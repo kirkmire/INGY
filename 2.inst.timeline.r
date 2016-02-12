@@ -22,7 +22,7 @@ xyplot(Plot ~ Year_Measurement | Installation,
            panel.xyplot(x[y==i],i,type="l")
            #panel.xyplot(x[y==i],i,type="p",pch=19,col=colr[y==i])
            panel.xyplot(x[y==i],i,type="p",pch=sym[y==i],fill="white")
-          
+           
          }
        })
 #dev.off()
@@ -76,7 +76,7 @@ xyplot(Installation ~ Year_Measurement,
        xlab="Year in which measurements were taken",ylab="Installation",
        scales=list(x=list(at=1998:2015)),
        main=paste("STCV Installation History (",filenm,")",sep=""),
-           panel=function(x,y,htyr,trtyr,...){
+       panel=function(x,y,htyr,trtyr,...){
          for (i in as.numeric(unique(y))){
            subx <- x[as.numeric(y)==i]
            panel.xyplot(subx,i,type="l")
@@ -120,9 +120,4 @@ ggplot(sinsthist3, aes(x=Year_Measurement, y=Installation,colour=factor(Entered=
   scale_colour_grey(name = "Measured")+
   scale_shape_manual(values = c(16,0))+
   scale_x_continuous(breaks=seq(1995,2015,2))
-
-
-
-  
-
 

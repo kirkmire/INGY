@@ -5,6 +5,7 @@ drp <- c("TCCheck","LRCheck","BCCheck","BBCheck","RL")
 drp <- c(drp, "DC","CT")
 
 
+
 library(lattice)
 #! 1. plot treatment history
 #pdf(file="plothist.pdf",height=11,width=8.5)

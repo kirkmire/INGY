@@ -10,8 +10,6 @@ filenm <- "stcv_database_19jan2016.accdb"
 
 #! 2. access libraries
 library(RODBC)
-
-
 library(lattice)
 library(MASS)
 library(lme4)

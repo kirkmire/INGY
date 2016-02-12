@@ -1,4 +1,3 @@
-
 #! 2. installations to drop
 # RL was abandoned w/o measurement; others are check plots
 drp <- c("TCCheck","LRCheck","BCCheck","BBCheck","RL")

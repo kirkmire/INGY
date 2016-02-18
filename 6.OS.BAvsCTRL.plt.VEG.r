@@ -1,19 +1,20 @@
-#Select Control Plots from list of inst and plots#
-CTRL.plots <- splot[ which(splot$Treatment=='CTRL'), ]
+#Select Control and GE Plots from list of inst and plots#
+CTRLandGE.plots <- splot[which(splot$Treatment==c('CTRL','GE')), ]
 
-#Merge Control plots with 4m^2 plot data#
-CTRL.plot.veg <- merge(CTRL.plots,sstp4,by=c("Installation","Plot"))
+#Merge Control&GE plots with 4m^2 plot data#
+CTRLandGE.plot.veg <- merge(CTRLandGE.plots,sstp1,by=c("Installation","Plot"))
 
+#Aggregate the control and GE plots 4m^2 data by Installation and find the mean of top height and polyveg% cover#
+CTRLandGE.volume.index<-aggregate(CTRLandGE.plot.veg[, 17:19], list(Installation=CTRLandGE.plot.veg$Installation,
+                                                                    Trt=CTRLandGE.plot.veg$Treatment
+                                                                 ), mean, na.rm=TRUE)
 
-#Aggregate the control plots 4m^2 data by Installation and find the mean of top height and polyveg% cover#
-volume.index<-aggregate(CTRL.plot.veg[, 17:19], list(CTRL.plot.veg$Installation), mean, na.rm=TRUE)
+#Create a US Volume Estimate by multiplying mean ployveg% cover * mean top height for each treatment w/i each inst#
+CTRLandGE.volume.index$volume<-CTRLandGE.volume.index$Coverage*((CTRLandGE.volume.index$Top-CTRLandGE.volume.index$Base)/.3048)
 
-#Create additional column that contains avg plyveg% cover*avg top height for each inst#
-volume.index$volume<-volume.index$Cover*volume.index$Top
-names(volume.index)[1]<-paste("Installation")
 
 #Merge volume df with Installation Info (contains estimate of SI)#
-OS.ctrl.plot<- merge(volume.index,sinst, by.x = "Installation", by.y = "Installation",all=F)
+OS.ctrl.plot<- merge(CTRLandGE.volume.index,sinst, by.x = "Installation", by.y = "Installation",all=F)
 
 #Below is from 4.explor.plots (describes the OS in terms of BAPA post harvest)#
 library(plyr)
@@ -28,13 +29,14 @@ threeDVeg<-merge(BAPA.by.inst,OS.ctrl.plot, by.x = "Installation", by.y = "Insta
 library(scatterplot3d)
 s3D<-scatterplot3d(threeDVeg$BAPA.inst,threeDVeg$SiteIndex_Value,threeDVeg$volume,
 
-              pch=19,        
+                  
 type="h", lty.hplot=2,       # lines to the horizontal plane
 scale.y=.75,                 # scale y axis (reduce by 25%)
 main="3-D Scatterplot",
-xlab="BAPA (ft^3/Ac)",
+xlab="Residual BAPA (ft^3/Ac)",
 ylab="Site Index Value",
-zlab="Volume Index"
+zlab="Volume Index",
+pch=as.integer(threeDVeg$Trt)
 )
 
 #Extracts coordinates from 3D plot for installation labels#

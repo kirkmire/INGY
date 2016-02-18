@@ -23,7 +23,6 @@ BAPA.by.inst<-ddply(OverS, "Installation", summarise, BAPA.inst= sum(BAPA))
 #Merges OS data to form df with OS BAPA, SI, and US Volume#
 threeDVeg<-merge(BAPA.by.inst,OS.ctrl.plot, by.x = "Installation", by.y = "Installation",all=F)
 
-
 #Creates a 3-D Scatterplot (x=BAPA,y=SI, z=Volume#
 
 library(scatterplot3d)

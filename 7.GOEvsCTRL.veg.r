@@ -1,4 +1,4 @@
-##Select Control and GE Plots from list of inst and plots#
+#Select Control and GE Plots from list of inst and plots#
 CTRLandGE.plots <- splot[which(splot$Treatment==c('CTRL','GE')), ]
 
 #Merge Control&GE plots with 4m^2 plot data#

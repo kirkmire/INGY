@@ -27,14 +27,15 @@ spec.freq
 #Stacked Bar Chart by Installation and Species#
 
 stag$numb<-1
-stag.sp.inst<-aggregate(stag$numb~stag$Installation+stag$Species, data=stag,sum, na.rm=TRUE)
+stag.sp.inst<-aggregate(numb~Installation+Species, data=stag,sum, na.rm=TRUE)
 
 #qplot(factor(Installation), data=stag[!(stag$Installation %in% drp),], geom="bar", fill=(factor(Species),values=cbPalette))#
 
 
 
-ggplot(data=stag.sp.inst, aes(x=stag$Installation, y=stag$numb)) + 
-                   geom_bar(aes(fill=stag$Species),stat="identity")
+ggplot(data=stag.sp.inst, aes(x=factor(Installation), y=numb)) + 
+                   geom_bar(aes(fill=Species),stat="identity")+ylab("Number")+xlab("Installation")+
+  scale_fill_manual(values=cbPalette)+theme(text = element_text(size=20))
            
            
 #Overstory BA/Ac by Installation (Year of First OS Measurement)#
@@ -63,21 +64,57 @@ BAPA.by.plot<-aggregate(OverS$BAPA, by=list(Installation=OverS$Installation,Plot
 setnames(BAPA.by.plot, "x", "BAPA")
 
 
-BAPA.by.inst<-ddply(OverS, "Installation", summarise, BAPA.inst= sum(BAPA))
+
 
 #Bar Chart of Initial BAPA by Installation, grouped by plot#
 
 barchart(BAPA~Installation,data=BAPA.by.plot[!(BAPA.by.plot$Installation %in% drp),],groups=Plot)
 
+#ggplot(data=BAPA.by.plot[!(BAPA.by.plot$Installation %in% drp),], aes(x=Installation, y=BAPA)) + 
+#  geom_bar(aes(fill=BAPA),   
+ #          stat="identity",
+ #          colour="black",    # Black outline for all
+ #          position="dodge"+ylab("BAPA")+xlab("Installation")+
+#theme(text = element_text(size=20))#
+
+
+plotcolor<-brewer.pal(22,"RdYlBu")
+
+bapa.drp<-BAPA.by.plot[!(BAPA.by.plot$Installation %in% drp),]
+
+
+ggplot(data=bapa.drp, aes(x=Installation,y=BAPA,fill=factor(Plot)))
++ geom_bar(stat="identity",position="dodge",colour="black")
++
+  scale_fill_discrete(name="Plot",breaks=c(1, 2),values=plotcolor)+xlab("Installation")+ylab("Retained Basal Area Per Acre")+
+  theme(text = element_text(size=20))
+
 #Bar chart of Initial Average BAPA by Installation#
+BAPA.by.inst<-ddply(OverS, "Installation", summarise, BAPA.inst= sum(BAPA))
 
 BAPA.by.inst$ave.BAPA<-BAPA.by.inst$BAPA.inst/7
 
 barchart(ave.BAPA~Installation, data=BAPA.by.inst[!(BAPA.by.inst$Installation %in% drp),])
 
+bapa.ave.inst<-BAPA.by.inst[!(BAPA.by.inst$Installation %in% drp),]
+                            
+ggplot(data=bapa.ave.inst, aes(x=factor(Installation), y=ave.BAPA))+
+  geom_bar(stat="identity",position="dodge")+ylab("Average BAPA ")+xlab("Installation")+
+  theme(text = element_text(size=20))
+
+  
+
+
+  geom_bar(aes(fill=cond2),   # fill depends on cond2
+           stat="identity",
+           colour="black",    # Black outline for all
+           position=position_dodge()) 
+
 #Aggregate small trees by inst and year meas#
 
 stc = aggregate(sstpt$Count,list(sstpt$Installation,sstpt$Year_Measurement), sum)
+
+
 
 #Include plot , then average accros#
 st.count<- setNames(stc, c("Installation","Year","Count"))

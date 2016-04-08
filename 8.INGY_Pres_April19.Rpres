@@ -1,28 +1,38 @@
-8.INGY_Pres_April19
+Inland Northwest Growth and Yield Cooperative
 ========================================================
-author: 
-date: 
-autosize: true
+author: Colin Kirkmire
+date: April 19 2016
 
-First Slide
-========================================================
+{/clearpage}
 
-For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
+![](INGYbanner.jpg)
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
 
-Slide With Code
+
+
+
+Map of Installations
 ========================================================
 
-```{r}
-summary(cars)
-```
+![](inst_map.jpg)
 
-Slide With Plot
+
+
+Timeline
 ========================================================
 
-```{r, echo=FALSE}
-plot(cars)
-```
+![](timeline.jpeg)
+
+
+
+
+
+Design of Study
+========================================================
+
+
+
+Tagged Trees by Species
+========================================================
+
+![](spec.freq.jpeg)

@@ -2,7 +2,7 @@ library(RODBC)
 library(RgoogleMaps)
 
 #! 1. read in some tables
-setwd("F:/INGY DATA/STCVRcode/STCV")
+setwd("G:/INGY DATA/STCVRcode/STCV")
 filenm <- "stcv_database_19jan2016.accdb"
 
 path <- odbcConnectAccess2007(filenm)

@@ -4,6 +4,16 @@ drp <- c("TCCheck","LRCheck","BCCheck","BBCheck","RL")
 # DC gives only 1 yr of growth data, CT only 2 years, before destroyed
 drp <- c(drp, "DC","CT")
 
+stag<-stag[!(stag$Installation %in% drp),]
+#Colorstuff#
+library(RColorBrewer)
+
+#Lookat all colors#
+display.brewer.all(n=NULL, type="all", select=NULL, exact.n=TRUE,
+                   colorblindFriendly=T)
+# The brewing#
+cbPalette <- brewer.pal(11,"RdYlBu")
+
 #Frequeny Plot by Species#
 
 library(plyr)
@@ -11,13 +21,22 @@ library(ggplot2)
 
 speciescount<-data.frame(count(stag$Species))
 
-spec.freq <- ggplot(speciescount, aes(x=factor(x),y=freq))+geom_bar(stat="identity")
+spec.freq <- ggplot(speciescount, aes(x=factor(x),y=freq))+geom_bar(stat="identity",fill=cbPalette)
 spec.freq
 
 #Stacked Bar Chart by Installation and Species#
 
-qplot(factor(Installation), data=stag[!(stag$Installation %in% drp),], geom="bar", fill=factor(Species))
+stag$numb<-1
+stag.sp.inst<-aggregate(stag$numb~stag$Installation+stag$Species, data=stag,sum, na.rm=TRUE)
 
+#qplot(factor(Installation), data=stag[!(stag$Installation %in% drp),], geom="bar", fill=(factor(Species),values=cbPalette))#
+
+
+
+ggplot(data=stag.sp.inst, aes(x=stag$Installation, y=stag$numb)) + 
+                   geom_bar(aes(fill=stag$Species),stat="identity")
+           
+           
 #Overstory BA/Ac by Installation (Year of First OS Measurement)#
 
 soverhist2 <- data.table(soverhist, key=c("Installation","Plot","Tree"))

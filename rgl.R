@@ -13,6 +13,7 @@ plot3d(fakedata$x,fakedata$y,fakedata$z,
        xlab="easting", ylab="northing", zlab="height")
 
 
+
 # color ramp
 myColorRamp <- function(colors, values) {
   v <- (values - min(values))/diff(range(values))

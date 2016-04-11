@@ -1,5 +1,5 @@
 #Select Control and GE Plots from list of inst and plots#
-CTRLandGE.plots <- splot[which(splot$Treatment==c('CTRL','GE')), ]
+CTRLandGE.plots <- splot[!(splot$Treatment=='1X'), ]
 
 #Merge Control&GE plots with 4m^2 plot data#
 CTRLandGE.plot.veg <- merge(CTRLandGE.plots,sstp1,by=c("Installation","Plot"))
@@ -10,7 +10,7 @@ CTRLandGE.volume.index<-aggregate(CTRLandGE.plot.veg[, 17:19], list(Installation
                                                                  ), mean, na.rm=TRUE)
 
 #Create a US Volume Estimate by multiplying mean ployveg% cover * mean top height for each treatment w/i each inst#
-CTRLandGE.volume.index$volume<-CTRLandGE.volume.index$Coverage*((CTRLandGE.volume.index$Top-CTRLandGE.volume.index$Base)/.3048)
+CTRLandGE.volume.index$volume<-((CTRLandGE.volume.index$Coverage/100)*4)*((CTRLandGE.volume.index$Top-CTRLandGE.volume.index$Base)/.3048)
 
 
 #Merge volume df with Installation Info (contains estimate of SI)#

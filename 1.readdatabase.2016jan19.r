@@ -4,9 +4,9 @@
 ## Change lines 7 and 8 as needed.
 
 #! 1. set directory and filename of current database
-data.dir <- "G:/INGY DATA/data"  # note the backward slashes
+data.dir <- "C:/Users/Colin/Desktop/Rprojects/INGY"  # note the backward slashes
 filenm <- "stcv_database_19jan2016.accdb"
-
+#Note: Make sure that R is running 32bit and acdb drivers are installed#
 
 #! 2. access libraries
 library(RODBC)

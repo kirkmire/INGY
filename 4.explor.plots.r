@@ -43,7 +43,6 @@ ggplot(data=stag.sp.inst, aes(x=factor(Installation), y=numb)) +
 soverhist2 <- data.table(soverhist, key=c("Installation","Plot","Tree"))
 test<-soverhist2[, list(value=min("Year_Measurement")), by=c("Installation","Plot","Tree")]
 
-
 library(plyr)
 library(data.table)
 library(lattice)

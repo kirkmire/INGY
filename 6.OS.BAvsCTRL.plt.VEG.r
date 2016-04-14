@@ -23,12 +23,14 @@ BAPA.by.inst<-ddply(OverS, "Installation", summarise, BAPA.inst= sum(BAPA))
 #Merges OS data to form df with OS BAPA, SI, and US Volume#
 threeDVeg<-merge(BAPA.by.inst,OS.ctrl.plot, by.x = "Installation", by.y = "Installation",all=F)
 
+
+#Remove Installations#
+threeDVeg<-threeDVeg[!(threeDVeg$Installation %in% drp),]
+
 #Creates a 3-D Scatterplot (x=BAPA,y=SI, z=Volume#
 
 library(scatterplot3d)
 s3D<-scatterplot3d(threeDVeg$BAPA.inst,threeDVeg$SiteIndex_Value,threeDVeg$volume,
-
-                  
 type="h", lty.hplot=2,       # lines to the horizontal plane
 scale.y=.75,                 # scale y axis (reduce by 25%)
 main="3-D Scatterplot",
@@ -45,6 +47,12 @@ text(s3D.coords$x, s3D.coords$y,     # x and y coordinates
      pos=4, cex=.5)    
 
 
+
+library(ggplot2)
+
+ba.final<-merge(locdataX,ba.final,by="Installation")
+
+plotcolor<-brewer.pal(3,"RdYlBu")
 
 
 

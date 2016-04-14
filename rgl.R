@@ -53,6 +53,25 @@ movie3d(spin3d(axis = c(0, 0, 1)), duration = 3,
 #     labels=(threeDVeg$Installation),       # text to plot
 #    pos=4, cex=.5)    
 
+dev.off()
+#Just SI vs BA#
+ggplot(threeDVeg, aes(x =BAPA.inst , y = SiteIndex_Value,color=threeDVeg$SiteIndex_Species))+
+  geom_point(size=2)+
+  ggtitle("Site Index vs Residual Basal Area")+
+  xlab("Residual Basal Area (ft^2/acre)")+
+  ylab("Site Index")+
+  labs(color="SI Species")+
+  theme(axis.text=element_text(size=12),
+        axis.title=element_text(size=14,face="bold"))
+
+
+
+
+
+
+
+
+
 
 
 

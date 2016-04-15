@@ -31,11 +31,36 @@ stag.sp.inst<-aggregate(numb~Installation+Species, data=stag,sum, na.rm=TRUE)
 
 #qplot(factor(Installation), data=stag[!(stag$Installation %in% drp),], geom="bar", fill=(factor(Species),values=cbPalette))#
 
+#For ordering installations by xcoord#
+
+locdata <- sinstloc[sinstloc$Coordinate_Type=="DD"& sinstloc$Plot=='0',]
+locdataX <- locdata[locdata$Coordinate_Axis=='X',]
 
 
-ggplot(data=stag.sp.inst, aes(x=factor(Installation), y=numb)) + 
+#Merge w location info#
+stag.sp.inst<-merge(x=locdataX, y=stag.sp.inst, by.x="Installation", by.y="Installation")
+
+#order by location info#
+stag.sp.inst<-stag.sp.inst[order(stag.sp.inst$Coordinate_Value),]
+
+
+theme(axis.line=element_blank(),
+      axis.text.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.ticks=element_blank(),
+      axis.title.x=element_blank(),
+      axis.title.y=element_blank(),
+      legend.position="none",
+      panel.background=element_blank(),
+      panel.border=element_blank(),
+      panel.grid.major=element_blank(),
+      panel.grid.minor=element_blank(),
+      plot.background=element_blank())
+
+
+ggplot(data=stag.sp.inst, aes(x=factor(Coordinate_Value), y=numb)) + 
                    geom_bar(aes(fill=Species),stat="identity")+ylab("Number")+xlab("Installation")+
-  scale_fill_manual(values=cbPalette)+theme(text = element_text(size=20))
+  scale_fill_manual(values=cbPalette)+theme(text = element_text(size=20),axis.text.x=element_blank())
            
            
 #Overstory BA/Ac by Installation (Year of First OS Measurement)#
@@ -59,11 +84,14 @@ OverS <- merge(min.OS, soverhist5,by=c("Installation","Plot","Tree","Year_Measur
 OverS$BAPA<-ifelse(OverS$DBH<10.5,((OverS$DBH^2)*.005454)/.26,((OverS$DBH^2)*.005454)/.46) 
 
 
+
+
 BAPA.by.plot<-aggregate(OverS$BAPA, by=list(Installation=OverS$Installation,Plot=OverS$Plot), FUN=sum)
 setnames(BAPA.by.plot, "x", "BAPA")
 
 
 
+sum(OverS$BAPA[OverS$Installation=="KC"])
 
 #Bar Chart of Initial BAPA by Installation, grouped by plot#
 
@@ -101,7 +129,6 @@ ggplot(data=bapa.ave.inst, aes(x=factor(Installation), y=ave.BAPA))+
   geom_bar(stat="identity",position="dodge")+ylab("Average BAPA ")+xlab("Installation")+
   theme(text = element_text(size=20))
 
-  
 
 
   geom_bar(aes(fill=cond2),   # fill depends on cond2

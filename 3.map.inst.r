@@ -35,10 +35,10 @@ tmp <- PlotOnStaticMap(basemap)
 tmp <- PlotOnStaticMap(basemap,cex=2,pch=21,col="red",
                        lat=locs0v2$Lat,
                        lon=locs0v2$Long)
-#tmp <- PlotOnStaticMap(basemap,cex=1.1,col="red",add=T,
-#  lat=locs0v2$Lat,
-#  lon=locs0v2$Long,
-#  FUN=text,labels=locs0v2$Installation)#
+tmp <- PlotOnStaticMap(basemap,cex=1.1,col="red",add=T,
+lat=locs0v2$Lat,
+lon=locs0v2$Long,
+FUN=text,labels=locs0v2$Installation)#
 
 
 

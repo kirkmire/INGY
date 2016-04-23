@@ -16,17 +16,17 @@ draw.circle(80,80,80,border="black",nv=1000,
 draw.circle(80,80,60,border="red",lty=3,lwd=3)
 
 #Small tree Plots#
-draw.circle(80,111,10,border="green",lty=1,lwd=1)
-draw.circle(80,49,10,border="green",lty=1,lwd=1)
+draw.circle(80,111,10,border="black",lty=1,lwd=1)
+draw.circle(80,49,10,border="black",lty=1,lwd=1)
 
 #side small trees#
-draw.circle(106.8,95.5,10,border="green",lty=1,lwd=1)
-draw.circle(106.8,64.5,10,border="green",lty=1,lwd=1)
-draw.circle(53.2,64.5,10,border="green",lty=1,lwd=1)
-draw.circle(53.2,95.5,10,border="green",lty=1,lwd=1)
+draw.circle(106.8,95.5,10,border="black",lty=1,lwd=1)
+draw.circle(106.8,64.5,10,border="black",lty=1,lwd=1)
+draw.circle(53.2,64.5,10,border="black",lty=1,lwd=1)
+draw.circle(53.2,95.5,10,border="black",lty=1,lwd=1)
 
 #1ft radius plot center#
-draw.circle(80,80,1,border="green",lty=1,lwd=1)
+draw.circle(80,80,1,border="black",lty=1,lwd=1)
 
 
 #Draw radial lines#
@@ -38,19 +38,12 @@ draw.radial.line(0,31, center=c(80,80),deg=270)
 draw.radial.line(0,31, center=c(80,80),deg=330)
 
 #Drawing 4x4 Veg Quad Squares#
-rect(80,111,col=NA,border="black")
+rect(76.72,107.72,83.28,114.28,col=NA,border="black")
+rect(76.72,107.72,80,111,col=NA,border="black")
 
+rect(76.72,45.72,83.28,52.28,col=NA,border="black")
+rect(80,49,83.28,52.28,col=NA,border="black")
 
-
-draw.circle(3.5,7,0.8,border="blue",lty=2,lwd=2)
-
-
-plot(1:5,seq(1,10,length=5),type="n",xlab="",ylab="",main="Test draw.circle",asp = 1)
-draw.circle(2,4,c(1,0.66,0.33),border="purple",
-            col=c("#ff00ff","#ff77ff","#ffccff"),lty=1,lwd=1)
-draw.circle(2.5,8,0.6,border="red",lty=3,lwd=3)
-draw.circle(4,3,0.7,border="green",lty=1,lwd=1)
-draw.circle(3.5,7,0.8,border="blue",lty=2,lwd=2)
 
 
 

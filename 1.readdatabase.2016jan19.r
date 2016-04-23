@@ -52,7 +52,11 @@ stagm <- sqlFetch(path,"STPs_TaggedTrees_Measures")
 spptr <- sqlFetch(path,"Lookup_Species_Tree")
 sppnontr <- sqlFetch(path,"Lookup_Species_NonTree")
 
+#timeline data
+meast <- sqlFetch(path,"Meas_Timeline")
+
 odbcCloseAll()
+
 
 
 

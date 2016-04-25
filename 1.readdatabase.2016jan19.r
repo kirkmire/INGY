@@ -4,7 +4,7 @@
 ## Change lines 7 and 8 as needed.
 
 #! 1. set directory and filename of current database
-data.dir <- "G:/INGY/INGY DATA/data"  # note the backward slashes
+data.dir <- "C:/Users/Colin/Desktop/R-Projects/INGY"  # note the backward slashes
 filenm <- "stcv_database_19jan2016.accdb"
 
 
@@ -53,7 +53,7 @@ spptr <- sqlFetch(path,"Lookup_Species_Tree")
 sppnontr <- sqlFetch(path,"Lookup_Species_NonTree")
 
 #timeline data
-meast <- sqlFetch(path,"Meas_Timeline")
+meast <- sqlFetch(path,"Timeline")
 
 odbcCloseAll()
 

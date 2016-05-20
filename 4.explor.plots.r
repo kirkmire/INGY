@@ -21,7 +21,10 @@ library(ggplot2)
 
 speciescount<-data.frame(count(stag$Species))
 
-spec.freq <- ggplot(speciescount, aes(x=factor(x),y=freq))+geom_bar(stat="identity",fill=cbPalette)
+spec.freq <- ggplot(speciescount, aes(x=factor(x),y=freq))+geom_bar(stat="identity",fill=cbPalette)+
+ggtitle("Tagged Trees by Species")+
+  xlab("Four Letter Species Code")+
+  ylab("Number of Tagged Small Trees")
 spec.freq
 
 #Stacked Bar Chart by Installation and Species#

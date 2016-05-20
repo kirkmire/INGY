@@ -8,7 +8,9 @@ library(plotrix)
 
 
 
-plot(0:170,0:170,type="n",xlab="",ylab="",main="Plot Design",asp = 1)
+plot(c(0,170),c(0,170),xlim=c(0,170),ylim=c(0,170), xaxs="i",yaxs="i",
+     type="n",xlab="Feet",ylab="",main="STCV Plot Design",bty="n",asp = 1,axes=F)
+Axis(side=1, labels=T)
 #Large tree plot#
 draw.circle(80,80,80,border="black",nv=1000,
             col=NA,lty=1,lwd=2)
@@ -30,19 +32,19 @@ draw.circle(80,80,1,border="black",lty=1,lwd=1)
 
 
 #Draw radial lines#
-draw.radial.line(0,31, center=c(80,80),deg=30)
-draw.radial.line(0,31, center=c(80,80),deg=90)
-draw.radial.line(0,31, center=c(80,80),deg=150)
-draw.radial.line(0,31, center=c(80,80),deg=210)
-draw.radial.line(0,31, center=c(80,80),deg=270)
-draw.radial.line(0,31, center=c(80,80),deg=330)
+draw.radial.line(0,31, center=c(80,80),deg=30,lwd=1)
+draw.radial.line(0,31, center=c(80,80),deg=90,lwd=1)
+draw.radial.line(0,31, center=c(80,80),deg=150,lwd=1)
+draw.radial.line(0,31, center=c(80,80),deg=210,lwd=1)
+draw.radial.line(0,31, center=c(80,80),deg=270,lwd=1)
+draw.radial.line(0,31, center=c(80,80),deg=330,lwd=1)
 
 #Drawing 4x4 Veg Quad Squares#
-rect(76.72,107.72,83.28,114.28,col=NA,border="black")
-rect(76.72,107.72,80,111,col=NA,border="black")
+rect(76.72,107.72,83.28,114.28,col=NA,border="black", lwd=1)
+rect(76.72,107.72,80,111,col=NA,border="black", lwd=1)
 
-rect(76.72,45.72,83.28,52.28,col=NA,border="black")
-rect(80,49,83.28,52.28,col=NA,border="black")
+rect(76.72,45.72,83.28,52.28,col=NA,border="black", lwd=1)
+rect(80,49,83.28,52.28,col=NA,border="black", lwd=1)
 
 
 

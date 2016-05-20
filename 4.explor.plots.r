@@ -152,3 +152,4 @@ minyr.st.count<-do.call(rbind,lapply(split(st.count,st.count$Installation),funct
 #Per Acre Count of Small Trees by Installation in First Year Measurement#
 
 barchart((Count/.294)~Installation,data=minyr.st.count[!(minyr.st.count$Installation %in% drp),])
+

@@ -57,7 +57,8 @@ meast <- sqlFetch(path,"Timeline")
 
 odbcCloseAll()
 
-
+#merged stagm and stag#
+merged_stagm_stag <- merge(stagm, stag,by=c("Installation","Plot","STP","Tree"))
 
 
 #! 4. installations to drop

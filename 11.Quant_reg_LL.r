@@ -5,7 +5,7 @@
 merged_stagm_stag <- merge(stagm, stag,by=c("Installation","Plot","STP","Tree"))
 
 LL<-merged_stagm_stag[merged_stagm_stag$Installation=="LL"&merged_stagm_stag$Species=="PIPO"&merged_stagm_stag$Plot%in%c(1:7)&
-                        merged_stagm_stag$Year_Measurement%in%c(2004,2008),]
+                        merged_stagm_stag$Year_Measurement%in%c(2001,2008),]
 #Appears to be errors in data entry
 #Tree 663 goes from 8.5ft to 1.6ft, should read 9.6ft
 
@@ -64,7 +64,7 @@ library(ggplot2)
 
 ggplot(LL_both, aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
   geom_point(size=2,aes(col=LL_both$Treatment))+
-  ggtitle("Growth Inc vs Initial Height")+
+  ggtitle("LL Growth Inc vs Initial Height")+
   xlab("Initial Height")+
   ylab("Growth Inc")+
   geom_smooth(method=lm,aes(x=LL_both$Height_Total.x,y=LL_both$inc,col=LL_both$Treatment))+

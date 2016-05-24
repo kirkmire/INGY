@@ -5,7 +5,7 @@
 merged_stagm_stag <- merge(stagm, stag,by=c("Installation","Plot","STP","Tree"))
 
 LL<-merged_stagm_stag[merged_stagm_stag$Installation=="LL"&merged_stagm_stag$Species=="PIPO"&merged_stagm_stag$Plot%in%c(1:7)&
-                        merged_stagm_stag$Year_Measurement%in%c(2001,2008),]
+                        merged_stagm_stag$Year_Measurement%in%c(2004,2008),]
 #Appears to be errors in data entry
 #Tree 663 goes from 8.5ft to 1.6ft, should read 9.6ft
 
@@ -78,5 +78,46 @@ ggplot(LL_both, aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
 
 
 
+#To see ALL distinct quantile regression solutions for a particular model
+#Specify a tau outside the range [0,1]
 
+z<-rq(LL_both$Height_Total.x~LL_both$inc,tau=-1)
+
+
+#Formal Testing of estimated quantile regression relationships#
+
+fit1<-rq(LL_both$Height_Total.x~LL_both$inc,tau=.25)
+fit2<-rq(LL_both$Height_Total.x~LL_both$inc,tau=.50)
+fit3<-rq(LL_both$Height_Total.x~LL_both$inc,tau=.75)
+
+#Quantile Regression Analysis of Deviance Table#
+anova(fit1, fit2, fit3)
+
+
+x.poor <- quantile(LL_both$inc,.1,na.rm=T) #Poor is defined as at the .1 quantile of the sample distn
+x.rich <- quantile(LL_both$inc,.9,na.rm=T) #Rich is defined as at the .9 quantile of the sample distn
+
+ps <- z$sol[1,]
+qs.poor <- c(c(1,x.poor)%*%z$sol[4:5,])
+qs.rich <- c(c(1,x.rich)%*%z$sol[4:5,])
+
+dev.off()
+#now plot the two quantile functions to compare
+par(mfrow = c(1,2))
+plot(c(ps,ps),c(qs.poor,qs.rich), type="n",
++ xlab = expression(tau), ylab = "quantile")
+plot(stepfun(ps,c(qs.poor[1],qs.poor)), do.points=FALSE, add=TRUE)
+plot(stepfun(ps,c(qs.poor[1],qs.rich)), do.points=FALSE, add=TRUE,
+       + col.hor = "gray", col.vert = "gray")
+
+## now plot associated conditional density estimates
+## weights from ps (process)
+ps.wts <- (c(0,diff(ps)) + c(diff(ps),0)) / 2
+ap <- akj(qs.poor, z=qs.poor, p = ps.wts)
+ar <- akj(qs.rich, z=qs.rich, p = ps.wts)
+plot(c(qs.poor,qs.rich),c(ap$dens,ar$dens),type="n",
+       + xlab= "Food Expenditure", ylab= "Density")
+lines(qs.rich, ar$dens, col="gray")
+lines(qs.poor, ap$dens, col="black")
+legend("topright", c("poor","rich"), lty = c(1,1), col=c("black","gray"))
 

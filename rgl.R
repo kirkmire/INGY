@@ -1,3 +1,5 @@
+source('C:/Users/Colin/Desktop/R-Projects/INGY/4.explor.plots.r')
+source('C:/Users/Colin/Desktop/R-Projects/INGY/6.OS.BAvsCTRL.plt.VEG.r')
 
 library(rgl)
 
@@ -56,12 +58,22 @@ getwd()
 
 dev.off()
 
+#New 3D surface plot#
+
+library(plotly)
+library(ggplot2)
+# volcano is a numeric matrix that ships with R
+plot_ly(z = volcano, type = "surface")
 
 
 
+p <- plot_ly(y=threeDVeg$SiteIndex_Value,x=threeDVeg$ave.BAPA,z=threeDVeg$volume, type="surface",showscale=FALSE)
+%>%
+  add_trace(z=z2, type="surface", showscale=FALSE, opacity=0.98) %>%
+  add_trace(z=z3, type="surface", showscale=FALSE, opacity=0.98)
+p
 
-
-
+plot_ly(x=threeDVeg$ave.BAPA,y=threeDVeg$SiteIndex_Value,z=threeDVeg$volume, type = "surface")
 
 
 

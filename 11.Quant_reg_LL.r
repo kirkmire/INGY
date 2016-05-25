@@ -76,6 +76,22 @@ ggplot(LL_both, aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
 #For changing quantiles to color scaled
 #stat_quantile(aes(colour = ..quantile..), quantiles = taus)
 
+#Coefficient Plots
+
+gi <- rq(LL_both$inc~LL_both$Height_Total.x, tau= 1:9/10)
+
+
+## visualizations
+plot(gi)
+plot(gi, parm = 2, mar = c(5.1, 4.1, 2.1, 2.1), main = "", xlab = "tau", 
+     ylab = "Initial Height Coefficient", cex = 1, pch = 19)
+
+
+
+
+
+
+
 
 
 #To see ALL distinct quantile regression solutions for a particular model

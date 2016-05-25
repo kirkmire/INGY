@@ -4,7 +4,7 @@
 ## Change lines 7 and 8 as needed.
 
 #! 1. set directory and filename of current database
-data.dir <- "C:/Users/Colin/Desktop/Rprojects/INGY"  # note the backward slashes, check to see if it matches Rprojects folder
+data.dir <- "C:/Users/Colin/Desktop/R-Projects/INGY"  # note the backward slashes, check to see if it matches Rprojects folder
 filenm <- "stcv_database_19jan2016.accdb"
 
 

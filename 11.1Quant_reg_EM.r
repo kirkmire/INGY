@@ -16,7 +16,6 @@ EM<-EM[!(EM$Plot=="7"&EM$Tree=="732"),]
 
 
 
-
 EM_min<-EM[which(EM$Year_Measurement==min(EM$Year_Measurement)),]
 
 EM_max<-EM[which(EM$Year_Measurement==max(EM$Year_Measurement)),]
@@ -57,7 +56,7 @@ library(ggplot2)
 
 ggplot(EM_both, aes(x=EM_both$Height_Total.x,y=EM_both$inc))+
   geom_point(size=2,aes(col=EM_both$Treatment))+
-  ggtitle("EM Growth Inc vs Initial Height")+
+  ggtitle("EM Growth Inc vs Initial Height (02-06)")+
   xlab("Initial Height")+
   ylab("Growth Inc")+
   geom_smooth(method=lm,aes(x=EM_both$Height_Total.x,y=EM_both$inc,col=EM_both$Treatment))+
@@ -69,6 +68,64 @@ ggplot(EM_both, aes(x=EM_both$Height_Total.x,y=EM_both$inc))+
 #For changing quantiles to color scaled
 #stat_quantile(aes(colour = ..quantile..), quantiles = taus)
 
+
+#Coefficient Plots
+
+giEM <- rq(EM_both$inc~EM_both$Height_Total.x, tau= 1:9/10)
+
+
+## visualizations
+plot(giEM)
+plot(giEM, parm = 2, mar = c(5.1, 4.1, 2.1, 2.1), main = "", xlab = "tau", 
+     ylab = "Initial Height Coefficient", cex = 1, pch = 19)
+
+
+
+
+
+
+#To see ALL distinct quantile regression solutions for a particular model
+#Specify a tau outside the range [0,1]
+
+z<-rq(EM_both$Height_Total.x~EM_both$inc,tau=-1)
+
+
+#Formal Testing of estimated quantile regression relationships#
+
+EMfit1<-rq(EM_both$Height_Total.x~EM_both$inc,tau=.25)
+EMfit2<-rq(EM_both$Height_Total.x~EM_both$inc,tau=.50)
+EMfit3<-rq(EM_both$Height_Total.x~EM_both$inc,tau=.75)
+
+#Quantile Regression Analysis of Deviance Table#
+anova(EMfit1, EMfit2, EMfit3)
+
+
+EM.x.poor <- quantile(EM_both$inc,.1,na.rm=T) #Poor is defined as at the .1 quantile of the sample distn
+EM.x.rich <- quantile(EM_both$inc,.9,na.rm=T) #Rich is defined as at the .9 quantile of the sample distn
+
+EMps <- z$sol[1,]
+EM.qs.poor <- c(c(1,EM.x.poor)%*%z$sol[4:5,])
+EM.qs.rich <- c(c(1,EM.x.rich)%*%z$sol[4:5,])
+
+dev.off()
+#now plot the two quantile functions to compare
+par(mfrow = c(1,2))
+plot(c(EMps,EMps),c(EM.qs.poor,EM.qs.rich), type="n",
+     xlab = expression(tau), ylab = "quantile")
+plot(stepfun(EMps,c(EM.qs.poor[1],EM.qs.poor)), do.points=FALSE, add=TRUE)
+plot(stepfun(EMps,c(EM.qs.poor[1],EM.qs.rich)), do.points=FALSE, add=TRUE,
+     col.hor = "gray", col.vert = "gray")
+
+## now plot associated conditional density estimates
+## weights from ps (process)
+EM.ps.wts <- (c(0,diff(EMps)) + c(diff(EMps),0)) / 2
+ap <- akj(EM.qs.poor, z=EM.qs.poor, p = EM.ps.wts)
+ar <- akj(EM.qs.rich, z=EM.qs.rich, p = EM.ps.wts)
+plot(c(EM.qs.poor,EM.qs.rich),c(ap$dens,ar$dens),type="n",
+     xlab= "Incremental Growth", ylab= "Density")
+lines(EM.qs.rich, ar$dens, col="gray")
+lines(EM.qs.poor, ap$dens, col="black")
+#legend("topright", c("poor","rich"), lty = c(1,1), col=c("black","gray"))
 
 
 

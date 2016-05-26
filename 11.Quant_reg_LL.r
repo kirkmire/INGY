@@ -1,3 +1,5 @@
+source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jan19.r')
+
 #selecting Installations
 #LL has most PIPO tagged trees
 #CTRL Plots are 7 and 3

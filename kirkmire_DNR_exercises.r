@@ -2,7 +2,6 @@
 
 tree_data<-read.csv(url("http://forestlidar.org/added_files/tree_data.csv"))
 
-
 ##Exercise 2
 
 function1 <- function(x){
@@ -22,16 +21,15 @@ function1 <- function(x){
 
 function1(tree_data)
 
-
 ##Exercise 3
 
 avg_ht_function <- function(lower_bound,upper_bound){
-  sub_tree<-subset(tree_data,tree_data[2]>=lower_bound&tree_data[2]<=upper_bound)
+  sub_tree<-subset(tree_data,tree_data[,2]>=lower_bound&
+                     tree_data[,2]<=upper_bound)
   avg_ht<-mean(sub_tree[,3])
   return(avg_ht)
 }
   
-
 avg_ht_function(5,10)    
 
 avg_ht_function(20,30)         
@@ -39,20 +37,25 @@ avg_ht_function(20,30)
 ##Exercise 4
 
 avg_ht_function_clean <- function(lower_bound,upper_bound){
-  sub_tree<-subset(tree_data,tree_data[2]>=lower_bound&tree_data[2]<=upper_bound)
+  if( any(is.numeric(lower_bound)==F | is.numeric(upper_bound)==F ))
+    warning('Bounds must be numeric')
+  if( any(lower_bound < min(tree_data[,2]) | lower_bound > max(tree_data[,2]) ))
+     warning('Lower bound outside of DBH Range')
+  if( any(upper_bound > max(tree_data[,2]) | upper_bound < min(tree_data[,2])))
+    warning('Upper bound outside of DBH Range')
+  if(any(upper_bound<lower_bound))
+    warning('Bounds of DBH range in wrong order')
+    sub_tree<-subset(tree_data,tree_data[,2]>=lower_bound&tree_data[,2]<=upper_bound)
   avg_ht<-mean(sub_tree[,3])
   return(avg_ht)
 }
 
-avg_ht_function("a",10)  
+avg_ht_function_clean("a",10)  
 
 avg_ht_function_clean(9999,99999)  
 
 ##Exercise 5
 
-# load the required libraries 
-#library(sp) 
-#library(rgdal)
 library(maptools)
 
 tmpdir <- tempdir()
@@ -61,10 +64,10 @@ file <- basename(url)
 download.file(url, file)
 unzip(file, exdir = tmpdir )
 
-
 shapeFile <- paste(tmpdir,"/wa_state",sep="")
 area<- readShapeSpatial(shapeFile)
 
-plot(area)
+plot(area, main="Locations of Trees
+     from Exercise")
 points(tree_data$x, tree_data$y, col = "red", 
        cex = .5, pch=4) 

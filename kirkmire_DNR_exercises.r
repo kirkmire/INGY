@@ -39,9 +39,91 @@ avg_ht_function(20,30)
 
 ##Exercise 4
 
-
-avg_ht_function <- function(lower_bound,upper_bound){
+avg_ht_function_clean <- function(lower_bound,upper_bound){
   sub_tree<-subset(tree_data,tree_data[2]>=lower_bound&tree_data[2]<=upper_bound)
   avg_ht<-mean(sub_tree[,3])
   return(avg_ht)
 }
+
+avg_ht_function_clean("a",10)  
+
+avg_ht_function_clean(9999,99999)  
+
+##Exercise 5
+
+# load the required libraries 
+library(sp) 
+library(rgdal)
+
+
+library(maptools)
+
+
+http://forestlidar.org/added_files/wa_state.zip
+
+
+library(maptools)
+tmpdir <- tempdir()
+url <- 'http://forestlidar.org/added_files/wa_state.zip'
+file <- basename(url)
+download.file(url, file)
+unzip(file, exdir = tmpdir )
+
+
+shapeFile <- paste(tmpdir,"/wa_state",sep="")
+area<- readShapeSpatial(shapeFile)
+
+library(ggplot2)
+library(ggmap)
+area.points <- fortify(area)
+
+library(RColorBrewer)
+colors <- brewer.pal(9, "BuGn")
+
+
+mapImage <- get_map(location = c(lon = -118, lat = 37.5),
+                    color = "color",
+                    source = "osm",
+                    # maptype = "terrain",
+                    zoom = 6)
+
+ggmap(mapImage) +
+  geom_polygon(aes(x = long,
+                   y = lat,
+                   group = group),
+               data = area.points,
+               color = colors[9],
+               fill = colors[6],
+               alpha = 0.5) +
+  labs(x = "Longitude",
+       y = "Latitude")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,9 @@
+##Kirkmire 5/28 DNR Practical Exercises
+
 ##Exercise 1
 
 tree_data<-read.csv(url("http://forestlidar.org/added_files/tree_data.csv"))
+print(length(tree_data[,1]))
 
 ##Exercise 2
 

@@ -16,7 +16,7 @@ function1 <- function(x){
   matrix1<-matrix(vec,nrow=3,ncol=6,dimnames=list(c("Min","Max","Avg"),
           c("DBH","HT","Age","X.coord","Y.coord","Number>25in.DBH")))
   matrix2<-round(matrix1,2)
-    return(matrix2)
+    print(matrix2)
 }
 
 function1(tree_data)
@@ -27,7 +27,7 @@ avg_ht_function <- function(lower_bound,upper_bound){
   sub_tree<-subset(tree_data,tree_data[,2]>=lower_bound&
                      tree_data[,2]<=upper_bound)
   avg_ht<-mean(sub_tree[,3])
-  return(avg_ht)
+  print(avg_ht)
 }
   
 avg_ht_function(5,10)    
@@ -47,7 +47,7 @@ avg_ht_function_clean <- function(lower_bound,upper_bound){
     warning('Bounds of DBH range in wrong order')
     sub_tree<-subset(tree_data,tree_data[,2]>=lower_bound&tree_data[,2]<=upper_bound)
   avg_ht<-mean(sub_tree[,3])
-  return(avg_ht)
+  print(avg_ht)
 }
 
 avg_ht_function_clean("a",10)  

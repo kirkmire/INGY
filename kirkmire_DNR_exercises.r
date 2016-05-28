@@ -19,7 +19,7 @@ function1 <- function(x){
   matrix1<-matrix(vec,nrow=3,ncol=6,dimnames=list(c("Min","Max","Avg"),
           c("DBH","HT","Age","X.coord","Y.coord","Number>25in.DBH")))
   matrix2<-round(matrix1,2)
-    print(matrix2)
+  print(matrix2)
 }
 
 function1(tree_data)

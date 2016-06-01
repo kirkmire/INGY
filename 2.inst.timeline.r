@@ -100,7 +100,7 @@ xyplot(Installation ~ Year_Measurement,
        xlim=c(1997,2016),
        data=meast,
        htyr=meast$Assoc_OS,
-       trtyr=sinsthist3[,13:17],   #sinsthist3[,14:18],  
+       trtyr=trt$Year_Measurement,  
        xlab="Year in which measurements were taken",ylab="Installation",
        scales=list(x=list(at=1998:2015)),
        main=paste("STCV Installation History (",filenm,")",sep=""),
@@ -111,22 +111,47 @@ xyplot(Installation ~ Year_Measurement,
            panel.xyplot(subx,i,type="l",col="black")
            panel.xyplot(subOS,i,type="p",pch=17,fill="red",cex=1.8)
            panel.xyplot(subx,i,type="p",pch=15,col="red",cex=1.0)
-                              # subht <- htyr[as.numeric(y)==i]
+          # subht <- htyr[as.numeric(y)==i]
+          #special <- !is.na(subht) #& (subht %in% c(0,1,2,3,4,8,12))
+          #panel.xyplot(subx[special],i,type="p",pch=15,cex=2)
+          # panel.text(subx[special],i,subht[special],col="white",cex=.7,
+          #          adj=c(.45,.35))
+          #first <- trtyr[as.numeric(y)==i,1] - .15
+         #panel.segments(first,i-.3,first,i+.3,col="red",lwd=2)
+             for (j in as.numeric(unique(y))){
+             trt8 <- trtyr[as.numeric(y)==j]
+             panel.xyplot(trt8,j,type="p",pch=17,col="green",cex=1.8)
+           }
+           }
+         })
+
+
+xyplot(Installation ~ Year_Measurement,
+       xlim=c(1997,2016),
+       data=meast,
+       htyr=meast$Assoc_OS,
+       trtyr=meast$Trt,  
+       xlab="Year in which measurements were taken",ylab="Installation",
+       scales=list(x=list(at=1998:2015)),
+       main=paste("STCV Installation History (",filenm,")",sep=""),
+       panel=function(x,y,htyr,trtyr,...){
+         for (i in as.numeric(unique(y))){
+           subx <- x[as.numeric(y)==i]
+           subOS <- htyr[as.numeric(y)==i]
+           trt8 <- trtyr[as.numeric(y)==i]-.15
+           panel.xyplot(subx,i,type="l",col="black")
+           panel.xyplot(subOS,i,type="p",pch=17,fill="red",cex=1.8)
+           panel.xyplot(subx,i,type="p",pch=15,col="red",cex=1.0)
+           panel.xyplot(trt8,i,type="p",pch=19,col="green",cex=1.8)
+           # subht <- htyr[as.numeric(y)==i]
            #special <- !is.na(subht) #& (subht %in% c(0,1,2,3,4,8,12))
            #panel.xyplot(subx[special],i,type="p",pch=15,cex=2)
-          # panel.text(subx[special],i,subht[special],col="white",cex=.7,
-            #          adj=c(.45,.35))
-           first <- trtyr[as.numeric(y)==i,1] - .15
+           # panel.text(subx[special],i,subht[special],col="white",cex=.7,
+           #          adj=c(.45,.35))
+           #first <- trtyr[as.numeric(y)==i,1] - .15
            #panel.segments(first,i-.3,first,i+.3,col="red",lwd=2)
-           for (j in 2:5){
-             othr <- trtyr[as.numeric(y)==i,j] - .15
-             panel.segments(othr,i-.3,othr,i+.3,col="green",lwd=2)
-                       }
-         }
+                    }
        })
-
-
-
 
 
 #Sleeker Timeline Figures with ggplot2#
@@ -135,8 +160,7 @@ library(ggthemes)
 
 mteq <- sinsthist3[sinsthist3$Year_Measurement.1==sinsthist3$Year_Measurement,]
 
-ggplot(sinsthist3, aes(x=Year_Measurement, y=Installation,colour=factor(Entered=="0"),
-                       shape=factor(Entered=="0"),label=Year_Measurement.1 ))+
+ggplot(meast, aes(x=Year_Measurement, y=Installation))+
   geom_point(alpha=1,size=5)+theme(
     panel.grid.minor.x=element_line(size = 1),
     text = element_text(size=20),

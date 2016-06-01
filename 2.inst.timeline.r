@@ -86,13 +86,47 @@ xyplot(Installation ~ Year_Measurement,
            panel.text(subx[special],i,subht[special],col="white",cex=.7,
                       adj=c(.45,.35))
            first <- trtyr[as.numeric(y)==i,1] - .15
-           panel.segments(first,i-.3,first,i+.3,col="red",lwd=2)
+           #panel.segments(first,i-.3,first,i+.3,col="red",lwd=2)
            for (j in 2:5){
              othr <- trtyr[as.numeric(y)==i,j] - .15
              panel.segments(othr,i-.3,othr,i+.3,col="green",lwd=2)
            }
          }
        })
+
+#w/ meast#
+
+xyplot(Installation ~ Year_Measurement,
+       xlim=c(1997,2016),
+       data=meast,
+       htyr=meast$Assoc_OS,
+       trtyr=sinsthist3[,13:17],   #sinsthist3[,14:18],  
+       xlab="Year in which measurements were taken",ylab="Installation",
+       scales=list(x=list(at=1998:2015)),
+       main=paste("STCV Installation History (",filenm,")",sep=""),
+       panel=function(x,y,htyr,trtyr,...){
+         for (i in as.numeric(unique(y))){
+           subx <- x[as.numeric(y)==i]
+           subOS <- htyr[as.numeric(y)==i]
+           panel.xyplot(subx,i,type="l",col="black")
+           panel.xyplot(subOS,i,type="p",pch=17,fill="red",cex=1.8)
+           panel.xyplot(subx,i,type="p",pch=15,col="red",cex=1.0)
+                              # subht <- htyr[as.numeric(y)==i]
+           #special <- !is.na(subht) #& (subht %in% c(0,1,2,3,4,8,12))
+           #panel.xyplot(subx[special],i,type="p",pch=15,cex=2)
+          # panel.text(subx[special],i,subht[special],col="white",cex=.7,
+            #          adj=c(.45,.35))
+           first <- trtyr[as.numeric(y)==i,1] - .15
+           #panel.segments(first,i-.3,first,i+.3,col="red",lwd=2)
+           for (j in 2:5){
+             othr <- trtyr[as.numeric(y)==i,j] - .15
+             panel.segments(othr,i-.3,othr,i+.3,col="green",lwd=2)
+                       }
+         }
+       })
+
+
+
 
 
 #Sleeker Timeline Figures with ggplot2#

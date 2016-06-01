@@ -17,7 +17,7 @@ function1 <- function(x){
   numb_grt_25<-c(grt_than,0,0)
   vec<-c(dbh,ht,age,x_coord,y_coord,numb_grt_25)
   matrix1<-matrix(vec,nrow=3,ncol=6,dimnames=list(c("Min","Max","Avg"),
-          c("DBH","HT","Age","X.coord","Y.coord","Number>25in.DBH")))
+    c("DBH","HT","Age","X.coord","Y.coord","Number>25in.DBH")))
   matrix2<-round(matrix1,2)
   print(matrix2)
 }
@@ -53,7 +53,7 @@ avg_ht_function_clean <- function(lower_bound,upper_bound){
   print(avg_ht)
 }
 
-avg_ht_function_clean("a",10)  
+avg_ht_function_clean('a',10)  
 
 avg_ht_function_clean(9999,99999)  
 

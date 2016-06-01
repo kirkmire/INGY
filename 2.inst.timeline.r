@@ -95,36 +95,7 @@ xyplot(Installation ~ Year_Measurement,
        })
 
 #w/ meast#
-
-xyplot(Installation ~ Year_Measurement,
-       xlim=c(1997,2016),
-       data=meast,
-       htyr=meast$Assoc_OS,
-       trtyr=trt$Year_Measurement,  
-       xlab="Year in which measurements were taken",ylab="Installation",
-       scales=list(x=list(at=1998:2015)),
-       main=paste("STCV Installation History (",filenm,")",sep=""),
-       panel=function(x,y,htyr,trtyr,...){
-         for (i in as.numeric(unique(y))){
-           subx <- x[as.numeric(y)==i]
-           subOS <- htyr[as.numeric(y)==i]
-           panel.xyplot(subx,i,type="l",col="black")
-           panel.xyplot(subOS,i,type="p",pch=17,fill="red",cex=1.8)
-           panel.xyplot(subx,i,type="p",pch=15,col="red",cex=1.0)
-          # subht <- htyr[as.numeric(y)==i]
-          #special <- !is.na(subht) #& (subht %in% c(0,1,2,3,4,8,12))
-          #panel.xyplot(subx[special],i,type="p",pch=15,cex=2)
-          # panel.text(subx[special],i,subht[special],col="white",cex=.7,
-          #          adj=c(.45,.35))
-          #first <- trtyr[as.numeric(y)==i,1] - .15
-         #panel.segments(first,i-.3,first,i+.3,col="red",lwd=2)
-             for (j in as.numeric(unique(y))){
-             trt8 <- trtyr[as.numeric(y)==j]
-             panel.xyplot(trt8,j,type="p",pch=17,col="green",cex=1.8)
-           }
-           }
-         })
-
+trt <- unique(splothist[splothist$Action %in% c("IT","RT"),c(2,6)])
 
 xyplot(Installation ~ Year_Measurement,
        xlim=c(1997,2016),
@@ -137,12 +108,12 @@ xyplot(Installation ~ Year_Measurement,
        panel=function(x,y,htyr,trtyr,...){
          for (i in as.numeric(unique(y))){
            subx <- x[as.numeric(y)==i]
-           subOS <- htyr[as.numeric(y)==i]
+           subOS <- htyr[as.numeric(y)==i]+.15
            trt8 <- trtyr[as.numeric(y)==i]-.15
            panel.xyplot(subx,i,type="l",col="black")
-           panel.xyplot(subOS,i,type="p",pch=17,fill="red",cex=1.8)
-           panel.xyplot(subx,i,type="p",pch=15,col="red",cex=1.0)
-           panel.xyplot(trt8,i,type="p",pch=19,col="green",cex=1.8)
+           panel.xyplot(subOS,i,type="p",pch=17,col="chartreuse4",cex=2)
+           panel.xyplot(subx,i,type="p",pch=15,col="black",cex=1.0)
+           panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
            # subht <- htyr[as.numeric(y)==i]
            #special <- !is.na(subht) #& (subht %in% c(0,1,2,3,4,8,12))
            #panel.xyplot(subx[special],i,type="p",pch=15,cex=2)
@@ -177,4 +148,6 @@ ggplot(meast, aes(x=Year_Measurement, y=Installation))+
   scale_colour_grey(name = "Measured")+
   scale_shape_manual(values = c(16,0))+
   scale_x_continuous(breaks=seq(1995,2015,2))
+
+
 

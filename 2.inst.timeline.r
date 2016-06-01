@@ -111,7 +111,11 @@ xyplot(Installation ~ Year_Measurement,
            subOS <- htyr[as.numeric(y)==i]+.15
            trt8 <- trtyr[as.numeric(y)==i]-.15
            panel.xyplot(subx,i,type="l",col="black")
+<<<<<<< HEAD
            panel.xyplot(subOS,i,type="p",pch=17,col="chartreuse4",cex=2)
+=======
+           panel.xyplot(subOS,i,type="p",pch=17,col="green",cex=2)
+>>>>>>> 89d9ec6002aeaaae7e2137a665131f0c0272afca
            panel.xyplot(subx,i,type="p",pch=15,col="black",cex=1.0)
            panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
            # subht <- htyr[as.numeric(y)==i]

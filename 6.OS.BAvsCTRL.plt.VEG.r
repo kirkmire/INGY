@@ -8,9 +8,11 @@ CTRLandGE.plot.veg <- merge(CTRLandGE.plots,sstp1,by=c("Installation","Plot"))
 CTRLandGE.volume.index<-aggregate(CTRLandGE.plot.veg[, 17:19], list(Installation=CTRLandGE.plot.veg$Installation,
                                                                     Trt=CTRLandGE.plot.veg$Treatment
                                                                  ), mean, na.rm=TRUE)
-#Create a US Volume Estimate by multiplying mean ployveg% cover * mean top height for each treatment w/i each inst#
-CTRLandGE.volume.index$volume<-((CTRLandGE.volume.index$Coverage/100)*4)*((CTRLandGE.volume.index$Top-CTRLandGE.volume.index$Base)/.3048)
 
+#Create a US Volume Estimate by multiplying mean ployveg% cover * mean top height for each treatment w/i each inst#
+CTRLandGE.volume.index$volume<-(((CTRLandGE.volume.index$Coverage/100)*43.0556)*
+                                  ((CTRLandGE.volume.index$Top-CTRLandGE.volume.index$Base)))/43.0556
+#the above is actually calculating veg volume per square foot#
 
 #Merge volume df with Installation Info (contains estimate of SI)#
 OS.ctrl.plot<- merge(CTRLandGE.volume.index,sinst, by.x = "Installation", by.y = "Installation",all=F)

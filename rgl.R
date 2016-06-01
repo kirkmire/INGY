@@ -16,7 +16,10 @@ plot3d(threeDVeg$SiteIndex_Value,threeDVeg$ave.BAPA,threeDVeg$volume,
        xlab="", ylab="", zlab="")
 axes3d(c("x+", "y-", "z-"))
 grid3d(side=c('x+', 'y-', 'z'), col="gray")
-title3d(xlab = "Site Index", ylab = "Residual BAPA",zlab = "Vegetation Volume (M^3)", col="red")
+title3d(xlab = "Site Index (ft)",
+        ylab = "Residual BAPA (ft/acre)",
+        zlab = "Vegetation Volume (ft^3/ft^2)",
+        col="red")
 
 #Adding vertical droplines#
 plot3d(threeDVeg$SiteIndex_Value,threeDVeg$ave.BAPA,threeDVeg$volume,type='h',add=T,

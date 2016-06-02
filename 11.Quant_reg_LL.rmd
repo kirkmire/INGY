@@ -1,14 +1,14 @@
+selecting Installations
+LL has most PIPO tagged trees
+CTRL Plots are 7 and 3
 
-source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jan19.r')
-
-#selecting Installations
-#LL has most PIPO tagged trees
-#CTRL Plots are 7 and 3
+```{r}
+source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jan19.r', echo=F)
 
 merged_stagm_stag <- merge(stagm, stag,by=c("Installation","Plot","STP","Tree"))
 
-LL<-merged_stagm_stag[merged_stagm_stag$Installation=="LL"&merged_stagm_stag$Species=="PIPO"&merged_stagm_stag$Plot%in%c(1:7)&
-                        merged_stagm_stag$Year_Measurement%in%c(2004,2008),]
+LL<-merged_stagm_stag[merged_stagm_stag$Installation=="LL"&merged_stagm_stag$Species=="PIPO"&merged_stagm_stag$Plot%in%c(1:7)&merged_stagm_stag$Year_Measurement%in%c(2004,2008),]
+
 #Appears to be errors in data entry
 #Tree 663 goes from 8.5ft to 1.6ft, should read 9.6ft
 
@@ -26,6 +26,12 @@ LL<-LL[!(LL$Plot=="3"&LL$Tree=="19"),]
 
 LL<-LL[!(LL$Plot=="6"&LL$Tree=="242"),]
 
+#tree 683 plot 4 stp 5#
+LL<-LL[!(LL$Plot=="4"&LL$Tree=="683"),]
+
+#tree 111 plot 1 stp 6#
+LL<-LL[!(LL$Plot=="1"&LL$Tree=="111"),]
+
 
 LL_min<-LL[which(LL$Year_Measurement==min(LL$Year_Measurement)),]
 
@@ -40,15 +46,12 @@ LL_both<-merge(LL_both,splot,by=c("Installation","Plot"))
 LL_both$inc<-LL_both$Height_Total.y-LL_both$Height_Total.x
 
 boxplot(LL_both$inc)
+```
 
 
-
-#Quantreg with default plotting#
-
+Quantreg with default plotting
+```{r}
 library(quantreg)
-
-help(rq)
-
 
 plot(LL_both$Height_Total.x,LL_both$inc ,cex=.5,pch=19,xlab="Initial Height", ylab="Height Growth Increment",
      col=LL_both$Treatment)
@@ -60,21 +63,19 @@ for(i in 1:length(taus)){
   abline(rq(LL_both$inc~LL_both$Height_Total.x,tau=taus[i],data=LL_both),col="gray")
 }
 fit2<-summary(rq(LL_both$inc~LL_both$Height_Total.x,tau=c(.05,.25,.5,.75,.95)))
+```
 
+Quantile Regression Plot on GGplot
 
-
-#Quantile Regression Plot on GGplot#
+```{r}
 library(ggplot2)
-
 
 ggplot(LL_both, aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
   geom_point(size=2,aes(col=LL_both$Treatment))+
-  ggtitle("LL Growth Inc vs Initial Height")+
-  xlab("Initial Height")+
-  ylab("Growth Inc")+
-  geom_smooth(method=lm,aes(x=LL_both$Height_Total.x,y=LL_both$inc
-                            #,col=LL_both$Treatment
-                            ))+
+  ggtitle("Loon Lake Installation Growth Increment vs Initial Height (2004-2008)")+
+  xlab("Initial Height (ft)")+
+  ylab("Growth Increment (ft)")+
+  geom_smooth(method=lm,aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
   stat_quantile(quantiles = taus)
 
 #Warning generated from removal of Height-HeightNA#
@@ -82,9 +83,12 @@ ggplot(LL_both, aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
 
 #For changing quantiles to color scaled
 #stat_quantile(aes(colour = ..quantile..), quantiles = taus)
+```
 
-#Coefficient Plots
 
+Coefficient Plots
+
+```{r}
 gi <- rq(LL_both$inc~LL_both$Height_Total.x, tau= 1:9/10)
 
 
@@ -92,12 +96,6 @@ gi <- rq(LL_both$inc~LL_both$Height_Total.x, tau= 1:9/10)
 plot(gi)
 plot(gi, parm = 2, mar = c(5.1, 4.1, 2.1, 2.1), main = "", xlab = "tau", 
      ylab = "Initial Height Coefficient", cex = 1, pch = 19)
-
-
-
-
-
-
 
 
 
@@ -124,7 +122,6 @@ ps <- z$sol[1,]
 qs.poor <- c(c(1,x.poor)%*%z$sol[4:5,])
 qs.rich <- c(c(1,x.rich)%*%z$sol[4:5,])
 
-dev.off()
 #now plot the two quantile functions to compare
 par(mfrow = c(1,2))
 plot(c(ps,ps),c(qs.poor,qs.rich), type="n",
@@ -142,5 +139,9 @@ plot(c(qs.poor,qs.rich),c(ap$dens,ar$dens),type="n",
     xlab= "Incremental Growth", ylab= "Density")
 lines(qs.rich, ar$dens, col="gray")
 lines(qs.poor, ap$dens, col="black")
-legend("topright", c("poor","rich"), lty = c(1,1), col=c("black","gray"))
+legend("topright", c(".10 Quant",".90 Quant"), lty = c(1,1), col=c("black","gray"))
+```
+
+
+
 

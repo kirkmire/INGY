@@ -82,12 +82,16 @@ LL_CTRL_lm<-lm(LL_CTRL$inc~LL_CTRL$Height_Total.x)
 LL_CTRL_lm_curve<-lm(LL_CTRL$inc~sqrt(LL_CTRL$Height_Total.x))
 summary(LL_CTRL_lm)
 summary(LL_CTRL_lm_curve)
-#Curved relationship leads to lesser R2
+#Curved relationship leads to lesser R2 for CTRL
 
 LL_X_lm<-lm(LL_X$inc~LL_X$Height_Total.x)
 LL_X_lm_curve<-lm(LL_X$inc~sqrt(LL_X$Height_Total.x))
 summary(LL_X_lm)
 summary(LL_X_lm_curve)
+
+
+
+
 
 
 

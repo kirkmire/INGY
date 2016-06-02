@@ -16,9 +16,10 @@ plot3d(threeDVeg$SiteIndex_Value,threeDVeg$ave.BAPA,threeDVeg$volume,
        xlab="", ylab="", zlab="")
 axes3d(c("x+", "y-", "z-"))
 grid3d(side=c('x+', 'y-', 'z'), col="gray")
-title3d(xlab = "Site Index (ft)",
-        ylab = "Residual BAPA (ft/acre)",
-        zlab = "Vegetation Volume (ft^3/ft^2)",
+title3d(
+        #ylab = "Residual BAPA (ft/acre)",
+        # zlab = "Vegetation Volume (ft^3/ft^2)",
+        #xlab = "Site Index (ft)",
         col="red")
 
 #Adding vertical droplines#
@@ -71,7 +72,6 @@ plot_ly(z = volcano, type = "surface")
 
 
 p <- plot_ly(y=threeDVeg$SiteIndex_Value,x=threeDVeg$ave.BAPA,z=threeDVeg$volume, type="surface",showscale=FALSE)
-%>%
   add_trace(z=z2, type="surface", showscale=FALSE, opacity=0.98) %>%
   add_trace(z=z3, type="surface", showscale=FALSE, opacity=0.98)
 p

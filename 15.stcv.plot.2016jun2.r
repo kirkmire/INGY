@@ -4,10 +4,6 @@ dev.off()
 library(plotrix)
 
 
-
-
-
-
 plot(c(0,170),c(0,170),xlim=c(0,170),ylim=c(0,170), xaxs="i",yaxs="i",
      type="n",xlab="Feet",ylab="",main="STCV Plot Design",bty="n",asp = 1,axes=F)
 Axis(side=1, labels=T)

@@ -1,3 +1,4 @@
+
 source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jan19.r')
 
 #selecting Installations
@@ -43,6 +44,7 @@ boxplot(LL_both$inc)
 
 
 #Quantreg with default plotting#
+
 library(quantreg)
 
 help(rq)
@@ -58,41 +60,6 @@ for(i in 1:length(taus)){
   abline(rq(LL_both$inc~LL_both$Height_Total.x,tau=taus[i],data=LL_both),col="gray")
 }
 fit2<-summary(rq(LL_both$inc~LL_both$Height_Total.x,tau=c(.05,.25,.5,.75,.95)))
-
-#Examining Relationship between init height and inc growth
-overall_lm<-lm(LL_both$inc~LL_both$Height_Total.x)
-
-summary(overall_lm)
-
-overall_lm_curve<-lm(LL_both$inc~sqrt(LL_both$Height_Total.x))
-
-summary(overall_lm_curve)
-
-#By treatment
-
-LL_GE<-LL_both[which(LL_both$Treatment=="GE"),]
-LL_CTRL<-LL_both[which(LL_both$Treatment=="CTRL"),]
-LL_X<-LL_both[which(LL_both$Treatment=="1X"),]
-LL_GE_lm<-lm(LL_GE$inc~LL_GE$Height_Total.x)
-LL_GE_lm_curve<-lm(LL_GE$inc~sqrt(LL_GE$Height_Total.x))
-summary(LL_GE_lm)
-summary(LL_GE_lm_curve)
-
-LL_CTRL_lm<-lm(LL_CTRL$inc~LL_CTRL$Height_Total.x)
-LL_CTRL_lm_curve<-lm(LL_CTRL$inc~sqrt(LL_CTRL$Height_Total.x))
-summary(LL_CTRL_lm)
-summary(LL_CTRL_lm_curve)
-#Curved relationship leads to lesser R2 for CTRL
-
-LL_X_lm<-lm(LL_X$inc~LL_X$Height_Total.x)
-LL_X_lm_curve<-lm(LL_X$inc~sqrt(LL_X$Height_Total.x))
-summary(LL_X_lm)
-summary(LL_X_lm_curve)
-
-
-
-
-
 
 
 

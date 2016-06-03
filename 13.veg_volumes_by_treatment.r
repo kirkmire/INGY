@@ -19,7 +19,7 @@ LL_plots_veg_vol_index$volume<-(((LL_plots_veg_vol_index$Coverage/100)*10.7639)*
 #interesting that LL veg 4m^2 plot only taken in 2008, 2012#
   
 LL_veg_2004<-LL_plots_veg_vol_index[LL_plots_veg_vol_index$Group.3=="2004",]
-
+names(LL_veg_2004)[2]<-"Treatment"
 
 
 #Plot Volumes of treatments over measurement years#

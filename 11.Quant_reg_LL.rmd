@@ -47,16 +47,15 @@ LL_both<-merge(LL_both,splot,by=c("Installation","Plot"))
 LL_both$inc<-LL_both$Height_Total.y-LL_both$Height_Total.x
 
 #Create column with associated veg coverage#
-LL_both$veg<- ifelse(LL_both$Treatment==LL_veg_2004$Treatment,LL_veg_2004$Coverage,"bad")
-
-if (LL_both$Treatment==LL_veg_2004$Treatment) {
-   LL_both$veg<-LL_veg_2004$Coverage
-}
+LL_both$veg<- ifelse(LL_both$Treatment=="GE",LL_veg_2004$Coverage,NA)
 
 
+LL_both$veg<-with(LL_both, ifelse(LL_both$Treatment=="GE",LL_veg_2004$Coverage[LL_veg_2004$Treatment=="GE"],
+                                  ifelse(LL_both$Treatment=="1X",LL_veg_2004$Coverage[LL_veg_2004$Treatment=="1X"],
+                                  LL_veg_2004$Coverage[LL_veg_2004$Treatment=="CTRL"] )))
 
-
-
+#Make an interaction column#
+LL_both$int<-LL_both$veg+LL_both$Height_Total.x
 
 
 boxplot(LL_both$inc)
@@ -84,6 +83,8 @@ Quantile Regression Plot on GGplot
 ```{r}
 library(ggplot2)
 
+taus<-c(.05,.1,.25,.50,.75,.9,.95)
+
 ggplot(LL_both, aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
   geom_point(size=2,aes(col=LL_both$Treatment))+
   ggtitle("Loon Lake Installation Growth Increment vs Initial Height (2004-2008)")+
@@ -95,16 +96,9 @@ ggplot(LL_both, aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
 #Quantile Regression with Veg
 
 #add veg#
-names(LL_veg_2004)[2]<-"Treatment"
-names(LL_veg_2004)[3]<-"Year"
-
-LL_both$veg <- ifelse(LL_both$Treatment==LL_veg_2004$Treatment,LL_veg_2004$Coverage,"bad")
 
 
-dataframe$periodframe <- ifelse(dataframe$year > 1991,"post-1991", "pre-1991")
-
-
-ggplot(LL_both, aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
+ggplot(LL_both, aes(x=LL_both$int,y=LL_both$inc))+
   geom_point(size=2,aes(col=LL_both$Treatment))+
   ggtitle("Loon Lake Installation Growth Increment vs Initial Height (2004-2008)")+
   xlab("Initial Height (ft)")+

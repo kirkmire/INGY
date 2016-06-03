@@ -39,3 +39,27 @@ LL_X_lm_curve<-lm(LL_X$inc~sqrt(LL_X$Height_Total.x))
 summary(LL_X_lm)
 summary(LL_X_lm_curve)
 ```
+
+Plotting Curved Relationships
+```{r}
+library(quantreg)
+
+tau=c(.05,.25,.5,.75,.95)
+
+sq_rq05<-rq(LL_both$inc~sqrt(LL_both$Height_Total.x), tau=.05)
+sq_rq25<-rq(LL_both$inc~sqrt(LL_both$Height_Total.x), tau=.25)
+sq_rq5<-rq(LL_both$inc~sqrt(LL_both$Height_Total.x), tau=.5)
+sq_rq75<-rq(LL_both$inc~sqrt(LL_both$Height_Total.x), tau=.75)
+sq_rq95<-rq(LL_both$inc~sqrt(LL_both$Height_Total.x), tau=.95)
+
+plot(LL_both$Height_Total.x,LL_both$inc ,cex=.5,pch=19,xlab="Initial Height", ylab="Height Growth Increment",
+     col=LL_both$Treatment)
+#points(LL_both$Height_Total.x,LL_both$inc,cex=.8)
+curve((sq_rq05$coefficients[2]*sqrt(x))+sq_rq05$coefficients[1], add = TRUE, col = "black")
+curve((sq_rq25$coefficients[2]*sqrt(x))+sq_rq25$coefficients[1], add = TRUE, col = "black")
+curve((sq_rq5$coefficients[2]*sqrt(x))+sq_rq5$coefficients[1], add = TRUE, col = "black")
+curve((sq_rq75$coefficients[2]*sqrt(x))+sq_rq75$coefficients[1], add = TRUE, col = "black")
+curve((sq_rq95$coefficients[2]*sqrt(x))+sq_rq95$coefficients[1], add = TRUE, col = "black")
+
+
+```

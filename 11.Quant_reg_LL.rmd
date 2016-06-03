@@ -93,8 +93,15 @@ ggplot(LL_both, aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
   #geom_smooth(method=lm,aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
   stat_quantile(quantiles = taus)
 
-#Quantile Regression with Veg
+#Warning generated from removal of Height-HeightNA#
+#Okay#
 
+#For changing quantiles to color scaled
+#stat_quantile(aes(colour = ..quantile..), quantiles = taus)
+```
+Quantile Regression with Veg
+
+```{r}
 #add veg#
 
 
@@ -106,13 +113,54 @@ ggplot(LL_both, aes(x=LL_both$int,y=LL_both$inc))+
   #geom_smooth(method=lm,aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
   stat_quantile(quantiles = taus)
 
+#trying rgl#
+library(rgl)
+
+myColorRamp <- function(colors, values) {
+  v <- (values - min(values))/diff(range(values))
+  x <- colorRamp(colors)(v)
+  rgb(x[,1], x[,2], x[,3], maxColorValue = 255)
+}
 
 
-#Warning generated from removal of Height-HeightNA#
-#Okay#
+plot3d(LL_both$Height_Total.x, LL_both$veg, LL_both$inc, 
+       axes=FALSE,size=7,
+       col="black",
+       xlab="", ylab="", zlab="")
+axes3d(c("x+", "y-", "z-"))
+grid3d(side=c('x+', 'y-', 'z'), col="gray")
+title3d(main="Loon Lake QR of Ht Inc on % Vegetative VOlume and Initial Height",
+        ylab = "Ave Percent. Cover Veg.",
+         zlab = "Height Growtth Increment (ft)",
+        xlab = "Initial Height (ft)",
+       col="black",cex.main=2)
 
-#For changing quantiles to color scaled
-#stat_quantile(aes(colour = ..quantile..), quantiles = taus)
+#Adding vertical droplines#
+plot3d(threeDVeg$SiteIndex_Value,threeDVeg$ave.BAPA,threeDVeg$volume,type='h',add=T,
+       col=myColorRamp(c("blue","green","yellow","red"),threeDVeg$volume))
+
+#Fitting&Plotting RQ Planes#
+
+fit1=rq(LL_both$inc~LL_both$Height_Total.x+LL_both$veg, tau=.5)
+summary(fit1)
+
+coefs <- coef(fit1)
+planes3d(a=coefs["LL_both$Height_Total.x"], b=coefs["LL_both$veg"],-1, coefs["(Intercept)"], alpha=0.50, col="plum2")
+
+fit2=rq(LL_both$inc~LL_both$Height_Total.x+LL_both$veg, tau=.9)
+summary(fit2)
+
+coefs <- coef(fit2)
+planes3d(a=coefs["LL_both$Height_Total.x"], b=coefs["LL_both$veg"],-1, coefs["(Intercept)"], alpha=0.50, col="green")
+
+fit3=rq(LL_both$inc~LL_both$Height_Total.x+LL_both$veg, tau=.10)
+summary(fit3)
+
+coefs <- coef(fit3)
+planes3d(a=coefs["LL_both$Height_Total.x"], b=coefs["LL_both$veg"],-1, coefs["(Intercept)"], alpha=0.50, col="blue")
+
+
+
 ```
 
 

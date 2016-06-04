@@ -162,37 +162,6 @@ planes3d(a=coefs["LL_both$Height_Total.x"], b=coefs["LL_both$veg"],-1, coefs["(I
 
 
 ```
-Trying alternative rq (Interpolated growth curves)
-```{r}
-
-library(quantreg)
-
-LL1<-merged_stagm_stag[merged_stagm_stag$Installation=="LL"&merged_stagm_stag$Species=="PIPO"&merged_stagm_stag$Plot%in%c(1:7)&merged_stagm_stag$Year_Measurement%in%c(2001,2004,2008),]
-
-
-
-
-plot(LL1$Year_Measurement,LL1$Height_Total,cex=.5,pch=19,main="Total Height vs Year of Measurement",
-     xlab="Year of Measurement", ylab="Total Height (ft)",
-     col=LL_rLL$Installation)
-points(LL1$Year_Measurement,LL1$Height_Total,cex=.8)
-abline(rq(LL1$Height_Total~LL1$Year_Measurement, tau=.5), col="blue")
-abline(lm(LL1$Height_Total~LL1$Year_Measurement,lty=2, col="red"))
-
-taus<-c(.05,.1,.25,.50,.75,.9,.95)
-
-for(i in 1:length(taus)){
-  abline(rq(Height_Total~Year_Measurement,tau=taus[i],data=LL1),col="gray")
-}
-
-fit2<-summary(rq(LL_rLL$Height_Total~LL_rLL$Year_Measurement,tau=c(.05,.25,.5,.75,.95)))
-fit2
-
-
-
-```
-
-
 
 
 

@@ -25,7 +25,6 @@ fit2<-summary(rq(LL_rLL$Height_Total~LL_rLL$Year_Measurement,tau=c(.05,.25,.5,.7
 fit2
 
 
-
 ```
 What does the above look like on multiple dim?
 ```{r}

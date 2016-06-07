@@ -5,6 +5,7 @@ LL1<-merged_stagm_stag[merged_stagm_stag$Installation=="LL"&merged_stagm_stag$Sp
 
 LL1_init<-aggregate(LL1$Height_Total ~ LL1$Tree+LL1$Plot+LL1$STP, LL1, function(x) min(x))
 
+
 names(LL1_init)[1:4]<-c("Tree","Plot","STP","Height_Total")
 
 LL1_both<-merge(LL1_init,LL1, by=c("Plot","STP","Tree"))
@@ -13,9 +14,6 @@ LL1_both$inc<-LL1_both$Height_Total.y-LL1_both$Height_Total.x
 
 #Merge with splot for treatment column#
 LL1_both<-merge(LL1_both,splot,by=c("Installation","Plot"))
-
-#Create Column with growth increment#
-LL1_both$inc<-EM_both$Height_Total.y-EM_both$Height_Total.x
 
 boxplot(LL1_both$inc)
 

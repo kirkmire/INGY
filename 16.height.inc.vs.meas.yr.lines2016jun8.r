@@ -68,10 +68,17 @@ qfun <- function(x, q = 4) {
 }
 
 
-LL1_both$q <- ave(LL1_both$Height_Total.y,LL1_both$Year_Measurement.y,FUN=qfun)
 
 
-lllp<-ggplot(data=LL1_both, aes(x=Year_Measurement.y, y=inc,color= factor(LL1_both$q)))+geom_point()+
+LL2012<-LL1_both[LL1_both$Year_Measurement.y=="2012",]
+
+LL2012$quant <- qfun(LL2012$Height_Total.y)
+
+mk4 <- within(LL1_both, quanti <- totalPr - shipPr)
+
+merge(LL2012,LL1_both,by=c("Plot","Installation","STP","Tree"))
+
+lllp<-ggplot(data=LL1_both, aes(x=Year_Measurement.y, y=inc,color= factor(LL1_both$Quant)))+geom_point()+
   labs(title="LL Tree H-H Inc over Meas Years",y="Height-Init Height (ft)", x = "Measurement Year")+ 
   scale_fill_brewer(palette="Dark2") +tbp+ geom_line(aes(group=LL1_both$Tree))+ylim(0,20)
 
@@ -81,56 +88,7 @@ lllp+scale_colour_manual(values = c("black", "blue", "red","green"),
 
 
 
-#why are so many trees missing in the upper years?
 
-
-LL_count_check<-LL1_both[LL1_both$Year_Measurement.y=="2012",]
-#1999,2000,2004,2008,1012
-length(LL_count_check$Installation)
-
-
-numb.PIPO<-stag[stag$Installation=="LL"&&stag$Species=="PIPO"]
-
-length(LL1_both[LL1_both$Year_Measurement=="2008",])
-
-length(LL1_both[LL1_both$Year_Measurement=="2004",])
-
-
-
-
-##trying some 3D stuff
-
-LL1_both<-merge(LL1_both,LL1_both,by=c("Plot","STP","Tree"))
-
-aggregate(LL1_both[c("Plot","STP","Tree")], by=list(name=LL1$Tree), na.rm = TRUE)
-
-library(pl)
-ddply(LL1_both, "Tree", summarize, newCol = paste(Total_Height), collapse = "")
-
-library(rgl)
-
-# color ramp
-myColorRamp <- function(colors, values) {
-  v <- (values - min(values))/diff(range(values))
-  x <- colorRamp(colors)(v)
-  rgb(x[,1], x[,2], x[,3], maxColorValue = 255)
-}
-
-plot3d(threeDVeg$SiteIndex_Value,threeDVeg$ave.BAPA,threeDVeg$volume, 
-       axes=FALSE,size=7,
-       col=myColorRamp(c("blue","green","yellow","red"),threeDVeg$volume),
-       xlab="", ylab="", zlab="")
-axes3d(c("x+", "y-", "z-"))
-grid3d(side=c('x+', 'y-', 'z'), col="gray")
-title3d(
-  #ylab = "Residual BAPA (ft/acre)",
-  # zlab = "Vegetation Volume (ft^3/ft^2)",
-  #xlab = "Site Index (ft)",
-  col="red")
-
-#Adding vertical droplines#
-plot3d(threeDVeg$SiteIndex_Value,threeDVeg$ave.BAPA,threeDVeg$volume,type='h',add=T,
-       col=myColorRamp(c("blue","green","yellow","red"),threeDVeg$volume))
 
 
 

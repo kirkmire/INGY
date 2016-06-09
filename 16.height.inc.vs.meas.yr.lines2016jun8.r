@@ -56,27 +56,27 @@ tbp<-theme(
 lllp<-ggplot(data=LL1_both, aes(x=Year_Measurement.y, y=inc,color=LL1_both$Height_Total.x))+geom_point()+
   labs(title="LL Tree H-H Inc over Meas Years",y="Height-Init Height (ft)", x = "Measurement Year")+ 
   scale_fill_brewer(palette="Dark2") +tbp+ geom_line(aes(group=LL1_both$Tree))+ylim(0,20)
-lllp+scale_colour_gradient(limits=c(0, 10), low="red", high="green")
+lllp+scale_colour_gradient(limits=c(0, 15), low="red", high="green")
 
 
-probs <- c(0.50,0.80)
+#For coloring by quantiles of height growth difference from initial#
 
-quantiles <- function(x,y){
-  z<-quantile(x, prob=y)
-  return(z)
+qfun <- function(x, q = 4) {
+  quantile <- cut(x, breaks = quantile(x, probs = 0:q/q), 
+                  include.lowest = TRUE, labels = 1:q)
+  quantile
 }
-quantiles <- quantile(LL1_both$Year_Measurement.y, prob=probs)
 
 
+LL1_both$q <- ave(LL1_both$Height_Total.y,LL1_both$Year_Measurement.y,FUN=qfun)
 
 
-by(LL1_both, LL1_both$Year_Measurement.y, quantiles(x) , simplify = TRUE)
-
-lllp<-ggplot(data=LL1_both, aes(x=Year_Measurement.y, y=inc,color=(aes(colour = quant))))+geom_point()+
+lllp<-ggplot(data=LL1_both, aes(x=Year_Measurement.y, y=inc,color= factor(LL1_both$q)))+geom_point()+
   labs(title="LL Tree H-H Inc over Meas Years",y="Height-Init Height (ft)", x = "Measurement Year")+ 
   scale_fill_brewer(palette="Dark2") +tbp+ geom_line(aes(group=LL1_both$Tree))+ylim(0,20)
-lllp+scale_colour_manual(values = c("black", "blue", "red"), 
-                    labels = c("0-50", "50-80", "80-100")) 
+
+lllp+scale_colour_manual(values = c("black", "blue", "red","green"), 
+                    labels = c("0-25", "25-50", "50-75","75-100")) 
 
 
 

@@ -53,7 +53,7 @@ tbp<-theme(
   plot.title = element_text(face="bold", color = "black", size=18), 
   legend.position="bottom",axis.title.y=element_text(vjust=0.8))
 
-lllp<-ggplot(data=LL1_both, aes(x=Year_Measurement.y, y=inc,color=LL1_both$Height_Total.x))+geom_point()+
+lllp<-ggplot(data=LL1_both, aes(x=Year_Measurement.y, y=inc,color=LL1_both$inc))+geom_point()+
   labs(title="LL Tree H-H Inc over Meas Years",y="Height-Init Height (ft)", x = "Measurement Year")+ 
   scale_fill_brewer(palette="Dark2") +tbp+ geom_line(aes(group=LL1_both$Tree))+ylim(0,10)
 lllp+scale_colour_gradient(limits=c(0, 13), low="red", high="green")
@@ -62,10 +62,12 @@ lllp+scale_colour_gradient(limits=c(0, 13), low="red", high="green")
 #why are so many trees missing in the upper years?
 
 
-LL_count_check<-LL1_both[LL1_both$Year_Measurement=="2012",]
+LL_count_check<-LL1_both[LL1_both$Year_Measurement.y=="2012",]
 #1999,2000,2004,2008,1012
 length(LL_count_check$Installation)
 
+
+numb.PIPO<-stag[stag$Installation=="LL"&&stag$Species=="PIPO"]
 
 length(LL1_both[LL1_both$Year_Measurement=="2008",])
 

@@ -53,10 +53,32 @@ tbp<-theme(
   plot.title = element_text(face="bold", color = "black", size=18), 
   legend.position="bottom",axis.title.y=element_text(vjust=0.8))
 
-lllp<-ggplot(data=LL1_both, aes(x=Year_Measurement.y, y=inc,color=LL1_both$inc))+geom_point()+
+lllp<-ggplot(data=LL1_both, aes(x=Year_Measurement.y, y=inc,color=LL1_both$Height_Total.x))+geom_point()+
   labs(title="LL Tree H-H Inc over Meas Years",y="Height-Init Height (ft)", x = "Measurement Year")+ 
-  scale_fill_brewer(palette="Dark2") +tbp+ geom_line(aes(group=LL1_both$Tree))+ylim(0,10)
-lllp+scale_colour_gradient(limits=c(0, 13), low="red", high="green")
+  scale_fill_brewer(palette="Dark2") +tbp+ geom_line(aes(group=LL1_both$Tree))+ylim(0,20)
+lllp+scale_colour_gradient(limits=c(0, 10), low="red", high="green")
+
+
+probs <- c(0.50,0.80)
+
+quantiles <- function(x,y){
+  z<-quantile(x, prob=y)
+  return(z)
+}
+quantiles <- quantile(LL1_both$Year_Measurement.y, prob=probs)
+
+
+
+
+by(LL1_both, LL1_both$Year_Measurement.y, quantiles(x) , simplify = TRUE)
+
+lllp<-ggplot(data=LL1_both, aes(x=Year_Measurement.y, y=inc,color=(aes(colour = quant))))+geom_point()+
+  labs(title="LL Tree H-H Inc over Meas Years",y="Height-Init Height (ft)", x = "Measurement Year")+ 
+  scale_fill_brewer(palette="Dark2") +tbp+ geom_line(aes(group=LL1_both$Tree))+ylim(0,20)
+lllp+scale_colour_manual(values = c("black", "blue", "red"), 
+                    labels = c("0-50", "50-80", "80-100")) 
+
+
 
 
 #why are so many trees missing in the upper years?

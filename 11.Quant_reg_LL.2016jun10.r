@@ -2,7 +2,7 @@ selecting Installations
 LL has most PIPO tagged trees
 CTRL Plots are 7 and 3
 
-```{r}
+
 source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jun2.r', echo=F)
 
 merged_stagm_stag <- merge(stagm, stag,by=c("Installation","Plot","STP","Tree"))
@@ -57,7 +57,7 @@ boxplot(LL_both$inc)
 
 
 Quantreg with default plotting
-```{r}
+
 library(quantreg)
 
 plot(LL_both$Height_Total.x,LL_both$inc ,cex=.5,pch=19,xlab="Initial Height", ylab="Height Growth Increment",
@@ -74,7 +74,7 @@ fit2<-summary(rq(LL_both$inc~LL_both$Height_Total.x,tau=c(.05,.25,.5,.75,.95)))
 
 Quantile Regression Plot on GGplot
 
-```{r}
+
 library(ggplot2)
 
 taus<-c(.05,.1,.25,.50,.75,.9,.95)
@@ -92,10 +92,9 @@ ggplot(LL_both, aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
 
 #For changing quantiles to color scaled
 #stat_quantile(aes(colour = ..quantile..), quantiles = taus)
-```
-Quantile Regression with Veg
 
-```{r}
+
+
 #add veg#
 
 
@@ -107,61 +106,9 @@ ggplot(LL_both, aes(x=LL_both$int,y=LL_both$inc))+
   #geom_smooth(method=lm,aes(x=LL_both$Height_Total.x,y=LL_both$inc))+
   stat_quantile(quantiles = taus)
 
-#trying rgl#
-library(rgl)
 
-myColorRamp <- function(colors, values) {
-  v <- (values - min(values))/diff(range(values))
-  x <- colorRamp(colors)(v)
-  rgb(x[,1], x[,2], x[,3], maxColorValue = 255)
-}
+#Coefficient Plots
 
-
-plot3d(LL_both$Height_Total.x, LL_both$veg, LL_both$inc, 
-       axes=FALSE,size=7,
-       col="black",
-       xlab="", ylab="", zlab="")
-axes3d(c("x+", "y-", "z-"))
-grid3d(side=c('x+', 'y-', 'z'), col="gray")
-title3d(main="Loon Lake QR of Ht Inc on % Vegetative VOlume and Initial Height",
-        ylab = "Ave Percent. Cover Veg.",
-         zlab = "Height Growtth Increment (ft)",
-        xlab = "Initial Height (ft)",
-       col="black",cex.main=2)
-
-#Adding vertical droplines#
-plot3d(threeDVeg$SiteIndex_Value,threeDVeg$ave.BAPA,threeDVeg$volume,type='h',add=T,
-       col=myColorRamp(c("blue","green","yellow","red"),threeDVeg$volume))
-
-#Fitting&Plotting RQ Planes#
-
-fit1=rq(LL_both$inc~LL_both$Height_Total.x+LL_both$veg, tau=.5)
-summary(fit1)
-
-coefs <- coef(fit1)
-planes3d(a=coefs["LL_both$Height_Total.x"], b=coefs["LL_both$veg"],-1, coefs["(Intercept)"], alpha=0.50, col="plum2")
-
-fit2=rq(LL_both$inc~LL_both$Height_Total.x+LL_both$veg, tau=.9)
-summary(fit2)
-
-coefs <- coef(fit2)
-planes3d(a=coefs["LL_both$Height_Total.x"], b=coefs["LL_both$veg"],-1, coefs["(Intercept)"], alpha=0.50, col="green")
-
-fit3=rq(LL_both$inc~LL_both$Height_Total.x+LL_both$veg, tau=.10)
-summary(fit3)
-
-coefs <- coef(fit3)
-planes3d(a=coefs["LL_both$Height_Total.x"], b=coefs["LL_both$veg"],-1, coefs["(Intercept)"], alpha=0.50, col="blue")
-
-
-
-```
-
-
-
-Coefficient Plots
-
-```{r}
 gi <- rq(LL_both$inc~LL_both$Height_Total.x, tau= 1:9/10)
 
 
@@ -213,7 +160,7 @@ plot(c(qs.poor,qs.rich),c(ap$dens,ar$dens),type="n",
 lines(qs.rich, ar$dens, col="gray")
 lines(qs.poor, ap$dens, col="black")
 legend("topright", c(".10 Quant",".90 Quant"), lty = c(1,1), col=c("black","gray"))
-```
+
 
 
 

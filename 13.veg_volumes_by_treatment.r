@@ -25,7 +25,7 @@ names(LL_veg_2004)[2]<-"Treatment"
 #Plot Volumes of treatments over measurement years#
 library(ggplot2)
 
-ggplot(all_plots_veg_vol_index, aes(x=Group.3,y=volume))+
+ggplot(LL_plots_veg_vol_index, aes(x=Group.3,y=volume))+
   geom_point(size=2,aes(col=Group.2))+
   ggtitle("Mean Veg volume on LL over years measured")+
   xlab("Year Measurement")+

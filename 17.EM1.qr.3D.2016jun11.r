@@ -82,7 +82,11 @@ plot3d(EM1_both$BAPA,
        xlab="", ylab="", zlab="")
 axes3d(c("x+", "y-", "z-"))
 grid3d(side=c('x+', 'y-', 'z'), col="gray")
+<<<<<<< HEAD
 title3d(main="EM QR of Ht Inc on % Vegetative Volume and BAPA",
+=======
+title3d(main="Loon Lake QR of Ht Inc on % Vegetative Volume and Sum of CW",
+>>>>>>> 9277ade930a94064562304f64264a3756bd93220
         ylab = "Ave Percent. Cover Veg. by STP",
         zlab = "Height Growth Increment (ft)",
         xlab = "BAPA by Plot",

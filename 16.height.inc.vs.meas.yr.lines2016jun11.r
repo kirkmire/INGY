@@ -70,7 +70,14 @@ tbp<-theme(
   axis.title.x = element_text(face="bold", color="black", size=16),
   axis.title.y = element_text( face="bold",color="black", size=16),
   plot.title = element_text(face="bold", color = "black", size=18), 
-  legend.position="bottom",axis.title.y=element_text(vjust=0.8))
+  legend.text=element_text(color="black", size=14),
+  legend.title=	element_text(face="bold",color="black", size=14),
+  legend.justification=c(0,1), legend.position=c(0,1),
+  legend.background = element_rect(colour = "black"),
+  axis.title.y=element_text(vjust=0.8),
+  axis.text.x	=element_text(color="black", size=14),
+  axis.text.y=element_text(color="black", size=14),
+  axis.ticks=element_line(size=1,colour="black",linetype = 1))
 
 lllp<-ggplot(data=LL1_both, aes(x=Year_Measurement.y, 
   y=inc, color=LL1_both$Height_Total.x))+geom_point()+
@@ -101,17 +108,21 @@ LL2012$q<-quant
 LL1_both$qu<-LL2012$q[match(LL1_both$id,LL2012$id)]
 
 lllp<-ggplot(data=LL1_both, aes(x=Year_Measurement.y, 
-  y=inc,color= LL1_both$qu))+geom_point()+
-  labs(title="LL Tree H-H Inc over Meas Years",
+  y=inc,color= LL1_both$qu))+geom_point()+labs(title=
+"Tree Height Total - Initial Height over Measurement Years",
   y="Height-Init Height (ft)", x = "Measurement Year")+ 
   scale_fill_brewer(palette="Dark2") +tbp+ 
-  geom_line(aes(group=LL1_both$id))+ylim(0,20)
+  geom_line(aes(group=LL1_both$id))+ylim(0,17.5)
 
-cbPalette <-c("#999999", "#E69F00", "#56B4E9", "#009E73",
-              "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+cbPalette <-c("#999999", "#E69F00", "#56B4E9",  "#009E73",
+              "#D55E00","#0072B2", "#CC79A7","#F0E442")
 
-lllp+scale_colour_manual (values=cbPalette,labels = 
-  c("0-25", "25-50", "50-75","75-100","Dead/Missing"))
+lllp+scale_colour_manual(values=cbPalette,labels = 
+  c("0-25", "25-50", "50-75","75-100","Dead/Missing"),
+  name="Colored According to
+  2012 Growth Quantile")
+    
                            
                 
 
+dev.off()

@@ -1,3 +1,4 @@
+source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jun2.r')
 source('C:/Users/Colin/Desktop/R-Projects/INGY/13.veg_volumes_by_treatment.r')
 source('C:/Users/Colin/Desktop/R-Projects/INGY/4.explor.plots.2016.jun2.r')
 
@@ -26,7 +27,7 @@ EM1_init<-(EM[EM$Year_Measurement=="2002",])
 length(unique(EM1_init$Tree))
 
 #Random sample of 50 PIPO trees from LL1_init
-EM_samp<-EM1_init[sample(nrow(EM1_init),50),]
+EM_samp<-EM1_init[sample(nrow(EM1_init),70),]
 
 #Select only rows for which Tree==Tree
 EM<-EM[EM$Plot %in% EM_samp$Plot&EM$STP %in%EM_samp$STP&
@@ -37,7 +38,7 @@ EM1_both<-merge(EM1_init,EM, by=c("Plot","STP","Tree"))
 
 #Create H-H inc column
 
-EM1_both$inc<-EM1_both$Height_Total.x-EM1_both$Height_Total.y
+EM1_both$inc<-EM1_both$Height_Total.y-EM1_both$Height_Total.x
 
 
 #Merge with splot for treatment column#
@@ -82,15 +83,12 @@ plot3d(EM1_both$BAPA,
        xlab="", ylab="", zlab="")
 axes3d(c("x+", "y-", "z-"))
 grid3d(side=c('x+', 'y-', 'z'), col="gray")
-<<<<<<< HEAD
 title3d(main="EM QR of Ht Inc on % Vegetative Volume and BAPA",
-=======
-title3d(main="Loon Lake QR of Ht Inc on % Vegetative Volume and Sum of CW",
->>>>>>> 9277ade930a94064562304f64264a3756bd93220
         ylab = "Ave Percent. Cover Veg. by STP",
         zlab = "Height Growth Increment (ft)",
         xlab = "BAPA by Plot",
         col="black",cex.main=2)
+
 
 #Adding vertical droplines#
 #plot3d(threeDVeg$SiteIndex_Value,threeDVeg$ave.BAPA,threeDVeg$volume,type='h',add=T,
@@ -100,27 +98,27 @@ title3d(main="Loon Lake QR of Ht Inc on % Vegetative Volume and Sum of CW",
 library(quantreg)
 
 #QR for Median#
-fit5=rq(EM_both$inc~EM1_both$BAPA+EM_both$`EM_plots_veg$Coverage`, tau=.5)
+fit5=rq(EM1_both$inc~EM1_both$BAPA+EM1_both$`EM_plots_veg$Coverage`, tau=.5)
 summary(fit5)
 
 coefs <- coef(fit5)
-planes3d(a=coefs["EM1_both$BAPA"], b=coefs["EM_both$`EM_plots_veg$Coverage`"],
+planes3d(a=coefs["EM1_both$BAPA"], b=coefs["EM1_both$`EM_plots_veg$Coverage`"],
          -1, coefs["(Intercept)"], alpha=0.50, col="plum2")
 
 #QR for .10
-fit1=rq(EM_both$inc~EM1_both$BAPA+EM_both$`EM_plots_veg$Coverage`, tau=.10)
+fit1=rq(EM1_both$inc~EM1_both$BAPA+EM1_both$`EM_plots_veg$Coverage`, tau=.10)
 summary(fit1)
 
 coefs <- coef(fit1)
-planes3d(a=coefs["EM1_both$BAPA"], b=coefs["EM_both$`EM_plots_veg$Coverage`"],
+planes3d(a=coefs["EM1_both$BAPA"], b=coefs["EM1_both$`EM_plots_veg$Coverage`"],
          -1, coefs["(Intercept)"], alpha=0.50, col="red")
 
 #QR for .95
-fit9=rq(EM_both$inc~EM1_both$BAPA+EM_both$`EM_plots_veg$Coverage`, tau=.95)
+fit9=rq(EM1_both$inc~EM1_both$BAPA+EM1_both$`EM_plots_veg$Coverage`, tau=.95)
 summary(fit9)
 
 coefs <- coef(fit9)
-planes3d(a=coefs["EM1_both$BAPA"], b=coefs["EM_both$`EM_plots_veg$Coverage`"],
+planes3d(a=coefs["EM1_both$BAPA"], b=coefs["EM1_both$`EM_plots_veg$Coverage`"],
          -1, coefs["(Intercept)"], alpha=0.50, col="blue")
 
 

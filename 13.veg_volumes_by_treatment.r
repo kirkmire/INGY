@@ -30,3 +30,9 @@ ggplot(LL_plots_veg_vol_index, aes(x=Group.3,y=volume))+
   ggtitle("Mean Veg volume on LL over years measured")+
   xlab("Year Measurement")+
   ylab("Vegetative volume (ft^3/ft^m from 1m^2)")
+
+
+Veg<-aggregate(LL_plots_veg$Coverage~LL_plots_veg$Plot+LL_plots_veg$STP, FUN=mean)
+
+
+LL_both<-merge(CW,LL_both,by.y=c("Plot","STP"),by.x=c("LL_both$Plot","LL_both$STP"))

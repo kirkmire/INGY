@@ -24,7 +24,6 @@ LL<-LL[!(LL$Plot=="4"&LL$Tree=="683"),]
 #tree 111 plot 1 stp 6#
 LL<-LL[!(LL$Plot=="1"&LL$Tree=="111"),]
 
-
 #Select only tagged trees from 2004 (initial meas)
 LL1_init<-(LL[LL$Year_Measurement=="2004",])
 
@@ -65,55 +64,69 @@ CW<-aggregate(LL_both$CrownWidth.x~LL_both$Plot+LL_both$STP, FUN=sum)
 
 LL_both<-merge(CW,LL_both,by.y=c("Plot","STP"),by.x=c("LL_both$Plot","LL_both$STP"))
 
+#veg
+Veg<-aggregate(LL_plots_veg$Coverage~
+                 LL_plots_veg$Plot+LL_plots_veg$STP, FUN=mean)
+
+
+LL_both<-merge(Veg,LL_both,by.y=c("LL_both$Plot","LL_both$STP"),
+               by.x=c("LL_plots_veg$Plot","LL_plots_veg$STP"))
 
 
 
 #trying rgl#
 library(rgl)
 
-myColorRamp <- function(colors, values) {
-  v <- (values - min(values))/diff(range(values))
-  x <- colorRamp(colors)(v)
-  rgb(x[,1], x[,2], x[,3], maxColorValue = 255)
-}
+#myColorRamp <- function(colors, values) {
+#  v <- (values - min(values))/diff(range(values))
+ # x <- colorRamp(colors)(v)
+#  rgb(x[,1], x[,2], x[,3], maxColorValue = 255)
+#}
 
-
-plot3d(LL_both$`LL_both$CrownWidth.x`, LL_both$Coverage, LL_both$inc, 
+plot3d(LL_both$`LL_both$CrownWidth.x`, LL_both$`LL_plots_veg$Coverage`,
+       LL_both$inc, 
        axes=FALSE,size=7,
        col="black",
        xlab="", ylab="", zlab="")
 axes3d(c("x+", "y-", "z-"))
 grid3d(side=c('x+', 'y-', 'z'), col="gray")
-title3d(main="Loon Lake QR of Ht Inc on % Vegetative VOlume and Initial Height",
-        ylab = "Ave Percent. Cover Veg.",
-        zlab = "Height Growtth Increment (ft)",
-        xlab = "Initial Height (ft)",
+title3d(main="Loon Lake QR of Ht Inc on % Vegetative Volume and Sum of CW",
+        ylab = "Ave Percent. Cover Veg. by STP",
+        zlab = "Height Growth Increment (ft)",
+        xlab = "Sum of CW by STP",
         col="black",cex.main=2)
 
 #Adding vertical droplines#
-plot3d(threeDVeg$SiteIndex_Value,threeDVeg$ave.BAPA,threeDVeg$volume,type='h',add=T,
-       col=myColorRamp(c("blue","green","yellow","red"),threeDVeg$volume))
+#plot3d(threeDVeg$SiteIndex_Value,threeDVeg$ave.BAPA,threeDVeg$volume,type='h',add=T,
+       #col=myColorRamp(c("blue","green","yellow","red"),threeDVeg$volume))
 
 #Fitting&Plotting RQ Planes#
+library(quantreg)
 
-fit1=rq(LL_both$inc~LL_both$Height_Total.x+LL_both$veg, tau=.5)
+#QR for Median#
+fit5=rq(LL_both$inc~LL_both$`LL_both$CrownWidth.x`+LL_both$`LL_plots_veg$Coverage`, tau=.5)
+summary(fit5)
+
+#QR for Median
+coefs <- coef(fit5)
+planes3d(a=coefs["LL_both$`LL_both$CrownWidth.x`"], b=coefs["LL_both$`LL_plots_veg$Coverage`"],
+    -1, coefs["(Intercept)"], alpha=0.50, col="plum2")
+
+#QR for .10
+fit1=rq(LL_both$inc~LL_both$`LL_both$CrownWidth.x`+LL_both$`LL_plots_veg$Coverage`, tau=.1)
 summary(fit1)
 
 coefs <- coef(fit1)
-planes3d(a=coefs["LL_both$Height_Total.x"], b=coefs["LL_both$veg"],-1, coefs["(Intercept)"], alpha=0.50, col="plum2")
+planes3d(a=coefs["LL_both$`LL_both$CrownWidth.x`"], b=coefs["LL_both$`LL_plots_veg$Coverage`"],
+         -1, coefs["(Intercept)"], alpha=0.50, col="red")
 
-fit2=rq(LL_both$inc~LL_both$Height_Total.x+LL_both$veg, tau=.9)
-summary(fit2)
+#QR for .95
+fit9=rq(LL_both$inc~LL_both$`LL_both$CrownWidth.x`+LL_both$`LL_plots_veg$Coverage`, tau=.95)
+summary(fit9)
 
-coefs <- coef(fit2)
-planes3d(a=coefs["LL_both$Height_Total.x"], b=coefs["LL_both$veg"],-1, coefs["(Intercept)"], alpha=0.50, col="green")
-
-fit3=rq(LL_both$inc~LL_both$Height_Total.x+LL_both$veg, tau=.10)
-summary(fit3)
-
-coefs <- coef(fit3)
-planes3d(a=coefs["LL_both$Height_Total.x"], b=coefs["LL_both$veg"],-1, coefs["(Intercept)"], alpha=0.50, col="blue")
-
+coefs <- coef(fit9)
+planes3d(a=coefs["LL_both$`LL_both$CrownWidth.x`"], b=coefs["LL_both$`LL_plots_veg$Coverage`"],
+         -1, coefs["(Intercept)"], alpha=0.5, col="blue")
 
 
 #making a movie#

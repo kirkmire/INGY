@@ -59,6 +59,15 @@ LL_both$int<-LL_both$veg+LL_both$Height_Total.x
 
 
 boxplot(LL_both$inc)
+
+#Merging with veg info
+
+new.veg<-LL_plots_veg[LL_plots_veg$Lifeform=="POLV",]
+
+LL_both_plus<-merge(LL_both,new.veg, by.x=c("Plot","STP","Year_Measurement.x"),by.y=c("Plot","STP","Year_Measurement"),all.x=T)
+
+
+
 ```
 
 

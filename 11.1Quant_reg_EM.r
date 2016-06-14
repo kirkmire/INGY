@@ -14,8 +14,6 @@ EM<-merged_stagm_stag[merged_stagm_stag$Installation=="EM"&merged_stagm_stag$Spe
 
 EM<-EM[!(EM$Plot=="7"&EM$Tree=="732"),]
 
-
-
 EM_min<-EM[which(EM$Year_Measurement==min(EM$Year_Measurement)),]
 
 EM_max<-EM[which(EM$Year_Measurement==max(EM$Year_Measurement)),]

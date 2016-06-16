@@ -16,3 +16,12 @@ stagm<-stagm[!(stagm$Plot=="4"&stagm$Tree=="683"),]
 
 #tree 111 plot 1 stp 6#
 stagm<-stagm[!(stagm$Plot=="1"&stagm$Tree=="111"),]
+
+#tree 53 plot 3#
+stagm<-stagm[!(stagm$Plot=="3"&stagm$Tree=="53"),]
+
+#tree 284 plot 7#
+stagm<-stagm[!(stagm$Plot=="7"&stagm$Tree=="284"),]
+
+#tree 273 plot 1#
+stagm<-stagm[!(stagm$Plot=="1"&stagm$Tree=="673"),]

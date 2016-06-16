@@ -122,3 +122,23 @@ movie3d(spin3d(axis = c(0, 0, 1)), duration = 15,
 
 getwd()
 dev.off()
+
+library(quantreg)
+
+plot(incdata$init.ht,incdata$ht.inc,
+     xlab="Initial height",
+     ylab="Height increment",
+     main="Height Increment vs Initial Height")
+
+
+sq_rq05<-rq(incdata$ht.inc~sqrt(incdata$init.ht), tau=.10)
+sq_rq5<-rq(incdata$ht.inc~sqrt(incdata$init.ht), tau=.5)
+sq_rq95<-rq(incdata$ht.inc~sqrt(incdata$init.ht), tau=.90)
+#points(LL_both$Height_Total.x,LL_both$inc,cex=.8)
+curve((sq_rq05$coefficients[2]*sqrt(x))+sq_rq05$coefficients[1], add = TRUE, col = "red",lwd=2)
+curve((sq_rq5$coefficients[2]*sqrt(x))+sq_rq5$coefficients[1], add = TRUE, col = "black",lwd=2)
+curve((sq_rq95$coefficients[2]*sqrt(x))+sq_rq95$coefficients[1], add = TRUE, col = "blue",lwd=2)
+
+legend(15,.1, c(".90 Quantile",".50 Quantile",".10 Quantile"), 
+            lty=c(1,1,1),
+            lwd=c(2.5,2.5,2.5),col=c("blue","black","red")) 

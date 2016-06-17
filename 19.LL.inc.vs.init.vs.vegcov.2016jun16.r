@@ -139,6 +139,6 @@ curve((sq_rq05$coefficients[2]*sqrt(x))+sq_rq05$coefficients[1], add = TRUE, col
 curve((sq_rq5$coefficients[2]*sqrt(x))+sq_rq5$coefficients[1], add = TRUE, col = "black",lwd=2)
 curve((sq_rq95$coefficients[2]*sqrt(x))+sq_rq95$coefficients[1], add = TRUE, col = "red",lwd=2)
 
-legend(15,.1, c(".90 Quantile",".50 Quantile",".10 Quantile"), 
+legend(17,.2, c(".90 Quantile",".50 Quantile",".10 Quantile"), 
             lty=c(1,1,1),
             lwd=c(2.5,2.5,2.5),col=c("red","black","blue")) 

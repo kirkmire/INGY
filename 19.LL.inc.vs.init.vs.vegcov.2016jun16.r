@@ -1,5 +1,6 @@
 # need to run step 1 to get data
 source("1.readdatabase.2016jun2.r")
+source('18.database.error.corrections.2016jun16.r')
 
 # identify small tree forms of damage that we'll drop
 levels(stagm$Damage)
@@ -117,16 +118,15 @@ surface3d(xs,ys,zs(3),col="red",alpha=.5)
 
 # Create a movie
 
-movie3d(spin3d(axis = c(0, 0, 1)), duration = 15,
-        dir = getwd())
+#movie3d(spin3d(axis = c(0, 0, 1),rpm=4), duration = 15,
+        #dir = getwd())
 
 getwd()
 dev.off()
 
 library(quantreg)
 
-plot(incdata$init.ht,incdata$ht.inc,
-     xlab="Initial height",
+plot(incdata$init.ht, incdata$ht.inc, xlab="Initial height",
      ylab="Height increment",
      main="Height Increment vs Initial Height")
 
@@ -135,10 +135,10 @@ sq_rq05<-rq(incdata$ht.inc~sqrt(incdata$init.ht), tau=.10)
 sq_rq5<-rq(incdata$ht.inc~sqrt(incdata$init.ht), tau=.5)
 sq_rq95<-rq(incdata$ht.inc~sqrt(incdata$init.ht), tau=.90)
 #points(LL_both$Height_Total.x,LL_both$inc,cex=.8)
-curve((sq_rq05$coefficients[2]*sqrt(x))+sq_rq05$coefficients[1], add = TRUE, col = "red",lwd=2)
+curve((sq_rq05$coefficients[2]*sqrt(x))+sq_rq05$coefficients[1], add = TRUE, col = "blue",lwd=2)
 curve((sq_rq5$coefficients[2]*sqrt(x))+sq_rq5$coefficients[1], add = TRUE, col = "black",lwd=2)
-curve((sq_rq95$coefficients[2]*sqrt(x))+sq_rq95$coefficients[1], add = TRUE, col = "blue",lwd=2)
+curve((sq_rq95$coefficients[2]*sqrt(x))+sq_rq95$coefficients[1], add = TRUE, col = "red",lwd=2)
 
 legend(15,.1, c(".90 Quantile",".50 Quantile",".10 Quantile"), 
             lty=c(1,1,1),
-            lwd=c(2.5,2.5,2.5),col=c("blue","black","red")) 
+            lwd=c(2.5,2.5,2.5),col=c("red","black","blue")) 

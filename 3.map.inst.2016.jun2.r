@@ -2,8 +2,9 @@ library(RODBC)
 library(RgoogleMaps)
 
 #! 1. read in some tables
-setwd("G:/INGY DATA/STCVRcode/STCV")
-filenm <- "stcv_database_19jan2016.accdb"
+setwd("C:/Users/Colin/Desktop/R-Projects/INGY")
+
+filenm <- "stcv_database_Jun2016.accdb"
 
 path <- odbcConnectAccess2007(filenm)
 sqlTables(path)[,3]
@@ -38,7 +39,7 @@ tmp <- PlotOnStaticMap(basemap,cex=2,pch=21,col="red",
 tmp <- PlotOnStaticMap(basemap,cex=1.1,col="red",add=T,
 lat=locs0v2$Lat,
 lon=locs0v2$Long,
-FUN=text,labels=locs0v2$Installation)#
+FUN=text,labels=locs0v2$Installation)
 
 
 

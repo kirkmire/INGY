@@ -127,8 +127,8 @@ dev.off()
 library(quantreg)
 
 plot(incdata$init.ht, incdata$ht.inc, xlab="Initial height",
-     ylab="Height increment",
-     main="Height Increment vs Initial Height")
+     ylab="Annualized Height Increment (ft)",
+     main="Annualized Height Increment vs Initial Height (ft)")
 
 
 sq_rq05<-rq(incdata$ht.inc~sqrt(incdata$init.ht), tau=.10)

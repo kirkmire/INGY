@@ -5,7 +5,7 @@
 
 #! 1. set directory and filename of current database
 data.dir <- "C:/Users/Colin/Desktop/R-Projects/INGY"  # note the backward slashes, check to see if it matches Rprojects folder
-filenm <- "stcv_database_Jun2016.accdb"
+filenm <- "stcv_database_Aug2016.accdb"
 
 
 #! 2. access libraries

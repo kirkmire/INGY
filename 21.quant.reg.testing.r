@@ -13,3 +13,8 @@ sq_rq95<-rq(incdata$ht.inc~sqrt(incdata$init.ht), tau=.90)
 anova(sq_rq05,sq_rq5,sq_rq95)
 
 #Slopes are not the same at the three quantiles
+
+#plotting data#
+quantreg.all<-rq(incdata$ht.inc~sqrt(incdata$init.ht),tau=seq(.05,.95,by=.05))
+quantreg.plot<-summary(quantreg.all)
+plot(quantreg.plot)

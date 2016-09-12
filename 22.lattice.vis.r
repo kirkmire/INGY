@@ -44,11 +44,27 @@ update(bc.tree,
 
 update(bc.tree,border="transparent")
 
-#density plots
+#density plots ch3
 
-densityplot(~init.ht|Treatment,data=incdata,
+densityplot(~sqrt(init.ht)|Treatment,data=incdata,
             kernel="rect",bw=.2,plot.points="rug",
             n=200)
+
+#normal Q-Q plots
+
+qqmath(~sqrt(init.ht)|factor(Treatment),data=incdata,
+       f.value=ppoints(100))
+
+qqmath(~sqrt(init.ht)|Treatment,data=incdata,groups=yr1,aspect="xy",
+       f.value=ppoints(100), auto.key=list(space="right"),
+       xlab="Standard Normal Quantiles",
+       ylab="SQRT Init Ht")
+
+qqmath(~ht.inc|Treatment,data=incdata,groups=yr1,aspect="xy",
+       f.value=ppoints(100), auto.key=list(space="right"),
+       xlab="Standard Normal Quantiles",
+       ylab="SQRT Init Ht")
+
 
 
 

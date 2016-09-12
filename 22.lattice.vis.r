@@ -71,9 +71,9 @@ qqmath(~Height_Total|Installation,data=merged_stagm_stag,groups=Species,aspect="
        xlab="Standard Normal Quantiles",
        ylab="Init Ht")
 
-qqmath(~Height_Total|Species=="Pipo",data=merged_stagm_stag,groups=Year_Measurement,aspect="xy",
+qq.plot<-qqmath(~Height_Total|Species,data=merged_stagm_stag,groups=Year_Measurement,aspect="xy",
        f.value=ppoints(100), auto.key=list(space="right"),
        xlab="Standard Normal Quantiles",
        ylab="SQRT Init Ht")
 
-
+summary(qq.plot)

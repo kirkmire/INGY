@@ -63,11 +63,17 @@ qqmath(~sqrt(init.ht)|Treatment,data=incdata,groups=yr1,aspect="xy",
 qqmath(~ht.inc|Treatment,data=incdata,groups=yr1,aspect="xy",
        f.value=ppoints(100), auto.key=list(space="right"),
        xlab="Standard Normal Quantiles",
+       ylab="Ht inc")
+
+
+qqmath(~Height_Total|Installation,data=merged_stagm_stag,groups=Species,aspect="xy",
+       f.value=ppoints(100), auto.key=list(space="right"),
+       xlab="Standard Normal Quantiles",
+       ylab="Init Ht")
+
+qqmath(~Height_Total|Species=="Pipo",data=merged_stagm_stag,groups=Year_Measurement,aspect="xy",
+       f.value=ppoints(100), auto.key=list(space="right"),
+       xlab="Standard Normal Quantiles",
        ylab="SQRT Init Ht")
-
-
-
-
-
 
 

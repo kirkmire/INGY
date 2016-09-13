@@ -19,6 +19,7 @@ merged_stagm_stag$Installation<-as.character(merged_stagm_stag$Installation)
 
 int.function(merged_stagm_stag$Installation[3],merged_stagm_stag$Year_Measurement[3])
 
-
+#example
 int.function(inst="BB",2012)
 
+#still need to apply function across all rows 

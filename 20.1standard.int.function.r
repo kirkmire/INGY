@@ -22,4 +22,13 @@ int.function(merged_stagm_stag$Installation[3],merged_stagm_stag$Year_Measuremen
 #example
 int.function(inst="BB",2012)
 
-#still need to apply function across all rows 
+#apply function across all rows
+
+intervals<-mapply(int.function, merged_stagm_stag$Installation, merged_stagm_stag$Year_Measurement)     
+      
+#assign interval values to tree record column
+merged_stagm_stag$intervals<-intervals      
+      
+
+
+

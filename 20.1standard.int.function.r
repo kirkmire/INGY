@@ -1,47 +1,24 @@
+#This function checks the year of measurement in the tree record against
+#the measurement timeline df to assign an interval length that can later 
+#be used to standardize the growth intervals to one year 
 
-
-
-
-int.function<-function(inst,yr){
-   <-
-
-
-
-
-
-
-
-
-mst.function<-function(inst,yr){
-  inst<-merged_stagm_stag[merged_stagm_stag$Installation==,]
-  n<-length(meast$Year_Measurement)
-  fin.yr<-sort(unique(inst$Year_Measurement),partial=n)[n]
-  pen.yr<-sort(unique(inst$Year_Measurement),partial=n-1)[n-1]
-  antepen.yr<-sort(unique(inst$Year_Measurement),partial=n-2)[n-2]
-  preantepen.yr<-sort(unique(inst$Year_Measurement),partial=n-3)[n-3]
-  prepreantepen<-sort(unique(inst$Year_Measurement),partial=n-4)[n-4]
-  
-  
-  fin.yr<-sort(unique(inst$Year_Measurement),partial=n)[n]
-  pen.yr<-sort(unique(inst$Year_Measurement),partial=n-1)[n-1]
-  antepen.yr<-sort(unique(inst$Year_Measurement),partial=n-2)[n-2]
-  preantepen.yr<-sort(unique(inst$Year_Measurement),partial=n-3)[n-3]
-  prepreantepen<-sort(unique(inst$Year_Measurement),partial=n-4)[n-4]
-  
-  
-  
-  
-  min_yr<-over[over == min(over$Year_Measurement)]
-  max_yr<-over[over == max(over$Year_Measurement)]
-  first<-min_yr[1]
-  last<-max_yr[1]
-  result<-matrix(c(x,first,last,
-                   x,length(min_yr),length(max_yr)),ncol=3,byrow=T)
-  dimnames(result) <-list(rep("", dim(result)[1]), rep("", dim(result)[2]))
-  return(result)
+int.function<-function(inst,year){
+  inst.df<-timeline[timeline$Installation==inst,]
+  inst.df<-as.data.frame(inst.df)
+  inst.df <- inst.df[!is.na(inst.df$Year_Measurement),]
+  if (year==min(inst.df$Year_Measurement)) {
+    interval<-0
+  } else {
+    next.small<-max(inst.df$Year_Measurement[which(inst.df$Year_Measurement<year)])
+    interval<-year-next.small
+  }
+    return(interval)
 }
 
-for(i in unique(soverhist$Installation)){
-  print(OS.function(i))
-}
+merged_stagm_stag$Installation<-as.character(merged_stagm_stag$Installation)
+
+int.function(merged_stagm_stag$Installation[3],merged_stagm_stag$Year_Measurement[3])
+
+
+int.function(inst="BB",2012)
 

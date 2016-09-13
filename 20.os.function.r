@@ -1,4 +1,6 @@
-
+#This function was used to demonstrate that the OS tree record 
+#remained unchanged accross measurement years, implying that
+#ingrowth into OS class was not taken into account
 
 OS.function<-function(x){
   over<-soverhist[soverhist$Installation==x,]

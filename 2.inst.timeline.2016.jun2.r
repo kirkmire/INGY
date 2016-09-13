@@ -6,21 +6,53 @@ drp <- c(drp, "DC","CT")
 
 
 library(lattice)
+
+#w/ meast#########################
+trt <- unique(splothist[splothist$Action %in% c("IT","RT"),c(2,6)])
+
+xyplot(Installation ~ Year_Measurement,
+       xlim=c(1997,2016),
+       data=timeline,
+       htyr=timeline$Assoc_OS,
+       trtyr=timeline$Trt,  
+       xlab="Year in which measurements were taken",ylab="Installation",
+       scales=list(x=list(at=1998:2015)),
+       main=paste("STCV Installation History (",filenm,")",sep=""),
+       panel=function(x,y,htyr,trtyr,...){
+         for (i in as.numeric(unique(y))){
+           subx <- x[as.numeric(y)==i]
+           subOS <- htyr[as.numeric(y)==i]+.15
+           trt8 <- trtyr[as.numeric(y)==i]-.15
+           panel.xyplot(subx,i,type="l",col="black")
+           panel.xyplot(subOS,i,type="p",pch=17,col="chartreuse4",cex=2)
+           panel.xyplot(subx,i,type="p",pch=15,col="black",cex=1.0)
+           panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
+           # subht <- htyr[as.numeric(y)==i]
+           #special <- !is.na(subht) #& (subht %in% c(0,1,2,3,4,8,12))
+           #panel.xyplot(subx[special],i,type="p",pch=15,cex=2)
+           # panel.text(subx[special],i,subht[special],col="white",cex=.7,
+           #          adj=c(.45,.35))
+           #first <- trtyr[as.numeric(y)==i,1] - .15
+           #panel.segments(first,i-.3,first,i+.3,col="red",lwd=2)
+         }
+       })
+
+
 #! 1. plot treatment history
 #pdf(file="plothist.pdf",height=11,width=8.5)
-xyplot(Plot ~ Year_Measurement | Installation,
-       data=splothist[!(splothist$Installation %in% drp),],
-       trt=splothist[!(splothist$Installation %in% drp),"Action"],
-       xlab="Year",ylab="Plot",
-       main=paste("STCV Plot History (",filenm,")",sep=""),
-       panel=function(x,y,subscripts,trt,...){
-         insttrt <- trt[subscripts]
+#xyplot(Plot ~ Year_Measurement | Installation,
+#       data=splothist[!(splothist$Installation %in% drp),],
+#      trt=splothist[!(splothist$Installation %in% drp),"Action"],
+#       xlab="Year",ylab="Plot",
+#       main=paste("STCV Plot History (",filenm,")",sep=""),
+#       panel=function(x,y,subscripts,trt,...){
+#        insttrt <- trt[subscripts]
          #colr <- ifelse(insttrt %in% c("IT","RT"),"red","blue")
-         sym <- ifelse(insttrt %in% c("IT","RT"),19,21)
-         for (i in unique(y)){
-           panel.xyplot(x[y==i],i,type="l")
+#         sym <- ifelse(insttrt %in% c("IT","RT"),19,21)
+#         for (i in unique(y)){
+#           panel.xyplot(x[y==i],i,type="l")
            #panel.xyplot(x[y==i],i,type="p",pch=19,col=colr[y==i])
-           panel.xyplot(x[y==i],i,type="p",pch=sym[y==i],fill="white")
+#           panel.xyplot(x[y==i],i,type="p",pch=sym[y==i],fill="white")
            
          }
        })
@@ -59,26 +91,26 @@ xyplot(Installation ~ Year_Measurement,
          }
        })
 
-trt2 <- merge(trt,first.trt)
-trt2$num <- 1
-for (i in 2:nrow(trt2)){
-  trt2$num[i] <- ifelse(trt2$Year_Measurement[i]==trt2$x[i],1,trt2$num[i-1]+1)
-}
-trt3 <- reshape(trt2,v.names="Year_Measurement",idvar="Installation",timevar="num",direction="wide",drop="x")
-sinsthist3 <- merge(sinsthist2,trt3,all.x=T)
+#trt2 <- merge(trt,first.trt)
+#trt2$num <- 1
+#for (i in 2:nrow(trt2)){
+#  trt2$num[i] <- ifelse(trt2$Year_Measurement[i]==trt2$x[i],1,trt2$num[i-1]+1)
+#}
+#trt3 <- reshape(trt2,v.names="Year_Measurement",idvar="Installation",timevar="num",direction="wide",drop="x")
+#sinsthist3 <- merge(sinsthist2,trt3,all.x=T)
 
-xyplot(Installation ~ Year_Measurement,
-       xlim=c(1997,2016),
-       data=sinsthist3,
-       htyr=sinsthist3[,"Height_Year"],
-       trtyr=sinsthist3[,13:17],   #sinsthist3[,14:18],  
-       xlab="Year in which measurements were taken",ylab="Installation",
-       scales=list(x=list(at=1998:2015)),
-       main=paste("STCV Installation History (",filenm,")",sep=""),
-       panel=function(x,y,htyr,trtyr,...){
-         for (i in as.numeric(unique(y))){
-           subx <- x[as.numeric(y)==i]
-           panel.xyplot(subx,i,type="l")
+#xyplot(Installation ~ Year_Measurement,
+#      xlim=c(1997,2016),
+#       data=sinsthist3,
+#      htyr=sinsthist3[,"Height_Year"],
+#      trtyr=sinsthist3[,13:17],   #sinsthist3[,14:18],  
+#       xlab="Year in which measurements were taken",ylab="Installation",
+#       scales=list(x=list(at=1998:2015)),
+#       main=paste("STCV Installation History (",filenm,")",sep=""),
+#       panel=function(x,y,htyr,trtyr,...){
+#         for (i in as.numeric(unique(y))){
+#           subx <- x[as.numeric(y)==i]
+#           panel.xyplot(subx,i,type="l")
            panel.xyplot(subx,i,type="p",pch=21,fill="white",cex=1.45)
            subht <- htyr[as.numeric(y)==i]
            special <- !is.na(subht) #& (subht %in% c(0,1,2,3,4,8,12))
@@ -92,36 +124,6 @@ xyplot(Installation ~ Year_Measurement,
              panel.segments(othr,i-.3,othr,i+.3,col="green",lwd=2)
            }
          }
-       })
-
-#w/ meast#
-trt <- unique(splothist[splothist$Action %in% c("IT","RT"),c(2,6)])
-
-xyplot(Installation ~ Year_Measurement,
-       xlim=c(1997,2016),
-       data=meast,
-       htyr=meast$Assoc_OS,
-       trtyr=meast$Trt,  
-       xlab="Year in which measurements were taken",ylab="Installation",
-       scales=list(x=list(at=1998:2015)),
-       main=paste("STCV Installation History (",filenm,")",sep=""),
-       panel=function(x,y,htyr,trtyr,...){
-         for (i in as.numeric(unique(y))){
-           subx <- x[as.numeric(y)==i]
-           subOS <- htyr[as.numeric(y)==i]+.15
-           trt8 <- trtyr[as.numeric(y)==i]-.15
-           panel.xyplot(subx,i,type="l",col="black")
-           panel.xyplot(subOS,i,type="p",pch=17,col="chartreuse4",cex=2)
-           panel.xyplot(subx,i,type="p",pch=15,col="black",cex=1.0)
-           panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
-           # subht <- htyr[as.numeric(y)==i]
-           #special <- !is.na(subht) #& (subht %in% c(0,1,2,3,4,8,12))
-           #panel.xyplot(subx[special],i,type="p",pch=15,cex=2)
-           # panel.text(subx[special],i,subht[special],col="white",cex=.7,
-           #          adj=c(.45,.35))
-           #first <- trtyr[as.numeric(y)==i,1] - .15
-           #panel.segments(first,i-.3,first,i+.3,col="red",lwd=2)
-                    }
        })
 
 

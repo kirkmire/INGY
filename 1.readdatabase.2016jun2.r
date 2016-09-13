@@ -53,7 +53,7 @@ spptr <- sqlFetch(path,"Lookup_Species_Tree")
 sppnontr <- sqlFetch(path,"Lookup_Species_NonTree")
 
 #timeline data
-meast <- sqlFetch(path,"Timeline")
+timeline <- sqlFetch(path,"Timeline")
 
 odbcCloseAll()
 

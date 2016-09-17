@@ -1,36 +1,101 @@
 ---
-\pagenumbering{gobble} 
-title: "Predicting the Growth Response of Small Douglas-fir and
-    Ponderosa Pine Trees under Varying levels of Overstory Retention, 
-    Vegetative Competition and Site Quality"    
- 
-author:    | 
-    | Colin Patrick Kirkmire
-    | Advised by Dr. David Affleck and Dr. John Goodburn
-date:    |
-    | September 13, 2016
-output: pdf_document
-\pagenumbering{arabic} 
-
+author: 'Colin Patrick Kirkmire'
+date: 'September 17, 2016'
+division: 'College of Forestry and Conservation'
+advisor: 'Dr. David Affleck'
+#altadvisor: 'Dr. John Goodburn'
+# Delete line 6 if you only have one advisor
+department: 'Forest Management'
+title: 'Predicting the Growth Response of Small Douglas-fir and Pondersoa Pine Trees under Varying Levels of Overstory Retention'
+abstract: >
+  `r paste(readLines('abstract.Rmd'), collapse = ' ')`
+# If you'd rather include the preliminary content in files instead of inline
+# like below, use a command like that for the abstract above.  Note that a tab is 
+# needed on the line after the >.
+acknowledgements: >
+  I want to thank a few people.
+dedication: >
+  You can have a dedication here if you wish. 
+preface: >
+  This is an example of a thesis setup to use the reed thesis document class.
+bibliography: bib/thesis.bib
+# Download your specific bibliography database file and refer to it in the line above.
+csl: csl/apa.csl
+# Download your specific csl file and refer to it in the line above.
+output: 
+  reedtemplates::reed_thesis:
+    toc: true
+#    toc_depth: 5
+# Delete the # in line 28 to specify the depth of your table of contents
+# Default is set to 3 (chapter, section, subsection)
+lot: true
+lof: true
+#space_between_paragraphs: true
+# Delete the # at the beginning of the previous line if you'd like
+# to have a blank new line between each paragraph
+#header-includes:
+#- \usepackage{tikz}
 ---
-\newpage
 
-#Table of Contents
-<br>
----
-\newpage
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+<!--
+Above is the YAML (YAML Ain't Markup Language) header that includes a lot of metadata used to produce the document.  Be careful with spacing in this header!
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+If you'd prefer to not include a Dedication, for example, simply delete lines 17 and 18 above or add a # before them to comment them out.  If you have other LaTeX packages you would like to include, delete the # before header-includes and list the packages after hyphens on new lines.
 
-```{r}
-summary(cars)
+If you'd like to include a comment that won't be produced in your resulting PDF file enclose it in a block like this.
+-->
+
+```{r include_packages, include=FALSE}
+# This chunk ensures that the reedtemplates package is
+# installed and loaded. This reedtemplates package includes
+# the template files for the thesis and also two functions
+# used for labeling and referencing
+if(!require(devtools))
+  install.packages("devtools", repos = "http://cran.rstudio.com")
+if(!require(reedtemplates)){
+  library(devtools)
+  devtools::install_github("ismayc/reedtemplates")
+}
+library(reedtemplates)
 ```
 
-You can also embed plots, for example:
+<!--
+This is the way to split your thesis into chapters and then include each of the chapters seperately.  You can Knit the Rmd files corresponding to each chapter individually and then put them all back together by Knit-ing this document.
 
-```{r, echo=FALSE}
-plot(cars)
+This is an R chunk and chap0.Rmd refers to the Introductory chapter.  Feel free to name this file as something else, but don't forget to change the argument to in `child = ` below!
+-->
+
+```{r intro, child = 'chap0.Rmd'}
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+<!--
+This is for including Chapter 1.  Notice that it's also good practice to name your chunk.  This will help you debug potential issues as you knit.  The chunk above is called intro and the one below is called chapter1.  Feel free to change the name of the Rmd file as you wish, but don't forget to change it here from chap1.Rmd.
+-->
+
+```{r chapter1, child = 'chap1.Rmd'}
+```
+
+<!--
+Immediately below is the chunk for Chapter 2.
+--> 
+
+```{r chapter2, child = 'chap2.Rmd'}
+```
+
+```{r chapter3, child = 'chap3.Rmd'}
+```
+
+<!--
+Add other chunks here for other chapters in your thesis.  Note that if you use the `child =` parameter, you can't include anything else in your chunk.
+-->
+
+```{r conclusion, child = 'conclusion.Rmd'}
+```
+
+<!--
+The bib chunk below must go last in this document according to how R Markdown renders.  More info is at http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html
+-->
+
+```{r bib, child = 'bibliography.Rmd'}
+```
+

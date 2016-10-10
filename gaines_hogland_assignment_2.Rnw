@@ -1,0 +1,93 @@
+%%%%%%%%  Document class  %%%%%%%%%%%%
+\documentclass[10pt, letterpaper, fleqn]{article}
+% fleqn is for left aligned equations
+
+%%%%%%%%  Packages   %%%%%%%%%%%%%%%%
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{times}
+\usepackage{array}
+
+%%%%%%%%  Page Setup %%%%%%%%%%%%%%%%%%
+\usepackage[margin= 2cm]{geometry}
+
+%%%%%%%% Document %%%%%%%%%%%%%%%%%%%
+\usepackage{Sweave}
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\input{gaines_hogland_assignment_2-concordance}
+
+\noindent
+\textbf{\large{An even newer model for cork weight estimation in Northern Portugal}} \\[1pt] 
+
+\noindent
+John Hogla$^1$; George C. Gaines III $^2$ \\[1pt]
+
+\noindent
+\normalsize 1 \hspace{.2cm} \emph{USFS; Department of Forest Management, College of Forestry and Conservation, University of Montana}
+
+\noindent
+2 \hspace{.2cm} \emph{Department of Forest Management, College of Forestry and Conservation, University of Montana}\\[1pt]
+
+\large 
+\noindent
+Introduction\\[1pt]
+
+\normalsize
+\noindent 
+Cork, a material derived from the bark of cork oak (\emph{Quercus suber L.}) trees, is a unique and valuable non-timber forest product. A steady supply of cork is required for, among other items, the grips of fly-fishing rods crafted by such small-batch, boutique rod builders as the R.L. Winston Rod Co. in Twin Bridges, Montana, USA. Typical cork-stripping techniques, when implemented correctly, are relatively non-destructive and allow for repeated harvests from a given individual tree at nine-year intervals over the lifespan of the tree. The ability to estimate current and expected future stocks, at scales from individual stands to entire regions, is critical for perpetuation of sustainable harvest practices for cork producers and facilitation of production planning for wine makers, flooring manufacturers, and other consumers of cork. Portugal, a warm European nation bordered to the east by the Atlantic Ocean and to the west by Spain, accounts for 52 \% of gobal cork production. Sufficient predicitive models for cork yields in southern Portugal exist but significant latitudinal climatic and topographical variability warrant a separate model for northern Portugal. \\[4pt]
+
+\begin{figure}
+\begin{center}
+<<fig=TRUE,width=5,height=10>>=
+source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jun2.r', echo=F)
+#! 2. installations to drop
+# RL was abandoned w/o measurement; others are check plots
+drp <- c("TCCheck","LRCheck","BCCheck","BBCheck","RL")
+# DC gives only 1 yr of growth data, CT only 2 years, before destroyed
+drp <- c(drp, "DC","CT")
+
+
+library(lattice)
+
+#w/ meast#########################
+trt <- unique(splothist[splothist$Action %in% c("IT","RT"),c(2,6)])
+
+print(xyplot(Installation ~ Year_Measurement,
+       xlim=c(1997,2016),
+       data=timeline,
+       htyr=timeline$Assoc_OS,
+       trtyr=timeline$Trt,  
+       xlab="Year in which measurements were taken",ylab="Installation",
+       scales=list(x=list(at=1998:2015)),
+       main=paste("STCV Installation History (",filenm,")",sep=""),
+       panel=function(x,y,htyr,trtyr,...){
+         for (i in as.numeric(unique(y))){
+           subx <- x[as.numeric(y)==i]
+           subOS <- htyr[as.numeric(y)==i]+.15
+           trt8 <- trtyr[as.numeric(y)==i]-.15
+           panel.xyplot(subx,i,type="l",col="black")
+           panel.xyplot(subOS,i,type="p",pch=17,col="chartreuse4",cex=2)
+           panel.xyplot(subx,i,type="p",pch=15,col="black",cex=1.0)
+           panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
+             }
+       }))
+
+
+
+@
+\caption{Tis is a caption}
+\end{center}
+\end{figure}
+
+\noindent
+In this study, we develop a model to predict the weight of stripped cork (\emph{W}) using an incomplete portion of a dataset which was orginally comprised of 169 recently-stripped cork oaks. In this exercise, we aspire to a low-tech, logcial, contemplative approach to choosing pertinent regressor variables from a suite of available covariates. Additionally, we  restrict ourselves to the use of multiple linear regression models of the form \\[2pt]
+
+$\hat y_i = b_0 + b_1 x_{1i} + b_2 x_{2i} + ... + b_p +x_{pi},$ \\[2pt]
+
+\noindent 
+where $\hat y_i$ is the predicted weight of cork from the $i^{th}$ tree;  $x_{1i},...,x_{pi}, \hspace{.1cm} p = \{2,3,$ or $ 4\}$ are the values of regressor variables $p = \{2,3,$ or $ 4\}$ for the $i^{th}$ tree, which may be the raw covariates themselves or, alternatively, transformations of or interactions between the covariates; $b_0$ is an estimate of the true population intercept coefficient $\beta_0$; and $b_1,...,b_p$ are estimates of the true population slope coefficients for the corresponding regressors. It is worth noting that we are engaged in a competition wherein the team whose model best predicts a remaining withheld portion of the data will be awarded a lucrative +1 bonus mark, so, game on! \\[4pt]
+
+
+
+\end{document}

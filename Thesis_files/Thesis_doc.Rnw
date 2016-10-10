@@ -83,13 +83,27 @@
 \end{center}
 \normalsize
 
+\newpage
+\large 
+\begin{center}
+\textbf{LIST OF APPENDICES}\\[1pt]
+\end{center}
+\normalsize
 
+\newpage
+\large 
+\begin{center}
+\textbf{Introduction}\\[1pt]
+\end{center}
+\normalsize
 \noindent 
-Cork, a material derived from the bark of cork oak (\emph{Quercus suber L.}) trees, is a unique and valuable non-timber forest product. A steady supply of cork is required for, among other items, the grips of fly-fishing rods crafted by such small-batch, boutique rod builders as the R.L. Winston Rod Co. in Twin Bridges, Montana, USA. Typical cork-stripping techniques, when implemented correctly, are relatively non-destructive and allow for repeated harvests from a given individual tree at nine-year intervals over the lifespan of the tree. The ability to estimate current and expected future stocks, at scales from individual stands to entire regions, is critical for perpetuation of sustainable harvest practices for cork producers and facilitation of production planning for wine makers, flooring manufacturers, and other consumers of cork. Portugal, a warm European nation bordered to the east by the Atlantic Ocean and to the west by Spain, accounts for 52 \% of gobal cork production. Sufficient predicitive models for cork yields in southern Portugal exist but significant latitudinal climatic and topographical variability warrant a separate model for northern Portugal. \\[4pt]
+\text{This will be the introduction}
+\textbf{Objectives}\\[1pt]
+\textbf{Ecology of Ponderosa Pine Regeneration}\\[1pt]
 
 \begin{figure}
 \begin{center}
-<<fig=TRUE,width=5,height=10>>=
+<<fig=TRUE,width=9,height=9,echo=FALSE>>=
 source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jun2.r', echo=F)
 #! 2. installations to drop
 # RL was abandoned w/o measurement; others are check plots
@@ -97,12 +111,10 @@ drp <- c("TCCheck","LRCheck","BCCheck","BBCheck","RL")
 # DC gives only 1 yr of growth data, CT only 2 years, before destroyed
 drp <- c(drp, "DC","CT")
 
-
 library(lattice)
 
 #w/ meast#########################
 trt <- unique(splothist[splothist$Action %in% c("IT","RT"),c(2,6)])
-
 print(xyplot(Installation ~ Year_Measurement,
        xlim=c(1997,2016),
        data=timeline,
@@ -110,7 +122,7 @@ print(xyplot(Installation ~ Year_Measurement,
        trtyr=timeline$Trt,  
        xlab="Year in which measurements were taken",ylab="Installation",
        scales=list(x=list(at=1998:2015)),
-       main=paste("STCV Installation History (",filenm,")",sep=""),
+       main=paste("Installation History",sep=""),
        panel=function(x,y,htyr,trtyr,...){
          for (i in as.numeric(unique(y))){
            subx <- x[as.numeric(y)==i]
@@ -120,11 +132,9 @@ print(xyplot(Installation ~ Year_Measurement,
            panel.xyplot(subOS,i,type="p",pch=17,col="chartreuse4",cex=2)
            panel.xyplot(subx,i,type="p",pch=15,col="black",cex=1.0)
            panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
+          
              }
        }))
-
-
-
 @
 \caption{Tis is a caption}
 \end{center}

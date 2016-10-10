@@ -15,25 +15,75 @@
 \usepackage{Sweave}
 \begin{document}
 \SweaveOpts{concordance=TRUE}
-\input{gaines_hogland_assignment_2-concordance}
+\input{Thesis_doc-concordance}
 
-\noindent
-\textbf{\large{An even newer model for cork weight estimation in Northern Portugal}} \\[1pt] 
+\vspace*{5\baselineskip}
+\begin{center}
+\textbf{\large{Predicting the Growth Response of Small Pondersoa Pine Trees under Varying levels of Overstory Retention, Vegetative Competition and Site Quality}} \\[1pt] 
+\vspace*{5\baselineskip}
+\text{Colin Kirkmire} \\[1pt]
+\vspace*{3\baselineskip}
+\text{A thesis submitted to the Graduate Faculty of }\\[1pt]
+\text{the University of Montana}\\[1pt]
+\text{in partial fullfillment of the}\\[1pt]
+\text{requirements for the degree of}\\[1pt]
+\text{Master of Science}\\[1pt]
+\vspace*{3\baselineskip}
+\text{Department of Forest Management}\\[1pt]
+\text{College of Forestry and Conservation}\\[1pt]
+\text{University of Montana}\\[1pt]
+\vspace*{3\baselineskip}
+\text{Missoula, Montana}\\[1pt]
+\vspace*{1\baselineskip}
+\text{{2016}} \\[1pt]
+\vspace*{7\baselineskip}
+\text{Advised by Dr. David L.R. Affleck and Dr. John Goodburn}\\[1pt]
+\vspace*{7\baselineskip}
+\end{center}
 
-\noindent
-John Hogla$^1$; George C. Gaines III $^2$ \\[1pt]
-
-\noindent
-\normalsize 1 \hspace{.2cm} \emph{USFS; Department of Forest Management, College of Forestry and Conservation, University of Montana}
-
-\noindent
-2 \hspace{.2cm} \emph{Department of Forest Management, College of Forestry and Conservation, University of Montana}\\[1pt]
-
+\newpage
 \large 
-\noindent
-Introduction\\[1pt]
+\begin{center}
+\textbf{DEDICATION}\\[1pt]
+\end{center}
 
+\newpage
+\large 
+\begin{center}
+\textbf{BIOGRAPHY}\\[1pt]
+\end{center}
 \normalsize
+
+\newpage
+\large 
+\begin{center}
+\textbf{ACKNOWLEDGEMENTS}\\[1pt]
+\end{center}
+\normalsize
+
+
+\newpage
+\large 
+\begin{center}
+\textbf{TABLE OF CONTENTS}\\[1pt]
+\end{center}
+\normalsize
+
+\newpage
+\large 
+\begin{center}
+\textbf{LIST OF TABLES}\\[1pt]
+\end{center}
+\normalsize
+
+\newpage
+\large 
+\begin{center}
+\textbf{LIST OF FIGURES}\\[1pt]
+\end{center}
+\normalsize
+
+
 \noindent 
 Cork, a material derived from the bark of cork oak (\emph{Quercus suber L.}) trees, is a unique and valuable non-timber forest product. A steady supply of cork is required for, among other items, the grips of fly-fishing rods crafted by such small-batch, boutique rod builders as the R.L. Winston Rod Co. in Twin Bridges, Montana, USA. Typical cork-stripping techniques, when implemented correctly, are relatively non-destructive and allow for repeated harvests from a given individual tree at nine-year intervals over the lifespan of the tree. The ability to estimate current and expected future stocks, at scales from individual stands to entire regions, is critical for perpetuation of sustainable harvest practices for cork producers and facilitation of production planning for wine makers, flooring manufacturers, and other consumers of cork. Portugal, a warm European nation bordered to the east by the Atlantic Ocean and to the west by Spain, accounts for 52 \% of gobal cork production. Sufficient predicitive models for cork yields in southern Portugal exist but significant latitudinal climatic and topographical variability warrant a separate model for northern Portugal. \\[4pt]
 

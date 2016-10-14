@@ -8,6 +8,8 @@
 \usepackage{times}
 \usepackage{array}
 \usepackage{setspace}
+\usepackage[backend=bibtex]{biblatex}
+\bibliography{C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files/STCV.bib}
 
 %%%%%%%%  Page Setup %%%%%%%%%%%%%%%%%%
 \usepackage[margin= 2cm]{geometry}
@@ -18,9 +20,11 @@
 \SweaveOpts{concordance=TRUE}
 \input{Thesis_doc-concordance}
 
+%%%%%%%%  Bibliography Info %%%%%%
+
 \vspace*{5\baselineskip}
 \begin{center}
-\textbf{\large{Predicting the Growth Response of Small Pondersoa Pine Trees under Varying levels of Overstory Retention, Vegetative Competition and Site Quality}} \\[1pt] 
+\textbf{\large{Predicting the Growth Response of Small Ponderosa Pine Trees under Varying levels of Overstory Retention, Vegetative Competition and Site Quality}} \\[1pt] 
 \vspace*{5\baselineskip}
 \text{Colin Kirkmire} \\[1pt]
 \vspace*{3\baselineskip}
@@ -101,7 +105,7 @@
 \text{This will be the introduction}
 \textbf{Objectives}\\[1pt]
 \textbf{Ecology of Ponderosa Pine Regeneration}\\[1pt]
-
+This is a test of the citation capabilities of sweave\cite{Riegel1995a}
 
 \newpage
 \large 
@@ -120,6 +124,42 @@ The temporal initiation of installations varied with most being established in t
 The primary objective of the different herbicide treatments is to decouple the direct and indirect effects of removing overstory. The removal of the overstory increases available light which is hypothesized to encourage small tree growth as well as non-tree vegetation.  The herbicide treatments allow us to see how small trees grow under reduced overstory without the presence of a corresponding increase in non-tree vegetation.\\[2pt]
 \noindent 
 Figure 5 shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at each installation at four year intervals was successful for many installations but in some cases the intervals are somewhat irregular (i.e., 3-5 years in length). The schedule of measurements was based on the twelve-year projection cycles that were used by participating cooperative members.\\[2pt]
+\begin{figure}
+\begin{center}
+<<fig=TRUE,width=9,height=9,echo=FALSE>>=
+source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jun2.r', echo=F)
+#! 2. installations to drop
+# RL was abandoned w/o measurement; others are check plots
+drp <- c("TCCheck","LRCheck","BCCheck","BBCheck","RL")
+# DC gives only 1 yr of growth data, CT only 2 years, before destroyed
+drp <- c(drp, "DC","CT")
+
+library(lattice)
+
+#w/ meast#########################
+trt <- unique(splothist[splothist$Action %in% c("IT","RT"),c(2,6)])
+print(xyplot(Installation ~ Year_Measurement,
+       xlim=c(1997,2016),
+       data=timeline,
+       htyr=timeline$Assoc_OS,
+       trtyr=timeline$Trt,  
+       xlab="Year in which measurements were taken",ylab="Installation",
+       scales=list(x=list(at=1998:2015)),
+       main=paste("Installation History",sep=""),
+       panel=function(x,y,htyr,trtyr,...){
+         for (i in as.numeric(unique(y))){
+           subx <- x[as.numeric(y)==i]
+           subOS <- htyr[as.numeric(y)==i]+.15
+           trt8 <- trtyr[as.numeric(y)==i]-.15
+           panel.xyplot(subx,i,type="l",col="black")
+           panel.xyplot(subOS,i,type="p",pch=17,col="chartreuse4",cex=2)
+           panel.xyplot(subx,i,type="p",pch=15,col="black",cex=1.0)
+           panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
+          }}))
+@
+\caption{Tis is a caption}
+\end{center}
+\end{figure}
 \noindent 
 A point of concern is that some measurements were taken at times that would not have allowed for the herbicide applications to take full effect. That is, several measurements were concurrent with or followed too quickly after the first herbicide application.  This necessitated careful selection of the appropriate measurement years on a per installation basis.  Ultimately, the growth measurements will be put on the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. \\[2pt]
 \noindent 
@@ -157,49 +197,7 @@ Variable selection from within these categories is analogous to that of least sq
 However, this process alone fails to account for interaction terms between categories which are easy to imagine being important to small tree growth. For example, site productivity may have a different effect with or without understory vegetation.  To account for this, a forward step-wise building of a final model that consists of all four selected variables and all possible combinations of two-way interaction terms will proceed and the model with the lowest AIC selected. Presumably, any real ecological interaction between factors of small tree growth should be visible among the four most significant predictors within each category.\\[2pt]
 \noindent 
 Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare how small tree growth compared to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.\\[2pt]
-\newpage
-\begin{figure}
-\begin{center}
 
-
-<<fig=TRUE,width=9,height=9,echo=FALSE>>=
-source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jun2.r', echo=F)
-#! 2. installations to drop
-# RL was abandoned w/o measurement; others are check plots
-drp <- c("TCCheck","LRCheck","BCCheck","BBCheck","RL")
-# DC gives only 1 yr of growth data, CT only 2 years, before destroyed
-drp <- c(drp, "DC","CT")
-
-library(lattice)
-
-#w/ meast#########################
-trt <- unique(splothist[splothist$Action %in% c("IT","RT"),c(2,6)])
-print(xyplot(Installation ~ Year_Measurement,
-       xlim=c(1997,2016),
-       data=timeline,
-       htyr=timeline$Assoc_OS,
-       trtyr=timeline$Trt,  
-       xlab="Year in which measurements were taken",ylab="Installation",
-       scales=list(x=list(at=1998:2015)),
-       main=paste("Installation History",sep=""),
-       panel=function(x,y,htyr,trtyr,...){
-         for (i in as.numeric(unique(y))){
-           subx <- x[as.numeric(y)==i]
-           subOS <- htyr[as.numeric(y)==i]+.15
-           trt8 <- trtyr[as.numeric(y)==i]-.15
-           panel.xyplot(subx,i,type="l",col="black")
-           panel.xyplot(subOS,i,type="p",pch=17,col="chartreuse4",cex=2)
-           panel.xyplot(subx,i,type="p",pch=15,col="black",cex=1.0)
-           panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
-          
-             }
-       }))
-@
-\caption{Tis is a caption}
-\end{center}
-\end{figure}
-
-
-
+\printbibliography
 
 \end{document}

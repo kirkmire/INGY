@@ -123,10 +123,10 @@ This is a test of the citation capabilities of sweave\cite{Riegel1995a}
 \doublespacing
 Twenty-nine study sites (termed "installations") were established on a variety of cooperative member ownerships ranging from the eastern slopes of the Cascade Mountains to western Montana. The installations fall within three distinct geographic areas; central Washington, eastern Washington/Idaho and western Montana. \\[4pt]
 
-\begin{figure}[!t]
+\begin{figure}[!h]
 \begin{center}
     \includegraphics[width=.9\textwidth]{inst_map.png}
-    \caption{a nice plot}
+    \caption{Map of Installations}
     \label{fig:mesh1}
 \end{center}
 \end{figure}
@@ -171,7 +171,7 @@ print(xyplot(Installation ~ Year_Measurement,
            panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
           }}))
 @
-\caption{Tis is a caption}
+\caption{Timeline of Installation Measurements and Treatments}
 \end{center}
 \end{figure}
 \noindent 

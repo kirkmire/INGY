@@ -174,7 +174,7 @@ print(xyplot(Installation ~ Year_Measurement,
 \caption{Timeline of Installation Measurements and Treatments}
 \end{center}
 \end{figure}
-\noindent 
+
 A point of concern is that some measurements were taken at times that would not have allowed for the herbicide applications to take full effect. That is, several measurements were concurrent with or followed too quickly after the first herbicide application.  This necessitated careful selection of the appropriate measurement years on a per installation basis.  Ultimately, the growth measurements will be put on the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. \\[2pt]
 
 Each plot contains a series of nested plots that decrease in area with physiologically smaller vegetation units (Figure 4). Starting with the full extent of the plot, overstory trees (> 10.5 in DBH) were measured on an approximately half acre. Medium trees, with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested plot of roughly a quarter acre.
@@ -201,15 +201,17 @@ Following this evaluation, a random sample of tagged subject trees will be selec
 \textbf{Fitting Quantile Regression}\\[1pt]
 
 Only the installations with a greater than 70\% Ponderosa Pine composition at initiation will be included in the model.  Within these installations, the 6th plot will be withheld as training data.  The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  \\[2pt]
-\noindent 
-The "quantreg" package by Roger Koenker (citation) will be used to fit quantile regression planes individually for the specified quantiles (specified as tau values: .90, .50, .10).  This allows for differences in the selected predictor variables between the quantile planes.  \\[2pt]
-\noindent 
-The variable selection process for each individual quantile will be guided by the ecological framework behind small tree growth.  This means that the predictor variables will be selected from the four previously mentioned categories of ecological factors that affect tree growth. These are overstory measures, understory non-tree vegetation, site productivity and other small tree measures.  The square root of initial height (height at the beginning of measurement period) will also be included as a predictor of height growth increment since it is clear that square root of initial height explains much of the variability in height growth increment and we are interested in the other predictors.\\[2pt]
-\noindent 
-Variable selection from within these categories is analogous to that of least squares.   Model building will proceed from category to category with the model of lowest p-value being selected as the model carried forward to the next category. This will result in a parsimonious model that is easily understood and supported by our understanding of the factors surrounding small tree growth. \\[2pt]
-\noindent 
-However, this process alone fails to account for interaction terms between categories which are easy to imagine being important to small tree growth. For example, site productivity may have a different effect with or without understory vegetation.  To account for this, a forward step-wise building of a final model that consists of all four selected variables and all possible combinations of two-way interaction terms will proceed and the model with the lowest AIC selected. Presumably, any real ecological interaction between factors of small tree growth should be visible among the four most significant predictors within each category.\\[2pt]
-\noindent 
+
+The "quantreg" package by Roger Koenker \cite{Koenker} will be used to fit quantile regression planes individually for the specified quantiles (specified as tau values: .90, .50, .10).  This allows for differences in the selected predictor variables between the quantile planes.  \\[2pt]
+
+The variable selection process for each individual quantile will be guided by the ecological framework behind small tree growth.  This means that the predictor variables will be selected from the four previously mentioned categories of ecological factors that affect tree growth. These are overstory measures, understory non-tree vegetation, site productivity and other small tree measures.  The square root of initial height (height at the beginning of measurement period) will also be included as a predictor of height growth increment in the "base model" since it is clear that square root of initial height explains much of the variability in height growth increment and we are interested in the other predictors.\\[2pt]
+
+Variable selection from within these categories is analogous to that of least squares, except that variables will be selected with respect to their significance to the regression of the median (Tau=.5). Within each category of ecological factor, a subset of relevant variables will be considered that includes two-way interactions between the previously selected variables and the category under evaluation.  To evaluate the utility of higher-order polynomials, a Generalized Linear Model (GLM) with a smoother of all first-order predictors will be used to view the relationship with the predictors. If inclusion of a higher-order predictor is justified by the GLM plot than it will be considered alongside all other categorical predictors and as an interaction term.\\[2pt]
+
+Model building will proceed from category to category with the model of lowest AIC being selected as the model carried forward to the next category. This will result in a parsimonious model that is easily understood and supported by our understanding of the factors surrounding small tree growth.\\[2pt]
+
+The order of variable selection categories will proceed in the following order; understory tree, understory non-tree vegetation, overstory and finnaly site. The first two variables;understory non-tree, and understory small tree will be selected from a group of installations of comparable understory conditions. 
+
 Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare how small tree growth compared to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.\\[2pt]
 
 
@@ -217,5 +219,6 @@ Selecting a single dimension from each ecological category of small tree competi
 \printbibliography
 All analyses were performed using the R statistical software
 \Sexpr{R.Version()$version.string}.
+
 
 \end{document}

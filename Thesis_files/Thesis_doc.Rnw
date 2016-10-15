@@ -9,6 +9,7 @@
 \usepackage{array}
 \usepackage{setspace}
 \usepackage[backend=bibtex]{biblatex}
+\usepackage[toc,page]{appendix}
 \bibliography{C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files/STCV.bib}
 
 %%%%%%%%  Page Setup %%%%%%%%%%%%%%%%%%
@@ -23,7 +24,8 @@
 <<echo=F,results=hide>>=
 setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 @
-%%%%%%%%  Bibliography Info %%%%%%
+\pagenumbering{roman}
+\thispagestyle{empty}
 
 \vspace*{5\baselineskip}
 \begin{center}
@@ -76,6 +78,7 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \textbf{TABLE OF CONTENTS}\\[1pt]
 \end{center}
 \normalsize
+\tableofcontents
 
 \newpage
 \large 
@@ -102,6 +105,8 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \normalsize
 
 \newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
 \large 
 \begin{center}
 \textbf{Introduction}\\[1pt]
@@ -114,12 +119,11 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 This is a test of the citation capabilities of sweave\cite{Riegel1995a}
 
 \newpage
-\large 
 \begin{center}
-\textbf{Methods}\\[1pt]
+\section{Methods}
 \end{center}
 \normalsize
-\textbf{Sampling Strategy}\\[1pt]
+\subsection{Sampling Strategy}
 \doublespacing
 Twenty-nine study sites (termed "installations") were established on a variety of cooperative member ownerships ranging from the eastern slopes of the Cascade Mountains to western Montana. The installations fall within three distinct geographic areas; central Washington, eastern Washington/Idaho and western Montana. \\[4pt]
 
@@ -182,13 +186,13 @@ Small trees were measured on six .007 acre plots 60 degrees apart from plot cent
 
 There were two sampling methods used to measure vegetative competition. The first was transect based where point measurements of vegetation were obtained at one foot intervals along a 40 ft transect.  We also took vegetation measurements in the middle of the small tree plots in the form of both 1m2 and 4m2 grids. These vegetation measurements quantified separately the amounts of forbs, grasses and shrubs to the species level.  This is an example of how the resolution of the data goes beyond the scope of this analysis though will undoubtedly be of use in future research efforts.\\[2pt]
 
-\textbf{Statistical Approach}\\[1pt]
+\subsection{Statistical Approach}
 
 This research seeks to address the question of how to predict the response distribution of small Ponderosa Pine tree height growth increments.  To achieve this ends, a nonparametric statistical regression technique known as quantile regression will be utilized to fit growth curves over select quantiles of the response distribution heights by a set of ecologically and statistically significant predictors. Thus we will be able to predict the heights of the "fastest", "median" and "slowest" growing trees.
 This research has widespread applications in the management of Ponderosa Pine stands since the fastest growing trees are
 presumably those that progress into the canopy and those that may be retained with preference in the context of a thinning.\\[2pt]
 
-The model is predictive in the sense that it will attempt to predict the .9 quantile height growth increment. For example, the model will not be able to determine whether specific trees will be projected to be above or below the .9 quantile line but rather predict what the .9 quantile height itself is for a given set of predictors. If enough information was known about these trees to predict which would be the fastest growing trees, it would negate the utility of quantile regression.\\[2pt]
+The model is predictive in the sense that it will attempt to predict several quantiles height growth increments. For example, the model will not be able to determine whether specific trees will be projected to be above or below the .9 quantile line but rather predict what the .9 quantile height itself is for a given set of predictors. If enough information was known about these trees to predict which would be the fastest growing trees, it would negate the utility of quantile regression.\\[2pt]
 
 The fact that quantile regression attempts to characterize the entire distribution of heights makes it much more difficult to test and validate than an ordinary least squares regression.  The regression estimates at the selected quantile provide predictions for that specific quantile and it is likely that the predictive ability of the model changes at different quantiles.  For example, the model may predict the median better than the upper quantile. \\[2pt]
 
@@ -198,24 +202,28 @@ To evaluate the model, three quantiles will be fitted to represent the range of 
 
 Following this evaluation, a random sample of tagged subject trees will be selected to have their height growth increments predicted in the USFS Forest Vegetation Simulator (FVS).  These predicted height increments will then be evaluated as above.  It is not expected that .90 of the predicted tree heights will fall below that .90 quantiles for example. The FVS small tree growth sub-model is based on a least squares regression equation so it is very unlikely that the predicted heights will correspond to the quantile planes.   Rather, this exercise is to illuminate how far from the actual growth response distribution of FVS predictions can be.\\[2pt]
 
-\textbf{Fitting Quantile Regression}\\[1pt]
+\subsection{Fitting Quantile Regression}
 
-Only the installations with a greater than 70\% Ponderosa Pine composition at initiation will be included in the model.  Within these installations, the 6th plot will be withheld as training data.  The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  \\[2pt]
+Only the installations with a greater than 100 Ponderosa Pine tagged small trees at initiation will be included in the model.  Within these installations, the 6th plot will be withheld as training data. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  \\[2pt]
 
 The "quantreg" package by Roger Koenker \cite{Koenker} will be used to fit quantile regression planes individually for the specified quantiles (specified as tau values: .90, .50, .10).  This allows for differences in the selected predictor variables between the quantile planes.  \\[2pt]
 
 The variable selection process for each individual quantile will be guided by the ecological framework behind small tree growth.  This means that the predictor variables will be selected from the four previously mentioned categories of ecological factors that affect tree growth. These are overstory measures, understory non-tree vegetation, site productivity and other small tree measures.  The square root of initial height (height at the beginning of measurement period) will also be included as a predictor of height growth increment in the "base model" since it is clear that square root of initial height explains much of the variability in height growth increment and we are interested in the other predictors.\\[2pt]
 
-Variable selection from within these categories is analogous to that of least squares, except that variables will be selected with respect to their significance to the regression of the median (Tau=.5). Within each category of ecological factor, a subset of relevant variables will be considered that includes two-way interactions between the previously selected variables and the category under evaluation.  To evaluate the utility of higher-order polynomials, a Generalized Linear Model (GLM) with a smoother of all first-order predictors will be used to view the relationship with the predictors. If inclusion of a higher-order predictor is justified by the GLM plot than it will be considered alongside all other categorical predictors and as an interaction term.\\[2pt]
+Variable selection from within these categories is analogous to that of least squares, except that variables will be selected with respect to their significance to the regression of the median (Tau=.5). Within each category of ecological factor, a subset of relevant variables will be considered that includes two-way interactions between the previously selected variables and the category under evaluation. This subset of variables will also take into consideration the practicality of the predictors.\\[2pt]
+
+To evaluate the utility of higher-order polynomials, a Generalized Linear Model (GLM) with a smoother of all first-order predictors will be used to view the relationship with the predictors individually. If inclusion of a higher-order predictor is justified by the GLM plot than it will be considered alongside all other categorical predictors and as an interaction term.\\[2pt]
 
 Model building will proceed from category to category with the model of lowest AIC being selected as the model carried forward to the next category. This will result in a parsimonious model that is easily understood and supported by our understanding of the factors surrounding small tree growth.\\[2pt]
 
-The order of variable selection categories will proceed in the following order; understory tree, understory non-tree vegetation, overstory and finnaly site. The first two variables;understory non-tree, and understory small tree will be selected from a group of installations of comparable understory conditions. 
+The order of variable selection categories will proceed in the following order; understory tree, understory non-tree vegetation, overstory and finnaly site. The first two variables;understory non-tree, and understory small tree will be selected from the control plots of a group of installations of comparable understory conditions. Once an "understory model" is established, the selection of overstory and site variables will proceed in that order.  These two final categories necesitate the "linking" of all selected Ponderosa Pine installations \\[2pt]
 
 Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare how small tree growth compared to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.\\[2pt]
 
 
-
+\newpage
+\appendix
+\section(Bibliography)
 \printbibliography
 All analyses were performed using the R statistical software
 \Sexpr{R.Version()$version.string}.

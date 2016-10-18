@@ -4,12 +4,17 @@
 
 %%%%%%%%  Packages   %%%%%%%%%%%%%%%%
 \usepackage{amsmath,amssymb}
-\usepackage{graphicx}
+\usepackage{graphicx} 
 \usepackage{times}
 \usepackage{array}
 \usepackage{setspace}
 \usepackage[backend=bibtex]{biblatex}
-\usepackage[toc,page]{appendix}
+\usepackage{tocloft}
+\newcommand{\listappendicesname}{Appendices}
+\newlistof{appendices}{apc}{\listappendicesname}
+\newcommand{\appendices}[1]{\addcontentsline{apc}{appendices}{#1}}
+\newcommand{\newappendix}[1]{\section*{#1}\appendices{#1}}
+\parindent0mm
 \bibliography{C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files/STCV.bib}
 
 %%%%%%%%  Page Setup %%%%%%%%%%%%%%%%%%
@@ -103,6 +108,7 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \textbf{LIST OF APPENDICES}\\[1pt]
 \end{center}
 \normalsize
+\listofappendices
 
 \newpage
 \pagenumbering{arabic}
@@ -222,8 +228,7 @@ Selecting a single dimension from each ecological category of small tree competi
 
 
 \newpage
-\appendix
-\section(Bibliography)
+\newappendix{Bibliography}
 \printbibliography
 All analyses were performed using the R statistical software
 \Sexpr{R.Version()$version.string}.

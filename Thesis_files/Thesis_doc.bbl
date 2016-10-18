@@ -17,6 +17,29 @@
 \endgroup
 
 \sortlist[entry]{nty/global/}
+  \entry{Koenker}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=KR}{%
+         family={Koenker},
+         familyi={K\bibinitperiod},
+         given={Roger},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KR1}
+    \strng{fullhash}{KR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{note}{R package version 5.24}
+    \field{title}{quantreg: Quantile Regression}
+    \verb{url}
+    \verb https://CRAN.R-project.org/package=quantreg
+    \endverb
+    \field{year}{2016}
+  \endentry
+
   \entry{Riegel1995a}{article}{}
     \name{author}{3}{}{%
       {{hash=RGM}{%

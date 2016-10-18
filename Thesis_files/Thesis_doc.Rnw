@@ -124,6 +124,29 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \textbf{Ecology of Ponderosa Pine Regeneration}\\[1pt]
 This is a test of the citation capabilities of sweave\cite{Riegel1995a}
 
+\begin{figure}
+\begin{center}
+<<fig=TRUE,width=9,height=9,echo=FALSE>>=
+source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jun2.r', echo=F)
+#! 2. installations to drop
+# RL was abandoned w/o measurement; others are check plots
+drp <- c("TCCheck","LRCheck","BCCheck","BBCheck","RL")
+# DC gives only 1 yr of growth data, CT only 2 years, before destroyed
+drp <- c(drp, "DC","CT")
+
+library(lattice)
+stag$count<-1
+spec.freq.table<-xtabs(count~Installation+Species, data=stag)
+spec.freq.table<-as.data.frame(spec.freq.table)
+spec.freq.table<-spec.freq.table[! spec.freq.table$Installation %in% drp,]
+
+barchart(Freq~Installation, data=spec.freq.table,groups=Species, stack=T,
+         auto.key=list(title="Species",columns=2),
+         ylab="Number of Small Tagged Trees at Initiation",
+         par.settings=list(superpose.polygon=list(col=rainbow(12))))
+@
+\end{center}
+\end{figure}
 \newpage
 \begin{center}
 \section{Methods}

@@ -416,7 +416,42 @@ print(inst_tl)
 \end{center}
 \end{figure}
 
+
+
 A point of concern is that some measurements were taken at times that would not have allowed for the herbicide applications to take full effect. That is, several measurements were concurrent with or followed too quickly after the first herbicide application.  This necessitated careful selection of the appropriate measurement years on a per installation basis.  Ultimately, the growth measurements will be put on the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. \\[2pt]
+
+\begin{figure}
+\begin{center}
+<<fig=TRUE,width=9,height=9,echo=FALSE>>=
+#Select Control and GE Plots from list of inst and plots#
+CTRLandGE.plots <- splot[which(!splot$Treatment=='1X'),]
+
+#Merge Control&GE plots with 4m^2 plot data#
+CTRLandGE.plot.veg <- merge(CTRLandGE.plots,sstp1,by=c("Installation","Plot"))
+
+#Find minimum year of measurement in timeline#
+min_year<-ddply(timeline, .(Installation), summarise, Year_Measurement=min(Year_Measurement))
+
+#merge based on Installation and minimum year of measurement
+CTRLandGE.plot.veg<-merge(CTRLandGE.plot.veg,min_year, by=c("Installation","Year_Measurement"))
+
+
+#Aggregate the control and GE plots 1m^2 data by Installation and find the mean of top height and polyveg% cover#
+CTRLandGE.volume.index<-aggregate(CTRLandGE.plot.veg[, 17:19], list(CTRLandGE.plot.veg$Installation,
+                                                                    CTRLandGE.plot.veg$Treatment), mean, na.rm=TRUE)
+
+#Create a US Volume Estimate by multiplying mean ployveg% cover * mean top height for each treatment w/i each inst#
+CTRLandGE.volume.index$volume<-CTRLandGE.volume.index$Cover*CTRLandGE.volume.index$Top
+
+
+barchart(CTRLandGE.volume.index$volume~CTRLandGE.volume.index$Group.1,groups=CTRLandGE.volume.index$Group.2,
+         xlab=list(label="Installation",cex=1.5),
+         ylab=list(label="Vegetation Volume",cex=1.5),
+         main=list(label="Vegetation Volume at First Measurement Year", cex=1.5))
+@
+\caption{Volume Comparison of Understory Vegetation in First Measurement Year}
+\end{center}
+\end{figure}
 
 Each plot contains a series of nested plots that decrease in area with physiologically smaller vegetation units (Figure 4). Starting with the full extent of the plot, overstory trees (> 10.5 in DBH) were measured on an approximately half acre. Medium trees, with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested plot of roughly a quarter acre.
 Small trees were measured on six .007 acre plots 60 degrees apart from plot center at a distance of approximately 30 feet.  Small trees are defined as those that have a DBH less than 3.5 in yet are greater than .5 ft in height for shade tolerant species or 1 ft for shade intolerants at the time of initial measurements.\\[2pt]
@@ -462,7 +497,5 @@ Selecting a single dimension from each ecological category of small tree competi
 \newappendix{Bibliography}
 \printbibliography
 All analyses were performed using the R statistical software
-\Sexpr{R.Version()$version.string}.
-
-
+\Sexpr{R.Version()$version.string}. This thesis was compiled using the document preparation software \LaTeX.
 \end{document}

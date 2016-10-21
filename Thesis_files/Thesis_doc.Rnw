@@ -10,7 +10,7 @@
 \usepackage{setspace}
 \usepackage[backend=bibtex]{biblatex}
 \usepackage{tocloft}
-\newcommand{\listappendicesname}{Appendices}
+\newcommand{\listappendicesname}{List of Appendices}
 \newlistof{appendices}{apc}{\listappendicesname}
 \newcommand{\appendices}[1]{\addcontentsline{apc}{appendices}{#1}}
 \newcommand{\newappendix}[1]{\section*{#1}\appendices{#1}}
@@ -208,7 +208,7 @@ lon=locs0v2$Long)
 \begin{figure}[!h]
 \begin{center}
     \includegraphics[width=.9\textwidth]{inst_map.png}
-    \caption{Map of Installations}
+    \caption{Map of Installations (with > 60 small tagged Ponderosa Pine)}
     \label{fig:mesh1}
 \end{center}
 \end{figure}
@@ -216,12 +216,22 @@ lon=locs0v2$Long)
 
 
 Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or harvested with one of the aforementioned variable retention harvest systems: shelterwood, seed tree and heavy thinning. \\[2pt]
+\begin{figure}
+\begin{center}
+<<fig=TRUE,width=9,height=9,echo=FALSE>>=
+
+
+@
+
+\caption{Matrix of Site Index and Overstory Conditions}
+\end{center}
+\end{figure}
 
 The temporal initiation of installations varied with most being established in the last years of the 1990s and early 2000s.  Three check plots were also installed to audit the quality of the data collection efforts. Treatments were randomly assigned to seven plots within each installation (Figure 3).  Three plots received multiple applications of regionally effective herbicide.  The remaining four plots are split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.\\[2pt]
 
 The primary objective of the different herbicide treatments is to decouple the direct and indirect effects of removing overstory. The removal of the overstory increases available light which is hypothesized to encourage small tree growth as well as non-tree vegetation.  The herbicide treatments allow us to see how small trees grow under reduced overstory without the presence of a corresponding increase in non-tree vegetation.\\[2pt]
 
-Figure 5 shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at each installation at four year intervals was successful for many installations but in some cases the intervals are somewhat irregular (i.e., 3-5 years in length). The schedule of measurements was based on the twelve-year projection cycles that were used by participating cooperative members.\\[2pt]
+Figure 3 shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at each installation at four year intervals was successful for many installations but in some cases the intervals are somewhat irregular (i.e., 3-5 years in length). The schedule of measurements was based on the twelve-year projection cycles that were used by participating cooperative members.\\[2pt]
 \begin{figure}
 \begin{center}
 <<fig=TRUE,width=9,height=9,echo=FALSE>>=
@@ -229,15 +239,19 @@ library(lattice)
 
 #w/ meast#########################
 trt <- unique(splothist[splothist$Action %in% c("IT","RT"),c(2,6)])
-print(xyplot(Installation ~ Year_Measurement,
+inst_tl<-
+  
+  xyplot(Installation ~ Year_Measurement,
        xlim=c(1997,2016),
        data=timeline,
        htyr=timeline$Assoc_OS,
        trtyr=timeline$Trt,  
-       xlab="Year in which measurements were taken",ylab="Installation",
-       scales=list(x=list(at=1998:2015)),
-       main=paste("Installation History",sep=""),
-       panel=function(x,y,htyr,trtyr,...){
+     scales=list(x=list(at=1998:2015, cex=1.0)),
+        xlab=list(label="Year",cex=1.5),
+        ylab=list(label="Installation",cex=1.5),
+        main=list(label="Installation History", cex=1.5),
+         panel=function(x,y,htyr,trtyr,...){
+           panel.abline(h = timeline$Installation, v = c(1998:2015), lty = "dotted",            col = "light grey")
          for (i in as.numeric(unique(y))){
            subx <- x[as.numeric(y)==i]
            subOS <- htyr[as.numeric(y)==i]+.15
@@ -246,7 +260,9 @@ print(xyplot(Installation ~ Year_Measurement,
            panel.xyplot(subOS,i,type="p",pch=17,col="chartreuse4",cex=2)
            panel.xyplot(subx,i,type="p",pch=15,col="black",cex=1.0)
            panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
-          }}))
+           }})
+
+print(inst_tl)
 @
 \caption{Timeline of Installation Measurements and Treatments}
 \end{center}

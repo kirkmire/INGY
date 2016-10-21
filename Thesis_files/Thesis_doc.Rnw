@@ -127,7 +127,14 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \text{This will be the introduction}
 \textbf{Objectives}\\[1pt]
 \textbf{Ecology of Ponderosa Pine Regeneration}\\[1pt]
-This is a test of the citation capabilities of sweave\cite{Riegel1995a}
+
+Many studies have found that understory vegetation competition slows the early development of ponderosa pine  
+
+Busse et al. found that the presence of understory vegetation adversely affected the growth of ponderosa pine for an estimated 20 years which is a relatively short time in a long stand rotation\cite{Busse1996}. However, the authors also noted that there is a long term benefit to the upper soil horizon from maintaining understory vegetation in the form of greater C and N.
+
+
+
+
 
 \begin{figure}
 \begin{center}
@@ -212,11 +219,58 @@ lon=locs0v2$Long)
 
 \begin{wrapfigure}{r}{\textwidth}
 \begin{center}
-    \includegraphics[width=50mm,scale=.8]{inst_map.png}
+    \includegraphics[width=50mm]{inst_map.png}
     \caption{Map of Installations (with > 60 small tagged Ponderosa Pine)}
     \label{fig:mesh1}
 \end{center}
 \end{wrapfigure}
+
+\begin{figure}
+\begin{center}
+<<fig=TRUE,width=5,height=5,echo=FALSE>>=
+library(plotrix)
+
+plot(c(0,170),c(0,170),xlim=c(0,170),ylim=c(0,170), xaxs="i",yaxs="i",
+     type="n",xlab="Feet",ylab="",main="STCV Plot Design",bty="n",asp = 1,axes=F)
+Axis(side=1, labels=T)
+#Large tree plot#
+draw.circle(80,80,80,border="black",nv=1000,
+            col=NA,lty=1,lwd=2)
+#Medium Tree plot#
+draw.circle(80,80,60,border="black",lty=1,lwd=1)
+
+#Small tree Plots#
+draw.circle(80,111,10,border="black",lty=1,lwd=1)
+draw.circle(80,49,10,border="black",lty=1,lwd=1)
+
+#side small trees#
+draw.circle(106.8,95.5,10,border="black",lty=1,lwd=1)
+draw.circle(106.8,64.5,10,border="black",lty=1,lwd=1)
+draw.circle(53.2,64.5,10,border="black",lty=1,lwd=1)
+draw.circle(53.2,95.5,10,border="black",lty=1,lwd=1)
+
+#1ft radius plot center#
+draw.circle(80,80,1,border="black",lty=1,lwd=1)
+
+#Draw radial lines#
+draw.radial.line(0,31, center=c(80,80),deg=30,lwd=1)
+draw.radial.line(0,31, center=c(80,80),deg=90,lwd=1)
+draw.radial.line(0,31, center=c(80,80),deg=150,lwd=1)
+draw.radial.line(0,31, center=c(80,80),deg=210,lwd=1)
+draw.radial.line(0,31, center=c(80,80),deg=270,lwd=1)
+draw.radial.line(0,31, center=c(80,80),deg=330,lwd=1)
+
+#Drawing 4x4 Veg Quad Squares#
+rect(76.72,107.72,83.28,114.28,col=NA,border="black", lwd=1)
+rect(76.72,107.72,80,111,col=NA,border="black", lwd=1)
+
+rect(76.72,45.72,83.28,52.28,col=NA,border="black", lwd=1)
+rect(80,49,83.28,52.28,col=NA,border="black", lwd=1)
+@
+\caption{Design of STCV Sampling Plot}
+\end{center}
+\end{figure}
+
 
 
 \begin{figure}

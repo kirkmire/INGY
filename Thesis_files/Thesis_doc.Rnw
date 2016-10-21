@@ -10,6 +10,11 @@
 \usepackage{setspace}
 \usepackage[backend=bibtex]{biblatex}
 \usepackage{tocloft}
+\usepackage{float}
+\usepackage{wrapfig}
+\floatstyle{boxed} 
+\renewcommand{\floatpagefraction}{.8}
+\restylefloat{figure}
 \newcommand{\listappendicesname}{List of Appendices}
 \newlistof{appendices}{apc}{\listappendicesname}
 \newcommand{\appendices}[1]{\addcontentsline{apc}{appendices}{#1}}
@@ -205,13 +210,42 @@ lon=locs0v2$Long)
 #dev.off()
 @
 
-\begin{figure}[!h]
+\begin{wrapfigure}{r}{\textwidth}
 \begin{center}
-    \includegraphics[width=.9\textwidth]{inst_map.png}
+    \includegraphics[width=50mm,scale=.8]{inst_map.png}
     \caption{Map of Installations (with > 60 small tagged Ponderosa Pine)}
     \label{fig:mesh1}
 \end{center}
+\end{wrapfigure}
+
+
+\begin{figure}
+\begin{center}
+<<fig=TRUE,width=5,height=5,echo=FALSE>>=
+#Frequeny Plot by Species#
+
+library(plyr)
+library(ggplot2)
+
+speciescount<-data.frame(count(stag$Species))
+
+spec.freq <- ggplot(speciescount, aes(x=factor(x),y=freq))+geom_bar(stat="identity")+
+ggtitle("Tagged Trees by Species")+
+  xlab("Four Letter Species Code")+
+  ylab("Number of Tagged Small Trees")
+
+spec_freq<-barchart(speciescount$freq~speciescount$x,
+        xlab=list(label="Four Letter Species Code",cex=1.5),
+        col="black",
+        ylab=list(label="Number of Tagged Small Trees",cex=1.5),
+        main=list(label="Tagged Trees by Species at Initiation", cex=1.5)) 
+
+print(spec_freq)
+@
+\caption{Number of Small Tagged Trees by Species}
+\end{center}
 \end{figure}
+
 
 
 
@@ -219,8 +253,68 @@ Installations were established in stands with various forest cover (e.g., mixed 
 \begin{figure}
 \begin{center}
 <<fig=TRUE,width=9,height=9,echo=FALSE>>=
+library(plyr)
+library(data.table)
+library(lattice)
 
+soverhist2 <- data.table(soverhist, key=c("Installation","Plot","Tree"))
 
+soverhist5 = data.table(soverhist)
+
+min.OS<-soverhist5[,min(Year_Measurement),by=c("Installation","Plot","Tree")]
+
+setnames(min.OS, "V1", "Year_Measurement")
+
+OverS <- merge(min.OS, soverhist5,
+               by=c("Installation","Plot","Tree","Year_Measurement"))
+
+OverS$BAPA<-ifelse(OverS$DBH<10.5,((OverS$DBH^2)*.005454)/.26,
+                   ((OverS$DBH^2)*.005454)/.46) 
+
+BAPA.by.plot<-aggregate(OverS$BAPA, 
+        by=list(Installation=OverS$Installation,Plot=OverS$Plot), FUN=sum)
+
+setnames(BAPA.by.plot, "x", "BAPA")
+
+#Select Control and GE Plots from list of inst and plots#
+CTRLandGE.plots <- splot[!(splot$Treatment=='1X'), ]
+
+#Merge Control&GE plots with 4m^2 plot data#
+CTRLandGE.plot.veg <- merge(CTRLandGE.plots,sstp1,by=c("Installation","Plot"))
+
+#Aggregate the control and GE plots 4m^2 data by Installation and find the mean of top height and polyveg% cover#
+CTRLandGE.volume.index<-aggregate(CTRLandGE.plot.veg[, 17:19], list(Installation=CTRLandGE.plot.veg$Installation,Trt=CTRLandGE.plot.veg$Treatment), mean, na.rm=TRUE)
+
+#Create a US Volume Estimate by multiplying mean ployveg% cover * mean top height for each treatment w/i each inst#
+CTRLandGE.volume.index$volume<-(((CTRLandGE.volume.index$Coverage/100)*43.0556)*
+      ((CTRLandGE.volume.index$Top-CTRLandGE.volume.index$Base)))/43.0556
+#the above is actually calculating veg volume per square foot#
+
+#Merge volume df with Installation Info (contains estimate of SI)#
+OS.ctrl.plot<- merge(CTRLandGE.volume.index,sinst, by.x = "Installation", by.y = "Installation",all=F)
+
+BAPA.by.inst<-ddply(OverS, "Installation", summarise, BAPA.inst= sum(BAPA))
+
+BAPA.by.inst$ave.BAPA<-BAPA.by.inst$BAPA.inst/7
+
+bapa.by.inst<-BAPA.by.inst[!(BAPA.by.inst$Installation %in% drp),]
+
+#Merges OS data to form df with OS BAPA, SI, and US Volume#
+threeDVeg<-merge(BAPA.by.inst,OS.ctrl.plot, by.x = "Installation", by.y = "Installation",all=F)
+
+#Remove Installations#
+threeDVeg<-threeDVeg[!(threeDVeg$Installation %in% drp),]
+
+si_matrix<-xyplot(threeDVeg$SiteIndex_Value~threeDVeg$ave.BAPA, type=c("g","p"),
+       groups=threeDVeg$SiteIndex_Species,
+       xlab=list(label="Overstory Basal Area (ft^2/ac)",cex=1.5),
+        ylab=list(label="Site Index Value",cex=1.5),
+        main=list(label="Site Index and Residual Basal Area Matrix", cex=1.5),
+        par.settings=list(superpose.symbol=list(
+                      pch=c(15,16),
+                      col=c("blue","red","green","purple"))))
+
+         print(si_matrix)
 @
 
 \caption{Matrix of Site Index and Overstory Conditions}
@@ -246,11 +340,11 @@ inst_tl<-
        data=timeline,
        htyr=timeline$Assoc_OS,
        trtyr=timeline$Trt,  
-     scales=list(x=list(at=1998:2015, cex=1.0)),
+     scales=list(x=list(at=1998:2015, cex=1.0,rot=45)),
         xlab=list(label="Year",cex=1.5),
         ylab=list(label="Installation",cex=1.5),
-        main=list(label="Installation History", cex=1.5),
-         panel=function(x,y,htyr,trtyr,...){
+           main=list(label="Installation History", cex=1.5),
+           panel=function(x,y,htyr,trtyr,...){
            panel.abline(h = timeline$Installation, v = c(1998:2015), lty = "dotted",            col = "light grey")
          for (i in as.numeric(unique(y))){
            subx <- x[as.numeric(y)==i]

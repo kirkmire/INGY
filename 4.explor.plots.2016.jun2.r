@@ -31,7 +31,7 @@ spec.freq
 
 stag$numb<-1
 stag.sp.inst<-aggregate(numb~Installation+Species, data=stag,sum, na.rm=TRUE)
-
+barchart(numb~Installation|Species,data=stag.sp.inst)
 #qplot(factor(Installation), data=stag[!(stag$Installation %in% drp),], geom="bar", fill=(factor(Species),values=cbPalette))#
 
 #For ordering installations by xcoord#
@@ -155,4 +155,8 @@ minyr.st.count<-do.call(rbind,lapply(split(st.count,st.count$Installation),funct
 #Per Acre Count of Small Trees by Installation in First Year Measurement#
 
 barchart((Count/.294)~Installation,data=minyr.st.count[!(minyr.st.count$Installation %in% drp),])
+
+
+
+
 

@@ -418,7 +418,7 @@ print(inst_tl)
 
 
 
-A point of concern is that some measurements were taken at times that would not have allowed for the herbicide applications to take full effect. That is, several measurements were concurrent with or followed too quickly after the first herbicide application.  This necessitated careful selection of the appropriate measurement years on a per installation basis.  Ultimately, the growth measurements will be put on the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. \\[2pt]
+A point of concern is that some measurements were taken at times that would not have allowed for the herbicide applications to take full effect. That is, several measurements were concurrent with or followed too quickly after the first herbicide application.  This necessitated careful selection of the appropriate measurement years on a per installation basis. Generally, "first interval years" were selected such that one to three years following the initial herbicide application were included to allow for the herbicide to take effect. Ultimately, the growth measurements will be put on the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. \\[2pt]
 
 \begin{figure}
 \begin{center}
@@ -437,8 +437,7 @@ CTRLandGE.plot.veg<-merge(CTRLandGE.plot.veg,min_year, by=c("Installation","Year
 
 
 #Aggregate the control and GE plots 1m^2 data by Installation and find the mean of top height and polyveg% cover#
-CTRLandGE.volume.index<-aggregate(CTRLandGE.plot.veg[, 17:19], list(CTRLandGE.plot.veg$Installation,
-                                                                    CTRLandGE.plot.veg$Treatment), mean, na.rm=TRUE)
+CTRLandGE.volume.index<-aggregate(CTRLandGE.plot.veg[, 17:19], list(CTRLandGE.plot.veg$Installation, CTRLandGE.plot.veg$Treatment), mean, na.rm=TRUE)
 
 #Create a US Volume Estimate by multiplying mean ployveg% cover * mean top height for each treatment w/i each inst#
 CTRLandGE.volume.index$volume<-CTRLandGE.volume.index$Cover*CTRLandGE.volume.index$Top
@@ -449,9 +448,11 @@ barchart(CTRLandGE.volume.index$volume~CTRLandGE.volume.index$Group.1,groups=CTR
          ylab=list(label="Vegetation Volume",cex=1.5),
          main=list(label="Vegetation Volume at First Measurement Year", cex=1.5))
 @
-\caption{Volume Comparison of Understory Vegetation in First Measurement Year}
+\caption{Volume Comparison of Understory Vegetation in First Year of Timeline}
 \end{center}
 \end{figure}
+
+When looking at the vegetation volumes between the control and the herbacide plots in the year of first measurement, it is apparent that there is a large drop in volume within installations with large amounts of understory vegetation when herbicide is applied. However, the herbicide applications failed to contibute to a marked difference in volume in installations of little volume in control plots.
 
 Each plot contains a series of nested plots that decrease in area with physiologically smaller vegetation units (Figure 4). Starting with the full extent of the plot, overstory trees (> 10.5 in DBH) were measured on an approximately half acre. Medium trees, with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested plot of roughly a quarter acre.
 Small trees were measured on six .007 acre plots 60 degrees apart from plot center at a distance of approximately 30 feet.  Small trees are defined as those that have a DBH less than 3.5 in yet are greater than .5 ft in height for shade tolerant species or 1 ft for shade intolerants at the time of initial measurements.\\[2pt]

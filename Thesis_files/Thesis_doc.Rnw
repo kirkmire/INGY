@@ -375,6 +375,8 @@ si_matrix<-xyplot(threeDVeg$SiteIndex_Value~threeDVeg$ave.BAPA, type=c("g","p"),
 \end{center}
 \end{figure}
 
+The site productivity of the installations was measured according to the cominate site tree which varied between ponderosa pine, douglas fir and ... Selecting only stands with greater than 60 small tagged ponderosa for this analysis effectively removed nearly all stands that meaasured site index with a species besides ponderosa pine.
+
 The temporal initiation of installations varied with most being established in the last years of the 1990s and early 2000s.  Three check plots were also installed to audit the quality of the data collection efforts. Treatments were randomly assigned to seven plots within each installation (Figure 3).  Three plots received multiple applications of regionally effective herbicide.  The remaining four plots are split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.\\[2pt]
 
 The primary objective of the different herbicide treatments is to decouple the direct and indirect effects of removing overstory. The removal of the overstory increases available light which is hypothesized to encourage small tree growth as well as non-tree vegetation.  The herbicide treatments allow us to see how small trees grow under reduced overstory without the presence of a corresponding increase in non-tree vegetation.\\[2pt]
@@ -442,17 +444,19 @@ CTRLandGE.volume.index<-aggregate(CTRLandGE.plot.veg[, 17:19], list(CTRLandGE.pl
 #Create a US Volume Estimate by multiplying mean ployveg% cover * mean top height for each treatment w/i each inst#
 CTRLandGE.volume.index$volume<-CTRLandGE.volume.index$Cover*CTRLandGE.volume.index$Top
 
+CTRLandGE.volume.index<-CTRLandGE.volume.index[! CTRLandGE.volume.index$Group.1 %in% drp,]
 
 barchart(CTRLandGE.volume.index$volume~CTRLandGE.volume.index$Group.1,groups=CTRLandGE.volume.index$Group.2,
          xlab=list(label="Installation",cex=1.5),
          ylab=list(label="Vegetation Volume",cex=1.5),
-         main=list(label="Vegetation Volume at First Measurement Year", cex=1.5))
+         main=list(label="Vegetation Volume at First Measurement Year", cex=1.5),
+                   auto.key=T)
 @
 \caption{Volume Comparison of Understory Vegetation in First Year of Timeline}
 \end{center}
 \end{figure}
 
-When looking at the vegetation volumes between the control and the herbacide plots in the year of first measurement, it is apparent that there is a large drop in volume within installations with large amounts of understory vegetation when herbicide is applied. However, the herbicide applications failed to contibute to a marked difference in volume in installations of little volume in control plots.
+When comparing the vegetation volumes between the control and the herbacide plots at the begining of the measurement intervals, it is apparent that there is a large drop in volume within installations with large amounts of understory vegetation when herbicide is applied. However, the herbicide applications failed to contibute to a marked difference in volume in installations of little volume in control plots.
 
 Each plot contains a series of nested plots that decrease in area with physiologically smaller vegetation units (Figure 4). Starting with the full extent of the plot, overstory trees (> 10.5 in DBH) were measured on an approximately half acre. Medium trees, with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested plot of roughly a quarter acre.
 Small trees were measured on six .007 acre plots 60 degrees apart from plot center at a distance of approximately 30 feet.  Small trees are defined as those that have a DBH less than 3.5 in yet are greater than .5 ft in height for shade tolerant species or 1 ft for shade intolerants at the time of initial measurements.\\[2pt]

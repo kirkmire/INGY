@@ -138,6 +138,9 @@ Busse et al. found that the presence of understory vegetation adversely affected
 Composition of forest understory species are controlled by overstory trees which filter light, moderate understory air and soil temperature,and directly compete for soil water and nutrients cite(need Spurr and Barnes 1980). Conifer reforestation efforts are often hampered by the aggressive and competitive ability of \emph{Carex} and \emph{Calamagrostis} because they respond positively to the removal of the overstory (Sloan and Ryker 1986). 
 
 
+
+
+
 \begin{figure}[h]
 \begin{center}
     \includegraphics[width=160mm]{comp_flowchart.jpg}
@@ -504,6 +507,17 @@ The "quantreg" package by Roger Koenker cite(Koenker) will be used to fit quanti
 The variable selection process for each individual quantile will be guided by the ecological framework behind small tree growth.  This means that the predictor variables will be selected from the four previously mentioned categories of ecological factors that affect tree growth. These are overstory measures, understory non-tree vegetation, site productivity and other small tree measures.  The square root of initial height (height at the beginning of measurement period) will also be included as a predictor of height growth increment in the "base model" since it is clear that square root of initial height explains much of the variability in height growth increment and we are interested in the other predictors.\\[2pt]
 
 Variable selection from within these categories is analogous to that of least squares, except that variables will be selected with respect to their significance to the regression of the median (Tau=.5). Within each category of ecological factor, a subset of relevant variables will be considered that includes two-way interactions between the previously selected variables and the category under evaluation. This subset of variables will also take into consideration the practicality of the predictors.\\[2pt]
+
+\textbf{Variable Selection Process:}\\[1pt]
+\begin{enumerate}
+  \item{Fit quantile regression model for $\textrm{ Tau}=.5$ using the base model of
+\begin{center}
+  $\triangle \textrm{ height annual}=\sqrt{\textrm{initial height}}+\textrm{ small tree variable}$
+\end{center}}
+  \item{another cat}
+\end{enumerate}
+
+
 
 To evaluate the utility of higher-order polynomials, a Generalized Linear Model (GLM) with a smoother of all first-order predictors will be used to view the relationship with the predictors individually. If inclusion of a higher-order predictor is justified by the GLM plot than it will be considered alongside all other categorical predictors and as an interaction term.\\[2pt]
 

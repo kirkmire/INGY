@@ -16,6 +16,8 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \usepackage{filecontents}
 \bibliography{STCV.bib}
 \usepackage{tocloft}
+\usepackage{tocbibind}
+\usepackage{xpatch}
 \usepackage{float}
 \usepackage{wrapfig}
 \floatstyle{boxed} 
@@ -90,7 +92,7 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \textbf{TABLE OF CONTENTS}\\[1pt]
 \end{center}
 \normalsize
-\tableofcontents
+\tableofcontents*
 
 \newpage
 \large 
@@ -108,6 +110,16 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \end{center}
 \normalsize
 \listoffigures
+
+%\newpage
+%\large 
+%\begin{center}
+%\textbf{LIST OF EQUATIONS}\\[1pt]
+%\end{center}
+%\newcommand{\listequationsname}
+%\normalsize
+%\listofequations
+
 
 \newpage
 \large 
@@ -510,11 +522,13 @@ Variable selection from within these categories is analogous to that of least sq
 
 \textbf{Variable Selection Process:}\\[1pt]
 \begin{enumerate}
-  \item{Fit quantile regression model for $\textrm{ Tau}=.5$ using the base model of
-\begin{center}
-  $\triangle \textrm{ height annual}=\sqrt{\textrm{initial height}}+\textrm{ small tree variable}$
-\end{center}}
-  \item{another cat}
+  \item{Fit quantile regression models for $\textrm{ Tau}=.5$ using the base model of
+  \begin{center}
+\begin{equation}\label{eq:Base Model}
+  \Delta \textrm{ height annual}=\sqrt{\textrm{initial height}}+\textrm{ small tree variable}
+\end{equation}
+  \end{center}}
+  \item{}
 \end{enumerate}
 
 

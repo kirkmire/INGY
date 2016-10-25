@@ -26,6 +26,7 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \newcommand{\appendices}[1]{\addcontentsline{apc}{appendices}{#1}}
 \newcommand{\newappendix}[1]{\section*{#1}\appendices{#1}}
 \parindent0mm
+\setkeys{Gin}{width=0.9\textwidth}
 
 %%%%%%%%  Page Setup %%%%%%%%%%%%%%%%%%
 \usepackage[margin= 2cm]{geometry}
@@ -137,7 +138,7 @@ Busse et al. found that the presence of understory vegetation adversely affected
 Composition of forest understory species are controlled by overstory trees which filter light, moderate understory air and soil temperature,and directly compete for soil water and nutrients cite(need Spurr and Barnes 1980). Conifer reforestation efforts are often hampered by the aggressive and competitive ability of \emph{Carex} and \emph{Calamagrostis} because they respond positively to the removal of the overstory (Sloan and Ryker 1986). 
 
 
-\begin{figure}
+\begin{figure}[h]
 \begin{center}
     \includegraphics[width=160mm]{comp_flowchart.jpg}
     \caption{Biological framework of small tree growth. Small trees are defined as those that have a DBH less than 3.5 in}
@@ -146,9 +147,7 @@ Composition of forest understory species are controlled by overstory trees which
 \end{figure}
 
 
-\begin{figure}
-\begin{center}
-<<fig=TRUE,width=6,height=6,echo=FALSE>>=
+<<speccomp, include=false,fig=TRUE,width=4,height=4,echo=FALSE>>=
 source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jun2.r', echo=F)
 #! 2. installations to drop
 # RL was abandoned w/o measurement; others are check plots
@@ -178,12 +177,17 @@ barchart(Freq~Installation, data=spec.freq.table,groups=Species, stack=T,
          Trees at Initiation",
          par.settings=list(superpose.polygon=list(col=rainbow(12))))
 @
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=160mm]{Thesis_doc-speccomp}
 \caption{Species Composition of Small Tagged Trees in Installations with more than 60 Ponderosa Pine}
 \label{fig:spec_comp}
 \end{center}
 \end{figure}
 
 \newpage
+\clearpage
 \begin{center}
 \section{Methods}
 \end{center}
@@ -193,7 +197,7 @@ barchart(Freq~Installation, data=spec.freq.table,groups=Species, stack=T,
 Twenty-nine study sites (termed "installations") were established on a variety of cooperative member ownership ranging from the eastern slopes of the Cascade Mountains to western Montana. The installations fall within three distinct geographic areas; central Washington, eastern Washington/Idaho and western Montana. \\[4pt]
 
 
-<<fig=FALSE,echo=FALSE>>=
+<<fig=FALSE,include=FALSE, echo=FALSE>>=
 #! 2. subset of installations
 library(RODBC)
 library(RgoogleMaps)
@@ -224,21 +228,20 @@ lat=locs0v2$Lat,
 lon=locs0v2$Long)
 #FUN=text,
 #labels=locs0v2$Installation)
-#dev.off()
+dev.off()
 @
 
-\begin{figure}
+\begin{figure}[ht]
 \begin{center}
-    \includegraphics[width=160mm]{inst_map.png}
-    \caption{Mapof STCV Installations}
+    \includegraphics[width=150mm]{inst_map.png}
+    \caption{Map of STCV Installations}
     \label{fig:map}
 \end{center}
 \end{figure}
 
 
-\begin{figure}
-\begin{center}
-<<fig=TRUE,width=5,height=5,echo=FALSE>>=
+
+<<sampleplot,include=FALSE,fig=FALSE,width=5,height=5,echo=FALSE>>=
 library(plotrix)
 
 plot(c(0,170),c(0,170),xlim=c(0,170),ylim=c(0,170), xaxs="i",yaxs="i",
@@ -278,30 +281,33 @@ rect(76.72,107.72,80,111,col=NA,border="black", lwd=1)
 rect(76.72,45.72,83.28,52.28,col=NA,border="black", lwd=1)
 rect(80,49,83.28,52.28,col=NA,border="black", lwd=1)
 @
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=80mm]{Thesis_doc-sampleplot}
 \caption{Design of STCV Sampling Plot}
 \label{fig:design}
 \end{center}
 \end{figure}
 
 
-
-\begin{figure}
-\begin{center}
-<<fig=TRUE,width=5,height=5,echo=FALSE>>=
-#Frequeny Plot by Species#
+<<species,include=False,fig=FALSE,width=5,height=5,echo=FALSE>>=
+#Frequency Plot by Species#
 
 library(plyr)
 
 speciescount<-data.frame(count(stag$Species))
 
-spec_freq<-barchart(speciescount$freq~speciescount$x,
+barchart(speciescount$freq~speciescount$x,
         xlab=list(label="Four Letter Species Code",cex=1.5),
         col="black",
         ylab=list(label="Number of Tagged Small Trees",cex=1.5),
         main=list(label="Tagged Trees by Species at Initiation", cex=1.5)) 
 
-print(spec_freq)
 @
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=80mm]{Thesis_doc-species}
 \caption{Number of Small Tagged Trees by Species}
 \label{fig:st_by_spec}
 \end{center}
@@ -309,9 +315,10 @@ print(spec_freq)
 
 
 Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or harvested with one of the aforementioned variable retention harvest systems: shelterwood, seed tree and heavy thinning. \\[2pt]
-\begin{figure}
+
+\begin{figure}[ht]
 \begin{center}
-<<fig=TRUE,width=9,height=9,echo=FALSE>>=
+<<include=TRUE,fig=TRUE,width=5,height=5,echo=FALSE>>=
 library(plyr)
 library(data.table)
 library(lattice)
@@ -364,7 +371,7 @@ threeDVeg<-merge(BAPA.by.inst,OS.ctrl.plot, by.x = "Installation", by.y = "Insta
 #Remove Installations#
 threeDVeg<-threeDVeg[!(threeDVeg$Installation %in% drp),]
 
-si_matrix<-xyplot(threeDVeg$SiteIndex_Value~threeDVeg$ave.BAPA, type=c("g","p"),
+simatrix<-xyplot(threeDVeg$SiteIndex_Value~threeDVeg$ave.BAPA, type=c("g","p"),
        groups=threeDVeg$SiteIndex_Species,
        xlab=list(label="Overstory Basal Area (ft^2/ac)",cex=1.5),
         ylab=list(label="Site Index Value",cex=1.5),
@@ -372,10 +379,8 @@ si_matrix<-xyplot(threeDVeg$SiteIndex_Value~threeDVeg$ave.BAPA, type=c("g","p"),
         par.settings=list(superpose.symbol=list(
                       pch=c(15,16),
                       col=c("blue","red","green","purple"))))
-
-         print(si_matrix)
+print(simatrix)
 @
-
 \caption{Matrix of Site Index and Overstory Conditions}
 \label{fig:si_os_matrix}
 \end{center}
@@ -392,6 +397,7 @@ The primary objective of the different herbicide treatments is to decouple the d
 Figure 3 shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at each installation at four year intervals was successful for many installations but in some cases the intervals are somewhat irregular (i.e., 3-5 years in length). The schedule of measurements was based on the twelve-year projection cycles that were used by participating cooperative members.\\[2pt]
 \begin{figure}
 \begin{center}
+
 <<fig=TRUE,width=9,height=9,echo=FALSE>>=
 library(lattice)
 

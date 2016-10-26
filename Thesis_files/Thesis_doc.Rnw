@@ -27,6 +27,12 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \newlistof{appendices}{apc}{\listappendicesname}
 \newcommand{\appendices}[1]{\addcontentsline{apc}{appendices}{#1}}
 \newcommand{\newappendix}[1]{\section*{#1}\appendices{#1}}
+
+\newcommand{\listequationsname}{List of Equations}
+\newlistof{myequations}{equ}{\listequationsname}
+\newcommand{\myequations}[1]{%
+\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}\par}
+
 \parindent0mm
 \setkeys{Gin}{width=0.9\textwidth}
 
@@ -93,6 +99,11 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \end{center}
 \normalsize
 \tableofcontents*
+\large 
+\begin{center}
+\textbf{LIST OF APPENDICES}\\[1pt]
+\end{center}
+\listofappendices
 
 \newpage
 \large 
@@ -111,23 +122,7 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \normalsize
 \listoffigures
 
-%\newpage
-%\large 
-%\begin{center}
-%\textbf{LIST OF EQUATIONS}\\[1pt]
-%\end{center}
-%\newcommand{\listequationsname}
-%\normalsize
-%\listofequations
 
-
-\newpage
-\large 
-\begin{center}
-\textbf{LIST OF APPENDICES}\\[1pt]
-\end{center}
-\normalsize
-\listofappendices
 
 \newpage
 \pagenumbering{arabic}
@@ -524,10 +519,12 @@ Variable selection from within these categories is analogous to that of least sq
 \begin{enumerate}
   \item{Fit quantile regression models for $\textrm{ Tau}=.5$ using the base model of
   \begin{center}
-\begin{equation}\label{eq:Base Model}
+\begin{equation}\label{eq:Eq1}
   \Delta \textrm{ height annual}=\sqrt{\textrm{initial height}}+\textrm{ small tree variable}
 \end{equation}
+\myequations{Equation number \ref{eq:Eq1}}
   \end{center}}
+  
   \item{}
 \end{enumerate}
 
@@ -547,4 +544,9 @@ Selecting a single dimension from each ecological category of small tree competi
 \printbibliography
 All analyses were performed using the R statistical software
 \Sexpr{R.Version()$version.string}. This thesis was compiled using the document preparation software \LaTeX.
+
+\newpage
+\newappendix{Equations} 
+
+\listofmyequations
 \end{document}

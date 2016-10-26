@@ -97,6 +97,7 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \begin{center}
 \textbf{TABLE OF CONTENTS}\\[1pt]
 \end{center}
+
 \normalsize
 \tableofcontents*
 \large 
@@ -121,7 +122,6 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \end{center}
 \normalsize
 \listoffigures
-
 
 
 \newpage
@@ -515,26 +515,11 @@ The variable selection process for each individual quantile will be guided by th
 
 Variable selection from within these categories is analogous to that of least squares, except that variables will be selected with respect to their significance to the regression of the median (Tau=.5). Within each category of ecological factor, a subset of relevant variables will be considered that includes two-way interactions between the previously selected variables and the category under evaluation. This subset of variables will also take into consideration the practicality of the predictors.\\[2pt]
 
-\textbf{Variable Selection Process:}\\[1pt]
-\begin{enumerate}
-  \item{Fit quantile regression models for $\textrm{ Tau}=.5$ using the base model of
-  \begin{center}
-\begin{equation}\label{eq:Eq1}
-  \Delta \textrm{ height annual}=\sqrt{\textrm{initial height}}+\textrm{ small tree variable}
-\end{equation}
-\myequations{Equation number \ref{eq:Eq1}}
-  \end{center}}
-  
-  \item{}
-\end{enumerate}
-
-
-
 To evaluate the utility of higher-order polynomials, a Generalized Linear Model (GLM) with a smoother of all first-order predictors will be used to view the relationship with the predictors individually. If inclusion of a higher-order predictor is justified by the GLM plot than it will be considered alongside all other categorical predictors and as an interaction term.\\[2pt]
 
 Model building will proceed from category to category with the model of lowest AIC being selected as the model carried forward to the next category. This will result in a parsimonious model that is easily understood and supported by our understanding of the factors surrounding small tree growth.\\[2pt]
 
-The order of variable selection categories will proceed in the following order; understory tree, understory non-tree vegetation, overstory and finnaly site. The first two variables;understory non-tree, and understory small tree will be selected from the control plots of a group of installations of comparable understory conditions. Once an "understory model" is established, the selection of overstory and site variables will proceed in that order.  These two final categories necessitate the "linking" of all selected Ponderosa Pine installations \\[2pt]
+The order of variable selection categories will proceed in the following order; understory tree, understory non-tree vegetation, overstory and finally site. The first two variables;understory non-tree, and understory small tree will be selected from the control plots of a group of installations of comparable understory conditions. Once an "understory model" is established, the selection of overstory and site variables will proceed in that order.  These two final categories necessitate the "linking" of all selected Ponderosa Pine installations \\[2pt]
 
 Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare how small tree growth compared to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.\\[2pt]
 
@@ -546,7 +531,70 @@ All analyses were performed using the R statistical software
 \Sexpr{R.Version()$version.string}. This thesis was compiled using the document preparation software \LaTeX.
 
 \newpage
-\newappendix{Equations} 
+\begin{singlespace}
+\newappendix{Variable Selection Steps}
+\begin{enumerate}
+\begin{small}
+  \item{Select intallations with >60 \emph{P. Ponderosa} small tagged trees at initiation}
+  
+  \item{Select installations of similar overstory basal area and site productivity}
+  
+  \item{Retain the sixth plot of each installation for validation}
+  
+\item{Create a list of the practical predictor variables within each category:
+  \begin{itemize}
+         \item {Understory Tree}
+         \item {Understory Non-tree}
+         \item {Overstory Tree}
+         \item {Site Productivity}
+ \end{itemize}
+}
+  
+  \item{For each candidate variable in the category ``understory tree'' generate a generalized additive model (GAM) using the base model:
+  \begin{center}
+\begin{equation}\label{eq:Eq1}
+  \Delta \textrm{ height annual}=\sqrt{\textrm{ initial height }}+\textrm{ candidate small tree variable}
+\end{equation}
+  \end{center}
+  }
+  
+  \item{Visually examine the results and residuals of the models produced in 5}
+  
+  \item{Include quadratic terms of variables in the list of candidate variables if warrented}
+  
+  \item{Fit a quantile regression model with each candidate variable for$\textrm{ Tau}=.5$ using the quantreg package
+    \begin{center}
+\begin{equation}\label{eq:Eq2}
+  \emph{Q}_{.50}\Delta \textrm{ height annual}=\sqrt{\textrm{ initial height }}+\textrm{ candidate small tree variable}
+\end{equation}
+  \end{center}
+  }
+  
+  
+  \item{Calculate the AIC for each model within the small tree category}
+  
+  \item{Select the variable from the model with the lowest AIC to be carried forward into the "understory nontree vegetation" category}
+  
+  \item{Repeat steps 5-10 for the understory nontree vegetation variables}
+  \item{Repeat step 11 for Tau=.90 and .10}
+  \item{Select variables from the overstory and site productivity categories using the process outlined in steps 5-12 using all installations selected in step 1}\\
+  \textbf{Final Models:}
+      \begin{center}
+\begin{equation}\label{eq:Eq3}
+\begin{aligned}
+ \emph{Q}_{.10,.50,.90} \Delta \textrm{ height annual}=\sqrt{\textrm{ initial height }}+\textrm{ small tree variable }\\
++ \textrm{ understory variable }+\textrm{ overstory variable }+\textrm{ site variable}
+  \end{aligned}
+  \end{equation}
+  \end{center}
+\end{small}
+\end{enumerate}
+\end{singlespace}
 
+
+\newpage
+\newappendix{Equations}
 \listofmyequations
+
+
 \end{document}

@@ -8,7 +8,10 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 
 %%%%%%%%  Packages   %%%%%%%%%%%%%%%%
 \usepackage{amsmath,amssymb}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
 \usepackage{graphicx} 
+\usepackage{indentfirst}
 \usepackage{times}
 \usepackage{array}
 \usepackage{setspace}
@@ -34,6 +37,8 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}\par}
 
 \parindent0mm
+\setlength{\parindent}{4em}
+\setlength{\parskip}{1em}
 \setkeys{Gin}{width=0.9\textwidth}
 
 %%%%%%%%  Page Setup %%%%%%%%%%%%%%%%%%
@@ -157,7 +162,7 @@ Composition of forest understory species are controlled by overstory trees which
 \end{figure}
 
 
-<<speccomp, include=false,fig=TRUE,width=4,height=4,echo=FALSE>>=
+<<speccomp, include=false,fig=TRUE,width=8,height=8,echo=FALSE>>=
 source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jun2.r', echo=F)
 #! 2. installations to drop
 # RL was abandoned w/o measurement; others are check plots
@@ -190,7 +195,7 @@ barchart(Freq~Installation, data=spec.freq.table,groups=Species, stack=T,
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=160mm]{Thesis_doc-speccomp}
+\includegraphics[width=100mm]{Thesis_doc-speccomp}
 \caption{Species Composition of Small Tagged Trees in Installations with more than 60 Ponderosa Pine}
 \label{fig:spec_comp}
 \end{center}
@@ -204,7 +209,7 @@ barchart(Freq~Installation, data=spec.freq.table,groups=Species, stack=T,
 \normalsize
 \subsection{Sampling Strategy}
 \doublespacing
-Twenty-nine study sites (termed "installations") were established on a variety of cooperative member ownership ranging from the eastern slopes of the Cascade Mountains to western Montana. The installations fall within three distinct geographic areas; central Washington, eastern Washington/Idaho and western Montana. \\[4pt]
+Twenty-nine study sites (termed ``installations'') were established on a variety of cooperative member ownership ranging from the eastern slopes of the Cascade Mountains to western Montana. The installations fall within three distinct geographic areas; central Washington, eastern Washington/Idaho and western Montana. \\[4pt]
 
 
 <<fig=FALSE,include=FALSE, echo=FALSE>>=
@@ -224,7 +229,7 @@ names(locs0v2)[3:4] <- c("Long","Lat")
 #! 3. map it
 ratio <- 5/10 #height to width ratio of map
 
-png("inst_map.png",width=150*10,height=150*10*ratio,pointsize=8,res=400)
+png("inst_map.png",width=150*10,height=150*10*ratio,pointsize=8,res=8000)
 boxit <- qbbox(locs0v2$Lat,locs0v2$Long, TYPE="all")
 basemap <- GetMap.bbox(boxit$lonR,boxit$latR, size=c(400,400*ratio),
                        destfile="temp.png", maptype="terra-in") #"mapmaker-hybrid",
@@ -233,7 +238,7 @@ tmp <- PlotOnStaticMap(basemap)
                       # lat=locs0v2$Lat,
                        #lon=locs0v2$Long)
 #For text labels
-tmp <- PlotOnStaticMap(basemap,cex=.9,col="black",add=T,
+tmp <- PlotOnStaticMap(basemap,cex=.01,col="black",add=T,
 lat=locs0v2$Lat,
 lon=locs0v2$Long)
 #FUN=text,
@@ -243,7 +248,7 @@ dev.off()
 
 \begin{figure}[ht]
 \begin{center}
-    \includegraphics[width=150mm]{inst_map.png}
+    \includegraphics[width=.8\textwidth]{inst_map.png}
     \caption{Map of STCV Installations}
     \label{fig:map}
 \end{center}
@@ -251,7 +256,7 @@ dev.off()
 
 
 
-<<sampleplot,include=FALSE,fig=FALSE,width=5,height=5,echo=FALSE>>=
+<<sampleplot,include=FALSE,fig=FALSE,width=8,height=8,echo=FALSE>>=
 library(plotrix)
 
 plot(c(0,170),c(0,170),xlim=c(0,170),ylim=c(0,170), xaxs="i",yaxs="i",
@@ -505,24 +510,25 @@ To evaluate the model, three quantiles will be fitted to represent the range of 
 
 Following this evaluation, a random sample of tagged subject trees will be selected to have their height growth increments predicted in the USFS Forest Vegetation Simulator (FVS).  These predicted height increments will then be evaluated as above.  It is not expected that .90 of the predicted tree heights will fall below that .90 quantiles for example. The FVS small tree growth sub-model is based on a least squares regression equation so it is very unlikely that the predicted heights will correspond to the quantile planes.   Rather, this exercise is to illuminate how far from the actual growth response distribution of FVS predictions can be.\\[2pt]
 
-\subsection{Fitting Quantile Regression}
+\newpage
+\subsection{Variable Selection}
 
 
-Only the installations with a greater than 60 Ponderosa Pine tagged small trees at initiation will be included in the model.  Within these installations, the 6th plot will be withheld as training data. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  \\[2pt]
+\par Only the installations with a greater than 60 Ponderosa Pine tagged small trees at initiation will be included in the model.  Within these installations, the 6th plot will be withheld as validation data. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  
 
 
-The variable selection process for each individual quantile will be guided by the ecological framework behind small tree growth.  This means that the predictor variables will be selected from the four previously mentioned categories of ecological factors that affect tree growth. These are overstory measures, understory non-tree vegetation, site productivity and other small tree measures.  The square root of initial height (height at the beginning of measurement period) will also be included as a predictor of height growth increment in the "base model" since it is clear that square root of initial height explains much of the variability in height growth increment and we are interested in the other predictors.\\[2pt]
+The variable selection process for each individual quantile will be guided by the ecological framework behind small tree growth.  The predictor variables will be selected from the four previously mentioned categories of ecological factors that affect tree growth (see figure \ref{fig:chart} on page \pageref{fig:chart}). These categories are overstory measures, understory non-tree vegetation, site productivity and other small tree measures.  The square root of initial height (height at the beginning of measurement period) will be included as a predictor of height growth increment in the ``base model'' since square root of initial height explains much of the variability in height growth increment and we are interested in the other predictors.
 
-Variable selection from within these categories is analogous to that of least squares, except that variables will be selected with respect to their significance to the regression of the median (Tau=.5). Within each category of ecological factor, a subset of relevant variables will be considered that includes two-way interactions between the previously selected variables and the category under evaluation. This subset of variables will also take into consideration the practicality of the predictors.\\[2pt]
+To evaluate the utility of higher-order polynomials, Generalized Additive Models (GAM) with  smoothers of first-order predictors will be used to view the relationship with the predictors individually. If inclusion of a higher-order predictor is justified by the GAM plot than it will be considered alongside all other categorical predictors and as an interaction term.
 
-To evaluate the utility of higher-order polynomials, a Generalized Additive Model (GAM) with a smoother of all first-order predictors will be used to view the relationship with the predictors individually. If inclusion of a higher-order predictor is justified by the GLM plot than it will be considered alongside all other categorical predictors and as an interaction term.\\[2pt]
+Variable selection from within these categories is analogous to that of least squares, except that variables will be selected with respect to their significance to the regression of the median ($\tau$=.5). Within each category of ecological factor, a subset of relevant variables will be considered that includes two-way interactions between the previously selected variables and the category under evaluation. This subset of variables will also take into consideration the practicality of the predictors.
 
-The "quantreg" package by Roger Koenker cite(Koenker) will be used to fit quantile regression planes individually for the specified quantiles (specified as tau values: .90, .50, .10).  This allows for differences in the selected predictor variables between the quantile planes.
-Model building will proceed from category to category with the model of lowest AIC being selected as the model carried forward to the next category. This will result in a parsimonious model that is easily understood and supported by our understanding of the factors surrounding small tree growth.\\[2pt]
+The ``quantreg'' package by Roger Koenker cite(Koenker) will be used to fit quantile regression planes individually for the specified quantiles (specified as $\tau$ values: .90, .50, .10).  This allows for differences in the selected predictor variables between the quantile planes.
+Model building will proceed from category to category with the model of lowest AIC being selected as the model carried forward to the next category. This will result in a parsimonious model that is easily understood and supported by our understanding of the factors surrounding small tree growth.
 
-The order of variable selection categories will proceed in the following order; understory tree, understory non-tree vegetation, overstory and finally site. The first two variables;understory non-tree, and understory small tree will be selected from the control plots of a group of installations of comparable understory conditions. Once an ``understory model'' is established, the selection of overstory and site variables will proceed in that order.  These two final categories necessitate the ``linking''of all selected Ponderosa Pine installations \\[2pt]
+The order of variable selection categories will proceed in the following order; understory tree, understory non-tree vegetation, overstory and finally site productivity. The first two variables; understory non-tree, and understory small tree will be selected from the control plots of a group of installations of comparable site and overstory conditions. Once an ``understory model'' is established, the selection of overstory and site variables will proceed in that order.  These two final categories necessitate the ``linking''of all selected Ponderosa Pine installations. 
 
-Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare how small tree growth compared to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.\\[2pt]
+Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare small tree growth to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.
 
 
 \newpage
@@ -563,7 +569,7 @@ All analyses were performed using the R statistical software
   
   \item{Include quadratic terms of variables in the list of candidate variables if warrented}
   
-  \item{Fit a quantile regression model with each candidate variable for$\textrm{ Tau}=.5$ using the quantreg package
+  \item{Fit a quantile regression model with each candidate variable for$\textrm{ $\tau$}=.5$ using the quantreg package
     \begin{center}
 \begin{equation}\label{eq:Eq2}
   \emph{Q}_{.50}\Delta \textrm{ height annual}=\sqrt{\textrm{ initial height }}+\textrm{ candidate small tree variable}
@@ -574,10 +580,10 @@ All analyses were performed using the R statistical software
   
   \item{Calculate the AIC for each model within the small tree category}
   
-  \item{Select the variable from the model with the lowest AIC to be carried forward into the "understory nontree vegetation" category}
+  \item{Select the variable from the model with the lowest AIC to be carried forward into the ``understory nontree vegetation'' category}
   
   \item{Repeat steps 5-10 for the understory non-tree vegetation variables}
-  \item{Repeat step 11 for Tau=.90 and .10}
+  \item{Repeat step 11 for $\tau$=.90 and .10}
   \item{Select variables from the overstory and site productivity categories using the process outlined in steps 5-12 using all installations selected in step 1 (and all plots)}\\
   \textbf{Final Models:}
       \begin{center}

@@ -16,6 +16,8 @@ int.function<-function(inst,year){
 }
 
 merged_stagm_stag$Installation<-as.character(merged_stagm_stag$Installation)
+timeline$Installation<-as.character(timeline$Installation)
+
 
 int.function(merged_stagm_stag$Installation[3],merged_stagm_stag$Year_Measurement[3])
 
@@ -30,55 +32,39 @@ interval<-mapply(int.function, merged_stagm_stag$Installation, merged_stagm_stag
 merged_stagm_stag$interval<-interval 
 
 #concate Inst,Plot,Tree
-conc<-paste(merged_stagm_stag$Installation,merged_stagm_stag$Plot,merged_stagm_stag$Tree,sep=",")
-merged_stagm_stag$conc<-conc
+merged_stagm_stag$conc<-paste(merged_stagm_stag$Installation,merged_stagm_stag$Plot,merged_stagm_stag$Tree,sep=",")
 
 #(height-prev.years height)/interval=annualized height growth
+
+merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Year_Measurement==merged_stagm_stag$Year_Growth,]
+
 annual.ht<-function(conca,year){
   treeinfo<-merged_stagm_stag[merged_stagm_stag$conc==conca,]
-  treeinfo<-as.data.frame(treeinfo)
-  x<-as.data.frame(cbind(treeinfo$Year_Measurement,treeinfo$Height_Total,treeinfo$interval))
-  toBeRemoved<-which(x$V3=="Inf"|x$V1>year)
-  x<-x[-toBeRemoved,]
-  last.meas<-x[x$V1==max(x$V1),]
-  pen.meas<-x[x$V1==max(x$V1[x$V1!=max(x$V1)]),]
-  an.height<-((last.meas$V2-pen.meas$V2)/last.meas$V3)
-  
- return(an.height)
+  prev.year <- timeline[timeline$Installation==treeinfo$Installation[1],"Year_Measurement"]
+  prev.year <- prev.year[!is.na(prev.year) ]
+  prev.year <- prev.year[prev.year<year]
+  prev.year <- ifelse(length(prev.year)==0,0,max(prev.year))
+  treeinfo <- treeinfo[treeinfo$Year_Measurement %in% c(year,prev.year),]
+    if (nrow(treeinfo)==1){
+    htinc <- -999
+  } else {
+    htinc <- treeinfo$Height_Total[treeinfo$Year_Measurement==year] -
+              treeinfo$Height_Total[treeinfo$Year_Measurement==prev.year]
+    htinc <- htinc/diff(range(treeinfo$Year_Measurement))
+  }
+  htinc
 }
-
-#Example on a single tree
-annual.ht("UW,7,92",2008)
-
-ht_annual<-annual.ht(merged_stagm_stag$conc, merged_stagm_stag$Year_Measurement)
-
-unique(c(merged_stagm_stag$conc,merged_stagm_stag$Year_Measurement))
-
-last.meas-pen.meas
-tert.meas<-sort(x,partial=n-2)[n-2]
-quart.meas<-sort(x,partial=n-3)[n-3]
-
-x <- as.data.frame(c(12.45,34,4,0,-234,45.6,4))
-y <- as.data.frame(c(23,43,43,34,34,34,34))
-z <- as.data.frame(c(x,y))
-last.meas<-z[z$x==max(z$x),]
-pen.meas<-x[x$Year_Measurement==max(x[x!=max(x)]),]
-an.height<-((last.meas$Height_Total[1]-pen.meas$Height_Total[1])/last.meas$interval[1])
-
-max(x)
+  
 
 
-
-treeinfo<-merged_stagm_stag[merged_stagm_stag$conc=="BB,1,350",]
-treeinfo<-as.data.frame(treeinfo)
-x<-as.data.frame(cbind(treeinfo$Year_Measurement,treeinfo$Height_Total,treeinfo$interval))
-last.meas<-2008 #year
-toBeRemoved<-which(x$V3=="Inf"|x$V1>2008)
-x<-x[-toBeRemoved,]
-last.meas<-x[x$V1==max(x$V1),]
-pen.meas<-x[x$V1==max(x$V1[x$V1!=max(x$V1)]),]
-an.height<-((last.meas$V2-pen.meas$V2)/last.meas$V3)
+#Example on a single tree record
+annual.ht("LR,2,123",2010)
 
 
+merged_stagm_stag$ht_annual<-0
+
+for(i in 1:nrow(merged_stagm_stag)){
+    merged_stagm_stag$ht_annual[i]<-annual.ht(merged_stagm_stag$conc[i], merged_stagm_stag$Year_Measurement[i])
+}
 
 

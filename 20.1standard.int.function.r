@@ -22,7 +22,7 @@ timeline$Installation<-as.character(timeline$Installation)
 int.function(merged_stagm_stag$Installation[3],merged_stagm_stag$Year_Measurement[3])
 
 #example
-int.function(inst="BB",2012)
+int.function(inst="DF",2006)
 
 #apply function across all rows
 
@@ -31,12 +31,14 @@ interval<-mapply(int.function, merged_stagm_stag$Installation, merged_stagm_stag
 #assign interval values to tree record column
 merged_stagm_stag$interval<-interval 
 
-#concate Inst,Plot,Tree
-merged_stagm_stag$conc<-paste(merged_stagm_stag$Installation,merged_stagm_stag$Plot,merged_stagm_stag$Tree,sep=",")
+#concate Inst,Plot,STP,Tree
+merged_stagm_stag$conc<-paste(merged_stagm_stag$Installation,merged_stagm_stag$Plot,merged_stagm_stag$STP,
+                                merged_stagm_stag$Tree,sep=",")
 
 #(height-prev.years height)/interval=annualized height growth
 
 merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Year_Measurement==merged_stagm_stag$Year_Growth,]
+merged_stagm_stag<-merged_stagm_stag[! merged_stagm_stag$Installation %in% drp,]
 
 annual.ht<-function(conca,year){
   treeinfo<-merged_stagm_stag[merged_stagm_stag$conc==conca,]
@@ -57,12 +59,17 @@ annual.ht<-function(conca,year){
   
 
 
-#Example on a single tree record
+###Example on a single tree record
 annual.ht("LR,2,123",2010)
 
+#Remove records of DF plot 4 stp 1 w/ year growth=2001 due to duplicate records of year meas=2002, bees nest
+merged_stagm_stag<-merged_stagm_stag[!(merged_stagm_stag$Installation=='DF'&merged_stagm_stag$Plot==4&
+                    merged_stagm_stag$STP==1&merged_stagm_stag$Year_Growth==2001),]
 
+#Assign column for height annualized height growth inc
 merged_stagm_stag$ht_annual<-0
 
+#Apply function to every row
 for(i in 1:nrow(merged_stagm_stag)){
     merged_stagm_stag$ht_annual[i]<-annual.ht(merged_stagm_stag$conc[i], merged_stagm_stag$Year_Measurement[i])
 }

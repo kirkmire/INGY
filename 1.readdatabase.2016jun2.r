@@ -60,6 +60,8 @@ odbcCloseAll()
 #merged stagm and stag#
 merged_stagm_stag <- merge(stagm, stag,by=c("Installation","Plot","STP","Tree"))
 
+#merge with plot data for treatment etc
+merged_stagm_stag<-merge(merged_stagm_stag,splot,by=c("Installation","Plot"))
 
 #! 4. installations to drop
 # RL was abandoned w/o measurement; others are check plots

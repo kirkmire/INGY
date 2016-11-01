@@ -60,11 +60,13 @@ annual.ht<-function(conca,year){
 
 
 ###Example on a single tree record
-annual.ht("LR,2,123",2010)
+annual.ht("LR,2,1,123",2010)
 
 #Remove records of DF plot 4 stp 1 w/ year growth=2001 due to duplicate records of year meas=2002, bees nest
 merged_stagm_stag<-merged_stagm_stag[!(merged_stagm_stag$Installation=='DF'&merged_stagm_stag$Plot==4&
                     merged_stagm_stag$STP==1&merged_stagm_stag$Year_Growth==2001),]
+
+
 
 #Assign column for height annualized height growth inc
 merged_stagm_stag$ht_annual<-0
@@ -73,5 +75,20 @@ merged_stagm_stag$ht_annual<-0
 for(i in 1:nrow(merged_stagm_stag)){
     merged_stagm_stag$ht_annual[i]<-annual.ht(merged_stagm_stag$conc[i], merged_stagm_stag$Year_Measurement[i])
 }
+
+#Remove all records with ht_annual=NA,-999
+merged_stagm_stag$ht_annual[is.na(merged_stagm_stag$ht_annual)]<--999     
+merged_stagm_stag<-merged_stagm_stag[!(merged_stagm_stag$ht_annual==-999),]
+
+#Rename DF something reasonable
+
+annual.gr<-merged_stagm_stag
+              
+                                     
+
+
+
+
+
 
 

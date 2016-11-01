@@ -66,6 +66,13 @@ merged_stagm_stag <- merge(stagm, stag,by=c("Installation","Plot","STP","Tree"))
 drp <- c("TCCheck","LRCheck","BCCheck","BBCheck","RL")
 # DC gives only 1 yr of growth data, CT only 2 years, before destroyed
 drp <- c(drp, "DC","CT")
-
-
-
+# Add installations with <60 PIPO at initiation to drp
+stag$count<-1
+spec.freq.table<-xtabs(count~Installation+Species, data=stag)
+spec.freq.table<-as.data.frame(spec.freq.table)
+spec.freq.table<-spec.freq.table[! spec.freq.table$Installation %in% drp,]
+pi<-spec.freq.table[spec.freq.table$Species=="PIPO",]
+lt60<-pi[pi$Freq<60,]
+lt60<-lt60$Installation
+lt60<-as.vector(lt60)
+drp60<-c(drp,lt60)

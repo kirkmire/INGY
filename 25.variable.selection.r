@@ -42,53 +42,87 @@ names(annual.gr)[2:11]<-c("one","two","four","six","eight","ten","twelve","fourt
 gam.st1<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                 smooth(annual.gr$one),family=gaussian(link="log"))
 
+plot(annual.gr$ht_annual, fitted(gam.st1))
+
 #GAM for 2 ht class
 gam.st2<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                smooth(annual.gr$two),family=gaussian(link="log"))
+
+plot(annual.gr$ht_annual, fitted(gam.st2))
 
 #GAM for 4 ht class
 gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                smooth(annual.gr$four),family=gaussian(link="log"))
 
+plot(annual.gr$ht_annual, fitted(gam.st4))
+
 #GAM for 6 ht class
-gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+gam.st6<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                smooth(annual.gr$six),family=gaussian(link="log"))
 
+plot(annual.gr$ht_annual, fitted(gam.st6))
+
 #GAM for 8 ht class
-gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+gam.st8<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                smooth(annual.gr$eight),family=gaussian(link="log"))
 
+plot(annual.gr$ht_annual, fitted(gam.st8))
+
 #GAM for 10 ht class
-gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+gam.st10<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                smooth(annual.gr$ten),family=gaussian(link="log"))
 
+plot(annual.gr$ht_annual, fitted(gam.st10))
+
 #GAM for 12 ht class
-gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+gam.st12<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                smooth(annual.gr$twelve),family=gaussian(link="log"))
 
+plot(annual.gr$ht_annual, fitted(gam.st12))
+
 #GAM for 14 ht class
-gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+gam.st14<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                smooth(annual.gr$fourteen),family=gaussian(link="log"))
 
+
+identify(annual.gr$ht_annual, fitted(gam.st12))
+
 #GAM for 16 ht class
-gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+gam.st16<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                smooth(annual.gr$sixteen),family=gaussian(link="log"))
+
+plot(annual.gr$ht_annual, fitted(gam.st16))
+
+#GAM for 18 ht class
+gam.st18<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+               smooth(annual.gr$eighteen),family=gaussian(link="log"))
+
+plot(annual.gr$ht_annual, fitted(gam.st18))
 
 #GAM for small.tpa
 gam.stpa<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                 smooth(annual.gr$small.tpa),family=gaussian(link="log"))
     
-vis.gam(gam.stpa,data=annual.gr)
+plot(annual.gr$ht_annual, fitted(gam.stpa))
 
 #need to figure out how to visualize GAM 
 
 #GAM for Basal Diam
-gam.stbd<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-                  smooth(annual.gr$BasalDiameter),family=gaussian(link="log"))    
+annual.grbd<-annual.gr[!annual.gr$BasalDiameter=="NA",]
+
+gam.stbd<-gam(annual.grbd$ht_annual~sqrt(annual.grbd$Height_Total)+
+                  smooth(annual.grbd$BasalDiameter),family=gaussian(link="log"))    
+
+plot(annual.grbd$ht_annual, fitted(gam.stbd))
     
 #GAM for DBH
-gam.stdbh<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-                  smooth(annual.gr$DBH),family=gaussian(link="log"))       
+annual.grdbh<-annual.gr[!annual.gr$DBH=="NA",]
+
+gam.stdbh<-gam(annual.grdbh$ht_annual~sqrt(annual.grdbh$Height_Total)+
+                  smooth(annual.grdbh$DBH),family=gaussian(link="log"))       
+
+plot(annual.grdbh$ht_annual, fitted(gam.stdbh))
+
 
 #GAM for Crown Length
 #Need to make variable
@@ -96,57 +130,6 @@ annual.gr$Crown_Length<-annual.gr$Height_Total-annual.gr$Height_CrownBase
 
 gam.stcl<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                   smooth(annual.gr$Crown_Length),family=gaussian(link="log"))     
-library(ggplot2)
-c<-ggplot(data =annual.gr,
-          formula = ht_annual~sqrt(Height_Total))
-c
-
-
-thegam<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total),family=gaussian(link="log"))    
-
-preds<-predict(thegam, type="terms", newdata=temperature.seq,
-               se.fit=TRUE)
-
-# set up the temperature, the fit and the upper and lower
-# confidence interval
-
-temperature<-temperature.seq$temp
-fit<-preds$fit
-fit.up95<-fit-1.96*preds$se.fit
-fit.low95<-fit+1.96*preds$se.fit
-
-# plot the temperature smooth but leave blank for
-# now so that we can add the line on top of the polygon
-plot(temperature, fit, type="n", lwd=3, xlim=c(-3,90), ylim=c(-20,30),
-     main="Ahhh, definitely better",
-     ylab=paste("s(temp,", round(sum(thegam$edf[-1]),2), ")", sep=""))
-
-# If you want confidence lines instead of a grey poly you can
-# use this code
-#lines(temperature, fit.up95, lty="dotted")
-#lines(temperature, fit.low95, lty="dotted")
-
-# For the confidence grey polygon
-polygon(c(temperature, rev(temperature)), 
-        c(fit.low95,rev(fit.up95)), col="grey",
-        border=NA)
-
-lines(temperature, fit,  lwd=2)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     
@@ -162,6 +145,9 @@ library(quantreg)
 qr.stpa<-rq(annual.gr$ht_annual ~ sqrt(annual.gr$Height_Total)+annual.gr$small.tpa,tau=c(.5))
 summary(qr.stpa)
 AIC(qr.stpa)
+
+#Need to do QR for height classes
+
 
 #QR for basal.diameter
 qr.stbd<-rq(annual.gr$ht_annual ~ sqrt(annual.gr$Height_Total)+annual.gr$BasalDiameter,tau=c(.5))

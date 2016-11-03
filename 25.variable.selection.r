@@ -1,14 +1,14 @@
 ###GLM Take1###
 
-library(gam)
+library(mgcv)
 
 #Selecting installations of similar overstory basal area and SI
 sim<-c("EM","BC","TJ","RM","CM","TC")
 
 annual.gr<-annual.gr[annual.gr$Installation %in% sim, ]
 
-#Exclude the 6th plots of each installation
-annual.gr<-annual.gr[! annual.gr$Plot==6,]
+#Exclude the 6th small tree plots of each installation
+annual.gr<-annual.gr[! annual.gr$STP==6,]
 
 #Select all control plots 
 annual.gr<-annual.gr[annual.gr$Treatment=="CTRL",]
@@ -27,22 +27,6 @@ ht.class <- cbind(Installation = rownames(ht.class), ht.class)
 rownames(ht.class) <- NULL
 ht.class<-ht.class[ht.class$Installation %in% sim,]
 
-#GAM for -1 ht class
-gam.st1<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-                smooth(annual.gr$`-1`),family=gaussian(link="log"))
-
-#GAM for 2 ht class
-gam.st2<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-               smooth(annual.gr$`2`),family=gaussian(link="log"))
-
-#GAM for 4 ht class
-gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-               smooth(annual.gr$`4`),family=gaussian(link="log"))
-
-#Error in eval(expr, envir, enclos) : 
- # cannot find valid starting values: please specify some
-
-
 #TPA Variable
 #Utilize Tree Tally Data
 ht.class$small.tpa<-rowSums(ht.class[2:11])
@@ -50,11 +34,52 @@ ht.class$small.tpa<-rowSums(ht.class[2:11])
 #Merge with annual.growth
 annual.gr<-merge(ht.class,annual.gr,by="Installation")
 
+#Substitute numeric height classes for character headings
+names(annual.gr)[2:11]<-c("one","two","four","six","eight","ten","twelve","fourteen","sixteen","eighteen")
+
+
+#GAM for -1 ht class
+gam.st1<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+                smooth(annual.gr$one),family=gaussian(link="log"))
+
+#GAM for 2 ht class
+gam.st2<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+               smooth(annual.gr$two),family=gaussian(link="log"))
+
+#GAM for 4 ht class
+gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+               smooth(annual.gr$four),family=gaussian(link="log"))
+
+#GAM for 6 ht class
+gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+               smooth(annual.gr$six),family=gaussian(link="log"))
+
+#GAM for 8 ht class
+gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+               smooth(annual.gr$eight),family=gaussian(link="log"))
+
+#GAM for 10 ht class
+gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+               smooth(annual.gr$ten),family=gaussian(link="log"))
+
+#GAM for 12 ht class
+gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+               smooth(annual.gr$twelve),family=gaussian(link="log"))
+
+#GAM for 14 ht class
+gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+               smooth(annual.gr$fourteen),family=gaussian(link="log"))
+
+#GAM for 16 ht class
+gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
+               smooth(annual.gr$sixteen),family=gaussian(link="log"))
 
 #GAM for small.tpa
 gam.stpa<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                 smooth(annual.gr$small.tpa),family=gaussian(link="log"))
     
+vis.gam(gam.stpa,data=annual.gr)
+
 #need to figure out how to visualize GAM 
 
 #GAM for Basal Diam

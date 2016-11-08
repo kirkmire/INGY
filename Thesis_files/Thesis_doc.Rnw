@@ -584,19 +584,16 @@ All analyses were performed using the R statistical software
   
   \item{Repeat steps 5-10 for the UV variables}
   \item{Select variables from the overstory and site productivity categories using the process outlined in steps 5-11 using all installations selected in step 1 (and all plots)}
-  \item{Using the variables selected for the $\textrm{$\tau$=.5}$, fit quantile regressions for $\textrm{$\tau$=.1,.9}$. This will estimate different \textrm{b}_{\tau} for each specified quantile.\\
-  \textbf{Final Models:}
+  \item{Using the variables selected for the $\tau$=.5, fit quantile regressions for $\tau=.1,.9$. This will estimate different b_${\tau}$ for each specified quantile.\\
+  
+  \textbf{Final Models:}\\
 
-
+\begin{center}
 \begin{equation}\label{eq:Eq3}
-
-$
  \Delta _{\tau} =\textrm{b}_{0,\tau}\sqrt{\textrm{h}}+\textrm{b}_{UT,\tau}\textrm{UT} 
  + \textrm{b}_{UV,\tau}\textrm{UV}+\textrm{b}_{OT,\tau}\textrm{OT}+\textrm{b}_{SP,\tau}\textrm{SP}
-$$
-
   \end{equation}
-
+  \end{center}
 \end{small}
 \end{enumerate}
 \end{singlespace}

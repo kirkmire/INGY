@@ -9,6 +9,7 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 %%%%%%%%  Packages   %%%%%%%%%%%%%%%%
 \usepackage{amsmath,amssymb}
 \usepackage[english]{babel}
+\usepackage[csquotes]
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx} 
 \usepackage{indentfirst}

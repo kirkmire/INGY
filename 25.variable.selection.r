@@ -39,11 +39,19 @@ names(annual.gr)[2:11]<-c("one","two","four","six","eight","ten","twelve","fourt
 
 
 #GAM for -1 ht class
-gam.st1<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-                smooth(annual.gr$one),family=gaussian(link="log"))
+gam.st1<-gam(ht_annual~sqrt(Height_Total)+smooth(one),data=annual.gr,family="gaussian")
+summary(gam.st1)
+
+
+
+par(mfrow=c(2,2),mar=c(4,4,1,2))
+
+par(mfrow=c(1,2))
+plot(predict(gam.st1),residuals(gam.st1),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.st1),main="")
+
 
 plot(annual.gr$ht_annual, fitted(gam.st1))
-
 #GAM for 2 ht class
 gam.st2<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                smooth(annual.gr$two),family=gaussian(link="log"))

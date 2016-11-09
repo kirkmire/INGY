@@ -60,11 +60,14 @@ plot(annual.gr$ht_annual, fitted(gam.st4))
 gam.st6<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                smooth(annual.gr$six),family=gaussian(link="log"))
 
-plot(annual.gr$ht_annual, fitted(gam.st6))
+library(car)
+crPlot(annual.gr$ht_annual, fitted(gam.st6))
+crPlot(gam.st6,variable=sqrt(annual.gr$Height_Total))
 
 #GAM for 8 ht class
 gam.st8<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
                smooth(annual.gr$eight),family=gaussian(link="log"))
+
 
 plot(annual.gr$ht_annual, fitted(gam.st8))
 

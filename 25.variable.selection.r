@@ -11,7 +11,7 @@ annual.gr<-annual.gr[annual.gr$Installation %in% sim, ]
 annual.gr<-annual.gr[! annual.gr$STP==6,]
 
 #Select all control plots 
-annual.gr<-annual.gr[annual.gr$Treatment=="CTRL",]
+#annual.gr<-annual.gr[annual.gr$Treatment=="CTRL",]
 
 ######Understory Tree Variables######
 #TPA, ---Species---, ---Top height---, basal diameter, diameter at breast height, crown length, crown width
@@ -19,10 +19,20 @@ annual.gr<-annual.gr[annual.gr$Treatment=="CTRL",]
 
 
 #Number per height class/acre
-#Remove 6th plot tally data
-sstpt<-sstpt[!sstpt$Plot==6,]
-ht.class<-as.data.frame.matrix(xtabs(sstpt$Count~sstpt$Installation+sstpt$HeightClass, data=sstpt))
-ht.class<-ht.class/.2164#acres in 5x6=30 small tree plots
+ht.class<-aggregate(Count~Installation+Plot+STP+Year_Measurement+HeightClass,data=sstpt,sum)
+
+ht.class2<-reshape(ht.class, direction="wide",idvar=
+          c("Installation","Plot","STP","Year_Measurement"),
+          timevar="HeightClass",v.names="Count")
+
+annual.gr2<-merge(annual.gr,ht.class2, all.x=T)
+
+#Variable for all tree
+annual.gr2$small.tpa<- 138.66*rowSums(annual.gr2[,substring(names(annual.gr2),1,6)=="Count."],na.rm=T)
+  
+#make a function that akes inst, year, plot and deletes all other inst, plots and any height 
+#classes that arent relavant, adds up whatevers left
+
 ht.class <- cbind(Installation = rownames(ht.class), ht.class)
 rownames(ht.class) <- NULL
 ht.class<-ht.class[ht.class$Installation %in% sim,]
@@ -31,8 +41,6 @@ ht.class<-ht.class[ht.class$Installation %in% sim,]
 #Utilize Tree Tally Data
 ht.class$small.tpa<-rowSums(ht.class[2:11])
 
-#Merge with annual.growth
-annual.gr<-merge(ht.class,annual.gr,by="Installation")
 
 #Substitute numeric height classes for character headings
 names(annual.gr)[2:11]<-c("one","two","four","six","eight","ten","twelve","fourteen","sixteen","eighteen")
@@ -43,7 +51,7 @@ annual.gr$srHeight_Total<-sqrt(annual.gr$Height_Total)
 
 
 
-gam.st1<-gam(ht_annual~s(one),data=annual.gr)
+gam.st1<-gam(ht_annual~srHeight_Total+s(one),data=annual.gr)
 summary(gam.st1)
 
 

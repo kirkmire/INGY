@@ -42,6 +42,12 @@ annual.ht("LR,2,1,123",2010)
 merged_stagm_stag<-merged_stagm_stag[!(merged_stagm_stag$Installation=='DF'&merged_stagm_stag$Plot==4&
                     merged_stagm_stag$STP==1&merged_stagm_stag$Year_Growth==2001),]
 
+#change year measurement of DF plot 4 stp1 from 2002 to 2001, was measured later due to bees nest
+merged_stagm_stag[(merged_stagm_stag$Installation=='DF'&merged_stagm_stag$Plot==4&
+merged_stagm_stag$STP==1&merged_stagm_stag$Year_Growth==2001),]<-2001
+
+merged_stagm_stag$Year_Measurement[merged_stagm_stag=='DF'&merged_stagm_stag$Plot==4&
+                                     merged_stagm_stag$STP==1&merged_stagm_stag$Year_Measurement==2002]<-2001
 
 #Assign column for height annualized height growth inc
 merged_stagm_stag$ht_annual<-0

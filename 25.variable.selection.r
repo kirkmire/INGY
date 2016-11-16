@@ -25,13 +25,21 @@ ht.class2<-reshape(ht.class, direction="wide",idvar=
           c("Installation","Plot","STP","Year_Measurement"),
           timevar="HeightClass",v.names="Count")
 
+#make NA tally =0
+count.names<-names(ht.class2[,substring(names(ht.class2),1,6)=="Count."])
+
+for(i in count.names) {
+  ht.class2[i][is.na(ht.class2[i])] <- 0
+}
+
 annual.gr2<-merge(annual.gr,ht.class2, all.x=T)
 
 #Variable for all tree
 annual.gr2$small.tpa<- 138.66*rowSums(annual.gr2[,substring(names(annual.gr2),1,6)=="Count."],na.rm=T)
   
-#make a function that akes inst, year, plot and deletes all other inst, plots and any height 
+#make a function that takes inst, year, plot and deletes all other inst, plots and any height 
 #classes that arent relavant, adds up whatevers left
+
 
 ht.class <- cbind(Installation = rownames(ht.class), ht.class)
 rownames(ht.class) <- NULL

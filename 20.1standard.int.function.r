@@ -19,17 +19,18 @@ merged_stagm_stag<-merged_stagm_stag[! merged_stagm_stag$Installation %in% drp,]
 
 annual.ht<-function(conca,year){
   treeinfo<-merged_stagm_stag[merged_stagm_stag$conc==conca,]
-  prev.year <- timeline[timeline$Installation==treeinfo$Installation[1],"Year_Measurement"]
-  prev.year <- prev.year[!is.na(prev.year) ]
-  prev.year <- prev.year[prev.year>year]
-  prev.year <- ifelse(length(prev.year)==0,0,min(prev.year))
-  treeinfo <- treeinfo[treeinfo$Year_Measurement %in% c(year,prev.year),]
+  next.year <- timeline[timeline$Installation==treeinfo$Installation[1],"Year_Measurement"]
+  next.year <- next.year[!is.na(next.year)]
+  next.year <- next.year[next.year>year]
+  next.year <- ifelse(length(next.year)==0,0,min(next.year))
+  treeinfo <- treeinfo[treeinfo$Year_Measurement %in% c(year,next.year),]
     if (nrow(treeinfo)==1){
     htinc <- -999
   } else {
-    htinc <- treeinfo$Height_Total[treeinfo$Year_Measurement==year] -
-              treeinfo$Height_Total[treeinfo$Year_Measurement==prev.year]
-    htinc <- -htinc/diff(range(treeinfo$Year_Measurement))
+    htinc <- treeinfo$Height_Total[treeinfo$Year_Measurement==next.year]-
+           treeinfo$Height_Total[treeinfo$Year_Measurement==year] 
+              
+    htinc <- htinc/diff(range(treeinfo$Year_Measurement))
   }
   htinc
 }

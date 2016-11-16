@@ -47,7 +47,7 @@ tpa.gtr.than<-function(inst,year,plot,stp,tree,height){
   tally.df<-tally.df[tally.df$STP %in% stp,]
   tally.df<-tally.df[tally.df$Tree %in% tree,]
   counts.df<-tally.df[,substring(names(annual.gr2),1,6)=="Count."]
-  counts.df<-rbind(counts.df,lower.bound=c(15,1,3,5,7,9,11,13,15,17))
+  counts.df<-rbind(counts.df,lower.bound=c(15,2,4,6,8,10,12,14))
   counts.df<-t(counts.df)
   counts.df<-as.data.frame(counts.df)
   counts.df<-subset(counts.df,counts.df$lower.bound>height)
@@ -56,6 +56,8 @@ tpa.gtr.than<-function(inst,year,plot,stp,tree,height){
   tpa.grtr<-138.66*trees.grtr
   tpa.grtr
 }
+
+#use midpoints as bounds?
 
 ###Example on a single tree record
 tpa.gtr.than("BC",2006,1,3,305,1)

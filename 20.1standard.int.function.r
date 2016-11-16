@@ -18,6 +18,7 @@ merged_stagm_stag<-merged_stagm_stag[! merged_stagm_stag$Installation %in% drp,]
 #then subtracts the height of the first year of measurement to provide a height increment
 
 annual.ht<-function(conca,year){
+  
   treeinfo<-merged_stagm_stag[merged_stagm_stag$conc==conca,]
   next.year <- timeline[timeline$Installation==treeinfo$Installation[1],"Year_Measurement"]
   next.year <- next.year[!is.na(next.year)]
@@ -30,7 +31,7 @@ annual.ht<-function(conca,year){
     htinc <- treeinfo$Height_Total[treeinfo$Year_Measurement==next.year]-
            treeinfo$Height_Total[treeinfo$Year_Measurement==year] 
               
-    htinc <- htinc/diff(range(treeinfo$Year_Measurement))
+        htinc <- htinc/diff(range(treeinfo$Year_Measurement[1],treeinfo$Year_Measurement[2]))
   }
   htinc
 }

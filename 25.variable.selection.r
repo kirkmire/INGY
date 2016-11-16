@@ -40,6 +40,38 @@ annual.gr2$small.tpa<- 138.66*rowSums(annual.gr2[,substring(names(annual.gr2),1,
 #make a function that takes inst, year, plot and deletes all other inst, plots and any height 
 #classes that arent relavant, adds up whatevers left
 
+tpa.gtr.than<-function(inst,year,plot,stp,tree,height){
+  tally.df<-annual.gr2[annual.gr2$Installation %in% inst,]
+  tally.df<-tally.df[tally.df$Year_Measurement %in% year,]
+  tally.df<-tally.df[tally.df$Plot %in% plot,]
+  tally.df<-tally.df[tally.df$STP %in% stp,]
+  tally.df<-tally.df[tally.df$Tree %in% tree,]
+  counts.df<-tally.df[,substring(names(annual.gr2),1,6)=="Count."]
+  counts.df<-rbind(counts.df,lower.bound=c(15,1,3,5,7,9,11,13,15,17))
+  counts.df<-t(counts.df)
+  counts.df<-as.data.frame(counts.df)
+  counts.df<-subset(counts.df,counts.df$lower.bound>height)
+  names(counts.df)[1]<-"tally"
+  trees.grtr<-sum(counts.df$tally)
+  tpa.grtr<-138.66*trees.grtr
+  tpa.grtr
+}
+
+###Example on a single tree record
+tpa.gtr.than("BC",2006,1,3,305,1)
+
+annual.gr2$tpa.gt<-0
+
+for(i in 1:nrow(annual.gr2)){
+  annual.gr2$tpa.gt[i]<-tpa.gtr.than(
+    annual.gr2$Installation[i], 
+    annual.gr2$Year_Measurement[i],
+    annual.gr2$Plot[i],
+    annual.gr2$STP[i],
+    annual.gr2$Tree[i],
+    annual.gr2$Height_Total[i])
+}
+
 
 ht.class <- cbind(Installation = rownames(ht.class), ht.class)
 rownames(ht.class) <- NULL

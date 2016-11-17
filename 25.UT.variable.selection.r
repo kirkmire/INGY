@@ -2,13 +2,15 @@
 
 library(mgcv)
 
+#Exclude the 6th small tree plots of each installation
+annual.gr<-annual.gr[! annual.gr$STP==6,]
+
 #Selecting installations of similar overstory basal area and SI
 sim<-c("EM","BC","TJ","RM","CM","TC")
 
-annual.gr<-annual.gr[annual.gr$Installation %in% sim, ]
+annual.gr1<-annual.gr[annual.gr$Installation %in% sim, ]
 
-#Exclude the 6th small tree plots of each installation
-annual.gr<-annual.gr[! annual.gr$STP==6,]
+
 
 #Select all control plots 
 #annual.gr<-annual.gr[annual.gr$Treatment=="CTRL",]
@@ -32,7 +34,7 @@ for(i in count.names) {
   ht.class2[i][is.na(ht.class2[i])] <- 0
 }
 
-annual.gr2<-merge(annual.gr,ht.class2, all.x=T)
+annual.gr2<-merge(annual.gr1,ht.class2, all.x=T)
 
 #Variable for all tree
 annual.gr2$small.tpa<- 138.66*rowSums(annual.gr2[,substring(names(annual.gr2),1,6)=="Count."],na.rm=T)

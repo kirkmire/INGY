@@ -325,14 +325,18 @@ aic.list<-c(aic.list,AIC(qr.stcw)[1])
 
 
 #QR for Crown Length
-qr.stcl<-rq(ht_annual~srHeight_Total+Crown_Length,tau=c(.5),data=annual.gr2)
+qr.stcl<-rq(ht_annual~srHeight_Total+CrownLength,tau=c(.5),data=annual.gr2)
 summary(qr.stcl)
 aic.list<-c(aic.list,AIC(qr.stcl)[1])
 
+aic.list<-t(as.data.frame(aic.list))
+variable<-c("SmallTPA","Two","Four","Six","Eight",
+                      "Ten","Twelve","Fourteen","Fifteen",
+                      "TGT","BD","DBH","CrownWidth","CrownLength")
 
+colnames(aic.list)<-(variable)
 
-
-
+aic.list[,aic.list==min(aic.list)]
 
 
 

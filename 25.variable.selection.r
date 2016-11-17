@@ -85,164 +85,249 @@ ht.class$small.tpa<-rowSums(ht.class[2:11])
 
 
 #Substitute numeric height classes for character headings
-names(annual.gr)[2:11]<-c("one","two","four","six","eight","ten","twelve","fourteen","sixteen","eighteen")
+colnames(annual.gr2)[substring(colnames(annual.gr2),1,6)=="Count."]<-c("other","two","four","six","eight","ten","twelve","fourteen")
 
+annual.gr2$srHeight_Total<-sqrt(annual.gr2$Height_Total)
 
-#GAM for -1 ht class
-annual.gr$srHeight_Total<-sqrt(annual.gr$Height_Total)
-
-
-
-gam.st1<-gam(ht_annual~srHeight_Total+s(one),data=annual.gr)
+#GAM for 2 ht class
+gam.st2<-gam(ht_annual~srHeight_Total+s(two),data=annual.gr2, family=gaussian(link="log"))
 summary(gam.st1)
 
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.st2,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
+par(mfrow=c(1,2))
+plot(predict(gam.st2),residuals(gam.st2),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.st2),main="")
+
+
+#GAM for 4 ht class
+gam.st4<-gam(ht_annual~srHeight_Total+s(four),data=annual.gr2, family=gaussian(link="log"))
+summary(gam.st4)
 
 par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.st1,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-
 
 par(mfrow=c(1,2))
 plot(predict(gam.st1),residuals(gam.st1),xlab="predicted",ylab="residuals")
 qqnorm(residuals(gam.st1),main="")
 
-
-plot(annual.gr$ht_annual, fitted(gam.st1))
-#GAM for 2 ht class
-gam.st2<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-               smooth(annual.gr$two),family=gaussian(link="log"))
-
-plot(annual.gr$ht_annual, fitted(gam.st2))
-
-#GAM for 4 ht class
-gam.st4<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-               smooth(annual.gr$four),family=gaussian(link="log"))
-
-plot(annual.gr$ht_annual, fitted(gam.st4))
-
 #GAM for 6 ht class
-gam.st6<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-               smooth(annual.gr$six),family=gaussian(link="log"))
+gam.st6<-gam(ht_annual~srHeight_Total+s(six),data=annual.gr2, family=gaussian(link="log"))
+summary(gam.st6)
 
-library(car)
-crPlot(annual.gr$ht_annual, fitted(gam.st6))
-crPlot(gam.st6,variable=sqrt(annual.gr$Height_Total))
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.st6,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+par(mfrow=c(1,2))
+plot(predict(gam.st6),residuals(gam.st6),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.st6),main="")
 
 #GAM for 8 ht class
-gam.st8<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-               smooth(annual.gr$eight),family=gaussian(link="log"))
+gam.st8<-gam(ht_annual~srHeight_Total+s(eight),data=annual.gr2, family=gaussian(link="log"))
+summary(gam.st8)
 
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.st8,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
-plot(annual.gr$ht_annual, fitted(gam.st8))
+par(mfrow=c(1,2))
+plot(predict(gam.st8),residuals(gam.st8),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.st8),main="")
 
 #GAM for 10 ht class
-gam.st10<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-               smooth(annual.gr$ten),family=gaussian(link="log"))
+gam.st10<-gam(ht_annual~srHeight_Total+s(ten),data=annual.gr2, family=gaussian(link="log"))
+summary(gam.st10)
 
-plot(annual.gr$ht_annual, fitted(gam.st10))
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.st10,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+par(mfrow=c(1,2))
+plot(predict(gam.st10),residuals(gam.st10),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.st10),main="")
 
 #GAM for 12 ht class
-gam.st12<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-               smooth(annual.gr$twelve),family=gaussian(link="log"))
+gam.st12<-gam(ht_annual~srHeight_Total+s(twelve),data=annual.gr2, family=gaussian(link="log"))
+summary(gam.st12)
 
-plot(annual.gr$ht_annual, fitted(gam.st12))
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.st12,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+par(mfrow=c(1,2))
+plot(predict(gam.st12),residuals(gam.st12),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.st12),main="")
 
 #GAM for 14 ht class
-gam.st14<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-               smooth(annual.gr$fourteen),family=gaussian(link="log"))
+gam.st14<-gam(ht_annual~srHeight_Total+s(fourteen),data=annual.gr2, family=gaussian(link="log"))
+summary(gam.st14)
 
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.st14,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
-identify(annual.gr$ht_annual, fitted(gam.st12))
+par(mfrow=c(1,2))
+plot(predict(gam.st14),residuals(gam.st14),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.st14),main="")
 
-#GAM for 16 ht class
-gam.st16<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-               smooth(annual.gr$sixteen),family=gaussian(link="log"))
+#GAM for 15 "other" ht class
+gam.st15<-gam(ht_annual~srHeight_Total+s(other),data=annual.gr2, family=gaussian(link="log"))
+summary(gam.st12)
 
-plot(annual.gr$ht_annual, fitted(gam.st16))
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.st15,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
-#GAM for 18 ht class
-gam.st18<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-               smooth(annual.gr$eighteen),family=gaussian(link="log"))
+par(mfrow=c(1,2))
+plot(predict(gam.st15),residuals(gam.st12),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.st15),main="")
 
-plot(annual.gr$ht_annual, fitted(gam.st18))
 
 #GAM for small.tpa
-gam.stpa<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-                smooth(annual.gr$small.tpa),family=gaussian(link="log"))
-    
-plot(annual.gr$ht_annual, fitted(gam.stpa))
+gam.sttpa<-gam(ht_annual~srHeight_Total+s(small.tpa),data=annual.gr2, family=gaussian(link="log"))
+summary(gam.sttpa)
 
-#need to figure out how to visualize GAM 
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.sttpa,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+par(mfrow=c(1,2))
+plot(predict(gam.sttpa),residuals(gam.sttpa),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.sttpa),main="")
+
+#GAM for tally of trees greater than subject tree
+gam.sttgt<-gam(ht_annual~srHeight_Total+s(tpa.gt),data=annual.gr2, family=gaussian(link="log"))
+summary(gam.sttgt)
+
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.sttgt,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+par(mfrow=c(1,2))
+plot(predict(gam.sttgt),residuals(gam.sttgt),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.sttgt),main="")
+
 
 #GAM for Basal Diam
-annual.grbd<-annual.gr[!annual.gr$BasalDiameter=="NA",]
 
-gam.stbd<-gam(annual.grbd$ht_annual~sqrt(annual.grbd$Height_Total)+
-                  smooth(annual.grbd$BasalDiameter),family=gaussian(link="log"))    
+gam.stbd<-gam(ht_annual~srHeight_Total+s(BasalDiameter),data=annual.gr2, family=gaussian(link="log"))
+summary(gam.stbd)
 
-plot(annual.grbd$ht_annual, fitted(gam.stbd))
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.stbd,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+par(mfrow=c(1,2))
+plot(predict(gam.stbd),residuals(gam.stbd),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.stbd),main="")
     
 #GAM for DBH
-annual.grdbh<-annual.gr[!annual.gr$DBH=="NA",]
+gam.stdbh<-gam(ht_annual~srHeight_Total+s(DBH),data=annual.gr2, family=gaussian(link="log"))
+summary(gam.stdbh)
 
-gam.stdbh<-gam(annual.grdbh$ht_annual~sqrt(annual.grdbh$Height_Total)+
-                  smooth(annual.grdbh$DBH),family=gaussian(link="log"))       
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.stdbh,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
-plot(annual.grdbh$ht_annual, fitted(gam.stdbh))
+par(mfrow=c(1,2))
+plot(predict(gam.stdbh),residuals(gam.stdbh),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.stdbh),main="")
 
 
 #GAM for Crown Length
 #Need to make variable
-annual.gr$Crown_Length<-annual.gr$Height_Total-annual.gr$Height_CrownBase
+annual.gr2$CrownLength<-annual.gr2$Height_Total-annual.gr2$Height_CrownBase
 
-gam.stcl<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-                  smooth(annual.gr$Crown_Length),family=gaussian(link="log"))     
+gam.stcl<-gam(ht_annual~srHeight_Total+s(CrownLength),data=annual.gr2, family=gaussian(link="log"))
+summary(gam.stcl)
+
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.stcl,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+par(mfrow=c(1,2))
+plot(predict(gam.stcl),residuals(gam.stcl),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.stcl),main="")
 
 
-    
 #GAM for Crown Width
-gam.stcw<-gam(annual.gr$ht_annual~sqrt(annual.gr$Height_Total)+
-                  smooth(annual.gr$CrownWidth),family=gaussian(link="log"))       
+gam.stcw<-gam(ht_annual~srHeight_Total+s(CrownWidth),data=annual.gr2, family=gaussian(link="log"))
+summary(gam.stcw)
+
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.stcl,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+par(mfrow=c(1,2))
+plot(predict(gam.stcw),residuals(gam.stcw),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.stcw),main="")
 
 
 #####Quantile Regression
 library(quantreg)
 
 #QR for small.tpa
-qr.stpa<-rq(annual.gr$ht_annual ~ sqrt(annual.gr$Height_Total)+annual.gr$small.tpa,tau=c(.5))
+qr.stpa<-rq(ht_annual ~ srHeight_Total+small.tpa,tau=c(.5),data=annual.gr2)
 summary(qr.stpa)
-AIC(qr.stpa)
+aic.list<-AIC(qr.stpa)[1]
 
-#Need to do QR for height classes
+#QR for height class 2
+qr.stp2<-rq(ht_annual~srHeight_Total+two,tau=c(.5),data=annual.gr2)
+summary(qr.stp2)
+aic.list<-c(aic.list,AIC(qr.stp2)[1])
+
+#QR for height class 4
+qr.stp4<-rq(ht_annual~srHeight_Total+four,tau=c(.5),data=annual.gr2)
+summary(qr.stp4)
+aic.list<-c(aic.list,AIC(qr.stp4)[1])
+
+#QR for height class 6
+qr.stp6<-rq(ht_annual~srHeight_Total+six,tau=c(.5),data=annual.gr2)
+summary(qr.stp6)
+aic.list<-c(aic.list,AIC(qr.stp6)[1])
+
+#QR for height class 8
+qr.stp8<-rq(ht_annual~srHeight_Total+eight,tau=c(.5),data=annual.gr2)
+summary(qr.stp8)
+aic.list<-c(aic.list,AIC(qr.stp8)[1])
+
+#QR for height class 10
+qr.stp10<-rq(ht_annual~srHeight_Total+ten,tau=c(.5),data=annual.gr2)
+summary(qr.stp10)
+aic.list<-c(aic.list,AIC(qr.stp10)[1])
+
+#QR for height class 12
+qr.stp12<-rq(ht_annual~srHeight_Total+twelve,tau=c(.5),data=annual.gr2)
+summary(qr.stp12)
+aic.list<-c(aic.list,AIC(qr.stp12)[1])
+
+#QR for height class 14
+qr.stp14<-rq(ht_annual~srHeight_Total+fourteen,tau=c(.5),data=annual.gr2)
+summary(qr.stp14)
+aic.list<-c(aic.list,AIC(qr.stp14)[1])
+
+#QR for height class 15
+qr.stp15<-rq(ht_annual~srHeight_Total+other,tau=c(.5),data=annual.gr2)
+summary(qr.stp15)
+aic.list<-c(aic.list,AIC(qr.stp15)[1])
+
+#QR for trees greater than
+qr.sttgt<-rq(ht_annual~srHeight_Total+tpa.gt,tau=c(.5),data=annual.gr2)
+summary(qr.sttgt)
+aic.list<-c(aic.list,AIC(qr.sttgt)[1])
 
 
-#QR for basal.diameter
-qr.stbd<-rq(annual.gr$ht_annual ~ sqrt(annual.gr$Height_Total)+annual.gr$BasalDiameter,tau=c(.5))
+#QR for basal diameter
+qr.stbd<-rq(ht_annual~srHeight_Total+BasalDiameter,tau=c(.5),data=annual.gr2)
 summary(qr.stbd)
-AIC(qr.stbd)
+aic.list<-c(aic.list,AIC(qr.stbd)[1])
 
-#QR for dbh
-qr.stdbh<-rq(annual.gr$ht_annual ~ sqrt(annual.gr$Height_Total)+annual.gr$DBH,tau=c(.5))
+
+#QR for DBH
+qr.stdbh<-rq(ht_annual~srHeight_Total+DBH,tau=c(.5),data=annual.gr2)
 summary(qr.stdbh)
-AIC(qr.stdbh)
+aic.list<-c(aic.list,AIC(qr.stdbh)[1])
 
-#QR for crown.length
-qr.stcl<-rq(annual.gr$ht_annual ~ sqrt(annual.gr$Height_Total)+annual.gr$Crown_Length,tau=c(.5))
-summary(qr.stcl)
-AIC(qr.stcl)
-
-#QR for crown.width
-qr.stcw<-rq(annual.gr$ht_annual ~ sqrt(annual.gr$Height_Total)+annual.gr$CrownWidth,tau=c(.5))
+#QR for Crown Width
+qr.stcw<-rq(ht_annual~srHeight_Total+CrownWidth,tau=c(.5),data=annual.gr2)
 summary(qr.stcw)
-AIC(qr.stcw)
+aic.list<-c(aic.list,AIC(qr.stcw)[1])
 
 
-
-
-
-
-
-
+#QR for Crown Length
+qr.stcl<-rq(ht_annual~srHeight_Total+Crown_Length,tau=c(.5),data=annual.gr2)
+summary(qr.stcl)
+aic.list<-c(aic.list,AIC(qr.stcl)[1])
 
 
 

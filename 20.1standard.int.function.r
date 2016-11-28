@@ -12,6 +12,8 @@ merged_stagm_stag$conc<-paste(merged_stagm_stag$Installation,merged_stagm_stag$P
 merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Year_Measurement==merged_stagm_stag$Year_Growth,]
 merged_stagm_stag<-merged_stagm_stag[! merged_stagm_stag$Installation %in% drp,]
 
+#Select only PIPO trees
+merged_stagm_stag<-merged_stagm_stag[merged_stagm_stag$Species=="PIPO",]
 
 #This function checks the year of measurement in the tree record against
 #the measurement timeline, finds the next measurement year's height,

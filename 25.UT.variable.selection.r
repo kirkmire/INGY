@@ -1,46 +1,46 @@
-###GLM Take1###
-
-library(mgcv)
-
-#Exclude the 6th small tree plots of each installation
-annual.gr<-annual.gr[! annual.gr$STP==6,]
-
-#Selecting installations of similar overstory basal area and SI
-sim<-c("EM","BC","TJ","RM","CM","TC")
-
-annual.gr1<-annual.gr[annual.gr$Installation %in% sim, ]
-
-
-
-#Select all control plots 
-#annual.gr<-annual.gr[annual.gr$Treatment=="CTRL",]
-
 ######Understory Tree Variables######
 #TPA, ---Species---, ---Top height---, basal diameter, diameter at breast height, crown length, crown width
 #number per height class per acre
 
+#Excludes the 6th small tree plots of each installation
+annual.gr<-annual.gr[! annual.gr$STP==6,]
 
-#Number per height class/acre
+#Selects installations of similar overstory basal area and SI
+#see figure
+sim<-c("EM","BC","TJ","RM","CM","TC")
+
+#Selects tree record of anuual growth from similar installations
+annual.gr1<-annual.gr[annual.gr$Installation %in% sim, ]
+
+
+#Aggregates the number of small trees in count plots by 
+#Inst, Plot, STP, Year Meas and height class
 ht.class<-aggregate(Count~Installation+Plot+STP+Year_Measurement+HeightClass,data=sstpt,sum)
+ht.class<-ht.class[ht.class$Installation %in% sim,]
 
+#Reshapes aggregated dataframe so that each Inst,Plot,STP,YM row 
+#contains every associated height class
 ht.class2<-reshape(ht.class, direction="wide",idvar=
           c("Installation","Plot","STP","Year_Measurement"),
           timevar="HeightClass",v.names="Count")
 
-#make NA tally =0
+#Makes NA tallies =0
 count.names<-names(ht.class2[,substring(names(ht.class2),1,6)=="Count."])
 
 for(i in count.names) {
   ht.class2[i][is.na(ht.class2[i])] <- 0
 }
 
+#Merges annual growth records with height class tally data
 annual.gr2<-merge(annual.gr1,ht.class2, all.x=T)
 
-#Variable for all tree
+#Creates variable for all trees counted regardless of height class
 annual.gr2$small.tpa<- 138.66*rowSums(annual.gr2[,substring(names(annual.gr2),1,6)=="Count."],na.rm=T)
   
-#make a function that takes inst, year, plot and deletes all other inst, plots and any height 
-#classes that arent relavant, adds up whatevers left
+#Function takes inst, year, plot, stp, tree and height
+#deletes all other inst, plots and any height 
+#classes that aren't relevant, sums whatevers left to create 
+#a tpa-greater-than variable
 
 tpa.gtr.than<-function(inst,year,plot,stp,tree,height){
   tally.df<-annual.gr2[annual.gr2$Installation %in% inst,]
@@ -59,12 +59,25 @@ tpa.gtr.than<-function(inst,year,plot,stp,tree,height){
   tpa.grtr
 }
 
-#use midpoints as bounds?
+#use midpoints of height classes as bounds? this would
+#provide a balance between considering tally trees within 
+#the subject tree's height class as either all smaller or 
+#all larger that the subject tree 
+
+#Also, since -1 ("other") height class represents tally trees larger 
+#than 14.9 feet tall, is it reasonable to assume that a subject tree
+#greater than 14.9 would have zero trees greater than it?
+#alternative would be to move "other" class lower bound to 17,18, etc ft
+
 
 ###Example on a single tree record
 tpa.gtr.than("BC",2006,1,3,305,1)
 
+#Assigns a tpa greater than variable to dataframe
 annual.gr2$tpa.gt<-0
+
+#For loop that runs tpa greater than function
+#on all rows of df
 
 for(i in 1:nrow(annual.gr2)){
   annual.gr2$tpa.gt[i]<-tpa.gtr.than(
@@ -77,19 +90,16 @@ for(i in 1:nrow(annual.gr2)){
 }
 
 
-ht.class <- cbind(Installation = rownames(ht.class), ht.class)
-rownames(ht.class) <- NULL
-ht.class<-ht.class[ht.class$Installation %in% sim,]
-
-#TPA Variable
-#Utilize Tree Tally Data
-ht.class$small.tpa<-rowSums(ht.class[2:11])
-
-
-#Substitute numeric height classes for character headings
+#Substitute numeric height classes for character 
+#headings for ease of modeling
 colnames(annual.gr2)[substring(colnames(annual.gr2),1,6)=="Count."]<-c("other","two","four","six","eight","ten","twelve","fourteen")
 
 annual.gr2$srHeight_Total<-sqrt(annual.gr2$Height_Total)
+
+
+###GLM Take1###
+
+library(mgcv)
 
 #GAM for 2 ht class
 gam.st2<-gam(ht_annual~srHeight_Total+s(two),data=annual.gr2, family=gaussian(link="log"))

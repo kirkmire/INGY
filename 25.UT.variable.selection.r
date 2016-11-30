@@ -2,21 +2,11 @@
 #TPA, ---Species---, ---Top height---, basal diameter, diameter at breast height, crown length, crown width
 #number per height class per acre
 
-#Excludes the 6th small tree plots of each installation
-annual.gr<-annual.gr[! annual.gr$STP==6,]
-
-#Selects installations of similar overstory basal area and SI
-#see figure
-sim<-c("EM","BC","TJ","RM","CM","TC")
-
-#Selects tree record of anuual growth from similar installations
-annual.gr1<-annual.gr[annual.gr$Installation %in% sim, ]
-
 
 #Aggregates the number of small trees in count plots by 
 #Inst, Plot, STP, Year Meas and height class
 ht.class<-aggregate(Count~Installation+Plot+STP+Year_Measurement+HeightClass,data=sstpt,sum)
-ht.class<-ht.class[ht.class$Installation %in% sim,]
+#ht.class<-ht.class[ht.class$Installation %in% sim,]
 
 #Reshapes aggregated dataframe so that each Inst,Plot,STP,YM row 
 #contains every associated height class
@@ -32,10 +22,10 @@ for(i in count.names) {
 }
 
 #Merges annual growth records with height class tally data
-annual.gr2<-merge(annual.gr1,ht.class2, all.x=T)
+annual.gr<-merge(annual.gr,ht.class2, all.x=T)
 
 #Creates variable for all trees counted regardless of height class
-annual.gr2$small.tpa<- 138.66*rowSums(annual.gr2[,substring(names(annual.gr2),1,6)=="Count."],na.rm=T)
+annual.gr$small.tpa<- 138.66*rowSums(annual.gr[,substring(names(annual.gr),1,6)=="Count."],na.rm=T)
   
 #Function takes inst, year, plot, stp, tree and height
 #deletes all other inst, plots and any height 
@@ -43,12 +33,12 @@ annual.gr2$small.tpa<- 138.66*rowSums(annual.gr2[,substring(names(annual.gr2),1,
 #a tpa-greater-than variable
 
 tpa.gtr.than<-function(inst,year,plot,stp,tree,height){
-  tally.df<-annual.gr2[annual.gr2$Installation %in% inst,]
+  tally.df<-annual.gr[annual.gr$Installation %in% inst,]
   tally.df<-tally.df[tally.df$Year_Measurement %in% year,]
   tally.df<-tally.df[tally.df$Plot %in% plot,]
   tally.df<-tally.df[tally.df$STP %in% stp,]
   tally.df<-tally.df[tally.df$Tree %in% tree,]
-  counts.df<-tally.df[,substring(names(annual.gr2),1,6)=="Count."]
+  counts.df<-tally.df[,substring(names(annual.gr),1,6)=="Count."]
   counts.df<-rbind(counts.df,lower.bound=c(15,2,4,6,8,10,12,14))
   counts.df<-t(counts.df)
   counts.df<-as.data.frame(counts.df)
@@ -79,31 +69,37 @@ annual.gr2$tpa.gt<-0
 #For loop that runs tpa greater than function
 #on all rows of df
 
-for(i in 1:nrow(annual.gr2)){
-  annual.gr2$tpa.gt[i]<-tpa.gtr.than(
-    annual.gr2$Installation[i], 
-    annual.gr2$Year_Measurement[i],
-    annual.gr2$Plot[i],
-    annual.gr2$STP[i],
-    annual.gr2$Tree[i],
-    annual.gr2$Height_Total[i])
+for(i in 1:nrow(annual.gr)){
+  annual.gr$tpa.gt[i]<-tpa.gtr.than(
+    annual.gr$Installation[i], 
+    annual.gr$Year_Measurement[i],
+    annual.gr$Plot[i],
+    annual.gr$STP[i],
+    annual.gr$Tree[i],
+    annual.gr$Height_Total[i])
 }
 
 
 #Substitute numeric height classes for character 
 #headings for ease of modeling
-colnames(annual.gr2)[substring(colnames(annual.gr2),1,6)=="Count."]<-c("other","two","four","six","eight","ten","twelve","fourteen")
+colnames(annual.gr)[substring(colnames(annual.gr),1,6)=="Count."]<-c("other","two","four","six","eight","ten","twelve","fourteen")
 
-annual.gr2$srHeight_Total<-sqrt(annual.gr2$Height_Total)
+annual.gr$srHeight_Total<-sqrt(annual.gr$Height_Total)
 
 
 ###GLM Take1###
-
 library(mgcv)
+
+#Selects installations of similar overstory basal area and SI
+#see figure
+sim<-c("EM","BC","TJ","RM","CM","TC")
+
+#Selects tree record of anuual growth from similar installations
+annual.gr2<-annual.gr2[annual.gr2$Installation %in% sim, ]
 
 #GAM for 2 ht class
 gam.st2<-gam(ht_annual~srHeight_Total+s(two),data=annual.gr2, family=gaussian(link="log"))
-summary(gam.st1)
+summary(gam.st2)
 
 par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.st2,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)

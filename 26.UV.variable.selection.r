@@ -60,22 +60,42 @@ annual.gr3<- merge(annual.gr3, veg_record4,by=c("Installation","Plot","STP","Yea
 annual.gr3<-annual.gr3[!annual.gr3$STP==6,]
 
 
-#GAM for 
-gam.stdbh<-gam(ht_annual~srHeight_Total+s(DBH),data=annual.gr2, family=gaussian(link="log"))
-summary(gam.stdbh)
+#GAM for 1m polyveg cover
+gam.1m.polv<-gam(ht_annual~srHeight_Total+s(Cov.POLV),data=annual.gr3, family=gaussian(link="log"))
+summary(gam.1m.polv)
 
 par(mfrow=c(1,2),mar=c(4,4,1,2))
-plot(gam.stdbh,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+plot(gam.1m.polv,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 par(mfrow=c(1,2))
-plot(predict(gam.stdbh),residuals(gam.stdbh),xlab="predicted",ylab="residuals")
-qqnorm(residuals(gam.stdbh),main="")
+plot(predict(gam.1m.polv),residuals(gam.1m.polv),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.1m.polv),main="")
 
 
+#GAM for 4m polyveg cover
+gam.4m.polv<-gam(ht_annual~srHeight_Total+s(Cov4.POLV),data=annual.gr3, family=gaussian(link="log"))
+summary(gam.4m.polv)
 
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.4m.polv,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
+par(mfrow=c(1,2))
+plot(predict(gam.4m.polv),residuals(gam.4m.polv),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.4m.polv),main="")
 
+#QR for 1m polyveg cover
+qr.1m.polv<-rq(ht_annual~srHeight_Total+Cov.POLV+fourteen,tau=c(.5),data=annual.gr3)
+summary(qr.1m.polv)
+aic.list.veg<-AIC(qr.1m.polv)[1]
 
+#QR for 4m polyveg cover
+qr.4m.polv<-rq(ht_annual~srHeight_Total+Cov4.POLV+fourteen,tau=c(.5),data=annual.gr3)
+summary(qr.4m.polv)
+aic.list.veg<-c(aic.list.veg,AIC(qr.4m.polv)[1])
+
+#Four meter veg data appears to have a marginally lower AIC,
+#Issue arrises when considering that this variable was only collected for half of the study 
+#Perhaps not worth utilizing this variable and in doing so losing half of tree records...
 
 
 

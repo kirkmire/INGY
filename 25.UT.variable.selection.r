@@ -64,7 +64,7 @@ tpa.gtr.than<-function(inst,year,plot,stp,tree,height){
 tpa.gtr.than("BC",2006,1,3,305,1)
 
 #Assigns a tpa greater than variable to dataframe
-annual.gr2$tpa.gt<-0
+annual.gr$tpa.gt<-0
 
 #For loop that runs tpa greater than function
 #on all rows of df
@@ -79,6 +79,9 @@ for(i in 1:nrow(annual.gr)){
     annual.gr$Height_Total[i])
 }
 
+#Crown Length Variable#
+annual.gr$CrownLength<-annual.gr$Height_Total-annual.gr$Height_CrownBase
+
 
 #Substitute numeric height classes for character 
 #headings for ease of modeling
@@ -87,14 +90,14 @@ colnames(annual.gr)[substring(colnames(annual.gr),1,6)=="Count."]<-c("other","tw
 annual.gr$srHeight_Total<-sqrt(annual.gr$Height_Total)
 
 
-###GLM Take1###
+###GAM Take1###
 library(mgcv)
 
 #Selects installations of similar overstory basal area and SI
 #see figure
 sim<-c("EM","BC","TJ","RM","CM","TC")
 
-#Selects tree record of anuual growth from similar installations
+#Selects tree record of annual growth from similar installations
 annual.gr2<-annual.gr[annual.gr$Installation %in% sim, ]
 
 #Removes 6th stp plots from analysis
@@ -115,6 +118,7 @@ qqnorm(residuals(gam.st2),main="")
 #GAM for 4 ht class
 gam.st4<-gam(ht_annual~srHeight_Total+s(four),data=annual.gr2, family=gaussian(link="log"))
 summary(gam.st4)
+gam.check(gam.st4)
 
 par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.st4,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
@@ -122,6 +126,10 @@ plot(gam.st4,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 par(mfrow=c(1,2))
 plot(predict(gam.st4),residuals(gam.st4),xlab="predicted",ylab="residuals")
 qqnorm(residuals(gam.st4),main="")
+
+annual.gr2$resid<-gam.st4$residuals
+
+odd.resid<-as.data.frame(residuals(gam.st4))
 
 #GAM for 6 ht class
 gam.st6<-gam(ht_annual~srHeight_Total+s(six),data=annual.gr2, family=gaussian(link="log"))

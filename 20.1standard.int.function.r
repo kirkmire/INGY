@@ -69,4 +69,14 @@ merged_stagm_stag<-merged_stagm_stag[!(merged_stagm_stag$ht_annual==-999),]
 
 #Rename dataframe something reasonable
 annual.gr<-merged_stagm_stag
-              
+
+#Removes unneeded columns in df
+f.names<-names(annual.gr[,substring(names(annual.gr),1,1)=="F"])
+
+other.names<-c("Height_Growth3Year","ID.x")
+
+annual.gr<-annual.gr[,!(names(annual.gr) %in% f.names)]
+annual.gr<-annual.gr[,!(names(annual.gr) %in% other.names)]
+
+
+            

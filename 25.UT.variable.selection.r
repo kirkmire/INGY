@@ -95,7 +95,10 @@ library(mgcv)
 sim<-c("EM","BC","TJ","RM","CM","TC")
 
 #Selects tree record of anuual growth from similar installations
-annual.gr2<-annual.gr2[annual.gr2$Installation %in% sim, ]
+annual.gr2<-annual.gr[annual.gr$Installation %in% sim, ]
+
+#Removes 6th stp plots from analysis
+annual.gr2<-annual.gr2[!annual.gr2$STP==6,]
 
 #GAM for 2 ht class
 gam.st2<-gam(ht_annual~srHeight_Total+s(two),data=annual.gr2, family=gaussian(link="log"))
@@ -114,11 +117,11 @@ gam.st4<-gam(ht_annual~srHeight_Total+s(four),data=annual.gr2, family=gaussian(l
 summary(gam.st4)
 
 par(mfrow=c(1,2),mar=c(4,4,1,2))
-plot(gam.st1,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+plot(gam.st4,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 par(mfrow=c(1,2))
-plot(predict(gam.st1),residuals(gam.st1),xlab="predicted",ylab="residuals")
-qqnorm(residuals(gam.st1),main="")
+plot(predict(gam.st4),residuals(gam.st4),xlab="predicted",ylab="residuals")
+qqnorm(residuals(gam.st4),main="")
 
 #GAM for 6 ht class
 gam.st6<-gam(ht_annual~srHeight_Total+s(six),data=annual.gr2, family=gaussian(link="log"))

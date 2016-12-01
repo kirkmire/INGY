@@ -2,12 +2,6 @@
 #Percentage cover 1m, upper and lower extent of height
 
 
-
-#Selects all installations 
-veg<-c("EM","BC","TJ","RM","CM","TC")
-
-annual.gr3<-annual.gr[annual.gr$Installation %in% sim, ]
-
 #Abbreviates row headings in veg plot measurements
 names(sstp1)[7:8]<-c("Cov","Bas")
 

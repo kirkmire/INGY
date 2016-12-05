@@ -55,6 +55,70 @@ veg_record4<- merge(splot, stp4,by=c("Installation","Plot"))
 annual.gr3<- merge(annual.gr3, veg_record4,by=c("Installation","Plot","STP","Year_Measurement"))
 
 
+##Transect Data##
+names(stran)[9:10]<-c("basT","topT")
+
+#Assigns zeros to NA values (transect points where no veg present)
+veg.T.names<-names(stran[,substring(names(stran),4,4)=="T"])
+
+for(i in veg.T.names) {
+  stran[i][is.na(stran[i])] <- 0
+}
+
+#calculate difference in top and base meas
+stran$diffT<-stran$topT-stran$basT
+
+stran1<-ddply(stran, c("Installation","Plot","Transect","Year_Measurement","Point","Lifeform"),
+              basT=mean(basT),topT=mean(topT))
+
+aggdata <-aggregate(stran$diffT,
+                    by=list("Installation","Plot","Transect","Year_Measurement","Point","Lifeform"),
+                 FUN=mean)
+
+library(reshape)
+stran1<-melt(stran,id.vars=c("Installation","Plot","Transect","Year_Measurement","Point","Lifeform"),
+                       measure.vars="diffT")
+
+
+
+cast.test<-cast(stran1,ID~value,mean) 
+  
+  
+  
+
+#Reshapes vegetation transect data
+
+
+veg.tran<-reshape(stran, direction="wide",idvar=
+               c("Installation","Plot","Year_Measurement"),
+             timevar="Lifeform",v.names=c("basT","topT"))
+
+#Calculating diff bt top and base heights on transect
+veg.tran$tran.diff.F<-veg.tran$topT.F-veg.tran$basT.F
+
+veg.tran$tran.diff.S<-veg.tran$topT.S-veg.tran$basT.S
+
+veg.tran$tran.diff.NA<-veg.tran$topT.NA-veg.tran$basT.NA
+
+veg.tran$tran.diff.null<-veg.tran$topT.NULL-veg.tran$basT.NULL
+#Finding average height diff by species group, Installation, Plot and Year Measurement
+
+library(plyr)
+
+veg.tran1<-ddply(veg.tran, c("Installation","Plot","Year_Measurement"),summarize,
+      mean.F=mean(tran.diff.F),mean.S=mean(tran.diff.S),mean.NA=mean(tran.diff.NA),
+      mean.null=mean(tran.diff.null))
+
+#unsure what "NA" or "NULL" lifeforms translates to
+#protocol seems tohave changed in later years of the study in
+#favor of not distinguishing between shrubs and forbs
+
+
+
+
+#Merge transect data with annual.gr3
+annual.gr3<-merge(annual.gr3,veg.tran1,by=c("Installation","Plot","Year_Measurement"))
+
 
 #Removes 6th stp plots from analysis
 annual.gr3<-annual.gr3[!annual.gr3$STP==6,]
@@ -64,7 +128,7 @@ annual.gr3<-annual.gr3[!annual.gr3$STP==6,]
 gam.1m.polv<-gam(ht_annual~srHeight_Total+s(Cov.POLV),data=annual.gr3, family=gaussian(link="log"))
 summary(gam.1m.polv)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
+
 plot(gam.1m.polv,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 par(mfrow=c(1,2))
@@ -76,7 +140,6 @@ qqnorm(residuals(gam.1m.polv),main="")
 gam.4m.polv<-gam(ht_annual~srHeight_Total+s(Cov4.POLV),data=annual.gr3, family=gaussian(link="log"))
 summary(gam.4m.polv)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.4m.polv,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 par(mfrow=c(1,2))

@@ -107,7 +107,7 @@ annual.gr2<-annual.gr2[!annual.gr2$STP==6,]
 gam.st2<-gam(ht_annual~srHeight_Total+s(two),data=annual.gr2, family=gaussian(link="log"))
 summary(gam.st2)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
+#par(mfrow=c(2,2),mar=c(4,4,1,2))
 plot(gam.st2,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 par(mfrow=c(1,2))
@@ -119,6 +119,10 @@ qqnorm(residuals(gam.st2),main="")
 gam.st4<-gam(ht_annual~srHeight_Total+s(four),data=annual.gr2, family=gaussian(link="log"))
 summary(gam.st4)
 gam.check(gam.st4)
+
+
+hist(annual.gr$srHeight_Total)
+hist(annual.gr$ht_annual)
 
 par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.st4,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
@@ -358,7 +362,9 @@ colnames(aic.list)<-(variable)
 aic.list[,aic.list==min(aic.list)]
 
 
-
+#Initial DBH has the lowest aic, however, it is not really a measure of other small tree
+#competition. The number of trees in the fourteen foot ht. class is and has the next lowest 
+#aic
 
 
 

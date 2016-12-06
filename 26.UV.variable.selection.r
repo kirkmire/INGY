@@ -68,56 +68,33 @@ for(i in veg.T.names) {
 #calculate difference in top and base meas
 stran$diffT<-stran$topT-stran$basT
 
-stran1<-ddply(stran, c("Installation","Plot","Transect","Year_Measurement","Point","Lifeform"),
-              basT=mean(basT),topT=mean(topT))
+#Aggregates transect data to the plot level
+agg.tran.data <-aggregate(stran$diffT,
+                    by=list("Installation"=stran$Installation,
+                            "Plot"=stran$Plot,
+                            "Year_Measurement"=stran$Year_Measurement,
+                            "Lifeform"=stran$Lifeform),FUN=mean)
 
-aggdata <-aggregate(stran$diffT,
-                    by=list("Installation","Plot","Transect","Year_Measurement","Point","Lifeform"),
-                 FUN=mean)
+#Reshapes transect data so each plot is a row
+agg.tran.data1<-reshape(agg.tran.data, direction="wide",idvar=
+                c("Installation","Plot","Year_Measurement"),
+              timevar="Lifeform",v.names="x")
 
-library(reshape)
-stran1<-melt(stran,id.vars=c("Installation","Plot","Transect","Year_Measurement","Point","Lifeform"),
-                       measure.vars="diffT")
-
-
-
-cast.test<-cast(stran1,ID~value,mean) 
-  
-  
-  
-
-#Reshapes vegetation transect data
+names(agg.tran.data1)[4:6]<-c("diff.F","diff.null","diff.S")
 
 
-veg.tran<-reshape(stran, direction="wide",idvar=
-               c("Installation","Plot","Year_Measurement"),
-             timevar="Lifeform",v.names=c("basT","topT"))
 
-#Calculating diff bt top and base heights on transect
-veg.tran$tran.diff.F<-veg.tran$topT.F-veg.tran$basT.F
+#Merges aggregated transect data to the "big" df
 
-veg.tran$tran.diff.S<-veg.tran$topT.S-veg.tran$basT.S
-
-veg.tran$tran.diff.NA<-veg.tran$topT.NA-veg.tran$basT.NA
-
-veg.tran$tran.diff.null<-veg.tran$topT.NULL-veg.tran$basT.NULL
-#Finding average height diff by species group, Installation, Plot and Year Measurement
-
-library(plyr)
-
-veg.tran1<-ddply(veg.tran, c("Installation","Plot","Year_Measurement"),summarize,
-      mean.F=mean(tran.diff.F),mean.S=mean(tran.diff.S),mean.NA=mean(tran.diff.NA),
-      mean.null=mean(tran.diff.null))
+annual.gr4<-merge(annual.gr3,agg.tran.data1,by=c("Installation","Plot","Year_Measurement"))
+                  
+#Investigate loss of rows in merging and lack of visibility in diff columns
 
 #unsure what "NA" or "NULL" lifeforms translates to
 #protocol seems tohave changed in later years of the study in
 #favor of not distinguishing between shrubs and forbs
 
 
-
-
-#Merge transect data with annual.gr3
-annual.gr3<-merge(annual.gr3,veg.tran1,by=c("Installation","Plot","Year_Measurement"))
 
 
 #Removes 6th stp plots from analysis
@@ -160,7 +137,9 @@ aic.list.veg<-c(aic.list.veg,AIC(qr.4m.polv)[1])
 #Issue arrises when considering that this variable was only collected for half of the study 
 #Perhaps not worth utilizing this variable and in doing so losing half of tree records...
 
-
-
+library(quantreg)
+qr.tran.polv<-rq(ht_annual~srHeight_Total+annual.gr4$diff.S+fourteen,tau=c(.5),data=annual.gr4)
+summary(qr.tran.polv)
+aic.list.veg<-c(aic.list.veg,AIC(qr.4m.polv)[1])
 
 

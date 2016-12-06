@@ -35,5 +35,42 @@ names(agg.over.data)[4]<-c("over.sum.bapa")
 
 
 #need to add a column to annual growth that assigns a OS reference year
+#reference year should be before 
+
+#Function that assigns an OSBA variable based on Year_Measurement of 
+#tree record and equal to or most recent year measurement
+
+recent.OS<-function(installation,plot,year){
+  
+  #creates dataframe of an individual small tree in all meas years
+  treeinfo<-agg.over.data[agg.over.data$Installation==installation&agg.over.data$Plot==plot,]
+  years <- treeinfo$Year_MeasurementOS
+  #selects tree records that are less than specified year
+  relevant.years <- years[years<=year]
+  #selects the maximum tree record from those remaining
+  yearOS <- ifelse(length(relevant.years)==0,0,max(relevant.years))
+
+  treeinfo <- treeinfo[treeinfo$Year_Measurement==yearOS,]
+  bapa<-treeinfo$over.sum.bapa
+  bapa
+}
+
+#example on one plot
+recent.OS("BB","7",2008)
+
+#Assign column for recent bapa
+annual.gr4$bapa<-0
+
+#Apply function to every row
+for(i in 1:nrow(annual.gr4)){
+ annual.gr4$bapa[i]<-recent.OS(annual.gr4$Installation[i], 
+                               annual.gr4$Plot[i],
+                               annual.gr4$Year_Measurement[i])
+}
+
+
+for(i in 1:nrow(merged_stagm_stag)){
+  merged_stagm_stag$ht_annual[i]<-annual.ht(merged_stagm_stag$conc[i], merged_stagm_stag$Year_Measurement[i])
+}
 
   

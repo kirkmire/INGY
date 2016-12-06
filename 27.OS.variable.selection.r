@@ -32,11 +32,10 @@ agg.over.data <-aggregate(soverhist$BAPA,
                                   "Year_MeasurementOS"=soverhist$Year_Measurement)
                                   ,FUN=sum)
 
-#need to add a column to annual growth that assigns a OS reference year
-
 
 names(agg.over.data)[4]<-c("over.sum.bapa")
 
 
+#need to add a column to annual growth that assigns a OS reference year
 
   

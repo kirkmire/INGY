@@ -16,7 +16,6 @@ threeDVeg<-merge(BAPA.by.inst,OS.ctrl.plot, by.x = "Installation", by.y = "Insta
 threeDVeg<-threeDVeg[!(threeDVeg$Installation %in% drp),]
 
 
-
 library(ggplot2)
 
 ba.final<-merge(locdataX,ba.final,by="Installation")

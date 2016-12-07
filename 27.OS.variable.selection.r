@@ -1,24 +1,10 @@
 
-#Below is from 4.explor.plots (describes the OS in terms of BAPA post harvest)#
-library(plyr)
+#Makes OS dbh that are NA = zero, NA typically corresponds to 
+#cut or dead trees, subsequent code wont (sum) aggregate NAs
 
-BAPA.by.inst<-ddply(OverS, "Installation", summarise, BAPA.inst= sum(BAPA))
-
-BAPA.by.inst$ave.BAPA<-BAPA.by.inst$BAPA.inst/7
+soverhist$DBH[is.na(soverhist$DBH)] <- 0
 
 
-bapa.by.inst<-BAPA.by.inst[!(BAPA.by.inst$Installation %in% drp),]
-
-#Merges OS data to form df with OS BAPA, SI, and US Volume#
-threeDVeg<-merge(BAPA.by.inst,OS.ctrl.plot, by.x = "Installation", by.y = "Installation",all=F)
-
-#Remove Installations#
-threeDVeg<-threeDVeg[!(threeDVeg$Installation %in% drp),]
-
-
-library(ggplot2)
-
-ba.final<-merge(locdataX,ba.final,by="Installation")
 
 
 #Aggregates OS ba data to the plot level 
@@ -63,14 +49,12 @@ annual.gr4$bapa<-0
 
 #Apply function to every row
 for(i in 1:nrow(annual.gr4)){
- annual.gr4$bapa[i]<-recent.OS(annual.gr4$Installation[i], 
-                               annual.gr4$Plot[i],
-                               annual.gr4$Year_Measurement[i])
+ annual.gr4$bapa[i]<-recent.OS(annual.gr4$Installation[1], 
+                               annual.gr4$Plot[1],
+                               annual.gr4$Year_Measurement[1])
 }
 
 
-for(i in 1:nrow(merged_stagm_stag)){
-  merged_stagm_stag$ht_annual[i]<-annual.ht(merged_stagm_stag$conc[i], merged_stagm_stag$Year_Measurement[i])
-}
+
 
   

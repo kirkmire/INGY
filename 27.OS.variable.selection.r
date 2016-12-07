@@ -5,31 +5,39 @@
 soverhist$DBH[is.na(soverhist$DBH)] <- 0
 
 
-
-
 #Aggregates OS ba data to the plot level 
 #trees may grow out of <10.5 in class that are in the quarter acre plot,
 #need to assign avariable that stays with OS tree regadless of growth (ie .26 or .46)
 OS.plot<-function(installation,plot,tree){
-  
-  #creates dataframe of an individual small tree in all meas years
+  #creates dataframe of an individual OS tree in all meas years
   treeinfo<-soverhist[soverhist$Installation==installation&soverhist$Plot==plot&
-                        soverhist$Tree=tree,]
-  years <- treeinfo$Year_MeasurementOS
-  #selects tree records that are less than specified year
-  relevant.years <- years[years<=year]
-  #selects the maximum tree record from those remaining
-  yearOS <- ifelse(length(relevant.years)==0,0,min(relevant.years))
-  
-  treeinfo <- treeinfo[treeinfo$Year_Measurement==yearOS,]
-  bapa<-treeinfo$over.sum.bapa
-  bapa
+          soverhist$Tree==tree,]
+  #selects the min year
+  years <- min(treeinfo$Year_Measurement)
+  treeinfo <- treeinfo[treeinfo$Year_Measurement==years,]
+if(treeinfo$DBH<10.5){
+  plot.size<-.26
+    }else{plot.size<-.46}
+  plot.size
 }
-soverhist$OSplot<-ifelse(soverhist$DBH<10.5,.26,.46) 
+
+#Example on one OS tree record
+OS.plot("BB",4,175)
+
+#Apply to all overhist records
+
+#Assign column for recent bapa
+soverhist$plot.size<-0
+
+#Apply function to every row
+for(i in 1:nrow(soverhist)){
+  soverhist$plot.size[i]<-OS.plot(soverhist$Installation[i], 
+                                soverhist$Plot[i],
+                                soverhist$Tree[i])
+}
 
 
-soverhist$BAPA<-ifelse(soverhist$DBH<10.5,((soverhist$DBH^2)*.005454)/.26,((soverhist$DBH^2)*.005454)/.46) 
-
+soverhist$BAPA<-((soverhist$DBH^2)*.005454)/soverhist$plot.size
 
 
 agg.over.data <-aggregate(soverhist$BAPA,
@@ -70,9 +78,9 @@ annual.gr4$bapa<-0
 
 #Apply function to every row
 for(i in 1:nrow(annual.gr4)){
- annual.gr4$bapa[i]<-recent.OS(annual.gr4$Installation[1], 
-                               annual.gr4$Plot[1],
-                               annual.gr4$Year_Measurement[1])
+ annual.gr4$bapa[i]<-recent.OS(annual.gr4$Installation[i], 
+                               annual.gr4$Plot[i],
+                               annual.gr4$Year_Measurement[i])
 }
 
 

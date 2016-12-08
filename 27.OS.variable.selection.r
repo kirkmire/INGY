@@ -1,4 +1,14 @@
 
+#code to remove all .y variables from df 
+#may need to move this
+
+for(i in 3:18){
+  y.names<-c(y.names,names(annual.gr4[,substring(names(annual.gr4),i-1,i)==".y"]))
+}
+
+annual.gr4<-annual.gr4[,! names(annual.gr4) %in% y.names]
+
+
 #Makes OS dbh that are NA = zero, NA typically corresponds to 
 #cut or dead trees, subsequent code wont (sum) aggregate NAs
 
@@ -57,12 +67,12 @@ names(agg.over.data)[4]<-c("over.sum.bapa")
 
 recent.OS<-function(installation,plot,year){
   
-  #creates dataframe of an individual small tree in all meas years
+  #creates dataframe of an individual OS records in all meas years
   treeinfo<-agg.over.data[agg.over.data$Installation==installation&agg.over.data$Plot==plot,]
   years <- treeinfo$Year_MeasurementOS
-  #selects tree records that are less than specified year
+  #selects OS records that are less than specified year
   relevant.years <- years[years<=year]
-  #selects the maximum tree record from those remaining
+  #selects the maximum year OS record from those remaining
   yearOS <- ifelse(length(relevant.years)==0,0,max(relevant.years))
 
   treeinfo <- treeinfo[treeinfo$Year_Measurement==yearOS,]
@@ -102,60 +112,58 @@ if (is.na(soverhist$CrownWidth_2[i])==T) {
 }
 
 #Computes Crown Area in square feet
-soverhist$CrownWidth_3<-((soverhist$CrownWidth_3/2)^2)*3.14
+soverhist$CrownWidth_4<-((soverhist$CrownWidth_3/2)^2)*3.14
 
 #Computes Crown Area in terms of percent of an acre
-soverhist$Crown_MCA<-(soverhist$CrownWidth_3/43560)*100
+soverhist$Crown_MCA<-(soverhist$CrownWidth_3/(43560*soverhist$plot.size))
 
-soverhist$BAPA<-ifelse(soverhist$DBH<10.5,((soverhist$DBH^2)*.005454)/.26,((soverhist$DBH^2)*.005454)/.46) 
+#Aggregates Crown Width data to the plot level as CCF 
 
-agg.over.data <-aggregate(soverhist$BAPA,
+agg.over.data.CCF <-aggregate(soverhist$Crown_MCA,
                           by=list("Installation"=soverhist$Installation,
                                   "Plot"=soverhist$Plot,
                                   "Year_MeasurementOS"=soverhist$Year_Measurement)
                           ,FUN=sum)
 
-names(agg.over.data)[4]<-c("over.sum.bapa")
+names(agg.over.data.CCF)[4]<-c("CCF")
+
+#CCF appears to be highly correlated with year measurement
+#Need to adjust for this
+
+plot(agg.over.data.CCF$CCF~agg.over.data.CCF$Year_MeasurementOS)
 
 
-#Aggregates Crown Width data to the plot level 
-
-soverhist$BAPA<-ifelse(soverhist$DBH<10.5,((soverhist$DBH^2)*.005454)/.26,((soverhist$DBH^2)*.005454)/.46) 
-
-agg.over.data <-aggregate(soverhist$BAPA,
-                          by=list("Installation"=soverhist$Installation,
-                                  "Plot"=soverhist$Plot,
-                                  "Year_MeasurementOS"=soverhist$Year_Measurement)
-                          ,FUN=sum)
-
-names(agg.over.data)[4]<-c("over.sum.bapa")
-
-
-#need to add a column to annual growth that assigns a OS reference year
-#reference year should be before 
-
-#Function that assigns an OSBA variable based on Year_Measurement of 
+#Function that assigns an CCF variable based on Year_Measurement of 
 #tree record and equal to or most recent year measurement
 
-recent.OS<-function(installation,plot,year){
+recent.CCF<-function(installation,plot,year){
   
-  #creates dataframe of an individual small tree in all meas years
-  treeinfo<-agg.over.data[agg.over.data$Installation==installation&agg.over.data$Plot==plot,]
+  #creates dataframe of OS records in all meas years
+  treeinfo<-agg.over.data.CCF[agg.over.data.CCF$Installation==installation&agg.over.data.CCF$Plot==plot,]
   years <- treeinfo$Year_MeasurementOS
-  #selects tree records that are less than specified year
+  #selects OS records that are less than specified year
   relevant.years <- years[years<=year]
-  #selects the maximum tree record from those remaining
+  #selects the maximum year OS record from those remaining
   yearOS <- ifelse(length(relevant.years)==0,0,max(relevant.years))
   
   treeinfo <- treeinfo[treeinfo$Year_Measurement==yearOS,]
-  bapa<-treeinfo$over.sum.bapa
-  bapa
+  CCF<-treeinfo$CCF
+  CCF
 }
 
+#example on one plot
+recent.CCF("BB","7",2008)
 
+#Assign column for recent bapa
+annual.gr4$CCF<-0
 
-
-
+#Apply function to every row
+for(i in 1:nrow(annual.gr4)){
+  annual.gr4$CCF[i]<-recent.CCF(
+    annual.gr4$Installation[i], 
+    annual.gr4$Plot[i],
+    annual.gr4$Year_Measurement[i])
+}
 
 
 

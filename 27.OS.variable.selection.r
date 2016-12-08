@@ -175,6 +175,7 @@ is.factor(agg.over.data.CCF$Installation)
 library(lattice)
 xyplot(agg.over.data.CCF$CCF~agg.over.data.CCF$Year_MeasurementOS|factor(agg.over.data.CCF$Installation))
 
+#Obtains an estimate of bapa at the plot level 
 
 bapa.OS.lm<-function(installation, plot, year){
   plot.info<-agg.over.data[agg.over.data$Installation==installation&agg.over.data$Plot==plot,]
@@ -205,6 +206,7 @@ for(i in 1:nrow(annual.gr4)){
 #George mentioned modeling individual tree CWs then
 #aggregating as an estimated CCF...or using FVS
 
-
+#seems like OLS might be appropriate considering that 
+#CCF and BAPA are plot level aggregates 
   
 

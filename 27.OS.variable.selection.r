@@ -84,7 +84,7 @@ recent.OS<-function(installation,plot,year){
 recent.OS("BB","7",2008)
 
 #Assign column for recent bapa
-annual.gr4$bapa<-0
+annual.gr4$bapa1<-0
 
 #Apply function to every row
 for(i in 1:nrow(annual.gr4)){
@@ -127,10 +127,6 @@ agg.over.data.CCF <-aggregate(soverhist$Crown_MCA,
 
 names(agg.over.data.CCF)[4]<-c("CCF")
 
-#CCF appears to be highly correlated with year measurement
-#Need to adjust for this
-
-plot(agg.over.data.CCF$CCF~agg.over.data.CCF$Year_MeasurementOS)
 
 
 #Function that assigns an CCF variable based on Year_Measurement of 
@@ -165,6 +161,50 @@ for(i in 1:nrow(annual.gr4)){
     annual.gr4$Year_Measurement[i])
 }
 
+#Do I need to standardize the OS measurements using
+#year_measurement information?
+#more recent OS measurements are obviously greater 
+#than those that were acquired earlier in the study
+
+#...project OS attributes forward at an installation level
+#...would allow for an estimation of previous years OS attributes
+#...a more realistic and defensible variable
+
+is.factor(agg.over.data.CCF$Installation)
+
+library(lattice)
+xyplot(agg.over.data.CCF$CCF~agg.over.data.CCF$Year_MeasurementOS|factor(agg.over.data.CCF$Installation))
+
+
+bapa.OS.lm<-function(installation, plot, year){
+  plot.info<-agg.over.data[agg.over.data$Installation==installation&agg.over.data$Plot==plot,]
+  bapa.model<-lm(plotinfo$over.sum.bapa~plotinfo$Year_MeasurementOS)
+  est.bapa.OS<-bapa.model$coefficients[1]+((year-1)*bapa.model$coefficients[2])
+  est.bapa.OS
+}
+#Example:
+plotinfo<-agg.over.data[agg.over.data$Installation=="BB"&agg.over.data$Plot==1,]
+bapa.model<-lm(plotinfo$over.sum.bapa~plotinfo$Year_MeasurementOS)
+bapa.model.coef<-c(bapa.model$coefficients[2])
+summary(bapa.model)
+plot(bapa.model)
+
+bapa.OS.lm("BB",1,2008)
+
+  
+bapa.OS<-0
+
+for(i in 1:nrow(annual.gr4)){
+  annual.gr4$bapa.OS[i]<-bapa.OS.lm(
+    annual.gr4$Installation[i], 
+    annual.gr4$Plot[i],
+    annual.gr4$Year_Measurement[i])
+}
+
+
+#George mentioned modeling individual tree CWs then
+#aggregating as an estimated CCF...or using FVS
 
 
   
+

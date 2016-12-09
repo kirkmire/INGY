@@ -199,10 +199,10 @@ bapa.OS.lm<-function(installation, plot, year){
     est.bapa.OS<-plotinfo$over.sum.bapa[plotinfo$Year_MeasurementOS==max(plotinfo$Year_MeasurementOS)]
   }else {
     newplotinfo<-plotinfo[plotinfo$Year_MeasurementOS>year,][1,]
-    newplotinfo2<-plotinfo[plotinfo$Year_MeasurementOS<=year,]
-    newplotinfo2<-newplotinfo2[nrow(newplotinfo2),]
-    newplotinfo3<-rbind(newplotinfo,newplotinfo2)
-    bapa.model<-lm(newplotinfo3$over.sum.bapa~newplotinfo3$Year_MeasurementOS)
+    first.year<-plotinfo[plotinfo$Year_MeasurementOS<=year,]
+    second.year<-newplotinfo2[nrow(newplotinfo2),]
+    lm.years<-rbind(first.year,second.year)
+    bapa.model<-lm(lm.years$over.sum.bapa~lm.years$Year_MeasurementOS)
     est.bapa.OS<-bapa.model$coefficients[1]+((year)*bapa.model$coefficients[2])
       }
      est.bapa.OS
@@ -214,7 +214,7 @@ bapa.model.coef<-c(bapa.model$coefficients[2])
 summary(bapa.model)
 plot(bapa.model)
 
-bapa.OS.lm("BB",1,1999)
+bapa.OS.lm("BB",1,2008)
 
   
 annual.gr4$bapa.OS<-0

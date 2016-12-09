@@ -58,6 +58,15 @@ agg.over.data <-aggregate(soverhist$BAPA,
 
 names(agg.over.data)[4]<-c("over.sum.bapa")
 
+inst.year<-unique(agg.over.data[,c(1,3)])
+#every inst year combo
+inst.yr.1<-inst.year;inst.yr.1$Plot<-1
+inst.yr.2<-inst.year;inst.yr.2$Plot<-2
+inst.yr.3<-inst.year;inst.yr.3$Plot<-3
+
+
+rbind(inst.yr.1,inst.yr.2,inst.yr.3)
+#plot basal areas to check for (also add TPA)
 
 #need to add a column to annual growth that assigns a OS reference year
 #reference year should be before 
@@ -178,22 +187,37 @@ xyplot(agg.over.data.CCF$CCF~agg.over.data.CCF$Year_MeasurementOS|factor(agg.ove
 #Obtains an estimate of bapa at the plot level 
 
 bapa.OS.lm<-function(installation, plot, year){
-  plot.info<-agg.over.data[agg.over.data$Installation==installation&agg.over.data$Plot==plot,]
-  bapa.model<-lm(plotinfo$over.sum.bapa~plotinfo$Year_MeasurementOS)
-  est.bapa.OS<-bapa.model$coefficients[1]+((year-1)*bapa.model$coefficients[2])
-  est.bapa.OS
+ # installation<-"BB"
+ # plot<-1
+ # year<-2008
+  
+  
+  plotinfo<-agg.over.data[agg.over.data$Installation==installation&agg.over.data$Plot==plot,]
+  if(min(plotinfo$Year_MeasurementOS)>=year){
+    est.bapa.OS<-plotinfo$over.sum.bapa[plotinfo$Year_MeasurementOS==min(plotinfo$Year_MeasurementOS)]
+  } else  if(max(plotinfo$Year_MeasurementOS)<=year){
+    est.bapa.OS<-plotinfo$over.sum.bapa[plotinfo$Year_MeasurementOS==max(plotinfo$Year_MeasurementOS)]
+  }else {
+    newplotinfo<-plotinfo[plotinfo$Year_MeasurementOS>year,][1,]
+    newplotinfo2<-plotinfo[plotinfo$Year_MeasurementOS<=year,]
+    newplotinfo2<-newplotinfo2[nrow(newplotinfo2),]
+    newplotinfo3<-rbind(newplotinfo,newplotinfo2)
+    bapa.model<-lm(newplotinfo3$over.sum.bapa~newplotinfo3$Year_MeasurementOS)
+    est.bapa.OS<-bapa.model$coefficients[1]+((year)*bapa.model$coefficients[2])
+      }
+     est.bapa.OS
 }
 #Example:
-plotinfo<-agg.over.data[agg.over.data$Installation=="BB"&agg.over.data$Plot==1,]
+plot.info<-agg.over.data[agg.over.data$Installation=="BB"&agg.over.data$Plot==1,]
 bapa.model<-lm(plotinfo$over.sum.bapa~plotinfo$Year_MeasurementOS)
 bapa.model.coef<-c(bapa.model$coefficients[2])
 summary(bapa.model)
 plot(bapa.model)
 
-bapa.OS.lm("BB",1,2008)
+bapa.OS.lm("BB",1,1999)
 
   
-bapa.OS<-0
+annual.gr4$bapa.OS<-0
 
 for(i in 1:nrow(annual.gr4)){
   annual.gr4$bapa.OS[i]<-bapa.OS.lm(

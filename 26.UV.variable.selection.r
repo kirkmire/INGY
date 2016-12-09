@@ -64,6 +64,10 @@ veg.T.names<-names(stran[,substring(names(stran),4,4)=="T"])
 for(i in veg.T.names) {
   stran[i][is.na(stran[i])] <- 0
 }
+#Count transect observation number
+#If not figure out missing
+#probably supposed to be zero
+
 
 #calculate difference in top and base meas
 stran$diffT<-stran$topT-stran$basT
@@ -73,7 +77,7 @@ agg.tran.data <-aggregate(stran$diffT,
                     by=list("Installation"=stran$Installation,
                             "Plot"=stran$Plot,
                             "Year_Measurement"=stran$Year_Measurement,
-                            "Lifeform"=stran$Lifeform),FUN=mean)
+                            "Lifeform"=stran$Lifeform),FUN=mean)#total/number of points
 
 #Reshapes transect data so each plot is a row
 agg.tran.data1<-reshape(agg.tran.data, direction="wide",idvar=

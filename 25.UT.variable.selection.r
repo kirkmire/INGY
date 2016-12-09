@@ -104,7 +104,7 @@ annual.gr2<-annual.gr[annual.gr$Installation %in% sim, ]
 annual.gr2<-annual.gr2[!annual.gr2$STP==6,]
 
 #GAM for 2 ht class
-gam.st2<-gam(ht_annual~srHeight_Total+s(two),data=annual.gr2, family=gaussian(link="log"))
+gam.st2<-gam(ht_annual~s(srHeight_Total)+s(CrownWidth),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.st2)
 
 #par(mfrow=c(2,2),mar=c(4,4,1,2))
@@ -113,10 +113,10 @@ plot(gam.st2,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 par(mfrow=c(1,2))
 plot(predict(gam.st2),residuals(gam.st2),xlab="predicted",ylab="residuals")
 qqnorm(residuals(gam.st2),main="")
-
+range(annual.gr2$ht_annual)
 
 #GAM for 4 ht class
-gam.st4<-gam(ht_annual~srHeight_Total+s(four),data=annual.gr2, family=gaussian(link="log"))
+gam.st4<-gam(ht_annual~srHeight_Total+s(four),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.st4)
 gam.check(gam.st4)
 
@@ -367,5 +367,8 @@ aic.list[,aic.list==min(aic.list)]
 #aic
 
 
-
+qr.nothing<-rq(ht_annual~CrownWidth,tau=c(.5),data=annual.gr2)
+summary(qr.nothing)
+AIC(qr.nothing)
+aic.list<-c(aic.list,)[1])
     

@@ -115,6 +115,7 @@ plot(gam.st2,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 #qqnorm(residuals(gam.st2),main="")
 #range(annual.gr2$ht_annual)
 
+
 #GAM for 4 ht class
 gam.st4<-gam(ht_annual~s(srHeight_Total)+s(four),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.st4)

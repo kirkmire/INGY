@@ -78,5 +78,10 @@ other.names<-c("Height_Growth3Year","ID.x")
 annual.gr<-annual.gr[,!(names(annual.gr) %in% f.names)]
 annual.gr<-annual.gr[,!(names(annual.gr) %in% other.names)]
 
+#Remove tree EM 1,5,636, lean resulted in measurement inconsistancies and a -10 ft annual ht
+#maybe remove from annual.gr get it out of model earlier
+
+annual.gr<-annual.gr[!annual.gr$conc=="EM,1,5,636",]
+
 
             

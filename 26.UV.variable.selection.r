@@ -115,7 +115,6 @@ annual.gr4<-merge(annual.gr4,agg.grass.data,by=c("Installation","Plot","Year_Mea
 
 
 
-
 #Removes 6th stp plots from analysis
 annual.gr4<-annual.gr4[!annual.gr4$STP==6,]
 

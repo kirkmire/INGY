@@ -1,6 +1,7 @@
 
 #code to remove all .y variables from df 
 #may need to move this
+y.names<-numeric(0)
 
 for(i in 3:18){
   y.names<-c(y.names,names(annual.gr4[,substring(names(annual.gr4),i-1,i)==".y"]))
@@ -63,44 +64,73 @@ inst.year<-unique(agg.over.data[,c(1,3)])
 inst.yr.1<-inst.year;inst.yr.1$Plot<-1
 inst.yr.2<-inst.year;inst.yr.2$Plot<-2
 inst.yr.3<-inst.year;inst.yr.3$Plot<-3
+inst.yr.4<-inst.year;inst.yr.4$Plot<-4
+inst.yr.5<-inst.year;inst.yr.5$Plot<-5
+inst.yr.6<-inst.year;inst.yr.6$Plot<-6
+inst.yr.7<-inst.year;inst.yr.7$Plot<-7
+
+inst.combos<-rbind(inst.yr.1,inst.yr.2,inst.yr.3,
+                   inst.yr.4,inst.yr.5,inst.yr.6
+                  ,inst.yr.7)
+
+inst.combos$conc<-paste(inst.combos$Installation,inst.combos$Plot,inst.combos$Year_MeasurementOS,sep=",")
+
+agg.over.data$conc<-paste(agg.over.data$Installation,agg.over.data$Plot,agg.over.data$Year_MeasurementO,sep=",")
+
+agg.over.check<-merge(agg.over.data,inst.combos,by=("conc"))
+
+missing.OS<-subset(inst.combos,!( inst.combos$conc %in% agg.over.check$conc))
+missing.OS.that.matter<-missing.OS[! missing.OS$Installation %in% drp60,]
+
+#GC plot 5 OS measurements missing
+#TC plots 2,6 and 7 missing as well
 
 
-rbind(inst.yr.1,inst.yr.2,inst.yr.3)
-#plot basal areas to check for (also add TPA)
 
-#need to add a column to annual growth that assigns a OS reference year
-#reference year should be before 
+
+#plot basal areas to check for missing inst/years
+library(lattice)
+xyplot(agg.over.data$over.sum.bapa~agg.over.data$Year_MeasurementOS|agg.over.data$Installation,groups=agg.over.data$Plot)
+
+#Upper Metcalf OSBA decreased bt 1999 and 2010 across all installations
+#possible reasons are mortality, harvest or measurement error
+
+soverhistUM<-soverhist[soverhist$Installation=="UM",]
+xyplot(soverhistUM$Height_Total~soverhistUM$Year_Measurement,groups=soverhistUM$Tree,type="b")
+
+#tallest UM trees seems to be missing from 2010 remeasurement
+#unable to locate hard copies of UM OS measurements
+
 
 #Function that assigns an OSBA variable based on Year_Measurement of 
-#tree record and equal to or most recent year measurement
-
-recent.OS<-function(installation,plot,year){
-  
-  #creates dataframe of an individual OS records in all meas years
-  treeinfo<-agg.over.data[agg.over.data$Installation==installation&agg.over.data$Plot==plot,]
-  years <- treeinfo$Year_MeasurementOS
+#OS trees nearest that of small trees
+#replaced in favor of interpolative BA function
+#recent.OS<-function(installation,plot,year){
+    #creates dataframe of an individual OS records in all meas years
+ # treeinfo<-agg.over.data[agg.over.data$Installation==installation&agg.over.data$Plot==plot,]
+  #years <- treeinfo$Year_MeasurementOS
   #selects OS records that are less than specified year
-  relevant.years <- years[years<=year]
+ # relevant.years <- years[years<=year]
   #selects the maximum year OS record from those remaining
-  yearOS <- ifelse(length(relevant.years)==0,0,max(relevant.years))
+ # yearOS <- ifelse(length(relevant.years)==0,0,max(relevant.years))
 
-  treeinfo <- treeinfo[treeinfo$Year_Measurement==yearOS,]
-  bapa<-treeinfo$over.sum.bapa
-  bapa
-}
+ # treeinfo <- treeinfo[treeinfo$Year_Measurement==yearOS,]
+ # bapa<-treeinfo$over.sum.bapa
+ # bapa
+#}
 
 #example on one plot
-recent.OS("BB","7",2008)
+#recent.OS("BB","7",2008)
 
 #Assign column for recent bapa
-annual.gr4$bapa1<-0
+#annual.gr4$bapa1<-0
 
 #Apply function to every row
-for(i in 1:nrow(annual.gr4)){
- annual.gr4$bapa[i]<-recent.OS(annual.gr4$Installation[i], 
-                               annual.gr4$Plot[i],
-                               annual.gr4$Year_Measurement[i])
-}
+#for(i in 1:nrow(annual.gr4)){
+# annual.gr4$bapa[i]<-recent.OS(annual.gr4$Installation[i], 
+                              # annual.gr4$Plot[i],
+                              # annual.gr4$Year_Measurement[i])
+#}
 
 
 #Crown Competition Factor
@@ -140,8 +170,9 @@ names(agg.over.data.CCF)[4]<-c("CCF")
 
 #Function that assigns an CCF variable based on Year_Measurement of 
 #tree record and equal to or most recent year measurement
+#Needs to be replaced with interpolative function
 
-recent.CCF<-function(installation,plot,year){
+#recent.CCF<-function(installation,plot,year){
   
   #creates dataframe of OS records in all meas years
   treeinfo<-agg.over.data.CCF[agg.over.data.CCF$Installation==installation&agg.over.data.CCF$Plot==plot,]
@@ -163,26 +194,19 @@ recent.CCF("BB","7",2008)
 annual.gr4$CCF<-0
 
 #Apply function to every row
-for(i in 1:nrow(annual.gr4)){
+#for(i in 1:nrow(annual.gr4)){
   annual.gr4$CCF[i]<-recent.CCF(
     annual.gr4$Installation[i], 
     annual.gr4$Plot[i],
     annual.gr4$Year_Measurement[i])
 }
 
-#Do I need to standardize the OS measurements using
-#year_measurement information?
-#more recent OS measurements are obviously greater 
-#than those that were acquired earlier in the study
-
-#...project OS attributes forward at an installation level
-#...would allow for an estimation of previous years OS attributes
-#...a more realistic and defensible variable
 
 is.factor(agg.over.data.CCF$Installation)
 
 library(lattice)
 xyplot(agg.over.data.CCF$CCF~agg.over.data.CCF$Year_MeasurementOS|factor(agg.over.data.CCF$Installation))
+
 
 #Obtains an estimate of bapa at the plot level 
 
@@ -190,9 +214,7 @@ bapa.OS.lm<-function(installation, plot, year){
  # installation<-"BB"
  # plot<-1
  # year<-2008
-  
-  
-  plotinfo<-agg.over.data[agg.over.data$Installation==installation&agg.over.data$Plot==plot,]
+    plotinfo<-agg.over.data[agg.over.data$Installation==installation&agg.over.data$Plot==plot,]
   if(min(plotinfo$Year_MeasurementOS)>=year){
     est.bapa.OS<-plotinfo$over.sum.bapa[plotinfo$Year_MeasurementOS==min(plotinfo$Year_MeasurementOS)]
   } else  if(max(plotinfo$Year_MeasurementOS)<=year){
@@ -200,7 +222,7 @@ bapa.OS.lm<-function(installation, plot, year){
   }else {
     newplotinfo<-plotinfo[plotinfo$Year_MeasurementOS>year,][1,]
     first.year<-plotinfo[plotinfo$Year_MeasurementOS<=year,]
-    second.year<-newplotinfo2[nrow(newplotinfo2),]
+    second.year<-newplotinfo[nrow(newplotinfo),]
     lm.years<-rbind(first.year,second.year)
     bapa.model<-lm(lm.years$over.sum.bapa~lm.years$Year_MeasurementOS)
     est.bapa.OS<-bapa.model$coefficients[1]+((year)*bapa.model$coefficients[2])
@@ -226,11 +248,10 @@ for(i in 1:nrow(annual.gr4)){
     annual.gr4$Year_Measurement[i])
 }
 
+i
 
-#George mentioned modeling individual tree CWs then
-#aggregating as an estimated CCF...or using FVS
 
-#seems like OLS might be appropriate considering that 
+#OLS appropriate considering that 
 #CCF and BAPA are plot level aggregates 
   
 

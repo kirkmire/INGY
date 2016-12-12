@@ -5,7 +5,7 @@ merged_stagm_stag$Installation<-as.character(merged_stagm_stag$Installation)
 timeline$Installation<-as.character(timeline$Installation)
 
 #Removes tree records that are from dropped installations
-merged_stagm_stag<-merged_stagm_stag[! merged_stagm_stag$Installation %in% drp,]
+merged_stagm_stag<-merged_stagm_stag[! merged_stagm_stag$Installation %in% drp60,]
 
 #Removes tree records where year measurement=year growth
 merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Year_Measurement==merged_stagm_stag$Year_Growth,]

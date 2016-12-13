@@ -92,7 +92,18 @@ names(agg.tran.data1)[4:6]<-c("diff.F","diff.null","diff.S")
 
 annual.gr4<-merge(annual.gr3,agg.tran.data1,by=c("Installation","Plot","Year_Measurement"))
                   
-#Investigate loss of rows in merging and lack of visibility in diff columns
+
+#code to remove all .y variables from df 
+
+y.names<-numeric(0)
+
+for(i in 3:18){
+  y.names<-c(y.names,names(annual.gr4[,substring(names(annual.gr4),i-1,i)==".y"]))
+}
+
+annual.gr4<-annual.gr4[,! names(annual.gr4) %in% y.names]
+
+
 
 #unsure what "NA" or "NULL" lifeforms translates to
 #protocol seems tohave changed in later years of the study in
@@ -150,7 +161,7 @@ par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.tran.F,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 #GAM for Grass transect data
-gam.tran.GR<-gam(ht_annual~s(srHeight_Total)+s(grass.ht.x),data=annual.gr4, family=gaussian(link="identity"))
+gam.tran.GR<-gam(ht_annual~s(srHeight_Total)+s(grass.ht),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.tran.GR)
 
 par(mfrow=c(1,2),mar=c(4,4,1,2))
@@ -191,7 +202,7 @@ summary(qr.4m.S)
 aic.list.veg<-c(aic.list.veg,AIC(qr.4m.S)[1])
 
 #QR for transect grass height
-qr.tran.gr<-rq(ht_annual~srHeight_Total+grass.ht.x+STP,tau=c(.5),data=annual.gr4)
+qr.tran.gr<-rq(ht_annual~srHeight_Total+grass.ht+STP,tau=c(.5),data=annual.gr4)
 summary(qr.tran.gr)
 aic.list.veg<-c(aic.list.veg,AIC(qr.tran.gr)[1])
 

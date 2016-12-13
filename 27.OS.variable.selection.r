@@ -1,13 +1,4 @@
 
-#code to remove all .y variables from df 
-#may need to move this
-y.names<-numeric(0)
-
-for(i in 3:18){
-  y.names<-c(y.names,names(annual.gr4[,substring(names(annual.gr4),i-1,i)==".y"]))
-}
-
-annual.gr4<-annual.gr4[,! names(annual.gr4) %in% y.names]
 
 
 #Makes OS dbh that are NA = zero, NA typically corresponds to 
@@ -85,8 +76,34 @@ missing.OS.that.matter<-missing.OS[! missing.OS$Installation %in% drp60,]
 #GC plot 5 OS measurements missing
 #TC plots 2,6 and 7 missing as well
 
+#Makes "zero" rows for GC Plot#5 and TC Plots#2,6,7
 
+newRow <- data.frame(Installation="GC",Plot=5,Year_MeasurementOS=1999,over.sum.bapa=0,conc="GC,5,1999")
+agg.over.data<-rbind(newRow,agg.over.data)
 
+newRow1 <- data.frame(Installation="GC",Plot=5,Year_MeasurementOS=2008,over.sum.bapa=0,conc="GC,5,2008")
+agg.over.data<-rbind(newRow1,agg.over.data)
+
+newRow2 <- data.frame(Installation="GC",Plot=5,Year_MeasurementOS=2012,over.sum.bapa=0,conc="GC,5,2012")
+agg.over.data<-rbind(newRow2,agg.over.data)
+
+newRow3 <- data.frame(Installation="TC",Plot=2,Year_MeasurementOS=2000,over.sum.bapa=0,conc="TC,2,2000")
+agg.over.data<-rbind(newRow3,agg.over.data)
+
+newRow4 <- data.frame(Installation="TC",Plot=2,Year_MeasurementOS=2010,over.sum.bapa=0,conc="TC,2,2010")
+agg.over.data<-rbind(newRow4,agg.over.data)
+
+newRow5 <- data.frame(Installation="TC",Plot=6,Year_MeasurementOS=2000,over.sum.bapa=0,conc="TC,6,2000")
+agg.over.data<-rbind(newRow5,agg.over.data)
+
+newRow6 <- data.frame(Installation="TC",Plot=6,Year_MeasurementOS=2010,over.sum.bapa=0,conc="TC,6,2010")
+agg.over.data<-rbind(newRow6,agg.over.data)
+
+newRow7 <- data.frame(Installation="TC",Plot=7,Year_MeasurementOS=2010,over.sum.bapa=0,conc="TC,7,2000")
+agg.over.data<-rbind(newRow7,agg.over.data)
+
+newRow8 <- data.frame(Installation="TC",Plot=7,Year_MeasurementOS=2010,over.sum.bapa=0,conc="TC,7,2010")
+agg.over.data<-rbind(newRow8,agg.over.data)
 
 #plot basal areas to check for missing inst/years
 library(lattice)
@@ -168,42 +185,6 @@ names(agg.over.data.CCF)[4]<-c("CCF")
 
 
 
-#Function that assigns an CCF variable based on Year_Measurement of 
-#tree record and equal to or most recent year measurement
-#Needs to be replaced with interpolative function
-
-#recent.CCF<-function(installation,plot,year){
-  
-  #creates dataframe of OS records in all meas years
-  treeinfo<-agg.over.data.CCF[agg.over.data.CCF$Installation==installation&agg.over.data.CCF$Plot==plot,]
-  years <- treeinfo$Year_MeasurementOS
-  #selects OS records that are less than specified year
-  relevant.years <- years[years<=year]
-  #selects the maximum year OS record from those remaining
-  yearOS <- ifelse(length(relevant.years)==0,0,max(relevant.years))
-  
-  treeinfo <- treeinfo[treeinfo$Year_Measurement==yearOS,]
-  CCF<-treeinfo$CCF
-  CCF
-}
-
-#example on one plot
-recent.CCF("BB","7",2008)
-
-#Assign column for recent bapa
-annual.gr4$CCF<-0
-
-#Apply function to every row
-#for(i in 1:nrow(annual.gr4)){
-  annual.gr4$CCF[i]<-recent.CCF(
-    annual.gr4$Installation[i], 
-    annual.gr4$Plot[i],
-    annual.gr4$Year_Measurement[i])
-}
-
-
-is.factor(agg.over.data.CCF$Installation)
-
 library(lattice)
 xyplot(agg.over.data.CCF$CCF~agg.over.data.CCF$Year_MeasurementOS|factor(agg.over.data.CCF$Installation))
 
@@ -236,7 +217,8 @@ bapa.model.coef<-c(bapa.model$coefficients[2])
 summary(bapa.model)
 plot(bapa.model)
 
-bapa.OS.lm("BB",1,2008)
+bapa.OS.lm("GC",5,1999)
+#issue seems to be the 
 
   
 annual.gr4$bapa.OS<-0
@@ -248,10 +230,51 @@ for(i in 1:nrow(annual.gr4)){
     annual.gr4$Year_Measurement[i])
 }
 
-i
-
+#Installation PC missing from OS, check for it
 
 #OLS appropriate considering that 
 #CCF and BAPA are plot level aggregates 
-  
+
+
+#Obtains an estimate of CCF at the plot level
+
+
+CCF.OS.lm<-function(installation, plot, year){
+  # installation<-"BB"
+  # plot<-1
+  # year<-2008
+  plotinfo<-agg.over.data.CCF[agg.over.data.CCF$Installation==installation&agg.over.data.CCF$Plot==plot,]
+  if(min(plotinfo$Year_MeasurementOS)>=year){
+    est.CCF.OS<-plotinfo$CCF[plotinfo$Year_MeasurementOS==min(plotinfo$Year_MeasurementOS)]
+  } else  if(max(plotinfo$Year_MeasurementOS)<=year){
+    est.CCF.OS<-plotinfo$over.sum.CCF[plotinfo$Year_MeasurementOS==max(plotinfo$Year_MeasurementOS)]
+  }else {
+    newplotinfo<-plotinfo[plotinfo$Year_MeasurementOS>year,][1,]
+    first.year<-plotinfo[plotinfo$Year_MeasurementOS<=year,]
+    second.year<-newplotinfo[nrow(newplotinfo),]
+    lm.years<-rbind(first.year,second.year)
+    CCF.model<-lm(lm.years$over.sum.CCF~lm.years$Year_MeasurementOS)
+    est.CCF.OS<-CCF.model$coefficients[1]+((year)*bapa.model$coefficients[2])
+  }
+  est.CCF.OS
+}
+#Example:
+plot.info<-agg.over.data.CCF[agg.over.data.CCF$Installation=="BB"&agg.over.data.CCF$Plot==1,]
+CCF.model<-lm(plotinfo$over.sum.CCF~plotinfo$Year_MeasurementOS)
+CCF.model.coef<-c(CCF.model$coefficients[2])
+summary(CCF.model)
+plot(CCF.model)
+
+CCF.OS.lm("BB",1,2008)
+
+
+annual.gr4$CCF.OS<-0
+
+for(i in 1:nrow(annual.gr4)){
+  annual.gr4$CCF.OS[i]<-bapa.OS.lm(
+    annual.gr4$Installation[i], 
+    annual.gr4$Plot[i],
+    annual.gr4$Year_Measurement[i])
+}
+
 

@@ -602,6 +602,10 @@ colnames(aic.list.OS.CW)<-(OS.variable)
 
 rbind(aic.list.OS,aic.list.OS.CW)
 
+#CW has clearly seperated from stpa 
+#BAPA OS var only has a marginally lower
+#aic than the model that included the 
+#addition of shrub transect var
 
 
 

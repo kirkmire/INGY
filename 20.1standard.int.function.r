@@ -18,6 +18,15 @@ merged_stagm_stag$conc<-paste(merged_stagm_stag$Installation,merged_stagm_stag$P
                                 merged_stagm_stag$Tree,sep=",")
 
 
+#Removes DF measurements from year measurement ==2002,
+#no measurements from this year due to bees nest
+#not sure where these heights came from, inconsistant with following years
+
+merged_stagm_stag.z<-merged_stagm_stag[!(merged_stagm_stag$Installation=="DF"&
+                                       merged_stagm_stag$Plot==4&
+                                       merged_stagm_stag$STP==1&
+                                       merged_stagm_stag$Year_Measurement==2002),]
+
 #This function checks the year of measurement in the tree record against
 #the measurement timeline, finds the previous measurement year's height,
 #then subtracts the height in the first year of measurement to provide a 

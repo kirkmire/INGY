@@ -56,6 +56,35 @@ annual.gr3<- merge(annual.gr, veg_record,by=c("Installation","Plot","STP","Year_
 #annual.gr3<- merge(annual.gr3, veg_record4,by=c("Installation","Plot","STP","Year_Measurement"))
 
 
+
+##1m S, F, and PLOV diffs##
+
+sstp1$diff.1m<-sstp1$Top-sstp1$Bas
+
+#Aggragates 1m F diff to the plot level
+agg.1m.data <-aggregate(sstp1$diff.1m,
+                          by=list("Installation"=sstp1$Installation,
+                                  "Plot"=sstp1$Plot,
+                                  "Year_Measurement"=sstp1$Year_Measurement,
+                                  "Lifeform"=sstp1$Lifeform),FUN=mean)
+
+
+agg.1m.data1<-reshape(agg.1m.data, direction="wide",idvar=
+                          c("Installation","Plot","Year_Measurement"),
+                        timevar="Lifeform",v.names="x")
+
+names(agg.1m.data1)[4:7]<-c("diff.F.1m","diff.G.1m","diff.HS.1m","diff.LS.1m")
+names(agg.1m.data1)[9]<-c("diff.POLV.1m")
+
+
+#Merges aggregated transect data to the "big" df
+
+annual.gr4<-merge(annual.gr3,agg.1m.data1,by=c("Installation","Plot","Year_Measurement"))
+
+
+
+
+
 ##Transect Data##
 names(stran)[9:10]<-c("basT","topT")
 
@@ -91,7 +120,7 @@ names(agg.tran.data1)[4:6]<-c("diff.F","diff.null","diff.S")
 
 #Merges aggregated transect data to the "big" df
 
-annual.gr4<-merge(annual.gr3,agg.tran.data1,by=c("Installation","Plot","Year_Measurement"))
+annual.gr4<-merge(annual.gr4,agg.tran.data1,by=c("Installation","Plot","Year_Measurement"))
                   
 
 #code to remove all .y variables from df 
@@ -142,12 +171,31 @@ summary(gam.1m.polv)
 par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.1m.polv,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
-#GAM for 4m polyveg cover
-#gam.4m.polv<-gam(ht_annual~s(srHeight_Total)+s(Cov4.POLV),data=annual.gr4, family=gaussian(link="identity"))
+#GAM for 1m polyveg diff
+#gam.1m.polv.diff<-gam(ht_annual~s(srHeight_Total)+s(annual.gr4$diff.POLV.1m),data=annual.gr4, family=gaussian(link="identity"))
 #summary(gam.4m.polv)
+#Not enough (non-NA) data to do anything meaningful
 
-#par(mfrow=c(1,2),mar=c(4,4,1,2))
-#plot(gam.4m.polv,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+#GAM for 1m F diff
+gam.1m.F.diff<-gam(ht_annual~s(srHeight_Total)+s(annual.gr4$diff.F.1m),data=annual.gr4, family=gaussian(link="identity"))
+summary(gam.1m.F.diff)
+
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.1m.F.diff,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+#GAM for 1m LS diff
+gam.1m.LS.diff<-gam(ht_annual~s(srHeight_Total)+s(annual.gr4$diff.LS.1m),data=annual.gr4, family=gaussian(link="identity"))
+summary(gam.1m.LS.diff)
+
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.1m.LS.diff,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+#GAM for 1m HS diff
+gam.1m.HS.diff<-gam(ht_annual~s(srHeight_Total)+s(annual.gr4$diff.HS.1m),data=annual.gr4, family=gaussian(link="identity"))
+summary(gam.1m.HS.diff)
+
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.1m.HS.diff,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
 #GAM for Shrub transect data
@@ -200,6 +248,8 @@ aic.list.veg<-c(aic.list.veg,AIC(qr.1m.F)[1])
 qr.1m.S<-rq(ht_annual~srHeight_Total+Cov.LS+STP,tau=c(.5),data=annual.gr4)
 summary(qr.1m.S)
 aic.list.veg<-c(aic.list.veg,AIC(qr.1m.S)[1])
+
+
 
 #QR for 4m Shrub cover
 #qr.4m.S<-rq(ht_annual~srHeight_Total+Cov4.LS+STP,tau=c(.5),data=annual.gr4)

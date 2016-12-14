@@ -50,6 +50,8 @@ qr.SI<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=
 summary(qr.SI)
 AIC(qr.SI)[1]
 
+#SI qr has an AIC> 4741 (OS TPA)
+
 
 plot(summary(qr.SI, se = "nid"), level = 0.95)
 #illustrates how the effects of predictors 

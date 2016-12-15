@@ -81,11 +81,18 @@ agg.1m.data1<-reshape(agg.1m.data, direction="wide",idvar=
                           c("Installation","Plot","Year_Measurement"),
                         timevar="Lifeform",v.names="x")
 
+veg.names<-names(agg.1m.data1[,substring(names(agg.1m.data1),2,2)=="."])
+
+for(i in veg.names) {
+  agg.1m.data1[i][is.na(agg.1m.data1[i])] <- 0
+}
+
+
 names(agg.1m.data1)[4:7]<-c("diff.F.1m","diff.G.1m","diff.HS.1m","diff.LS.1m")
 names(agg.1m.data1)[9]<-c("diff.POLV.1m")
 
 
-#Merges aggregated transect data to the "big" df
+#Merges aggregated 1m data to the "big" df
 
 annual.gr4<-merge(annual.gr3,agg.1m.data1,by=c("Installation","Plot","Year_Measurement"))
 
@@ -129,7 +136,29 @@ names(agg.tran.data1)[4:6]<-c("diff.F","diff.null","diff.S")
 #Merges aggregated transect data to the "big" df
 
 annual.gr4<-merge(annual.gr4,agg.tran.data1,by=c("Installation","Plot","Year_Measurement"))
-                  
+               
+   
+##Transect Grass Cover Data##
+
+stranco$Pct_Grass[is.na(stranco$Pct_Grass)] <- 0
+
+agg.tran.data.G <-aggregate(stranco$Pct_Grass,
+                          by=list("Installation"=stranco$Installation,
+                                  "Plot"=stranco$Plot,
+                                  "Year_Measurement"=stranco$Year_Measurement
+                                  ),FUN=mean)#total/number of points
+
+
+names(agg.tran.data.G)[4]<-("tran.G")
+
+
+
+#Merges aggregated transect data to the "big" df
+
+annual.gr4<-merge(annual.gr4,agg.tran.data.G,by=c("Installation","Plot","Year_Measurement"))
+
+
+
 
 #code to remove all .y variables from df 
 
@@ -228,11 +257,17 @@ summary(gam.tran.GR)
 par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.tran.GR,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
+#GAM for Grass transect data
+gam.tran.GR.cov<-gam(ht_annual~s(srHeight_Total)+s(tran.G),data=annual.gr4, family=gaussian(link="identity"))
+summary(gam.tran.GR.cov)
+
+par(mfrow=c(1,2),mar=c(4,4,1,2))
+plot(gam.tran.GR.cov,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 #Veg Quantreg
 library(quantreg)
 
-#QR for 1m polyveg cover
+#QR for 1m POLV cover
 qr.1m.polv<-rq(ht_annual~srHeight_Total+Cov.POLV+STP,tau=c(.5),data=annual.gr4)
 summary(qr.1m.polv)
 aic.list.veg<-AIC(qr.1m.polv)[1]
@@ -242,12 +277,12 @@ qr.1m.F<-rq(ht_annual~srHeight_Total+Cov.F+STP,tau=c(.5),data=annual.gr4)
 summary(qr.1m.F)
 aic.list.veg<-c(aic.list.veg,AIC(qr.1m.F)[1])
 
-#QR for 1m LOW Shrub cover
+#QR for 1m LS cover
 qr.1m.LS<-rq(ht_annual~srHeight_Total+Cov.LS+STP,tau=c(.5),data=annual.gr4)
 summary(qr.1m.LS)
 aic.list.veg<-c(aic.list.veg,AIC(qr.1m.LS)[1])
 
-#QR for 1m High Shrub cover
+#QR for 1m HS cover
 qr.1m.HS<-rq(ht_annual~srHeight_Total+Cov.HS+STP,tau=c(.5),data=annual.gr4)
 summary(qr.1m.HS)
 aic.list.veg<-c(aic.list.veg,AIC(qr.1m.HS)[1])
@@ -290,20 +325,26 @@ aic.list.veg<-c(aic.list.veg,AIC(qr.shrub.tran)[1])
 
 
 #QR for both Forb and Shrub Transect
-qr.forb.shrub.tran<-rq(ht_annual~srHeight_Total+diff.F+diff.S+STP,tau=c(.5),data=annual.gr4)
-summary(qr.forb.shrub.tranCW)
-aic.list.veg<-c(aic.list.veg,AIC(qr.forb.shrub.tran)[1])
+#qr.forb.shrub.tran<-rq(ht_annual~srHeight_Total+diff.F+diff.S+STP,tau=c(.5),data=annual.gr4)
+#summary(qr.forb.shrub.tranCW)
+#aic.list.veg<-c(aic.list.veg,AIC(qr.forb.shrub.tran)[1])
 
 #QR for transect grass height
 qr.tran.gr<-rq(ht_annual~srHeight_Total+grass.ht+STP,tau=c(.5),data=annual.gr4)
 summary(qr.tran.gr)
 aic.list.veg<-c(aic.list.veg,AIC(qr.tran.gr)[1])
 
+#QR for transect grass cover
+qr.tran.gr.cov<-rq(ht_annual~srHeight_Total+tran.G+STP,tau=c(.5),data=annual.gr4)
+summary(qr.tran.gr.cov)
+aic.list.veg<-c(aic.list.veg,AIC(qr.tran.gr.cov)[1])
+
 #surpising that shrub transect cover has the lowest aic for veg
 
 veg.variable<-c("POLV.cov","F.cov","LS.cov","HS.cov","G.cov",
                 "F.diff","LS.diff","HS.diff","G.diff",
-                "F.tran","S.tran","F.S.tran","G.tran"
+                "F.tran","S.tran","G.tran.diff",
+                "G.tran.cov"
                )
 
 aic.list.veg<-t(as.data.frame(aic.list.veg))
@@ -383,14 +424,19 @@ aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.shrub.tran)[1])
 
 
 #QR for both Forb and Shrub Transect
-qrCW.forb.shrub.tran<-rq(ht_annual~srHeight_Total+diff.F+diff.S+CrownWidth,tau=c(.5),data=annual.gr4)
-summary(qrCW.forb.shrub.tranCW)
-aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.forb.shrub.tran)[1])
+#qrCW.forb.shrub.tran<-rq(ht_annual~srHeight_Total+diff.F+diff.S+CrownWidth,tau=c(.5),data=annual.gr4)
+#summary(qrCW.forb.shrub.tranCW)
+#aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.forb.shrub.tran)[1])
 
 #QR for transect grass height
 qrCW.tran.gr<-rq(ht_annual~srHeight_Total+grass.ht+CrownWidth,tau=c(.5),data=annual.gr4)
 summary(qrCW.tran.gr)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.tran.gr)[1])
+
+#QR for transect grass cover
+qrCW.tran.gr.cov<-rq(ht_annual~srHeight_Total+tran.G+CrownWidth,tau=c(.5),data=annual.gr4)
+summary(qrCW.tran.gr.cov)
+aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.tran.gr.cov)[1])
 
 
 aic.list.vegCW<-t(as.data.frame(aic.list.vegCW))
@@ -399,11 +445,28 @@ colnames(aic.list.vegCW)<-(veg.variable)
 
 sum(is.na(annual.gr4$diff.F.1m)==TRUE)
 
-rbind(aic.list.vegCW,aic.list.veg)
+veg.aic.list<-rbind(aic.list.vegCW,aic.list.veg)
 
 #AIC with CW much lower accross all vegetation measurements
-sum(is.na(annual.gr4$diff.HS.1m)==TRUE)
 
+is.na.list<-sum(is.na(annual.gr4$Cov.POLV)==TRUE)
+is.na.list<-c(is.na.list, sum(is.na(annual.gr4$Cov.F)==TRUE))
+is.na.list<-c(is.na.list, sum(is.na(annual.gr4$Cov.LS)==TRUE))
+is.na.list<-c(is.na.list, sum(is.na(annual.gr4$Cov.HS)==TRUE))
+is.na.list<-c(is.na.list, sum(is.na(annual.gr4$Cov.G)==TRUE))
+
+is.na.list<-c(is.na.list, sum(is.na(annual.gr4$diff.F.1m)==TRUE))
+is.na.list<-c(is.na.list, sum(is.na(annual.gr4$diff.LS.1m)==TRUE))
+is.na.list<-c(is.na.list, sum(is.na(annual.gr4$diff.HS.1m)==TRUE))
+is.na.list<-c(is.na.list, sum(is.na(annual.gr4$diff.G.1m)==TRUE))
+
+is.na.list<-c(is.na.list, sum(is.na(annual.gr4$diff.F)==TRUE))
+is.na.list<-c(is.na.list, sum(is.na(annual.gr4$diff.LS)==TRUE))
+is.na.list<-c(is.na.list, sum(is.na(annual.gr4$grass.ht)==TRUE))
+is.na.list<-c(is.na.list, sum(is.na(annual.gr4$tran.G)==TRUE))
+
+veg.aic.list<-rbind(is.na.list,veg.aic.list)
+colnames(veg.aic.list)<-(veg.variable)
 
 #AIC of HS volume is much lower than others, however,
 #it also missing for most records

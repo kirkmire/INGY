@@ -196,11 +196,11 @@ bapa.OS.lm<-function(installation, plot, year){
   est.bapa.OS
 }
 #Example:
-plot.info<-agg.over.data[agg.over.data$Installation=="BB"&agg.over.data$Plot==1,]
-bapa.model<-lm(plotinfo$over.sum.bapa~plotinfo$Year_MeasurementOS)
-bapa.model.coef<-c(bapa.model$coefficients[2])
-summary(bapa.model)
-plot(bapa.model)
+#plot.info<-agg.over.data[agg.over.data$Installation=="BB"&agg.over.data$Plot==1,]
+#bapa.model<-lm(plotinfo$over.sum.bapa~plotinfo$Year_MeasurementOS)
+#bapa.model.coef<-c(bapa.model$coefficients[2])
+#summary(bapa.model)
+#plot(bapa.model)
 
 bapa.OS.lm("GC",5,1999)
 
@@ -362,11 +362,11 @@ CCF.OS.lm<-function(installation, plot, year){
 }
 
 #Example:
-plot.info<-agg.over.data.CCF[agg.over.data.CCF$Installation=="BB"&agg.over.data.CCF$Plot==1,]
-CCF.model<-lm(plotinfo$CCF~plotinfo$Year_MeasurementOS)
-CCF.model.coef<-c(CCF.model$coefficients[2])
-summary(CCF.model)
-plot(CCF.model)
+#plot.info<-agg.over.data.CCF[agg.over.data.CCF$Installation=="BB"&agg.over.data.CCF$Plot==1,]
+#CCF.model<-lm(plotinfo$CCF~plotinfo$Year_MeasurementOS)
+#CCF.model.coef<-c(CCF.model$coefficients[2])
+#summary(CCF.model)
+#plot(CCF.model)
 
 CCF.OS.lm("BM",5,1999)
 
@@ -501,11 +501,11 @@ TPA.OS.lm<-function(installation, plot, year){
 }
 
 #Example:
-plot.info<-agg.over.data.TPA[agg.over.data.TPA$Installation=="BB"&agg.over.data.TPA$Plot==1,]
-TPA.model<-lm(plotinfo$TPA~plotinfo$Year_MeasurementOS)
-TPA.model.coef<-c(TPA.model$coefficients[2])
-summary(TPA.model)
-plot(TPA.model)
+#plot.info<-agg.over.data.TPA[agg.over.data.TPA$Installation=="BB"&agg.over.data.TPA$Plot==1,]
+#TPA.model<-lm(plotinfo$TPA~plotinfo$Year_MeasurementOS)
+#TPA.model.coef<-c(TPA.model$coefficients[2])
+#summary(TPA.model)
+#plot(TPA.model)
 
 TPA.OS.lm("BM",5,2000)
 

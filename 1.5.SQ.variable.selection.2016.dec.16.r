@@ -1,3 +1,5 @@
+#Reads in previous scripts required
+
 ######Site Index Variables######
 #SI #
 
@@ -52,22 +54,6 @@ AIC(qr.SI)[1]
 
 #SI qr has an AIC> 4741 (OS TPA)
 
-
-plot(summary(qr.SI, se = "nid"), level = 0.95)
-#illustrates how the effects of predictors 
-#cary over quantiles  and how the magnitude of 
-#the effects at varouis quantiles differ considerably fromthe OLS coefficients
-#even in terms of the CI 
-
-
-
-qr.SI.5<-  rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
-qr.SI.1 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.1),data=annual.gr4)
-qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.9),data=annual.gr4)
-
-anova(qr.SI.1,qr.SI.5,qr.SI.9)
-
-#strong evidence that the predictors are not the same between at least two of the models
 
 
 

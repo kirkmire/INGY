@@ -141,7 +141,7 @@ annual.gr4<-merge(annual.gr4,agg.tran.data1,by=c("Installation","Plot","Year_Mea
    
 ##Transect Grass Cover Data##
 
-stranco$Pct_Grass[is.na(stranco$Pct_Grass)] <- 0
+
 
 agg.tran.data.G <-aggregate(stranco$Pct_Grass,
                           by=list("Installation"=stranco$Installation,
@@ -191,13 +191,16 @@ agg.grass.data[4][is.na(agg.grass.data[4])] <- 0
 annual.gr4<-merge(annual.gr4,agg.grass.data,by=c("Installation","Plot","Year_Measurement"))
 
 
-
-#Removes 6th stp plots from analysis
-annual.gr4<-annual.gr4[!annual.gr4$STP==6,]
-
 #Removes trees with -inf ht_ annual...check the annual ht function function
 annual.gr4$inf.ht<-is.infinite(annual.gr4$ht_annual)
 annual.gr4<-annual.gr4[!annual.gr4$inf.ht==TRUE,]
+
+
+#Removes 6th stp plots from analysis
+annual.gr6<-annual.gr4[annual.gr4$STP==6,]
+
+annual.gr4<-annual.gr4[!annual.gr4$STP==6,]
+
 
 
 

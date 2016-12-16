@@ -1,4 +1,3 @@
-#Reads in previous scripts required
 
 ######Site Index Variables######
 #SI #

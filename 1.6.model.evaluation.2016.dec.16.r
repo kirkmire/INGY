@@ -1,7 +1,7 @@
 
 #Reads in previous scripts required
 source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.1annualizedht.2016dec16.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/1.1annualizedht.2016.dec16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)

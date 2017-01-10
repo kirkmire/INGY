@@ -14,20 +14,31 @@ key.filename <- "trial.key"
 keyfile <- file.path(key.dir,key.filename)
 
 
-##make fake data##
+##make data##
 
-FVS.Tree.Data<- data.frame(plot=annual.gr4$Plot,
-                          tree=annual.gr4$Installation,
+FVS.Tree.Data<- data.frame(plot=paste(annual.gr4$Installation,annual.gr4$Plot,annual.gr4$Year_Measurement,sep=""),
+                          tree=annual.gr4$Tree,
                           count=1,
                           species="PP",
                           dbh=annual.gr4$DBH,
                           hist=1,
                           height=annual.gr4$Height_Total,
-                          crown.ratio=(annual.gr4$Height_Total-annual.gr4$Height_CrownBase)/annual.gr4$Height_Total)
-  
+                          crown.ratio=100*(annual.gr4$Height_Total-annual.gr4$Height_CrownBase)/annual.gr4$Height_Total)
+
+
+#have to remove small trees with DBH<3.5
+FVS.Tree.Data1<-FVS.Tree.Data[which(FVS.Tree.Data$dbh>3.5),]
+#|is.na(FVS.Tree.Data$dbh==TRUE)
+
+#Have to remove negative crown ratios
+FVS.Tree.Data2<-FVS.Tree.Data1[which(FVS.Tree.Data1$crown.ratio>0),]
+
+FVS.Tree.Data<-FVS.Tree.Data2
+
+
 #data.frame(plot=rep(1:4,each=5),tree=1:20,
-#                       count=1,species="DF",dbh=rnorm(20,12,3),
-#                        hist=1,height=NA,crown.ratio=c(NA,runif(19,0,1)*100))
+#                      count=1,species="DF",dbh=rnorm(20,12,3),
+ #                      hist=1,height=NA,crown.ratio=c(NA,runif(19,0,1)*100))
 
 ##OR Load Your Own Dataframe##
 
@@ -73,13 +84,16 @@ stdname<-("Low")
 #BAF- Negative value is interpreted as the inverse of a large fixed area plot#
 BAF<-(-2)
 #Fixed Plot Size- the inverse area for cruise designs using a nested fixed radius plot for small trees#
-FRP<-(1/(314/43560))
+FRP<-(1/((5*314)/43560))
+#the sum of five stp areas within a given plot (sixth witheld)
 
 #Break point- the diameter cuttoff between large and small tree plots, default is 5in, put "999"#
 #for cruise designs that only use one plot size#
-DiamCO<-(10)
+DiamCO<-(10.5)
 #Plot Count#
-Plotcount<-(length(unique(annual.gr4$Installation)))*6
+Plotcount<-(length(unique(FVS.Tree.Data$plot)))
+#each half acre large tree plot considered as a plot
+
 #Non-Stockable Plots#
 nonstock<-(0)
 #Prop of stand considered stockable#  
@@ -102,15 +116,16 @@ elev <- 3800
 elev <- round(elev/100)
 
 ##Inventory Year (INVYEAR)##
-year <- (1999)
+year <- (2000)
 
 ##Number of Cycles to be projected (NUMCYCLE)##
-numcycle<-(1)
+numcycle<-(10)
 
 ## Cycle length in years ##
-cyclelen <- (1)
+cyclelen <- (5)
 
 
 # make a keyword file (set to where your make.keyword.r file is located)
 source('C:/open-fvs/rFVS/R/make.keyword.R')
+
 

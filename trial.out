@@ -1,0 +1,51 @@
+
+
+         FOREST VEGETATION SIMULATOR     VERSION 1108 -- INLAND EMPIRE EXPANDED                 RV:06/26/15    01-10-2017  11:40:58
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+                                                OPTIONS SELECTED BY INPUT
+
+KEYWORD FILE NAME: trial
+----------------------------------------------------------------------------------------------------------------------------------
+KEYWORD    PARAMETERS:
+--------   -----------------------------------------------------------------------------------------------------------------------
+
+SCREEN     SUMMARY TABLE WILL BE PRINTED TO DATA SET REFERENCE NUMBER     6 AS RUN PROGRESSES.
+
+STATS      STATISTICAL DESCRIPTION OF INPUT DATA WILL BE PROVIDED; CONFIDENCE LIMITS AT 0.05 LEVEL.
+
+TREELIST   DATE/CYCLE=    0; DATA SET REFERENCE NUMBER =  3.; HEADING SUPPRESSION CODE = 0.
+           (0=WITH HEADING, OTHER VALUES=SUPPRESS HEADING).
+
+NOAUTOES   TALLIES AND INGROWTH WILL NOT BE ADDED AUTOMATICALLY.
+           STOCKADJ IS SET TO ZERO, AND NO SPROUTING WILL BE SIMULATED.
+
+NOTRIPLE
+
+RANNSEED   RANDOM SEED IS:       55329.0
+
+STDIDENT
+           STAND ID= Low                                                                                                       
+
+           HABITAT TYPE WILL BE MAPPED TO 620 FOR THIS PROJECTION.
+
+STDINFO    FOREST-LOCATION CODE=     110; HABITAT TYPE=620; AGE=    0; ASPECT AZIMUTH IN DEGREES= 315.; SLOPE=  20.%
+           ELEVATION(100'S FEET)= 38.0; REFERENCE CODE=     
+
+DESIGN     BASAL AREA FACTOR=   -2.0; INVERSE OF FIXED PLOT AREA=  138.7; BREAK DBH=   10.0
+           NUMBER OF PLOTS=    90; NON-STOCKABLE PLOTS=     0; STAND SAMPLING WEIGHT=     1.00000
+           PROPORTION OF STAND CONSIDERED STOCKABLE=  1.000
+           SEE "OPTIONS SELECTED BY DEFAULT" FOR FINAL DESIGN VALUES.
+
+INVYEAR    INVENTORY YEAR= 1999
+
+NUMCYCLE   NUMBER OF CYCLES=  1
+
+TIMEINT    ALL CYCLES;  PERIOD LENGTH=  1
+
+TREEFMT 
+          (I4,I7,F6.0,I1,A3,F4.1,F3.1,2F3.0,F4.1,I3,6I2,2I1,I2,2I3,2I1,F3.0)              
+                                                                                          
+
+TREEDATA   DATA SET REFERENCE NUMBER= 15

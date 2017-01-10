@@ -53,7 +53,7 @@ valid.func<-function(sqht, stcw, stran, tpaos, si, annualht){
               cat<- "fiftytoninety", 
               #no
               ifelse(qr.pred.one<annualht&&annualht<qr.pred.five,
-                     cat<-"tentofifty",
+                     cat<-"bottom10tofifty",
                      cat<-"bottom10")))
 
   cat
@@ -80,10 +80,12 @@ sorted.totals<-as.data.frame(xtabs(annual.gr6$count~annual.gr6$response.cat)/nro
 
 sum(sorted.totals$Freq)
 
+
 barchart(sorted.totals$Freq~sorted.totals$annual.gr6.response.cat, names = "Quantile Bin",
         xlab = "Bin", ylab = "Frequency",type=density,
         main = "Witheld Data Height Growth Response 
         sorted by Quantile Category")
+
 
 
 

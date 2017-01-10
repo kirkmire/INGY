@@ -20,7 +20,7 @@ FVS.Tree.Data<- data.frame(plot=paste(annual.gr4$Installation,annual.gr4$Plot,an
                           tree=annual.gr4$Tree,
                           count=1,
                           species="PP",
-                          dbh=annual.gr4$DBH,
+                          dbh=round(annual.gr4$DBH,digits=1),
                           hist=1,
                           height=annual.gr4$Height_Total,
                           crown.ratio=100*(annual.gr4$Height_Total-annual.gr4$Height_CrownBase)/annual.gr4$Height_Total)
@@ -35,10 +35,14 @@ FVS.Tree.Data2<-FVS.Tree.Data1[which(FVS.Tree.Data1$crown.ratio>0),]
 
 FVS.Tree.Data<-FVS.Tree.Data2
 
+#Have to abbreviate plot info
+values <- 1:length(unique(FVS.Tree.Data$plot))
+FVS.Tree.Data$plot1 <- values[FVS.Tree.Data$plot]
+FVS.Tree.Data$plot<-FVS.Tree.Data$plot1
 
 #data.frame(plot=rep(1:4,each=5),tree=1:20,
-#                      count=1,species="DF",dbh=rnorm(20,12,3),
- #                      hist=1,height=NA,crown.ratio=c(NA,runif(19,0,1)*100))
+#     count=1,species="DF",dbh=rnorm(20,12,3),
+#                      hist=1,height=NA,crown.ratio=c(NA,runif(19,0,1)*100))
 
 ##OR Load Your Own Dataframe##
 

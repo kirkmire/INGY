@@ -15,27 +15,30 @@ keyfile <- file.path(key.dir,key.filename)
 
 
 ##make data##
+kc.trees<-annual.gr4[which(annual.gr4=="KC"),]
 
-FVS.Tree.Data<- data.frame(plot=paste(annual.gr4$Installation,annual.gr4$Plot,annual.gr4$Year_Measurement,sep=""),
-                          tree=annual.gr4$Tree,
+
+FVS.Tree.Data<- data.frame(plot=paste(kc.trees$Installation,kc.trees$Plot,kc.trees$Year_Measurement,sep=""),
+                          tree=kc.trees$Tree,
                           count=1,
                           species="PP",
-                          dbh=round(annual.gr4$DBH,digits=1),
+                          dbh=round(kc.trees$DBH,digits=1),
                           hist=1,
-                          height=annual.gr4$Height_Total,
-                          crown.ratio=100*(annual.gr4$Height_Total-annual.gr4$Height_CrownBase)/annual.gr4$Height_Total)
-
+                          height=kc.trees$Height_Total,
+                          crown.ratio=100*(kc.trees$Height_Total-kc.trees$Height_CrownBase)/kc.trees$Height_Total)
 
 #have to remove small trees with DBH<3.5
-FVS.Tree.Data1<-FVS.Tree.Data[!is.na(FVS.Tree.Data$dbh==TRUE),]
+#FVS.Tree.Data1<-FVS.Tree.Data[!is.na(FVS.Tree.Data$dbh==TRUE),]
+
+FVS.Tree.Data$dbh[is.na(FVS.Tree.Data$dbh)] <- 0
 
 #[which(FVS.Tree.Data$dbh>3.5),]
                                     
 #unfortunately rFVS doesnt seem to be able to handle NA DBHs
-#odd considering that small tree routine is based on height
+#many small trees are not tall enough to have a DBH
 
 #Have to remove negative crown ratios
-FVS.Tree.Data2<-FVS.Tree.Data1[which(FVS.Tree.Data1$crown.ratio>0),]
+FVS.Tree.Data2<-FVS.Tree.Data[which(FVS.Tree.Data$crown.ratio>0),]
 
 FVS.Tree.Data<-FVS.Tree.Data2
 

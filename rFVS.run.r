@@ -4,7 +4,7 @@
 fvsSetCmdLine("--keywordfile=trial.key")
 
 # run FVS
-fvsRun(-1,2050) #[[1]]
+fvsRun(-1,2000) #[[1]]
 tree.lists.initial <- fvsGetTreeAttrs(c("id","species","dbh","ht","tpa","age","cratio"))
 
 fvsRun(-1,2101) #[[1]]

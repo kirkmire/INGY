@@ -27,8 +27,12 @@ FVS.Tree.Data<- data.frame(plot=paste(annual.gr4$Installation,annual.gr4$Plot,an
 
 
 #have to remove small trees with DBH<3.5
-FVS.Tree.Data1<-FVS.Tree.Data[which(FVS.Tree.Data$dbh>3.5),]
-#|is.na(FVS.Tree.Data$dbh==TRUE)
+FVS.Tree.Data1<-FVS.Tree.Data[!is.na(FVS.Tree.Data$dbh==TRUE),]
+
+#[which(FVS.Tree.Data$dbh>3.5),]
+                                    
+#unfortunately rFVS doesnt seem to be able to handle NA DBHs
+#odd considering that small tree routine is based on height
 
 #Have to remove negative crown ratios
 FVS.Tree.Data2<-FVS.Tree.Data1[which(FVS.Tree.Data1$crown.ratio>0),]
@@ -36,9 +40,8 @@ FVS.Tree.Data2<-FVS.Tree.Data1[which(FVS.Tree.Data1$crown.ratio>0),]
 FVS.Tree.Data<-FVS.Tree.Data2
 
 #Have to abbreviate plot info
-values <- 1:length(unique(FVS.Tree.Data$plot))
-FVS.Tree.Data$plot1 <- values[FVS.Tree.Data$plot]
-FVS.Tree.Data$plot<-FVS.Tree.Data$plot1
+FVS.Tree.Data <- transform(FVS.Tree.Data,plot=as.numeric(factor(plot)))
+
 
 #data.frame(plot=rep(1:4,each=5),tree=1:20,
 #     count=1,species="DF",dbh=rnorm(20,12,3),
@@ -86,14 +89,16 @@ stdname<-("Low")
 
 ##Cruise Design##
 #BAF- Negative value is interpreted as the inverse of a large fixed area plot#
-BAF<-(-2)
+#BAF<-(-2)
+BAF<-(20)
 #Fixed Plot Size- the inverse area for cruise designs using a nested fixed radius plot for small trees#
-FRP<-(1/((5*314)/43560))
+FRP<-(10)
+#FRP<-(1/((5*314)/43560))
 #the sum of five stp areas within a given plot (sixth witheld)
 
 #Break point- the diameter cuttoff between large and small tree plots, default is 5in, put "999"#
 #for cruise designs that only use one plot size#
-DiamCO<-(10.5)
+DiamCO<-(999)
 #Plot Count#
 Plotcount<-(length(unique(FVS.Tree.Data$plot)))
 #each half acre large tree plot considered as a plot

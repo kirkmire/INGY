@@ -19,10 +19,12 @@ kc.trees<-annual.gr4[which(annual.gr4=="KC"),]
 
 
 FVS.Tree.Data<- data.frame(plot=paste(kc.trees$Plot,kc.trees$Year_Measurement,sep=""),
-                           tree=paste(kc.trees$Plot,
-                                      kc.trees$STP,
-                                      kc.trees$Year_Measurement,
-                                      kc.trees$Tree,sep=""),
+                           tree=paste(
+                             #kc.trees$Plot,
+                             kc.trees$STP,
+                             #kc.trees$Year_Measurement,
+                             kc.trees$Tree,
+                                      sep=""),
                           count=1,
                           species="PP",
                           dbh=round(kc.trees$DBH,digits=1),
@@ -30,13 +32,12 @@ FVS.Tree.Data<- data.frame(plot=paste(kc.trees$Plot,kc.trees$Year_Measurement,se
                           height=kc.trees$Height_Total,
                           crown.ratio=100*(kc.trees$Height_Total-kc.trees$Height_CrownBase)/kc.trees$Height_Total)
 
-#have to remove small trees with DBH<3.5
+
 #FVS.Tree.Data1<-FVS.Tree.Data[!is.na(FVS.Tree.Data$dbh==TRUE),]
 
 FVS.Tree.Data$dbh[is.na(FVS.Tree.Data$dbh)] <- 0.1
 
-#[which(FVS.Tree.Data$dbh>3.5),]
-                                    
+
 #unfortunately rFVS doesnt seem to be able to handle NA or 0.0 DBHS
 #many small trees are not tall enough to have a DBH!
 
@@ -51,7 +52,7 @@ FVS.Tree.Data$dbh[is.na(FVS.Tree.Data$dbh)] <- 0.1
 FVS.Tree.Data<-FVS.Tree.Data[which(FVS.Tree.Data$crown.ratio>0),]
 
 #Have to abbreviate tree and plot info
-FVS.Tree.Data <- transform(FVS.Tree.Data,tree=as.numeric(factor(tree)))
+#FVS.Tree.Data <- transform(FVS.Tree.Data,tree=as.numeric(factor(tree)))
 FVS.Tree.Data <- transform(FVS.Tree.Data,plot=as.numeric(factor(plot)))
 
 #data.frame(plot=rep(1:4,each=5),tree=1:20,

@@ -18,11 +18,11 @@ keyfile <- file.path(key.dir,key.filename)
 kc.trees<-annual.gr4[which(annual.gr4=="KC"),]
 
 
-FVS.Tree.Data<- data.frame(plot=paste(kc.trees$Installation,
-                                      kc.trees$Plot,
+FVS.Tree.Data<- data.frame(plot=paste(kc.trees$Plot,kc.trees$Year_Measurement,sep=""),
+                           tree=paste(kc.trees$Plot,
+                                      kc.trees$STP,
                                       kc.trees$Year_Measurement,
                                       kc.trees$Tree,sep=""),
-                          tree=kc.trees$Tree,
                           count=1,
                           species="PP",
                           dbh=round(kc.trees$DBH,digits=1),
@@ -50,9 +50,9 @@ FVS.Tree.Data$dbh[is.na(FVS.Tree.Data$dbh)] <- 0.1
 #Have to remove negative crown ratios
 FVS.Tree.Data<-FVS.Tree.Data[which(FVS.Tree.Data$crown.ratio>0),]
 
-#Have to abbreviate plot info
+#Have to abbreviate tree and plot info
+FVS.Tree.Data <- transform(FVS.Tree.Data,tree=as.numeric(factor(tree)))
 FVS.Tree.Data <- transform(FVS.Tree.Data,plot=as.numeric(factor(plot)))
-
 
 #data.frame(plot=rep(1:4,each=5),tree=1:20,
 #     count=1,species="DF",dbh=rnorm(20,12,3),

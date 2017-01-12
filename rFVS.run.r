@@ -5,10 +5,10 @@ fvsSetCmdLine("--keywordfile=trial.key")
 
 # run FVS
 fvsRun(-1,2000) #[[1]]
-tree.lists.initial <- fvsGetTreeAttrs(c("id","species","dbh","ht","tpa","age","cratio"))
+tree.lists.initial <- fvsGetTreeAttrs(c("id","plot","species","dbh","ht","tpa","age","cratio"))
 
 fvsRun(-1,2005) #[[1]]
-tree.lists.final <- fvsGetTreeAttrs(c("id","species","dbh","ht","tpa","age"))
+tree.lists.final <- fvsGetTreeAttrs(c("id","plot","species","dbh","ht","tpa","age"))
 
 
 ##Below is additional code for producing FVS summary statistics and Graphs##

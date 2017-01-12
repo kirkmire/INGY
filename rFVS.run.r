@@ -7,7 +7,7 @@ fvsSetCmdLine("--keywordfile=trial.key")
 fvsRun(-1,2000) #[[1]]
 tree.lists.initial <- fvsGetTreeAttrs(c("id","species","dbh","ht","tpa","age","cratio"))
 
-fvsRun(-1,2101) #[[1]]
+fvsRun(-1,2005) #[[1]]
 tree.lists.final <- fvsGetTreeAttrs(c("id","species","dbh","ht","tpa","age"))
 
 
@@ -39,7 +39,7 @@ fetchTrees <- function (captureYears)
 # is a string of R code that is evaluated at each stop point and the
 # second is a function that contains no arguments. 
 
-output <- fvsInteractRun(AfterEM1="fetchTrees(c(2020,2070))",
+output <- fvsInteractRun(AfterEM1="fetchTrees(2005)",
                          SimEnd=fvsGetSummary)
 
 

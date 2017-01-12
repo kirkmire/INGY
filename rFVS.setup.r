@@ -18,7 +18,10 @@ keyfile <- file.path(key.dir,key.filename)
 kc.trees<-annual.gr4[which(annual.gr4=="KC"),]
 
 
-FVS.Tree.Data<- data.frame(plot=paste(kc.trees$Installation,kc.trees$Plot,kc.trees$Year_Measurement,sep=""),
+FVS.Tree.Data<- data.frame(plot=paste(kc.trees$Installation,
+                                      kc.trees$Plot,
+                                      kc.trees$Year_Measurement,
+                                      kc.trees$Tree,sep=""),
                           tree=kc.trees$Tree,
                           count=1,
                           species="PP",
@@ -144,5 +147,10 @@ cyclelen <- (5)
 
 # make a keyword file (set to where your make.keyword.r file is located)
 source('C:/open-fvs/rFVS/R/make.keyword.R')
+
+
+
+
+
 
 

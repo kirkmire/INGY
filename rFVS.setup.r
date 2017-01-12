@@ -30,17 +30,22 @@ FVS.Tree.Data<- data.frame(plot=paste(kc.trees$Installation,kc.trees$Plot,kc.tre
 #have to remove small trees with DBH<3.5
 #FVS.Tree.Data1<-FVS.Tree.Data[!is.na(FVS.Tree.Data$dbh==TRUE),]
 
-FVS.Tree.Data$dbh[is.na(FVS.Tree.Data$dbh)] <- 0
+FVS.Tree.Data$dbh[is.na(FVS.Tree.Data$dbh)] <- 0.1
 
 #[which(FVS.Tree.Data$dbh>3.5),]
                                     
-#unfortunately rFVS doesnt seem to be able to handle NA DBHs
-#many small trees are not tall enough to have a DBH
+#unfortunately rFVS doesnt seem to be able to handle NA or 0.0 DBHS
+#many small trees are not tall enough to have a DBH!
+
+##From essential FVS:##
+#Trees smaller than 4.5 feet in height should be assigned
+#a small, but nonzero, diameter (for example, an estimated bud width, or 0.1 inch).
+#This diameter will not be incremented until projected
+#height becomes greater than 4.5 feet. DBH must be recorded if the tree is to be projected;
+#records with blank or zero DBH values are ignored. 
 
 #Have to remove negative crown ratios
-FVS.Tree.Data2<-FVS.Tree.Data[which(FVS.Tree.Data$crown.ratio>0),]
-
-FVS.Tree.Data<-FVS.Tree.Data2
+FVS.Tree.Data<-FVS.Tree.Data[which(FVS.Tree.Data$crown.ratio>0),]
 
 #Have to abbreviate plot info
 FVS.Tree.Data <- transform(FVS.Tree.Data,plot=as.numeric(factor(plot)))

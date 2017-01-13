@@ -15,7 +15,9 @@ keyfile <- file.path(key.dir,key.filename)
 
 
 ##make data##
-kc.trees<-annual.gr4[which(annual.gr4=="KC"),]
+
+kc.trees<-annual.gr4[which(annual.gr4$Installation=="KC"),]
+
 
 
 FVS.Tree.Data<- data.frame(plot=paste(kc.trees$Plot,kc.trees$Year_Measurement,sep=""),
@@ -32,6 +34,47 @@ FVS.Tree.Data<- data.frame(plot=paste(kc.trees$Plot,kc.trees$Year_Measurement,se
                           height=kc.trees$Height_Total,
                           crown.ratio=100*(kc.trees$Height_Total-kc.trees$Height_CrownBase)/kc.trees$Height_Total)
 
+#Need to bring in Overstory Trees#
+OS.KC.Trees<-soverhist[which(soverhist$Installation=="KC"&soverhist$Year_Measurement==2001),]
+
+OS.KC.Trees.2002<-soverhist[which(soverhist$Installation=="KC"&soverhist$Year_Measurement==2001),]
+OS.KC.Trees.2002$Year_Measurement[OS.KC.Trees.2002$Year_Measurement== 2001] <- 2002
+
+OS.KC.Trees.2003<-soverhist[which(soverhist$Installation=="KC"&soverhist$Year_Measurement==2001),]
+OS.KC.Trees.2003$Year_Measurement[OS.KC.Trees.2003$Year_Measurement== 2001] <- 2003
+
+OS.KC.Trees.2006<-soverhist[which(soverhist$Installation=="KC"&soverhist$Year_Measurement==2001),]
+OS.KC.Trees.2006$Year_Measurement[OS.KC.Trees.2006$Year_Measurement== 2001] <- 2006
+
+OS.KC.Trees.2010<-soverhist[which(soverhist$Installation=="KC"&soverhist$Year_Measurement==2001),]
+OS.KC.Trees.2010$Year_Measurement[OS.KC.Trees.2010$Year_Measurement== 2001] <- 2010
+
+OS.KC.Trees<-rbind(OS.KC.Trees,
+      OS.KC.Trees.2002,
+      OS.KC.Trees.2003,
+      OS.KC.Trees.2006,
+      OS.KC.Trees.2010)
+      
+      
+     
+FVS.Tree.Data.OS<- data.frame(plot=paste(OS.KC.Trees$Plot,OS.KC.Trees$Year_Measurement,sep=""),
+                           tree=paste(
+                             #OS.KC.Trees$Plot,
+                             OS.KC.Trees$STP,
+                             #OS.KC.Trees$Year_Measurement,
+                             OS.KC.Trees$Tree,
+                             sep=""),
+                           count=1,
+                           species="PP",
+                           dbh=round(OS.KC.Trees$DBH,digits=1),
+                           hist=1,
+                           height=OS.KC.Trees$Height_Total,
+                           crown.ratio=OS.KC.Trees$CrownRatio)
+
+
+
+#Rbind small and OS trees
+FVS.Tree.Data<-rbind(FVS.Tree.Data,FVS.Tree.Data.OS)
 
 #FVS.Tree.Data1<-FVS.Tree.Data[!is.na(FVS.Tree.Data$dbh==TRUE),]
 
@@ -101,11 +144,11 @@ stdname<-("Low")
 
 ##Cruise Design##
 #BAF- Negative value is interpreted as the inverse of a large fixed area plot#
-#BAF<-(-2)
-BAF<-(20)
+BAF<-(-2)
+#BAF<-(20)
 #Fixed Plot Size- the inverse area for cruise designs using a nested fixed radius plot for small trees#
-FRP<-(10)
-#FRP<-(1/((5*314)/43560))
+#FRP<-(10)
+FRP<-(1/((5*314)/43560))
 #the sum of five stp areas within a given plot (sixth witheld)
 
 #Break point- the diameter cuttoff between large and small tree plots, default is 5in, put "999"#
@@ -123,7 +166,9 @@ propstockstand<-(1)
 
 ##Stand Info (STDINFO)##
 #National Forest Near Where Stand is Located (Refer to variant guide)#
-NFcode<-(110)
+NFcode<-(106)
+#Cour de'Alene
+
 #Stand habitat code
 habtype <- 620
 #Stand age in years#
@@ -131,9 +176,9 @@ age<-(0)
 #Stand Aspect in degrees #
 aspect<-(315)
 #Stand Slope in percent#
-slope<-(20)
+slope<-(10)
 #Stand Elevation in feet#
-elev <- 3800
+elev <- 2000
 elev <- round(elev/100)
 
 ##Inventory Year (INVYEAR)##

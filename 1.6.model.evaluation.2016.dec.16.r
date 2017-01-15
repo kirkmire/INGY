@@ -7,6 +7,18 @@ source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.46.r',sep = ""), echo=
 source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.46.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.46.r',sep = ""), echo=TRUE)
 
+#combines all aic.lists into one dataframe
+aic.lists<-cbind(aic.list.UT, aic.list.vegCW, aic.list.OS, aic.list.SI)
+
+aic.lists<-t(aic.lists)
+
+
+#The code below will produce output that can then be copied over to the .tex file
+library(Hmisc)
+d <- data.frame(aic.lists)
+latex(d, file="")            # If you want all the data
+latex(describe(d), file="")  
+
 
 
 plot(summary(qr.SI, se = "nid"), level = 0.95)
@@ -135,7 +147,7 @@ qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,
 
 
 
-valid.func<-function(sqht, stcw, stran, tpaos, si, annualht){
+valid.func10<-function(sqht, stcw, stran, tpaos, si, annualht){
   #sqht<-1
   #stcw<-4
   #s.tran<-40
@@ -228,7 +240,7 @@ annual.gr6$diff.S[is.na(annual.gr6$diff.S)] <- 0
 annual.gr6$CrownWidth[is.na(annual.gr6$CrownWidth)] <- 0
 
 for(i in 1:nrow(annual.gr6)){
-  annual.gr6$response.cat[i]<-valid.func(
+  annual.gr6$response.cat[i]<-valid.func10(
     annual.gr6$srHeight_Total[i], 
     annual.gr6$CrownWidth[i],
     annual.gr6$diff.S[i],

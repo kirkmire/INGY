@@ -320,6 +320,6 @@ plot(FVS.Final$FVS.pred,FVS.Final$Tree)
 
 plot(FVS.Final$ht_annual,FVS.Final$Tree)
 
-plot(FVS.Final$ht_annual,FVS.Final$FVS.pred,)
+plot(FVS.Final$ht_annual,FVS.Final$FVS.pred,abline(a=0,b=1))
 
 

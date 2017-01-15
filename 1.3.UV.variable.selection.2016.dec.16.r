@@ -1,4 +1,4 @@
-
+US
 ######Understory Non-Tree Variables######
 #Percentage cover 1m, upper and lower extent of height
 
@@ -449,7 +449,7 @@ colnames(aic.list.vegCW)<-(veg.variable)
 
 sum(is.na(annual.gr4$diff.F.1m)==TRUE)
 
-veg.aic.list<-rbind(aic.list.vegCW,aic.list.veg)
+#veg.aic.list<-rbind(aic.list.vegCW,aic.list.veg)
 
 #AIC with CW much lower accross all vegetation measurements
 
@@ -469,8 +469,11 @@ is.na.list<-c(is.na.list, sum(is.na(annual.gr4$diff.LS)==TRUE))
 is.na.list<-c(is.na.list, sum(is.na(annual.gr4$grass.ht)==TRUE))
 is.na.list<-c(is.na.list, sum(is.na(annual.gr4$tran.G)==TRUE))
 
-veg.aic.list<-rbind(is.na.list,veg.aic.list)
-colnames(veg.aic.list)<-(veg.variable)
+#veg.aic.list<-rbind(is.na.list,veg.aic.list)
+#colnames(veg.aic.list)<-(veg.variable)
 
 #AIC of HS volume is much lower than others, however,
 #it also missing for most records
+
+
+

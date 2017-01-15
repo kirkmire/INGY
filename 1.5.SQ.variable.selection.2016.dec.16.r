@@ -49,7 +49,7 @@ library(quantreg)
 
 qr.SI<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(1:9/10),data=annual.gr4)
 summary(qr.SI)
-AIC(qr.SI)[1]
+aic.list.SI<-AIC(qr.SI)[1]
 
 #SI qr has an AIC> 4741 (OS TPA)
 

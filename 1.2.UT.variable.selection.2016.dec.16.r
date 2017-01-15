@@ -308,14 +308,14 @@ qr.stcl<-rq(ht_annual~srHeight_Total+CrownLength,tau=c(.5),data=annual.gr2)
 summary(qr.stcl)
 aic.list<-c(aic.list,AIC(qr.stcl)[1])
 
-aic.list<-t(as.data.frame(aic.list))
+aic.list.UT<-t(as.data.frame(aic.list))
 variable<-c("Nothing","SmallTPA","Two","Four","Six","Eight",
                       "Ten","Twelve","Fourteen","Fifteen",
                       "TGT","BD","DBH","CrownWidth","CrownLength")
 
-colnames(aic.list)<-(variable)
+colnames(aic.list.UT)<-(variable)
 
-aic.list[,aic.list==min(aic.list)]
+aic.list.UT[,aic.list.UT==min(aic.list.UT)]
 
 
 #Initial DBH has the lowest aic, however, it is not really a measure of other small tree
@@ -326,6 +326,32 @@ aic.list[,aic.list==min(aic.list)]
 #going forward. These variables are related because CW reflects the effects
 #of other small tree competition
 
-
-
+booktabs()
+library(tables)
+library(Hmisc)
+tabular(Species
+              + Hline(2:5) + 1
+               ~ Format(digits=2)
+               *(Sepal.Length
+                   + Sepal.Width)
+               *(mean + sd),
+               data=iris)
     
+tabular(Species ~ Format(digits=2)
+               *(Sepal.Length
+                 + Sepal.Width)
+              *(mean + sd),
+              data=iris)
+
+
+
+iris
+
+latex(tabular(Species
+              + + Hline(2:5) + 1
+              + ~ Format(digits=2)
+              + *(Sepal.Length
+                  + + Sepal.Width)
+              + *(mean + sd),
+              + data=iris))
+

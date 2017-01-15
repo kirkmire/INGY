@@ -154,7 +154,7 @@ barchart(sorted.totals$Freq~sorted.totals$FVS.Final.response.cat, names = "Quant
 aggregate(FVS.Final$ht_annual, list(FVS.Final$response.cat), mean)
 
 
-###higher resolution by including quantiles .4 to .9 by .4
+###higher resolution by including quantiles .1 to .9 by .1
 
 qr.SI.1<-  rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.1),data=annual.gr4)
 qr.SI.2 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.2),data=annual.gr4)
@@ -279,7 +279,7 @@ sum(sorted.totals$Freq)
 
 barchart(sorted.totals$Freq~sorted.totals$FVS.Final.response.cat, names = "Quantile Bin",
          xlab = "Bin", ylab = "Frequency",type=density,
-         main = "Witheld Data Height Growth Response 
+         main = "FVS Predicted Data Height Growth Response 
          sorted by Quantile Category")
 
 #Find the average annual height by response category
@@ -307,7 +307,7 @@ sum(sorted.totals$Freq)
 
 barchart(sorted.totals$Freq~sorted.totals$FVS.Final.response.cat, names = "Quantile Bin",
          xlab = "Bin", ylab = "Frequency",type=density,
-         main = "Witheld Data Height Growth Response 
+         main = "Actual Height Growth Response 
          sorted by Quantile Category")
 
 #Find the average annual height by response category
@@ -316,10 +316,5 @@ FVS.Final.avg<-aggregate(FVS.Final$ht_annual, list(FVS.Final$response.cat), mean
 plot(FVS.Final.avg$Group.1,FVS.Final.avg$x)
 
 
-plot(FVS.Final$FVS.pred,FVS.Final$Tree)
-
-plot(FVS.Final$ht_annual,FVS.Final$Tree)
-
-plot(FVS.Final$ht_annual,FVS.Final$FVS.pred,abline(a=0,b=1))
 
 

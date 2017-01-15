@@ -1,23 +1,23 @@
 
 #Reads in previous scripts required
 source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.4annualizedht.2016.dec.46.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.46.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.46.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.46.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.46.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/1.4annualizedht.2016.dec.16.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 
 #combines all aic.lists into one dataframe
 aic.lists<-cbind(aic.list.UT, aic.list.vegCW, aic.list.OS, aic.list.SI)
-
 aic.lists<-t(aic.lists)
+aic.lists<-round(aic.lists,2)
 
 
 #The code below will produce output that can then be copied over to the .tex file
 library(Hmisc)
-d <- data.frame(aic.lists)
-latex(d, file="")            # If you want all the data
-latex(describe(d), file="")  
+aic<- data.frame(aic.lists)
+latex(aic, file="")            # If you want all the data
+
 
 
 
@@ -28,10 +28,10 @@ plot(summary(qr.SI, se = "nid"), level = 0.95)
 #even in terms of the CI 
 
 qr.SI.5<-  rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
-qr.SI.4 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.4),data=annual.gr4)
+qr.SI.1 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.1),data=annual.gr4)
 qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.9),data=annual.gr4)
 
-anova(qr.SI.4,qr.SI.5,qr.SI.9)
+anova(qr.SI.1,qr.SI.5,qr.SI.9)
 
 #strong evidence that the predictors are not the same between at least two of the models
 
@@ -52,9 +52,9 @@ valid.func<-function(sqht, stcw, stran, tpaos, si, annualht){
                 qr.SI.5$coefficients[3]*stcw+qr.SI.5$coefficients[4]*stran+
                 qr.SI.5$coefficients[5]*tpaos+qr.SI.5$coefficients[6]*si
   
-  qr.pred.one <-qr.SI.4$coefficients[1]+qr.SI.4$coefficients[2]*sqht+
-                qr.SI.4$coefficients[3]*stcw+qr.SI.4$coefficients[4]*stran+
-                qr.SI.4$coefficients[5]*tpaos+qr.SI.4$coefficients[6]*si
+  qr.pred.one <-qr.SI.1$coefficients[1]+qr.SI.1$coefficients[2]*sqht+
+                qr.SI.1$coefficients[3]*stcw+qr.SI.1$coefficients[4]*stran+
+                qr.SI.1$coefficients[5]*tpaos+qr.SI.1$coefficients[6]*si
   
  ifelse(annualht>qr.pred.nine, 
        #yes
@@ -130,7 +130,7 @@ sum(sorted.totals$Freq)
 barchart(sorted.totals$Freq~sorted.totals$annual.gr6.lessthan10in.response.cat, names = "Quantile Bin",
          xlab = "Bin", ylab = "Frequency",type=density,
          main = "Witheld Data Height Growth Response 
-         sorted by Quantile Category")
+         sorted by Quantile Category (DBH>10in)")
 
 
 ###higher resolution by including quantiles .4 to .9 by .4
@@ -270,7 +270,7 @@ annual.gr6.lessthan10in$diff.S[is.na(annual.gr6.lessthan10in$diff.S)] <- 0
 annual.gr6.lessthan10in$CrownWidth[is.na(annual.gr6.lessthan10in$CrownWidth)] <- 0
 
 for(i in 1:nrow(annual.gr6.lessthan10in)){
-  annual.gr6.lessthan10in$response.cat[i]<-valid.func(
+  annual.gr6.lessthan10in$response.cat[i]<-valid.func10(
     annual.gr6.lessthan10in$srHeight_Total[i], 
     annual.gr6.lessthan10in$CrownWidth[i],
     annual.gr6.lessthan10in$diff.S[i],
@@ -289,7 +289,7 @@ sum(sorted.totals$Freq)
 barchart(sorted.totals$Freq~sorted.totals$annual.gr6.lessthan10in.response.cat, names = "Quantile Bin",
          xlab = "Bin", ylab = "Frequency",type=density,
          main = "Witheld Data Height Growth Response 
-         sorted by Quantile Category")
+         sorted by Quantile Category (DBH>10in)")
 
 min(sorted.totals$Freq)
 max(sorted.totals$Freq)

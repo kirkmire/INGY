@@ -591,6 +591,7 @@ qr.TPA.CW<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS,tau=c(.5),data=a
 summary(qr.TPA.CW)
 aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.TPA.CW)[1])
 
+length(qr.TPA.CW$y)
 
 OS.variable<-c("BAPA","CCF","TPA")
 

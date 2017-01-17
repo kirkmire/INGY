@@ -235,10 +235,14 @@ qr.nothing<-rq(ht_annual~srHeight_Total,tau=c(.5),data=annual.gr2)
 summary(qr.nothing)
 aic.list<-AIC(qr.nothing)[1]
 
+length(qr.nothing$y)
+
 #QR for small.tpa
 qr.stpa<-rq(ht_annual ~ srHeight_Total+small.tpa,tau=c(.5),data=annual.gr2)
 summary(qr.stpa)
 aic.list<-c(aic.list,AIC(qr.stpa)[1])
+
+length(qr.stpa$y)
 
 #QR for height class 2
 qr.stp2<-rq(ht_annual~srHeight_Total+two,tau=c(.5),data=annual.gr2)
@@ -279,34 +283,42 @@ aic.list<-c(aic.list,AIC(qr.stp14)[1])
 qr.stp15<-rq(ht_annual~srHeight_Total+other,tau=c(.5),data=annual.gr2)
 summary(qr.stp15)
 aic.list<-c(aic.list,AIC(qr.stp15)[1])
+length(qr.stp15$y)
+
 
 #QR for trees greater than
 qr.sttgt<-rq(ht_annual~srHeight_Total+tpa.gt,tau=c(.5),data=annual.gr2)
 summary(qr.sttgt)
 aic.list<-c(aic.list,AIC(qr.sttgt)[1])
-
+length(qr.sttgt$y)
 
 #QR for basal diameter
 qr.stbd<-rq(ht_annual~srHeight_Total+BasalDiameter,tau=c(.5),data=annual.gr2)
 summary(qr.stbd)
 aic.list<-c(aic.list,AIC(qr.stbd)[1])
-
+length(qr.stbd$y)
 
 #QR for DBH
 qr.stdbh<-rq(ht_annual~srHeight_Total+DBH,tau=c(.5),data=annual.gr2)
 summary(qr.stdbh)
 aic.list<-c(aic.list,AIC(qr.stdbh)[1])
 
+length(qr.stdbh$y)
+
 #QR for Crown Width
 qr.stcw<-rq(ht_annual~srHeight_Total+CrownWidth,tau=c(.5),data=annual.gr2)
 summary(qr.stcw)
 aic.list<-c(aic.list,AIC(qr.stcw)[1])
+
+length(qr.stcw$y)
 
 
 #QR for Crown Length
 qr.stcl<-rq(ht_annual~srHeight_Total+CrownLength,tau=c(.5),data=annual.gr2)
 summary(qr.stcl)
 aic.list<-c(aic.list,AIC(qr.stcl)[1])
+
+length(qr.stcl$y)
 
 aic.list.UT<-t(as.data.frame(aic.list))
 variable<-c("Nothing","SmallTPA","Two","Four","Six","Eight",

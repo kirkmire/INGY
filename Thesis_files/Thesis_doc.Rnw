@@ -534,7 +534,7 @@ Selecting a single dimension from each ecological category of small tree competi
 
 
 \begin{table}[h]
-\caption{Dummy table 1}
+\caption{Akaike Information Criterion (AIC) for .5 Quantile Regression by Category of Small Tree Competition  }
 \begin{center}
 \begin{tabular}{cccccccc}
 \hline\hline
@@ -567,6 +567,8 @@ CrownLength&$3021.98$\\
 \end{center}
 \label{tab:dum1}
 \end{table}
+
+
 
 \newpage
 \newappendix{Bibliography} 

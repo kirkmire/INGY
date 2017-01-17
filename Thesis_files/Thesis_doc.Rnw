@@ -9,8 +9,6 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 %%%%%%%%  Packages   %%%%%%%%%%%%%%%%
 \usepackage{amsmath,amssymb}
 \usepackage[english]{babel}
-\usepackage[csquotes]
-\usepackage[utf8]{inputenc}
 \usepackage{graphicx} 
 \usepackage{indentfirst}
 \usepackage{times}
@@ -531,6 +529,44 @@ Model building will proceed from category to category with the model of lowest A
 
 Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare small tree growth to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.
 
+\newpage
+\subsection{Variable Selection Results and Model Evaluation}
+
+
+\begin{table}[h]
+\caption{Dummy table 1}
+\begin{center}
+\begin{tabular}{cccccccc}
+\hline\hline
+{Small Tree}&{AIC}&
+{Vegetation}&{AIC}&
+{Overstory}&{AIC}&
+{Site}&{AIC}\\
+
+
+\hline
+Nothing&$3443.57$&POLV.cov&$6260.88$&BAPA&$5721.13$&\textbf{Site Index}&$6264.38$\\
+SmallTPA&$3190.12$&POLV.cov&$6260.88$&CCF&$5626.27$\\
+Two&$3437.78$&F.cov&$6439.84$&\textbf{TPA}&$5452.38$\\
+Four&$3431.33$&LS.cov&$6462.73$\\
+Six&$3354.51$&HS.cov&$6444.14$&\\
+Eight&$3299.83$&G.cov&$6463.12$\\
+Ten&$3266.95$&F.diff&$6257.36$\\
+Twelve&$3264.95$&LS.diff&$6366.31$\\
+Fourteen&$3256.55$&HS.diff&$6225.79$\\
+Fifteen&$3324.43$&G.diff&$6281.71$\\
+TGT&$3249.67$&F.tran&$5601.62$\\
+BD&$2674.49$&\textbf{S.tran}&$5206.99$\\
+DBH&$2418.16$&G.tran.diff&$6333.32$\\
+\textbf{CrownWidth}&$3120.50$&G.tran.cov&$6456.83$\\
+CrownLength&$3021.98$\\
+\\
+
+\hline
+\end{tabular}
+\end{center}
+\label{tab:dum1}
+\end{table}
 
 \newpage
 \newappendix{Bibliography} 

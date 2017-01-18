@@ -534,33 +534,37 @@ Selecting a single dimension from each ecological category of small tree competi
 
 
 \begin{table}[h]
+\small
 \caption{Akaike Information Criterion (AIC) for .5 Quantile Regression by Category of Small Tree Competition  }
 \begin{center}
-\begin{tabular}{cccccccc}
+\begin{tabular}{cccccccccccc}
 \hline\hline
-{Small Tree}&{AIC}&
-{Vegetation}&{AIC}&
-{Overstory}&{AIC}&
-{Site}&{AIC}\\
+{Small Tree}&{n}&{AIC}&
+{Vegetation}&{n}&{AIC}&
+{Overstory}&{n}&{AIC}&
+{Site}&{n}&{AIC}\\
 
 
 \hline
-Nothing&$3443.57$&POLV.cov&$6260.88$&BAPA&$5721.13$&\textbf{Site Index}&$6264.38$\\
-SmallTPA&$3190.12$&POLV.cov&$6260.88$&CCF&$5626.27$\\
-Two&$3437.78$&F.cov&$6439.84$&\textbf{TPA}&$5452.38$\\
-Four&$3431.33$&LS.cov&$6462.73$\\
-Six&$3354.51$&HS.cov&$6444.14$&\\
-Eight&$3299.83$&G.cov&$6463.12$\\
-Ten&$3266.95$&F.diff&$6257.36$\\
-Twelve&$3264.95$&LS.diff&$6366.31$\\
-Fourteen&$3256.55$&HS.diff&$6225.79$\\
-Fifteen&$3324.43$&G.diff&$6281.71$\\
-TGT&$3249.67$&F.tran&$5601.62$\\
-BD&$2674.49$&\textbf{S.tran}&$5206.99$\\
-DBH&$2418.16$&G.tran.diff&$6333.32$\\
-\textbf{CrownWidth}&$3120.50$&G.tran.cov&$6456.83$\\
-CrownLength&$3021.98$\\
+Nothing&$1998$&$3443.57$&POLV.cov&5481&6260.88&BAPA&4788&5058.74&Slope&4465&4258.45\\
+SmallTPA&$1998$&$3190.12$&F.cov&5481&6439.84&CCF&4788&4911.87&SI&4788&4447.04\\
+
+Two&$1993$&$3437.78$&LS.cov&5481&6462.73&TPA&4788&4741.38&Elevation&4580&4253.31\\
+Four&$1993$&$3431.33$&HS.cov&5481&6444.14&&&&Aspect&3515&3267.08\\
+Six&$1993$&$3354.51$&G.cov&5481&6463.12&&&&&&\\
+Eight&$1993$&$3299.83$&F.diff&5481&6257.36&&&&&&\\
+Ten&$1993$&$3266.95$&LS.diff&5481&6366.31&&&&&&\\
+Twelve&$1993$&$3264.95$&HS.diff&5481&6225.79&&&&&&\\
+Fourteen&$1993$&$3256.55$&G.diff&5481&6281.71&&&&&&\\
+Fifteen&$1993$&$3324.43$&F.tran&4901&5601.62&&&&&&\\
+TGT&$1993$&$3249.67$&S.tran&4788&5206.99&&&&&&\\
+BD&$1996$&$2674.49$&G.tran.diff&5481&6333.32&&&&&&\\
+DBH&$1511$&$2418.16$&G.tran.cov&5481&6456.83&&&&&&\\
+CrownWidth&$1995$&$3120.50$&&&&&&&&&\\
+CrownLength&$1990$&$3021.98$&&&&&&&&&\\
 \\
+
+
 
 \hline
 \end{tabular}

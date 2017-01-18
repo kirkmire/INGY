@@ -44,17 +44,52 @@ plot(gam.aspect,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
 
-#OS Quantreg (Carrying forward CW/sTPA and shrub transect, TPA)
+#Slope Quantreg (Carrying forward CW and shrub transect, TPA)
 library(quantreg)
 
-qr.SI<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(1:9/10),data=annual.gr4)
+qr.slope<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+Slope.x,tau=c(.5),data=annual.gr4)
 summary(qr.SI)
-aic.list.SI<-AIC(qr.SI)[1]
+aic.list.SQ<-AIC(qr.slope)[1]
+nlist.SQ<-length(qr.slope$y)
+
+
+#SI Quantreg (Carrying forward CW and shrub transect, TPA)
+library(quantreg)
+
+qr.SI<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.5),data=annual.gr4)
+summary(qr.SI)
+aic.list.SQ<-c(aic.list.SQ,AIC(qr.SI)[1])
+nlist.SQ<-c(nlist.SQ,length(qr.SI$y))
+
+#Elev Quantreg (Carrying forward CW and shrub transect, TPA)
+library(quantreg)
+
+qr.elev<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+Elevation.x,tau=c(.5),data=annual.gr4)
+summary(qr.elev)
+aic.list.SQ<-c(aic.list.SQ,AIC(qr.elev)[1])
+nlist.SQ<-c(nlist.SQ,length(qr.elev$y))
+
+#Asp Quantreg (Carrying forward CW and shrub transect, TPA)
+library(quantreg)
+
+qr.asp<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+Aspect_Deg.x,tau=c(.5),data=annual.gr4)
+summary(qr.asp)
+aic.list.SQ<-c(aic.list.SQ,AIC(qr.asp)[1])
+nlist.SQ<-c(nlist.SQ,length(qr.asp$y))
+
+
+
 
 #SI qr has an AIC> 4741 (OS TPA)
 
 
+SQ.variable<-c("Slope","SI","Elevation","Aspect")
+
+SQ.variable<-as.data.frame(SQ.variable)
+
+SQ.aic<-as.data.frame(cbind(nlist.SQ,aic.list.SQ))
 
 
+SQ.aic<-cbind(SQ.variable,SQ.aic)
 
-
+is.numeric(SQ.aic$aic.list.SQ)

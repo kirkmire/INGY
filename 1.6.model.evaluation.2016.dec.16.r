@@ -13,10 +13,39 @@ aic.lists<-t(aic.lists)
 aic.lists<-round(aic.lists,2)
 
 
+
+colnames(UT.aic)<-c("Variable","n","AIC")
+
+colnames(UV.aic)<-c("Variable","n","AIC")
+
+colnames(OS.aic)<-c("Variable","n","AIC")
+
+colnames(SQ.aic)<-c("Variable","n","AIC")
+
+aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
+
+aic.lists$AIC<-round(aic.lists$AIC,2)
+
+final.aic<-data.frame(matrix("", nrow = 15, ncol = 12),stringsAsFactors=F)
+final.aic$X1<-aic.lists$Variable[1:15]
+final.aic$X2<-aic.lists$n[1:15]
+final.aic$X3<-aic.lists$AIC[1:15]
+final.aic$X4[1:13]<-as.character(aic.lists$Variable[16:28])
+final.aic$X5[1:13]<-aic.lists$n[16:28]
+final.aic$X6[1:13]<-aic.lists$AIC[16:28]
+final.aic$X7[1:3]<-as.character(aic.lists$Variable[29:31])
+final.aic$X8[1:3]<-aic.lists$n[29:31]
+final.aic$X9[1:3]<-aic.lists$AIC[29:31]
+final.aic$X10[1:4]<-as.character(aic.lists$Variable[32:35])
+final.aic$X11[1:4]<-aic.lists$n[32:35]
+final.aic$X12[1:4]<-aic.lists$AIC[32:35]
+
+
+
 #The code below will produce output that can then be copied over to the .tex file
 library(Hmisc)
-aic<- data.frame(aic.lists)
-latex(aic, file="")            # If you want all the data
+
+latex(final.aic, file="")            # If you want all the data
 
 
 

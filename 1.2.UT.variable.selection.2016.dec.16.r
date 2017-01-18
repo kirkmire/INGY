@@ -230,104 +230,116 @@ plot(gam.stcw,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 #####Quantile Regression
 library(quantreg)
 
+
+
 #QR for small.tpa
 qr.nothing<-rq(ht_annual~srHeight_Total,tau=c(.5),data=annual.gr2)
 summary(qr.nothing)
 aic.list<-AIC(qr.nothing)[1]
-
-length(qr.nothing$y)
+nlist<-length(qr.nothing$y)
 
 #QR for small.tpa
 qr.stpa<-rq(ht_annual ~ srHeight_Total+small.tpa,tau=c(.5),data=annual.gr2)
 summary(qr.stpa)
 aic.list<-c(aic.list,AIC(qr.stpa)[1])
 
-length(qr.stpa$y)
+nlist<-c(nlist,length(qr.stpa$y))
 
 #QR for height class 2
 qr.stp2<-rq(ht_annual~srHeight_Total+two,tau=c(.5),data=annual.gr2)
 summary(qr.stp2)
 aic.list<-c(aic.list,AIC(qr.stp2)[1])
+nlist<-c(nlist,length(qr.stp2$y))
+
 
 #QR for height class 4
 qr.stp4<-rq(ht_annual~srHeight_Total+four,tau=c(.5),data=annual.gr2)
 summary(qr.stp4)
 aic.list<-c(aic.list,AIC(qr.stp4)[1])
+nlist<-c(nlist,length(qr.stp4$y))
 
 #QR for height class 6
 qr.stp6<-rq(ht_annual~srHeight_Total+six,tau=c(.5),data=annual.gr2)
 summary(qr.stp6)
 aic.list<-c(aic.list,AIC(qr.stp6)[1])
+nlist<-c(nlist,length(qr.stp6$y))
 
 #QR for height class 8
 qr.stp8<-rq(ht_annual~srHeight_Total+eight,tau=c(.5),data=annual.gr2)
 summary(qr.stp8)
 aic.list<-c(aic.list,AIC(qr.stp8)[1])
+nlist<-c(nlist,length(qr.stp8$y))
 
 #QR for height class 10
 qr.stp10<-rq(ht_annual~srHeight_Total+ten,tau=c(.5),data=annual.gr2)
 summary(qr.stp10)
 aic.list<-c(aic.list,AIC(qr.stp10)[1])
+nlist<-c(nlist,length(qr.stp10$y))
 
 #QR for height class 12
 qr.stp12<-rq(ht_annual~srHeight_Total+twelve,tau=c(.5),data=annual.gr2)
 summary(qr.stp12)
 aic.list<-c(aic.list,AIC(qr.stp12)[1])
+nlist<-c(nlist,length(qr.stp12$y))
 
 #QR for height class 14
 qr.stp14<-rq(ht_annual~srHeight_Total+fourteen,tau=c(.5),data=annual.gr2)
 summary(qr.stp14)
 aic.list<-c(aic.list,AIC(qr.stp14)[1])
+nlist<-c(nlist,length(qr.stp14$y))
 
 #QR for height class 15
 qr.stp15<-rq(ht_annual~srHeight_Total+other,tau=c(.5),data=annual.gr2)
 summary(qr.stp15)
 aic.list<-c(aic.list,AIC(qr.stp15)[1])
-length(qr.stp15$y)
+nlist<-c(nlist,length(qr.stp15$y))
 
 
 #QR for trees greater than
 qr.sttgt<-rq(ht_annual~srHeight_Total+tpa.gt,tau=c(.5),data=annual.gr2)
 summary(qr.sttgt)
 aic.list<-c(aic.list,AIC(qr.sttgt)[1])
-length(qr.sttgt$y)
+nlist<-c(nlist,length(qr.sttgt$y))
 
 #QR for basal diameter
 qr.stbd<-rq(ht_annual~srHeight_Total+BasalDiameter,tau=c(.5),data=annual.gr2)
 summary(qr.stbd)
 aic.list<-c(aic.list,AIC(qr.stbd)[1])
-length(qr.stbd$y)
+nlist<-c(nlist,length(qr.stbd$y))
 
 #QR for DBH
 qr.stdbh<-rq(ht_annual~srHeight_Total+DBH,tau=c(.5),data=annual.gr2)
 summary(qr.stdbh)
 aic.list<-c(aic.list,AIC(qr.stdbh)[1])
-
-length(qr.stdbh$y)
+nlist<-c(nlist,length(qr.stdbh$y))
 
 #QR for Crown Width
 qr.stcw<-rq(ht_annual~srHeight_Total+CrownWidth,tau=c(.5),data=annual.gr2)
 summary(qr.stcw)
 aic.list<-c(aic.list,AIC(qr.stcw)[1])
-
-length(qr.stcw$y)
+nlist<-c(nlist,length(qr.stcw$y))
 
 
 #QR for Crown Length
 qr.stcl<-rq(ht_annual~srHeight_Total+CrownLength,tau=c(.5),data=annual.gr2)
 summary(qr.stcl)
 aic.list<-c(aic.list,AIC(qr.stcl)[1])
+nlist<-c(nlist,length(qr.stcl$y))
 
-length(qr.stcl$y)
+UT.aic<-as.data.frame(cbind(nlist,aic.list))
 
-aic.list.UT<-t(as.data.frame(aic.list))
+UT.aic$aic.list<-as.numeric(UT.aic$aic.list)
+
 variable<-c("Nothing","SmallTPA","Two","Four","Six","Eight",
                       "Ten","Twelve","Fourteen","Fifteen",
                       "TGT","BD","DBH","CrownWidth","CrownLength")
 
-colnames(aic.list.UT)<-(variable)
+variable<-as.data.frame(variable)
 
-aic.list.UT[,aic.list.UT==min(aic.list.UT)]
+UT.aic<-cbind(variable,UT.aic)
+
+
+
 
 
 #Initial DBH has the lowest aic, however, it is not really a measure of other small tree
@@ -338,32 +350,5 @@ aic.list.UT[,aic.list.UT==min(aic.list.UT)]
 #going forward. These variables are related because CW reflects the effects
 #of other small tree competition
 
-booktabs()
-library(tables)
-library(Hmisc)
-tabular(Species
-              + Hline(2:5) + 1
-               ~ Format(digits=2)
-               *(Sepal.Length
-                   + Sepal.Width)
-               *(mean + sd),
-               data=iris)
-    
-tabular(Species ~ Format(digits=2)
-               *(Sepal.Length
-                 + Sepal.Width)
-              *(mean + sd),
-              data=iris)
 
-
-
-iris
-
-latex(tabular(Species
-              + + Hline(2:5) + 1
-              + ~ Format(digits=2)
-              + *(Sepal.Length
-                  + + Sepal.Width)
-              + *(mean + sd),
-              + data=iris))
 

@@ -574,34 +574,38 @@ aic.list.OS<-t(as.data.frame(aic.list.OS))
 colnames(aic.list.OS)<-(OS.variable)
 
 
-#CW QR
+#CW QR#####################################################
 
 #QR for BAPA CW
 qr.BAPA.CW<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+bapa.OS,tau=c(.5),data=annual.gr4)
 summary(qr.BAPA.CW)
 aic.list.OS.CW<-AIC(qr.BAPA.CW)[1]
+nlist.OS<-length(qr.BAPA.CW$y)
 
 #QR for CCF CW
 qr.CCF.CW<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+CCF.OS,tau=c(.5),data=annual.gr4)
 summary(qr.CCF.CW)
 aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.CCF.CW)[1])
+nlist.OS<-c(nlist.OS,length(qr.CCF.CW$y))
+
 
 #QR for TPA CW
 qr.TPA.CW<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS,tau=c(.5),data=annual.gr4)
 summary(qr.TPA.CW)
 aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.TPA.CW)[1])
+nlist.OS<-c(nlist.OS,length(qr.TPA.CW$y))
 
-length(qr.TPA.CW$y)
 
 OS.variable<-c("BAPA","CCF","TPA")
 
-aic.list.OS.CW<-t(as.data.frame(aic.list.OS.CW))
-
-colnames(aic.list.OS.CW)<-(OS.variable)
+OS.variable<-as.data.frame(OS.variable)
 
 
 
-rbind(aic.list.OS,aic.list.OS.CW)
+OS.aic<-as.data.frame(cbind(nlist.OS,aic.list.OS.CW))
+
+OS.aic<-cbind(OS.variable,OS.aic)
+
 
 #CW has clearly seperated from stpa 
 #BAPA OS var only has a marginally lower

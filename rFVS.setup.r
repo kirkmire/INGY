@@ -27,7 +27,7 @@ FVS.Tree.Data<- data.frame(plot=paste(kc.trees$Plot,kc.trees$Year_Measurement,se
                              #kc.trees$Year_Measurement,
                              kc.trees$Tree,
                                       sep=""),
-                          count=1,
+                          count=27.74,
                           species="PP",
                           dbh=round(kc.trees$DBH,digits=1),
                           hist=1,
@@ -70,6 +70,11 @@ FVS.Tree.Data.OS<- data.frame(plot=paste(OS.KC.Trees$Plot,OS.KC.Trees$Year_Measu
                            hist=1,
                            height=OS.KC.Trees$Height_Total,
                            crown.ratio=OS.KC.Trees$CrownRatio)
+
+for(i in 1:nrow(FVS.Tree.Data.OS)){
+  FVS.Tree.Data.OS$count[i]<-if(OS.KC.Trees$DBH[i]>10){2}
+  else{4}
+}
 
 
 
@@ -144,12 +149,10 @@ stdname<-("Low")
 
 ##Cruise Design##
 #BAF- Negative value is interpreted as the inverse of a large fixed area plot#
-BAF<-(-2)
-#BAF<-(20)
-#Fixed Plot Size- the inverse area for cruise designs using a nested fixed radius plot for small trees#
-#FRP<-(10)
-FRP<-(1/((5*314)/43560))
-#the sum of five stp areas within a given plot (sixth witheld)
+BAF<-(-1)
+
+FRP<-10
+
 
 #Break point- the diameter cuttoff between large and small tree plots, default is 5in, put "999"#
 #for cruise designs that only use one plot size#

@@ -322,9 +322,22 @@ max(sorted.totals$Freq)
 
 
 
+#########Residual Plots for Q50 ########
+cw.resid <- rq(ht_annual~CrownWidth,tau=c(.5),data=annual.gr4)
+
+plot(cw.resid$residuals~cw.resid$fitted.values)
 
 
+diff.S.resid <- rq(ht_annual~annual.gr4$diff.S,tau=c(.5),data=annual.gr4)
 
+plot(diff.S.resid$residuals~diff.S.resid$fitted.values)
 
+TPA.resid <- rq(ht_annual~annual.gr4$TPA.OS,tau=c(.5),data=annual.gr4)
+
+plot(TPA.resid$residuals~TPA.resid$fitted.values)
+
+SI.resid <-rq(ht_annual~annual.gr4$SiteIndex_Value,tau=c(.5),data=annual.gr4)
+
+plot(SI.resid$residuals~SI.resid$fitted.values)
 
 

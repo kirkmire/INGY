@@ -67,13 +67,13 @@ ggplot(data=stag.sp.inst, aes(x=factor(Coordinate_Value), y=numb)) +
            
            
 #Overstory BA/Ac by Installation (Year of First OS Measurement)#
-
-soverhist2 <- data.table(soverhist, key=c("Installation","Plot","Tree"))
-test<-soverhist2[, list(value=min("Year_Measurement")), by=c("Installation","Plot","Tree")]
-
 library(plyr)
 library(data.table)
 library(lattice)
+soverhist2 <- data.table(soverhist, key=c("Installation","Plot","Tree"))
+test<-soverhist2[, list(value=min("Year_Measurement")), by=c("Installation","Plot","Tree")]
+
+
 
 soverhist5 = data.table(soverhist)
 

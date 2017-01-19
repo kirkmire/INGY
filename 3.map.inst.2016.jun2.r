@@ -1,15 +1,15 @@
-library(RODBC)
+#library(RODBC)
 library(RgoogleMaps)
 
 #! 1. read in some tables
-filenm <- "stcv_database_Aug2016.accdb"
+#filenm <- "stcv_database_Aug2016.accdb"
 
-path <- odbcConnectAccess2007(filenm)
-sqlTables(path)[,3]
+#path <- odbcConnectAccess2007(filenm)
+#sqlTables(path)[,3]
 
-sinstloc <- sqlFetch(path,"Installations_Locations_GIS")
+#sinstloc <- sqlFetch(path,"Installations_Locations_GIS")
 
-odbcCloseAll()
+#odbcCloseAll()
 
 
 #! 2. subset of installations

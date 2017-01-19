@@ -13,7 +13,7 @@ annual.gr4<-merge(annual.gr4,sinst.pipo, by="Installation")
 
 
 #GAM for Site Index
-gam.SI<-gam(ht_annual~s(srHeight_Total)+s(SiteIndex_Value.x),data=annual.gr4, family=gaussian(link="identity"))
+gam.SI<-gam(ht_annual~s(srHeight_Total)+s(SiteIndex_Value),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.SI)
 
 par(mfrow=c(1,2),mar=c(4,4,1,2))
@@ -56,7 +56,7 @@ nlist.SQ<-length(qr.slope$y)
 #SI Quantreg (Carrying forward CW and shrub transect, TPA)
 library(quantreg)
 
-qr.SI<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.5),data=annual.gr4)
+qr.SI<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
 summary(qr.SI)
 aic.list.SQ<-c(aic.list.SQ,AIC(qr.SI)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.SI$y))

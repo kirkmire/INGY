@@ -13,7 +13,7 @@ annual.gr4<-merge(annual.gr4,sinst.pipo, by="Installation")
 
 
 #GAM for Site Index
-gam.SI<-gam(ht_annual~s(srHeight_Total)+s(SiteIndex_Value),data=annual.gr4, family=gaussian(link="identity"))
+gam.SI<-gam(ht_annual~s(srHeight_Total)+s(SiteIndex_Value.x),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.SI)
 
 par(mfrow=c(1,2),mar=c(4,4,1,2))
@@ -48,7 +48,7 @@ plot(gam.aspect,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 library(quantreg)
 
 qr.slope<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+Slope.x,tau=c(.5),data=annual.gr4)
-summary(qr.SI)
+summary(qr.slope)
 aic.list.SQ<-AIC(qr.slope)[1]
 nlist.SQ<-length(qr.slope$y)
 

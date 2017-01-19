@@ -51,6 +51,56 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \pagenumbering{roman}
 \thispagestyle{empty}
 
+\vspace*{1\baselineskip}
+\begin{center}
+
+\text{PREDICTING THE GROWTH RESPONSE OF SMALL PONDEROSA PINE TREES UNDER} 
+\text{VARYING LEVELS OF OVERSTORY RETENTION, VEGETATIVE COMPETITION AND}
+\text{SITE QUALITY} 
+
+\text{By}
+
+\text{Colin Patrick Kirkmire} 
+
+\text{B.Sc. Forest Management, University of Washington, Seattle, Washington, 2015} 
+
+\text{Thesis} 
+
+\text{presented in partial fulfillment of the requirements
+for the degree of} 
+
+\text{Master of Science}\\
+\text{in Forestry} 
+
+\text{The University of Montana}\\
+\text{Missoula, MT} 
+
+\text{July 2017} 
+
+\text{Approved by:}\\ 
+\vspace{10 mm}
+\text{Scott Whittenburg, Dean of the Graduate School}\\
+\text{Graduate School} 
+\vspace{10 mm}
+
+\text{Dr. David L.R. Affleck, Co-Chair}\\ 
+\text{Forest Management} 
+\vspace{10 mm}
+
+\text{Dr. John Goodburn, Co-Chair}\\ 
+\text{Forest Management} 
+\vspace{10 mm}
+
+\text{Dr. David Patterson}\\ 
+\text{Statistics} 
+\vspace{10 mm}
+
+\text{Dr. Peter Kolb}\\ 
+\text{Forestry Extension} 
+
+
+\newpage
+\thispagestyle{empty}
 \vspace*{5\baselineskip}
 \begin{center}
 \textbf{\large{Predicting the Growth Response of Small Ponderosa Pine Trees under Varying levels of Overstory Retention, Vegetative Competition and Site Quality}} \\[1pt] 

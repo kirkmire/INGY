@@ -1,4 +1,3 @@
-US
 ######Understory Non-Tree Variables######
 #Percentage cover 1m, upper and lower extent of height
 

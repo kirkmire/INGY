@@ -1,18 +1,13 @@
 
-#Reads in previous scripts required
+#Reads in previous scripts required (takes ~10min)
 source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.4annualizedht.2016.dec.16.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/1.1annualizedht.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 
 #combines all aic.lists into one dataframe
-aic.lists<-cbind(aic.list.UT, aic.list.vegCW, aic.list.OS, aic.list.SI)
-aic.lists<-t(aic.lists)
-aic.lists<-round(aic.lists,2)
-
-
 
 colnames(UT.aic)<-c("Variable","n","AIC")
 

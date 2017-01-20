@@ -105,24 +105,26 @@ annual.gr2<-annual.gr[annual.gr$Installation %in% sim, ]
 #Removes 6th stp plots from analysis
 annual.gr2<-annual.gr2[!annual.gr2$STP==6,]
 
+#GAM for Crownwidth ht class
+gam.stCW<-gam(ht_annual~s(srHeight_Total)+s(CrownWidth),data=annual.gr2, family=gaussian(link="identity"))
+summary(gam.stCW)
+
+par(mfrow=c(2,4),mar=c(4,4,1,2))
+plot(gam.stCW,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
 #GAM for 2 ht class
-gam.st2<-gam(ht_annual~s(srHeight_Total)+s(CrownWidth),data=annual.gr2, family=gaussian(link="identity"))
+gam.st2<-gam(ht_annual~s(srHeight_Total)+s(two),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.st2)
 
 #par(mfrow=c(2,2),mar=c(4,4,1,2))
 plot(gam.st2,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-
-#par(mfrow=c(1,2))
-#plot(predict(gam.st2),residuals(gam.st2),xlab="predicted",ylab="residuals")
-#qqnorm(residuals(gam.st2),main="")
-#range(annual.gr2$ht_annual)
 
 
 #GAM for 4 ht class
 gam.st4<-gam(ht_annual~s(srHeight_Total)+s(four),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.st4)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
+
 plot(gam.st4,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
@@ -130,22 +132,21 @@ plot(gam.st4,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 gam.st6<-gam(ht_annual~s(srHeight_Total)+s(six),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.st6)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
-plot(gam.st6,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
+plot(gam.st6,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+##Print##
 
 #GAM for 8 ht class
 gam.st8<-gam(ht_annual~s(srHeight_Total)+s(eight),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.st8)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
+par(mfrow=c(2,4),mar=c(4,4,1,2))
 plot(gam.st8,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 #GAM for 10 ht class
 gam.st10<-gam(ht_annual~s(srHeight_Total)+s(ten),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.st10)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.st10,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
@@ -153,7 +154,7 @@ plot(gam.st10,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 gam.st12<-gam(ht_annual~s(srHeight_Total)+s(twelve),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.st12)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
+
 plot(gam.st12,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
@@ -161,15 +162,15 @@ plot(gam.st12,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 gam.st14<-gam(ht_annual~s(srHeight_Total)+s(fourteen),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.st14)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
-plot(gam.st14,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
+plot(gam.st14,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+#Print#
 
 #GAM for 15 "other" ht class
 gam.st15<-gam(ht_annual~s(srHeight_Total)+s(other),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.st12)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
+par(mfrow=c(2,4),mar=c(4,4,1,2))
 plot(gam.st15,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
@@ -178,7 +179,7 @@ plot(gam.st15,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 gam.sttpa<-gam(ht_annual~s(srHeight_Total)+s(small.tpa),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.sttpa)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
+
 plot(gam.sttpa,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
@@ -186,7 +187,6 @@ plot(gam.sttpa,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 gam.sttgt<-gam(ht_annual~s(srHeight_Total)+s(tpa.gt),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.sttgt)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.sttgt,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
@@ -195,15 +195,15 @@ plot(gam.sttgt,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 gam.stbd<-gam(ht_annual~s(srHeight_Total)+s(BasalDiameter),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.stbd)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
-plot(gam.stbd,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
+plot(gam.stbd,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+##Print##
 
 #GAM for DBH
 gam.stdbh<-gam(ht_annual~s(srHeight_Total)+s(DBH),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.stdbh)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
+par(mfrow=c(2,4),mar=c(4,4,1,2))
 plot(gam.stdbh,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
@@ -214,7 +214,7 @@ annual.gr2$CrownLength<-annual.gr2$Height_Total-annual.gr2$Height_CrownBase
 gam.stcl<-gam(ht_annual~s(srHeight_Total)+s(CrownLength),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.stcl)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
+
 plot(gam.stcl,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
@@ -223,7 +223,6 @@ plot(gam.stcl,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 gam.stcw<-gam(ht_annual~s(srHeight_Total)+s(CrownWidth),data=annual.gr2, family=gaussian(link="identity"))
 summary(gam.stcw)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.stcw,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 

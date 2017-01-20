@@ -527,14 +527,13 @@ for(i in 1:nrow(annual.gr4)){
 gam.BAPA<-gam(ht_annual~s(srHeight_Total)+s(bapa.OS),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.BAPA)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
+par(mfrow=c(2,4),mar=c(4,4,1,2))
 plot(gam.BAPA,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 #GAM for CCF
 gam.CCF<-gam(ht_annual~s(srHeight_Total)+s(CCF.OS),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.CCF)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.CCF,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
@@ -542,7 +541,6 @@ plot(gam.CCF,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 gam.TPA<-gam(ht_annual~s(srHeight_Total)+s(TPA.OS),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.CCF)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.TPA,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 

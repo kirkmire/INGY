@@ -208,7 +208,7 @@ annual.gr4<-annual.gr4[!annual.gr4$STP==6,]
 gam.1m.polv<-gam(ht_annual~s(srHeight_Total)+s(Cov.POLV),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.1m.polv)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
+par(mfrow=c(2,4),mar=c(4,4,1,2))
 plot(gam.1m.polv,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 #GAM for 1m polyveg diff
@@ -220,29 +220,26 @@ plot(gam.1m.polv,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 gam.1m.F.diff<-gam(ht_annual~s(srHeight_Total)+s(annual.gr4$diff.F.1m),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.1m.F.diff)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.1m.F.diff,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 #GAM for 1m LS diff
 gam.1m.LS.diff<-gam(ht_annual~s(srHeight_Total)+s(annual.gr4$diff.LS.1m),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.1m.LS.diff)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.1m.LS.diff,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 #GAM for 1m HS diff
 gam.1m.HS.diff<-gam(ht_annual~s(srHeight_Total)+s(annual.gr4$diff.HS.1m),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.1m.HS.diff)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.1m.HS.diff,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-
+#Print#
 
 #GAM for Shrub transect data
 gam.tran.S<-gam(ht_annual~s(srHeight_Total)+s(diff.S),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.tran.S)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
+par(mfrow=c(2,4),mar=c(4,4,1,2))
 plot(gam.tran.S,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
@@ -250,22 +247,57 @@ plot(gam.tran.S,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 gam.tran.F<-gam(ht_annual~s(srHeight_Total)+s(diff.F),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.tran.F)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.tran.F,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 #GAM for Grass transect data
 gam.tran.GR<-gam(ht_annual~s(srHeight_Total)+s(grass.ht),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.tran.GR)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.tran.GR,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 #GAM for Grass transect data
 gam.tran.GR.cov<-gam(ht_annual~s(srHeight_Total)+s(tran.G),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.tran.GR.cov)
 
-par(mfrow=c(1,2),mar=c(4,4,1,2))
 plot(gam.tran.GR.cov,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+#Print#
+
+
+#GAM for 1m HS cover
+gam.tran.HS.cov<-gam(ht_annual~s(srHeight_Total)+s(Cov.HS),data=annual.gr4, family=gaussian(link="identity"))
+summary(gam.tran.HS.cov)
+
+par(mfrow=c(2,4),mar=c(4,4,1,2))
+plot(gam.tran.HS.cov,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+#GAM for 1m Grass cover
+gam.G.cov<-gam(ht_annual~s(srHeight_Total)+s(Cov.G),data=annual.gr4, family=gaussian(link="identity"))
+summary(gam.G.cov)
+
+plot(gam.G.cov,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+#GAM for 1m Forb cover
+gam.F.cov<-gam(ht_annual~s(srHeight_Total)+s(Cov.F),data=annual.gr4, family=gaussian(link="identity"))
+summary(gam.F.cov)
+
+plot(gam.F.cov,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+#GAM for 1m Forb cover
+gam.LS.cov<-gam(ht_annual~s(srHeight_Total)+s(Cov.LS),data=annual.gr4, family=gaussian(link="identity"))
+summary(gam.LS.cov)
+
+plot(gam.LS.cov,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+##Print##
+
+#GAM for 1m Grass diff
+gam.G.diff.cov<-gam(ht_annual~s(srHeight_Total)+s(diff.G.1m),data=annual.gr4, family=gaussian(link="identity"))
+summary(gam.G.diff.cov)
+
+par(mfrow=c(2,4),mar=c(4,4,1,2))
+plot(gam.G.diff.cov,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+
+
 
 #Veg Quantreg
 library(quantreg)

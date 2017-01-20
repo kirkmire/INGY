@@ -55,6 +55,75 @@ sppnontr <- sqlFetch(path,"Lookup_Species_NonTree")
 #timeline data
 timeline <- sqlFetch(path,"Timeline")
 
+
+#Forb/Shrub reference data
+forbshrub <- sqlFetch(path,"Lookup_Vegetation_Form")
+
+#Function for assigning "lifeform" to transect point data
+#Results posted to updated accdb
+
+length((forbshrub$Species))
+
+lookup<-function(species){
+   row<-forbshrub[forbshrub$Species==species,]
+  ifelse(length(row$Lifeform)==1,
+         "good",
+         ###issue: some species (SYAL, AMAL) listed as F and S
+         ifelse(row$Lifeform=="F",
+                "bad",
+                "good"))
+  
+}
+
+forbshrub$Lifeform2<-0
+
+for(i in 1:nrow(forbshrub)){
+  forbshrub$Lifeform2[i]<-lookup(
+    forbshrub$Species[i])
+}
+
+unsure<-forbshrub[forbshrub$Lifeform2=="bad",]
+library(xlsx)
+write.xlsx(unsure, "unsure.xlsx")
+
+print(unsure)
+
+lf.lookup<-function(species,top){
+  species<-"SYAL"
+  top<-4
+  row<-forbshrub[forbshrub$Species==species,]
+  ifelse(length(row$Lifeform)==1,
+    lf<-row$Lifeform,
+    ###issue: some species (SYAL, AMAL) listed as F and S
+    ifelse(top>3,
+          lf<-"HS",
+          lf<-"LS"))
+  lf
+}
+
+###For Site Quality#
+latlong.STCV <- sqlFetch(path,"Installations_Locations_GIS")
+latlong.STCV<-latlong.STCV[latlong.STCV$Coordinate_Type=="DD",]
+
+latlong.STCV.data<-reshape(latlong.STCV, direction="wide",idvar=
+                        c("Installation","Plot"),
+                      timevar="Coordinate_Axis")
+
+library(reshape2)
+latlong.STCV.data<-melt(latlong.STCV, id.vars=c("Installation","Plot","Year_Measurement"))
+
+stran$Lifeform1<-0
+
+for(i in 1:nrow(stran)){
+  stran$Lifeform1[i]<-lf.lookup(
+    stran$Species_Primary[i],
+    stran$Top[i])
+}
+
+
+
+
+
 odbcCloseAll()
 
 #merged stagm and stag#

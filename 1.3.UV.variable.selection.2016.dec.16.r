@@ -282,7 +282,7 @@ summary(gam.F.cov)
 
 plot(gam.F.cov,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
-#GAM for 1m Forb cover
+#GAM for 1m LS cover
 gam.LS.cov<-gam(ht_annual~s(srHeight_Total)+s(Cov.LS),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.LS.cov)
 

@@ -121,7 +121,7 @@ sum(sorted.totals$Freq)
 barchart(sorted.totals$Freq~sorted.totals$annual.gr6.response.cat, names = "Quantile Bin",
         xlab = "Bin", ylab = "Frequency",type=density,
         main = "Witheld Data Height Growth Response 
-        sorted by Quantile Category")
+        sorted by Quantile Category",ylim=c(0,.12))
 
 
 #Sorted responses for trees <10 in initial dbh

@@ -224,9 +224,9 @@ for(i in 1:nrow(annual.gr4)){
 
 
 ###Crown Competition Factor
-#Crown width variable found in "CrownWidth1" and "CorwnWidth2"
+#Crown width variable found in "CrownWidth1" and "CrownWidth2"
 #Need to create "if/else" statement that creates a new variable that either
-#takes "CrownWidth1" (assumes this is the averageCW for treetaken in field)
+#takes "CrownLength1" (assumes this is the averageCW for treetaken in field)
 #or takes both metrics and computes an average (assumes no average was taken in field)
 
 soverhist$CrownWidth_1[is.na(soverhist$CrownWidth_1)] <- 0
@@ -550,17 +550,17 @@ plot(gam.TPA,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 library(quantreg)
 
 #QR for BAPA
-qr.BAPA<-rq(ht_annual~srHeight_Total+STP+diff.S+bapa.OS,tau=c(.5),data=annual.gr4)
+qr.BAPA<-rq(ht_annual~srHeight_Total+STP+diff.G.1m+bapa.OS,tau=c(.5),data=annual.gr4)
 summary(qr.BAPA)
 aic.list.OS<-AIC(qr.BAPA)[1]
 
 #QR for CCF
-qr.CCF<-rq(ht_annual~srHeight_Total+STP+diff.S+CCF.OS,tau=c(.5),data=annual.gr4)
+qr.CCF<-rq(ht_annual~srHeight_Total+STP+diff.G.1m+CCF.OS,tau=c(.5),data=annual.gr4)
 summary(qr.CCF)
 aic.list.OS<-c(aic.list.OS,AIC(qr.CCF)[1])
 
 #QR for TPA
-qr.TPA<-rq(ht_annual~srHeight_Total+STP+diff.S+TPA.OS,tau=c(.5),data=annual.gr4)
+qr.TPA<-rq(ht_annual~srHeight_Total+STP+diff.G.1m+TPA.OS,tau=c(.5),data=annual.gr4)
 summary(qr.TPA)
 aic.list.OS<-c(aic.list.OS,AIC(qr.TPA)[1])
 
@@ -575,20 +575,20 @@ colnames(aic.list.OS)<-(OS.variable)
 #CW QR#####################################################
 
 #QR for BAPA CW
-qr.BAPA.CW<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+bapa.OS,tau=c(.5),data=annual.gr4)
+qr.BAPA.CW<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+bapa.OS,tau=c(.5),data=annual.gr4)
 summary(qr.BAPA.CW)
 aic.list.OS.CW<-AIC(qr.BAPA.CW)[1]
 nlist.OS<-length(qr.BAPA.CW$y)
 
 #QR for CCF CW
-qr.CCF.CW<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+CCF.OS,tau=c(.5),data=annual.gr4)
+qr.CCF.CW<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+CCF.OS,tau=c(.5),data=annual.gr4)
 summary(qr.CCF.CW)
 aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.CCF.CW)[1])
 nlist.OS<-c(nlist.OS,length(qr.CCF.CW$y))
 
 
 #QR for TPA CW
-qr.TPA.CW<-rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS,tau=c(.5),data=annual.gr4)
+qr.TPA.CW<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS,tau=c(.5),data=annual.gr4)
 summary(qr.TPA.CW)
 aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.TPA.CW)[1])
 nlist.OS<-c(nlist.OS,length(qr.TPA.CW$y))

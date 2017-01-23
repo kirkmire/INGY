@@ -25,15 +25,15 @@ final.aic<-data.frame(matrix("", nrow = 15, ncol = 12),stringsAsFactors=F)
 final.aic$X1<-aic.lists$Variable[1:15]
 final.aic$X2<-aic.lists$n[1:15]
 final.aic$X3<-aic.lists$AIC[1:15]
-final.aic$X4[1:13]<-as.character(aic.lists$Variable[16:28])
-final.aic$X5[1:13]<-aic.lists$n[16:28]
-final.aic$X6[1:13]<-aic.lists$AIC[16:28]
-final.aic$X7[1:3]<-as.character(aic.lists$Variable[29:31])
-final.aic$X8[1:3]<-aic.lists$n[29:31]
-final.aic$X9[1:3]<-aic.lists$AIC[29:31]
-final.aic$X10[1:4]<-as.character(aic.lists$Variable[32:35])
-final.aic$X11[1:4]<-aic.lists$n[32:35]
-final.aic$X12[1:4]<-aic.lists$AIC[32:35]
+final.aic$X4[1:14]<-as.character(aic.lists$Variable[16:29])
+final.aic$X5[1:14]<-aic.lists$n[16:29]
+final.aic$X6[1:14]<-aic.lists$AIC[16:29]
+final.aic$X7[1:3]<-as.character(aic.lists$Variable[30:32])
+final.aic$X8[1:3]<-aic.lists$n[30:32]
+final.aic$X9[1:3]<-aic.lists$AIC[30:32]
+final.aic$X10[1:4]<-as.character(aic.lists$Variable[33:36])
+final.aic$X11[1:4]<-aic.lists$n[33:36]
+final.aic$X12[1:4]<-aic.lists$AIC[33:36]
 
 
 
@@ -51,9 +51,9 @@ plot(summary(qr.SI, se = "nid"), level = 0.95)
 #the effects at varouis quantiles differ considerably fromthe OLS coefficients
 #even in terms of the CI 
 
-qr.SI.5<-  rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
-qr.SI.1 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.1),data=annual.gr4)
-qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.9),data=annual.gr4)
+qr.SI.5<-  rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
+qr.SI.1 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.1),data=annual.gr4)
+qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.9),data=annual.gr4)
 
 anova(qr.SI.1,qr.SI.5,qr.SI.9)
 
@@ -97,14 +97,15 @@ valid.func<-function(sqht, stcw, stran, tpaos, si, annualht){
 
 annual.gr6$response.cat<-0
 
-annual.gr6$diff.S[is.na(annual.gr6$diff.S)] <- 0
-annual.gr6$CrownWidth[is.na(annual.gr6$CrownWidth)] <- 0
+
+annual.gr6<-annual.gr6[!(is.na(annual.gr6$CrownLength)==T),] 
+annual.gr6<-annual.gr6[!(is.na(annual.gr6$CrownWidth)==T),] 
 
 for(i in 1:nrow(annual.gr6)){
   annual.gr6$response.cat[i]<-valid.func(
     annual.gr6$srHeight_Total[i], 
-    annual.gr6$CrownWidth[i],
-    annual.gr6$diff.S[i],
+    annual.gr6$CrownLength[i],
+    annual.gr6$diff.G.1m[i],
     annual.gr6$TPA.OS[i],
     annual.gr6$SiteIndex_Value[i],
     annual.gr6$ht_annual[i])
@@ -135,8 +136,8 @@ annual.gr6.lessthan10in<-annual.gr6.lessthan10in[!is.na(annual.gr6.lessthan10in$
 for(i in 1:nrow(annual.gr6.lessthan10in)){
   annual.gr6.lessthan10in$response.cat[i]<-valid.func(
     annual.gr6.lessthan10in$srHeight_Total[i], 
-    annual.gr6.lessthan10in$CrownWidth[i],
-    annual.gr6.lessthan10in$diff.S[i],
+    annual.gr6.lessthan10in$CrownLength[i],
+    annual.gr6.lessthan10in$diff.G.1m[i],
     annual.gr6.lessthan10in$TPA.OS[i],
     annual.gr6.lessthan10in$SiteIndex_Value[i],
     annual.gr6.lessthan10in$ht_annual[i])
@@ -159,15 +160,15 @@ barchart(sorted.totals$Freq~sorted.totals$annual.gr6.lessthan10in.response.cat, 
 
 ###higher resolution by including quantiles .4 to .9 by .4
 
-qr.SI.1<-  rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.1),data=annual.gr4)
-qr.SI.2 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.2),data=annual.gr4)
-qr.SI.3 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.3),data=annual.gr4)
-qr.SI.4 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.4),data=annual.gr4)
-qr.SI.5 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
-qr.SI.6 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.6),data=annual.gr4)
-qr.SI.7 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.7),data=annual.gr4)
-qr.SI.8 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.8),data=annual.gr4)
-qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value,tau=c(.9),data=annual.gr4)
+qr.SI.1<-  rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.1),data=annual.gr4)
+qr.SI.2 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.2),data=annual.gr4)
+qr.SI.3 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.3),data=annual.gr4)
+qr.SI.4 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.4),data=annual.gr4)
+qr.SI.5 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
+qr.SI.6 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.6),data=annual.gr4)
+qr.SI.7 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.7),data=annual.gr4)
+qr.SI.8 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.8),data=annual.gr4)
+qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.9),data=annual.gr4)
 
 
 
@@ -260,14 +261,14 @@ valid.func10<-function(sqht, stcw, stran, tpaos, si, annualht){
 
 annual.gr6$response.cat<-0
 
-annual.gr6$diff.S[is.na(annual.gr6$diff.S)] <- 0
-annual.gr6$CrownWidth[is.na(annual.gr6$CrownWidth)] <- 0
+annual.gr6$diff.G.1m[is.na(annual.gr6$diff.G.1m)] <- 0
+annual.gr6$CrownLength[is.na(annual.gr6$CrownLength)] <- 0
 
 for(i in 1:nrow(annual.gr6)){
   annual.gr6$response.cat[i]<-valid.func10(
     annual.gr6$srHeight_Total[i], 
-    annual.gr6$CrownWidth[i],
-    annual.gr6$diff.S[i],
+    annual.gr6$CrownLength[i],
+    annual.gr6$diff.G.1m[i],
     annual.gr6$TPA.OS[i],
     annual.gr6$SiteIndex_Value[i],
     annual.gr6$ht_annual[i])
@@ -339,5 +340,31 @@ plot(TPA.resid$residuals~TPA.resid$fitted.values)
 SI.resid <-rq(ht_annual~annual.gr4$SiteIndex_Value,tau=c(.5),data=annual.gr4)
 
 plot(SI.resid$residuals~SI.resid$fitted.values)
+
+###Sequential GAM Plots###
+dev.off()
+
+sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
+plot(sr.ht.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+###Need to add this to rest of code#
+annual.gr4<-annual.gr4[!annual.gr4$CrownLength<0,]
+cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$CrownLength))
+plot(cl.ht.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+
+tpa.os.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+
+           s(annual.gr4$TPA.OS))
+plot(tpa.os.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+
+
+si.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+
+           +annual.gr4$TPA.OS+s(annual.gr4$SiteIndex_Value))
+plot(si.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+
+
+
 
 

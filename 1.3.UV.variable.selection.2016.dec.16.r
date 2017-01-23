@@ -122,15 +122,20 @@ agg.tran.data <-aggregate(stran$diffT,
                     by=list("Installation"=stran$Installation,
                             "Plot"=stran$Plot,
                             "Year_Measurement"=stran$Year_Measurement,
-                            "Lifeform"=stran$Lifeform),FUN=mean)#total/number of points
+                            "Lifeform"=stran$Lifeform1),FUN=mean)#total/number of points
 
 #Reshapes transect data so each plot is a row
 agg.tran.data1<-reshape(agg.tran.data, direction="wide",idvar=
                 c("Installation","Plot","Year_Measurement"),
               timevar="Lifeform",v.names="x")
 
-names(agg.tran.data1)[4:6]<-c("diff.F","diff.null","diff.S")
+names(agg.tran.data1)[4:7]<-c("diff.F","diff.G","diff.HS","diff.LS")
 
+tran.names<-names(agg.tran.data1[,substring(names(agg.tran.data1),5,5)=="."])
+
+for(i in tran.names) {
+  agg.tran.data1[i][is.na(agg.tran.data1[i])] <- 0
+}
 
 
 #Merges aggregated transect data to the "big" df
@@ -235,13 +240,19 @@ summary(gam.1m.HS.diff)
 plot(gam.1m.HS.diff,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 #Print#
 
-#GAM for Shrub transect data
-gam.tran.S<-gam(ht_annual~s(srHeight_Total)+s(diff.S),data=annual.gr4, family=gaussian(link="identity"))
-summary(gam.tran.S)
+#GAM for LS transect data
+gam.tran.LS<-gam(ht_annual~s(srHeight_Total)+s(diff.LS),data=annual.gr4, family=gaussian(link="identity"))
+summary(gam.tran.LS)
 
 par(mfrow=c(2,4),mar=c(4,4,1,2))
-plot(gam.tran.S,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+plot(gam.tran.LS,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
+#GAM for HS transect data
+gam.tran.HS<-gam(ht_annual~s(srHeight_Total)+s(diff.HS),data=annual.gr4, family=gaussian(link="identity"))
+summary(gam.tran.HS)
+
+par(mfrow=c(2,4),mar=c(4,4,1,2))
+plot(gam.tran.HS,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 #GAM for Forb transect data
 gam.tran.F<-gam(ht_annual~s(srHeight_Total)+s(diff.F),data=annual.gr4, family=gaussian(link="identity"))
@@ -254,13 +265,14 @@ gam.tran.GR<-gam(ht_annual~s(srHeight_Total)+s(grass.ht),data=annual.gr4, family
 summary(gam.tran.GR)
 
 plot(gam.tran.GR,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+#Print#
 
 #GAM for Grass transect data
 gam.tran.GR.cov<-gam(ht_annual~s(srHeight_Total)+s(tran.G),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.tran.GR.cov)
 
 plot(gam.tran.GR.cov,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-#Print#
+
 
 
 #GAM for 1m HS cover
@@ -353,10 +365,15 @@ qr.forb.tran<-rq(ht_annual~srHeight_Total+diff.F+STP,tau=c(.5),data=annual.gr4)
 summary(qr.forb.tran)
 aic.list.veg<-c(aic.list.veg,AIC(qr.forb.tran)[1])
 
-#QR for Shrub transect cover
-qr.shrub.tran<-rq(ht_annual~srHeight_Total+diff.S+STP,tau=c(.5),data=annual.gr4)
-summary(qr.shrub.tran)
-aic.list.veg<-c(aic.list.veg,AIC(qr.shrub.tran)[1])
+#QR for LS transect cover
+qr.LS.tran<-rq(ht_annual~srHeight_Total+diff.LS+STP,tau=c(.5),data=annual.gr4)
+summary(qr.LS.tran)
+aic.list.veg<-c(aic.list.veg,AIC(qr.LS.tran)[1])
+
+#QR for HS transect cover
+qr.HS.tran<-rq(ht_annual~srHeight_Total+diff.HS+STP,tau=c(.5),data=annual.gr4)
+summary(qr.HS.tran)
+aic.list.veg<-c(aic.list.veg,AIC(qr.HS.tran)[1])
 
 
 #QR for both Forb and Shrub Transect
@@ -378,7 +395,7 @@ aic.list.veg<-c(aic.list.veg,AIC(qr.tran.gr.cov)[1])
 
 veg.variable<-c("POLV.cov","F.cov","LS.cov","HS.cov","G.cov",
                 "F.diff","LS.diff","HS.diff","G.diff",
-                "F.tran","S.tran","G.tran.diff",
+                "F.tran","LS.tran","HS.tran","G.tran.diff",
                 "G.tran.cov"
                )
 
@@ -402,86 +419,92 @@ colnames(aic.list.veg)<-(veg.variable)
 ###CW STP VAR##########################################################################
 
 #QR for 1m polyveg cover
-qrCW.1m.polv<-rq(ht_annual~srHeight_Total+Cov.POLV+CrownWidth,tau=c(.5),data=annual.gr4)
+qrCW.1m.polv<-rq(ht_annual~srHeight_Total+Cov.POLV+CrownLength,tau=c(.5),data=annual.gr4)
 summary(qrCW.1m.polv)
 aic.list.vegCW<-AIC(qrCW.1m.polv)[1]
 nlist.UV<-length(qrCW.1m.polv$y)
 
 
 #QR for 1m Forb cover
-qrCW.1m.F<-rq(ht_annual~srHeight_Total+Cov.F+CrownWidth,tau=c(.5),data=annual.gr4)
+qrCW.1m.F<-rq(ht_annual~srHeight_Total+Cov.F+CrownLength,tau=c(.5),data=annual.gr4)
 summary(qrCW.1m.F)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.F)[1])
 nlist.UV<-c(nlist.UV, length(qrCW.1m.F$y))
 
 #QR for 1m LOW Shrub cover
-qrCW.1m.LS<-rq(ht_annual~srHeight_Total+Cov.LS+CrownWidth,tau=c(.5),data=annual.gr4)
+qrCW.1m.LS<-rq(ht_annual~srHeight_Total+Cov.LS+CrownLength,tau=c(.5),data=annual.gr4)
 summary(qrCW.1m.LS)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.LS)[1])
 nlist.UV<-c(nlist.UV, length(qrCW.1m.LS$y))
 
 #QR for 1m High Shrub cover
-qrCW.1m.HS<-rq(ht_annual~srHeight_Total+Cov.HS+CrownWidth,tau=c(.5),data=annual.gr4)
+qrCW.1m.HS<-rq(ht_annual~srHeight_Total+Cov.HS+CrownLength,tau=c(.5),data=annual.gr4)
 summary(qrCW.1m.HS)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.HS)[1])
 nlist.UV<-c(nlist.UV, length(qrCW.1m.HS$y))
 
 #QR for 1m Grass cover
-qrCW.1m.G<-rq(ht_annual~srHeight_Total+Cov.G+CrownWidth,tau=c(.5),data=annual.gr4)
+qrCW.1m.G<-rq(ht_annual~srHeight_Total+Cov.G+CrownLength,tau=c(.5),data=annual.gr4)
 summary(qrCW.1m.G)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.G)[1])
 nlist.UV<-c(nlist.UV, length(qrCW.1m.G$y))
 
 #QR for 1m Forb diff
-qrCW.1m.F<-rq(ht_annual~srHeight_Total+diff.F.1m+CrownWidth,tau=c(.5),data=annual.gr4)
+qrCW.1m.F<-rq(ht_annual~srHeight_Total+diff.F.1m+CrownLength,tau=c(.5),data=annual.gr4)
 summary(qrCW.1m.F)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.F)[1])
 nlist.UV<-c(nlist.UV, length(qrCW.1m.F$y))
 
 #QR for 1m LOW Shrub diff
-qrCW.1m.S<-rq(ht_annual~srHeight_Total+diff.LS.1m+CrownWidth,tau=c(.5),data=annual.gr4)
-summary(qrCW.1m.S)
-aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.S)[1])
-nlist.UV<-c(nlist.UV, length(qrCW.1m.S$y))
+qrCW.1m.LS<-rq(ht_annual~srHeight_Total+diff.LS.1m+CrownLength,tau=c(.5),data=annual.gr4)
+summary(qrCW.1m.LS)
+aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.LS)[1])
+nlist.UV<-c(nlist.UV, length(qrCW.1m.LS$y))
 
 #QR for 1m High Shrub diff
-qrCW.1m.HS<-rq(ht_annual~srHeight_Total+diff.HS.1m+CrownWidth,tau=c(.5),data=annual.gr4)
+qrCW.1m.HS<-rq(ht_annual~srHeight_Total+diff.HS.1m+CrownLength,tau=c(.5),data=annual.gr4)
 summary(qrCW.1m.HS)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.HS)[1])
 nlist.UV<-c(nlist.UV, length(qrCW.1m.HS$y))
 
 #QR for 1m Grass diff
-qrCW.1m.G<-rq(ht_annual~srHeight_Total+diff.G.1m+CrownWidth,tau=c(.5),data=annual.gr4)
+qrCW.1m.G<-rq(ht_annual~srHeight_Total+diff.G.1m+CrownLength,tau=c(.5),data=annual.gr4)
 summary(qrCW.1m.G)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.G)[1])
 nlist.UV<-c(nlist.UV, length(qrCW.1m.G$y))
 
 
 #QR for Forb transect cover
-qrCW.forb.tran<-rq(ht_annual~srHeight_Total+diff.F+CrownWidth,tau=c(.5),data=annual.gr4)
+qrCW.forb.tran<-rq(ht_annual~srHeight_Total+diff.F+CrownLength,tau=c(.5),data=annual.gr4)
 summary(qrCW.forb.tran)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.forb.tran)[1])
 nlist.UV<-c(nlist.UV, length(qrCW.forb.tran$y))
 
-#QR for Shrub transect cover
-qrCW.shrub.tran<-rq(ht_annual~srHeight_Total+diff.S+CrownWidth,tau=c(.5),data=annual.gr4)
-summary(qrCW.shrub.tran)
-aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.shrub.tran)[1])
-nlist.UV<-c(nlist.UV, length(qrCW.shrub.tran$y))
+#QR for LS transect cover
+qr.LS.tran<-rq(ht_annual~srHeight_Total+diff.LS+CrownLength,tau=c(.5),data=annual.gr4)
+summary(qr.LS.tran)
+aic.list.vegCW<-c(aic.list.vegCW,AIC(qr.LS.tran)[1])
+nlist.UV<-c(nlist.UV, length(qr.LS.tran$y))
+
+#QR for HS transect cover
+qr.HS.tran<-rq(ht_annual~srHeight_Total+diff.HS+CrownLength,tau=c(.5),data=annual.gr4)
+summary(qr.HS.tran)
+aic.list.vegCW<-c(aic.list.vegCW,AIC(qr.HS.tran)[1])
+nlist.UV<-c(nlist.UV, length(qr.HS.tran$y))
 
 #QR for both Forb and Shrub Transect
-#qrCW.forb.shrub.tran<-rq(ht_annual~srHeight_Total+diff.F+diff.S+CrownWidth,tau=c(.5),data=annual.gr4)
+#qrCW.forb.shrub.tran<-rq(ht_annual~srHeight_Total+diff.F+diff.S+CrownLength,tau=c(.5),data=annual.gr4)
 #summary(qrCW.forb.shrub.tranCW)
 #aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.forb.shrub.tran)[1])
 
 #QR for transect grass height
-qrCW.tran.gr<-rq(ht_annual~srHeight_Total+grass.ht+CrownWidth,tau=c(.5),data=annual.gr4)
+qrCW.tran.gr<-rq(ht_annual~srHeight_Total+grass.ht+CrownLength,tau=c(.5),data=annual.gr4)
 summary(qrCW.tran.gr)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.tran.gr)[1])
 nlist.UV<-c(nlist.UV, length(qrCW.tran.gr$y))
 
 #QR for transect grass cover
-qrCW.tran.gr.cov<-rq(ht_annual~srHeight_Total+tran.G+CrownWidth,tau=c(.5),data=annual.gr4)
+qrCW.tran.gr.cov<-rq(ht_annual~srHeight_Total+tran.G+CrownLength,tau=c(.5),data=annual.gr4)
 summary(qrCW.tran.gr.cov)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.tran.gr.cov)[1])
 nlist.UV<-c(nlist.UV, length(qrCW.tran.gr.cov$y))

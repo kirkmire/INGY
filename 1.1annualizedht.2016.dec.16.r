@@ -13,6 +13,9 @@ merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Year_Measurement==merged
 #Removes all non-PIPO tree records
 merged_stagm_stag<-merged_stagm_stag[merged_stagm_stag$Species=="PIPO",]
 
+#Removes all Dead tree records
+merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Damage=="DEAD",]
+
 #Concatenates Inst,Plot,STP,Tree for unique individual tree identification
 merged_stagm_stag$conc<-paste(merged_stagm_stag$Installation,merged_stagm_stag$Plot,merged_stagm_stag$STP,
                                 merged_stagm_stag$Tree,sep=",")

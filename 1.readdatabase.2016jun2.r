@@ -83,36 +83,32 @@ for(i in 1:nrow(forbshrub)){
 }
 
 unsure<-forbshrub[forbshrub$Lifeform2=="bad",]
-library(xlsx)
-write.xlsx(unsure, "unsure.xlsx")
+#library(xlsx)
+#write.xlsx(unsure, "unsure.xlsx")
 
-print(unsure)
+#print(unsure)
 
-lf.lookup<-function(species,top){
-  species<-"SYAL"
-  top<-4
-  row<-forbshrub[forbshrub$Species==species,]
-  ifelse(length(row$Lifeform)==1,
-    lf<-row$Lifeform,
-    ###issue: some species (SYAL, AMAL) listed as F and S
-    ifelse(top>3,
-          lf<-"HS",
-          lf<-"LS"))
-  lf
-}
-
-###For Site Quality#
-latlong.STCV <- sqlFetch(path,"Installations_Locations_GIS")
-latlong.STCV<-latlong.STCV[latlong.STCV$Coordinate_Type=="DD",]
-
-latlong.STCV.data<-reshape(latlong.STCV, direction="wide",idvar=
-                        c("Installation","Plot"),
-                      timevar="Coordinate_Axis")
-
-library(reshape2)
-latlong.STCV.data<-melt(latlong.STCV, id.vars=c("Installation","Plot","Year_Measurement"))
+##Code for assigning new lifeform to stran data#
 
 stran$Lifeform1<-0
+forbshrub$Lifeform<-as.character(forbshrub$Lifeform)
+stran$Species_Primary<-as.character(stran$Species_Primary)
+stran<-stran[!is.na(stran$Top)==T,]
+
+
+lf.lookup<-function(species,top){
+ # species<-"FRVE"
+ # top<-.3
+  row<-forbshrub[forbshrub$Species==species,]
+  if(length(row$Lifeform)==1){row$Lifeform
+  } else {
+    if(top>3){"HS"
+    } else {
+      "LS"
+    }}
+  
+  }
+
 
 for(i in 1:nrow(stran)){
   stran$Lifeform1[i]<-lf.lookup(
@@ -121,6 +117,18 @@ for(i in 1:nrow(stran)){
 }
 
 
+###For Site Quality#
+Plots.lat.long <- sqlFetch(path,"Plots")
+
+
+Plots.lat.long1 <- Plots.lat.long[!Plots.lat.long$Installation %in% c("BCCheck","LRCheck"),
+                                  c("Installation","Plot","Latitude","Longitude")]
+
+
+Plots.lat.long1 <- Plots.lat.long1[!is.na(Plots.lat.long1$Latitude)==T,]
+
+#library(xlsx)
+#write.xlsx(Plots.lat.long1, "stcv.plot.coords.xlsx")
 
 
 

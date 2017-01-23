@@ -48,9 +48,9 @@ hist(FVS.Final$FVS.pred)
 
 library(quantreg)
 
-qr.SI.1<-  rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.1),data=annual.gr4)
-qr.SI.5 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.5),data=annual.gr4)
-qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.9),data=annual.gr4)
+qr.SI.5<-  rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
+qr.SI.1 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.1),data=annual.gr4)
+qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.9),data=annual.gr4)
 
 anova(qr.SI.1,qr.SI.5,qr.SI.9)
 
@@ -94,18 +94,18 @@ valid.func<-function(sqht, stcw, stran, tpaos, si, annualht){
 
 FVS.Final$response.cat<-0
 
-FVS.Final$diff.S[is.na(FVS.Final$diff.S)] <- 0
-FVS.Final$CrownWidth[is.na(FVS.Final$CrownWidth)] <- 0
+FVS.Final$CrownWidth[is.na(FVS.Final$CrownLength)] <- 0
 
 for(i in 1:nrow(FVS.Final)){
   FVS.Final$response.cat[i]<-valid.func(
     FVS.Final$srHeight_Total[i], 
-    FVS.Final$CrownWidth[i],
-    FVS.Final$diff.S[i],
+    FVS.Final$CrownLength[i],
+    FVS.Final$diff.G.1m[i],
     FVS.Final$TPA.OS[i],
-    FVS.Final$SiteIndex_Value.x[i],
+    FVS.Final$SiteIndex_Value[i],
     FVS.Final$FVS.pred[i])
 }
+
 
 FVS.Final$count<-1
 
@@ -130,12 +130,14 @@ barchart(sorted.totals$Freq~sorted.totals$FVS.Final.response.cat, names = "Quant
 for(i in 1:nrow(FVS.Final)){
   FVS.Final$response.cat[i]<-valid.func(
     FVS.Final$srHeight_Total[i], 
-    FVS.Final$CrownWidth[i],
-    FVS.Final$diff.S[i],
+    FVS.Final$CrownLength[i],
+    FVS.Final$diff.G.1m[i],
     FVS.Final$TPA.OS[i],
-    FVS.Final$SiteIndex_Value.x[i],
+    FVS.Final$SiteIndex_Value[i],
     FVS.Final$ht_annual[i])
 }
+
+
 
 FVS.Final$count<-1
 
@@ -156,15 +158,16 @@ aggregate(FVS.Final$ht_annual, list(FVS.Final$response.cat), mean)
 
 ###higher resolution by including quantiles .1 to .9 by .1
 
-qr.SI.1<-  rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.1),data=annual.gr4)
-qr.SI.2 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.2),data=annual.gr4)
-qr.SI.3 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.3),data=annual.gr4)
-qr.SI.4 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.4),data=annual.gr4)
-qr.SI.5 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.5),data=annual.gr4)
-qr.SI.6 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.6),data=annual.gr4)
-qr.SI.7 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.7),data=annual.gr4)
-qr.SI.8 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.8),data=annual.gr4)
-qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownWidth+diff.S+TPA.OS+SiteIndex_Value.x,tau=c(.9),data=annual.gr4)
+qr.SI.1<-  rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.1),data=annual.gr4)
+qr.SI.2 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.2),data=annual.gr4)
+qr.SI.3 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.3),data=annual.gr4)
+qr.SI.4 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.4),data=annual.gr4)
+qr.SI.5 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
+qr.SI.6 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.6),data=annual.gr4)
+qr.SI.7 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.7),data=annual.gr4)
+qr.SI.8 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.8),data=annual.gr4)
+qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.9),data=annual.gr4)
+
 
 
 
@@ -263,10 +266,10 @@ FVS.Final$CrownWidth[is.na(FVS.Final$CrownWidth)] <- 0
 for(i in 1:nrow(FVS.Final)){
   FVS.Final$response.cat[i]<-valid.func10(
     FVS.Final$srHeight_Total[i], 
-    FVS.Final$CrownWidth[i],
-    FVS.Final$diff.S[i],
+    FVS.Final$CrownLength[i],
+    FVS.Final$diff.G.1m[i],
     FVS.Final$TPA.OS[i],
-    FVS.Final$SiteIndex_Value.x[i],
+    FVS.Final$SiteIndex_Value[i],
     FVS.Final$FVS.pred[i])
 }
 
@@ -291,10 +294,10 @@ plot(FVS.Final.avg$Group.1,FVS.Final.avg$x)
 for(i in 1:nrow(FVS.Final)){
   FVS.Final$response.cat[i]<-valid.func10(
     FVS.Final$srHeight_Total[i], 
-    FVS.Final$CrownWidth[i],
-    FVS.Final$diff.S[i],
+    FVS.Final$CrownLength[i],
+    FVS.Final$diff.G.1m[i],
     FVS.Final$TPA.OS[i],
-    FVS.Final$SiteIndex_Value.x[i],
+    FVS.Final$SiteIndex_Value[i],
     FVS.Final$ht_annual[i])
 }
 
@@ -322,14 +325,16 @@ FVS.Final$Q50<-0
 for(i in 1:nrow(FVS.Final)){
   FVS.Final$Q50[i]<-qr.SI.5$coefficients[1]+
     qr.SI.5$coefficients[2]*FVS.Final$srHeight_Total[i]+
-    qr.SI.5$coefficients[3]*FVS.Final$CrownWidth[i]+
-    qr.SI.5$coefficients[4]*FVS.Final$diff.S[i]+
+    qr.SI.5$coefficients[3]*FVS.Final$CrownLength[i]+
+    qr.SI.5$coefficients[4]*FVS.Final$diff.G.1m[i]+
     qr.SI.5$coefficients[5]*FVS.Final$TPA.OS[i]+
-    qr.SI.5$coefficients[6]*FVS.Final$SiteIndex_Value.x[i]
+    qr.SI.5$coefficients[6]*FVS.Final$SiteIndex_Value[i]
   }
 
 
-plot(FVS.Final$Q50~FVS.Final$ht_annual)
+plot(FVS.Final$Q50~FVS.Final$ht_annual,xlim=c(0,2),ylim=c(0,2))
+abline(reg=lm(FVS.Final$Q50 ~ FVS.Final$ht_annual))
+
 
 plot(FVS.Final$Q50~FVS.Final$FVS.pred)
 

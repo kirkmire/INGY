@@ -12,6 +12,9 @@ dead.words<-c("DEAD","Dead","DEAD-CUT","DEAD-CUT DOWN")
 
 soverhist<-soverhist[! soverhist$Damage %in% dead.words,]
 
+#Removes dead ST records#
+annual.gr6<-annual.gr6[!annual.gr6$Damage=="DEAD",]
+
 #Aggregates OS ba data to the plot level 
 #trees may grow out of <10.5 in class that are in the quarter acre plot,
 #need to assign avariable that stays with OS tree regadless of growth (ie .26 or .46)

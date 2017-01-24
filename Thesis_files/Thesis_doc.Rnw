@@ -22,7 +22,7 @@ setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
 \usepackage{xpatch}
 \usepackage{float}
 \usepackage{wrapfig}
-\floatstyle{boxed} 
+\floatstyle{plain} 
 \renewcommand{\floatpagefraction}{.8}
 \restylefloat{figure}
 \newcommand{\listappendicesname}{}
@@ -97,6 +97,7 @@ for the degree of}
 
 \text{Dr. Peter Kolb}\\ 
 \text{Forestry Extension} 
+\end{center}
 
 
 \newpage
@@ -144,6 +145,20 @@ for the degree of}
 \textbf{ACKNOWLEDGEMENTS}\\[1pt]
 \end{center}
 \normalsize
+
+I would first like to extend appreciation to the INGY Cooperators, particularly those who participated in the Small Tree Competing Vegetation Study (STCV) for their commitment to this long term study. Their participation required that many stands not be harvested for the duration of the study and a substantial monitary cost over 15 years.
+
+I also owe a debt of gratitude to the many INGY technicians and researchers who have worked on the STCV before me. The completion of the dataset would not have been possible without your ``boots on the ground'' and careful acquisition of measurements.
+
+Thank you to my advisors Dr. David Affleck and Dr. John Goodburn for giving me the opportunity to choose a challenging research topic and for support as I developed the skills to accomplish this research.
+
+I thank my family for their support and excusing my absense while pursuing this research.  I would also like to thank all of the previous generations of my family that have enjoyed careers in forestry in the Western United States.  Your life-long passion for our forests and the communities they support is something that constantly motivates me.
+
+To my friends in forestry, I thank you for both your commeraderie and friendly competition. I hope that we may never stop developing and sharing our knowledge of forest management. 
+
+
+
+
 
 
 \newpage
@@ -210,7 +225,22 @@ Composition of forest understory species are controlled by overstory trees which
 \end{center}
 \end{figure}
 
+\begin{figure}
+\begin{center}
+<<label=fig2,fig=TRUE,echo=FALSE, >>=
+y<-1:10
+x<-1:10
+out3 <- lm(y ~ x + I(x^2) + I(x^3))
+plot(x, y)
+curve(predict(out3, newdata=data.frame(x=x)), add = TRUE)
+@
+\end{center}
+\caption{Scatter Plot with Cubic Regression Curve}
+\end{figure}
 
+
+\begin{figure}[h]
+\begin{center}
 <<speccomp, include=false,fig=TRUE,width=8,height=8,echo=FALSE>>=
 source('C:/Users/Colin/Desktop/R-Projects/INGY/1.readdatabase.2016jun2.r', echo=F)
 #! 2. installations to drop
@@ -225,13 +255,9 @@ barchart(Freq~Installation, data=spec.freq.table,groups=Species, stack=T,
          Trees at Initiation",
          par.settings=list(superpose.polygon=list(col=rainbow(12))))
 @
-
-\begin{figure}[h]
-\begin{center}
-\includegraphics[width=100mm]{Thesis_doc-speccomp}
+\end{center}
 \caption{Species Composition of Small Tagged Trees in Installations with more than 60 Ponderosa Pine}
 \label{fig:spec_comp}
-\end{center}
 \end{figure}
 
 \newpage
@@ -333,7 +359,7 @@ rect(80,49,83.28,52.28,col=NA,border="black", lwd=1)
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=80mm]{Thesis_doc-sampleplot}
+\includegraphics[width=80mm]{sampleplot}
 \caption{Design of STCV Sampling Plot}
 \label{fig:design}
 \end{center}
@@ -356,7 +382,7 @@ barchart(speciescount$freq~speciescount$x,
 @
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=80mm]{Thesis_doc-species}
+\includegraphics[width=80mm]{species}
 \caption{Number of Small Tagged Trees by Species}
 \label{fig:st_by_spec}
 \end{center}
@@ -596,24 +622,21 @@ Selecting a single dimension from each ecological category of small tree competi
 
 
 \hline
-Nothing&$1998$&$3443.57$&POLV.cov&5481&6260.88&BAPA&4788&5058.74&Slope&4465&4258.45\\
-SmallTPA&$1998$&$3190.12$&F.cov&5481&6439.84&CCF&4788&4911.87&SI&4788&4447.04\\
-
-Two&$1993$&$3437.78$&LS.cov&5481&6462.73&TPA&4788&4741.38&Elevation&4580&4253.31\\
-Four&$1993$&$3431.33$&HS.cov&5481&6444.14&&&&Aspect&3515&3267.08\\
-Six&$1993$&$3354.51$&G.cov&5481&6463.12&&&&&&\\
-Eight&$1993$&$3299.83$&F.diff&5481&6257.36&&&&&&\\
-Ten&$1993$&$3266.95$&LS.diff&5481&6366.31&&&&&&\\
-Twelve&$1993$&$3264.95$&HS.diff&5481&6225.79&&&&&&\\
-Fourteen&$1993$&$3256.55$&G.diff&5481&6281.71&&&&&&\\
-Fifteen&$1993$&$3324.43$&F.tran&4901&5601.62&&&&&&\\
-TGT&$1993$&$3249.67$&S.tran&4788&5206.99&&&&&&\\
-BD&$1996$&$2674.49$&G.tran.diff&5481&6333.32&&&&&&\\
-DBH&$1511$&$2418.16$&G.tran.cov&5481&6456.83&&&&&&\\
-CrownWidth&$1995$&$3120.50$&&&&&&&&&\\
+Nothing&$1998$&$3443.57$&POLV.cov&5635&6533.77&BAPA&5635&6096.25&Slope&5234&5195.74\\
+SmallTPA&$1998$&$3190.12$&F.cov&5635&6761.02&CCF&5635&5912.03&SI&5635&5544.5\\
+Two&$1993$&$3437.78$&LS.cov&5635&6784.32&TPA&5635&5812.81&Elevation&5377&5243.63\\
+Four&$1993$&$3431.33$&HS.cov&5635&6758.38&&&&Aspect&4232&4145.81\\
+Six&$1993$&$3354.51$&G.cov&5635&6781.24&&&&&&\\
+Eight&$1993$&$3299.83$&F.diff&5635&6536.06&&&&&&\\
+Ten&$1993$&$3266.95$&LS.diff&5635&6669.72&&&&&&\\
+Twelve&$1993$&$3264.95$&HS.diff&5635&6494.78&&&&&&\\
+Fourteen&$1993$&$3256.55$&G.diff&5635&6541.66&&&&&&\\
+Fifteen&$1993$&$3324.43$&F.tran&5635&6687.93&&&&&&\\
+TGT&$1993$&$3249.67$&LS.tran&5635&6627.75&&&&&&\\
+BD&$1996$&$2674.49$&HS.tran&5635&6681.19&&&&&&\\
+DBH&$1511$&$2418.16$&G.tran.diff&5635&6639.69&&&&&&\\
+CrownWidth&$1995$&$3120.50$&G.tran.cov&5445&6658.43&&&&&&\\
 CrownLength&$1990$&$3021.98$&&&&&&&&&\\
-\\
-
 
 
 \hline

@@ -6,6 +6,7 @@ source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=
 source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
 
 #combines all aic.lists into one dataframe
 
@@ -121,7 +122,7 @@ sum(sorted.totals$Freq)
 barchart(sorted.totals$Freq~sorted.totals$annual.gr6.response.cat, names = "Quantile Bin",
         xlab = "Bin", ylab = "Frequency",type=density,
         main = "Witheld Data Height Growth Response 
-        sorted by Quantile Category",ylim=c(0,.12))
+        sorted by Quantile Category",ylim=c(0,.60))
 
 
 #Sorted responses for trees <10 in initial dbh
@@ -155,7 +156,7 @@ sum(sorted.totals$Freq)
 barchart(sorted.totals$Freq~sorted.totals$annual.gr6.lessthan10in.response.cat, names = "Quantile Bin",
          xlab = "Bin", ylab = "Frequency",type=density,
          main = "Witheld Data Height Growth Response 
-         sorted by Quantile Category (DBH>10in)")
+         sorted by Quantile Category (DBH>10in)", ylim=c(0,.5))
 
 
 ###higher resolution by including quantiles .4 to .9 by .4
@@ -284,21 +285,21 @@ sum(sorted.totals$Freq)
 barchart(sorted.totals$Freq~sorted.totals$annual.gr6.response.cat, names = "Quantile Bin",
          xlab = "Bin", ylab = "Frequency",type=density,
          main = "Witheld Data Height Growth Response 
-        sorted by Quantile Category")
+        sorted by Quantile Category", ylim=c(0,.3))
 
 ###Higher resolution of lessthan 10in DBH
 
 
 annual.gr6.lessthan10in$response.cat<-0
 
-annual.gr6.lessthan10in$diff.S[is.na(annual.gr6.lessthan10in$diff.S)] <- 0
-annual.gr6.lessthan10in$CrownWidth[is.na(annual.gr6.lessthan10in$CrownWidth)] <- 0
+#annual.gr6.lessthan10in$CrownLength[is.na(annual.gr6.lessthan10in$CrownLength)] <- 0
+
 
 for(i in 1:nrow(annual.gr6.lessthan10in)){
   annual.gr6.lessthan10in$response.cat[i]<-valid.func10(
     annual.gr6.lessthan10in$srHeight_Total[i], 
-    annual.gr6.lessthan10in$CrownWidth[i],
-    annual.gr6.lessthan10in$diff.S[i],
+    annual.gr6.lessthan10in$CrownLength[i],
+    annual.gr6.lessthan10in$diff.G.1m[i],
     annual.gr6.lessthan10in$TPA.OS[i],
     annual.gr6.lessthan10in$SiteIndex_Value[i],
     annual.gr6.lessthan10in$ht_annual[i])
@@ -314,7 +315,7 @@ sum(sorted.totals$Freq)
 barchart(sorted.totals$Freq~sorted.totals$annual.gr6.lessthan10in.response.cat, names = "Quantile Bin",
          xlab = "Bin", ylab = "Frequency",type=density,
          main = "Witheld Data Height Growth Response 
-         sorted by Quantile Category (DBH>10in)")
+         sorted by Quantile Category (DBH>10in)",ylim=c(0,.3))
 
 min(sorted.totals$Freq)
 max(sorted.totals$Freq)
@@ -347,8 +348,7 @@ dev.off()
 sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
 plot(sr.ht.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
-###Need to add this to rest of code#
-annual.gr4<-annual.gr4[!annual.gr4$CrownLength<0,]
+
 cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$CrownLength))
 plot(cl.ht.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 

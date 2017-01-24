@@ -117,19 +117,20 @@ for(i in veg.T.names) {
 #calculate difference in top and base meas
 stran$diffT<-stran$topT-stran$basT
 
-#Aggregates transect data to the plot level
+#Aggregates transect data to the STP level
 agg.tran.data <-aggregate(stran$diffT,
                     by=list("Installation"=stran$Installation,
                             "Plot"=stran$Plot,
+                            "STP"=stran$Transect,
                             "Year_Measurement"=stran$Year_Measurement,
                             "Lifeform"=stran$Lifeform1),FUN=mean)#total/number of points
 
-#Reshapes transect data so each plot is a row
+#Reshapes transect data so each stp is a row
 agg.tran.data1<-reshape(agg.tran.data, direction="wide",idvar=
-                c("Installation","Plot","Year_Measurement"),
+                c("Installation","Plot","STP","Year_Measurement"),
               timevar="Lifeform",v.names="x")
 
-names(agg.tran.data1)[4:7]<-c("diff.F","diff.G","diff.HS","diff.LS")
+names(agg.tran.data1)[5:8]<-c("diff.F","diff.G","diff.HS","diff.LS")
 
 tran.names<-names(agg.tran.data1[,substring(names(agg.tran.data1),5,5)=="."])
 
@@ -140,7 +141,7 @@ for(i in tran.names) {
 
 #Merges aggregated transect data to the "big" df
 
-annual.gr4<-merge(annual.gr4,agg.tran.data1,by=c("Installation","Plot","Year_Measurement"))
+annual.gr4<-merge(annual.gr4,agg.tran.data1,by=c("Installation","Plot","STP","Year_Measurement"))
                
    
 ##Transect Grass Cover Data##
@@ -150,17 +151,18 @@ annual.gr4<-merge(annual.gr4,agg.tran.data1,by=c("Installation","Plot","Year_Mea
 agg.tran.data.G <-aggregate(stranco$Pct_Grass,
                           by=list("Installation"=stranco$Installation,
                                   "Plot"=stranco$Plot,
+                                  "STP"=stranco$Transect,
                                   "Year_Measurement"=stranco$Year_Measurement
                                   ),FUN=mean)#total/number of points
 
 
-names(agg.tran.data.G)[4]<-("tran.G")
+names(agg.tran.data.G)[5]<-("tran.G")
 
 
 
 #Merges aggregated transect data to the "big" df
 
-annual.gr4<-merge(annual.gr4,agg.tran.data.G,by=c("Installation","Plot","Year_Measurement"))
+annual.gr4<-merge(annual.gr4,agg.tran.data.G,by=c("Installation","Plot","STP","Year_Measurement"))
 
 
 
@@ -185,14 +187,15 @@ annual.gr4<-annual.gr4[,! names(annual.gr4) %in% y.names]
 agg.grass.data <-aggregate(strangr$Top,
                           by=list("Installation"=strangr$Installation,
                                   "Plot"=strangr$Plot,
+                                  "STP"=strangr$Transect,
                                   "Year_Measurement"=strangr$Year_Measurement),FUN=mean)
 
-names(agg.grass.data)[4]<-"grass.ht"
+names(agg.grass.data)[5]<-"grass.ht"
 
-agg.grass.data[4][is.na(agg.grass.data[4])] <- 0
+agg.grass.data[5][is.na(agg.grass.data[5])] <- 0
 
 
-annual.gr4<-merge(annual.gr4,agg.grass.data,by=c("Installation","Plot","Year_Measurement"))
+annual.gr4<-merge(annual.gr4,agg.grass.data,by=c("Installation","Plot","STP","Year_Measurement"))
 
 
 #Removes trees with -inf ht_ annual...check the annual ht function function
@@ -201,6 +204,8 @@ annual.gr4<-annual.gr4[!annual.gr4$inf.ht==TRUE,]
 
 
 #Removes 6th stp plots from analysis
+#Makes seperate dataframe for witheld data
+
 annual.gr6<-annual.gr4[annual.gr4$STP==6,]
 
 annual.gr4<-annual.gr4[!annual.gr4$STP==6,]

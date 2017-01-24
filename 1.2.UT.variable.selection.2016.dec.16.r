@@ -248,6 +248,7 @@ nlist<-c(nlist,length(qr.stpa$y))
 qr.stp2<-rq(ht_annual~srHeight_Total+two,tau=c(.5),data=annual.gr2)
 summary(qr.stp2)
 aic.list<-c(aic.list,AIC(qr.stp2)[1])
+
 nlist<-c(nlist,length(qr.stp2$y))
 
 

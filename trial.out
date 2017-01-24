@@ -1,6 +1,6 @@
 
 
-         FOREST VEGETATION SIMULATOR     VERSION 1108 -- INLAND EMPIRE EXPANDED                 RV:06/26/15    01-10-2017  11:40:58
+         FOREST VEGETATION SIMULATOR     VERSION 1108 -- INLAND EMPIRE EXPANDED                 RV:06/26/15    01-22-2017  19:13:43
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -30,22 +30,147 @@ STDIDENT
 
            HABITAT TYPE WILL BE MAPPED TO 620 FOR THIS PROJECTION.
 
-STDINFO    FOREST-LOCATION CODE=     110; HABITAT TYPE=620; AGE=    0; ASPECT AZIMUTH IN DEGREES= 315.; SLOPE=  20.%
-           ELEVATION(100'S FEET)= 38.0; REFERENCE CODE=     
+STDINFO    FOREST-LOCATION CODE=     106; HABITAT TYPE=620; AGE=    0; ASPECT AZIMUTH IN DEGREES= 315.; SLOPE=  10.%
+           ELEVATION(100'S FEET)= 20.0; REFERENCE CODE=     
 
-DESIGN     BASAL AREA FACTOR=   -2.0; INVERSE OF FIXED PLOT AREA=  138.7; BREAK DBH=   10.0
-           NUMBER OF PLOTS=    90; NON-STOCKABLE PLOTS=     0; STAND SAMPLING WEIGHT=     1.00000
+DESIGN     BASAL AREA FACTOR=   -1.0; INVERSE OF FIXED PLOT AREA=   10.0; BREAK DBH=  999.0
+           NUMBER OF PLOTS=    35; NON-STOCKABLE PLOTS=     0; STAND SAMPLING WEIGHT=     1.00000
            PROPORTION OF STAND CONSIDERED STOCKABLE=  1.000
            SEE "OPTIONS SELECTED BY DEFAULT" FOR FINAL DESIGN VALUES.
 
-INVYEAR    INVENTORY YEAR= 1999
+INVYEAR    INVENTORY YEAR= 2000
 
-NUMCYCLE   NUMBER OF CYCLES=  1
+NUMCYCLE   NUMBER OF CYCLES= 10
 
-TIMEINT    ALL CYCLES;  PERIOD LENGTH=  1
+TIMEINT    ALL CYCLES;  PERIOD LENGTH=  5
 
 TREEFMT 
           (I4,I7,F6.0,I1,A3,F4.1,F3.1,2F3.0,F4.1,I3,6I2,2I1,I2,2I3,2I1,F3.0)              
                                                                                           
 
 TREEDATA   DATA SET REFERENCE NUMBER= 15
+
+PROCESS    PROCESS THE STAND.
+----------------------------------------------------------------------------------------------------------------------------------
+
+                                                OPTIONS SELECTED BY DEFAULT
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+DESIGN     BASAL AREA FACTOR=   -1.0; INVERSE OF FIXED PLOT AREA=   10.0; BREAK DBH=  999.0
+           NUMBER OF PLOTS=    35; NON-STOCKABLE PLOTS=     0; STAND SAMPLING WEIGHT=     1.00000
+           PROPORTION OF STAND CONSIDERED STOCKABLE=  1.000
+
+STDINFO    FOREST-LOCATION CODE=     106; HABITAT TYPE=620; AGE=    0; ASPECT AZIMUTH IN DEGREES= 315.; SLOPE=  10.%
+           ELEVATION(100'S FEET)= 20.0;  REFERENCE CODE=     
+
+SPECIES      WP      WL      DF      GF      WH      RC      LP      ES      AF      PP
+SDI MAX     949.    949.    949.    949.    949.    949.    949.    949.    949.    949.
+
+SPECIES      MH      WB      LM      LL      PI      RM      PY      AS      CO      MM
+SDI MAX     949.    949.    949.    949.    949.    949.    949.    949.    949.    949.
+
+SPECIES      PB      OH      OS
+SDI MAX     949.    949.    949.
+
+                                  NATIONAL VOLUME ESTIMATOR LIBRARY EQUATION NUMBERS
+SPECIES CUBIC FOOT BOARD FOOT SPECIES CUBIC FOOT BOARD FOOT SPECIES CUBIC FOOT BOARD FOOT SPECIES CUBIC FOOT BOARD FOOT 
+------- ---------- ---------- ------- ---------- ---------- ------- ---------- ---------- ------- ---------- ---------- 
+  WP    I00FW2W119 I00FW2W119   WL    I00FW2W073 I00FW2W073   DF    I00FW2W202 I00FW2W202   GF    I00FW2W017 I00FW2W017
+  WH    I00FW2W260 I00FW2W260   RC    I00FW2W242 I00FW2W242   LP    I00FW2W108 I00FW2W108   ES    I00FW2W093 I00FW2W093
+  AF    I00FW2W019 I00FW2W019   PP    I00FW2W122 I00FW2W122   MH    I00FW2W260 I00FW2W260   WB    I00FW2W012 I00FW2W012
+  LM    I00FW2W073 I00FW2W073   LL    I00FW2W019 I00FW2W019   PI    102DVEW106 102DVEW106   RM    102DVEW106 102DVEW106
+  PY    616BEHW231 616BEHW231   AS    102DVEW746 102DVEW746   CO    102DVEW740 102DVEW740   MM    200DVEW746 200DVEW746
+  PB    101DVEW375 101DVEW375   OH    200DVEW746 200DVEW746   OS    I00FW2W260 I00FW2W260
+
+SITECODE   SITE INDEX INFORMATION:
+            WP=    0.;  WL=    0.;  DF=    0.;  GF=    0.;  WH=    0.;  RC=    0.;  LP=    0.;  ES=    0.; AF=    0.
+            PP=    0.;  MH=    0.;  WB=    0.;  LM=   39.;  LL=    0.;  PI=   14.;  RM=   11.;  PY=   39.; AS=   55.
+            CO=   86.;  MM=   55.;  PB=   55.;  OH=   86.;  OS=    0.
+           SITE SPECIES=DF CODE=    3
+
+INVENTORY POINT CROSS REFERENCE (FVS SEQUENTIAL POINT NUMBER = POINT NUMBER AS ENTERED IN THE INPUT DATA):
+  1=       1;   2=       2;   3=       3;   4=       4;   5=       5;   6=       6;   7=       7;   8=       8;   9=       9
+ 10=      10;  11=      11;  12=      12;  13=      13;  14=      14;  15=      15;  16=      16;  17=      17;  18=      18
+ 19=      19;  20=      20;  21=      21;  22=      22;  23=      23;  24=      24;  25=      25;  26=      26;  27=      27
+ 28=      28;  29=      29;  30=      30;  31=      31;  32=      32;  33=      33;  34=      34;  35=      35
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+                                                     ACTIVITY SCHEDULE
+
+STAND ID= Low                           MGMT ID= NONE                                                                            
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+CYCLE  DATE  EXTENSION  KEYWORD   DATE  PARAMETERS:
+-----  ----  ---------  --------  ----  ------------------------------------------------------------------------------------------
+
+   1   2000
+               BASE     TREELIST  2000        3.00      0.00
+
+   2   2005
+               BASE     TREELIST  2005        3.00      0.00
+
+   3   2010
+               BASE     TREELIST  2010        3.00      0.00
+
+   4   2015
+               BASE     TREELIST  2015        3.00      0.00
+
+   5   2020
+               BASE     TREELIST  2020        3.00      0.00
+
+   6   2025
+               BASE     TREELIST  2025        3.00      0.00
+
+   7   2030
+               BASE     TREELIST  2030        3.00      0.00
+
+   8   2035
+               BASE     TREELIST  2035        3.00      0.00
+
+   9   2040
+               BASE     TREELIST  2040        3.00      0.00
+
+  10   2045
+               BASE     TREELIST  2045        3.00      0.00
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+CALIBRATION STATISTICS:
+
+
+                                                 PP
+                                                ----
+
+NUMBER OF RECORDS PER SPECIES                   1557
+
+NUMBER OF RECORDS WITH MISSING HEIGHTS             0
+
+NUMBER OF RECORDS WITH BROKEN OR DEAD TOPS         0
+
+NUMBER OF RECORDS WITH MISSING CROWN RATIOS        0
+
+NUMBER OF RECORDS AVAILABLE FOR SCALING
+THE DIAMETER INCREMENT MODEL                       0
+
+RATIO OF STANDARD ERRORS
+(INPUT DBH GROWTH DATA : MODEL)                 1.00
+
+WEIGHT GIVEN TO THE INPUT GROWTH DATA WHEN
+DBH GROWTH MODEL SCALE FACTORS WERE COMPUTED    0.00
+
+INITIAL SCALE FACTORS FOR THE
+DBH INCREMENT MODEL                             1.00
+
+NUMBER OF RECORDS AVAILABLE FOR SCALING
+THE SMALL TREE HEIGHT INCREMENT MODEL             0
+
+INITIAL SCALE FACTORS FOR THE SMALL TREE
+HEIGHT INCREMENT MODEL                          1.00
+
+NUMBER OF RECORDS WITH MISTLETOE                   0
+
+***************
+***************

@@ -6,7 +6,7 @@ source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=
 source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
+source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
 
 #combines all aic.lists into one dataframe
 
@@ -45,8 +45,6 @@ latex(final.aic, file="")            # If you want all the data
 
 
 
-
-plot(summary(qr.SI, se = "nid"), level = 0.95)
 #illustrates how the effects of predictors 
 #cary over quantiles  and how the magnitude of 
 #the effects at varouis quantiles differ considerably fromthe OLS coefficients
@@ -329,10 +327,6 @@ cw.resid <- rq(ht_annual~CrownWidth,tau=c(.5),data=annual.gr4)
 
 plot(cw.resid$residuals~cw.resid$fitted.values)
 
-
-diff.S.resid <- rq(ht_annual~annual.gr4$diff.S,tau=c(.5),data=annual.gr4)
-
-plot(diff.S.resid$residuals~diff.S.resid$fitted.values)
 
 TPA.resid <- rq(ht_annual~annual.gr4$TPA.OS,tau=c(.5),data=annual.gr4)
 

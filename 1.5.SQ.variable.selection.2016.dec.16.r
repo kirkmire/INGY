@@ -1,14 +1,34 @@
+#Import google earth generated slop_elev_aspect csv#
+ge_sea<-read.csv("slope_elev_aspect.csv")
+
+names(ge_sea)[2]<-"InstPlot"
+
 
 ######Site Index Variables######
 #SI #
 
 soverhist<-soverhist[! soverhist$Damage %in% dead.words,]
 
-sinst.pipo<-sinst[! sinst$Installation %in% drp60,]
+sinst.pipo<-sinst[! sinst$Installation %in% drp60,
+                  c("Installation","SiteIndex_Value")]
 
 #all PIPO installations have a PIPO SI except for 1, GC
 
 annual.gr4<-merge(annual.gr4,sinst.pipo, by="Installation")
+
+annual.gr4$InstPlot<-paste(annual.gr4$Installation,annual.gr4$Plot,sep="")
+
+#Transform Aspect Variable#
+ge_sea$sin_rad_asp<-sin((ge_sea$aspect*3.141)/180) 
+
+ge_sea$cos_rad_asp<-cos((ge_sea$aspect*3.141)/180)
+
+
+ge_sea$asp1<-(ge_sea$sin_rad_asp+ge_sea$cos_rad_asp)
+
+annual.gr4<-merge(annual.gr4, ge_sea, by="InstPlot")
+
+
 
 
 
@@ -20,20 +40,21 @@ par(mfrow=c(2,4),mar=c(4,4,1,2))
 plot(gam.SI,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 #GAM for Slope
-gam.slope<-gam(ht_annual~s(srHeight_Total)+s(Slope.x),data=annual.gr4, family=gaussian(link="identity"))
+gam.slope<-gam(ht_annual~s(srHeight_Total)+s(slope),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.slope)
+
 
 plot(gam.slope,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
 #GAM for Elevation
-gam.elev<-gam(ht_annual~s(srHeight_Total)+s(Elevation.x),data=annual.gr4, family=gaussian(link="identity"))
+gam.elev<-gam(ht_annual~s(srHeight_Total)+s(elevation),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.elev)
 
 plot(gam.elev,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 #GAM for Aspect
-gam.aspect<-gam(ht_annual~s(srHeight_Total)+s(annual.gr4$Aspect_Deg.x),data=annual.gr4, family=gaussian(link="identity"))
+gam.aspect<-gam(ht_annual~s(srHeight_Total)+s(annual.gr4$cos_rad_asp),data=annual.gr4, family=gaussian(link="identity"))
 summary(gam.aspect)
 
 plot(gam.aspect,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
@@ -44,7 +65,7 @@ plot(gam.aspect,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 #Slope Quantreg (Carrying forward CW and shrub transect, TPA)
 library(quantreg)
 
-qr.slope<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+Slope.x,tau=c(.5),data=annual.gr4)
+qr.slope<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+slope,tau=c(.5),data=annual.gr4)
 summary(qr.slope)
 aic.list.SQ<-AIC(qr.slope)[1]
 nlist.SQ<-length(qr.slope$y)
@@ -61,7 +82,7 @@ nlist.SQ<-c(nlist.SQ,length(qr.SI$y))
 #Elev Quantreg (Carrying forward CW and shrub transect, TPA)
 library(quantreg)
 
-qr.elev<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+Elevation.x,tau=c(.5),data=annual.gr4)
+qr.elev<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+elevation,tau=c(.5),data=annual.gr4)
 summary(qr.elev)
 aic.list.SQ<-c(aic.list.SQ,AIC(qr.elev)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.elev$y))
@@ -69,7 +90,7 @@ nlist.SQ<-c(nlist.SQ,length(qr.elev$y))
 #Asp Quantreg (Carrying forward CW and shrub transect, TPA)
 library(quantreg)
 
-qr.asp<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+Aspect_Deg.x,tau=c(.5),data=annual.gr4)
+qr.asp<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+cos_rad_asp,tau=c(.5),data=annual.gr4)
 summary(qr.asp)
 aic.list.SQ<-c(aic.list.SQ,AIC(qr.asp)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.asp$y))

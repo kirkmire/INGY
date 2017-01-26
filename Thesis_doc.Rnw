@@ -19,7 +19,7 @@ source(paste(getwd(),'/1.6.model.evaluation.2016.dec.16.r',sep=""))
 \usepackage{setspace}
 \usepackage[backend=bibtex,style=authoryear]{biblatex}
 \usepackage{filecontents}
-\bibliography{STCV.bib}
+\bibliography{library.bib,other.bib}
 \usepackage{tocloft}
 \usepackage{tocbibind}
 \usepackage{xpatch}
@@ -171,7 +171,7 @@ To my friends in forestry, I thank you for both your commeraderie and friendly c
 \end{center}
 
 \normalsize
-\tableofcontents*
+\tableofcontents
 \large 
 \begin{center}
 \textbf{LIST OF APPENDICES}\\[1pt]
@@ -220,7 +220,7 @@ Composition of forest understory species are controlled by overstory trees which
 
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
     \includegraphics[width=160mm]{comp_flowchart.jpg}
     \caption{Biological framework of small tree growth. Small trees are defined as those that have a DBH less than 3.5 in}
@@ -228,18 +228,24 @@ Composition of forest understory species are controlled by overstory trees which
 \end{center}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[ht]
 \begin{center}
-<<label=fig2,fig=TRUE,echo=FALSE >>=
-y<-1:10
-x<-1:10
-out3 <- lm(y ~ x + I(x^2) + I(x^3))
-plot(x, y)
-curve(predict(out3, newdata=data.frame(x=x)), add = TRUE)
-@
+    \includegraphics[width=160mm]{threedveg.jpg}
+    \caption{Quantile Regression Visualization}
+    \label{fig:Quantregvis}
 \end{center}
-\caption{Scatter Plot with Cubic Regression Curve}
 \end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width=160mm]{all_trees.jpg}
+    \caption{Total height of all tagged small trees over the course of the study}
+    \label{fig:alltrees}
+\end{center}
+\end{figure}
+
+
+
 
 
 \begin{figure}
@@ -319,7 +325,7 @@ dev.off()
 
 \begin{figure}
 \begin{center}
-<<label=sampleplot,fig=TRUE,width=8,height=8,echo=FALSE>>=
+<<label=sampleplot,fig=TRUE,width=4,height=4,echo=FALSE>>=
 library(plotrix)
 
 plot(c(0,170),c(0,170),xlim=c(0,170),ylim=c(0,170), xaxs="i",yaxs="i",
@@ -336,10 +342,10 @@ draw.circle(80,114,10,border="black",lty=1,lwd=1)
 draw.circle(80,47,10,border="black",lty=1,lwd=1)
 
 #side small trees#
-draw.circle(106.8,95.5,10,border="black",lty=1,lwd=1)
-draw.circle(106.8,64.5,10,border="black",lty=1,lwd=1)
-draw.circle(53.2,64.5,10,border="black",lty=1,lwd=1)
-draw.circle(53.2,95.5,10,border="black",lty=1,lwd=1)
+draw.circle(108.57,96.5,10,border="black",lty=1,lwd=1)
+draw.circle(108.57,63.5,10,border="black",lty=1,lwd=1)
+draw.circle(51.43,63.5,10,border="black",lty=1,lwd=1)
+draw.circle(51.43,96.5,10,border="black",lty=1,lwd=1)
 
 #1ft radius plot center#
 draw.circle(80,80,2,border="black",lty=1,lwd=1)
@@ -352,17 +358,16 @@ draw.radial.line(2,33, center=c(80,80),deg=210,lwd=1)
 draw.radial.line(2,33, center=c(80,80),deg=270,lwd=1)
 draw.radial.line(2,33, center=c(80,80),deg=330,lwd=1)
 
-#Drawing 4x4 Veg Quad Squares#
-rect(76.72,107.72,83.28,114.28,col=NA,border="black", lwd=1)
-#rect(76.72,107.72,80,111,col=NA,border="black", lwd=1)
+#Drawing Veg Quad Squares#
+rect(80-(1*3.28084),113-(1*3.28084),80+(1*3.28084),113+(1*3.28084),col=NA,border="black", lwd=1)
+rect(80,113,80+(1*3.28084),113+(1*3.28084),col=NA,border="black", lwd=1)
 
 rect(80-(1*3.28084),47-(1*3.28084),80+(1*3.28084),47+(1*3.28084),col=NA,border="black", lwd=1)
-
-rect(80,47,(80+3.28084),(47+3.28084),col=NA,border="black", lwd=1)
+rect(80-(1*3.28084),47,80,47,col=NA,border="black", lwd=1)
 
 #Draw 15 veg transect points on 2 lines#
 N.tran<-seq(84,113,2)
-S.tran<-seq(76,50,-2)
+S.tran<-seq(76,47,-2)
 
 for(i in 1:length(N.tran)){
    draw.circle(80,N.tran[i],.3,border="black",lty=1,lwd=2)
@@ -374,13 +379,13 @@ for(i in 1:length(S.tran)){
 
 @
 \end{center}
-\caption{Design of STCV Sampling Plot}
+\caption{Design of STCV Sampling Plot. Note that transect points and quadrants exist for all six small tree plots although only illustrated on two.}
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}
 \begin{center}
-<<label=species, fig=TRUE,width=5,height=5,echo=FALSE>>=
+<<label=species, fig=TRUE,width=4,height=4,echo=FALSE>>=
 #Frequency Plot by Species#
 
 library(plyr)
@@ -476,6 +481,31 @@ To evaluate the model, three quantiles will be fitted to represent the range of 
 Following this evaluation, a random sample of tagged subject trees will be selected to have their height growth increments predicted in the USFS Forest Vegetation Simulator (FVS).  These predicted height increments will then be evaluated as above.  It is not expected that .90 of the predicted tree heights will fall below that .90 quantiles for example. The FVS small tree growth sub-model is based on a least squares regression equation so it is very unlikely that the predicted heights will correspond to the quantile planes.   Rather, this exercise is to illuminate how far from the actual growth response distribution of FVS predictions can be.\\[2pt]
 
 \newpage
+\subsection{Variable Acquisition}
+
+\textbf{Understory Tree:}
+The tallies of small trees from each small tree plot (STP) were summed by height class and then multiplied by 138.73 to obtain per acre estimates.  The number of trees greater than the subject trees was found by summing all height class tallies with class midpoints greater than the height of the subject tree. Crown length was found by subtracting the crown base from the total height.  Crown width was found as an average of the two perpendicular measurements of crown width obtained in the field. Basal diameter and DBH required no further refinement.
+
+\textbf{Understory Vegetation:}
+
+Only the 1m vegetation plots were utilized in this study since they were used for the duration of the study.  Average differences at the STP level between base and top height measurements were found separately for forbs,low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were found for polyvegetation, forbs, low shrubs, high shrubs and grasses.  Average height differences for low shrubs, high shrubs, forbs were calculated for the 30 transect points corresponding to each small tree plot.  Percentage cover of grass obtained ocularly through a 6in by 6in grid and top height of grasses were also averaged over the length of the transect.
+
+\textbf{Overstory Vegetation:}
+
+Dead overstory tree records were removed from the analysis.  Basal area was calculated for each overstory tree was aggregated from both the .26ac and .46ac overstory plots to provide a per acre estimate of basal area. Zero basal area per acre (BAPA) were assigned to installations without an overstory record due to clearcut. Basal area per acre was linearly interpolated between measurement years to provide estimates for years of small tree and understory measurement.  The initial and final years of overstory measurent provided limits of the interpolation meaning that a vegetation measurement year preceding or following the overstory measurements would be assigned the BAPA calculated for the initial or final Overstory measurement year, respectively.
+Crown competition factor (CCF) was obtained by calculating crown width as an average between the two perpendicular measurements of width and then converting crown width to crown area in square feet. Crown area was then computed in terms of percent of an acre (taking into account the plot size that each overstory tree was sampled in). Linearily interpolated estimates of plot level CCF were obtained in the manner described previously for BAPA.
+Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots.
+
+\textbf{Site Quality:}
+Slope, elevation and aspect were calculated using Google Earth Engine (\cite{googleearthengine}) for each plot's coordinates. Slope is in units percentage and elevation in meters. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180).
+
+
+Site index was included from STCV records of each installation's initiation. Site index species was Ponderosa Pine for the installations included in analysis although many other species were used at other installations.
+
+
+
+
+\newpage
 \subsection{Variable Selection}
 
 
@@ -500,36 +530,40 @@ Selecting a single dimension from each ecological category of small tree competi
 
 \newpage
 \subsection{Variable Selection Results and Model Evaluation}
+<<echo=F, results=hide>>=
+library(Hmisc)
 
+latex(final.aic, file="")  
+@
 
 \begin{table}[h]
 \small
 \caption{Akaike Information Criterion (AIC) for .5 Quantile Regression by Category of Small Tree Competition  }
 \begin{center}
-\begin{tabular}{cccccccccccc}
+\begin{tabular}{cccccccccc}
 \hline\hline
 {Small Tree}&{n}&{AIC}&
 {Vegetation}&{n}&{AIC}&
 {Overstory}&{n}&{AIC}&
-{Site}&{n}&{AIC}\\
+\\
 
 
 \hline
-Nothing&$1998$&$3443.57$&POLV.cov&5635&6533.77&BAPA&5635&6096.25&Slope&5234&5195.74\\
-SmallTPA&$1998$&$3190.12$&F.cov&5635&6761.02&CCF&5635&5912.03&SI&5635&5544.5\\
-Two&$1993$&$3437.78$&LS.cov&5635&6784.32&TPA&5635&5812.81&Elevation&5377&5243.63\\
-Four&$1993$&$3431.33$&HS.cov&5635&6758.38&&&&Aspect&4232&4145.81\\
-Six&$1993$&$3354.51$&G.cov&5635&6781.24&&&&&&\\
-Eight&$1993$&$3299.83$&F.diff&5635&6536.06&&&&&&\\
-Ten&$1993$&$3266.95$&LS.diff&5635&6669.72&&&&&&\\
-Twelve&$1993$&$3264.95$&HS.diff&5635&6494.78&&&&&&\\
-Fourteen&$1993$&$3256.55$&G.diff&5635&6541.66&&&&&&\\
-Fifteen&$1993$&$3324.43$&F.tran&5635&6687.93&&&&&&\\
-TGT&$1993$&$3249.67$&LS.tran&5635&6627.75&&&&&&\\
-BD&$1996$&$2674.49$&HS.tran&5635&6681.19&&&&&&\\
-DBH&$1511$&$2418.16$&G.tran.diff&5635&6639.69&&&&&&\\
-CrownWidth&$1995$&$3120.50$&G.tran.cov&5445&6658.43&&&&&&\\
-CrownLength&$1990$&$3021.98$&&&&&&&&&\\
+Nothing&$1762$&$2903.95$&POLV.cov&4285&4931.33&BAPA&4285&4551.97\tabularnewline
+SmallTPA&$1762$&$2680.76$&F.cov&4285&4987.12&CCF&4285&4368.78\tabularnewline
+Two&$1757$&$2898.57$&LS.cov&4285&4998.15&\textbf{TPA}&4285&4274.93\tabularnewline
+Four&$1757$&$2888.43$&HS.cov&4285&4986.22&&&\tabularnewline
+Six&$1757$&$2815.43$&G.cov&4285&4997.31&Site&n&AIC\tabularnewline
+Eight&$1757$&$2771.44$&\textbf{F.diff}&4285&4730.94&Slope&4285&4232.53\tabularnewline
+Ten&$1757$&$2751.43$&LS.diff&4285&4869.22&\textbf{SI}&4285&4030.84\tabularnewline
+Twelve&$1757$&$2748.98$&HS.diff&4285&4809.4&Elevation&4285&4275.61\tabularnewline
+Fourteen&$1757$&$2764.34$&G.diff&4285&4872.88&Aspect&4285&4206.16\tabularnewline
+Fifteen&$1757$&$2794.31$&F.tran&4285&4948.87&&&\tabularnewline
+TGT&$1757$&$2719.52$&LS.tran&4285&4957.66&&&\tabularnewline
+BD&$1760$&$2205.27$&HS.tran&4285&4896.88&&&\tabularnewline
+DBH&$1280$&$1934.95$&G.tran.diff&4285&4865.32&&&\tabularnewline
+CrownWidth&$1759$&$2610.96$&G.tran.cov&4283&4988.15&&&\tabularnewline
+\textbf{CrownLength}&$1754$&$2541.86$&&&&&&\tabularnewline
 
 
 \hline
@@ -539,12 +573,28 @@ CrownLength&$1990$&$3021.98$&&&&&&&&&\\
 \end{table}
 
 
+\newpage
+
+\begin{figure}
+\begin{center}
+<<test, width=8, height=8, fig.show='hold'>>=
+sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
+plot(sr.ht.gam,residuals=T,se=T,pch=".")
+cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$CrownLength))
+plot(cl.ht.gam,residuals=T,se=T,pch=".")
+@
+\end{center}
+\caption{Timeline of Installation Measurements and Treatments}
+\end{figure}
+
+
 
 \newpage
 \newappendix{Bibliography} 
 \printbibliography
 All analyses were performed using the R statistical software
 \Sexpr{R.Version()$version.string}. This thesis was compiled using the document preparation software \LaTeX.
+
 
 \newpage
 \begin{singlespace}
@@ -593,7 +643,7 @@ All analyses were performed using the R statistical software
   
   \item{Repeat steps 5-10 for the UV variables}
   \item{Select variables from the overstory and site productivity categories using the process outlined in steps 5-11 using all installations selected in step 1 (and all plots)}
-  \item{Using the variables selected for the $\tau$=.5, fit quantile regressions for $\tau=.1,.9$. This will estimate different b_${\tau}$ for each specified quantile.\\
+  \item{Using the variables selected for the $\tau$=.5, fit quantile regressions for $\tau$=.1,.9. This will estimate different b_${\tau}$ for each specified quantile.\\
   
   \textbf{Final Models:}\\
 

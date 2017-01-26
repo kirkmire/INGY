@@ -16,6 +16,31 @@ merged_stagm_stag<-merged_stagm_stag[which(merged_stagm_stag$Species=="PIPO"),]
 #Removes all Dead tree records
 merged_stagm_stag<-merged_stagm_stag[which(!merged_stagm_stag$Damage=="DEAD"),]
 
+#Concatenates Inst and Plot for unique STP identification
+merged_stagm_stag$InstPlot<-paste(merged_stagm_stag$Installation,
+                                     merged_stagm_stag$Plot,sep=",")
+
+#Assigns a random plot 1:6 to each STP
+
+uniqueinst<-unique(splothist[,c(2,3)])
+uniqueinst$STP1<-0
+uniqueinst$STP2<-0
+uniqueinst$STP3<-0
+uniqueinst$STP4<-0
+uniqueinst$STP5<-0
+uniqueinst$STP6<-0
+
+for(i in 1:nrow(uniqueinst)){
+  STPlist<-sample(1:6,6,FALSE)
+  uniqueinst$STP1[i]<-STPlist[1]
+  uniqueinst$STP2[i]<-STPlist[2]
+  uniqueinst$STP3[i]<-STPlist[3]
+  uniqueinst$STP4[i]<-STPlist[4]
+  uniqueinst$STP5[i]<-STPlist[5]
+  uniqueinst$STP6[i]<-STPlist[6]}
+
+#now just need to assign this to mergeed_stag_stagmdataframe, pair up by Inst, Plot and STP
+
 #Concatenates Inst,Plot,STP,Tree for unique individual tree identification
 merged_stagm_stag$conc<-paste(merged_stagm_stag$Installation,merged_stagm_stag$Plot,merged_stagm_stag$STP,
                                 merged_stagm_stag$Tree,sep=",")

@@ -22,7 +22,7 @@ aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
 
 aic.lists$AIC<-round(aic.lists$AIC,2)
 
-final.aic<-data.frame(matrix("", nrow = 15, ncol = 12),stringsAsFactors=F)
+final.aic<-data.frame(matrix("", nrow = 15, ncol = 9),stringsAsFactors=F)
 final.aic$X1<-aic.lists$Variable[1:15]
 final.aic$X2<-aic.lists$n[1:15]
 final.aic$X3<-aic.lists$AIC[1:15]
@@ -32,9 +32,12 @@ final.aic$X6[1:14]<-aic.lists$AIC[16:29]
 final.aic$X7[1:3]<-as.character(aic.lists$Variable[30:32])
 final.aic$X8[1:3]<-aic.lists$n[30:32]
 final.aic$X9[1:3]<-aic.lists$AIC[30:32]
-final.aic$X10[1:4]<-as.character(aic.lists$Variable[33:36])
-final.aic$X11[1:4]<-aic.lists$n[33:36]
-final.aic$X12[1:4]<-aic.lists$AIC[33:36]
+final.aic$X7[5]<-"Site"
+final.aic$X8[5]<-"n"
+final.aic$X9[5]<-"AIC"
+final.aic$X7[6:9]<-as.character(aic.lists$Variable[33:36])
+final.aic$X8[6:9]<-aic.lists$n[33:36]
+final.aic$X9[6:9]<-aic.lists$AIC[33:36]
 
 
 
@@ -339,12 +342,15 @@ plot(SI.resid$residuals~SI.resid$fitted.values)
 ###Sequential GAM Plots###
 dev.off()
 
+par(mfrow=c(1,3))
 sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
 plot(sr.ht.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
-
 cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$CrownLength))
 plot(cl.ht.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+veg.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+s(annual.gr4$diff.F.1m))
+plot(veg.ht.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
 tpa.os.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+

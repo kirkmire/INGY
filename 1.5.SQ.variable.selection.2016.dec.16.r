@@ -16,8 +16,6 @@ sinst.pipo<-sinst[! sinst$Installation %in% drp60,
 
 annual.gr4<-merge(annual.gr4,sinst.pipo, by="Installation")
 
-annual.gr4$InstPlot<-paste(annual.gr4$Installation,annual.gr4$Plot,sep="")
-
 #Transform Aspect Variable#
 ge_sea$sin_rad_asp<-sin((ge_sea$aspect*3.141)/180) 
 

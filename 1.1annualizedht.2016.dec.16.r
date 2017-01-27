@@ -22,7 +22,16 @@ merged_stagm_stag$InstPlot<-paste(merged_stagm_stag$Installation,
 
 #Assigns a random plot 1:6 to each STP
 
-uniqueinst<-unique(splothist[,c(2,3)])
+uniqueinst<-unique(splothist[,c(2,3,4)])
+
+uniqueinst$randstp<-0
+  
+  df2 <- uniqueinst[sample(by(uniqueinst$Installation)),]
+  
+df2 <- lapply(split(df, df$color),
+              function(subdf) subdf[sample(1:nrow(subdf), 3),]
+)
+
 uniqueinst$STP1<-0
 uniqueinst$STP2<-0
 uniqueinst$STP3<-0
@@ -30,6 +39,8 @@ uniqueinst$STP4<-0
 uniqueinst$STP5<-0
 uniqueinst$STP6<-0
 
+#comment this out and save assignments to file
+#so that not re-randomized every time
 for(i in 1:nrow(uniqueinst)){
   STPlist<-sample(1:6,6,FALSE)
   uniqueinst$STP1[i]<-STPlist[1]
@@ -38,6 +49,9 @@ for(i in 1:nrow(uniqueinst)){
   uniqueinst$STP4[i]<-STPlist[4]
   uniqueinst$STP5[i]<-STPlist[5]
   uniqueinst$STP6[i]<-STPlist[6]}
+
+library(xlsx)
+write.xlsx(uniqueinst, "/rand_stp")
 
 #now just need to assign this to mergeed_stag_stagmdataframe, pair up by Inst, Plot and STP
 

@@ -206,9 +206,9 @@ annual.gr4<-annual.gr4[!annual.gr4$inf.ht==TRUE,]
 #Removes 6th stp plots from analysis
 #Makes seperate dataframe for witheld data
 
-annual.gr6<-annual.gr4[annual.gr4$STP==6,]
+annual.gr6<-annual.gr4[annual.gr4$STP_rand==6,]
 
-annual.gr4<-annual.gr4[!annual.gr4$STP==6,]
+annual.gr4<-annual.gr4[!annual.gr4$STP_rand==6,]
 
 
 

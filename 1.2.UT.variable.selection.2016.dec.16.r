@@ -103,7 +103,7 @@ sim<-c("EM","BC","TJ","RM","CM","TC")
 annual.gr2<-annual.gr[annual.gr$Installation %in% sim, ]
 
 #Removes 6th stp plots from analysis
-annual.gr2<-annual.gr2[!annual.gr2$STP==6,]
+annual.gr2<-annual.gr2[!annual.gr2$STP_rand==6,]
 
 #GAM for Crownwidth ht class
 gam.stCW<-gam(ht_annual~s(srHeight_Total)+s(CrownWidth),data=annual.gr2, family=gaussian(link="identity"))

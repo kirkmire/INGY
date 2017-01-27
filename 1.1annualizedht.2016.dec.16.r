@@ -22,18 +22,19 @@ merged_stagm_stag$InstPlot<-paste(merged_stagm_stag$Installation,
 
 #Assigns a random plot 1:6 to each STP
 
-#uniqueinst<-unique(splothist[,c(2,3,4)])
+uniqueinst<-unique(splothist[,c(2,3,4)])
 
 
 library(xlsx)
 #write.xlsx(uniqueinst, "rand_stp.xlsx")
-#write.xlsx(x = sample.dataframe, file = "test.excelfile.xlsx",
-#           sheetName = "TestSheet", row.names = FALSE)
+
 
 randstp<-read.xlsx("rand_stp.xlsx",sheetName = "Sheet1")
 colnames(randstp)[4]<-"STP"
 
+
 merged_stagm_stag<-merge(randstp,merged_stagm_stag,by=c("Installation","Plot","STP"))
+merged_stagm_stag<-merged_stagm_stag[! merged_stagm_stag$Installation %in% drp60,]
 
 #now just need to assign this to mergeed_stag_stagmdataframe, pair up by Inst, Plot and STP
 

@@ -342,7 +342,7 @@ plot(SI.resid$residuals~SI.resid$fitted.values)
 ###Sequential GAM Plots###
 dev.off()
 
-par(mfrow=c(1,3))
+par(mfrow=c(2,3))
 sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
 plot(sr.ht.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 

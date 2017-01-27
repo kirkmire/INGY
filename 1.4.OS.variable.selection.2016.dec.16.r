@@ -167,8 +167,8 @@ xyplot(agg.over.data$over.sum.bapa~agg.over.data$Year_MeasurementOS|agg.over.dat
 #Upper Metcalf OSBA decreased bt 1999 and 2010 across all installations
 #possible reasons are mortality, harvest or measurement error
 
-soverhistUM<-soverhist[soverhist$Installation=="UM",]
-xyplot(soverhistUM$Height_Total~soverhistUM$Year_Measurement,groups=soverhistUM$Tree,type="b")
+#soverhistUM<-soverhist[soverhist$Installation=="UM",]
+#xyplot(soverhistUM$Height_Total~soverhistUM$Year_Measurement,groups=soverhistUM$Tree,type="b")
 
 #tallest UM trees seems to be missing from 2010 remeasurement
 #unable to locate hard copies of UM OS measurements
@@ -206,6 +206,9 @@ bapa.OS.lm("GC",5,1999)
 
 
 annual.gr4$bapa.OS<-0
+
+annual.gr4$Installation<-as.character(annual.gr4$Installation)
+agg.over.data$Installation<-as.character(agg.over.data$Installation)
 
 for(i in 1:nrow(annual.gr4)){
   annual.gr4$bapa.OS[i]<-bapa.OS.lm(
@@ -372,6 +375,7 @@ CCF.OS.lm("BM",5,1999)
 
 
 annual.gr4$CCF.OS<-0
+agg.over.data.CCF$Installation<-as.character(agg.over.data.CCF$Installation)
 
 for(i in 1:nrow(annual.gr4)){
   annual.gr4$CCF.OS[i]<-CCF.OS.lm(
@@ -511,6 +515,7 @@ TPA.OS.lm("BM",5,2000)
 
 
 annual.gr4$TPA.OS<-0
+agg.over.data.TPA$Installation<-as.character(agg.over.data.TPA$Installation)
 
 for(i in 1:nrow(annual.gr4)){
   annual.gr4$TPA.OS[i]<-TPA.OS.lm(
@@ -575,10 +580,16 @@ colnames(aic.list.OS)<-(OS.variable)
 #CW QR#####################################################
 
 #QR for BAPA CW
+qr.OS.nothing<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m,tau=c(.5),data=annual.gr4)
+summary(qr.OS.nothing)
+aic.list.OS.CW<-AIC(qr.OS.nothing)[1]
+nlist.OS<-length(qr.OS.nothing$y)
+
+#QR for BAPA CW
 qr.BAPA.CW<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+bapa.OS,tau=c(.5),data=annual.gr4)
 summary(qr.BAPA.CW)
-aic.list.OS.CW<-AIC(qr.BAPA.CW)[1]
-nlist.OS<-length(qr.BAPA.CW$y)
+aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.BAPA.CW)[1])
+nlist.OS<-c(nlist.OS,length(qr.BAPA.CW$y))
 
 #QR for CCF CW
 qr.CCF.CW<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+CCF.OS,tau=c(.5),data=annual.gr4)
@@ -594,7 +605,7 @@ aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.TPA.CW)[1])
 nlist.OS<-c(nlist.OS,length(qr.TPA.CW$y))
 
 
-OS.variable<-c("BAPA","CCF","TPA")
+OS.variable<-c("Nothing","BAPA","CCF","TPA")
 
 OS.variable<-as.data.frame(OS.variable)
 

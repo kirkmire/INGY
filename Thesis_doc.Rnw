@@ -46,155 +46,7 @@ source(paste(getwd(),'/1.6.model.evaluation.2016.dec.16.r',sep=""))
 %%%%%%%%  Page Setup %%%%%%%%%%%%%%%%%%
 \usepackage[margin= 2cm]{geometry}
 
-%%%%%%%% Document %%%%%%%%%%%%%%%%%%%
-\usepackage{Sweave}
-\begin{document}
-\SweaveOpts{concordance=TRUE}
-\input{Thesis_doc-concordance}
-\pagenumbering{roman}
-\thispagestyle{empty}
-
-\vspace*{1\baselineskip}
-\begin{center}
-
-\text{PREDICTING THE GROWTH RESPONSE OF SMALL PONDEROSA PINE TREES UNDER} 
-\text{VARYING LEVELS OF OVERSTORY RETENTION, VEGETATIVE COMPETITION AND}
-\text{SITE QUALITY} 
-
-\text{By}
-
-\text{Colin Patrick Kirkmire} 
-
-\text{B.Sc. Forest Management, University of Washington, Seattle, Washington, 2015} 
-
-\text{Thesis} 
-
-\text{presented in partial fulfillment of the requirements
-for the degree of} 
-
-\text{Master of Science}\\
-\text{in Forestry} 
-
-\text{The University of Montana}\\
-\text{Missoula, MT} 
-
-\text{July 2017} 
-
-\text{Approved by:}\\ 
-\vspace{10 mm}
-\text{Scott Whittenburg, Dean of the Graduate School}\\
-\text{Graduate School} 
-\vspace{10 mm}
-
-\text{Dr. David L.R. Affleck, Co-Chair}\\ 
-\text{Forest Management} 
-\vspace{10 mm}
-
-\text{Dr. John Goodburn, Co-Chair}\\ 
-\text{Forest Management} 
-\vspace{10 mm}
-
-\text{Dr. David Patterson}\\ 
-\text{Statistics} 
-\vspace{10 mm}
-
-\text{Dr. Peter Kolb}\\ 
-\text{Forestry Extension} 
-\end{center}
-
-
-\newpage
-\thispagestyle{empty}
-\vspace*{5\baselineskip}
-\begin{center}
-\textbf{\large{Predicting the Growth Response of Small Ponderosa Pine Trees under Varying levels of Overstory Retention, Vegetative Competition and Site Quality}} \\[1pt] 
-\vspace*{5\baselineskip}
-\text{Colin Kirkmire} \\[1pt]
-\vspace*{3\baselineskip}
-\text{A thesis submitted to the Graduate Faculty of }\\[1pt]
-\text{the University of Montana}\\[1pt]
-\text{in partial fullfillment of the}\\[1pt]
-\text{requirements for the degree of}\\[1pt]
-\text{Master of Science}\\[1pt]
-\vspace*{3\baselineskip}
-\text{Department of Forest Management}\\[1pt]
-\text{College of Forestry and Conservation}\\[1pt]
-\text{University of Montana}\\[1pt]
-\vspace*{3\baselineskip}
-\text{Missoula, Montana}\\[1pt]
-\vspace*{1\baselineskip}
-\text{{2016}} \\[1pt]
-\vspace*{7\baselineskip}
-\text{Advised by Dr. David L.R. Affleck and Dr. John Goodburn}\\[1pt]
-\vspace*{7\baselineskip}
-\end{center}
-
-\newpage
-\large 
-\begin{center}
-\textbf{DEDICATION}\\[1pt]
-\end{center}
-
-\newpage
-\large 
-\begin{center}
-\textbf{BIOGRAPHY}\\[1pt]
-\end{center}
-\normalsize
-
-\newpage
-\large 
-\begin{center}
-\textbf{ACKNOWLEDGEMENTS}\\[1pt]
-\end{center}
-\normalsize
-
-I would first like to extend appreciation to the INGY Cooperators, particularly those who participated in the Small Tree Competing Vegetation Study (STCV) for their commitment to this long term study. Their participation required that many stands not be harvested for the duration of the study and a substantial monitary cost over 15 years.
-
-I also owe a debt of gratitude to the many INGY technicians and researchers who have worked on the STCV before me. The completion of the dataset would not have been possible without your ``boots on the ground'' and careful acquisition of measurements.
-
-Thank you to my advisors Dr. David Affleck and Dr. John Goodburn for giving me the opportunity to choose a challenging research topic and for support as I developed the skills to accomplish this research.
-
-I thank my family for their support and excusing my absense while pursuing this research.  I would also like to thank all of the previous generations of my family that have enjoyed careers in forestry in the Western United States.  Your life-long passion for our forests and the communities they support is something that constantly motivates me.
-
-To my friends in forestry, I thank you for both your commeraderie and friendly competition. I hope that we may never stop developing and sharing our knowledge of forest management. 
-
-
-
-
-
-
-\newpage
-\large 
-\begin{center}
-\textbf{TABLE OF CONTENTS}\\[1pt]
-\end{center}
-
-\normalsize
-\tableofcontents
-\large 
-\begin{center}
-\textbf{LIST OF APPENDICES}\\[1pt]
-\end{center}
-\listofappendices
-
-\newpage
-\large 
-\begin{center}
-\textbf{TABLES}\\[1pt]
-\end{center}
-\normalsize
-\listoftables
-\normalsize
-
-\newpage
-\large 
-\begin{center}
-\textbf{FIGURES}\\[1pt]
-\end{center}
-\normalsize
-\listoffigures
-
+\SweaveInput{1.1title_intro_contents.rnw}
 
 \newpage
 \pagenumbering{arabic}
@@ -549,21 +401,22 @@ latex(final.aic, file="")
 
 
 \hline
-Nothing&$1762$&$2903.95$&POLV.cov&4285&4931.33&BAPA&4285&4551.97\tabularnewline
-SmallTPA&$1762$&$2680.76$&F.cov&4285&4987.12&CCF&4285&4368.78\tabularnewline
-Two&$1757$&$2898.57$&LS.cov&4285&4998.15&\textbf{TPA}&4285&4274.93\tabularnewline
-Four&$1757$&$2888.43$&HS.cov&4285&4986.22&&&\tabularnewline
-Six&$1757$&$2815.43$&G.cov&4285&4997.31&Site&n&AIC\tabularnewline
-Eight&$1757$&$2771.44$&\textbf{F.diff}&4285&4730.94&Slope&4285&4232.53\tabularnewline
-Ten&$1757$&$2751.43$&LS.diff&4285&4869.22&\textbf{SI}&4285&4030.84\tabularnewline
-Twelve&$1757$&$2748.98$&HS.diff&4285&4809.4&Elevation&4285&4275.61\tabularnewline
-Fourteen&$1757$&$2764.34$&G.diff&4285&4872.88&Aspect&4285&4206.16\tabularnewline
-Fifteen&$1757$&$2794.31$&F.tran&4285&4948.87&&&\tabularnewline
-TGT&$1757$&$2719.52$&LS.tran&4285&4957.66&&&\tabularnewline
-BD&$1760$&$2205.27$&HS.tran&4285&4896.88&&&\tabularnewline
-DBH&$1280$&$1934.95$&G.tran.diff&4285&4865.32&&&\tabularnewline
-CrownWidth&$1759$&$2610.96$&G.tran.cov&4283&4988.15&&&\tabularnewline
-\textbf{CrownLength}&$1754$&$2541.86$&&&&&&\tabularnewline
+Nothing&$1816$&$3083.98$&POLV.cov&4228&4953.03&BAPA&4228&4539.63\tabularnewline
+SmallTPA&$1816$&$2843.32$&F.cov&4228&5001.07&CCF&4228&4363.87\tabularnewline
+Two&$1811$&$3075.37$&LS.cov&4228&5009&\textbf{TPA}&4228&4272.83\tabularnewline
+Four&$1811$&$3065.19$&HS.cov&4228&4999.4&&&\tabularnewline
+Six&$1811$&$2990.19$&G.cov&4228&5005.13&Site&n&AIC\tabularnewline
+Eight&$1811$&$2944.22$&\textbf{F.diff}&4228&4783.02&Slope&4228&4218.55\tabularnewline
+Ten&$1811$&$2929.06$&LS.diff&4228&4924.31&\textbf{SI}&4228&4018.82\tabularnewline
+Twelve&$1811$&$2909.83$&HS.diff&4228&4861.02&Elevation&4228&4273.61\tabularnewline
+Fourteen&$1811$&$2948.04$&G.diff&4228&4910.01&Aspect&4228&4190\tabularnewline
+Fifteen&$1811$&$2965.70$&F.tran&4228&4958.23&&&\tabularnewline
+TGT&$1811$&$2896.52$&LS.tran&4228&4973.72&&&\tabularnewline
+BD&$1814$&$2359.86$&HS.tran&4228&4929.58&&&\tabularnewline
+DBH&$1334$&$2053.96$&G.tran.diff&4228&4893.88&&&\tabularnewline
+CrownWidth&$1813$&$2802.97$&G.tran.cov&4226&5008.45&&&\tabularnewline
+\textbf{CrownLength}&$1808$&$2705.84$&&&&&&\tabularnewline
+
 
 
 \hline

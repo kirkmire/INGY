@@ -13,7 +13,7 @@ sinst.pipo<-sinst[! sinst$Installation %in% drp60,
                   c("Installation","SiteIndex_Value")]
 
 #all PIPO installations have a PIPO SI except for 1, GC
-
+sinst.pipo$Installation<-as.character(sinst.pipo$Installation)
 annual.gr4<-merge(annual.gr4,sinst.pipo, by="Installation")
 
 #Transform Aspect Variable#
@@ -24,9 +24,10 @@ ge_sea$cos_rad_asp<-cos((ge_sea$aspect*3.141)/180)
 
 ge_sea$asp1<-(ge_sea$sin_rad_asp+ge_sea$cos_rad_asp)
 
+annual.gr4$InstPlot<-paste(annual.gr4$Installation,annual.gr4$Plot,sep="")
+annual.gr4$InstPlot<-as.character(annual.gr4$InstPlot)
+ge_sea$InstPlot<-as.character(ge_sea$InstPlot)
 annual.gr4<-merge(annual.gr4, ge_sea, by="InstPlot")
-
-
 
 
 

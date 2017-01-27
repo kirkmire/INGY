@@ -247,46 +247,46 @@ nlist<-c(nlist,length(qr.stpa$y))
 #QR for height class 2
 qr.stp2<-rq(ht_annual~srHeight_Total+two,tau=c(.5),data=annual.gr2)
 summary(qr.stp2)
-aic.list<-c(aic.list,AIC(qr.stp2)[1])
+#aic.list<-c(aic.list,AIC(qr.stp2)[1])
 
-nlist<-c(nlist,length(qr.stp2$y))
+#nlist<-c(nlist,length(qr.stp2$y))
 
 
 #QR for height class 4
 qr.stp4<-rq(ht_annual~srHeight_Total+four,tau=c(.5),data=annual.gr2)
 summary(qr.stp4)
-aic.list<-c(aic.list,AIC(qr.stp4)[1])
-nlist<-c(nlist,length(qr.stp4$y))
+#aic.list<-c(aic.list,AIC(qr.stp4)[1])
+#nlist<-c(nlist,length(qr.stp4$y))
 
 #QR for height class 6
 qr.stp6<-rq(ht_annual~srHeight_Total+six,tau=c(.5),data=annual.gr2)
 summary(qr.stp6)
-aic.list<-c(aic.list,AIC(qr.stp6)[1])
-nlist<-c(nlist,length(qr.stp6$y))
+#aic.list<-c(aic.list,AIC(qr.stp6)[1])
+#nlist<-c(nlist,length(qr.stp6$y))
 
 #QR for height class 8
 qr.stp8<-rq(ht_annual~srHeight_Total+eight,tau=c(.5),data=annual.gr2)
 summary(qr.stp8)
-aic.list<-c(aic.list,AIC(qr.stp8)[1])
-nlist<-c(nlist,length(qr.stp8$y))
+#aic.list<-c(aic.list,AIC(qr.stp8)[1])
+#nlist<-c(nlist,length(qr.stp8$y))
 
 #QR for height class 10
 qr.stp10<-rq(ht_annual~srHeight_Total+ten,tau=c(.5),data=annual.gr2)
 summary(qr.stp10)
-aic.list<-c(aic.list,AIC(qr.stp10)[1])
-nlist<-c(nlist,length(qr.stp10$y))
+#aic.list<-c(aic.list,AIC(qr.stp10)[1])
+#nlist<-c(nlist,length(qr.stp10$y))
 
 #QR for height class 12
 qr.stp12<-rq(ht_annual~srHeight_Total+twelve,tau=c(.5),data=annual.gr2)
 summary(qr.stp12)
-aic.list<-c(aic.list,AIC(qr.stp12)[1])
-nlist<-c(nlist,length(qr.stp12$y))
+#aic.list<-c(aic.list,AIC(qr.stp12)[1])
+#nlist<-c(nlist,length(qr.stp12$y))
 
 #QR for height class 14
 qr.stp14<-rq(ht_annual~srHeight_Total+fourteen,tau=c(.5),data=annual.gr2)
 summary(qr.stp14)
-aic.list<-c(aic.list,AIC(qr.stp14)[1])
-nlist<-c(nlist,length(qr.stp14$y))
+#aic.list<-c(aic.list,AIC(qr.stp14)[1])
+#nlist<-c(nlist,length(qr.stp14$y))
 
 #QR for height class 15
 qr.stp15<-rq(ht_annual~srHeight_Total+other,tau=c(.5),data=annual.gr2)
@@ -330,8 +330,7 @@ UT.aic<-as.data.frame(cbind(nlist,aic.list))
 
 UT.aic$aic.list<-as.numeric(UT.aic$aic.list)
 
-variable<-c("Nothing","SmallTPA","Two","Four","Six","Eight",
-                      "Ten","Twelve","Fourteen","Fifteen",
+variable<-c("Nothing","SmallTPA","Trees15+",
                       "TGT","BD","DBH","CrownWidth","CrownLength")
 
 variable<-as.data.frame(variable)

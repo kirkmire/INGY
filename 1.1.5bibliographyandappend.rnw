@@ -1,0 +1,79 @@
+% !Rnw root=Thesis_doc.RNW
+
+
+\newpage
+\newappendix{Bibliography} 
+\printbibliography
+All analyses were performed using the R statistical software
+\Sexpr{R.Version()$version.string}. This thesis was compiled using the document preparation software \LaTeX.
+
+
+\newpage
+\begin{singlespace}
+\newappendix{Variable Selection Steps}
+\begin{enumerate}
+\begin{small}
+  \item{Select intallations with >60 \emph{P. Ponderosa} small tagged trees at initiation}
+  
+  \item{Select installations of similar overstory basal area and site productivity}
+  
+  \item{Retain the sixth small tree plot of each installation for validation}
+  
+\item{Create a list of the practical predictor variables within each category:
+  \begin{itemize}
+         \item {Understory Tree (UT)}
+         \item {Understory Non-tree (UV)}
+         \item {Overstory Tree (OT)}
+         \item {Site Productivity (SP)}
+ \end{itemize}
+}
+  
+  \item{For each candidate variable in UT generate a generalized additive model (GAM) using the base model and only the control plots (no herbicide):
+  \begin{center}
+\begin{equation}\label{eq:Eq1}
+  \Delta \textrm{ height annual}=\sqrt{\textrm{ initial height }}+\textrm{ candidate small tree variable}
+\end{equation}
+  \end{center}
+  }
+  
+  \item{Visually examine the results and the partial residual plots of the models produced in 5}
+  
+  \item{Include quadratic terms of variables in the list of candidate variables if warranted}
+  
+  \item{Fit a quantile regression model with each candidate variable for$\textrm{ $\tau$}=.5$ using the quantreg package
+    \begin{center}
+\begin{equation}\label{eq:Eq2}
+  \emph{Q}_{.50}\Delta \textrm{ height annual}=\sqrt{\textrm{ initial height }}+\textrm{ candidate small tree variable}
+\end{equation}
+  \end{center}
+  }
+  
+  
+  \item{Calculate the AIC for each model within the UT category}
+  
+  \item{Select the variable from the model with the lowest AIC to be carried forward into UV category}
+  
+  \item{Repeat steps 5-10 for the UV variables}
+  \item{Select variables from the overstory and site productivity categories using the process outlined in steps 5-11 using all installations selected in step 1 (and all plots)}
+  \item{Using the variables selected for the $\tau$=.5, fit quantile regressions for $\tau$=.1,.9. This will estimate different b_${\tau}$ for each specified quantile.\\
+  
+  \textbf{Final Models:}\\
+
+\begin{center}
+\begin{equation}\label{eq:Eq3}
+ \Delta _{\tau} =\textrm{b}_{0,\tau}\sqrt{\textrm{h}}+\textrm{b}_{UT,\tau}\textrm{UT} 
+ + \textrm{b}_{UV,\tau}\textrm{UV}+\textrm{b}_{OT,\tau}\textrm{OT}+\textrm{b}_{SP,\tau}\textrm{SP}
+  \end{equation}
+  \end{center}
+\end{small}
+\end{enumerate}
+\end{singlespace}
+
+
+\newpage
+\newappendix{Equations}
+\listofmyequations
+
+
+
+

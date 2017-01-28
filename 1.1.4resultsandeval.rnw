@@ -1,0 +1,64 @@
+% !Rnw root=Thesis_doc.RNW
+
+
+\newpage
+\subsection{Variable Selection Results and Model Evaluation}
+<<echo=F, results=hide>>=
+library(Hmisc)
+
+latex(final.aic, file="")  
+@
+
+\begin{table}[h]
+\small
+\caption{Akaike Information Criterion (AIC) for .5 Quantile Regression by Category of Small Tree Competition  }
+\begin{center}
+\begin{tabular}{cccccccccc}
+\hline\hline
+{Small Tree}&{n}&{AIC}&
+{Vegetation}&{n}&{AIC}&
+{Overstory}&{n}&{AIC}&
+\\
+
+
+\hline
+Nothing&$1816$&$3083.98$&POLV.cov&4228&4953.03&BAPA&4228&4539.63\tabularnewline
+SmallTPA&$1816$&$2843.32$&F.cov&4228&5001.07&CCF&4228&4363.87\tabularnewline
+Two&$1811$&$3075.37$&LS.cov&4228&5009&\textbf{TPA}&4228&4272.83\tabularnewline
+Four&$1811$&$3065.19$&HS.cov&4228&4999.4&&&\tabularnewline
+Six&$1811$&$2990.19$&G.cov&4228&5005.13&Site&n&AIC\tabularnewline
+Eight&$1811$&$2944.22$&\textbf{F.diff}&4228&4783.02&Slope&4228&4218.55\tabularnewline
+Ten&$1811$&$2929.06$&LS.diff&4228&4924.31&\textbf{SI}&4228&4018.82\tabularnewline
+Twelve&$1811$&$2909.83$&HS.diff&4228&4861.02&Elevation&4228&4273.61\tabularnewline
+Fourteen&$1811$&$2948.04$&G.diff&4228&4910.01&Aspect&4228&4190\tabularnewline
+Fifteen&$1811$&$2965.70$&F.tran&4228&4958.23&&&\tabularnewline
+TGT&$1811$&$2896.52$&LS.tran&4228&4973.72&&&\tabularnewline
+BD&$1814$&$2359.86$&HS.tran&4228&4929.58&&&\tabularnewline
+DBH&$1334$&$2053.96$&G.tran.diff&4228&4893.88&&&\tabularnewline
+CrownWidth&$1813$&$2802.97$&G.tran.cov&4226&5008.45&&&\tabularnewline
+\textbf{CrownLength}&$1808$&$2705.84$&&&&&&\tabularnewline
+
+
+
+\hline
+\end{tabular}
+\end{center}
+\label{tab:dum1}
+\end{table}
+
+
+\newpage
+
+\begin{figure}
+\begin{center}
+<<test, width=8, height=8, fig.show='hold'>>=
+sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
+plot(sr.ht.gam,residuals=T,se=T,pch=".")
+cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$CrownLength))
+plot(cl.ht.gam,residuals=T,se=T,pch=".")
+@
+\end{center}
+\caption{Timeline of Installation Measurements and Treatments}
+\end{figure}
+
+

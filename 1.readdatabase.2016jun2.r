@@ -57,7 +57,7 @@ timeline <- sqlFetch(path,"Timeline")
 
 
 #Forb/Shrub reference data
-forbshrub <- sqlFetch(path,"Lookup_Vegetation_Form")
+forbshrub <- sqlFetch(path,"Lookup_Vegetation_Form_ckedits")
 
 #Function for assigning "lifeform" to transect point data
 #Results posted to updated accdb

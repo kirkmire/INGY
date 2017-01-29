@@ -22,22 +22,22 @@ aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
 
 aic.lists$AIC<-round(aic.lists$AIC,2)
 
-final.aic<-data.frame(matrix("", nrow = 15, ncol = 9),stringsAsFactors=F)
-final.aic$X1<-aic.lists$Variable[1:15]
-final.aic$X2<-aic.lists$n[1:15]
-final.aic$X3<-aic.lists$AIC[1:15]
-final.aic$X4[1:14]<-as.character(aic.lists$Variable[16:29])
-final.aic$X5[1:14]<-aic.lists$n[16:29]
-final.aic$X6[1:14]<-aic.lists$AIC[16:29]
-final.aic$X7[1:3]<-as.character(aic.lists$Variable[30:32])
-final.aic$X8[1:3]<-aic.lists$n[30:32]
-final.aic$X9[1:3]<-aic.lists$AIC[30:32]
+final.aic<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
+final.aic$X1<-c(aic.lists$Variable[1:8],"","","","","","")
+final.aic$X2<-c(aic.lists$n[1:8],"","","","","","")
+final.aic$X3<-c(aic.lists$AIC[1:8],"","","","","","")
+final.aic$X4[1:14]<-as.character(aic.lists$Variable[9:22])
+final.aic$X5[1:14]<-aic.lists$n[9:22]
+final.aic$X6[1:14]<-aic.lists$AIC[9:22]
+final.aic$X7[1:4]<-as.character(aic.lists$Variable[23:26])
+final.aic$X8[1:4]<-aic.lists$n[23:26]
+final.aic$X9[1:4]<-aic.lists$AIC[23:26]
 final.aic$X7[5]<-"Site"
 final.aic$X8[5]<-"n"
 final.aic$X9[5]<-"AIC"
-final.aic$X7[6:9]<-as.character(aic.lists$Variable[33:36])
-final.aic$X8[6:9]<-aic.lists$n[33:36]
-final.aic$X9[6:9]<-aic.lists$AIC[33:36]
+final.aic$X7[6:9]<-as.character(aic.lists$Variable[27:30])
+final.aic$X8[6:9]<-aic.lists$n[27:30]
+final.aic$X9[6:9]<-aic.lists$AIC[27:30]
 
 
 

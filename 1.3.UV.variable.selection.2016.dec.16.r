@@ -405,12 +405,27 @@ summary(gam.G.diff.cov)
 par(mfrow=c(2,4),mar=c(4,4,1,2))
 plot(gam.G.diff.cov,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
+#GAM for init tree ht veg diff
+init.diff.1m<-gam(ht_annual~s(srHeight_Total)+s(treeminus),data=annual.gr4, family=gaussian(link="identity"))
+summary(init.diff.1m)
+
+par(mfrow=c(2,4),mar=c(4,4,1,2))
+plot(init.diff.1m,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+#GAM for init tree ht veg diff trans
+init.diff.1m.trans<-gam(ht_annual~s(srHeight_Total)+s(treeminus_trans),data=annual.gr4, family=gaussian(link="identity"))
+summary(init.diff.1m.trans)
+
+par(mfrow=c(2,4),mar=c(4,4,1,2))
+plot(init.diff.1m.trans,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+
 
 
 veg.variable<-c("Nothing","POLV.cov","F.cov","LS.cov","HS.cov","G.cov",
                "LS.diff","HS.diff",
-                "F.tran","LS.tran","HS.tran","G.tran.diff",
-                "G.tran.cov"
+                "LS.tran","HS.tran","G.tran.diff",
+                "G.tran.cov","mx.vg.diff1m","mx.vg.diff.tr"
                )
 
 
@@ -479,10 +494,10 @@ nlist.UV<-c(nlist.UV, length(qrCW.1m.HS$y))
 
 
 #QR for Forb transect cover
-qrCW.forb.tran<-rq(ht_annual~srHeight_Total+diff.F+CrownLength,tau=c(.5),data=annual.gr4)
-summary(qrCW.forb.tran)
-aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.forb.tran)[1])
-nlist.UV<-c(nlist.UV, length(qrCW.forb.tran$y))
+#qrCW.forb.tran<-rq(ht_annual~srHeight_Total+diff.F+CrownLength,tau=c(.5),data=annual.gr4)
+#summary(qrCW.forb.tran)
+#aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.forb.tran)[1])
+#nlist.UV<-c(nlist.UV, length(qrCW.forb.tran$y))
 
 #QR for LS transect cover
 qr.LS.tran<-rq(ht_annual~srHeight_Total+diff.LS+CrownLength,tau=c(.5),data=annual.gr4)
@@ -512,6 +527,19 @@ qrCW.tran.gr.cov<-rq(ht_annual~srHeight_Total+tran.G+CrownLength,tau=c(.5),data=
 summary(qrCW.tran.gr.cov)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.tran.gr.cov)[1])
 nlist.UV<-c(nlist.UV, length(qrCW.tran.gr.cov$y))
+
+#QR for init tree height max veg difference (1m veg plot)
+qrCW.1m.max.vg.diff<-rq(ht_annual~srHeight_Total+annual.gr4$treeminus+CrownLength,tau=c(.5),data=annual.gr4)
+summary(qrCW.1m.max.vg.diff)
+aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.max.vg.diff)[1])
+nlist.UV<-c(nlist.UV, length(qrCW.1m.max.vg.diff$y))
+
+#QR for init tree height max veg difference (transect)
+qrCW.1m.max.vg.diff.tran<-rq(ht_annual~srHeight_Total+annual.gr4$treeminus+CrownLength,tau=c(.5),data=annual.gr4)
+summary(qrCW.1m.max.vg.diff.tran)
+aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.max.vg.diff.tran)[1])
+nlist.UV<-c(nlist.UV, length(qrCW.1m.max.vg.diff.tran$y))
+
 
 length(aic.list.vegCW)
 length(nlist.UV)

@@ -52,14 +52,14 @@ latex(final.aic, file="")            # If you want all the data
 #cary over quantiles  and how the magnitude of 
 #the effects at varouis quantiles differ considerably fromthe OLS coefficients
 #even in terms of the CI 
+library(quantreg)
+qr.SI.5<-  rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.5),data=annual.gr4)
+qr.SI.1 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.1),data=annual.gr4)
+qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.9),data=annual.gr4)
 
-qr.SI.5<-  rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
-qr.SI.1 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.1),data=annual.gr4)
-qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.9),data=annual.gr4)
+fit1 <- summary(rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(1:9/10),data=annual.gr4))
+plot(fit1)
 
-anova(qr.SI.1,qr.SI.5,qr.SI.9)
-
-#strong evidence that the predictors are not the same between at least two of the models
 
 
 valid.func<-function(sqht, stcw, stran, tpaos, si, annualht){
@@ -107,9 +107,9 @@ for(i in 1:nrow(annual.gr6)){
   annual.gr6$response.cat[i]<-valid.func(
     annual.gr6$srHeight_Total[i], 
     annual.gr6$CrownLength[i],
-    annual.gr6$diff.G.1m[i],
+    annual.gr6$treeminus[i],
     annual.gr6$TPA.OS[i],
-    annual.gr6$SiteIndex_Value[i],
+    annual.gr6$slopePercent*aspect*elevation[i],
     annual.gr6$ht_annual[i])
   }
 
@@ -139,9 +139,9 @@ for(i in 1:nrow(annual.gr6.lessthan10in)){
   annual.gr6.lessthan10in$response.cat[i]<-valid.func(
     annual.gr6.lessthan10in$srHeight_Total[i], 
     annual.gr6.lessthan10in$CrownLength[i],
-    annual.gr6.lessthan10in$diff.G.1m[i],
+    annual.gr6.lessthan10in$treeminus[i],
     annual.gr6.lessthan10in$TPA.OS[i],
-    annual.gr6.lessthan10in$SiteIndex_Value[i],
+    annual.gr6.lessthan10in$slopePercent*aspect*elevation[i],
     annual.gr6.lessthan10in$ht_annual[i])
 }
 
@@ -162,15 +162,15 @@ barchart(sorted.totals$Freq~sorted.totals$annual.gr6.lessthan10in.response.cat, 
 
 ###higher resolution by including quantiles .4 to .9 by .4
 
-qr.SI.1<-  rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.1),data=annual.gr4)
-qr.SI.2 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.2),data=annual.gr4)
-qr.SI.3 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.3),data=annual.gr4)
-qr.SI.4 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.4),data=annual.gr4)
-qr.SI.5 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
-qr.SI.6 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.6),data=annual.gr4)
-qr.SI.7 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.7),data=annual.gr4)
-qr.SI.8 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.8),data=annual.gr4)
-qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.9),data=annual.gr4)
+qr.SI.1<-  rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.1),data=annual.gr4)
+qr.SI.2 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.2),data=annual.gr4)
+qr.SI.3 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.3),data=annual.gr4)
+qr.SI.4 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.4),data=annual.gr4)
+qr.SI.5 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.5),data=annual.gr4)
+qr.SI.6 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.6),data=annual.gr4)
+qr.SI.7 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.7),data=annual.gr4)
+qr.SI.8 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.8),data=annual.gr4)
+qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.9),data=annual.gr4)
 
 
 
@@ -263,16 +263,16 @@ valid.func10<-function(sqht, stcw, stran, tpaos, si, annualht){
 
 annual.gr6$response.cat<-0
 
-annual.gr6$diff.G.1m[is.na(annual.gr6$diff.G.1m)] <- 0
+annual.gr6$treeminus[is.na(annual.gr6$treeminus)] <- 0
 annual.gr6$CrownLength[is.na(annual.gr6$CrownLength)] <- 0
 
 for(i in 1:nrow(annual.gr6)){
   annual.gr6$response.cat[i]<-valid.func10(
     annual.gr6$srHeight_Total[i], 
     annual.gr6$CrownLength[i],
-    annual.gr6$diff.G.1m[i],
+    annual.gr6$treeminus[i],
     annual.gr6$TPA.OS[i],
-    annual.gr6$SiteIndex_Value[i],
+    annual.gr6$slopePercent*aspect*elevation[i],
     annual.gr6$ht_annual[i])
 }
 
@@ -300,9 +300,9 @@ for(i in 1:nrow(annual.gr6.lessthan10in)){
   annual.gr6.lessthan10in$response.cat[i]<-valid.func10(
     annual.gr6.lessthan10in$srHeight_Total[i], 
     annual.gr6.lessthan10in$CrownLength[i],
-    annual.gr6.lessthan10in$diff.G.1m[i],
+    annual.gr6.lessthan10in$treeminus[i],
     annual.gr6.lessthan10in$TPA.OS[i],
-    annual.gr6.lessthan10in$SiteIndex_Value[i],
+    annual.gr6.lessthan10in$slopePercent*aspect*elevation[i],
     annual.gr6.lessthan10in$ht_annual[i])
 }
 
@@ -335,7 +335,7 @@ TPA.resid <- rq(ht_annual~annual.gr4$TPA.OS,tau=c(.5),data=annual.gr4)
 
 plot(TPA.resid$residuals~TPA.resid$fitted.values)
 
-SI.resid <-rq(ht_annual~annual.gr4$SiteIndex_Value,tau=c(.5),data=annual.gr4)
+SI.resid <-rq(ht_annual~annual.gr4$slopePercent*aspect*elevation,tau=c(.5),data=annual.gr4)
 
 plot(SI.resid$residuals~SI.resid$fitted.values)
 
@@ -360,9 +360,8 @@ plot(tpa.os.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
 si.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+
-           +annual.gr4$TPA.OS+s(annual.gr4$SiteIndex_Value))
+           +annual.gr4$TPA.OS+s(annual.gr4$slopePercent*aspect*elevation))
 plot(si.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-
 
 
 

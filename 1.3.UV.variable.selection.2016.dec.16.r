@@ -27,7 +27,7 @@ veg_record<- merge(splot, stp,by=c("Installation","Plot"))
 
 #Merges annual small tree growth records with 1m veg records for each year
 annual.gr3<- merge(annual.gr, veg_record,by=c("Installation","Plot","STP","Year_Measurement"))
-
+veg_record$STP[1]
 
 #4m data not collected until 2007, ok to compare to 1m data 
 #that was colected throughout study (1998)?
@@ -95,6 +95,8 @@ names(agg.1m.data1)[9]<-c("diff.POLV.1m")
 #Merges aggregated 1m data to the "big" df
 
 annual.gr4<-merge(annual.gr3,agg.1m.data1,by=c("Installation","Plot","Year_Measurement"))
+
+
 
 
 
@@ -202,7 +204,94 @@ annual.gr4<-merge(annual.gr4,agg.grass.data,by=c("Installation","Plot","STP","Ye
 annual.gr4$inf.ht<-is.infinite(annual.gr4$ht_annual)
 annual.gr4<-annual.gr4[!annual.gr4$inf.ht==TRUE,]
 
+#Function for height difference between top height of tallest shrub on each 
+#stp vegplot
 #Find diff between init tree height and max shrub height
+
+init_tree_shrub_ht_diff<-function(Installation,Plot,STP,Year,height){
+  #Installation<-"KC"
+  #Plot<-1
+  #STP<-1
+  #Year<-2010
+  #height<-10
+  shrub_ht<-veg_record[veg_record$Installation==Installation&
+                         veg_record$Plot==Plot&
+                         veg_record$STP==STP&
+                         veg_record$Year_Measurement==Year,]
+  
+  max.ht.shrub<-max(shrub_ht$Top.LS,shrub_ht$Top.HS,shrub_ht$Top.F)
+  tree.ht.minus.shrub<-height-max.ht.shrub
+  tree.ht.minus.shrub
+  }
+
+annual.gr4$treeminus<-0
+
+for(i in 1:nrow(annual.gr4)){
+  annual.gr4$treeminus[i]<-init_tree_shrub_ht_diff(
+    annual.gr4$Installation[i], 
+    annual.gr4$Plot[i],
+    annual.gr4$STP[i],
+    annual.gr4$Year_Measurement[i],
+    annual.gr4$Height_Total[i]
+    )
+}
+
+mean(annual.gr4$treeminus)
+
+#Function for height difference between top height of tallest shrub on each 
+#stp vegplot
+#Find diff between init tree height and max shrub height
+
+agg.tran.data.max <-aggregate(stran$topT,
+                          by=list("Installation"=stran$Installation,
+                                  "Plot"=stran$Plot,
+                                  "STP"=stran$Transect,
+                                  "Year_Measurement"=stran$Year_Measurement,
+                                  "Lifeform"=stran$Lifeform1),FUN=max)#total/number of points
+
+#Reshapes transect data so each stp is a row
+agg.tran.data.max1<-reshape(agg.tran.data.max, direction="wide",idvar=
+                          c("Installation","Plot","STP","Year_Measurement"),
+                        timevar="Lifeform",v.names="x")
+
+#Assigns zeros to NA values (transect points where no veg present)
+agg.T.names<-names(agg.tran.data.max1[,substring(names(agg.tran.data.max1),1,1)=="x"])
+
+for(i in agg.T.names) {
+  agg.tran.data.max1[i][is.na(agg.tran.data.max1[i])] <- 0
+}
+
+init_tree_shrub_ht_diff_trans<-function(Installation,Plot,STP,Year,height){
+  #Installation<-"KC"
+  #Plot<-1
+  #STP<-1
+  #Year<-2010
+  #height<-10
+  shrub_ht<-agg.tran.data.max1[agg.tran.data.max1$Installation==Installation&
+                         agg.tran.data.max1$Plot==Plot&
+                         agg.tran.data.max1$STP==STP&
+                         agg.tran.data.max1$Year_Measurement==Year,]
+  
+  max.ht.shrub<-max(shrub_ht$x.F,shrub_ht$x.HS,shrub_ht$x.LS,shrub_ht$x.S)
+  tree.ht.minus.shrub<-height-max.ht.shrub
+  tree.ht.minus.shrub
+}
+
+annual.gr4$treeminus_trans<-0
+
+
+for(i in 1:nrow(annual.gr4)){
+  annual.gr4$treeminus_trans[i]<-init_tree_shrub_ht_diff_trans(
+    annual.gr4$Installation[i], 
+    annual.gr4$Plot[i],
+    annual.gr4$STP[i],
+    annual.gr4$Year_Measurement[i],
+    annual.gr4$Height_Total[i]
+  )
+}
+
+mean(annual.gr4$treeminus_trans)
+mean(annual.gr4$treeminus)
 
 
 

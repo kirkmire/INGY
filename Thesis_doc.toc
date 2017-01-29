@@ -12,8 +12,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.1}Sampling Strategy}{4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2}Statistical Approach}{8}
+\contentsline {subsection}{\numberline {1.2}Statistical Approach}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.3}Variable Selection}{10}
+\contentsline {subsection}{\numberline {1.3}Variable Acquisition}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.4}Variable Selection Results and Model Evaluation}{12}
+\contentsline {subsection}{\numberline {1.4}Variable Selection}{13}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.5}Variable Selection Results and Model Evaluation}{15}

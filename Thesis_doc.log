@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.5)  24 JAN 2017 15:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.5)  28 JAN 2017 15:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -958,24 +958,24 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (./Thesis_doc.aux)
 \openout1 = `Thesis_doc.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 45.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 45.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 47.
  (c:/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    ... okay on input line 47.
 
 (c:/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1023,8 +1023,8 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Thesis_doc.bbl' found.
 
 (./Thesis_doc.bbl)
-Package biblatex Info: Reference section=0 on input line 45.
-Package biblatex Info: Reference segment=0 on input line 45.
+Package biblatex Info: Reference section=0 on input line 47.
+Package biblatex Info: Reference segment=0 on input line 47.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1091,158 +1091,147 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout9 = `Thesis_doc.lof'.
 
  [9]
-Underfull \hbox (badness 10000) in paragraph at lines 201--205
+Underfull \hbox (badness 10000) in paragraph at lines 204--208
 
  []
 
+<comp_flowchart.jpg, id=57, 1208.26407pt x 622.57594pt>
+File: comp_flowchart.jpg Graphic file (type jpg)
 
-LaTeX Warning: File `comp_flowchart.jpg' not found on input line 219.
+<use comp_flowchart.jpg>
+Package pdftex.def Info: comp_flowchart.jpg used on input line 222.
+(pdftex.def)             Requested size: 455.24408pt x 234.56737pt.
+ <threedveg.jpg, id=58, 613.54219pt x 372.64218pt>
+File: threedveg.jpg Graphic file (type jpg)
 
+<use threedveg.jpg>
+Package pdftex.def Info: threedveg.jpg used on input line 230.
+(pdftex.def)             Requested size: 455.24408pt x 276.50145pt.
+ <all_trees.jpg, id=59, 1209.01688pt x 688.07062pt>
+File: all_trees.jpg Graphic file (type jpg)
 
-! Package pdftex.def Error: File `comp_flowchart.jpg' not found.
+<use all_trees.jpg>
+Package pdftex.def Info: all_trees.jpg used on input line 238.
+(pdftex.def)             Requested size: 455.24408pt x 259.08626pt.
+ <Thesis_doc-speccomp.pdf, id=60, 578.16pt x 578.16pt>
+File: Thesis_doc-speccomp.pdf Graphic file (type pdf)
 
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.219 ...graphics[width=160mm]{comp_flowchart.jpg}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+<use Thesis_doc-speccomp.pdf>
+Package pdftex.def Info: Thesis_doc-speccomp.pdf used on input line 250.
+(pdftex.def)             Requested size: 400.38872pt x 400.38646pt.
+ [1 <./comp_flowchart.jpg>] [2 <./threedveg.jpg> <./all_trees.jpg>] [3 <./Thesi
+s_doc-speccomp.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 268--269
 
-LaTeX Font Info:    Try loading font information for T1+aett on input line 219.
+ []
+
+LaTeX Font Info:    Try loading font information for T1+aett on input line 272.
 
 (c:/texlive/2016/texmf-dist/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<Thesis_doc-fig2.pdf, id=37, 433.62pt x 433.62pt>
-File: Thesis_doc-fig2.pdf Graphic file (type pdf)
- <use Thesis_doc-fig2.pdf>
-Package pdftex.def Info: Thesis_doc-fig2.pdf used on input line 227.
-(pdftex.def)             Requested size: 400.38872pt x 400.41072pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[1] [2] [3 <./Thesis_doc-fig2.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 248--249
-
- []
-
-<inst_map.png, id=54, 13.55063pt x 6.77531pt>
+<inst_map.png, id=76, 13.55063pt x 6.77531pt>
 File: inst_map.png Graphic file (type png)
  <use inst_map.png>
-Package pdftex.def Info: inst_map.png used on input line 260.
+Package pdftex.def Info: inst_map.png used on input line 280.
 (pdftex.def)             Requested size: 400.38872pt x 200.4801pt.
 
-<sampleplot.png, id=55, 216.81pt x 216.81pt>
-File: sampleplot.png Graphic file (type png)
- <use sampleplot.png>
-Package pdftex.def Info: sampleplot.png used on input line 271.
-(pdftex.def)             Requested size: 227.62204pt x 227.63405pt.
+<Thesis_doc-sampleplot.pdf, id=77, 289.08pt x 289.08pt>
+File: Thesis_doc-sampleplot.pdf Graphic file (type pdf)
 
+<use Thesis_doc-sampleplot.pdf>
+Package pdftex.def Info: Thesis_doc-sampleplot.pdf used on input line 289.
+(pdftex.def)             Requested size: 400.38872pt x 400.40851pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+<Thesis_doc-species.pdf, id=78, 289.08pt x 289.08pt>
+File: Thesis_doc-species.pdf Graphic file (type pdf)
 
-<species.png, id=56, 216.81pt x 216.81pt>
-File: species.png Graphic file (type png)
- <use species.png>
-Package pdftex.def Info: species.png used on input line 280.
-(pdftex.def)             Requested size: 227.62204pt x 227.63405pt.
+<use Thesis_doc-species.pdf>
+Package pdftex.def Info: Thesis_doc-species.pdf used on input line 297.
+(pdftex.def)             Requested size: 400.38872pt x 400.40851pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 287--288
+Underfull \hbox (badness 10000) in paragraph at lines 303--304
 
  []
 
 [4
 
  <./inst_map.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 294--295
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 296--297
-
- []
-
-[5 <./sampleplot.png>] <Thesis_doc-007.pdf, id=65, 650.43pt x 650.43pt>
-File: Thesis_doc-007.pdf Graphic file (type pdf)
-
-<use Thesis_doc-007.pdf>
-Package pdftex.def Info: Thesis_doc-007.pdf used on input line 302.
-(pdftex.def)             Requested size: 400.38872pt x 400.39418pt.
-
 Underfull \hbox (badness 10000) in paragraph at lines 310--311
 
  []
 
-[6 <./species.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 315--317
+[5 <./Thesis_doc-sampleplot.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 312--313
 
  []
 
-[7 <./Thesis_doc-007.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 318--319
+[6 <./Thesis_doc-species.pdf>]
+<Thesis_doc-timeline.pdf, id=102, 433.62pt x 433.62pt>
+File: Thesis_doc-timeline.pdf Graphic file (type pdf)
+
+<use Thesis_doc-timeline.pdf>
+Package pdftex.def Info: Thesis_doc-timeline.pdf used on input line 318.
+(pdftex.def)             Requested size: 400.38872pt x 400.41072pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 325--326
+
+ []
+
+[7 <./Thesis_doc-timeline.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 330--332
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 322--325
+Underfull \hbox (badness 10000) in paragraph at lines 333--334
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 326--327
+Underfull \hbox (badness 10000) in paragraph at lines 337--340
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 328--329
+Underfull \hbox (badness 10000) in paragraph at lines 341--342
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 330--331
+Underfull \hbox (badness 10000) in paragraph at lines 343--344
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 332--333
+Underfull \hbox (badness 10000) in paragraph at lines 345--346
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--335
+Underfull \hbox (badness 10000) in paragraph at lines 347--348
 
  []
 
-[9] [10] [11]
-Overfull \hbox (44.58142pt too wide) in paragraph at lines 367--395
- [] 
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 349--350
+
  []
 
-[12] [13]
-LaTeX Font Info:    Try loading font information for TS1+aer on input line 420.
+[10] [11] [12] [13] [14] [15] [16]
+LaTeX Font Info:    Try loading font information for TS1+aer on input line 487.
 
- (c:/PROGRA~1/R/R-33~1.0/share/texmf/tex/latex/ts1aer.fd
+
+(c:/PROGRA~1/R/R-33~1.0/share/texmf/tex/latex/ts1aer.fd
 File: ts1aer.fd 
 )
 LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <10> not available
-(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 420.
+(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 487.
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.454 ...u=.1,.9$. This will estimate different b_
+l.521 ...u$=.1,.9. This will estimate different b_
                                                   ${\tau}$ for each specifie...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1250,7 +1239,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing { inserted.
 <to be read again> 
                    $
-l.454 ...=.1,.9$. This will estimate different b_$
+l.521 ...$=.1,.9. This will estimate different b_$
                                                   {\tau}$ for each specified...
 A left brace was mandatory here, so I've put one in.
 You might want to delete and/or insert some corrections
@@ -1260,7 +1249,7 @@ so that I will find a matching right brace soon.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.454 ...=.1,.9$. This will estimate different b_$
+l.521 ...$=.1,.9. This will estimate different b_$
                                                   {\tau}$ for each specified...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1271,13 +1260,13 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.454 ...9$. This will estimate different b_${\tau
+l.521 ....9. This will estimate different b_${\tau
                                                   }$ for each specified quan...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.454 ...$. This will estimate different b_${\tau}
+l.521 ...9. This will estimate different b_${\tau}
                                                   $ for each specified quant...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1286,19 +1275,19 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 454--455
+Underfull \hbox (badness 10000) in paragraph at lines 521--522
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 456--457
+Underfull \hbox (badness 10000) in paragraph at lines 523--524
 
  []
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.464 \end{small}
+l.531 \end{small}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1309,7 +1298,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.464 \end{small}
+l.531 \end{small}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1317,23 +1306,23 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-[14] (./Thesis_doc.equ)
+[17] (./Thesis_doc.equ)
 \tf@equ=\write10
 \openout10 = `Thesis_doc.equ'.
 
- [15] (./Thesis_doc.aux)
+ [18] (./Thesis_doc.aux)
 Package logreq Info: Writing requests to 'Thesis_doc.run.xml'.
 \openout1 = `Thesis_doc.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18629 strings out of 493013
- 331714 string characters out of 6136993
- 552025 words of memory out of 5000000
- 21882 multiletter control sequences out of 15000+600000
- 53943 words of font info for 106 fonts, out of 8000000 for 9000
+ 18652 strings out of 493013
+ 332260 string characters out of 6136993
+ 550072 words of memory out of 5000000
+ 21901 multiletter control sequences out of 15000+600000
+ 54434 words of font info for 108 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,8n,46p,10406b,1581s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 45i,8n,46p,10406b,1581s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2016
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2016/texmf-di
@@ -1344,14 +1333,15 @@ onts/cm/cmmi7.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 r10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c
 :/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2
 016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2016/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2016/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmtt10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/cm-s
-uper/sfrm1000.pfb>
-Output written on Thesis_doc.pdf (24 pages, 996055 bytes).
+ist/fonts/type1/public/amsfonts/cm/cmsltt10.pfb><c:/texlive/2016/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmti10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmtt10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sf
+rm1000.pfb>
+Output written on Thesis_doc.pdf (27 pages, 1411397 bytes).
 PDF statistics:
- 159 PDF objects out of 1000 (max. 8388607)
- 106 compressed objects within 2 object streams
+ 206 PDF objects out of 1000 (max. 8388607)
+ 126 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 34 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 129 words of extra memory for PDF output out of 10000 (max. 10000000)
 

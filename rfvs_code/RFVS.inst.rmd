@@ -1,0 +1,62 @@
+---
+title: "Instructions for Setting up rFVS"
+author: "Colin Kirkmire"
+date: "March 21, 2016"
+output: html_document
+---
+
+
+
+All directions derived from the rFVS wiki document linked below:
+
+https://sourceforge.net/p/open-fvs/wiki/rFVS/#getting-started
+
+#Step 1: Install Latest Version of R using installr package#
+```{r}
+# installing/loading the package:
+#if(!require(installr)) {
+#install.packages("installr"); require(installr)} #load / install+load installr
+ 
+# using the package:
+#updateR() # this will start the updating process of your R installation.  It will check for newer versions, and if one is available, will guide you through the decisions you need to make.
+```
+
+#Step 2: Install Rtools#
+Rtools (package) provides a single set of tools that includes everything you need to build FVS on Windows. 
+
+The link below provides instructions for installing Rtools:
+https://github.com/stan-dev/rstan/wiki/Install-Rtools-for-Windows
+
+This is the link for the actual download:
+https://cran.r-project.org/bin/windows/Rtools/
+
+Download Rtools version that is compatible with your version of R (most recent reccomended).
+
+To test for successful installation of RTools you will need to open a Command Window. For example, on Windows this is done by clicking Start > (All) Programs > Accessories > Command Prompt.
+
+
+
+
+#Step 3:Install a subversion client#
+
+This is neccesary to download the "open-fvs" open-source Subversion (SVN) file repository.
+
+Here is a link to download (any SVN client will do):
+https://tortoisesvn.net/
+
+#Step 4: Build the FVS executables#
+
+https://sourceforge.net/p/open-fvs/wiki/BuildProcess_Rtools/
+
+#Step 5: Download rFVS files#
+
+You must match the machine architecture: run 32-bit R if you have 32-bit FVS and 64-bit R if you have built FVS as 64-bit.  32 bit seems to be the reccomended combination.  Change between 32 nd 64 bit through tools->global options->rversion.
+
+Download the rFVS file here (21 files total) using you SVN client:
+https://sourceforge.net/p/open-fvs/code/HEAD/tree/rFVS/
+
+
+
+
+
+

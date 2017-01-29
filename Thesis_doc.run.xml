@@ -83,7 +83,8 @@
       <file>Thesis_doc-blx.bib</file>
     </requires>
     <requires type="editable">
-      <file>STCV.bib</file>
+      <file>library.bib</file>
+      <file>other.bib</file>
     </requires>
     <requires type="static">
       <file>biblatex.bst</file>

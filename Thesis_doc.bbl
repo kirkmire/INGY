@@ -89,5 +89,24 @@
     \field{journaltitle}{Soil Science Society of America Journal}
     \field{year}{1996}
   \endentry
+
+  \entry{googleearthengine}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=G}{%
+         family={{Google Earth Engine Team}},
+         familyi={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{G1}
+    \strng{fullhash}{G1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{howpublished}{\url{https://earthengine.google.com}}
+    \field{title}{Google Earth Engine: A planetary-scale geo-spatial analysis
+  platform}
+    \field{month}{12}
+  \endentry
 \endsortlist
 \endinput

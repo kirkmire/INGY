@@ -93,10 +93,15 @@ aic.list.SQ<-c(aic.list.SQ,AIC(qr.asp)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.asp$y))
 
 #Sea Interact.
-qr.sea<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+annual.gr4$aspect*
-             annual.gr4$elevation*
-             annual.gr4$slopePercent,
-           tau=c(.5),data=annual.gr4)
+qr.sea<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+
+             log(elevation+1)*
+             slopePercent*(cos_rad_asp*sin_rad_asp)+
+             (elevation^2)*(slopePercent*
+                                         (cos_rad_asp+
+                                         sin_rad_asp))+
+             elevation+(elevation^2),
+            tau=c(.5), data=annual.gr4)
+
 summary(qr.sea)
 aic.list.SQ<-c(aic.list.SQ,AIC(qr.sea)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.sea$y))

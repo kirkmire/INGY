@@ -53,11 +53,28 @@ latex(final.aic, file="")            # If you want all the data
 #the effects at varouis quantiles differ considerably fromthe OLS coefficients
 #even in terms of the CI 
 library(quantreg)
-qr.SI.5<-  rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.5),data=annual.gr4)
-qr.SI.1 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.1),data=annual.gr4)
-qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.9),data=annual.gr4)
+qr.SI.5<-  rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
+                log(elevation+1)*
+                slopePercent*(cos_rad_asp*sin_rad_asp)+
+                (elevation^2)*(slopePercent*(cos_rad_asp+sin_rad_asp))+
+                elevation+(elevation^2),tau=c(.5), data=annual.gr4)
 
-fit1 <- summary(rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(1:9/10),data=annual.gr4))
+qr.SI.1 <-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
+               log(elevation+1)*
+               slopePercent*(cos_rad_asp*sin_rad_asp)+
+               (elevation^2)*(slopePercent*(cos_rad_asp+sin_rad_asp))+
+               elevation+(elevation^2),tau=c(.1),data=annual.gr4)
+
+qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
+                log(elevation+1)*
+                slopePercent*(cos_rad_asp*sin_rad_asp)+
+                (elevation^2)*(slopePercent*(cos_rad_asp+sin_rad_asp))+
+                elevation+(elevation^2),tau=c(.9),data=annual.gr4)
+
+fit1 <- summary(rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+  log(elevation+1)*
+                     slopePercent*(cos_rad_asp*sin_rad_asp)+
+                     (elevation^2)*(slopePercent*(cos_rad_asp+sin_rad_asp))+
+                     elevation+(elevation^2),tau=c(1:9/10),data=annual.gr4))
 plot(fit1)
 
 qr.SI.5$coefficients

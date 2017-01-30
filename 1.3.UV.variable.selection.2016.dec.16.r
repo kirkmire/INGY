@@ -225,6 +225,8 @@ init_tree_shrub_ht_diff<-function(Installation,Plot,STP,Year,height){
   }
 
 annual.gr4$treeminus<-0
+annual.gr4$Installation<-as.character(annual.gr4$Installation)
+veg_record$Installation<-as.character(veg_record$Installation)
 
 for(i in 1:nrow(annual.gr4)){
   annual.gr4$treeminus[i]<-init_tree_shrub_ht_diff(
@@ -278,7 +280,7 @@ init_tree_shrub_ht_diff_trans<-function(Installation,Plot,STP,Year,height){
 }
 
 annual.gr4$treeminus_trans<-0
-
+agg.tran.data.max1$Installation<-as.character(agg.tran.data.max1$Installation)
 
 for(i in 1:nrow(annual.gr4)){
   annual.gr4$treeminus_trans[i]<-init_tree_shrub_ht_diff_trans(

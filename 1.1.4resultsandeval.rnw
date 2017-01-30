@@ -61,4 +61,22 @@ plot(cl.ht.gam,residuals=T,se=T,pch=".")
 \caption{Timeline of Installation Measurements and Treatments}
 \end{figure}
 
-
+\begin{table}[hptb]
+\caption{Engel's Law\label{fit1}}
+\begin{center}
+\begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|} \hline
+\multicolumn{1}{|l||}{Quantiles}&\multicolumn{1}{c|}{(Intercept)}&\multicolumn{1}{c|}{srHeight_Total}&\multicolumn{1}{c|}{CrownLength}&\multicolumn{1}{c|}{treeminus}&\multicolumn{1}{c|}{TPA.OS}&\multicolumn{1}{c|}{slopePercent}&\multicolumn{1}{c|}{aspect}&\multicolumn{1}{c|}{elevation}&\multicolumn{1}{c|}{slopePercent:aspect}&\multicolumn{1}{c|}{slopePercent:elevation}&\multicolumn{1}{c|}{aspect:elevation}&\multicolumn{1}{c|}{slopePercent:aspect:elevation}\\ \hline
+0.1&$\underset{(~~0.120)}{~-0.270}$&$\underset{(~~0.032)}{~~0.049}$&$\underset{(~~0.007)}{~~0.074}$&$\underset{(~~0.008)}{~-0.022}$&$\underset{(~~0.000)}{~-0.003}$&$\underset{(~~0.011)}{~~0.027}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
+0.2&$\underset{(~~0.085)}{~-0.261}$&$\underset{(~~0.022)}{~~0.107}$&$\underset{(~~0.005)}{~~0.077}$&$\underset{(~~0.005)}{~-0.024}$&$\underset{(~~0.000)}{~-0.003}$&$\underset{(~~0.008)}{~~0.025}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
+0.3&$\underset{(~~0.081)}{~-0.310}$&$\underset{(~~0.018)}{~~0.111}$&$\underset{(~~0.004)}{~~0.076}$&$\underset{(~~0.004)}{~-0.021}$&$\underset{(~~0.000)}{~-0.004}$&$\underset{(~~0.008)}{~~0.039}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
+0.4&$\underset{(~~0.082)}{~-0.279}$&$\underset{(~~0.021)}{~~0.107}$&$\underset{(~~0.004)}{~~0.085}$&$\underset{(~~0.005)}{~-0.026}$&$\underset{(~~0.000)}{~-0.005}$&$\underset{(~~0.008)}{~~0.040}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
+0.5&$\underset{(~~0.097)}{~-0.231}$&$\underset{(~~0.021)}{~~0.122}$&$\underset{(~~0.005)}{~~0.096}$&$\underset{(~~0.005)}{~-0.035}$&$\underset{(~~0.000)}{~-0.005}$&$\underset{(~~0.009)}{~~0.040}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
+0.6&$\underset{(~~0.101)}{~-0.191}$&$\underset{(~~0.023)}{~~0.121}$&$\underset{(~~0.006)}{~~0.110}$&$\underset{(~~0.005)}{~-0.036}$&$\underset{(~~0.000)}{~-0.006}$&$\underset{(~~0.009)}{~~0.036}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
+0.7&$\underset{(~~0.098)}{~-0.051}$&$\underset{(~~0.024)}{~~0.116}$&$\underset{(~~0.006)}{~~0.117}$&$\underset{(~~0.006)}{~-0.038}$&$\underset{(~~0.000)}{~-0.006}$&$\underset{(~~0.008)}{~~0.038}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
+0.8&$\underset{(~~0.146)}{~-0.004}$&$\underset{(~~0.033)}{~~0.096}$&$\underset{(~~0.008)}{~~0.125}$&$\underset{(~~0.007)}{~-0.036}$&$\underset{(~~0.000)}{~-0.007}$&$\underset{(~~0.011)}{~~0.033}$&$\underset{(~~0.001)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
+0.9&$\underset{(~~0.206)}{~~0.187}$&$\underset{(~~0.053)}{~~0.108}$&$\underset{(~~0.011)}{~~0.129}$&$\underset{(~~0.012)}{~-0.040}$&$\underset{(~~0.000)}{~-0.009}$&$\underset{(~~0.022)}{~~0.050}$&$\underset{(~~0.001)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
+\hline
+\end{tabular}
+\vspace{3mm}
+\end{center}
+\end{table}

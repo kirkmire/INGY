@@ -60,27 +60,51 @@ qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent
 fit1 <- summary(rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(1:9/10),data=annual.gr4))
 plot(fit1)
 
+qr.SI.5$coefficients
+
+latex(fit1, caption="Engel's Law", file="")
 
 
-valid.func<-function(sqht, stcw, stran, tpaos, si, annualht){
+valid.func<-function(sqht, stcw, stran, tpaos, slope, asp,
+                     elev, annualht){
   #sqht<-1
   #stcw<-4
   #s.tran<-40
   #tpa.os<-30
   #si<-60
- # annual.ht<-15
+  #annual.ht<-15
   
   qr.pred.nine <-qr.SI.9$coefficients[1]+qr.SI.9$coefficients[2]*sqht+
              qr.SI.9$coefficients[3]*stcw+qr.SI.9$coefficients[4]*stran+
-             qr.SI.9$coefficients[5]*tpaos+qr.SI.9$coefficients[6]*si
+             qr.SI.9$coefficients[5]*tpaos+
+             qr.SI.9$coefficients[6]*slope+
+             qr.SI.9$coefficients[7]*asp+
+             qr.SI.9$coefficients[8]*elev+
+             qr.SI.9$coefficients[9]*slope*asp+
+             qr.SI.9$coefficients[10]*slope*elev+
+             qr.SI.9$coefficients[11]*asp*elev+
+             qr.SI.9$coefficients[12]*slope*asp*elev
+            
   
   qr.pred.five <-qr.SI.5$coefficients[1]+qr.SI.5$coefficients[2]*sqht+
-                qr.SI.5$coefficients[3]*stcw+qr.SI.5$coefficients[4]*stran+
-                qr.SI.5$coefficients[5]*tpaos+qr.SI.5$coefficients[6]*si
+    qr.SI.5$coefficients[3]*stcw+qr.SI.5$coefficients[4]*stran+
+    qr.SI.5$coefficients[5]*tpaos+qr.SI.5$coefficients[6]*slope+
+    qr.SI.5$coefficients[7]*asp+
+    qr.SI.5$coefficients[8]*elev+
+    qr.SI.5$coefficients[9]*slope*asp+
+    qr.SI.5$coefficients[10]*slope*elev+
+    qr.SI.5$coefficients[11]*asp*elev+
+    qr.SI.5$coefficients[12]*slope*asp*elev
   
   qr.pred.one <-qr.SI.1$coefficients[1]+qr.SI.1$coefficients[2]*sqht+
-                qr.SI.1$coefficients[3]*stcw+qr.SI.1$coefficients[4]*stran+
-                qr.SI.1$coefficients[5]*tpaos+qr.SI.1$coefficients[6]*si
+    qr.SI.1$coefficients[3]*stcw+qr.SI.1$coefficients[4]*stran+
+    qr.SI.1$coefficients[5]*tpaos+qr.SI.1$coefficients[6]*slope+
+    qr.SI.1$coefficients[7]*asp+
+    qr.SI.1$coefficients[8]*elev+
+    qr.SI.1$coefficients[9]*slope*asp+
+    qr.SI.1$coefficients[10]*slope*elev+
+    qr.SI.1$coefficients[11]*asp*elev+
+    qr.SI.1$coefficients[12]*slope*asp*elev
   
  ifelse(annualht>qr.pred.nine, 
        #yes
@@ -109,7 +133,9 @@ for(i in 1:nrow(annual.gr6)){
     annual.gr6$CrownLength[i],
     annual.gr6$treeminus[i],
     annual.gr6$TPA.OS[i],
-    annual.gr6$slopePercent*aspect*elevation[i],
+    annual.gr6$slopePercent[i],
+    annual.gr6$aspect[i],
+    annual.gr6$elevation[i],
     annual.gr6$ht_annual[i])
   }
 
@@ -174,7 +200,8 @@ qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent
 
 
 
-valid.func10<-function(sqht, stcw, stran, tpaos, si, annualht){
+valid.func10<-function(sqht, stcw, stran, tpaos, slope, asp,
+                       elev, annualht){
   #sqht<-1
   #stcw<-4
   #s.tran<-40
@@ -184,41 +211,105 @@ valid.func10<-function(sqht, stcw, stran, tpaos, si, annualht){
   
   qr.pred.one <-qr.SI.1$coefficients[1]+qr.SI.1$coefficients[2]*sqht+
     qr.SI.1$coefficients[3]*stcw+qr.SI.1$coefficients[4]*stran+
-    qr.SI.1$coefficients[5]*tpaos+qr.SI.1$coefficients[6]*si
+    qr.SI.1$coefficients[5]*tpaos+
+    qr.SI.1$coefficients[6]*slope+
+    qr.SI.1$coefficients[7]*asp+
+    qr.SI.1$coefficients[8]*elev+
+    qr.SI.1$coefficients[9]*slope*asp+
+    qr.SI.1$coefficients[10]*slope*elev+
+    qr.SI.1$coefficients[11]*asp*elev+
+    qr.SI.1$coefficients[12]*slope*asp*elev
   
   qr.pred.two <-qr.SI.2$coefficients[1]+qr.SI.2$coefficients[2]*sqht+
     qr.SI.2$coefficients[3]*stcw+qr.SI.2$coefficients[4]*stran+
-    qr.SI.2$coefficients[5]*tpaos+qr.SI.2$coefficients[6]*si
+    qr.SI.2$coefficients[5]*tpaos+
+    qr.SI.2$coefficients[6]*slope+
+    qr.SI.2$coefficients[7]*asp+
+    qr.SI.2$coefficients[8]*elev+
+    qr.SI.2$coefficients[9]*slope*asp+
+    qr.SI.2$coefficients[10]*slope*elev+
+    qr.SI.2$coefficients[11]*asp*elev+
+    qr.SI.2$coefficients[12]*slope*asp*elev
   
   qr.pred.three <-qr.SI.3$coefficients[1]+qr.SI.3$coefficients[2]*sqht+
     qr.SI.3$coefficients[3]*stcw+qr.SI.3$coefficients[4]*stran+
-    qr.SI.3$coefficients[5]*tpaos+qr.SI.3$coefficients[6]*si
+    qr.SI.3$coefficients[5]*tpaos+
+    qr.SI.3$coefficients[6]*slope+
+    qr.SI.3$coefficients[7]*asp+
+    qr.SI.3$coefficients[8]*elev+
+    qr.SI.3$coefficients[9]*slope*asp+
+    qr.SI.3$coefficients[10]*slope*elev+
+    qr.SI.3$coefficients[11]*asp*elev+
+    qr.SI.3$coefficients[12]*slope*asp*elev
+  
   
   qr.pred.four <-qr.SI.4$coefficients[1]+qr.SI.4$coefficients[2]*sqht+
     qr.SI.4$coefficients[3]*stcw+qr.SI.4$coefficients[4]*stran+
-    qr.SI.4$coefficients[5]*tpaos+qr.SI.4$coefficients[6]*si
+    qr.SI.4$coefficients[5]*tpaos+
+    qr.SI.4$coefficients[6]*slope+
+    qr.SI.4$coefficients[7]*asp+
+    qr.SI.4$coefficients[8]*elev+
+    qr.SI.4$coefficients[9]*slope*asp+
+    qr.SI.4$coefficients[10]*slope*elev+
+    qr.SI.4$coefficients[11]*asp*elev+
+    qr.SI.4$coefficients[12]*slope*asp*elev
   
   qr.pred.five <-qr.SI.5$coefficients[1]+qr.SI.5$coefficients[2]*sqht+
     qr.SI.5$coefficients[3]*stcw+qr.SI.5$coefficients[4]*stran+
-    qr.SI.5$coefficients[5]*tpaos+qr.SI.5$coefficients[6]*si
+    qr.SI.5$coefficients[5]*tpaos+
+    qr.SI.5$coefficients[6]*slope+
+    qr.SI.5$coefficients[7]*asp+
+    qr.SI.5$coefficients[8]*elev+
+    qr.SI.5$coefficients[9]*slope*asp+
+    qr.SI.5$coefficients[10]*slope*elev+
+    qr.SI.5$coefficients[11]*asp*elev+
+    qr.SI.5$coefficients[12]*slope*asp*elev
   
   qr.pred.six <-qr.SI.6$coefficients[1]+qr.SI.6$coefficients[2]*sqht+
     qr.SI.6$coefficients[3]*stcw+qr.SI.6$coefficients[4]*stran+
-    qr.SI.6$coefficients[5]*tpaos+qr.SI.6$coefficients[6]*si
+    qr.SI.6$coefficients[5]*tpaos+
+    qr.SI.6$coefficients[6]*slope+
+    qr.SI.6$coefficients[7]*asp+
+    qr.SI.6$coefficients[8]*elev+
+    qr.SI.6$coefficients[9]*slope*asp+
+    qr.SI.6$coefficients[10]*slope*elev+
+    qr.SI.6$coefficients[11]*asp*elev+
+    qr.SI.6$coefficients[12]*slope*asp*elev
   
   qr.pred.seven <-qr.SI.7$coefficients[1]+qr.SI.7$coefficients[2]*sqht+
     qr.SI.7$coefficients[3]*stcw+qr.SI.7$coefficients[4]*stran+
-    qr.SI.7$coefficients[5]*tpaos+qr.SI.7$coefficients[6]*si
-  
+    qr.SI.7$coefficients[5]*tpaos+
+    qr.SI.7$coefficients[6]*slope+
+    qr.SI.7$coefficients[7]*asp+
+    qr.SI.7$coefficients[8]*elev+
+    qr.SI.7$coefficients[9]*slope*asp+
+    qr.SI.7$coefficients[10]*slope*elev+
+    qr.SI.7$coefficients[11]*asp*elev+
+    qr.SI.7$coefficients[12]*slope*asp*elev
   
   qr.pred.eight <-qr.SI.8$coefficients[1]+qr.SI.8$coefficients[2]*sqht+
     qr.SI.8$coefficients[3]*stcw+qr.SI.8$coefficients[4]*stran+
-    qr.SI.8$coefficients[5]*tpaos+qr.SI.8$coefficients[6]*si
-  
+    qr.SI.8$coefficients[5]*tpaos+
+    qr.SI.8$coefficients[6]*slope+
+    qr.SI.8$coefficients[7]*asp+
+    qr.SI.8$coefficients[8]*elev+
+    qr.SI.8$coefficients[9]*slope*asp+
+    qr.SI.8$coefficients[10]*slope*elev+
+    qr.SI.8$coefficients[11]*asp*elev+
+    qr.SI.8$coefficients[12]*slope*asp*elev
+    
   qr.pred.nine <-qr.SI.9$coefficients[1]+qr.SI.9$coefficients[2]*sqht+
     qr.SI.9$coefficients[3]*stcw+qr.SI.9$coefficients[4]*stran+
-    qr.SI.9$coefficients[5]*tpaos+qr.SI.9$coefficients[6]*si
-  
+    qr.SI.9$coefficients[5]*tpaos+
+    qr.SI.9$coefficients[6]*slope+
+    qr.SI.9$coefficients[7]*asp+
+    qr.SI.9$coefficients[8]*elev+
+    qr.SI.9$coefficients[9]*slope*asp+
+    qr.SI.9$coefficients[10]*slope*elev+
+    qr.SI.9$coefficients[11]*asp*elev+
+    qr.SI.9$coefficients[12]*slope*asp*elev
+    
+
   ifelse(annualht>qr.pred.nine, 
          #yes
          cat<-"9", 
@@ -272,7 +363,9 @@ for(i in 1:nrow(annual.gr6)){
     annual.gr6$CrownLength[i],
     annual.gr6$treeminus[i],
     annual.gr6$TPA.OS[i],
-    annual.gr6$slopePercent*aspect*elevation[i],
+    annual.gr6$slopePercent[i],
+    annual.gr6$aspect[i],
+    annual.gr6$elevation[i],
     annual.gr6$ht_annual[i])
 }
 
@@ -286,7 +379,7 @@ sum(sorted.totals$Freq)
 barchart(sorted.totals$Freq~sorted.totals$annual.gr6.response.cat, names = "Quantile Bin",
          xlab = "Bin", ylab = "Frequency",type=density,
          main = "Witheld Data Height Growth Response 
-        sorted by Quantile Category", ylim=c(0,.3))
+        sorted by Quantile Category", ylim=c(0,.2))
 
 ###Higher resolution of lessthan 10in DBH
 

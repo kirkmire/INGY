@@ -199,8 +199,8 @@ There were two sampling methods used to measure vegetative competition. The firs
 
 \subsection{Statistical Approach}
 
-This research seeks to address the question of how to predict the response distribution of small Ponderosa Pine tree height growth increments.  To achieve this ends, a nonparametric statistical regression technique known as quantile regression will be utilized to fit growth curves over select quantiles of the response distribution heights by a set of ecologically and statistically significant predictors. Thus we will be able to predict the heights of the "fastest", "median" and "slowest" growing trees.
-This research has widespread applications in the management of Ponderosa Pine stands since the fastest growing trees are
+This research seeks to address the question of how to predict the response distribution of small ponderosa pine tree height growth increments.  To achieve this ends, a nonparametric statistical regression technique known as quantile regression will be utilized to fit growth curves over select quantiles of the response distribution heights by a set of ecologically and statistically significant predictors. Thus we will be able to predict the heights of the "fastest", "median" and "slowest" growing trees.
+This research has widespread applications in the management of ponderosa pine stands since the fastest growing trees are
 presumably those that progress into the canopy and those that may be retained with preference in the context of a thinning.\\[2pt]
 
 The model is predictive in the sense that it will attempt to predict several quantiles height growth increments. For example, the model will not be able to determine whether specific trees will be projected to be above or below the .9 quantile line but rather predict what the .9 quantile height itself is for a given set of predictors. If enough information was known about these trees to predict which would be the fastest growing trees, it would negate the utility of quantile regression.\\[2pt]
@@ -230,10 +230,10 @@ Crown competition factor (CCF) was obtained by calculating crown width as an ave
 Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots.
 
 \textbf{Site Quality:}
-Slope, elevation and aspect were calculated using Google Earth Engine (\cite{googleearthengine}) for each plot's coordinates. Slope is in units percentage and elevation in meters. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180).
+Slope, elevation and aspect were calculated using Google Earth Engine (\cite{googleearthengine}) for each plot's GPS recorded decimal degree coordinates. Slope is in units percentage and elevation in meters. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180) and $\sin$((aspect*$\pi$)/180). Interacting effects of elevation, slope and aspect were considered according to a linear model proposed by Salas and Stage(\cite{Stage2007a}).  This model allows for the aspect effects to involve slope and varying elevation.
 
 
-Site index was included from STCV records of each installation's initiation. Site index species was Ponderosa Pine for the installations included in analysis although many other species were used at other installations.
+Site index was included from STCV records of each installation's initiation. An open grown dominate site tree was identified at the intiation of the site and site index calculted from ?curves. Site index species was ponderosa pine for the installations included in analysis although many other species were used at other installations. 
 
 
 

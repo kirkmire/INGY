@@ -3,11 +3,7 @@
 
 \newpage
 \subsection{Variable Selection Results and Model Evaluation}
-<<echo=F, results=hide>>=
-library(Hmisc)
 
-latex(final.aic, file="")  
-@
 
 \begin{table}[h]
 \small

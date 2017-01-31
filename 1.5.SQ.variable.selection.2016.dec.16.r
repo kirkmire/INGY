@@ -66,41 +66,47 @@ plot(gam.aspect,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 #SI Quantreg (Carrying forward CW and shrub transect, TPA)
 library(quantreg)
 
-qr.SI<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
+qr.SI<-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
 summary(qr.SI)
 aic.list.SQ<-AIC(qr.SI)[1]
 nlist.SQ<-length(qr.SI$y)
 
 #Slope Quantreg (Carrying forward CW and shrub transect, TPA)
 
-qr.slope<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+slopePercent,tau=c(.5),data=annual.gr4)
+qr.slope<-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent,tau=c(.5),data=annual.gr4)
 summary(qr.slope)
 aic.list.SQ<-c(aic.list.SQ,AIC(qr.slope)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.slope$y))
 
 #Elev Quantreg (Carrying forward CW and shrub transect, TPA)
 
-qr.elev<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+elevation,tau=c(.5),data=annual.gr4)
+qr.elev<-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+elevation,tau=c(.5),data=annual.gr4)
 summary(qr.elev)
 aic.list.SQ<-c(aic.list.SQ,AIC(qr.elev)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.elev$y))
 
 #Asp Quantreg (Carrying forward CW and shrub transect, TPA)
 
-qr.asp<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+cos_rad_asp,tau=c(.5),data=annual.gr4)
+qr.asp<-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+cos_rad_asp,tau=c(.5),data=annual.gr4)
 summary(qr.asp)
 aic.list.SQ<-c(aic.list.SQ,AIC(qr.asp)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.asp$y))
 
 #Sea Interact.
-qr.sea<-rq(ht_annual~srHeight_Total+CrownLength+diff.G.1m+TPA.OS+
-             log(elevation+1)*
-             slopePercent*(cos_rad_asp*sin_rad_asp)+
-             (elevation^2)*(slopePercent*
-                                         (cos_rad_asp+
-                                         sin_rad_asp))+
-             elevation+(elevation^2),
-            tau=c(.5), data=annual.gr4)
+qr.sea<-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
+             slopePercent + # goes with coefficient b1
+             slopePercent:cos_rad_asp + #with b2
+             slopePercent:sin_rad_asp + #with b3
+             slopePercent:log(elevation+1) + #b4
+             slopePercent:log(elevation+1):cos_rad_asp + #b5
+             slopePercent:log(elevation+1):sin_rad_asp + #b6
+             slopePercent:I(elevation^2) +   #b7
+             slopePercent:I(elevation^2):cos_rad_asp +   #b8
+             slopePercent:I(elevation^2):sin_rad_asp +   #b9
+             elevation + # b10
+             I(elevation^2) , #b11
+           tau=c(.5) ,  data=annual.gr4)
+
 
 summary(qr.sea)
 aic.list.SQ<-c(aic.list.SQ,AIC(qr.sea)[1])

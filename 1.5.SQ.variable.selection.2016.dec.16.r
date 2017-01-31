@@ -63,6 +63,8 @@ plot(gam.aspect,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 
 
+
+
 #SI Quantreg (Carrying forward CW and shrub transect, TPA)
 library(quantreg)
 

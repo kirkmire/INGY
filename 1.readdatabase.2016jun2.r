@@ -55,6 +55,7 @@ sppnontr <- sqlFetch(path,"Lookup_Species_NonTree")
 #timeline data
 timeline <- sqlFetch(path,"Timeline")
 
+timelineJan<-timeline
 
 #Forb/Shrub reference data
 forbshrub <- sqlFetch(path,"Lookup_Vegetation_Form_ckedits")

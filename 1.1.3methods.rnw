@@ -39,12 +39,13 @@ tmp <- PlotOnStaticMap(basemap)
                       # lat=locs0v2$Lat,
                        #lon=locs0v2$Long)
 #For text labels
-tmp <- PlotOnStaticMap(basemap,cex=.03,col="black",add=T,
-lat=locs0v2$Lat,
-lon=locs0v2$Long,
-FUN=text,
-labels=locs0v2$Installation)
-dev.off()
+ tmp <- PlotOnStaticMap(basemap,cex=.03,col="black",add=T,
+                        FUN=points)
+# lat=locs0v2$Lat,
+# lon=locs0v2$Long,
+# FUN=text,
+# labels=locs0v2$Installation)
+#dev.off()
 @
 
 \begin{figure}[ht]
@@ -156,19 +157,20 @@ Figure 3 shows the temporal scope of the data collection as well as herbicide ap
 library(lattice)
 
 #w/ meast#########################
-timeline<-timeline[timeline$Installation %in% drp60,]
+timelineJan<-timelineJan[timelineJan$Installation %in% drp60,]
+
 
 xyplot(Installation ~ Year_Measurement,
        xlim=c(1997,2016),
-       data=timeline,
-       htyr=timeline$Assoc_OS,
-       trtyr=timeline$Trt,  
+       data=timelineJan,
+       htyr=timelineJan$Assoc_OS,
+       trtyr=timelineJan$Trt,  
      scales=list(x=list(at=1998:2015, cex=1.0,rot=45)),
         xlab=list(label="Year",cex=1.5),
         ylab=list(label="Installation",cex=1.5),
            main=list(label="Installation History", cex=1.5),
            panel=function(x,y,htyr,trtyr,...){
-           panel.abline(h = timeline$Installation, v = c(1998:2015), lty = "dotted", col = "light grey")
+           panel.abline(h = timelineJan$Installation, v = c(1998:2015), lty = "dotted", col = "light grey")
          for (i in as.numeric(unique(y))){
            subx <- x[as.numeric(y)==i]
            subOS <- htyr[as.numeric(y)==i]+.15
@@ -180,10 +182,13 @@ xyplot(Installation ~ Year_Measurement,
            }})
 
 
+
+dev.off()
 @
 \end{center}
-\caption{Timeline of Installation Measurements and Treatments}
+\caption{Timeline of Installation Measurements and Treatments.}
 \end{figure}
+\text{Squares are years of understory and small tree measurements. Green and red triagles represent years of overstory measurements and herbacide treatment, respectively. Note that year the initial measurement periods selected such that they follow herbicide treatments.}
 
 
 

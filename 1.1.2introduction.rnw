@@ -52,24 +52,24 @@ Composition of forest understory species are controlled by overstory trees which
 
 
 
-\begin{figure}
-\begin{center}
-<<label=speccomp,fig=TRUE,width=8,height=8,echo=FALSE>>=
-
-#! 2. installations to drop
-
-
-spec.freq.table<-spec.freq.table[! spec.freq.table$Installation %in% drp,]
-
-barchart(Freq~Installation, data=spec.freq.table,groups=Species, stack=T,
-         key = simpleKey(text = levels(spec.freq.table$Species), 
-                         corner = c(1, 1)), 
-         ylab="Number of Small Tagged 
-         Trees at Initiation",
-         par.settings=list(superpose.polygon=list(col=rainbow(12))))
-@
-\end{center}
-\caption{Species Composition of Small Tagged Trees in Installations with more than 60 Ponderosa Pine}
-\end{figure}
+%' \begin{figure}
+%' \begin{center}
+%' <<label=speccomp,fig=TRUE,width=8,height=8,echo=FALSE>>=
+%' 
+%' #! 2. installations to drop
+%' 
+%' 
+%' spec.freq.table<-spec.freq.table[! spec.freq.table$Installation %in% drp,]
+%' 
+%' barchart(Freq~Installation, data=spec.freq.table,groups=Species, stack=T,
+%'          key = simpleKey(text = levels(spec.freq.table$Species), 
+%'                          corner = c(1, 1)), 
+%'          ylab="Number of Small Tagged 
+%'          Trees at Initiation",
+%'          par.settings=list(superpose.polygon=list(col=rainbow(12))))
+%' @
+%' \end{center}
+%' \caption{Species Composition of Small Tagged Trees in Installations with more than 60 Ponderosa Pine}
+%' \end{figure}
 
 

@@ -17,7 +17,7 @@ source(paste(getwd(),'/1.6.model.evaluation.2016.dec.16.r',sep=""))
 \usepackage{times}
 \usepackage{array}
 \usepackage{setspace}
-\usepackage{biblatex}
+\usepackage[style=authoryear]{biblatex}
 \usepackage{filecontents}
 \bibliography{library.bib,other.bib}
 \usepackage{tocloft}

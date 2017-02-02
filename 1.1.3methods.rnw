@@ -57,9 +57,79 @@ tmp <- PlotOnStaticMap(basemap)
 \end{figure}
 
 
+
+Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or harvested with one of the aforementioned variable retention harvest systems: shelterwood, seed tree and heavy thinning. \\[2pt]
+
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width=160mm]{instLayout.jpg}
+    \caption{Illustration of a STCV installation and herbicide assignments}
+    \label{fig:instLayout}
+\end{center}
+\end{figure}
+
+The site productivity of the installations was measured according to the dominate site tree which varied between ponderosa pine, douglas fir and western larch. Selecting only stands with greater than 60 small tagged ponderosa for this analysis effectively removed nearly all stands that measured site index with a species besides ponderosa pine.
+
+There appears to be a group of six installations with similarly low overstory retention levels and high site index values.  This makes sense from a forest management perspective, that relatively little residual overstory would be left on sites with higher productivity.  These installations could be used to develop the understory model since they are so similar in overstory and site productivity. There are many other installations that can be brought in later to expand the model to other various levels of productivity and overstory retention.
+
+The temporal initiation of installations varied with most being established in the last years of the 1990s and early 2000s.  Three check plots were also installed to audit the quality of the data collection efforts. Treatments were randomly assigned to seven plots within each installation \ref{fig:instLayout}.  Three plots received multiple applications of regionally effective herbicide.  The remaining four plots are split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.\\[2pt]
+
+The primary objective of the different herbicide treatments is to decouple the direct and indirect effects of removing overstory. The removal of the overstory increases available light which is hypothesized to encourage small tree growth as well as non-tree vegetation.  The herbicide treatments allow us to see how small trees grow under reduced overstory without the presence of a corresponding increase in non-tree vegetation.\\[2pt]
+
+\ref{fig:timeline} shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at each installation at four year intervals was successful for many installations but in some cases the intervals are somewhat irregular (i.e., 3-5 years in length). The schedule of measurements was based on the twelve-year projection cycles that were used by participating cooperative members.\\[2pt]
 \begin{figure}
 \begin{center}
-<<label=sampleplot,fig=TRUE,width=4,height=4,echo=FALSE>>=
+
+<<label=timeline,fig=TRUE,echo=FALSE>>=
+library(lattice)
+
+#w/ meast#########################
+timelineJan<-timelineJan[!timelineJan$Installation %in% drp60,]
+
+
+xyplot(Installation ~ Year_Measurement,
+       xlim=c(1997,2016),
+       data=timelineJan,
+       htyr=timelineJan$Assoc_OS,
+       trtyr=timelineJan$Trt,  
+     scales=list(x=list(at=1998:2015, cex=1.0,rot=45)),
+        xlab=list(label="Year",cex=1.5),
+        ylab=list(label="Installation",cex=1.5),
+           main=list(label="Installation History", cex=1.5),
+           panel=function(x,y,htyr,trtyr,...){
+           panel.abline(h = timelineJan$Installation, v = c(1998:2015), lty = "dotted", col = "light grey")
+         for (i in as.numeric(unique(y))){
+           subx <- x[as.numeric(y)==i]
+           subOS <- htyr[as.numeric(y)==i]+.15
+           trt8 <- trtyr[as.numeric(y)==i]-.15
+           panel.xyplot(subx,i,type="l",col="black")
+           panel.xyplot(subOS,i,type="p",pch=17,col="chartreuse4",cex=2)
+           panel.xyplot(subx,i,type="p",pch=15,col="black",cex=1.0)
+           panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
+           }})
+
+
+
+dev.off()
+@
+\end{center}
+\caption{Timeline of Installation Measurements and Treatments.}
+\end{figure}
+\text{Squares are years of understory and small tree measurements. Green and red triagles represent years of overstory measurements and herbacide treatment, respectively. Note that year the initial measurement periods selected such that they follow herbicide treatments.}
+
+
+
+A point of concern is that some measurements were taken at times that would not have allowed for the herbicide applications to take full effect. That is, several measurements were concurrent with or followed too quickly after the first herbicide application.  This necessitated careful selection of the appropriate measurement years on a per installation basis. Generally, "first interval years" were selected such that one to three years following the initial herbicide application were included to allow for the herbicide to take effect. Ultimately, the growth measurements will be put on the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. \\[2pt]
+
+
+When comparing the vegetation volumes between the control and the herbicide plots at the beginning of the measurement intervals, it is apparent that there is a large drop in volume within installations with large amounts of understory vegetation when herbicide is applied. However, the herbicide applications failed to contribute to a marked difference in volume in installations of little volume in control plots.
+
+
+
+
+\begin{figure}
+\begin{center}
+<<label=samplePlot,fig=TRUE,width=4,height=4,echo=FALSE>>=
 library(plotrix)
 
 plot(c(0,170),c(0,170),xlim=c(0,170),ylim=c(0,170), xaxs="i",yaxs="i",
@@ -116,88 +186,7 @@ for(i in 1:length(S.tran)){
 \caption{Design of STCV Sampling Plot. Note that transect points and quadrants exist for all six small tree plots although only illustrated on two.}
 \end{figure}
 
-
-\begin{figure}
-\begin{center}
-<<label=species, fig=TRUE,width=4,height=4,echo=FALSE>>=
-#Frequency Plot by Species#
-
-library(plyr)
-
-speciescount<-data.frame(count(stag$Species))
-
-barchart(speciescount$freq~speciescount$x,
-        xlab=list(label="Four Letter Species Code",cex=1.5),
-        col="black",
-        ylab=list(label="Number of Tagged Small Trees",cex=1.5),
-        main=list(label="Tagged Trees by Species at Initiation", cex=1.5)) 
-
-@
-\end{center}
-\caption{Number of Small Tagged Trees by Species}
-\end{figure}
-
-
-Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or harvested with one of the aforementioned variable retention harvest systems: shelterwood, seed tree and heavy thinning. \\[2pt]
-
-
-The site productivity of the installations was measured according to the dominate site tree which varied between ponderosa pine, douglas fir and ... Selecting only stands with greater than 60 small tagged ponderosa for this analysis effectively removed nearly all stands that measured site index with a species besides ponderosa pine.
-
-There appears to be a group of six installations with similarly low overstory retention levels and high site index values.  This makes sense from a forest management perspective, that relatively little residual overstory would be left on sites with higher productivity.  These installations could be used to develop the understory model since they are so similar in overstory and site productivity. There are many other installations that can be brought in later to expand the model to other various levels of productivity and overstory retention.
-
-The temporal initiation of installations varied with most being established in the last years of the 1990s and early 2000s.  Three check plots were also installed to audit the quality of the data collection efforts. Treatments were randomly assigned to seven plots within each installation (Figure 3).  Three plots received multiple applications of regionally effective herbicide.  The remaining four plots are split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.\\[2pt]
-
-The primary objective of the different herbicide treatments is to decouple the direct and indirect effects of removing overstory. The removal of the overstory increases available light which is hypothesized to encourage small tree growth as well as non-tree vegetation.  The herbicide treatments allow us to see how small trees grow under reduced overstory without the presence of a corresponding increase in non-tree vegetation.\\[2pt]
-
-Figure 3 shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at each installation at four year intervals was successful for many installations but in some cases the intervals are somewhat irregular (i.e., 3-5 years in length). The schedule of measurements was based on the twelve-year projection cycles that were used by participating cooperative members.\\[2pt]
-\begin{figure}
-\begin{center}
-
-<<label=timeline,fig=TRUE,echo=FALSE>>=
-library(lattice)
-
-#w/ meast#########################
-timelineJan<-timelineJan[timelineJan$Installation %in% drp60,]
-
-
-xyplot(Installation ~ Year_Measurement,
-       xlim=c(1997,2016),
-       data=timelineJan,
-       htyr=timelineJan$Assoc_OS,
-       trtyr=timelineJan$Trt,  
-     scales=list(x=list(at=1998:2015, cex=1.0,rot=45)),
-        xlab=list(label="Year",cex=1.5),
-        ylab=list(label="Installation",cex=1.5),
-           main=list(label="Installation History", cex=1.5),
-           panel=function(x,y,htyr,trtyr,...){
-           panel.abline(h = timelineJan$Installation, v = c(1998:2015), lty = "dotted", col = "light grey")
-         for (i in as.numeric(unique(y))){
-           subx <- x[as.numeric(y)==i]
-           subOS <- htyr[as.numeric(y)==i]+.15
-           trt8 <- trtyr[as.numeric(y)==i]-.15
-           panel.xyplot(subx,i,type="l",col="black")
-           panel.xyplot(subOS,i,type="p",pch=17,col="chartreuse4",cex=2)
-           panel.xyplot(subx,i,type="p",pch=15,col="black",cex=1.0)
-           panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
-           }})
-
-
-
-dev.off()
-@
-\end{center}
-\caption{Timeline of Installation Measurements and Treatments.}
-\end{figure}
-\text{Squares are years of understory and small tree measurements. Green and red triagles represent years of overstory measurements and herbacide treatment, respectively. Note that year the initial measurement periods selected such that they follow herbicide treatments.}
-
-
-
-A point of concern is that some measurements were taken at times that would not have allowed for the herbicide applications to take full effect. That is, several measurements were concurrent with or followed too quickly after the first herbicide application.  This necessitated careful selection of the appropriate measurement years on a per installation basis. Generally, "first interval years" were selected such that one to three years following the initial herbicide application were included to allow for the herbicide to take effect. Ultimately, the growth measurements will be put on the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. \\[2pt]
-
-
-When comparing the vegetation volumes between the control and the herbicide plots at the beginning of the measurement intervals, it is apparent that there is a large drop in volume within installations with large amounts of understory vegetation when herbicide is applied. However, the herbicide applications failed to contribute to a marked difference in volume in installations of little volume in control plots.
-
-Each plot contains a series of nested plots that decrease in area with physiologically smaller vegetation units (Figure 4). Starting with the full extent of the plot, overstory trees (> 10.5 in DBH) were measured on an approximately half acre. Medium trees, with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested plot of roughly a quarter acre.
+Each plot contains a series of nested plots that decrease in area with physiologically smaller vegetation units \ref{fig:samplePlot}. Starting with the full extent of the plot, overstory trees (> 10.5 in DBH) were measured on an approximately half acre. Medium trees, with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested plot of roughly a quarter acre.
 Small trees were measured on six .007 acre plots 60 degrees apart from plot center at a distance of approximately 30 feet.  Small trees are defined as those that have a DBH less than 3.5 in yet are greater than .5 ft in height for shade tolerant species or 1 ft for shade intolerant at the time of initial measurements.\\[2pt]
 
 There were two sampling methods used to measure vegetative competition. The first was transect based where point measurements of vegetation were obtained at one foot intervals along a 40 ft transect.  We also took vegetation measurements in the middle of the small tree plots in the form of both 1m2 and 4m2 grids. These vegetation measurements quantified separately the amounts of forbs, grasses and shrubs to the species level.  This is an example of how the resolution of the data goes beyond the scope of this analysis though will undoubtedly be of use in future research efforts.\\[2pt]
@@ -212,11 +201,11 @@ The model is predictive in the sense that it will attempt to predict several qua
 
 The fact that quantile regression attempts to characterize the entire distribution of heights makes it much more difficult to test and validate than an ordinary least squares regression.  The regression estimates at the selected quantile provide predictions for that specific quantile and it is likely that the predictive ability of the model changes at different quantiles.  For example, the model may predict the median better than the upper quantile. \\[2pt]
 
-To evaluate the model, three quantiles will be fitted to represent the range of the response distribution (.90,.50 and .10).  The height increments from the withheld plot data will then be compared to the height of the predicted quantile regression line for its corresponding predictor variables.  For example, if the .90 quantile plane is a good fit, then theoretically 10\% of the height increments will lie above the plane and 90\% below.  The .50 and .10 planes will be evaluated in a similar manner. \\[2pt]
+To evaluate the model, three quantiles will be fitted to represent the range of the response distribution (.90,.50 and .10).  The height increments from the withheld plot data will then be compared to the height of the predicted quantile regression line for its corresponding predictor variables.  For example, if the .90 quantile plane is a good fit, then theoretically 10\% of the height increments will lie above the plane and 90\% below.  The bins between the .10, .50 and .90 planes will be evaluated in a similar manner. \\[2pt]
 
-	If it appears that there is some commonality between the tree height increments that are falling below/above the quantile plane...\\[2pt]
+With the the ability to predict quantile annual height increments, we can predict the quantile height increments for new sets of data and thus have an idea of what the fastest growing small trees will advance in terms of an annual height increment.\\[2pt]
 
-Following this evaluation, a random sample of tagged subject trees will be selected to have their height growth increments predicted in the USFS Forest Vegetation Simulator (FVS).  These predicted height increments will then be evaluated as above.  It is not expected that .90 of the predicted tree heights will fall below that .90 quantiles for example. The FVS small tree growth sub-model is based on a least squares regression equation so it is very unlikely that the predicted heights will correspond to the quantile planes.   Rather, this exercise is to illuminate how far from the actual growth response distribution of FVS predictions can be.\\[2pt]
+Following this initial evaluation, an installation's tagged subject trees will be selected to have their height growth increments predicted in the USFS Forest Vegetation Simulator (FVS).  These predicted height increments will then be evaluated as above.  It is not expected that .90 of the predicted tree heights will fall below that .90 quantiles for example. The FVS small tree height increment growth sub-model is based on a least squares regression model \cite{Dixon2002} so it is very unlikely that the predicted heights will correspond to the quantile planes.   Rather, this exercise is to illuminate how far from the actual growth response distribution of small trees FVS predictions can be.\\[2pt]
 
 \newpage
 \subsection{Variable Acquisition}
@@ -226,7 +215,7 @@ The tallies of small trees from each small tree plot (STP) were summed by height
 
 \textbf{Understory Vegetation:}
 
-Only the 1m vegetation plots were utilized in this study since they were used for the duration of the study.  Average differences at the STP level between base and top height measurements were found separately for forbs,low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were found for polyvegetation, forbs, low shrubs, high shrubs and grasses.  Average height differences for low shrubs, high shrubs, forbs were calculated for the 30 transect points corresponding to each small tree plot.  Percentage cover of grass obtained ocularly through a 6in by 6in grid and top height of grasses were also averaged over the length of the transect.
+Only the 1m vegetation plots were utilized in this study since they were used for the duration of the study.  Average differences at the STP level between base and top height measurements were found separately for forbs,low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were found for polyvegetation, forbs, low shrubs, high shrubs and grasses.  Average height differences for low shrubs, high shrubs, forbs were calculated for the 30 or 40 transect points corresponding to each small tree plot.  Percentage cover of grass obtained ocularly through a 6in by 6in grid and top height of grasses were also averaged over the length of the transect. Two relative measures of competition were created by subtracting the tallest understory vegetation height from that of the subject tree  for both 1m and transect vegetation.
 
 \textbf{Overstory Vegetation:}
 
@@ -247,7 +236,28 @@ Site index was included from STCV records of each installation's initiation. An 
 \subsection{Variable Selection}
 
 
-\par Only the installations with greater than 60 ponderosa pine tagged small trees at initiation will be included in the model.  Within these installations, the 6th small tree plots will be withheld as validation data. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  
+\par Only the installations with greater than 60 ponderosa pine tagged small trees at initiation will be included in the model \ref{numb.pond}.  Within these installations, the 6th small tree plots will be withheld as validation data. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  
+
+\begin{figure}
+\begin{center}
+<<label=numb.pond, fig=TRUE,width=4,height=4,echo=FALSE>>=
+#Frequency Plot by Species#
+pipond<-pi[!pi$Installation %in% drp60,]
+sort(pipond$Freq,decreasing=F)
+pipond<- pipond[order(pipond$Freq),] 
+
+library(lattice)
+barchart(pipond$Freq~pipond$Installation,
+        xlab=list(label="Installation",cex=1.5),
+        col="black",
+        ylab=list(label="Number of Tagged Small Trees",cex=1.5),
+        main=list(label="Tagged Ponderosa Pine at Initiation", cex=1.5)) 
+
+@
+\end{center}
+\caption{Number of Small Tagged Ponderosa Pine Trees}
+\end{figure}
+
 
 The objective is to obtain a parsimonious model that is easily understood and informed by our understanding of the factors surrounding small tree growth. The variable selection process for each individual quantile will be guided by the ecological framework behind small tree growth.  The predictor variables will be selected from the four previously mentioned categories of ecological factors that affect tree growth (see Figure \ref{fig:chart} on page \pageref{fig:chart}). These categories are overstory measures, understory non-tree vegetation, site productivity and other small tree measures.  The square root of initial height (height at the beginning of measurement period) explains much of the variability in height growth increment and will be included as a predictor in the base model.
 
@@ -260,7 +270,7 @@ To evaluate the utility of higher-order polynomial expressions of predictor vari
 
 Variable selection from within these categories will be made with respect to their importance in descrbing trends in the median ($\tau$=.5). Within each category of ecological factor, a subset of relevant variables will be considered that includes two-way interactions between the previously selected variables and the category under evaluation. This subset of variables will also take into consideration the practicality of the predictors.
 
-The \texttt{quantreg} package by Roger Koenker cite(Koenker) will be used to fit quantile regression surfaces individually for the specified quantiles (specified as $\tau$ values: .90, .50, .10).  This allows for differences in the selected predictor variables between the quantile planes.
+The \texttt{quantreg} package by Roger Koenker \cite{Koenker2015} will be used to fit quantile regression surfaces individually for the specified quantiles (specified as $\tau$ values: .90, .50, .10).  This allows for differences in the selected predictor variables between the quantile planes.
 Model building will proceed from category to category with the model of lowest AIC being selected as the model carried forward to the next category. 
 
 

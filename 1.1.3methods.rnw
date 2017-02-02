@@ -108,7 +108,7 @@ xyplot(sinst1$SiteIndex_Value~sinst1$minOSBA,
 
 @
 \end{center}
-\caption{Site Index and Overstory Basal Area at Initiation}
+\caption{Site Index and Overstory Basal Area at Initiation\label{fig:siteOverstory}}
 \end{figure}
 
 
@@ -153,7 +153,7 @@ xyplot(Installation ~ Year_Measurement,
 dev.off()
 @
 \end{center}
-\caption{Timeline of Installation Measurements and Treatments.}
+\caption{Timeline of Installation Measurements and Treatments.\label{fig:timeline}}
 \end{figure}
 \text{Squares are years of understory and small tree measurements. Green and red triagles represent years of overstory measurements and herbacide treatment, respectively. Note that year the initial measurement periods selected such that they follow herbicide treatments.}
 
@@ -161,8 +161,42 @@ dev.off()
 
 A point of concern is that some measurements were taken at times that would not have allowed for the herbicide applications to take full effect. That is, several measurements were concurrent with or followed too quickly after the first herbicide application.  This necessitated careful selection of the appropriate measurement years on a per installation basis. Generally, "first interval years" were selected such that one to three years following the initial herbicide application were included to allow for the herbicide to take effect. Ultimately, the growth measurements will be put on the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. \\[2pt]
 
+\begin{figure}
+\begin{center}
+<<label=vegVol, fig=TRUE,width=5,height=4,echo=FALSE>>=
+library(RColorBrewer)
+myColours <- brewer.pal(6,"Blues")
 
-When comparing the vegetation volumes between the control and the herbicide plots at the beginning of the measurement intervals, it is apparent that there is a large drop in volume within installations with large amounts of understory vegetation when herbicide is applied. However, the herbicide applications failed to contribute to a marked difference in volume in installations of little volume in control plots.
+my.settings <- list(
+  superpose.polygon=list(col=myColours[2:5], border="transparent"),
+  strip.background=list(col=myColours[6]),
+  strip.border=list(col="black")
+)
+
+CTRLandGE.volume.index$Group.2<-factor(CTRLandGE.volume.index$Group.2)
+
+barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, groups=CTRLandGE.volume.index$Group.2,
+         origin=0, 
+         #main="Motor insurance claims frequency"
+         xlab="Installation", ylab="Vegetation Volume",
+        scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)),                  
+         auto.key=list(space="bottom", columns=1, 
+                       points=FALSE, rectangles=TRUE,
+                       title="Treatment", cex.title=1),
+         par.settings = my.settings,
+         par.strip.text=list(col="white", font=2),
+         panel=function(x,y,...){
+           panel.grid(h=-1, v=0); 
+           panel.barchart(x,y,...)
+         }
+)
+
+@
+\end{center}
+\caption{Control and Herbicide Plot Vegetation Volume\label{fig:vegVol}}
+\end{figure}
+
+When comparing the vegetation volumes between the control and the herbicide plots at the beginning of the measurement intervals, it is apparent that there is a large drop in volume within installations with large amounts of understory vegetation when herbicide is applied(see \ref{fig:vegVol}). However, the herbicide applications failed to contribute to a marked difference in volume in installations of little volume in control plots.
 
 
 
@@ -223,7 +257,7 @@ for(i in 1:length(S.tran)){
 
 @
 \end{center}
-\caption{Design of STCV Sampling Plot. Note that transect points and quadrants exist for all six small tree plots although only illustrated on two.}
+\caption{Design of STCV Sampling Plot. Note that transect points and quadrants exist for all six small tree plots although only illustrated on two.\label{fig:samplePlot}}
 \end{figure}
 
 Each plot contains a series of nested plots that decrease in area with physiologically smaller vegetation units \ref{fig:samplePlot}. Starting with the full extent of the plot, overstory trees (> 10.5 in DBH) were measured on an approximately half acre. Medium trees, with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested plot of roughly a quarter acre.
@@ -276,11 +310,11 @@ Site index was included from STCV records of each installation's initiation. An 
 \subsection{Variable Selection}
 
 
-\par Only the installations with greater than 60 ponderosa pine tagged small trees at initiation will be included in the model \ref{numb.pond}.  Within these installations, the 6th small tree plots will be withheld as validation data. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  
+\par Only the installations with greater than 60 ponderosa pine tagged small trees at initiation will be included in the model \ref{numb.pond}.  Within each plot, one of the sixth STPs was randomly selected as validation data. The randomness was neccesary to account for the uphill orientation of the first STP on each plot and clockwise layout of remaining STPSs. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  
 
 \begin{figure}
 \begin{center}
-<<label=numb.pond, fig=TRUE,width=4,height=4,echo=FALSE>>=
+<<label=numbPond, fig=TRUE,width=4,height=4,echo=FALSE>>=
 #Frequency Plot by Species#
 pipond<-pi[!pi$Installation %in% drp60,]
 sort(pipond$Freq,decreasing=F)
@@ -288,14 +322,14 @@ pipond<- pipond[order(pipond$Freq),]
 
 library(lattice)
 barchart(pipond$Freq~pipond$Installation,
-        xlab=list(label="Installation",cex=1.5),
+        xlab="Installation",
         col="black",
-        ylab=list(label="Number of Tagged Small Trees",cex=1.5),
-        main=list(label="Tagged Ponderosa Pine at Initiation", cex=1.5)) 
+        ylab="Number of Tagged Small Trees")
+        #main=list(label="Tagged Ponderosa Pine at Initiation") 
 
 @
 \end{center}
-\caption{Number of Small Tagged Ponderosa Pine Trees}
+\caption{Number of Small Tagged Ponderosa Pine Trees\label{fig:numbPond}}
 \end{figure}
 
 

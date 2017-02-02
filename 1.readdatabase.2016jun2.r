@@ -156,3 +156,5 @@ lt60<-pi[pi$Freq<60,]
 lt60<-lt60$Installation
 lt60<-as.vector(lt60)
 drp60<-c(drp,lt60)
+
+

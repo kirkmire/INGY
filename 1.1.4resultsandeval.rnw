@@ -18,21 +18,22 @@
 
 
 \hline
-Nothing&$1816$&$3083.98$&POLV.cov&4228&4953.03&BAPA&4228&4539.63\tabularnewline
-SmallTPA&$1816$&$2843.32$&F.cov&4228&5001.07&CCF&4228&4363.87\tabularnewline
-Two&$1811$&$3075.37$&LS.cov&4228&5009&\textbf{TPA}&4228&4272.83\tabularnewline
-Four&$1811$&$3065.19$&HS.cov&4228&4999.4&&&\tabularnewline
-Six&$1811$&$2990.19$&G.cov&4228&5005.13&Site&n&AIC\tabularnewline
-Eight&$1811$&$2944.22$&\textbf{F.diff}&4228&4783.02&Slope&4228&4218.55\tabularnewline
-Ten&$1811$&$2929.06$&LS.diff&4228&4924.31&\textbf{SI}&4228&4018.82\tabularnewline
-Twelve&$1811$&$2909.83$&HS.diff&4228&4861.02&Elevation&4228&4273.61\tabularnewline
-Fourteen&$1811$&$2948.04$&G.diff&4228&4910.01&Aspect&4228&4190\tabularnewline
-Fifteen&$1811$&$2965.70$&F.tran&4228&4958.23&&&\tabularnewline
-TGT&$1811$&$2896.52$&LS.tran&4228&4973.72&&&\tabularnewline
-BD&$1814$&$2359.86$&HS.tran&4228&4929.58&&&\tabularnewline
-DBH&$1334$&$2053.96$&G.tran.diff&4228&4893.88&&&\tabularnewline
-CrownWidth&$1813$&$2802.97$&G.tran.cov&4226&5008.45&&&\tabularnewline
-\textbf{CrownLength}&$1808$&$2705.84$&&&&&&\tabularnewline
+
+Nothing&1816&3083.98&Nothing&4228&5008.34&Nothing&4228&4910.01\tabularnewline
+SmallTPA&1816&2843.32&POLV.cov&4228&4953.03&BAPA&4228&4539.63\tabularnewline
+Trees15+&1811&2965.7&F.cov&4228&5001.07&CCF&4228&4363.87\tabularnewline
+TGT&1811&2896.52&LS.cov&4228&5009&\textbf{TPA}&4228&4272.83\tabularnewline
+BD&1814&2359.86&HS.cov&4228&4999.4&Site&n&AIC\tabularnewline
+DBH&1334&2053.96&G.cov&4228&5005.13&SI&4228&3942.94\tabularnewline
+CrownWidth&1813&2802.97&LS.diff&4228&4924.31&Slope&4228&4127.8\tabularnewline
+\textbf{CrownLength}&1808&2705.84&HS.diff&4228&4861.02&Elevation&4228&4202.6\tabularnewline
+&&&LS.tran&4228&4973.72&Aspect&4228&4133.11\tabularnewline
+&&&HS.tran&4228&4929.58&\textbf{SEA Int}&4228&3740.49\tabularnewline
+&&&G.tran.diff&4228&4893.88&&&\tabularnewline
+&&&G.tran.cov&4226&5008.45&&&\tabularnewline
+&&&mx.vg.diff1m&4228&4771.1&&&\tabularnewline
+&&&\textbf{mx.vg.diff.tr}&4228&4771.1&&&\tabularnewline
+
 
 
 

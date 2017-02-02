@@ -8,80 +8,115 @@ source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=
 source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
 
-# #combines all aic.lists into one dataframe
-# 
-# colnames(UT.aic)<-c("Variable","n","AIC")
-# 
-# colnames(UV.aic)<-c("Variable","n","AIC")
-# 
-# colnames(OS.aic)<-c("Variable","n","AIC")
-# 
-# colnames(SQ.aic)<-c("Variable","n","AIC")
-# 
-# aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
-# 
-# aic.lists$AIC<-round(aic.lists$AIC,2)
-# 
-# final.aic<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
-# final.aic$X1<-c(aic.lists$Variable[1:8],"","","","","","")
-# final.aic$X2<-c(aic.lists$n[1:8],"","","","","","")
-# final.aic$X3<-c(aic.lists$AIC[1:8],"","","","","","")
-# final.aic$X4[1:14]<-as.character(aic.lists$Variable[9:22])
-# final.aic$X5[1:14]<-aic.lists$n[9:22]
-# final.aic$X6[1:14]<-aic.lists$AIC[9:22]
-# final.aic$X7[1:4]<-as.character(aic.lists$Variable[23:26])
-# final.aic$X8[1:4]<-aic.lists$n[23:26]
-# final.aic$X9[1:4]<-aic.lists$AIC[23:26]
-# final.aic$X7[5]<-"Site"
-# final.aic$X8[5]<-"n"
-# final.aic$X9[5]<-"AIC"
-# final.aic$X7[6:9]<-as.character(aic.lists$Variable[27:30])
-# final.aic$X8[6:9]<-aic.lists$n[27:30]
-# final.aic$X9[6:9]<-aic.lists$AIC[27:30]
-# 
-# 
-# 
-# #The code below will produce output that can then be copied over to the .tex file
-# library(Hmisc)
-# 
-# latex(final.aic, file="")            # If you want all the data
-# 
-# 
-# 
-# #illustrates how the effects of predictors 
-# #cary over quantiles  and how the magnitude of 
-# #the effects at varouis quantiles differ considerably fromthe OLS coefficients
-# #even in terms of the CI 
-# library(quantreg)
-# qr.SI.5<-  rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
-#                 log(elevation+1)*
-#                 slopePercent*(cos_rad_asp*sin_rad_asp)+
-#                 (elevation^2)*(slopePercent*(cos_rad_asp+sin_rad_asp))+
-#                 elevation+(elevation^2),tau=c(.5), data=annual.gr4)
-# 
-# qr.SI.1 <-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
-#                log(elevation+1)*
-#                slopePercent*(cos_rad_asp*sin_rad_asp)+
-#                (elevation^2)*(slopePercent*(cos_rad_asp+sin_rad_asp))+
-#                elevation+(elevation^2),tau=c(.1),data=annual.gr4)
-# 
-# qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
-#                 log(elevation+1)*
-#                 slopePercent*(cos_rad_asp*sin_rad_asp)+
-#                 (elevation^2)*(slopePercent*(cos_rad_asp+sin_rad_asp))+
-#                 elevation+(elevation^2),tau=c(.9),data=annual.gr4)
-# 
-# fit1 <- summary(rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+  log(elevation+1)*
-#                      slopePercent*(cos_rad_asp*sin_rad_asp)+
-#                      (elevation^2)*(slopePercent*(cos_rad_asp+sin_rad_asp))+
-#                      elevation+(elevation^2),tau=c(1:9/10),data=annual.gr4))
-# plot(fit1)
-# 
-# qr.SI.5$coefficients
-# 
-# latex(fit1, caption="Engel's Law", file="")
-# 
-# 
+#combines all aic.lists into one dataframe
+
+colnames(UT.aic)<-c("Variable","n","AIC")
+
+colnames(UV.aic)<-c("Variable","n","AIC")
+
+colnames(OS.aic)<-c("Variable","n","AIC")
+
+colnames(SQ.aic)<-c("Variable","n","AIC")
+
+aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
+
+aic.lists$AIC<-round(aic.lists$AIC,2)
+
+final.aic<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
+final.aic$X1[1:8]<-as.character(aic.lists$Variable[1:8])
+final.aic$X2[1:8]<-aic.lists$n[1:8]
+final.aic$X3[1:8]<-aic.lists$AIC[1:8]
+final.aic$X4[1:14]<-as.character(aic.lists$Variable[9:22])
+final.aic$X5[1:14]<-aic.lists$n[9:22]
+final.aic$X6[1:14]<-aic.lists$AIC[9:22]
+final.aic$X7[1:4]<-as.character(aic.lists$Variable[23:26])
+final.aic$X8[1:4]<-aic.lists$n[23:26]
+final.aic$X9[1:4]<-aic.lists$AIC[23:26]
+final.aic$X7[5]<-"Site"
+final.aic$X8[5]<-"n"
+final.aic$X9[5]<-"AIC"
+final.aic$X7[6:10]<-as.character(aic.lists$Variable[27:31])
+final.aic$X8[6:10]<-aic.lists$n[27:31]
+final.aic$X9[6:10]<-aic.lists$AIC[27:31]
+
+
+
+#The code below will produce output that can then be copied over to the .tex file
+library(Hmisc)
+
+latex(final.aic, file="")            # If you want all the data
+
+
+
+#illustrates how the effects of predictors 
+#cary over quantiles  and how the magnitude of 
+#the effects at varouis quantiles differ considerably fromthe OLS coefficients
+#even in terms of the CI 
+library(quantreg)
+qr.SI.5<-  rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
+                slopePercent + # goes with coefficient b1
+                slopePercent:cos_rad_asp + #with b2
+                slopePercent:sin_rad_asp + #with b3
+                slopePercent:log(elevation+1) + #b4
+                slopePercent:log(elevation+1):cos_rad_asp + #b5
+                slopePercent:log(elevation+1):sin_rad_asp + #b6
+                slopePercent:I(elevation^2) +   #b7
+                slopePercent:I(elevation^2):cos_rad_asp +   #b8
+                slopePercent:I(elevation^2):sin_rad_asp +   #b9
+                elevation + # b10
+                I(elevation^2) , #b11
+              tau=c(.5) ,  data=annual.gr4)
+
+
+qr.SI.1 <-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
+               slopePercent + # goes with coefficient b1
+               slopePercent:cos_rad_asp + #with b2
+               slopePercent:sin_rad_asp + #with b3
+               slopePercent:log(elevation+1) + #b4
+               slopePercent:log(elevation+1):cos_rad_asp + #b5
+               slopePercent:log(elevation+1):sin_rad_asp + #b6
+               slopePercent:I(elevation^2) +   #b7
+               slopePercent:I(elevation^2):cos_rad_asp +   #b8
+               slopePercent:I(elevation^2):sin_rad_asp +   #b9
+               elevation + # b10
+               I(elevation^2) , #b11
+             tau=c(.5) ,  data=annual.gr4)
+
+
+qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
+                slopePercent + # goes with coefficient b1
+                slopePercent:cos_rad_asp + #with b2
+                slopePercent:sin_rad_asp + #with b3
+                slopePercent:log(elevation+1) + #b4
+                slopePercent:log(elevation+1):cos_rad_asp + #b5
+                slopePercent:log(elevation+1):sin_rad_asp + #b6
+                slopePercent:I(elevation^2) +   #b7
+                slopePercent:I(elevation^2):cos_rad_asp +   #b8
+                slopePercent:I(elevation^2):sin_rad_asp +   #b9
+                elevation + # b10
+                I(elevation^2) , #b11
+              tau=c(.5) ,  data=annual.gr4)
+
+
+
+fit1 <- summary(rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
+                     slopePercent + # goes with coefficient b1
+                     slopePercent:cos_rad_asp + #with b2
+                     slopePercent:sin_rad_asp + #with b3
+                     slopePercent:log(elevation+1) + #b4
+                     slopePercent:log(elevation+1):cos_rad_asp + #b5
+                     slopePercent:log(elevation+1):sin_rad_asp + #b6
+                     slopePercent:I(elevation^2) +   #b7
+                     slopePercent:I(elevation^2):cos_rad_asp +   #b8
+                     slopePercent:I(elevation^2):sin_rad_asp +   #b9
+                     elevation + # b10
+                     I(elevation^2) , #b11
+                   tau=c(1:9/10),  data=annual.gr4))
+plot(fit1)
+
+latex(fit1, caption="Engel's Law", file="")
+
+
 # valid.func<-function(sqht, stcw, stran, tpaos, slope, asp,
 #                      elev, annualht){
 #   #sqht<-1
@@ -449,31 +484,43 @@ source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), e
 # 
 # plot(SI.resid$residuals~SI.resid$fitted.values)
 # 
-# ###Sequential GAM Plots###
-# dev.off()
-# 
-# par(mfrow=c(2,3))
-# sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
-# plot(sr.ht.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-# 
-# cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$CrownLength))
-# plot(cl.ht.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-# 
-# veg.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+s(annual.gr4$diff.F.1m))
-# plot(veg.ht.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-# 
-# 
-# tpa.os.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+
-#            s(annual.gr4$TPA.OS))
-# plot(tpa.os.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-# 
-# 
-# 
-# si.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+
-#            +annual.gr4$TPA.OS+s(annual.gr4$slopePercent*aspect*elevation))
-# plot(si.gam,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-# 
-# 
-# 
-# 
-# 
+###Sequential GAM Plots###
+dev.off()
+
+par(mfrow=c(2,3))
+sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
+plot(sr.ht.gam,residuals=T,se=T,pch=".",ask=F)
+
+cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$CrownLength))
+plot(cl.ht.gam,residuals=T,se=T,pch=".",ask=F)
+
+veg.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+s(annual.gr4$treeminus))
+plot(veg.ht.gam,residuals=T,se=T,pch=".",ask=F)
+
+
+tpa.os.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+annual.gr4$treeminus+
+           s(annual.gr4$TPA.OS))
+plot(tpa.os.gam,residuals=T,se=T,pch=".",ask=F)
+
+#should each SEA term be added as a smoothed term?
+
+si.gam<-gam(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
+             #how to make this below a smoothed term
+             slopePercent + # goes with coefficient b1
+             slopePercent:cos_rad_asp + #with b2
+             slopePercent:sin_rad_asp + #with b3
+             slopePercent:log(elevation+1) + #b4
+             slopePercent:log(elevation+1):cos_rad_asp + #b5
+             slopePercent:log(elevation+1):sin_rad_asp + #b6
+             slopePercent:I(elevation^2) +   #b7
+             slopePercent:I(elevation^2):cos_rad_asp +   #b8
+             slopePercent:I(elevation^2):sin_rad_asp +   #b9
+             elevation + # b10
+             I(elevation^2) ,data=annual.gr4) #b11
+            
+plot(si.gam,residuals=T,se=T,pch=".",ask=F)
+
+
+
+
+

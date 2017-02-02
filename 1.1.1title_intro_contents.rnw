@@ -56,33 +56,6 @@ for the degree of}
 \text{Forestry Extension} 
 \end{center}
 
-
-\newpage
-\thispagestyle{empty}
-\vspace*{5\baselineskip}
-\begin{center}
-\textbf{\large{Predicting the Growth Response of Small Ponderosa Pine Trees under Varying levels of Overstory Retention, Vegetative Competition and Site Quality}} \\[1pt] 
-\vspace*{5\baselineskip}
-\text{Colin Kirkmire} \\[1pt]
-\vspace*{3\baselineskip}
-\text{A thesis submitted to the Graduate Faculty of }\\[1pt]
-\text{the University of Montana}\\[1pt]
-\text{in partial fullfillment of the}\\[1pt]
-\text{requirements for the degree of}\\[1pt]
-\text{Master of Science}\\[1pt]
-\vspace*{3\baselineskip}
-\text{Department of Forest Management}\\[1pt]
-\text{College of Forestry and Conservation}\\[1pt]
-\text{University of Montana}\\[1pt]
-\vspace*{3\baselineskip}
-\text{Missoula, Montana}\\[1pt]
-\vspace*{1\baselineskip}
-\text{{2016}} \\[1pt]
-\vspace*{7\baselineskip}
-\text{Advised by Dr. David L.R. Affleck and Dr. John Goodburn}\\[1pt]
-\vspace*{7\baselineskip}
-\end{center}
-
 \newpage
 \large 
 \begin{center}

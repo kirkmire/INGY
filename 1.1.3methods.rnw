@@ -41,16 +41,16 @@ tmp <- PlotOnStaticMap(basemap)
 #For text labels
  tmp <- PlotOnStaticMap(basemap,cex=.03,col="black",add=T,
                         FUN=points)
-# lat=locs0v2$Lat,
-# lon=locs0v2$Long,
-# FUN=text,
-# labels=locs0v2$Installation)
+#  lat=locs0v2$Lat,
+#  lon=locs0v2$Long,
+#  FUN=text,
+#  labels=locs0v2$Installation)
 #dev.off()
 @
 
 \begin{figure}[ht]
 \begin{center}
-    \includegraphics[width=.8\textwidth]{inst_map.png}
+    \includegraphics[width=.8\textwidth]{temp.png}
     \caption{Map of STCV Installations}
     \label{fig:map}
 \end{center}
@@ -70,7 +70,47 @@ Installations were established in stands with various forest cover (e.g., mixed 
 
 The site productivity of the installations was measured according to the dominate site tree which varied between ponderosa pine, douglas fir and western larch. Selecting only stands with greater than 60 small tagged ponderosa for this analysis effectively removed nearly all stands that measured site index with a species besides ponderosa pine.
 
-There appears to be a group of six installations with similarly low overstory retention levels and high site index values.  This makes sense from a forest management perspective, that relatively little residual overstory would be left on sites with higher productivity.  These installations could be used to develop the understory model since they are so similar in overstory and site productivity. There are many other installations that can be brought in later to expand the model to other various levels of productivity and overstory retention.
+There appears to be a group of six installations with similarly low overstory retention levels and high site index values \ref{fig:siteOverstory}.  This makes sense from a forest management perspective, that relatively little residual overstory would be left on sites with higher productivity.  These installations could be used to develop the understory model since they are so similar in overstory and site productivity. There are many other installations that can be brought in later to expand the model to other various levels of productivity and overstory retention.
+
+\begin{figure}
+\begin{center}
+<<label=siteOverstory, fig=TRUE,width=4,height=3,echo=FALSE>>=
+#Frequency Plot by Species#
+
+library(lattice)
+ 
+minOSBA.func<-function(Installation1){
+  #Installation1<-"DF"
+  minOSBA<-annual.gr4[which(annual.gr4$Installation==Installation1),]
+  minYearOSBA<-minOSBA[which.min(minOSBA$Year_Measurement)
+                       ,c("Year_Measurement","bapa.OS")]
+  initBAPA<-minYearOSBA$bapa.OS
+  initBAPA
+  }
+
+
+sinst$minOSBA<-0
+
+sinst1<-sinst[!sinst$Installation %in% drp60,]
+
+for(i in 1:nrow(sinst1)){
+  sinst1$minOSBA[i]<-minOSBA.func(sinst1$Installation[i])
+}
+
+xyplot(sinst1$SiteIndex_Value~sinst1$minOSBA,
+        xlab="Retained Overstory Basal Area",
+        col="black",grid=T,
+        ylab="Site Index (P.Ponderosa) ft. ht. at 50 yrs.",
+        main="") 
+
+#add text labels that indicate installation
+#only plot initial OSBA measurements
+
+@
+\end{center}
+\caption{Site Index and Overstory Basal Area at Initiation}
+\end{figure}
+
 
 The temporal initiation of installations varied with most being established in the last years of the 1990s and early 2000s.  Three check plots were also installed to audit the quality of the data collection efforts. Treatments were randomly assigned to seven plots within each installation \ref{fig:instLayout}.  Three plots received multiple applications of regionally effective herbicide.  The remaining four plots are split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.\\[2pt]
 

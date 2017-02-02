@@ -333,9 +333,9 @@ UT.aic$aic.list<-as.numeric(UT.aic$aic.list)
 variable<-c("Nothing","SmallTPA","Trees15+",
                       "TGT","BD","DBH","CrownWidth","CrownLength")
 
-variable<-as.data.frame(variable)
+variableUT<-as.data.frame(variable)
 
-UT.aic<-cbind(variable,UT.aic)
+UT.aic<-cbind(variableUT,UT.aic)
 
 
 

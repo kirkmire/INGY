@@ -62,7 +62,7 @@ save(splot,splothist,
      sstp,sstp1,sstp4,sstpr,sstpt,
      stag,stagm,
      spptr,sppnontr,forbshrub,
-     meast,timeline,timelineJan,
+     timeline,timelineJan,
      Plots.lat.long,
      file=file.path("./dlra_code",paste(filenm,".Rdata",sep="")))
 

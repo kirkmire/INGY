@@ -43,9 +43,15 @@ stagm <- sqlFetch(path,"STPs_TaggedTrees_Measures")
 # lookup data
 spptr <- sqlFetch(path,"Lookup_Species_Tree")
 sppnontr <- sqlFetch(path,"Lookup_Species_NonTree")
+forbshrub <- sqlFetch(path,"Lookup_Vegetation_Form_ckedits")
 
 #timeline data
-meast <- sqlFetch(path,"Timeline")
+timeline <- sqlFetch(path,"Timeline")
+
+timelineJan<-timeline
+
+###For Site Quality#
+Plots.lat.long <- sqlFetch(path,"Plots")
 
 odbcCloseAll()
 
@@ -55,8 +61,9 @@ save(splot,splothist,
      strani,stran,stranco,strangr,
      sstp,sstp1,sstp4,sstpr,sstpt,
      stag,stagm,
-     spptr,sppnontr,
-     meast,
+     spptr,sppnontr,forbshrub,
+     meast,timeline,timelineJan,
+     Plots.lat.long,
      file=file.path("./dlra_code",paste(filenm,".Rdata",sep="")))
 
 

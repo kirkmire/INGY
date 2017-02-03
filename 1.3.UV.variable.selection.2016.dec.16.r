@@ -275,7 +275,8 @@ init_tree_shrub_ht_diff_trans<-function(Installation,Plot,STP,Year,height){
                          agg.tran.data.max1$Year_Measurement==Year,]
   
   max.ht.shrub<-max(shrub_ht$x.F,shrub_ht$x.HS,shrub_ht$x.LS,shrub_ht$x.S)
-  tree.ht.minus.shrub<-height-max.ht.shrub
+  # tree.ht.minus.shrub<-height-max.ht.shrub
+  tree.ht.minus.shrub<-max.ht.shrub
   tree.ht.minus.shrub
 }
 
@@ -408,9 +409,11 @@ par(mfrow=c(2,4),mar=c(4,4,1,2))
 plot(gam.G.diff.cov,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 
 #GAM for init tree ht veg diff
-init.diff.1m<-gam(ht_annual~s(srHeight_Total)+s(treeminus),data=annual.gr4, family=gaussian(link="identity"))
+init.diff.1m<-gam(ht_annual~srHeight_Total+annual.gr4$CrownLength+s(annual.gr4$Cov.POLV),data=annual.gr4, family=gaussian(link="identity"))
 summary(init.diff.1m)
 
+
+AIC(init.diff.1m)
 par(mfrow=c(2,4),mar=c(4,4,1,2))
 plot(init.diff.1m,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 

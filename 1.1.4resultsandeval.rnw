@@ -45,6 +45,18 @@ CrownWidth&1813&2802.97&LS.diff&4228&4924.31&Slope&4228&4127.8\tabularnewline
 
 
 \newpage
+Zhang et al. found that the importance of shrub control on growth increment was not evident in the final years of their study, as tree-shrub competition likely switched to tree-tree compitition. However, shrub control is critical for stand development on low quality sites.
+
+A number of reports on Ponderosa Pine Level-of-Growing Stock Study found that regardless of stand age, ponderosa pine responded to thinning immediately and that average dbh and crown length and width increased with decreasing residual stand densities.(Barrett
+1983; Ronco et al. 1985; Cochran and Barrett 1995, 1999; Oliver
+1979, 1997, 2005)
+
+
+
+
+
+
+
 
 \begin{figure}
 \begin{center}
@@ -77,3 +89,7 @@ plot(cl.ht.gam,residuals=T,se=T,pch=".")
 \vspace{3mm}
 \end{center}
 \end{table}
+
+
+
+

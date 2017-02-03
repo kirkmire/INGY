@@ -24,12 +24,14 @@ merged_stagm_stag$InstPlot<-paste(merged_stagm_stag$Installation,
 
 uniqueinst<-unique(splothist[,c(2,3,4)])
 
-
-library(xlsx)
-#write.xlsx(uniqueinst, "rand_stp.xlsx")
-
-
-randstp<-read.xlsx("rand_stp.xlsx",sheetName = "Sheet1")
+if (Sys.info()['sysname']=="Linux"){
+  library(gdata)
+  randstp <- read.xls("rand_stp.xlsx", sheet = 1, header = TRUE)
+} else {
+  library(xlsx)
+  #write.xlsx(uniqueinst, "rand_stp.xlsx")
+  randstp<-read.xlsx("rand_stp.xlsx",sheetName = "Sheet1")
+}
 colnames(randstp)[4]<-"STP"
 
 
@@ -98,7 +100,7 @@ for(i in 1:nrow(merged_stagm_stag)){
 
 #Remove all records with ht_annual=NA,-999, 
 #these represent end-of-timeline-interval tree records
-merged_stagm_stag$ht_annual[is.na(merged_stagm_stag$ht_annual)]<--999     
+merged_stagm_stag$ht_annual[is.na(merged_stagm_stag$ht_annual)]<- -999     
 merged_stagm_stag<-merged_stagm_stag[!(merged_stagm_stag$ht_annual==-999),]
 
 #Rename dataframe something reasonable
@@ -118,4 +120,8 @@ annual.gr<-annual.gr[,!(names(annual.gr) %in% other.names)]
 annual.gr<-annual.gr[!annual.gr$conc=="EM,1,5,636",]
 
 
+# Look at damage codes
+table(droplevels(annual.gr$Damage)) # how many of these codes can you decipher?
+annual.gr[annual.gr$Damage=="D",] # dead?
+annual.gr[grep("DT",annual.gr$Damage),] # dead top?
             

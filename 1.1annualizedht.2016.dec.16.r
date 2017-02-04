@@ -122,6 +122,29 @@ annual.gr<-annual.gr[!annual.gr$conc=="EM,1,5,636",]
 
 # Look at damage codes
 table(droplevels(annual.gr$Damage)) # how many of these codes can you decipher?
+#SW=sweep
+#FT=forked top
+#FUT= damaged (f**ed up) top catchall
+#RT=regenerated top
+#DT=dead top
+#BT=broken top
+#ID= missing ID (we're pretty sure this is the right one though based on azimuth&dist)
+#AD=animal damage
+#MT= mistletoe
+#SP=?
+#X=? (160 have this code)
+
+
+
 annual.gr[annual.gr$Damage=="D",] # dead?
+#will look up
 annual.gr[grep("DT",annual.gr$Damage),] # dead top?
+
+
+
+
+
+
+
+
             

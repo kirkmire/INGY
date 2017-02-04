@@ -9,9 +9,11 @@
 \end{center}
 \normalsize
 \noindent 
-\text{This will be the introduction}
-\textbf{Objectives}\\[1pt]
-\textbf{Ecology of Ponderosa Pine Regeneration}\\[1pt]
+
+\section*{Introduction}
+
+\subsection*{Ecology of Ponderosa Pine Regeneration}
+
 
 
 Many studies have found that understory vegetation competition slows the early development of ponderosa pine  
@@ -19,6 +21,35 @@ Many studies have found that understory vegetation competition slows the early d
 Busse et al. found that the presence of understory vegetation adversely affected the growth of ponderosa pine for an estimated 20 years which is a relatively short time in a long stand rotation (\cite{Busse1996}). However, the authors also noted that there is a long term benefit to the upper soil horizon from maintaining understory vegetation in the form of greater C and N.
 
 Composition of forest understory species are controlled by overstory trees which filter light, moderate understory air and soil temperature,and directly compete for soil water and nutrients cite(need Spurr and Barnes 1980). Conifer reforestation efforts are often hampered by the aggressive and competitive ability of \emph{Carex} and \emph{Calamagrostis} because they respond positively to the removal of the overstory (Sloan and Ryker 1986). 
+
+Powers et al. found that variable retention harvesting of Pondersosa Pine stands can result in improved seedling photosynthetic capacity, water relations and growth, but that the spatial pattern of retention had surprisingly little impact on average performance in the first 4 years after harvesting. This intuitive result may be observed between installations that had big differences in overstory retention.  The enhanced growth of the small trees on installations without much overstory may be perpetuated throughout the growth of the stand.
+
+
+\subsection*{Small Tree Competing Vegetation Study}
+
+Ponderosa Pine is an important species both ecologically and commercially in the Inland Northwest. Natural regeneration from seed trees following harvest is the most common reforestation technique in stands of this species. It follows that variable retention harvesting methods have long been popular in Ponderosa Pine stands. 
+
+Variable retention allows for the removal of merchantable trees while retaining a number of trees that provide both seed source for a new cohort, benefits for wildlife, and have even been proposed as an approach to emulate natural disturbances ( Franklin et al., 2000). However, there is limited work examining the factors of variable retention harvests that effect the developmental responses of the small trees released through variable retention harvests.
+
+The Small Tree Competing Vegetation Study (STCV) was initiated in 1999 to examine seedling and sapling growth response to the abundance of understory vegetation and to the density of residual overstory cover. Data from tagged small trees, understory vegetation and retained overstory was collected for the next 16 years with measurements occuring at roughly four year intervals. Preliminary findings confirmed that many of the small Ponderosa Pine seedlings and saplings remained small over the course of the study.
+
+When early characteristics of STCV small tree growth were presented at a technical conference, this obvious difference in height growth rates was pointed out by an audience member. It became apparant that modeling the mean growth response of these small trees may not be appropriate since so many "stayed small".  Rather, it would be more valuable to predict the growth response of the fastest growing small trees since these are the trees that will presumably be recruited into the overstory and eventually become commercially viable trees.
+
+\subsection*{Introduction to Quantile Regression}
+
+This desire led to an investigation of Quantile Regression as a semi-parametric approach to modeling separately the height growth of the small trees. Quantile regression utilizes the simplex algorithm (as opposed to least-squares) to optimize a linear reggresion through specified or set of specified quantiles (${\tau}$) of the response distribution (Ex: ${\tau}$=.5, the median regression). This allows for predictor variables to have entirely different coeeficient values between quantiles.
+
+
+Authors ...suggest that if ecological limiting factors act as constraints on organisms, then the estimated effects for the measured factors were not measured or not well represented in by changes in the means of the response variable distribution.
+
+The factors that affect the growth of the slowest growing trees may not be significant in predicting the growth of the fastest growing trees. This also accounts for unknown or unmeasured variables that may be explaining much of the variance in height growth response.  Unmeasured variables may relate to such things as micro-site suitablility or other location specific factors such as distance from a retained overstory tree.
+
+Qauntile regression has been used in many fields and it's utility in ecology is increasingly realized, especially as a method of estimating rates of change for functions near the upper boundary. Examples include pronghorn abundance by forage availability and ...
+
+
+
+
+
 
 
 

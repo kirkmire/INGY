@@ -68,34 +68,44 @@ plot(gam.aspect,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 #SI Quantreg (Carrying forward CW and shrub transect, TPA)
 library(quantreg)
 
-qr.SI<-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
+qr.SI<-rq(ht_annual~srHeight_Total+CrownLength+
+            # treeminus+
+            TPA.OS+SiteIndex_Value,tau=c(.5),data=annual.gr4)
 summary(qr.SI)
 aic.list.SQ<-AIC(qr.SI)[1]
 nlist.SQ<-length(qr.SI$y)
 
 #Slope Quantreg (Carrying forward CW and shrub transect, TPA)
 
-qr.slope<-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent,tau=c(.5),data=annual.gr4)
+qr.slope<-rq(ht_annual~srHeight_Total+CrownLength+
+               # treeminus+
+               TPA.OS+slopePercent,tau=c(.5),data=annual.gr4)
 summary(qr.slope)
 aic.list.SQ<-c(aic.list.SQ,AIC(qr.slope)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.slope$y))
 
 #Elev Quantreg (Carrying forward CW and shrub transect, TPA)
 
-qr.elev<-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+elevation,tau=c(.5),data=annual.gr4)
+qr.elev<-rq(ht_annual~srHeight_Total+CrownLength+
+              # treeminus+
+              TPA.OS+elevation,tau=c(.5),data=annual.gr4)
 summary(qr.elev)
 aic.list.SQ<-c(aic.list.SQ,AIC(qr.elev)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.elev$y))
 
 #Asp Quantreg (Carrying forward CW and shrub transect, TPA)
 
-qr.asp<-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+cos_rad_asp,tau=c(.5),data=annual.gr4)
+qr.asp<-rq(ht_annual~srHeight_Total+CrownLength+
+             # treeminus+
+             TPA.OS+cos_rad_asp,tau=c(.5),data=annual.gr4)
 summary(qr.asp)
 aic.list.SQ<-c(aic.list.SQ,AIC(qr.asp)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.asp$y))
 
 #Sea Interact.
-qr.sea<-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
+qr.sea<-rq(ht_annual~srHeight_Total+CrownLength+
+             # treeminus+
+             TPA.OS+
              slopePercent + # goes with coefficient b1
              slopePercent:cos_rad_asp + #with b2
              slopePercent:sin_rad_asp + #with b3

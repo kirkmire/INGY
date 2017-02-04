@@ -580,32 +580,40 @@ colnames(aic.list.OS)<-(OS.variable)
 #CW QR#####################################################
 
 #QR for Nothing
-# qr.OS.nothing<-rq(ht_annual~srHeight_Total+CrownLength+treeminus,tau=c(.5),data=annual.gr4)
-# summary(qr.OS.nothing)
-# aic.list.OS.CW<-AIC(qr.OS.nothing)[1]
-# nlist.OS<-length(qr.OS.nothing$y)
+qr.OS.nothing<-rq(ht_annual~srHeight_Total+CrownLength
+                  #  treeminus
+                  ,tau=c(.5),data=annual.gr4)
+summary(qr.OS.nothing)
+aic.list.OS.CW<-AIC(qr.OS.nothing)[1]
+nlist.OS<-length(qr.OS.nothing$y)
 
 #QR for BAPA CW
-qr.BAPA.CW<-rq(ht_annual~srHeight_Total+CrownLength+treeminus+bapa.OS,tau=c(.5),data=annual.gr4)
+qr.BAPA.CW<-rq(ht_annual~srHeight_Total+CrownLength+
+                 # treeminus+
+                 bapa.OS,tau=c(.5),data=annual.gr4)
 summary(qr.BAPA.CW)
-aic.list.OS.CW<-AIC(qr.BAPA.CW)[1]
-nlist.OS<-length(qr.BAPA.CW$y)
+aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.BAPA.CW)[1])
+nlist.OS<-c(nlist.OS,length(qr.BAPA.CW$y))
 
 #QR for CCF CW
-qr.CCF.CW<-rq(ht_annual~srHeight_Total+CrownLength+treeminus+CCF.OS,tau=c(.5),data=annual.gr4)
+qr.CCF.CW<-rq(ht_annual~srHeight_Total+CrownLength+
+                # treeminus+
+                CCF.OS,tau=c(.5),data=annual.gr4)
 summary(qr.CCF.CW)
 aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.CCF.CW)[1])
 nlist.OS<-c(nlist.OS,length(qr.CCF.CW$y))
 
 
 #QR for TPA CW
-qr.TPA.CW<-rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS,tau=c(.5),data=annual.gr4)
+qr.TPA.CW<-rq(ht_annual~srHeight_Total+CrownLength+
+                # treeminus+
+                TPA.OS,tau=c(.5),data=annual.gr4)
 summary(qr.TPA.CW)
 aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.TPA.CW)[1])
 nlist.OS<-c(nlist.OS,length(qr.TPA.CW$y))
 
 
-OS.variable<-c("BAPA","CCF","TPA")
+OS.variable<-c("Nothing","BAPA","CCF","TPA")
 
 OS.variable<-as.data.frame(OS.variable)
 

@@ -326,12 +326,26 @@ summary(qr.stcl)
 aic.list<-c(aic.list,AIC(qr.stcl)[1])
 nlist<-c(nlist,length(qr.stcl$y))
 
+#QR for Crown Ratio
+annual.gr2$cratio<-annual.gr2$CrownLength/annual.gr2$Height_Total
+qr.stcl<-rq(ht_annual~srHeight_Total+cratio,tau=c(.5),data=annual.gr2)
+summary(qr.stcl)
+aic.list<-c(aic.list,AIC(qr.stcl)[1])
+nlist<-c(nlist,length(qr.stcl$y))
+
+#GAM for Crown Width
+gam.stcw<-gam(ht_annual~s(srHeight_Total)+s(cratio),data=annual.gr2, family=gaussian(link="identity"))
+summary(gam.stcw)
+
+plot(gam.stcw,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+
+
 UT.aic<-as.data.frame(cbind(nlist,aic.list))
 
 UT.aic$aic.list<-as.numeric(UT.aic$aic.list)
 
 variable<-c("Nothing","SmallTPA","Trees15+",
-                      "TGT","BD","DBH","CrownWidth","CrownLength")
+                      "TGT","BD","DBH","CrownWidth","CrownLength","CrownRatio")
 
 variableUT<-as.data.frame(variable)
 

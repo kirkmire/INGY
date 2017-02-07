@@ -57,6 +57,16 @@ for the degree of}
 \end{center}
 
 \newpage
+Kirkmire, Colin, M.SC, May 2017                Forestry
+
+Abstract Title
+Chairperson or Co-Chairperson: Committee Member Name
+Co-Chairperson: Committee Member Name (remove this line if not applicable)
+
+Abstract Content (Single spaced, one page, two space paragraph indent, no more than 350
+words.)
+
+\newpage
 \large 
 \begin{center}
 \textbf{DEDICATION}\\[1pt]

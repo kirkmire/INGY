@@ -89,6 +89,7 @@ plot(cl.ht.gam,residuals=T,se=T,pch=".")
 \vspace{3mm}
 \end{center}
 \end{table}
+\end{spacing}
 
 
 

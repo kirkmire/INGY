@@ -51,8 +51,7 @@ tmp <- PlotOnStaticMap(basemap)
 \begin{figure}[ht]
 \begin{center}
     \includegraphics[width=.8\textwidth]{temp.png}
-    \caption{Map of STCV Installations}
-    \label{fig:map}
+    \caption{Map of STCV Installations\label{fig:map}}
 \end{center}
 \end{figure}
 

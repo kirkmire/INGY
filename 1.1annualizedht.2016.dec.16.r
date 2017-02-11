@@ -15,6 +15,12 @@ merged_stagm_stag<-merged_stagm_stag[which(merged_stagm_stag$Species=="PIPO"),]
 
 #Removes all Dead tree records
 merged_stagm_stag<-merged_stagm_stag[which(!merged_stagm_stag$Damage=="DEAD"),]
+merged_stagm_stag<-merged_stagm_stag[which(!merged_stagm_stag$Damage=="D"),]
+merged_stagm_stag<-merged_stagm_stag[which(!merged_stagm_stag$Damage=="DT"),]
+merged_stagm_stag<-merged_stagm_stag[(merged_stagm_stag$Height_Total!=0 & !is.na(merged_stagm_stag$Height_Total)),]
+
+#remove any for height total missing/0
+
 
 #Concatenates Inst and Plot for unique STP identification
 merged_stagm_stag$InstPlot<-paste(merged_stagm_stag$Installation,
@@ -57,9 +63,11 @@ merged_stagm_stag<-merged_stagm_stag[!(merged_stagm_stag$Installation=="DF"&
 #This function checks the year of measurement in the tree record against
 #the measurement timeline, finds the previous measurement year's height,
 #then subtracts the height in the first year of measurement to provide a 
-#height increment that is assigned to the 
+#height increment that is assigned to the "ht_annual" var
 
 annual.ht<-function(conca,year){
+  #conca="EM,1,1,608"
+  #year=2001
   #creates dataframe of an individual small tree in all meas years
   treeinfo<-merged_stagm_stag[merged_stagm_stag$conc==conca,]
   #selects all treeinfo records in years that are not found in timeline
@@ -98,13 +106,19 @@ for(i in 1:nrow(merged_stagm_stag)){
     merged_stagm_stag$ht_annual[i]<-annual.ht(merged_stagm_stag$conc[i], merged_stagm_stag$Year_Measurement[i])
 }
 
+
 #Remove all records with ht_annual=NA,-999, 
 #these represent end-of-timeline-interval tree records
 merged_stagm_stag$ht_annual[is.na(merged_stagm_stag$ht_annual)]<- -999     
 merged_stagm_stag<-merged_stagm_stag[!(merged_stagm_stag$ht_annual==-999),]
 
+# keep the right growth periods
+keep <- unique(timeline[,c("Installation","Year_Measurement")])
+keep <- keep[!is.na(keep$Year_Measurement),]
+merged_stagm_stag2 <- merge(merged_stagm_stag,keep)
+
 #Rename dataframe something reasonable
-annual.gr<-merged_stagm_stag
+annual.gr<-merged_stagm_stag2
 
 #Removes unneeded columns in df
 f.names<-names(annual.gr[,substring(names(annual.gr),1,1)=="F"])
@@ -129,20 +143,23 @@ table(droplevels(annual.gr$Damage)) # how many of these codes can you decipher?
 #DT=dead top
 #BT=broken top
 #ID= missing ID (we're pretty sure this is the right one though based on azimuth&dist)
-#AD=animal damage
+#AD= animal damage
 #MT= mistletoe
-#SP=?
-#X=? (160 have this code)
+#SP= species error?
+#X=? (160 have this code), no damage?
 
 
 
-annual.gr[annual.gr$Damage=="D",] # dead?
+annual.gr[annual.gr$Damage=="D",] # dead? remove
 #will look up
-annual.gr[grep("DT",annual.gr$Damage),] # dead top?
+tempdf<-annual.gr[grep("RT",annual.gr$Damage,invert=F),] # dead top?
 
 
+table(droplevels(tempdf$Damage)) # how many of these codes can you decipher?
 
 
+hist(annual.gr$ht_annual)
+hist(tempdf$ht_annual)
 
 
 

@@ -1,6 +1,7 @@
 % !Rnw root=Thesis_doc.RNW
 
 
+
 \newpage
 \clearpage
 \begin{center}
@@ -12,40 +13,40 @@
 Twenty-nine study sites (termed ``installations'') were established on a variety of cooperative member ownership ranging from the eastern slopes of the Cascade Mountains to western Montana. The installations fall within three distinct geographic areas; central Washington, eastern Washington/Idaho and western Montana. \\[4pt]
 
 
-<<fig=FALSE,include=FALSE, echo=FALSE>>=
+ <<fig=FALSE,include=FALSE, echo=FALSE>>=
 #! 2. subset of installations
 library(RODBC)
 library(RgoogleMaps)
 
-locs0 <- sinstloc[sinstloc$Coordinate_Type=="DD" & 
-                    !(sinstloc$Installation %in% drp60),]
+ locs0 <- sinstloc[sinstloc$Coordinate_Type=="DD" &
+                     !(sinstloc$Installation %in% drp60),]
 
-locs0v2 <- reshape(locs0,direction="wide",
-                   v.names="Coordinate_Value",
-                   timevar="Coordinate_Axis",
-                   idvar=c("Installation","Plot"))
-locs0v2 <- locs0v2[locs0v2$Plot==0,c(1,3,5,6)]
-names(locs0v2)[3:4] <- c("Long","Lat")
+ locs0v2 <- reshape(locs0,direction="wide",
+                    v.names="Coordinate_Value",
+                    timevar="Coordinate_Axis",
+                    idvar=c("Installation","Plot"))
+ locs0v2 <- locs0v2[locs0v2$Plot==0,c(1,3,5,6)]
+ names(locs0v2)[3:4] <- c("Long","Lat")
 
-#! 3. map it
-ratio <- 5/10 #height to width ratio of map
+ #! 3. map it
+ ratio <- 5/10 #height to width ratio of map
 
-png("inst_map.png",width=150*10,height=150*10*ratio,pointsize=8,res=8000)
-boxit <- qbbox(locs0v2$Lat,locs0v2$Long, TYPE="all")
-basemap <- GetMap.bbox(boxit$lonR,boxit$latR, size=c(400,400*ratio),
-                       destfile="temp.png", maptype="terra-in") #"mapmaker-hybrid",
-tmp <- PlotOnStaticMap(basemap)
-#tmp <- PlotOnStaticMap(basemap,cex=2,pch=21,col="red",
-                      # lat=locs0v2$Lat,
-                       #lon=locs0v2$Long)
-#For text labels
- tmp <- PlotOnStaticMap(basemap,cex=.03,col="black",add=T,
-                        FUN=points)
-#  lat=locs0v2$Lat,
-#  lon=locs0v2$Long,
-#  FUN=text,
-#  labels=locs0v2$Installation)
-#dev.off()
+ png("inst_map.png",width=150*10,height=150*10*ratio,pointsize=8,res=8000)
+ boxit <- qbbox(locs0v2$Lat,locs0v2$Long, TYPE="all")
+ basemap <- GetMap.bbox(boxit$lonR,boxit$latR, size=c(400,400*ratio),
+                        destfile="temp.png", maptype="terra-in") #"mapmaker-hybrid",
+ #tmp <- PlotOnStaticMap(basemap)
+ #tmp <- PlotOnStaticMap(basemap,cex=2,pch=21,col="red",
+                       # lat=locs0v2$Lat,
+                        #lon=locs0v2$Long)
+ #For text labels
+tmp <- PlotOnStaticMap(basemap,cex=.03,col="black",add=T,
+
+lat=locs0v2$Lat,
+lon=locs0v2$Long,
+FUN=text,
+labels=locs0v2$Installation)
+dev.off()
 @
 
 \begin{figure}[ht]
@@ -69,7 +70,7 @@ Installations were established in stands with various forest cover (e.g., mixed 
 
 The site productivity of the installations was measured according to the dominate site tree which varied between ponderosa pine, douglas fir and western larch. Selecting only stands with greater than 60 small tagged ponderosa for this analysis effectively removed nearly all stands that measured site index with a species besides ponderosa pine.
 
-There appears to be a group of six installations with similarly low overstory retention levels and high site index values \ref{fig:siteOverstory}.  This makes sense from a forest management perspective, that relatively little residual overstory would be left on sites with higher productivity.  These installations could be used to develop the understory model since they are so similar in overstory and site productivity. There are many other installations that can be brought in later to expand the model to other various levels of productivity and overstory retention.
+There appears to be a group of six installations with similarly low overstory retention levels and high site index values (see Figure \ref{fig:siteOverstory}).  This makes sense from a forest management perspective, that relatively little residual overstory would be left on sites with higher productivity.  These installations could be used to develop the understory model since they are so similar in overstory and site productivity. There are many other installations that can be brought in later to expand the model to other various levels of productivity and overstory retention.
 
 \begin{figure}
 \begin{center}
@@ -111,15 +112,15 @@ xyplot(sinst1$SiteIndex_Value~sinst1$minOSBA,
 \end{figure}
 
 
-The temporal initiation of installations varied with most being established in the last years of the 1990s and early 2000s.  Three check plots were also installed to audit the quality of the data collection efforts. Treatments were randomly assigned to seven plots within each installation \ref{fig:instLayout}.  Three plots received multiple applications of regionally effective herbicide.  The remaining four plots are split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.\\[2pt]
+The temporal initiation of installations varied with most being established in the last years of the 1990s and early 2000s.  Three check plots were also installed to audit the quality of the data collection efforts. Treatments were randomly assigned to seven plots within each installation (see Figure \ref{fig:instLayout}).  Three plots received multiple applications of regionally effective herbicide.  The remaining four plots are split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.\\[2pt]
 
 The primary objective of the herbicide treatments is to decouple the site quality and vegetative effects. It has been reported that like tree growth increases in good sites, levels of
 understory increase as well (Stage and Boyd 1987, Walstad and Kuch 1987). The herbicide treatments allow us to see how small trees grow under varying levels of site quality without the presence of  corresponding non-tree vegetation.)\\[2pt]
 
-\ref{fig:timeline} shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at each installation at four year intervals was successful for many installations but in some cases the intervals are somewhat irregular (i.e., 3-5 years in length). The schedule of measurements was based on the twelve-year projection cycles that were used by participating cooperative members.\\[2pt]
+Figure \ref{fig:timeline} shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at each installation at four year intervals was successful for many installations but in some cases the intervals are somewhat irregular (i.e., 3-5 years in length). The schedule of measurements was based on the twelve-year projection cycles that were used by participating cooperative members.\\[2pt]
+
 \begin{figure}
 \begin{center}
-
 <<label=timeline,fig=TRUE,echo=FALSE>>=
 library(lattice)
 
@@ -148,9 +149,6 @@ xyplot(Installation ~ Year_Measurement,
            panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
            }})
 
-
-
-dev.off()
 @
 \end{center}
 \caption{Timeline of Installation Measurements and Treatments.\label{fig:timeline}}
@@ -180,7 +178,7 @@ barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, groups=
          #main="Motor insurance claims frequency"
          xlab="Installation", ylab="Vegetation Volume",
         scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)),                  
-         auto.key=list(space="bottom", columns=1, 
+         auto.key=list(space="right", columns=1, 
                        points=FALSE, rectangles=TRUE,
                        title="Treatment", cex.title=1),
          par.settings = my.settings,
@@ -196,7 +194,7 @@ barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, groups=
 \caption{Control and Herbicide Plot Vegetation Volume\label{fig:vegVol}}
 \end{figure}
 
-When comparing the vegetation volumes between the control and the herbicide plots at the beginning of the measurement intervals, it is apparent that there is a large drop in volume within installations with large amounts of understory vegetation when herbicide is applied(see \ref{fig:vegVol}). However, the herbicide applications failed to contribute to a marked difference in volume in installations of little volume in control plots.
+When comparing the vegetation volumes between the control and the herbicide plots at the beginning of the measurement intervals, it is apparent that there is a large drop in volume within installations with large amounts of understory vegetation when herbicide is applied (see Figure \ref{fig:vegVol}). However, the herbicide applications failed to contribute to a marked difference in volume in installations of little volume in control plots.
 
 
 
@@ -238,7 +236,7 @@ draw.radial.line(2,33, center=c(80,80),deg=330,lwd=1)
 
 #Drawing Veg Quad Squares#
 rect(80-(1*3.28084),113-(1*3.28084),80+(1*3.28084),113+(1*3.28084),col=NA,border="black", lwd=1)
-rect(80,113,80+(1*3.28084),113+(1*3.28084),col=NA,border="black", lwd=1)
+rect(80,113,80+(1*3.28084),113,col=NA,border="black", lwd=1)
 
 rect(80-(1*3.28084),47-(1*3.28084),80+(1*3.28084),47+(1*3.28084),col=NA,border="black", lwd=1)
 rect(80-(1*3.28084),47,80,47,col=NA,border="black", lwd=1)
@@ -260,7 +258,7 @@ for(i in 1:length(S.tran)){
 \caption{Design of STCV Sampling Plot. Note that transect points and quadrants exist for all six small tree plots although only illustrated on two.\label{fig:samplePlot}}
 \end{figure}
 
-Each plot contains a series of nested plots that decrease in area with physiologically smaller vegetation units \ref{fig:samplePlot}. Starting with the full extent of the plot, overstory trees (> 10.5 in DBH) were measured on an approximately half acre. Medium trees, with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested plot of roughly a quarter acre.
+Each plot contains a series of nested plots that decrease in area with physiologically smaller vegetation units (see Figure \ref{fig:samplePlot}). Starting with the full extent of the plot, overstory trees (> 10.5 in DBH) were measured on an approximately half acre. Medium trees, with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested plot of roughly a quarter acre.
 Small trees were measured on six .007 acre plots 60 degrees apart from plot center at a distance of approximately 30 feet.  Small trees are defined as those that have a DBH less than 3.5 in yet are greater than .5 ft in height for shade tolerant species or 1 ft for shade intolerant at the time of initial measurements.\\[2pt]
 
 There were two sampling methods used to measure vegetative competition. The first was transect based where point measurements of vegetation were obtained at one foot intervals along a 40 ft transect.  We also took vegetation measurements in the middle of the small tree plots in the form of both 1m2 and 4m2 grids. These vegetation measurements quantified separately the amounts of forbs, grasses and shrubs to the species level.  This is an example of how the resolution of the data goes beyond the scope of this analysis though will undoubtedly be of use in future research efforts.\\[2pt]
@@ -310,22 +308,35 @@ Site index was included from STCV records of each installation's initiation. An 
 \subsection{Variable Selection}
 
 
-\par Only the installations with greater than 60 ponderosa pine tagged small trees at initiation will be included in the model \ref{numb.pond}.  Within each plot, one of the sixth STPs was randomly selected as validation data. The randomness was neccesary to account for the uphill orientation of the first STP on each plot and clockwise layout of remaining STPSs. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  
+\par Only the installations with greater than 60 ponderosa pine tagged small trees at initiation will be included in the model (see Figure \ref{numbPond}).  Within each plot, one of the sixth STPs was randomly selected as validation data. The randomness was neccesary to account for the uphill orientation of the first STP on each plot and clockwise layout of remaining STPSs. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  
 
 \begin{figure}
 \begin{center}
-<<label=numbPond, fig=TRUE,width=4,height=4,echo=FALSE>>=
+<<label=numbPond, fig=TRUE,width=6,height=4,echo=FALSE>>=
 #Frequency Plot by Species#
 pipond<-pi[!pi$Installation %in% drp60,]
-sort(pipond$Freq,decreasing=F)
+#sort(pipond$Freq,decreasing=F)
 pipond<- pipond[order(pipond$Freq),] 
 
 library(lattice)
-barchart(pipond$Freq~pipond$Installation,
-        xlab="Installation",
-        col="black",
-        ylab="Number of Tagged Small Trees")
-        #main=list(label="Tagged Ponderosa Pine at Initiation") 
+
+barchart(pipond$Freq ~ pipond$Installation,
+         origin=0, 
+         #main="Motor insurance claims frequency"
+         xlab="Installation", ylab="Number of Tagged Small Trees",
+        scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)), 
+         ylim=c(0,270),
+         # auto.key=list(space="right", columns=1, 
+         #               points=FALSE, rectangles=TRUE,
+         #               title="Treatment", cex.title=1),
+         par.settings = my.settings,
+         par.strip.text=list(col="white", font=2),
+         panel=function(x,y,...){
+           panel.grid(h=-1, v=0); 
+           panel.barchart(x,y,...)
+         }
+)
+
 
 @
 \end{center}
@@ -349,6 +360,5 @@ Model building will proceed from category to category with the model of lowest A
 
 
 Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare small tree growth to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.
-
 
 

@@ -10,7 +10,7 @@
 \normalsize
 \subsection{Sampling Strategy}
 \doublespacing
-Twenty-nine study sites (termed ``installations'') were established on a variety of cooperative member ownership ranging from the eastern slopes of the Cascade Mountains to western Montana. The installations fall within three distinct geographic areas; central Washington, eastern Washington/Idaho and western Montana. \\[4pt]
+Twenty-nine study sites (termed ``installations'') were established on a variety of cooperative member ownership ranging from the eastern slopes of the Cascade Mountains to western Montana. The installations fall within three distinct geographic areas; central Washington, eastern Washington/Idaho and western Montana. 
 
 
  <<fig=FALSE,include=FALSE, echo=FALSE>>=
@@ -61,7 +61,7 @@ dev.off()
 
 
 
-Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or harvested with one of the aforementioned variable retention harvest systems: shelterwood, seed tree and heavy thinning. \\[2pt]
+Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or harvested with one of the aforementioned variable retention harvest systems: shelterwood, seed tree and heavy thinning. 
 
 \begin{figure}[ht]
 \begin{center}
@@ -77,7 +77,7 @@ There appears to be a group of six installations with similarly low overstory re
 
 \begin{figure}
 \begin{center}
-<<label=siteOverstory, fig=TRUE,width=4,height=3,echo=FALSE>>=
+<<fig=TRUE,width=4,height=3,echo=FALSE>>=
 #Frequency Plot by Species#
 
 library(lattice)
@@ -115,16 +115,16 @@ xyplot(sinst1$SiteIndex_Value~sinst1$minOSBA,
 \end{figure}
 
 
-The temporal initiation of installations varied with most being established in the last years of the 1990s and early 2000s.  Three check plots were also installed to audit the quality of the data collection efforts. Treatments were randomly assigned to seven plots within each installation (see Figure \ref{fig:instLayout}).  Three plots received multiple applications of regionally effective herbicide.  The remaining four plots are split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.\\[2pt]
+The temporal initiation of installations varied with most being established in the last years of the 1990s and early 2000s.  Three check plots were also installed to audit the quality of the data collection efforts. Treatments were randomly assigned to seven plots within each installation (see Figure \ref{fig:instLayout}).  Three plots received multiple applications of regionally effective herbicide.  The remaining four plots are split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.
 
 The primary objective of the herbicide treatments is to decouple the site quality and vegetative effects. It has been reported that like tree growth increases in good sites, levels of
-understory increase as well (Stage and Boyd 1987, Walstad and Kuch 1987). The herbicide treatments allow us to see how small trees grow under varying levels of site quality without the presence of  corresponding non-tree vegetation.)\\[2pt]
+understory increase as well (Stage and Boyd 1987, Walstad and Kuch 1987). The herbicide treatments allow us to see how small trees grow under varying levels of site quality without the presence of  corresponding non-tree vegetation.)
 
-Figure \ref{fig:timeline} shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at each installation at four year intervals was successful for many installations but in some cases the intervals are somewhat irregular (i.e., 3-5 years in length). The schedule of measurements was based on the twelve-year projection cycles that were used by participating cooperative members.\\[2pt]
+Figure \ref{fig:timeline} shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at each installation at four year intervals was successful for many installations but in some cases the intervals are somewhat irregular (i.e., 3-5 years in length). The schedule of measurements was based on the twelve-year projection cycles that were used by participating cooperative members.
 
 \begin{figure}
 \begin{center}
-<<label=timeline,fig=TRUE,echo=FALSE>>=
+<<fig=TRUE,echo=FALSE>>=
 library(lattice)
 
 #w/ meast#########################
@@ -158,9 +158,7 @@ xyplot(Installation ~ Year_Measurement,
 \end{figure}
 \text{Squares are years of understory and small tree measurements. Green and red triagles represent years of overstory measurements and herbacide treatment, respectively. Note that year the initial measurement periods selected such that they follow herbicide treatments.}
 
-
-
-A point of concern is that some measurements were taken at times that would not have allowed for the herbicide applications to take full effect. That is, several measurements were concurrent with or followed too quickly after the first herbicide application.  This necessitated careful selection of the appropriate measurement years on a per installation basis. Generally, "first interval years" were selected such that one to three years following the initial herbicide application were included to allow for the herbicide to take effect. Ultimately, the growth measurements will be put on the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. \\[2pt]
+A point of concern is that some measurements were taken at times that would not have allowed for the herbicide applications to take full effect. That is, several measurements were concurrent with or followed too quickly after the first herbicide application.  This necessitated careful selection of the appropriate measurement years on a per installation basis. Generally, "first interval years" were selected such that one to three years following the initial herbicide application were included to allow for the herbicide to take effect. Ultimately, the growth measurements will be put on the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. 
 
 \begin{figure}
 \begin{center}
@@ -271,7 +269,11 @@ There were two sampling methods used to measure vegetative competition. The firs
 
 The objective is to obtain a parsimonious model that is easily understood and informed by our understanding of the factors surrounding small tree growth. The variable selection process for each individual quantile will be guided by the ecological framework behind small tree growth. The quantile regression model was constructed in a forward stepwise selection that proceeded from one of the four previously mentioned categories of ecological competition that affect tree growth (see Figure \ref{fig:chart} on page \pageref{fig:chart}). These categories are understory tree competition, understory non-tree vegetative competition, retained overstory competition, and site productivity.  
 
-Only the installations with greater than 60 ponderosa pine tagged small trees at initiation will be included in the model (see Figure \ref{numbPond}).  Within each plot, one of the sixth STPs was randomly selected as validation data. The randomness was neccesary to account for the uphill orientation of the first STP on each plot and clockwise layout of remaining STPSs. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  
+Only the installations with greater than 60 ponderosa pine tagged small trees at initiation will be included in the model (see Figure \ref{numbPond}). At these installations, the response variable; annual height increment, was calculated by finding the appropriate measurement intervals according to the timeline in Figure\ref{fig:timeline} on page \pageref{fig:timeline}, then subtracting earlier height increments from the latter and then dividing by the difference between measurement years. 
+
+It was also during this stage of preparation that damage codes were addressed. Over the years many of the small tagged trees endured some kind of damage (see figure of damage codes) including mortality, broken tops, forked tops, sweep or animal damage. Dead trees and those with dead tops were removed from analysis since these trees typically had annualized height growth increments of zero or below.
+
+Within each plot, one of the six small tree plots was randomly selected as validation data. The randomness was neccesary to account for the uphill orientation of the first STP on each plot and clockwise layout of remaining STPSs. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  
 
 \begin{figure}
 \begin{center}
@@ -308,7 +310,7 @@ barchart(pipond$Freq ~ pipond$Installation,
 
 
 
-Within each category of ecological factor, a subset of relevant variables were considered that also evaluated the utility of higher-order polynomial expressions of predictor variables using generalized additive models (GAM) with smoothers of first-order predictors. If inclusion of a higher-order predictor was justified by the partial residual plot from a GAM then it was considered alongside all other predictors and as an interaction term. Variable selection from within these categories was made with respect to their importance in describing trends in the median ($\tau$=.5) quantile regression using the \texttt{quantreg} package by Roger Koenker \cite{Koenker2015}. The square root of initial height (height at the beginning of measurement period) explains much of the variability in height growth increment and was included as a predictor in the base model.
+Within each category of ecological factor, a subset of relevant predictor variables were considered that also evaluated the utility of higher-order polynomial expressions using generalized additive models (GAM) with smoothers of first-order predictors. If inclusion of a higher-order predictor was justified by the partial residual plot from a GAM then it was considered alongside all other predictors and as an interaction term. Variable selection from within these categories was made with respect to their importance in describing trends in the median ($\tau$=.5) quantile regression using the \texttt{quantreg} package by Roger Koenker \cite{Koenker2015}. The square root of initial height (height at the beginning of measurement period) explains much of the variability in height growth increment and was included as a predictor in the base model.
 
 
 Aikekes Information Criterion (AIC) was used to compare model fit between variables within each category. The predictor with the lowest AIC was selected to represent that category in the model. If two predictors had similarly low AIC values, then they were both carried forward into the subsequent categories until a clear advantage could be discerned. If a category was unable to produce a predictor with a meaningfully low AIC or the predictor was deemed immpractical, no predictor was selected from that category. Refer to appendix \ref{B. Variable Selection Steps} for a step-by-step guide to model construction.
@@ -345,14 +347,14 @@ Site index was included from STCV records of each installation's initiation. An 
 \subsection{Model Evaluation}
 
 
-The constructed model is predictive in the sense that it attempts to predict several quantiles height growth increments. For example, the model cannot determine whether specific trees will be projected to be above or below the .9 quantile line but rather predict what the .9 quantile height itself is for a given set of predictors. If enough information was known about these trees to predict which would be the fastest growing trees, it would negate the utility of quantile regression.\\[2pt]
+The constructed model is predictive in the sense that it attempts to predict several quantiles height growth increments. For example, the model cannot determine whether specific trees will be projected to be above or below the .9 quantile line but rather predict what the .9 quantile height itself is for a given set of predictors. If enough information was known about these trees to predict which would be the fastest growing trees, it would negate the utility of quantile regression.
 
-The fact that quantile regression attempts to characterize the entire distribution of heights makes it more difficult to test and validate than an ordinary least squares regression.  The regression estimates at the selected quantile provide predictions for that specific quantile and it is likely that the predictive ability of the model changes at different quantiles.  For example, the model may predict the median better than the upper quantile. \\[2pt]
+The fact that quantile regression attempts to characterize the entire distribution of heights makes it more difficult to test and validate than an ordinary least squares regression.  The regression estimates at the selected quantile provide predictions for that specific quantile and it is likely that the predictive ability of the model changes at different quantiles.  For example, the model may predict the median better than the upper quantile. 
 
-To evaluate the model, three quantiles will be fitted to represent the range of the response distribution (.90,.50 and .10).  The height increments from the withheld plot data will then be compared to the height of the predicted quantile regression line for its corresponding predictor variables.  For example, if the .90 quantile plane is a good fit, then theoretically 10\% of the height increments will lie above the plane and 90\% below.  The bins between the .10, .50 and .90 planes will be evaluated in a similar manner. To examine the distribution of repsonses at a finer resolution, the bins can be constructed at every decile (i.e. .10,.20,.30 etc.).\\[2pt]
+To evaluate the model, three quantiles will be fitted to represent the range of the response distribution (.90,.50 and .10).  The height increments from the withheld plot data will then be compared to the height of the predicted quantile regression line for its corresponding predictor variables.  For example, if the .90 quantile plane is a good fit, then theoretically 10\% of the height increments will lie above the plane and 90\% below.  The bins between the .10, .50 and .90 planes will be evaluated in a similar manner. To examine the distribution of repsonses at a finer resolution, the bins can be constructed at every decile (i.e. .10,.20,.30 etc.).
 
-With the the ability to predict annual height increments by quantile, we can predict the quantile height increments for new sets of data and thus have an idea of what the fastest growing small trees will advance in terms of an annual height increment.\\[2pt]
+With the the ability to predict annual height increments by quantile, we can predict the quantile height increments for new sets of data and thus have an idea of what the fastest growing small trees will advance in terms of an annual height increment.
 
-Following this initial evaluation, an installation's tagged subject trees will be selected to have their height growth increments predicted in the USFS Forest Vegetation Simulator (FVS).  These predicted height increments will then be evaluated as above.  It is not expected that .90 of the predicted tree heights will fall below that .90 quantiles for example. The FVS small tree height increment growth sub-model is based on a least squares regression model \cite{Dixon2002} so it is very unlikely that the predicted heights will correspond to the quantile planes.   Rather, this exercise is to illuminate how far from the actual growth response distribution of small trees FVS predictions can be.\\[2pt]
+Following this initial evaluation, an installation's tagged subject trees will be selected to have their height growth increments predicted in the USFS Forest Vegetation Simulator (FVS).  These predicted height increments will then be evaluated as above.  It is not expected that .90 of the predicted tree heights will fall below that .90 quantiles for example. The FVS small tree height increment growth sub-model is based on a least squares regression model \cite{Dixon2002} so it is very unlikely that the predicted heights will correspond to the quantile planes.   Rather, this exercise is to illuminate how far from the actual growth response distribution of small trees FVS predictions can be.
 
 

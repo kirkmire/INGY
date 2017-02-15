@@ -21,23 +21,20 @@
 
 \hline
 
-Nothing&1816&3083.98&Nothing&4228&5008.34&Nothing&4228&4910.01\tabularnewline
-SmallTPA&1816&2843.32&POLV.cov&4228&4953.03&BAPA&4228&4539.63\tabularnewline
-Trees15+&1811&2965.7&F.cov&4228&5001.07&CCF&4228&4363.87\tabularnewline
-TGT&1811&2896.52&LS.cov&4228&5009&\textbf{TPA}&4228&4272.83\tabularnewline
-BD&1814&2359.86&HS.cov&4228&4999.4&Site&n&AIC\tabularnewline
-DBH&1334&2053.96&G.cov&4228&5005.13&SI&4228&3942.94\tabularnewline
-CrownWidth&1813&2802.97&LS.diff&4228&4924.31&Slope&4228&4127.8\tabularnewline
-\textbf{CrownLength}&1808&2705.84&HS.diff&4228&4861.02&Elevation&4228&4202.6\tabularnewline
-&&&LS.tran&4228&4973.72&Aspect&4228&4133.11\tabularnewline
-&&&HS.tran&4228&4929.58&\textbf{SEA Int}&4228&3740.49\tabularnewline
-&&&G.tran.diff&4228&4893.88&&&\tabularnewline
-&&&G.tran.cov&4226&5008.45&&&\tabularnewline
-&&&mx.vg.diff1m&4228&4771.1&&&\tabularnewline
-&&&\textbf{mx.vg.diff.tr}&4228&4771.1&&&\tabularnewline
-
-
-
+Nothing&683&1267.72&Nothing&2155&1952.73&Nothing&2155&1952.73\tabularnewline
+SmallTPA&683&1128.73&POLV.cov&2155&1917.27&BAPA&2155&1878.24\tabularnewline
+Trees15+&680&1211.25&F.cov&2155&1936.24&CCF&2155&1799.89\tabularnewline
+TGT&680&1164.91&LS.cov&2155&1947.57&TPA&2155&1753.38\tabularnewline
+BD&682&928.5&HS.cov&2155&1946.06&Site&n&AIC\tabularnewline
+DBH&596&928.2&G.cov&2155&1943.72&TPA&2155&1753.38\tabularnewline
+CrownWidth&680&1126.07&LS.diff&2155&1872&SI&2155&1590.61\tabularnewline
+CrownLength&680&1014.34&HS.diff&2155&1862.7&Slope&2155&1735.13\tabularnewline
+CrownRatio&680&934.79&LS.tran&2155&1875.83&Elevation&2155&1752.72\tabularnewline
+&&&HS.tran&2155&1912.21&Aspect&2155&1696.07\tabularnewline
+&&&G.tran.diff&2155&1863.14&SEA Int&2155&1518.36\tabularnewline
+&&&G.tran.cov&2153&1953.86&&&\tabularnewline
+&&&mx.vg.diff1m&2155&1925.21&&&\tabularnewline
+&&&mx.vg.diff.tr&2155&1925.21&&&\tabularnewline
 
 \hline
 \end{tabular}
@@ -62,17 +59,17 @@ A number of reports on Ponderosa Pine Level-of-Growing Stock Study found that re
 
 \begin{figure}
 \begin{center}
-<<test, width=8, height=8, fig.show='hold'>>=
+<<fig=TRUE,width=4,height=3,echo=FALSE>>=
 sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
 plot(sr.ht.gam,residuals=T,se=T,pch=".")
-cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$CrownLength))
+cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$cratio))
 plot(cl.ht.gam,residuals=T,se=T,pch=".")
 @
 \end{center}
 \caption{Timeline of Installation Measurements and Treatments}
 \end{figure}
 
-\begin{table}[hptb]
+\begin{table}[ht]
 \caption{Engel's Law\label{fit1}}
 \begin{center}
 \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|} \hline

@@ -24,21 +24,21 @@ aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
 aic.lists$AIC<-round(aic.lists$AIC,2)
 
 final.aic<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
-final.aic$X1[1:8]<-as.character(aic.lists$Variable[1:8])
-final.aic$X2[1:8]<-aic.lists$n[1:8]
-final.aic$X3[1:8]<-aic.lists$AIC[1:8]
-final.aic$X4[1:14]<-as.character(aic.lists$Variable[9:22])
-final.aic$X5[1:14]<-aic.lists$n[9:22]
-final.aic$X6[1:14]<-aic.lists$AIC[9:22]
-final.aic$X7[1:4]<-as.character(aic.lists$Variable[23:26])
-final.aic$X8[1:4]<-aic.lists$n[23:26]
-final.aic$X9[1:4]<-aic.lists$AIC[23:26]
+final.aic$X1[1:9]<-as.character(aic.lists$Variable[1:9])
+final.aic$X2[1:9]<-aic.lists$n[1:9]
+final.aic$X3[1:9]<-aic.lists$AIC[1:9]
+final.aic$X4[1:14]<-as.character(aic.lists$Variable[10:23])
+final.aic$X5[1:14]<-aic.lists$n[10:23]
+final.aic$X6[1:14]<-aic.lists$AIC[10:23]
+final.aic$X7[1:4]<-as.character(aic.lists$Variable[24:27])
+final.aic$X8[1:4]<-aic.lists$n[24:27]
+final.aic$X9[1:4]<-aic.lists$AIC[24:27]
 final.aic$X7[5]<-"Site"
 final.aic$X8[5]<-"n"
 final.aic$X9[5]<-"AIC"
-final.aic$X7[6:10]<-as.character(aic.lists$Variable[27:31])
-final.aic$X8[6:10]<-aic.lists$n[27:31]
-final.aic$X9[6:10]<-aic.lists$AIC[27:31]
+final.aic$X7[6:10]<-as.character(aic.lists$Variable[28:32])
+final.aic$X8[6:10]<-aic.lists$n[28:32]
+final.aic$X9[6:10]<-aic.lists$AIC[28:32]
 
 
 

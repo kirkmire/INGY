@@ -1,5 +1,7 @@
 % !Rnw root=Thesis_doc.RNW
 
+% Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare small tree growth to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.
+
 
 \newpage
 \subsection{Variable Selection Results and Model Evaluation}

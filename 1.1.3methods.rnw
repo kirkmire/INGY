@@ -18,34 +18,37 @@ Twenty-nine study sites (termed ``installations'') were established on a variety
 library(RODBC)
 library(RgoogleMaps)
 
- locs0 <- sinstloc[sinstloc$Coordinate_Type=="DD" &
-                     !(sinstloc$Installation %in% drp60),]
 
- locs0v2 <- reshape(locs0,direction="wide",
-                    v.names="Coordinate_Value",
-                    timevar="Coordinate_Axis",
-                    idvar=c("Installation","Plot"))
- locs0v2 <- locs0v2[locs0v2$Plot==0,c(1,3,5,6)]
- names(locs0v2)[3:4] <- c("Long","Lat")
+#! 2. subset of installations
+locs0 <- sinstloc[sinstloc$Coordinate_Type=="DD" & 
+                    !(sinstloc$Installation %in% drp60),]
+locs0v2 <- reshape(locs0,direction="wide",
+                   v.names="Coordinate_Value",
+                   timevar="Coordinate_Axis",
+                   idvar=c("Installation","Plot"))
+locs0v2 <- locs0v2[locs0v2$Plot==0,c(1,3,5,6)]
+names(locs0v2)[3:4] <- c("Long","Lat")
 
- #! 3. map it
- ratio <- 5/10 #height to width ratio of map
 
- png("inst_map.png",width=150*10,height=150*10*ratio,pointsize=8,res=8000)
- boxit <- qbbox(locs0v2$Lat,locs0v2$Long, TYPE="all")
- basemap <- GetMap.bbox(boxit$lonR,boxit$latR, size=c(400,400*ratio),
-                        destfile="temp.png", maptype="terra-in") #"mapmaker-hybrid",
- #tmp <- PlotOnStaticMap(basemap)
- #tmp <- PlotOnStaticMap(basemap,cex=2,pch=21,col="red",
-                       # lat=locs0v2$Lat,
-                        #lon=locs0v2$Long)
- #For text labels
-tmp <- PlotOnStaticMap(basemap,cex=.03,col="black",add=T,
+#! 3. map it
+ratio <- 6/10 #height to width ratio of map
 
+png("inst_map.png",width=300*10,height=300*10*ratio,pointsize=12,res=300)
+boxit <- qbbox(locs0v2$Lat,locs0v2$Long, TYPE="all")
+basemap <- GetMap.bbox(boxit$lonR,boxit$latR, size=c(640,640*ratio),
+                       destfile="temp.png", maptype="terra-in") #"mapmaker-hybrid",
+tmp <- PlotOnStaticMap(basemap)
+tmp <- PlotOnStaticMap(basemap,cex=2,pch=21,col="red",
+                       lat=locs0v2$Lat,
+                       lon=locs0v2$Long)
+
+#For text labels
+tmp <- PlotOnStaticMap(basemap,cex=.5,col="black",add=T,
 lat=locs0v2$Lat,
 lon=locs0v2$Long,
-FUN=text,
-labels=locs0v2$Installation)
+FUN=text,labels=locs0v2$Installation)
+
+
 dev.off()
 @
 
@@ -263,52 +266,12 @@ Small trees were measured on six .007 acre plots 60 degrees apart from plot cent
 
 There were two sampling methods used to measure vegetative competition. The first was transect based where point measurements of vegetation were obtained at one foot intervals along a 40 ft transect.  We also took vegetation measurements in the middle of the small tree plots in the form of both 1m2 and 4m2 grids. These vegetation measurements quantified separately the amounts of forbs, grasses and shrubs to the species level.  This is an example of how the resolution of the data goes beyond the scope of this analysis though will undoubtedly be of use in future research efforts.\\[2pt]
 
-\subsection{Statistical Approach}
-
-This research seeks to address the question of how to predict the response distribution of small ponderosa pine tree height growth increments.  To achieve this ends, a nonparametric statistical regression technique known as quantile regression will be utilized to fit growth curves over select quantiles of the response distribution heights by a set of ecologically and statistically significant predictors. Thus we will be able to predict the heights of the "fastest", "median" and "slowest" growing trees.
-This research has widespread applications in the management of ponderosa pine stands since the fastest growing trees are
-presumably those that progress into the canopy and those that may be retained with preference in the context of a thinning.\\[2pt]
-
-The model is predictive in the sense that it will attempt to predict several quantiles height growth increments. For example, the model will not be able to determine whether specific trees will be projected to be above or below the .9 quantile line but rather predict what the .9 quantile height itself is for a given set of predictors. If enough information was known about these trees to predict which would be the fastest growing trees, it would negate the utility of quantile regression.\\[2pt]
-
-The fact that quantile regression attempts to characterize the entire distribution of heights makes it much more difficult to test and validate than an ordinary least squares regression.  The regression estimates at the selected quantile provide predictions for that specific quantile and it is likely that the predictive ability of the model changes at different quantiles.  For example, the model may predict the median better than the upper quantile. \\[2pt]
-
-To evaluate the model, three quantiles will be fitted to represent the range of the response distribution (.90,.50 and .10).  The height increments from the withheld plot data will then be compared to the height of the predicted quantile regression line for its corresponding predictor variables.  For example, if the .90 quantile plane is a good fit, then theoretically 10\% of the height increments will lie above the plane and 90\% below.  The bins between the .10, .50 and .90 planes will be evaluated in a similar manner. \\[2pt]
-
-With the the ability to predict quantile annual height increments, we can predict the quantile height increments for new sets of data and thus have an idea of what the fastest growing small trees will advance in terms of an annual height increment.\\[2pt]
-
-Following this initial evaluation, an installation's tagged subject trees will be selected to have their height growth increments predicted in the USFS Forest Vegetation Simulator (FVS).  These predicted height increments will then be evaluated as above.  It is not expected that .90 of the predicted tree heights will fall below that .90 quantiles for example. The FVS small tree height increment growth sub-model is based on a least squares regression model \cite{Dixon2002} so it is very unlikely that the predicted heights will correspond to the quantile planes.   Rather, this exercise is to illuminate how far from the actual growth response distribution of small trees FVS predictions can be.\\[2pt]
-
 \newpage
-\subsection{Variable Acquisition}
+\subsection{Model Construction}
 
-\textbf{Understory Tree:}
-The tallies of small trees from each small tree plot (STP) were summed by height class and then multiplied by 138.73 to obtain per acre estimates.  The number of trees greater than the subject trees was found by summing all height class tallies with class midpoints greater than the height of the subject tree. Crown length was found by subtracting the crown base from the total height.  Crown width was found as an average of the two perpendicular measurements of crown width obtained in the field. Basal diameter and DBH required no further refinement.
+The objective is to obtain a parsimonious model that is easily understood and informed by our understanding of the factors surrounding small tree growth. The variable selection process for each individual quantile will be guided by the ecological framework behind small tree growth. The quantile regression model was constructed in a forward stepwise selection that proceeded from one of the four previously mentioned categories of ecological competition that affect tree growth (see Figure \ref{fig:chart} on page \pageref{fig:chart}). These categories are understory tree competition, understory non-tree vegetative competition, retained overstory competition, and site productivity.  
 
-\textbf{Understory Vegetation:}
-
-Only the 1m vegetation plots were utilized in this study since they were used for the duration of the study.  Average differences at the STP level between base and top height measurements were found separately for forbs,low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were found for polyvegetation, forbs, low shrubs, high shrubs and grasses.  Average height differences for low shrubs, high shrubs, forbs were calculated for the 30 or 40 transect points corresponding to each small tree plot.  Percentage cover of grass obtained ocularly through a 6in by 6in grid and top height of grasses were also averaged over the length of the transect. Two relative measures of competition were created by subtracting the tallest understory vegetation height from that of the subject tree  for both 1m and transect vegetation.
-
-\textbf{Overstory Vegetation:}
-
-Dead overstory tree records were removed from the analysis.  Basal area was calculated for each overstory tree was aggregated from both the .26ac and .46ac overstory plots to provide a per acre estimate of basal area. Zero basal area per acre (BAPA) were assigned to installations without an overstory record due to clearcut. Basal area per acre was linearly interpolated between measurement years to provide estimates for years of small tree and understory measurement.  The initial and final years of overstory measurent provided limits of the interpolation meaning that a vegetation measurement year preceding or following the overstory measurements would be assigned the BAPA calculated for the initial or final Overstory measurement year, respectively.
-Crown competition factor (CCF) was obtained by calculating crown width as an average between the two perpendicular measurements of width and then converting crown width to crown area in square feet. Crown area was then computed in terms of percent of an acre (taking into account the plot size that each overstory tree was sampled in). Linearily interpolated estimates of plot level CCF were obtained in the manner described previously for BAPA.
-Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots.
-
-\textbf{Site Quality:}
-Slope, elevation and aspect were calculated using Google Earth Engine (\cite{googleearthengine}) for each plot's GPS recorded decimal degree coordinates. Slope is in units percentage and elevation in meters. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180) and $\sin$((aspect*$\pi$)/180). Interacting effects of elevation, slope and aspect were considered according to a linear model proposed by Salas and Stage(\cite{Stage2007a}).  This model allows for the aspect effects to involve slope and varying elevation.
-
-
-Site index was included from STCV records of each installation's initiation. An open grown dominate site tree was identified at the intiation of the site and site index calculted from ?curves. Site index species was ponderosa pine for the installations included in analysis although many other species were used at other installations. 
-
-
-
-
-\newpage
-\subsection{Variable Selection}
-
-
-\par Only the installations with greater than 60 ponderosa pine tagged small trees at initiation will be included in the model (see Figure \ref{numbPond}).  Within each plot, one of the sixth STPs was randomly selected as validation data. The randomness was neccesary to account for the uphill orientation of the first STP on each plot and clockwise layout of remaining STPSs. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  
+Only the installations with greater than 60 ponderosa pine tagged small trees at initiation will be included in the model (see Figure \ref{numbPond}).  Within each plot, one of the sixth STPs was randomly selected as validation data. The randomness was neccesary to account for the uphill orientation of the first STP on each plot and clockwise layout of remaining STPSs. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  
 
 \begin{figure}
 \begin{center}
@@ -344,21 +307,52 @@ barchart(pipond$Freq ~ pipond$Installation,
 \end{figure}
 
 
-The objective is to obtain a parsimonious model that is easily understood and informed by our understanding of the factors surrounding small tree growth. The variable selection process for each individual quantile will be guided by the ecological framework behind small tree growth.  The predictor variables will be selected from the four previously mentioned categories of ecological factors that affect tree growth (see Figure \ref{fig:chart} on page \pageref{fig:chart}). These categories are overstory measures, understory non-tree vegetation, site productivity and other small tree measures.  The square root of initial height (height at the beginning of measurement period) explains much of the variability in height growth increment and will be included as a predictor in the base model.
+
+Within each category of ecological factor, a subset of relevant variables were considered that also evaluated the utility of higher-order polynomial expressions of predictor variables using generalized additive models (GAM) with smoothers of first-order predictors. If inclusion of a higher-order predictor was justified by the partial residual plot from a GAM then it was considered alongside all other predictors and as an interaction term. Variable selection from within these categories was made with respect to their importance in describing trends in the median ($\tau$=.5) quantile regression using the \texttt{quantreg} package by Roger Koenker \cite{Koenker2015}. The square root of initial height (height at the beginning of measurement period) explains much of the variability in height growth increment and was included as a predictor in the base model.
 
 
-The order of variable selection categories will proceed in the following order; understory tree, understory non-tree vegetation, overstory and finally site productivity. The first two variables; understory non-tree, and understory small tree will be selected from the control plots of a group of installations of comparable site and overstory conditions. Once an ``understory model'' is established, the selection of overstory and site variables will proceed in that order.  These two final categories necessitate the ``linking''of all selected ponderosa pine installations. 
+Aikekes Information Criterion (AIC) was used to compare model fit between variables within each category. The predictor with the lowest AIC was selected to represent that category in the model. If two predictors had similarly low AIC values, then they were both carried forward into the subsequent categories until a clear advantage could be discerned. If a category was unable to produce a predictor with a meaningfully low AIC or the predictor was deemed immpractical, no predictor was selected from that category. Refer to appendix \ref{B. Variable Selection Steps} for a step-by-step guide to model construction.
 
 
 
-To evaluate the utility of higher-order polynomial expressions of predictor variables, generalized additive models (GAM) with  smoothers of first-order predictors will be used. If inclusion of a higher-order predictor is justified by the partial residual lot from a GAM then it will be considered alongside all other predictors and as an interaction term.
+\newpage
+\subsection{Variable Acquisition}
 
-Variable selection from within these categories will be made with respect to their importance in descrbing trends in the median ($\tau$=.5). Within each category of ecological factor, a subset of relevant variables will be considered that includes two-way interactions between the previously selected variables and the category under evaluation. This subset of variables will also take into consideration the practicality of the predictors.
+\textbf{Understory Tree Competition:}
+For this category of ecological competition, only stands of similar overstory basal area and site productivity were selected to compare predictor variables within. This was done to isolate the effects of inter-small tree competition.  Ranges of retained basal area and site productivity undoubtedly have influence on small tree growth rates and will be accounted for in subsequent categories. 
 
-The \texttt{quantreg} package by Roger Koenker \cite{Koenker2015} will be used to fit quantile regression surfaces individually for the specified quantiles (specified as $\tau$ values: .90, .50, .10).  This allows for differences in the selected predictor variables between the quantile planes.
-Model building will proceed from category to category with the model of lowest AIC being selected as the model carried forward to the next category. 
+The tallies of small trees from each small tree plot (STP) were summed by height class and then multiplied by 138.73 to obtain per acre estimates.  The number of trees greater than the subject trees was found by summing all height class tallies with class midpoints greater than the height of the subject tree. Crown length was found by subtracting the crown base from the total height.  Crown width was found as an average of the two perpendicular measurements of crown width obtained in the field. Crown ratio was obtained by dividing the crown length by the total tree height. Basal diameter and DBH required no further refinement.
+
+\textbf{Understory Vegetation Competition:}
+All stands with greater than 60 tagged small ponderosa pine trees were brought into consideration for the three remaining categories. Although measurements were recorded to 4m vegetation plots in the later years or the study, only the 1m vegetation plots were utilized in this analysis since they were used for the duration of the study.  
+
+Average differences at the STP level between base and top height measurements were found separately for forbs,low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were found for polyvegetation, forbs, low shrubs, high shrubs and grasses.  Average height differences for low shrubs, high shrubs, forbs were calculated for the 30 or 40 transect points corresponding to each small tree plot.  Percentage cover of grass obtained ocularly through a 6in by 6in grid and top height of grasses were also averaged over the length of the transect. Two relative measures of competition were created by subtracting the tallest understory vegetation height from that of the subject tree for both 1m and transect vegetation.
+
+\textbf{Retained Overstory Tree Competition:}
+
+Dead overstory tree records were removed from the analysis.  Basal area was calculated for each overstory tree was aggregated from both the .26ac and .46ac overstory plots to provide a per acre estimate of basal area. Zero basal area per acre (BAPA) were assigned to installations without an overstory record due to clearcut. Basal area per acre was linearly interpolated between measurement years to provide estimates for years of small tree and understory measurement.  The initial and final years of overstory measurent provided limits of the interpolation meaning that a vegetation measurement year preceding or following the overstory measurements would be assigned the BAPA calculated for the initial or final Overstory measurement year, respectively.
+Crown competition factor (CCF) was obtained by calculating crown width as an average between the two perpendicular measurements of width and then converting crown width to crown area in square feet. Crown area was then computed in terms of percent of an acre (taking into account the plot size that each overstory tree was sampled in). Linearily interpolated estimates of plot level CCF were obtained in the manner described previously for BAPA.
+Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots.
+
+\textbf{Site Quality:}
+Slope, elevation and aspect were calculated using Google Earth Engine (\cite{googleearthengine}) for each plot's GPS recorded decimal degree coordinates. Slope is in units percentage and elevation in meters. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180) and $\sin$((aspect*$\pi$)/180). Interacting effects of elevation, slope and aspect were considered according to a linear model proposed by Salas and Stage(\cite{Stage2007a}).  This model allows for the aspect effects to involve slope and varying elevation.
 
 
-Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare small tree growth to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.
+Site index was included from STCV records of each installation's initiation. An open grown dominate site tree was identified at the intiation of the site and site index calculted from standard site index curves. Site index species was ponderosa pine for the installations included in analysis although many other species were used at other installations. 
+
+
+\newpage
+\subsection{Model Evaluation}
+
+
+The constructed model is predictive in the sense that it attempts to predict several quantiles height growth increments. For example, the model cannot determine whether specific trees will be projected to be above or below the .9 quantile line but rather predict what the .9 quantile height itself is for a given set of predictors. If enough information was known about these trees to predict which would be the fastest growing trees, it would negate the utility of quantile regression.\\[2pt]
+
+The fact that quantile regression attempts to characterize the entire distribution of heights makes it more difficult to test and validate than an ordinary least squares regression.  The regression estimates at the selected quantile provide predictions for that specific quantile and it is likely that the predictive ability of the model changes at different quantiles.  For example, the model may predict the median better than the upper quantile. \\[2pt]
+
+To evaluate the model, three quantiles will be fitted to represent the range of the response distribution (.90,.50 and .10).  The height increments from the withheld plot data will then be compared to the height of the predicted quantile regression line for its corresponding predictor variables.  For example, if the .90 quantile plane is a good fit, then theoretically 10\% of the height increments will lie above the plane and 90\% below.  The bins between the .10, .50 and .90 planes will be evaluated in a similar manner. To examine the distribution of repsonses at a finer resolution, the bins can be constructed at every decile (i.e. .10,.20,.30 etc.).\\[2pt]
+
+With the the ability to predict annual height increments by quantile, we can predict the quantile height increments for new sets of data and thus have an idea of what the fastest growing small trees will advance in terms of an annual height increment.\\[2pt]
+
+Following this initial evaluation, an installation's tagged subject trees will be selected to have their height growth increments predicted in the USFS Forest Vegetation Simulator (FVS).  These predicted height increments will then be evaluated as above.  It is not expected that .90 of the predicted tree heights will fall below that .90 quantiles for example. The FVS small tree height increment growth sub-model is based on a least squares regression model \cite{Dixon2002} so it is very unlikely that the predicted heights will correspond to the quantile planes.   Rather, this exercise is to illuminate how far from the actual growth response distribution of small trees FVS predictions can be.\\[2pt]
 
 

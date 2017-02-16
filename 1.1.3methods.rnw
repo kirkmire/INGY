@@ -273,6 +273,8 @@ Only the installations with greater than 60 ponderosa pine tagged small trees at
 
 It was also during this stage of preparation that damage codes were addressed. Over the years many of the small tagged trees endured some kind of damage (see figure of damage codes) including mortality, broken tops, forked tops, sweep or animal damage. Dead trees and those with dead tops were removed from analysis since these trees typically had annualized height growth increments of zero or below.
 
+% add plots of damage code numbers and annual height histogram
+
 Within each plot, one of the six small tree plots was randomly selected as validation data. The randomness was neccesary to account for the uphill orientation of the first STP on each plot and clockwise layout of remaining STPSs. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  
 
 \begin{figure}

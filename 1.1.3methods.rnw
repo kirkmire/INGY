@@ -94,15 +94,31 @@ for(i in 1:nrow(sinst1)){
   sinst1$minOSBA[i]<-minOSBA.func(sinst1$Installation[i])
 }
 
+sim<-c("EM","BC","TJ","RM","CR","TC")
+sim<-as.factor(sim)
+
+simInst<-sinst1[sinst1$Installation %in% sim,]
+difInst<-sinst1[!sinst1$Installation %in% sim,]
+
 xyplot(sinst1$SiteIndex_Value~sinst1$minOSBA,
-        xlab="Retained Overstory Basal Area (Basal Area Per acre)",
-        col="black",grid=T,
-        ylab="Site Index (P.Ponderosa) ft. ht. at 50 yrs.",
-       cex.lab=.3,
-        main="") 
+        xlab=list("Retained Overstory Basal Area (Basal Area Per acre)",cex=.8),
+        col="white",grid=T,cex=.001,
+        ylab=list("Site Index (P.Ponderosa) ft. ht. at 50 yrs.",cex=.8),
+          main="",
+        panel=function(x, y, ...) {
+               panel.xyplot(x, y, ...);
+               ltext(x=difInst$minOSBA, y=difInst$SiteIndex_Value, 
+                     labels=difInst$Installation, offset=0, cex=0.8, col="black")
+        #     },
+        # panel1=function(x, y, ...) {
+               panel.xyplot(x, y, ...);
+               ltext(x=simInst$minOSBA, y=simInst$SiteIndex_Value,
+                     labels=simInst$Installation , offset=0, cex=0.8, col="red3"
+                     )
+            }) 
 
 #add text labels that indicate installation
-#only plot initial OSBA measurements
+
 
 @
 \end{center}
@@ -115,7 +131,7 @@ The temporal initiation of installations varied with most being established in t
 \begin{figure}[h]
 \begin{center}
     \includegraphics[width=160mm]{instLayout.jpg}
-    \caption{Illustration of a STCV installation and herbicide assignments}
+    \caption{Illustration of an STCV installation and herbicide assignments}
     \label{fig:instLayout}
 \end{center}
 \end{figure}
@@ -140,9 +156,10 @@ xyplot(Installation ~ Year_Measurement,
        htyr=timelineJan$Assoc_OS,
        trtyr=timelineJan$Trt,  
      scales=list(x=list(at=1998:2015, cex=1.0,rot=45)),
-        xlab=list(label="Year",cex=1.5),
-        ylab=list(label="Installation",cex=1.5),
-           main=list(label="Installation History", cex=1.5),
+        xlab=list(label="Year",cex=1.0),
+        ylab=list(label="Installation",cex=1.0),
+           main="",
+       #list(label="Installation History", cex=1.5),
            panel=function(x,y,htyr,trtyr,...){
            panel.abline(h = timelineJan$Installation, v = c(1998:2015), lty = "dotted", col = "light grey")
          for (i in as.numeric(unique(y))){
@@ -209,7 +226,9 @@ When comparing the vegetation volumes between the control and the herbicide plot
 library(plotrix)
 
 plot(c(0,170),c(0,170),xlim=c(0,170),ylim=c(0,170), xaxs="i",yaxs="i",
-     type="n",xlab="Feet",ylab="",main="STCV Plot Design",bty="n",asp = 1,axes=F)
+     type="n",xlab="Feet",ylab="",
+     main=NULL,
+     bty="n",asp = 1,axes=F)
 Axis(side=1, labels=T)
 #Large tree plot#
 draw.circle(80,80,80,border="black",nv=1000,
@@ -378,7 +397,18 @@ Crown competition factor (CCF) was obtained by calculating crown width as an ave
 Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots.
 
 \textbf{Site Quality:}
-Slope, elevation and aspect were calculated using Google Earth Engine (\cite{googleearthengine}) for each plot's GPS recorded decimal degree coordinates. Slope is in units percentage and elevation in meters. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180) and $\sin$((aspect*$\pi$)/180). Interacting effects of elevation, slope and aspect were considered according to a linear model proposed by Salas and Stage(\cite{Stage2007a}).  This model allows for the aspect effects to involve slope and varying elevation.
+Slope, elevation and aspect were calculated using Google Earth Engine (\cite{googleearthengine}) for each plot's GPS recorded decimal degree coordinates. Slope is in units percentage and elevation in meters. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180) and $\sin$((aspect*$\pi$)/180). Interacting effects of elevation, slope and aspect were considered according to a linear model proposed by Salas and Stage(\cite{Stage2007a}).  This model allows for the aspect effects to involve slope and varying elevation (see equation***).
+
+
+\begin{align}
+% \label{eq:seaInt}
+
+y &= b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)]  \nonumber \\ 
+&+\text{ln}(el+1)*s[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)] \nonumber \\ 
+&+(el^2)*s[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2
+
+% \caption{Qualitatively derived mathematical expression of aspect, slope and elevation}
+\end{align}
 
 
 Site index was included from STCV records of each installation's initiation. An open grown dominate site tree was identified at the initiation of the site and site index calculated from standard site index curves. Site index species was ponderosa pine for the installations included in analysis although many other species were used at other installations. 

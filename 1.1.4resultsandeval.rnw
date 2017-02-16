@@ -4,7 +4,7 @@
 
 
 \newpage
-\subsection{Variable Selection Results and Model Evaluation}
+\section{Results and Evaluation}
 
 
 \begin{table}[h]

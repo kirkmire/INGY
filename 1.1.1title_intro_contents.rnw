@@ -5,6 +5,7 @@
 \begin{document}
 \SweaveOpts{concordance=TRUE}
 \input{Thesis_doc-concordance}
+\setkeys{Gin}{width=0.7\textwidth} 
 \pagenumbering{roman}
 \thispagestyle{empty}
 

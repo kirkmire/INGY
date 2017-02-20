@@ -54,64 +54,68 @@ latex(final.aic, file="")            # If you want all the data
 #the effects at varouis quantiles differ considerably fromthe OLS coefficients
 #even in terms of the CI 
 library(quantreg)
-qr.SI.5<-  rq(ht_annual~srHeight_Total+
-                CrownLength+
-                #treeminus+
-                TPA.OS+
-                slopePercent + # goes with coefficient b1
-                slopePercent:cos_rad_asp + #with b2
-                slopePercent:sin_rad_asp + #with b3
-                slopePercent:log(elevation+1) + #b4
-                slopePercent:log(elevation+1):cos_rad_asp + #b5
-                slopePercent:log(elevation+1):sin_rad_asp + #b6
-                slopePercent:I(elevation^2) +   #b7
-                slopePercent:I(elevation^2):cos_rad_asp +   #b8
-                slopePercent:I(elevation^2):sin_rad_asp +   #b9
-                elevation + # b10
-                I(elevation^2) , #b11
-              tau=.5 ,  data=annual.gr4)
 
 
 qr.SI.1 <-rq(ht_annual~srHeight_Total+
-               CrownLength+
+               cratio+
               # treeminus+
                TPA.OS+
-               slopePercent + # goes with coefficient b1
-               slopePercent:cos_rad_asp + #with b2
-               slopePercent:sin_rad_asp + #with b3
-               slopePercent:log(elevation+1) + #b4
-               slopePercent:log(elevation+1):cos_rad_asp + #b5
-               slopePercent:log(elevation+1):sin_rad_asp + #b6
-               slopePercent:I(elevation^2) +   #b7
-               slopePercent:I(elevation^2):cos_rad_asp +   #b8
-               slopePercent:I(elevation^2):sin_rad_asp +   #b9
-               elevation + # b10
-               I(elevation^2) , #b11
+               slopePercent + 
+               slopePercent:cos_rad_asp + 
+               slopePercent:sin_rad_asp + 
+               slopePercent:log(elevation+1) + 
+               slopePercent:log(elevation+1):cos_rad_asp + 
+               slopePercent:log(elevation+1):sin_rad_asp + 
+               slopePercent:I(elevation^2) +   
+               slopePercent:I(elevation^2):cos_rad_asp +   
+               slopePercent:I(elevation^2):sin_rad_asp +   
+               elevation + 
+               I(elevation^2) , 
              tau=.1 ,  data=annual.gr4)
 
 
-qr.SI.9 <- rq(ht_annual~
-                srHeight_Total+#goes with coefficient b1
-                CrownLength+#b2
-              #   treeminus+
-                TPA.OS+ #b3
-                slopePercent + # b4
-                slopePercent:cos_rad_asp + #with b5
-                slopePercent:sin_rad_asp + #with b6
-                slopePercent:log(elevation+1) + #b7
-                slopePercent:log(elevation+1):cos_rad_asp + #b8
-                slopePercent:log(elevation+1):sin_rad_asp + #b9
-                slopePercent:I(elevation^2) +   #b10
-                slopePercent:I(elevation^2):cos_rad_asp +   #b11
-                slopePercent:I(elevation^2):sin_rad_asp +   #b12
-                elevation + # b13
-                I(elevation^2) , #b14
-              tau=.9,  data=annual.gr4)
+qr.SI.5 <-rq(ht_annual~srHeight_Total+
+               cratio+
+               # treeminus+
+               TPA.OS+
+               slopePercent + 
+               slopePercent:cos_rad_asp + 
+               slopePercent:sin_rad_asp + 
+               slopePercent:log(elevation+1) + 
+               slopePercent:log(elevation+1):cos_rad_asp + 
+               slopePercent:log(elevation+1):sin_rad_asp + 
+               slopePercent:I(elevation^2) +   
+               slopePercent:I(elevation^2):cos_rad_asp +   
+               slopePercent:I(elevation^2):sin_rad_asp +   
+               elevation + 
+               I(elevation^2) , 
+             tau=.5,  data=annual.gr4)
+
+qr.SI.9 <-rq(ht_annual~srHeight_Total+
+               cratio+
+               # treeminus+
+               TPA.OS+
+               slopePercent + 
+               slopePercent:cos_rad_asp + 
+               slopePercent:sin_rad_asp + 
+               slopePercent:log(elevation+1) + 
+               slopePercent:log(elevation+1):cos_rad_asp + 
+               slopePercent:log(elevation+1):sin_rad_asp + 
+               slopePercent:I(elevation^2) +   
+               slopePercent:I(elevation^2):cos_rad_asp +   
+               slopePercent:I(elevation^2):sin_rad_asp +   
+               elevation + 
+               I(elevation^2) , 
+             tau=.9 ,  data=annual.gr4)
+
 
 
 
 fit1 <- summary(rq(ht_annual~
-                     srHeight_Total+CrownLength+treeminus+TPA.OS+
+                     srHeight_Total+
+                     cratio+
+                     #treeminus+
+                     TPA.OS+
                      slopePercent + # goes with coefficient b1
                      slopePercent:cos_rad_asp + #with b2
                      slopePercent:sin_rad_asp + #with b3
@@ -131,18 +135,19 @@ latex(fit1, caption="Engel's Law", file="")
 
 valid.func<-function(sqht, stcl, tpaos, slope, cos_asp, sin_asp,
                      elev, annualht){
-#   sqht<-1
-#   stcl<-4
-# elev<-1000
-# tpaos<-30
-#   slope<-1
-#   cos_asp<-2
-  #annual.ht<-15
+ #   sqht<-1
+ #   stcl<-4
+ # elev<-1000
+ # tpaos<-30
+ #   slope<-1
+ #   cos_asp<-2
+ #  annualht<-15
+ #  sin_asp<-.5
+ #  rad_asp<-.5
 
   qr.pred.one <-qr.SI.1$coefficients[1]+
     qr.SI.1$coefficients[2]*sqht+
     qr.SI.1$coefficients[3]*stcl+
-    # qr.SI.1$coefficients[4]*stran+
     qr.SI.1$coefficients[4]*tpaos+
     qr.SI.1$coefficients[5]*slope+
     qr.SI.1$coefficients[6]*elev+
@@ -160,7 +165,6 @@ valid.func<-function(sqht, stcl, tpaos, slope, cos_asp, sin_asp,
     qr.pred.five <-qr.SI.5$coefficients[1]+
       qr.SI.5$coefficients[2]*sqht+
       qr.SI.5$coefficients[3]*stcl+
-      # qr.SI.5$coefficients[4]*stran+
       qr.SI.5$coefficients[4]*tpaos+
       qr.SI.5$coefficients[5]*slope+
       qr.SI.5$coefficients[6]*elev+
@@ -178,20 +182,25 @@ valid.func<-function(sqht, stcl, tpaos, slope, cos_asp, sin_asp,
     qr.pred.nine <-qr.SI.9$coefficients[1]+
       qr.SI.9$coefficients[2]*sqht+
       qr.SI.9$coefficients[3]*stcl+
-      # qr.SI.9$coefficients[4]*stran+
       qr.SI.9$coefficients[4]*tpaos+
-      qr.SI.9$coefficients[9]*slope+
+      qr.SI.9$coefficients[5]*slope+
       qr.SI.9$coefficients[6]*elev+
       qr.SI.9$coefficients[7]*(elev^2)+
       qr.SI.9$coefficients[8]*slope*cos_asp+
       qr.SI.9$coefficients[9]*slope*sin_asp+
       qr.SI.9$coefficients[10]*slope*log(elev+1)+
-      qr.SI.9$coefficients[11]*slope*I(elev^2)+
+      qr.SI.9$coefficients[11]*slope*(elev^2)+
       qr.SI.9$coefficients[12]*slope*cos_asp*log(elev+1)+
     qr.SI.9$coefficients[13]*slope*sin_asp*log(elev+1)+
     qr.SI.9$coefficients[14]*slope*cos_asp*(elev+1)+
     qr.SI.9$coefficients[15]*slope*sin_asp*(elev^2)
 
+# annualht<-1.6
+# qr.pred.nine<-1.9
+# qr.pred.one<-1.0
+# qr.pred.five<-1.5
+    
+    
  ifelse(annualht>qr.pred.nine,
        #yes
        cat<-"top10",
@@ -210,15 +219,11 @@ valid.func<-function(sqht, stcl, tpaos, slope, cos_asp, sin_asp,
 annual.gr6$response.cat<-0
 
 
-annual.gr6<-annual.gr6[!(is.na(annual.gr6$CrownLength)==T),]
 
-
-  
 for(i in 1:nrow(annual.gr6)){
   annual.gr6$response.cat[i]<-valid.func(
     annual.gr6$srHeight_Total[i],
-    annual.gr6$CrownLength[i],
-  #  annual.gr6$treeminus[i],
+    annual.gr6$cratio[i],
     annual.gr6$TPA.OS[i],
     annual.gr6$slopePercent[i],
     annual.gr6$cos_rad_asp[i],
@@ -232,8 +237,11 @@ annual.gr6$count<-1
 
 sorted.totals<-as.data.frame(xtabs(annual.gr6$count~annual.gr6$response.cat)/nrow(annual.gr6))
 
+
+
 sum(sorted.totals$Freq)
 
+hist(annual.gr6$ht_annual)
 
 barchart(sorted.totals$Freq~sorted.totals$annual.gr6.response.cat, names = "Quantile Bin",
         xlab = "Bin", ylab = "Frequency",type=density,
@@ -241,13 +249,17 @@ barchart(sorted.totals$Freq~sorted.totals$annual.gr6.response.cat, names = "Quan
         sorted by Quantile Category",ylim=c(0,.60))
 
 #Chi Squared test of homogeneity
-
+(annual.gr6$Species)
 act.0to1<-
   act.1to3<-
   act.3plus<-
   
   actual<-table(rbind(act.0to1,act.1to3,act.3plus))
 
+total_witheld<-nrow(annual.gr6)
+
+exp.1<-total_witheld*.1
+exp.4<-total_witheld*.4
 
 chisq.test(new.freqs, p=old.freqs/sum(old.freqs))
 

@@ -2,6 +2,8 @@
 #TPA, BAPA, Crown Competition Factor#
 
 
+annual.gr6$cratio<-annual.gr6$CrownLength/annual.gr6$Height_Total
+
 #Makes OS dbh that are NA = zero, NA typically corresponds to 
 #cut or dead trees, subsequent code wont (sum) aggregate NAs
 
@@ -10,10 +12,9 @@ soverhist$DBH[is.na(soverhist$DBH)] <- 0
 #Removes dead OS trees record
 dead.words<-c("DEAD","Dead","DEAD-CUT","DEAD-CUT DOWN")
 
+
 soverhist<-soverhist[! soverhist$Damage %in% dead.words,]
 
-#Removes dead ST records#
-annual.gr6<-annual.gr6[!annual.gr6$Damage=="DEAD",]
 
 #Example on one OS tree record
 OS.plot("BB",4,175)
@@ -30,7 +31,6 @@ for(i in 1:nrow(annual.gr6)){
 
 
 annual.gr6$CCF.OS<-0
-
 
 for(i in 1:nrow(annual.gr6)){
   annual.gr6$CCF.OS[i]<-CCF.OS.lm(
@@ -49,13 +49,7 @@ for(i in 1:nrow(annual.gr6)){
 }
 
 annual.gr6<-merge(annual.gr6,sinst.pipo, by="Installation")
-#Transform Aspect Variable#
-ge_sea$sin_rad_asp<-sin((ge_sea$aspect*3.141)/180) 
 
-ge_sea$cos_rad_asp<-cos((ge_sea$aspect*3.141)/180)
-
-
-ge_sea$asp1<-(ge_sea$sin_rad_asp+ge_sea$cos_rad_asp)
 
 annual.gr6$InstPlot<-paste(annual.gr6$Installation,annual.gr6$Plot,sep="")
 annual.gr6$InstPlot<-as.character(annual.gr6$InstPlot)

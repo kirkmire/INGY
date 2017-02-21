@@ -9,11 +9,10 @@
 
 \section{Introduction}
 
-Ponderosa pine is an important species both ecologically and commercially in the Inland Northwest. t is akey speciesin a range of silvicultural systems that vary widely by region and site conditions. In the Northern Rocky Mountains, group selection, seed tree, or shelterwood systems are often
-%addd sentence here describing why?
-recommended (Adams 1994). In the Pacific Northwest, long-rotation even-aged systems or uneven aged systems are suggested, with group selection being the most highly recommended (Tesch 1994). Nearly all of these silvicultural systems include a retained overstory component which is achieved through variable retention harvesting.
+Ponderosa pine is an important species both ecologically and commercially in the Inland Northwest. t is a key species in a range of silvicultural systems that vary widely by region and site conditions. Although a full array of silvicultural systems are found applied to ponderosa pine stands in the Northern Rocky Mountains, group selection, seed tree, or shelterwood systems are often recommended (Adams 1994). In the Pacific Northwest, multiple-entry management using either long-rotation even-aged systems or uneven-aged systems are suggested, with group selection being the most highly recommended (Tesch 1994). These groups provide openings with sufficient light to allow shade intoloerant species to germinate and be competitive in mixed species stands (O'Hara). The resultant multi-aged stand is suitable for achieving a variety of objectives including timber production, aesthetics, and restoring presettlement stands structures (O'Hara). Nearly all of the proposed systems include a retained overstory component which is achieved through variable retention harvesting. 
 
-Variable retention harvest allows for the removal of merchantable trees while retaining elements of the previous stand's overstory structure. Those trees provide both seed source for a new cohort, benefits for wildlife, and have even been proposed as an approach to emulate natural disturbances (\cite{Franklin1997}). Powers et al.(2011) found that variable retention harvesting of pondersosa pine stands can result in improved seedling photosynthetic capacity, water relations and growth, but that the spatial pattern of retention had surprisingly little impact on average growth in the first 4 years after harvesting. This result may be observed between sites with large differences in overstory retention.  The enhanced growth of the small trees on sites without much overstory may be perpetuated throughout the growth of the stand. However, there is limited work examining the factors that affect the developmental responses of the small trees released through variable retention harvests.
+
+Variable retention harvest allows for the removal of merchantable trees while retaining elements of the previous stand's overstory structure. Those trees provide both seed source for a new cohort, benefits for wildlife, and have even been proposed as an approach to emulate natural disturbances (\cite{Franklin1997}). Powers et al.(2011) found that variable retention harvesting of pondersosa pine stands can result in improved seedling photosynthetic capacity, water relations and growth.  The enhanced growth of the small trees on sites without much overstory may be perpetuated throughout the growth of the stand. However, there is limited work examining the factors that affect the developmental responses of the small trees released through variable retention harvests.
 
 \subsection{Ecology of Ponderosa Pine Regeneration and Growth}
 
@@ -27,15 +26,15 @@ The direct competition for light, water and nutrients is not the only way that p
 (Cooper and others 1991, Daubenmire and Daubenmire 1968). 
 
 
-Understory non-arboreal vegetation is also not the only ecological competition for young ponderosa pine. Overstory trees and other small trees can effectively restrict growth. Stagnation in diameter, and often in height, represents a problem in densely stocked stands, but especially on poor sites (Oliver and Ryker). Just as juvenile trees must face this often severe competition from overstory trees, so must the understory vegetation. The productivity of ponderosa pine forest understory has been found to be inversely related to the density of overstory trees, regardless of whether expressed in basal area, trees per acre, percent canopy cover, or stand density index (Ffolliott 1983, Moore and Dieter 1992). The species composition of forest understory is also controlled by overstory trees which filter light, moderate understory air and soil temperature, and directly compete for soil water and nutrients (Spurr and Barnes 1980). For example, conifer reforestation efforts are often hampered by the competitive ability of \emph{Carex} and \emph{Calamagrostis} because they respond positively to the removal of the overstory (\cite{Sloan1987}). 
+Understory non-arboreal vegetation is also not the only ecological competition for young ponderosa pine. Overstory trees and other small trees can effectively restrict growth. Stagnation in diameter, and often in height, represents a problem in densely stocked stands, but especially on poor sites (Oliver and Ryker). Just as juvenile trees must face this often severe competition from overstory trees, so must the understory vegetation. The productivity of ponderosa pine forest understory (in terms of total herbage production, perennial grass prouctiodn, and forage consumed in weight per unit area) has been found to be inversely related to the density of overstory trees, regardless of whether expressed in basal area, trees per acre, percent canopy cover, or stand density index (Ffolliott 1983, Moore and Dieter 1992). The species composition of forest understory is also controlled by overstory trees which filter light, moderate understory air and soil temperature, and directly compete for soil water and nutrients (Spurr and Barnes 1980). For example, conifer reforestation efforts are often hampered by the competitive ability of \emph{Carex} and \emph{Calamagrostis} because they respond positively to the removal of the overstory (\cite{Sloan1987}). 
 
-\begin{figure}[ht]
-\begin{center}
-    \includegraphics[width=160mm]{comp_flowchart.jpg}
-    \caption{Biological framework of small tree growth. Small trees are defined as those that have a DBH less than 3.5 in}
-    \label{fig:chart}
-\end{center}
-\end{figure}
+% \begin{figure}[ht]
+% \begin{center}
+%     \includegraphics[width=160mm]{comp_flowchart.jpg}
+%     \caption{Biological framework of small tree growth. Small trees are defined as those that have a DBH less than 3.5 in}
+%     \label{fig:chart}
+% \end{center}
+% \end{figure}
 
 
 Regardless of why ponderosa pine growth is suppressed and for how long, this species is remarkably resilient and is fully capable of growth when the suppressing factor is resolved. Ponderosa pine remains physiologically young perpetually and was found to respond to overstory release up to age 200 in Arizona (Barrett, 1979). Stagnated sapling stands in other regions have been found to respond to thinning at ages 70 to 100 years old  and seem to grow as vigorously as unstagnated stands, when crowns grow to sufficient size to occupy the additional growing space (Barrett, \cite{Van-Deusen1974}). 
@@ -51,19 +50,18 @@ Preliminary findings revealed an extrememly skewed distribution of height growth
 The desire to focus on the full distribution of growth rates naturally led to an investigation of quantile regression (Koenker, this technique allows for the characterization of multiple quantiles of the height growth responses of small trees. Quantile regression utilizes the simplex algorithm (as opposed to least-squares) to calibrate linear regression functions to describe a through specified or set of specified quantiles (${\tau}$) of the response distribution. Specifying the .90 quantile (${\tau}$=.90), for example, allows for the examination of the ``maximum'' or upper portion of the height growth response distribution and its relationship with stand and site factors. By contrast, ${\tau}$=.50 would describe the median height growth response.
 
 
-This characterization of the response distribution also allows for predictor variables to have entirely different effects accross quantiles. The quantile regression visualization shown below (Figure \ref{fig:quantRegvis}) compares three quantiles of the annual height growth response of one installation's small trees against vegetative cover and initial height. The factors that affect the growth of the slowest growing trees may not be significant in predicting the growth of the fastest growing trees. 
-
-Quantile regression allows for the description of the impact of both measured and unmeasured competitive factors that may be explaining much of the variance in height growth response. Two subject trees within the same 10 foot radius plot may experience vastly different growth rates despite having the same values of measured factors.  For ponderosa pine small tree growth, unmeasured factors may relate to such things as genetic characteristics, micro-climate, micro-site suitability or other location specific factors such as distance from a retained overstory tree or competing vegetation. Vegetation is known to have a major effect on micro-climate, affecting light, temperature, precipitation and wind (Tappenier). However, most growth and yield field sampling methods attempt to maintain a degree of simplicity and reproducibility and therefore avoid sampling at a micro-resolution. This inevitably leads to variance since there are many unmeasured factors and is well-suited to quantile regression since the homogeneity of variance assumption does not apply to this semi-parametric approach. 
-
-
+This characterization of the response distribution also allows for predictor variables to have entirely different effects accross quantiles. The quantile regression visualization shown below (Figure \ref{fig:quantRegvis}) compares three quantiles of the annual height growth response against overstory basal area and site index. In the example above, the ${\tau}$=.10 quantile plane shows very little response for both overstory basal area and site index. However, the height growth in the ${\tau}$=.90,.50 quantile planes change readily as site index and retained basal area respectively increase and decrease. Although not the case in this example, the factors that affect the growth of the slowest growing trees may not be significant predicting the growth of the fastest growing trees. In an extreme case, the factors may even have opposing signs between quantile planes.
 
 \begin{figure}[H]
 \begin{center}
-    \includegraphics[width=160mm]{threedveg.jpg}
-    \caption{Quantile Regression Visualization\label{fig:quantRegvis}}
+    \includegraphics[width=160mm]{threedOSBA.SI.jpg}
+    \caption{Quantile Regression Visualization.  \label{fig:quantRegvis}}
     
 \end{center}
 \end{figure}
+
+Quantile regression allows for the description of the impact of both measured and unmeasured competitive factors that may be explaining much of the variance in height growth response. Two subject trees within the same 10 foot radius plot may experience vastly different growth rates despite having the same values of measured factors.  For ponderosa pine small tree growth, unmeasured factors may relate to such things as genetic characteristics, micro-climate, micro-site suitability or other location specific factors such as distance from a retained overstory tree or competing vegetation. Vegetation is known to have a major effect on micro-climate, affecting light, temperature, precipitation and wind (Tappenier). However, most growth and yield field sampling methods attempt to maintain a degree of simplicity and reproducibility and therefore avoid sampling at a micro-resolution. This inevitably leads to variance since there are many unmeasured factors and is well-suited to quantile regression since the homogeneity of variance assumption does not apply to this semi-parametric approach. 
+
 
 The description of growth in terms of centiles has been used since the 19th century as a graphical method to monitor height-for-age and weight-for-age trajection of infants and children (Wei,Koenker). Although most of these charts were created through parametric methods (LMS, Cole), recognizing what may be considered out of the ordinary or what the maximum expected growth could be has undoubtedly provided medical practitioners with a useful tool in caring for patients. It has more recently been proven useful in evaluating and predicting other rates of change of biological growth functions near the upper boundary.
 

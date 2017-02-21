@@ -413,18 +413,29 @@ Slope, elevation and aspect were calculated using Google Earth Engine (\cite{goo
 
 Site index was included from STCV records of each installation's initiation. An open grown dominate site tree was identified at the initiation of the site and site index calculated from standard site index curves. Site index species was ponderosa pine for the installations included in analysis although many other species were used at other installations. 
 
-
+\newpage
 \subsection{Model Validation}
 
 
-The constructed model is predictive in the sense that it attempts to forecast quantile intervals of annual height growth for varying levels of retained overstory, understory vegetative volume, small tree competition and site quality. The model cannot determine which quantile interval a specific tree's annual height will fall into, but rather predict what the intervals themselves are for a given set of predictors. If enough information was known about the subject trees to predict which would be the fastest growing trees, it would negate the utility of quantile regression.
+The fact that quantile regression attempts to characterize the entire distribution of heights makes it more difficult to test and validate than an ordinary least squares regression.  The regression estimates at the selected quantile provide predictions for that specific quantile and it is likely that the predictive ability of the model changes at different quantiles.  For example, the model may better predict the median than the upper quantile. 
 
-The fact that quantile regression attempts to characterize the entire distribution of heights makes it more difficult to test and validate than an ordinary least squares regression.  The regression estimates at the selected quantile provide predictions for that specific quantile and it is likely that the predictive ability of the model changes at different quantiles.  For example, the model may predict the median better than the upper quantile. 
 
-To evaluate the model, four quantile intervals will be fitted to represent the range of the response distribution (.90,.50 and .10).  The actual annual height increments from the withheld plot data were then binned by quantile interval. If the .90 quantile plane is a good fit, then theoretically 10\% of the height increments will lie above the plane and 90\% below.  The bins between the .10, .50 and .90 planes will be evaluated in a similar manner. To examine the distribution of responses at a finer resolution, the intervals can be constructed at every decile (i.e. .10,.20,.30 etc.).
+To evaluate the model, three quantiles of the height growth response distribution (${\tau}$=.10,.50 and .90) were calculated for each individual tree in the validation data set. The actual recorded annualized height growth increments were then binned according which of the four quantile intervals they fell (i.e. less than .10, .10 to .50, etc.). To add further evaluate the model, the validation trees were also classified into initial height classes of ``less than 3 feet'', ``3-5 feet'' and ``greater than five feet''.
 
-With the the ability to predict annual height increments by quantile, we can predict the quantile height increments for new sets of data and thus have an idea of what the fastest growing small trees will advance in terms of an annual height increment.
+A chi-squared test for homogeneity was then conducted to compare the actual and expected frequencies of annual tree height growth increments within each interval. 
 
-Following this initial evaluation, an installation's tagged subject trees will be selected to have their height growth increments predicted in the USFS Forest Vegetation Simulator (FVS).  These predicted height increments will then be evaluated as above.  It is not expected that .90 of the predicted tree heights will fall below that .90 quantiles for example. The FVS small tree height increment growth sub-model is based on a least squares regression model \cite{Dixon2002} so it is very unlikely that the predicted heights will correspond to the quantile planes.   Rather, this exercise is to illuminate how far from the actual growth response distribution of small trees FVS predictions can be.
+Hypotheses tested:
+
+H_{0}: P.10 and P.90 =.10 and P.10to50 and P.50to90 =.40
+
+H_{A}: P.10 and P.90 $\not\equiv$ .10 and P.10to50 and P.50to90 $\not\equiv$ .40
+
+
+ 
+ %The actual annual height increments from the withheld plot data were then binned by quantile interval. If the .90 quantile plane is a good fit, then theoretically 10\% of the height increments will lie above the plane and 90\% below.  The bins between the .10, .50 and .90 planes will be evaluated in a similar manner. To examine the distribution of responses at a finer resolution, the intervals can be constructed at every decile (i.e. .10,.20,.30 etc.).
+
+% With the the ability to predict annual height increments by quantile, we can predict the quantile height increments for new sets of data and thus have an idea of what the fastest growing small trees will advance in terms of an annual height increment.
+
+% Following this initial evaluation, an installation's tagged subject trees will be selected to have their height growth increments predicted in the USFS Forest Vegetation Simulator (FVS).  These predicted height increments will then be evaluated as above.  It is not expected that .90 of the predicted tree heights will fall below that .90 quantiles for example. The FVS small tree height increment growth sub-model is based on a least squares regression model \cite{Dixon2002} so it is very unlikely that the predicted heights will correspond to the quantile planes.   Rather, this exercise is to illuminate how far from the actual growth response distribution of small trees FVS predictions can be.
 
 

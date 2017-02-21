@@ -53,66 +53,63 @@ source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
 # #cary over quantiles  and how the magnitude of 
 # #the effects at varouis quantiles differ considerably fromthe OLS coefficients
 # #even in terms of the CI 
-# library(quantreg)
-# 
-# 
-# qr.SI.1 <-rq(ht_annual~srHeight_Total+
-#                cratio+
-#               # treeminus+
-#                TPA.OS+
-#                SiteIndex_Value,
-#                # slopePercent + 
-#                # slopePercent:cos_rad_asp + 
-#                # slopePercent:sin_rad_asp + 
-#                # slopePercent:log(elevation+1) + 
-#                # slopePercent:log(elevation+1):cos_rad_asp + 
-#                # slopePercent:log(elevation+1):sin_rad_asp + 
-#                # slopePercent:I(elevation^2) +   
-#                # slopePercent:I(elevation^2):cos_rad_asp +   
-#                # slopePercent:I(elevation^2):sin_rad_asp +   
-#                # elevation + 
-#                # I(elevation^2) , 
-#              tau=.1 ,  data=annual.gr4)
-# 
-# 
-# qr.SI.5 <-rq(ht_annual~srHeight_Total+
-#                cratio+
-#                # treeminus+
-#                TPA.OS+
-#                SiteIndex_Value,
-#                # slopePercent + 
-#                # slopePercent:cos_rad_asp + 
-#                # slopePercent:sin_rad_asp + 
-#                # slopePercent:log(elevation+1) + 
-#                # slopePercent:log(elevation+1):cos_rad_asp + 
-#                # slopePercent:log(elevation+1):sin_rad_asp + 
-#                # slopePercent:I(elevation^2) +   
-#                # slopePercent:I(elevation^2):cos_rad_asp +   
-#                # slopePercent:I(elevation^2):sin_rad_asp +   
-#                # elevation + 
-#                # I(elevation^2) , 
-#              tau=.5,  data=annual.gr4)
-# 
-# qr.SI.9 <-rq(ht_annual~srHeight_Total+
-#                cratio+
-#                # treeminus+
-#                TPA.OS+
-#                SiteIndex_Value,
-#                # slopePercent + 
-#                # slopePercent:cos_rad_asp + 
-#                # slopePercent:sin_rad_asp + 
-#                # slopePercent:log(elevation+1) + 
-#                # slopePercent:log(elevation+1):cos_rad_asp + 
-#                # slopePercent:log(elevation+1):sin_rad_asp + 
-#                # slopePercent:I(elevation^2) +   
-#                # slopePercent:I(elevation^2):cos_rad_asp +   
-#                # slopePercent:I(elevation^2):sin_rad_asp +   
-#                # elevation + 
-#                # I(elevation^2) , 
-#              tau=.9 ,  data=annual.gr4)
-# 
-# 
-# 
+library(quantreg)
+
+
+qr.SI.1 <-rq(ht_annual~srHeight_Total+
+               cratio+
+              # treeminus+
+               TPA.OS+
+               slopePercent +
+               slopePercent:cos_rad_asp +
+               slopePercent:sin_rad_asp +
+               slopePercent:log(elevation+1) +
+               slopePercent:log(elevation+1):cos_rad_asp +
+               slopePercent:log(elevation+1):sin_rad_asp +
+               slopePercent:I(elevation^2) +
+               slopePercent:I(elevation^2):cos_rad_asp +
+               slopePercent:I(elevation^2):sin_rad_asp +
+               elevation +
+               I(elevation^2) ,
+             tau=.1 ,  data=annual.gr4)
+
+
+qr.SI.5 <-rq(ht_annual~srHeight_Total+
+               cratio+
+               # treeminus+
+               TPA.OS+
+               slopePercent +
+               slopePercent:cos_rad_asp +
+               slopePercent:sin_rad_asp +
+               slopePercent:log(elevation+1) +
+               slopePercent:log(elevation+1):cos_rad_asp +
+               slopePercent:log(elevation+1):sin_rad_asp +
+               slopePercent:I(elevation^2) +
+               slopePercent:I(elevation^2):cos_rad_asp +
+               slopePercent:I(elevation^2):sin_rad_asp +
+               elevation +
+               I(elevation^2) ,
+             tau=.5,  data=annual.gr4)
+
+qr.SI.9 <-rq(ht_annual~srHeight_Total+
+               cratio+
+               # treeminus+
+               TPA.OS+
+               slopePercent +
+               slopePercent:cos_rad_asp +
+               slopePercent:sin_rad_asp +
+               slopePercent:log(elevation+1) +
+               slopePercent:log(elevation+1):cos_rad_asp +
+               slopePercent:log(elevation+1):sin_rad_asp +
+               slopePercent:I(elevation^2) +
+               slopePercent:I(elevation^2):cos_rad_asp +
+               slopePercent:I(elevation^2):sin_rad_asp +
+               elevation +
+               I(elevation^2) ,
+             tau=.9 ,  data=annual.gr4)
+
+
+
 # 
 # fit1 <- summary(rq(ht_annual~
 #                      srHeight_Total+
@@ -136,13 +133,12 @@ source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
 # latex(fit1, caption="Engel's Law", file="")
 # 
 # 
-# valid.func<-function(sqht, stcl, tpaos, 
-#                      # slope, 
-#                      # cos_asp, 
-#                      # sin_asp,
-#                      SI,
-#                     # elev, 
-#                      annualht){
+valid.func<-function(sqht, stcl, tpaos,
+                    slope,
+                    cos_asp,
+                    sin_asp,
+                    elev,
+                     annualht){
 #  #   sqht<-1
 #  #   stcl<-4
 #  # elev<-1000
@@ -153,158 +149,151 @@ source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
 #  #  sin_asp<-.5
 #  #  rad_asp<-.5
 # 
-#   qr.pred.one <-qr.SI.1$coefficients[1]+
-#     qr.SI.1$coefficients[2]*sqht+
-#     qr.SI.1$coefficients[3]*stcl+
-#     qr.SI.1$coefficients[4]*tpaos+
-#     qr.SI.1$coefficients[5]*SI
-#     
-#     # qr.SI.1$coefficients[5]*slope+
-#     # qr.SI.1$coefficients[6]*elev+
-#     # qr.SI.1$coefficients[7]*(elev^2)+
-#     # qr.SI.1$coefficients[8]*slope*cos_asp
-#     # qr.SI.1$coefficients[9]*slope*sin_asp+
-#     # qr.SI.1$coefficients[10]*slope*log(elev+1)+
-#     # qr.SI.1$coefficients[11]*slope*(elev^2)+
-#     # qr.SI.1$coefficients[12]*slope*cos_asp*log(elev+1)+
-#     # qr.SI.1$coefficients[13]*slope*sin_asp*log(elev+1)+
-#     # qr.SI.1$coefficients[14]*slope*cos_asp*(elev+1)+
-#     # qr.SI.1$coefficients[15]*slope*sin_asp*(elev^2)
-#     
-#     
-#     qr.pred.five <-qr.SI.5$coefficients[1]+
-#       qr.SI.5$coefficients[2]*sqht+
-#       qr.SI.5$coefficients[3]*stcl+
-#       qr.SI.5$coefficients[4]*tpaos+
-#       qr.SI.5$coefficients[5]*SI
-#     
-#       # qr.SI.5$coefficients[5]*slope+
-#       # qr.SI.5$coefficients[6]*elev+
-#       # qr.SI.5$coefficients[7]*(elev^2)+
-#       # qr.SI.5$coefficients[8]*slope*cos_asp+
-#       # qr.SI.5$coefficients[9]*slope*sin_asp+
-#       # qr.SI.5$coefficients[10]*slope*log(elev+1)+
-#       # qr.SI.5$coefficients[11]*slope*(elev^2)+
-#       # qr.SI.5$coefficients[12]*slope*cos_asp*log(elev+1)+
-#       # qr.SI.5$coefficients[13]*slope*sin_asp*log(elev+1)+
-#       # qr.SI.5$coefficients[14]*slope*cos_asp*(elev+1)+
-#       # qr.SI.5$coefficients[15]*slope*sin_asp*(elev^2)
-#       
-#     
-#     qr.pred.nine <-qr.SI.9$coefficients[1]+
-#       qr.SI.9$coefficients[2]*sqht+
-#       qr.SI.9$coefficients[3]*stcl+
-#       qr.SI.9$coefficients[4]*tpaos+
-#       qr.SI.9$coefficients[5]*SI
-#     
-#     #   qr.SI.9$coefficients[5]*slope+
-#     #   qr.SI.9$coefficients[6]*elev+
-#     #   qr.SI.9$coefficients[7]*(elev^2)+
-#     #   qr.SI.9$coefficients[8]*slope*cos_asp+
-#     #   qr.SI.9$coefficients[9]*slope*sin_asp+
-#     #   qr.SI.9$coefficients[10]*slope*log(elev+1)+
-#     #   qr.SI.9$coefficients[11]*slope*(elev^2)+
-#     #   qr.SI.9$coefficients[12]*slope*cos_asp*log(elev+1)+
-#     # qr.SI.9$coefficients[13]*slope*sin_asp*log(elev+1)+
-#     # qr.SI.9$coefficients[14]*slope*cos_asp*(elev+1)+
-#     # qr.SI.9$coefficients[15]*slope*sin_asp*(elev^2)
-# 
-# # annualht<-1.6
-# # qr.pred.nine<-1.9
-# # qr.pred.one<-1.0
-# # qr.pred.five<-1.5
-#     
-#     
-#  ifelse(annualht>qr.pred.nine,
-#        #yes
-#        cat<-"top10",
-#        #no
-#        ifelse(qr.pred.five<annualht&&annualht<qr.pred.nine,
-#               #yes
-#               cat<- "fiftytoninety",
-#               #no
-#               ifelse(qr.pred.one<annualht&&annualht<qr.pred.five,
-#                      cat<-"bottom10tofifty",
-#                      cat<-"bottom10")))
-# 
-#   cat
-# }
-# 
-# annual.gr6$response.cat<-0
-# 
-# 
-# 
-# for(i in 1:nrow(annual.gr6)){
-#   annual.gr6$response.cat[i]<-valid.func(
-#     annual.gr6$srHeight_Total[i],
-#     annual.gr6$cratio[i],
-#     annual.gr6$TPA.OS[i],
-#     # annual.gr6$slopePercent[i],
-#     # annual.gr6$cos_rad_asp[i],
-#     # annual.gr6$sin_rad_asp[i],
-#     # annual.gr6$elevation[i],
-#     annual.gr6$SiteIndex_Value[i],
-#     annual.gr6$ht_annual[i])
-# }
-# 
-# 
-# annual.gr6$count<-1
-# 
-# sorted.totals<-as.data.frame(xtabs(annual.gr6$count~annual.gr6$response.cat)/nrow(annual.gr6))
-# 
-# 
-# 
-# sum(sorted.totals$Freq)
-# 
-# hist(annual.gr6$ht_annual)
-# 
-# barchart(sorted.totals$Freq~sorted.totals$annual.gr6.response.cat, names = "Quantile Bin",
-#         xlab = "Bin", ylab = "Frequency",type=density,
-#         main = "Witheld Data Height Growth Response
-#         sorted by Quantile Category",ylim=c(0,.60))
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# #Sorted responses for trees <10 in initial dbh
-# 
-# annual.gr6.lessthan10in<-annual.gr6[annual.gr6$DBH<10,]
-# 
-# sum(is.na(annual.gr6.lessthan10in$DBH==T))
-# 
-# #Removes NA values of DBH, should be done in model building?
-# annual.gr6.lessthan10in<-annual.gr6.lessthan10in[!is.na(annual.gr6.lessthan10in$DBH),]
-# 
-# for(i in 1:nrow(annual.gr6.lessthan10in)){
-#   annual.gr6.lessthan10in$response.cat[i]<-valid.func(
-#     annual.gr6.lessthan10in$srHeight_Total[i],
-#     annual.gr6.lessthan10in$CrownLength[i],
-#     annual.gr6.lessthan10in$treeminus[i],
-#     annual.gr6.lessthan10in$TPA.OS[i],
-#     annual.gr6.lessthan10in$slopePercent*aspect*elevation[i],
-#     annual.gr6.lessthan10in$ht_annual[i])
-# }
-# 
-# 
-# 
-# annual.gr6.lessthan10in$count<-1
-# 
-# sorted.totals<-as.data.frame(xtabs(annual.gr6.lessthan10in$count~
-#                                      annual.gr6.lessthan10in$response.cat)/
-#                                nrow(annual.gr6.lessthan10in))
-# 
-# sum(sorted.totals$Freq)
-# 
-# 
-# barchart(sorted.totals$Freq~sorted.totals$annual.gr6.lessthan10in.response.cat, names = "Quantile Bin",
-#          xlab = "Bin", ylab = "Frequency",type=density,
-#          main = "Witheld Data Height Growth Response
-#          sorted by Quantile Category (DBH>10in)", ylim=c(0,.5))
-# 
+  qr.pred.one <-qr.SI.1$coefficients[1]+
+    qr.SI.1$coefficients[2]*sqht+
+    qr.SI.1$coefficients[3]*stcl+
+    qr.SI.1$coefficients[4]*tpaos+
+    qr.SI.1$coefficients[5]*slope+
+    qr.SI.1$coefficients[6]*elev+
+    qr.SI.1$coefficients[7]*(elev^2)+
+    qr.SI.1$coefficients[8]*slope*cos_asp+
+    qr.SI.1$coefficients[9]*slope*sin_asp+
+    qr.SI.1$coefficients[10]*slope*log(elev+1)+
+    qr.SI.1$coefficients[11]*slope*(elev^2)+
+    qr.SI.1$coefficients[12]*slope*cos_asp*log(elev+1)+
+    qr.SI.1$coefficients[13]*slope*sin_asp*log(elev+1)+
+    qr.SI.1$coefficients[14]*slope*cos_asp*(elev+1)+
+    qr.SI.1$coefficients[15]*slope*sin_asp*(elev^2)
+
+
+    qr.pred.five <-qr.SI.5$coefficients[1]+
+      qr.SI.5$coefficients[2]*sqht+
+      qr.SI.5$coefficients[3]*stcl+
+      qr.SI.5$coefficients[4]*tpaos+
+      qr.SI.5$coefficients[5]*slope+
+      qr.SI.5$coefficients[6]*elev+
+      qr.SI.5$coefficients[7]*(elev^2)+
+      qr.SI.5$coefficients[8]*slope*cos_asp+
+      qr.SI.5$coefficients[9]*slope*sin_asp+
+      qr.SI.5$coefficients[10]*slope*log(elev+1)+
+      qr.SI.5$coefficients[11]*slope*(elev^2)+
+      qr.SI.5$coefficients[12]*slope*cos_asp*log(elev+1)+
+      qr.SI.5$coefficients[13]*slope*sin_asp*log(elev+1)+
+      qr.SI.5$coefficients[14]*slope*cos_asp*(elev+1)+
+      qr.SI.5$coefficients[15]*slope*sin_asp*(elev^2)
+
+    
+    qr.pred.nine <-qr.SI.9$coefficients[1]+
+      qr.SI.9$coefficients[2]*sqht+
+      qr.SI.9$coefficients[3]*stcl+
+      qr.SI.9$coefficients[4]*tpaos+
+      qr.SI.9$coefficients[5]*slope+
+    qr.SI.9$coefficients[6]*elev+
+    qr.SI.9$coefficients[7]*(elev^2)+
+    qr.SI.9$coefficients[8]*slope*cos_asp+
+    qr.SI.9$coefficients[9]*slope*sin_asp+
+    qr.SI.9$coefficients[10]*slope*log(elev+1)+
+    qr.SI.9$coefficients[11]*slope*(elev^2)+
+    qr.SI.9$coefficients[12]*slope*cos_asp*log(elev+1)+
+  qr.SI.9$coefficients[13]*slope*sin_asp*log(elev+1)+
+  qr.SI.9$coefficients[14]*slope*cos_asp*(elev+1)+
+  qr.SI.9$coefficients[15]*slope*sin_asp*(elev^2)
+
+# annualht<-1.6
+# qr.pred.nine<-1.9
+# qr.pred.one<-1.0
+# qr.pred.five<-1.5
+
+
+ ifelse(annualht>qr.pred.nine,
+       #yes
+       cat<-"top10",
+       #no
+       ifelse(qr.pred.five<annualht&&annualht<qr.pred.nine,
+              #yes
+              cat<- "fiftytoninety",
+              #no
+              ifelse(qr.pred.one<annualht&&annualht<qr.pred.five,
+                     cat<-"bottom10tofifty",
+                     cat<-"bottom10")))
+
+  cat
+}
+
+annual.gr6$response.cat<-0
+
+
+
+for(i in 1:nrow(annual.gr6)){
+  annual.gr6$response.cat[i]<-valid.func(
+    annual.gr6$srHeight_Total[i],
+    annual.gr6$cratio[i],
+    annual.gr6$TPA.OS[i],
+    annual.gr6$slopePercent[i],
+    annual.gr6$cos_rad_asp[i],
+    annual.gr6$sin_rad_asp[i],
+    annual.gr6$elevation[i],
+    annual.gr6$ht_annual[i])
+}
+
+
+annual.gr6$count<-1
+
+sorted.totals<-as.data.frame(xtabs(annual.gr6$count~annual.gr6$response.cat)/nrow(annual.gr6))
+
+
+
+sum(sorted.totals$Freq)
+
+hist(annual.gr6$ht_annual)
+
+barchart(sorted.totals$Freq~sorted.totals$annual.gr6.response.cat, names = "Quantile Bin",
+        xlab = "Bin", ylab = "Frequency",type=density,
+        main = "Witheld Data Height Growth Response
+        sorted by Quantile Category",ylim=c(0,.60))
+
+
+
+
+
+
+
+
+#Sorted responses for trees <10 in initial dbh
+
+annual.gr6.lessthan10in<-annual.gr6[annual.gr6$DBH<10,]
+
+sum(is.na(annual.gr6.lessthan10in$DBH==T))
+
+#Removes NA values of DBH, should be done in model building?
+annual.gr6.lessthan10in<-annual.gr6.lessthan10in[!is.na(annual.gr6.lessthan10in$DBH),]
+
+for(i in 1:nrow(annual.gr6.lessthan10in)){
+  annual.gr6.lessthan10in$response.cat[i]<-valid.func(
+    annual.gr6.lessthan10in$srHeight_Total[i],
+    annual.gr6.lessthan10in$CrownLength[i],
+    annual.gr6.lessthan10in$treeminus[i],
+    annual.gr6.lessthan10in$TPA.OS[i],
+    annual.gr6.lessthan10in$slopePercent*aspect*elevation[i],
+    annual.gr6.lessthan10in$ht_annual[i])
+}
+
+
+
+annual.gr6.lessthan10in$count<-1
+
+sorted.totals<-as.data.frame(xtabs(annual.gr6.lessthan10in$count~
+                                     annual.gr6.lessthan10in$response.cat)/
+                               nrow(annual.gr6.lessthan10in))
+
+sum(sorted.totals$Freq)
+
+
+barchart(sorted.totals$Freq~sorted.totals$annual.gr6.lessthan10in.response.cat, names = "Quantile Bin",
+         xlab = "Bin", ylab = "Frequency",type=density,
+         main = "Witheld Data Height Growth Response
+         sorted by Quantile Category (DBH>10in)", ylim=c(0,.5))
+
 
 ###higher resolution by including quantiles .4 to .9 by .4
 

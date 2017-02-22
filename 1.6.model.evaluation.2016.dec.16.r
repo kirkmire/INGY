@@ -158,13 +158,54 @@ library(plyr)
 sorted.totals<-count(annual.gr6, 'response.cat')
 
 
+trellis.device(color = FALSE)
+
+lattice.options(default.theme = modifyList(standard.theme(color = 
+                                                            FALSE), list(strip.background = list(col = "transparent")))) 
+
+library(RColorBrewer)
+display.brewer.all()
+
+
+myColours <- brewer.pal(6,"Greens")
+## Create your own list with
+my.settings <- list(
+  superpose.polygon=list(col=myColours[2:5], border="transparent"),
+  strip.background=list(col=myColours[6]),
+  strip.border=list(col="black")
+)
+
 barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",
-        xlab = "Bin", ylab = "Frequency",type=density,
+        xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
         main = "Witheld Data Height Growth Response
-        sorted by Quantile Category",ylim=c(0,.60))
+        sorted by Quantile Category",ylim=c(0,.60),
+        par.settings = my.settings,
+        par.strip.text=list(col="white", font=2),
+        panel=function(x,y,...){
+          panel.grid(h=-1, v=0); 
+          panel.barchart(x,y,...)
+        })
+
+#Chi Squared test of homogeneity
 
 
+annual.gr6.lessthan1<-annual.gr6[annual.gr6$Height_Total<3,]
+annual.gr6.1to3<-annual.gr6[3<annual.gr6$Height_Total&&annual.gr6$Height_Total<5,]
+annual.gr6.3plus<-annual.gr6[annual.gr6$Height_Total>5,]
 
+x.table1<-t(count(annual.gr6.lessthan1, 'response.cat'))
+x.table2<-t(count(annual.gr6.1to3, 'response.cat'))
+x.table3<-t(count(annual.gr6.3plus, 'response.cat'))
+
+brkdwn<-rbind(x.table1,x.table2,x.table3)
+
+
+min(annual.gr6$Height_Total)
+
+hist(annual.gr6$Height_Total)
+
+xsq<-chisq.test(x.table1)
+xsq$expected
 
 
 
@@ -204,6 +245,7 @@ barchart(sorted.totals$Freq~sorted.totals$annual.gr6.lessthan10in.response.cat, 
          xlab = "Bin", ylab = "Frequency",type=density,
          main = "Witheld Data Height Growth Response
          sorted by Quantile Category (DBH>10in)", ylim=c(0,.5))
+
 
 
 ###higher resolution by including quantiles .1 to .9 by .1

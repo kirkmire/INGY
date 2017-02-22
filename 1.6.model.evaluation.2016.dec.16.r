@@ -110,12 +110,23 @@ qr.SI.9 <-rq(ht_annual~srHeight_Total+
 annual.gr6$qr.pred.one <- predict.rq(qr.SI.1, annual.gr6)
 annual.gr6$qr.pred.five <- predict.rq(qr.SI.5, annual.gr6)
 annual.gr6$qr.pred.nine <- predict.rq(qr.SI.9, annual.gr6)
-    hist(annual.gr6$s)
+
+ hist(annual.gr4$ht_annual)
+ hist(annual.gr6$ht_annual)
  
-   #isTRUE(predict.rq(qr.SI.1, annual.gr6)==predict(qr.SI.1, annual.gr6))
+ hist(annual.gr4$cratio)
+ hist(annual.gr6$cratio)
+#isTRUE(predict.rq(qr.SI.1, annual.gr6)==predict(qr.SI.1, annual.gr6))
+
+
+
     
 valid.func<-function(annualht,qr.pred.one,qr.pred.five,qr.pred.nine){
-
+  # annualht<-1.2
+  # qr.pred.one<-1
+  # qr.pred.five<-1.6
+  # qr.pred.nine<-1.6
+  
  ifelse(annualht>qr.pred.nine,
        #yes
        cat<-"top10",
@@ -195,17 +206,7 @@ barchart(sorted.totals$Freq~sorted.totals$annual.gr6.lessthan10in.response.cat, 
          sorted by Quantile Category (DBH>10in)", ylim=c(0,.5))
 
 
-###higher resolution by including quantiles .4 to .9 by .4
-
-# qr.SI.1<-  rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.1),data=annual.gr4)
-# qr.SI.2 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.2),data=annual.gr4)
-# qr.SI.3 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.3),data=annual.gr4)
-# qr.SI.4 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.4),data=annual.gr4)
-# qr.SI.5 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.5),data=annual.gr4)
-# qr.SI.6 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.6),data=annual.gr4)
-# qr.SI.7 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.7),data=annual.gr4)
-# qr.SI.8 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.8),data=annual.gr4)
-# qr.SI.9 <- rq(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+slopePercent*aspect*elevation,tau=c(.9),data=annual.gr4)
+###higher resolution by including quantiles .1 to .9 by .1
 
 
 

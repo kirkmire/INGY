@@ -307,7 +307,7 @@ annual.gr4<-annual.gr4[!annual.gr4$STP_rand==6,]
 
 
 #Creates crown ratio variable for annual gr4
-annual.gr4$cratio<- annual.gr4$Height_Total-annual.gr4$CrownLength
+annual.gr4$cratio<- annual.gr4$CrownLength/annual.gr4$Height_Total
 
 
 #GAM for 1m polyveg cover

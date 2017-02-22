@@ -57,4 +57,13 @@ ge_sea$InstPlot<-as.character(ge_sea$InstPlot)
 annual.gr6<-merge(annual.gr6, ge_sea, by="InstPlot")
 
 
+annual.gr6$TPA.OS<-0
+agg.over.data.TPA$Installation<-as.character(agg.over.data.TPA$Installation)
+
+for(i in 1:nrow(annual.gr6)){
+  annual.gr6$TPA.OS[i]<-TPA.OS.lm(
+    annual.gr6$Installation[i], 
+    annual.gr6$Plot[i],
+    annual.gr6$Year_Measurement[i])
+}
 

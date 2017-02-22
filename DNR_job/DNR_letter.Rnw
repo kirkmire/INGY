@@ -1,0 +1,35 @@
+\documentclass[11pt]{article}
+
+\usepackage{setspace}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\noindent 
+\begin{spacing}{1.5}
+\thispagestyle{empty}
+
+\newpage
+
+I am proficient working in the R programming environment and have taken to compiling reports in the document preparation system \LaTeX. Both my undergraduate and masters thesis as well as my assignments for graduate level statistics and sampling courses were undertaken entirely within this program. 
+
+I have used FVS extensively, stemming from my undergraduate experience projecting stand conditions for recently purchased King County Parks land. I have used FVS to project forest conditions in Western Washington, Western Montana as well as British Colombia. In my graduate research, I have adopted portions of the FVS small tree growth routine into my model that describes \emph{Pinus ponderosa} growth under variable retention harvest. This research has allowed me to gain a better understanding of the underlying relationships and structure of this popular growth and yield model. In addition, I have worked on connecting to FVS through R in a program called rFVS which allows for seamless workflow between the two programs.
+
+
+Since my research also involved a 15 year record of tagged tree and associated vegetation and overstory measures which was compiled into an Access database, I gained competency in using Access and connecting to it through R. Since my early experience with FVS was through the Suppose GUI, I have had exposure to Access for many years.
+
+I had several courses in ArcGIS and remote sensing at the University of Washington. I am currently improving my spatial analysis capabilities through a course in Google Earth Engine, which combines a multi-petabyte catalog of satellite imagery and geospatial datasets through a JavaScript API. With this program,I can efficiently calculate a number of environmental gradient variables including slope, elevation, aspect and NDVI. This is the platform I have used for all of my spatially derived variables and have become comfortable, although I have maintained competency with ArcGIS as well.
+
+
+I have studied extensively sampling and estimation. I have a thorough knowledge of the logic and application of simple random, systematic, stratified and 3p sampling designs. I have utilized both variable and fixed radius plot sampling designs in a number of contexts including 
+
+
+
+I have a B.S. in Sustainable Forest Management from the University of Washington as well as an M.S. in Forest Biometrics from the University of Montana that is nearing completion.
+
+My research has been conducted indecently for the last two years and involves the complex statistical problem of modeling small tree height growth. I have lead a team of research technicians in successfully completing field measurements for the past two summers. 
+
+
+\end{spacing}
+
+
+\end{document}

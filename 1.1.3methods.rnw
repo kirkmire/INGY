@@ -10,6 +10,7 @@
 \normalsize
 \subsection{Sampling Strategy}
 \doublespacing
+\newpage
 Twenty-nine study sites (termed ``installations'') were established on a variety of cooperative member ownership ranging from the eastern slopes of the Cascade Mountains to western Montana. The installations fell within three distinct geographic areas; central Washington, eastern Washington/Idaho and western Montana. 
 
 

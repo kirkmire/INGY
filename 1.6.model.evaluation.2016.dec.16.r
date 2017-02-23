@@ -10,42 +10,42 @@ source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), e
 source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
 
 #combines all aic.lists into one dataframe
-# 
-# colnames(UT.aic)<-c("Variable","n","AIC")
-# 
-# colnames(UV.aic)<-c("Variable","n","AIC")
-# 
-# colnames(OS.aic)<-c("Variable","n","AIC")
-# 
-# colnames(SQ.aic)<-c("Variable","n","AIC")
-# 
-# aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
-# 
-# aic.lists$AIC<-round(aic.lists$AIC,2)
-# 
-# final.aic<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
-# final.aic$X1[1:9]<-as.character(aic.lists$Variable[1:9])
-# final.aic$X2[1:9]<-aic.lists$n[1:9]
-# final.aic$X3[1:9]<-aic.lists$AIC[1:9]
-# final.aic$X4[1:14]<-as.character(aic.lists$Variable[10:23])
-# final.aic$X5[1:14]<-aic.lists$n[10:23]
-# final.aic$X6[1:14]<-aic.lists$AIC[10:23]
-# final.aic$X7[1:4]<-as.character(aic.lists$Variable[24:27])
-# final.aic$X8[1:4]<-aic.lists$n[24:27]
-# final.aic$X9[1:4]<-aic.lists$AIC[24:27]
-# final.aic$X7[5]<-"Site"
-# final.aic$X8[5]<-"n"
-# final.aic$X9[5]<-"AIC"
-# final.aic$X7[6:10]<-as.character(aic.lists$Variable[28:32])
-# final.aic$X8[6:10]<-aic.lists$n[28:32]
-# final.aic$X9[6:10]<-aic.lists$AIC[28:32]
-# 
-# 
-# 
-# #The code below will produce output that can then be copied over to the .tex file
-# library(Hmisc)
-# 
-# latex(final.aic, file="")            # If you want all the data
+
+colnames(UT.aic)<-c("Variable","n","AIC")
+
+colnames(UV.aic)<-c("Variable","n","AIC")
+
+colnames(OS.aic)<-c("Variable","n","AIC")
+
+colnames(SQ.aic)<-c("Variable","n","AIC")
+
+aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
+
+aic.lists$AIC<-round(aic.lists$AIC,2)
+
+final.aic<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
+final.aic$X1[1:9]<-as.character(aic.lists$Variable[1:9])
+final.aic$X2[1:9]<-aic.lists$n[1:9]
+final.aic$X3[1:9]<-aic.lists$AIC[1:9]
+final.aic$X4[1:14]<-as.character(aic.lists$Variable[10:23])
+final.aic$X5[1:14]<-aic.lists$n[10:23]
+final.aic$X6[1:14]<-aic.lists$AIC[10:23]
+final.aic$X7[1:4]<-as.character(aic.lists$Variable[24:27])
+final.aic$X8[1:4]<-aic.lists$n[24:27]
+final.aic$X9[1:4]<-aic.lists$AIC[24:27]
+final.aic$X7[5]<-"Site"
+final.aic$X8[5]<-"n"
+final.aic$X9[5]<-"AIC"
+final.aic$X7[6:10]<-as.character(aic.lists$Variable[28:32])
+final.aic$X8[6:10]<-aic.lists$n[28:32]
+final.aic$X9[6:10]<-aic.lists$AIC[28:32]
+
+
+
+#The code below will produce output that can then be copied over to the .tex file
+library(Hmisc)
+
+latex(final.aic, file="")            # If you want all the data
 # 
 # 
 # 
@@ -189,62 +189,67 @@ barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.c
 #Chi Squared test of homogeneity
 
 
-annual.gr6.lessthan1<-annual.gr6[annual.gr6$Height_Total<3,]
-annual.gr6.1to3<-annual.gr6[3<annual.gr6$Height_Total&&annual.gr6$Height_Total<5,]
-annual.gr6.3plus<-annual.gr6[annual.gr6$Height_Total>5,]
-
-x.table1<-t(count(annual.gr6.lessthan1, 'response.cat'))
-x.table2<-t(count(annual.gr6.1to3, 'response.cat'))
-x.table3<-t(count(annual.gr6.3plus, 'response.cat'))
-
-brkdwn<-rbind(x.table1,x.table2,x.table3)
-
-
-min(annual.gr6$Height_Total)
-
-hist(annual.gr6$Height_Total)
-
-xsq<-chisq.test(x.table1)
-xsq$expected
-
-
-
-
-
-#Sorted responses for trees <10 in initial dbh
-
-annual.gr6.lessthan10in<-annual.gr6[annual.gr6$DBH<10,]
-
-sum(is.na(annual.gr6.lessthan10in$DBH==T))
-
-#Removes NA values of DBH, should be done in model building?
-annual.gr6.lessthan10in<-annual.gr6.lessthan10in[!is.na(annual.gr6.lessthan10in$DBH),]
-
-for(i in 1:nrow(annual.gr6.lessthan10in)){
-  annual.gr6.lessthan10in$response.cat[i]<-valid.func(
-    annual.gr6.lessthan10in$srHeight_Total[i],
-    annual.gr6.lessthan10in$CrownLength[i],
-    annual.gr6.lessthan10in$treeminus[i],
-    annual.gr6.lessthan10in$TPA.OS[i],
-    annual.gr6.lessthan10in$slopePercent*aspect*elevation[i],
-    annual.gr6.lessthan10in$ht_annual[i])
-}
+# annual.gr6.lessthan1<-annual.gr6[annual.gr6$Height_Total<3,]
+# annual.gr6.1to3<-annual.gr6[3<annual.gr6$Height_Total&&annual.gr6$Height_Total<5,]
+# annual.gr6.3plus<-annual.gr6[annual.gr6$Height_Total>5,]
+# 
+# x.table1<-as.table(t(count(annual.gr6.lessthan1, 'response.cat')))
+# x.table1<-x.table1["freq",]
+# x.table1<-as.numeric(x.table1)
+# 
+# x.table2<-t(count(annual.gr6.1to3, 'response.cat'))
+# x.table3<-t(count(annual.gr6.3plus, 'response.cat'))
+# 
+# brkdwn<-rbind(x.table1,x.table2,x.table3)
+# 
+# 
+# min(annual.gr6$Height_Total)
+# 
+# hist(annual.gr6$Height_Total)
+# 
+# xsq<-chisq.test(x.table1,p=c(.1,.4,.4,.1))
+# 
+#                                     
+# xsq$expected
 
 
 
-annual.gr6.lessthan10in$count<-1
-
-sorted.totals<-as.data.frame(xtabs(annual.gr6.lessthan10in$count~
-                                     annual.gr6.lessthan10in$response.cat)/
-                               nrow(annual.gr6.lessthan10in))
-
-sum(sorted.totals$Freq)
 
 
-barchart(sorted.totals$Freq~sorted.totals$annual.gr6.lessthan10in.response.cat, names = "Quantile Bin",
-         xlab = "Bin", ylab = "Frequency",type=density,
-         main = "Witheld Data Height Growth Response
-         sorted by Quantile Category (DBH>10in)", ylim=c(0,.5))
+# #Sorted responses for trees <10 in initial dbh
+# 
+# annual.gr6.lessthan10in<-annual.gr6[annual.gr6$DBH<10,]
+# 
+# sum(is.na(annual.gr6.lessthan10in$DBH==T))
+# 
+# #Removes NA values of DBH, should be done in model building?
+# annual.gr6.lessthan10in<-annual.gr6.lessthan10in[!is.na(annual.gr6.lessthan10in$DBH),]
+# 
+# for(i in 1:nrow(annual.gr6.lessthan10in)){
+#   annual.gr6.lessthan10in$response.cat[i]<-valid.func(
+#     annual.gr6.lessthan10in$srHeight_Total[i],
+#     annual.gr6.lessthan10in$CrownLength[i],
+#     annual.gr6.lessthan10in$treeminus[i],
+#     annual.gr6.lessthan10in$TPA.OS[i],
+#     annual.gr6.lessthan10in$slopePercent*aspect*elevation[i],
+#     annual.gr6.lessthan10in$ht_annual[i])
+# }
+# 
+# 
+# 
+# annual.gr6.lessthan10in$count<-1
+# 
+# sorted.totals<-as.data.frame(xtabs(annual.gr6.lessthan10in$count~
+#                                      annual.gr6.lessthan10in$response.cat)/
+#                                nrow(annual.gr6.lessthan10in))
+# 
+# sum(sorted.totals$Freq)
+# 
+# 
+# barchart(sorted.totals$Freq~sorted.totals$annual.gr6.lessthan10in.response.cat, names = "Quantile Bin",
+#          xlab = "Bin", ylab = "Frequency",type=density,
+#          main = "Witheld Data Height Growth Response
+#          sorted by Quantile Category (DBH>10in)", ylim=c(0,.5))
 
 
 

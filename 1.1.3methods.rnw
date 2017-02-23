@@ -11,49 +11,49 @@
 \subsection{Sampling Strategy}
 \doublespacing
 
-Twenty-nine study sites (termed ``installations'') were established on a variety of cooperative member ownership ranging from the eastern slopes of the Cascade Mountains to western Montana. The installations fell within three distinct geographic areas; central Washington, eastern Washington/Idaho and western Montana. 
+Twenty-six study sites were established on a variety of cooperative member ownership ranging from the eastern slopes of the Cascade Mountains to western Montana (see Figure \ref{fig:map}).  Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or harvested with one of the aforementioned variable retention harvest systems: shelterwood, seed tree or heavy thinning. 
 
+% 
+% <<fig=FALSE,include=FALSE, echo=FALSE>>=
+% #! 2. subset of installations
+% library(RODBC)
+% library(RgoogleMaps)
+% 
+% 
+% #! 2. subset of installations
+% locs0 <- sinstloc[sinstloc$Coordinate_Type=="DD" &
+%                     !(sinstloc$Installation %in% drp60),]
+% locs0v2 <- reshape(locs0,direction="wide",
+%                    v.names="Coordinate_Value",
+%                    timevar="Coordinate_Axis",
+%                    idvar=c("Installation","Plot"))
+% locs0v2 <- locs0v2[locs0v2$Plot==0,c(1,3,5,6)]
+% names(locs0v2)[3:4] <- c("Long","Lat")
+% 
+% 
+% #! 3. map it
+% ratio <- 6/10 #height to width ratio of map
+% 
+% png("inst_map.png",width=300*10,height=300*10*ratio,pointsize=12,res=300)
+% boxit <- qbbox(locs0v2$Lat,locs0v2$Long, TYPE="all")
+% basemap <- GetMap.bbox(boxit$lonR,boxit$latR, size=c(640,640*ratio),
+%                        destfile="temp.png", maptype="terra-in") #"mapmaker-hybrid",
+% tmp <- PlotOnStaticMap(basemap)
+% tmp <- PlotOnStaticMap(basemap,cex=3,pch=21,col="red",
+%                        lat=locs0v2$Lat,
+%                        lon=locs0v2$Long)
+% 
+% #For text labels
+% tmp <- PlotOnStaticMap(basemap,cex=1,col="black",add=T,
+% lat=locs0v2$Lat,
+% lon=locs0v2$Long,
+% FUN=text,labels=locs0v2$Installation)
+% 
+% 
+% dev.off()
+% @
 
-<<fig=FALSE,include=FALSE, echo=FALSE>>=
-#! 2. subset of installations
-library(RODBC)
-library(RgoogleMaps)
-
-
-#! 2. subset of installations
-locs0 <- sinstloc[sinstloc$Coordinate_Type=="DD" &
-                    !(sinstloc$Installation %in% drp60),]
-locs0v2 <- reshape(locs0,direction="wide",
-                   v.names="Coordinate_Value",
-                   timevar="Coordinate_Axis",
-                   idvar=c("Installation","Plot"))
-locs0v2 <- locs0v2[locs0v2$Plot==0,c(1,3,5,6)]
-names(locs0v2)[3:4] <- c("Long","Lat")
-
-
-#! 3. map it
-ratio <- 6/10 #height to width ratio of map
-
-png("inst_map.png",width=300*10,height=300*10*ratio,pointsize=12,res=300)
-boxit <- qbbox(locs0v2$Lat,locs0v2$Long, TYPE="all")
-basemap <- GetMap.bbox(boxit$lonR,boxit$latR, size=c(640,640*ratio),
-                       destfile="temp.png", maptype="terra-in") #"mapmaker-hybrid",
-tmp <- PlotOnStaticMap(basemap)
-tmp <- PlotOnStaticMap(basemap,cex=3,pch=21,col="red",
-                       lat=locs0v2$Lat,
-                       lon=locs0v2$Long)
-
-#For text labels
-tmp <- PlotOnStaticMap(basemap,cex=1,col="black",add=T,
-lat=locs0v2$Lat,
-lon=locs0v2$Long,
-FUN=text,labels=locs0v2$Installation)
-
-
-dev.off()
-@
-
-\begin{figure}[h]
+\begin{figure}[!htb]
 \begin{center}
     \includegraphics[width=.8\textwidth]{inst_map.png}
     \caption{Map of STCV Installations\label{fig:map}}
@@ -61,11 +61,7 @@ dev.off()
 \end{figure}
 
 
-
-Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or harvested with one of the aforementioned variable retention harvest systems: shelterwood, seed tree and heavy thinning. 
-
-
-The temporal initiation of installations varied with most being established in the last years of the 1990s and early 2000s.  Three check plots were also installed to audit the quality of the data collection efforts. Treatments were randomly assigned to seven plots within each installation (see Figure \ref{fig:instLayout}).  Three plots received multiple applications of regionally effective herbicide.  The remaining four plots are split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.
+The year of initiation of installations varied with most being established in the last years of the 1990s and early 2000s.  Three check plots were also installed to audit the quality of the data collection efforts. Treatments were randomly assigned to seven plots within each installation (see Figure \ref{fig:instLayout}).  Three plots received multiple applications of regionally effective herbicide.  The remaining four plots were split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.
 
 \begin{figure}[h]
 \begin{center}
@@ -75,12 +71,11 @@ The temporal initiation of installations varied with most being established in t
 \end{center}
 \end{figure}
 
-The primary objective of the herbicide treatments was to decouple the site quality and vegetative effects. It has been reported that like tree growth increases in good sites, levels of
-understory increase as well (Stage and Boyd 1987, Walstad and Kuch 1987). The herbicide treatments allowed us to see how small trees grow under varying levels of site quality without the presence of  corresponding non-tree vegetation.)
+The primary objective of the herbicide treatments was to decouple the site quality and vegetative effects. It has been reported that like tree growth increases in good sites, levels of understory increase as well (Stage and Boyd 1987, Walstad and Kuch 1987). The herbicide treatments reveals how small trees grow under varying levels of site quality without the presence of a corresponding increase non-arboreal vegetation. Because the objective of the herbicide treatments was to simply provide a range of non-arboral vegetation levels, the herbicide application regimes varied greatly and not all installations recieved treatment. 
 
-Figure \ref{fig:timeline} shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at each installation at four year intervals was successful for many installations but in some cases the intervals are somewhat irregular (i.e., 3-5 years in length). The schedule of measurements was based on twelve-year projection cycles that were used by participating cooperative members.
+Figure \ref{fig:timeline} shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at each installation at four year intervals was successful for many installations but in some cases the intervals were somewhat irregular (i.e., 3-5 years in length). The schedule of measurements was based on twelve-year projection cycles that were used by participating cooperative members. 
 
-\begin{figure}
+\begin{figure}[!htb]
 \begin{center}
 <<fig=TRUE,echo=FALSE>>=
 library(lattice)
@@ -113,14 +108,13 @@ xyplot(Installation ~ Year_Measurement,
 
 @
 \end{center}
-\caption{Timeline of Installation Measurements and Treatments.\label{fig:timeline}}
-\text{Green and red triangles represent years of overstory measurements and herbicide treatment, respectively. The black squares represent the years of the selected growth intervals. Note that the first year of the interval was selected such that it follows herbicide treatments by at least one year.}
+\caption{Timeline of Installation Measurements and Treatments.Green and red triangles represent years of overstory measurements and herbicide treatment, respectively. The black squares represent the years of the selected growth intervals. \label{fig:timeline}}
 \end{figure}
 
 
-A point of concern is that some measurements were taken at times that would not have allowed for the herbicide applications to take full effect. That is, several measurements were concurrent with or followed too quickly after the first herbicide application.  This necessitated careful selection of the appropriate measurement years on a per installation basis. The``first interval years'' were selected such that one to three years following the initial herbicide application were included to allow for the herbicide to take effect. Ultimately, the growth measurements will be put on the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. 
+A point of concern is that some measurements were taken at times that would not have allowed for the herbicide applications to take full effect. That is, several measurement years were concurrent with or followed too quickly after the first herbicide application.  This necessitated careful selection of the appropriate measurement years on an installation by installation basis. The``first interval years'' were selected such that one to three years following the initial herbicide application were included to allow for the herbicide to take effect. Ultimately, the height growth increments were standardized to the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. 
 
-\begin{figure}
+\begin{figure}[!htb]
 \begin{center}
 <<label=vegVol, fig=TRUE,width=7,height=4,echo=FALSE>>=
 library(RColorBrewer)
@@ -137,7 +131,7 @@ CTRLandGE.volume.index$Group.2<-factor(CTRLandGE.volume.index$Group.2)
 barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, groups=CTRLandGE.volume.index$Group.2,
          origin=0, 
          #main="Motor insurance claims frequency"
-         xlab="Installation", ylab="Vegetation Volume",
+         xlab="Installation", ylab="Vegetation Depth (ft.)",
         scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)),                  
          auto.key=list(space="right", columns=1, 
                        points=FALSE, rectangles=TRUE,
@@ -154,13 +148,13 @@ barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, groups=
 \end{center}
 \caption{Control and Herbicide Plot Vegetation Volume\label{fig:vegVol}}
 \end{figure}
+ 
+%Found by taking the installation-wide average of top and cov polyveg values in the first year of the selected measurement interval
 
-When comparing the vegetation volumes between the control and the herbicide plots at the beginning of the measurement intervals, it is apparent that there is a large drop in volume within installations with large amounts of understory vegetation when herbicide is applied (see Figure \ref{fig:vegVol}). However, the herbicide applications failed to contribute to a marked difference in volume in installations of little vegetative volume in control plots.
+When comparing the vegetation depths between the control and the herbicide plots in the first year of the selected measuremnt intervals, it is apparent that there is a large drop in vegetation levels within installations with large amounts of understory vegetation in the control plots(see Figure \ref{fig:vegVol}). This indicates some success in establishing a wide range of non-arboreal vegetative conditions on installations. However, the herbicide applications failed to contribute to a marked difference in depth in installations of little vegetative volume in control plots. 
 
 
-
-
-\begin{figure}
+\begin{figure}[!htb]
 \begin{center}
 <<label=samplePlot,fig=TRUE,echo=FALSE>>=
 library(plotrix)
@@ -219,29 +213,30 @@ rect(80-(1*3.28084),47,80,47,col=NA,border="black", lwd=1)
 
 @
 \end{center}
-\caption{Design of STCV Sampling Plot. Note that quadrants exist for all six small tree plots although only illustrated on two.\label{fig:samplePlot}}
+\caption{Design of STCV Sampling Plot. Note that vegetation quadrants exist for all six small tree plots although only illustrated on two.\label{fig:samplePlot}}
 \end{figure}
 
 Each plot contained a series of nested plots that decrease in area with physiologically smaller vegetation units (see Figure \ref{fig:samplePlot}). Starting with the full extent of the plot, overstory trees (> 10.5 in DBH) were measured on an approximately half acre. Medium trees, with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested plot of roughly a quarter acre. 
 
-Small trees are defined as those that have a DBH less than 3.5 in yet are greater than .5 ft in height for shade tolerant species or 1 ft for shade intolerant at the time of initial measurements. Small trees were measured on six .007 acre plots 60 degrees apart from plot center at a distance of approximately 30 feet.  
+Small trees were defined as those that have a DBH less than 3.5 in yet are greater than .5 ft in height for shade tolerant species or 1 ft for shade intolerant at the time of initial measurements. Small trees were measured on six .007 acre plots 60 degrees apart from plot center at a distance of approximately 30 feet.  
 
 There were two sampling methods used to measure vegetative competition. The first was transect based where point measurements of vegetation were obtained at one foot intervals along a 40 ft transect.  We also took vegetation measurements in the middle of the small tree plots in the form of both $1m^{2}$ and $4m^{2}$ grids. These vegetation measurements quantified separately the amounts of forbs, grasses and shrubs to the species level.  This is an example of how the resolution of the data goes beyond the scope of this analysis though will undoubtedly be of use in future research efforts.
 
+\newpage
 \subsection{Model Construction}
 
-The objective is to obtain a parsimonious model that is easily understood and informed by our understanding of the factors surrounding small tree growth. The variable selection process for each individual quantile will be guided by the ecological framework behind small tree growth. The quantile regression model was constructed in a forward stepwise selection that proceeded from one of the four previously mentioned categories of ecological competition that affect tree growth (see Figure \ref{fig:chart} on page \pageref{fig:chart}). These categories are understory tree competition, understory non-tree vegetative competition, retained overstory competition, and site productivity.  
+The objective was to obtain a parsimonious model that is easily understood and informed by our understanding of the factors surrounding small tree growth. The variable selection process for each individual quantile will be guided by the ecological framework behind small tree growth. The quantile regression model was constructed in a forward stepwise selection that proceeded from one of the four previously mentioned categories of ecological competition that affect tree growth (see Figure \ref{fig:chart} on page \pageref{fig:chart}). These categories are understory tree competition, understory non-tree vegetative competition, retained overstory competition, and site productivity.  
 
-Only the installations with greater than 60 ponderosa pine tagged small trees at initiation will be included in the model (see Figure \ref{fig:numbPond}). At these installations, the response variable; annual height increment, was calculated by finding the appropriate measurement intervals according to the timeline in Figure\ref{fig:timeline} on page \pageref{fig:timeline}, then subtracting earlier height increments from the latter and then dividing by the difference between measurement years. 
+Only the installations with greater than 60 ponderosa pine tagged small trees at initiation were included in the model (see Figure \ref{fig:numbPond}). At these installations, the response variable; annual height increment, was calculated by finding the appropriate measurement intervals according to the timeline in Figure\ref{fig:timeline} on page \pageref{fig:timeline}, then subtracting earlier height increments from the latter and then dividing by the difference between measurement years. 
 
-The site productivity of the installations was measured according to the dominate site tree which varied between ponderosa pine, douglas fir and western larch. Selecting only stands with greater than 60 small tagged ponderosa for this analysis effectively removed nearly all stands that measured site index with a species besides ponderosa pine.
-
-
-There appears to be a group of six installations with similarly low overstory retention levels and high site index values (see red colored installations in Figure \ref{fig:siteOverstory}).  It makes sense from a forest management perspective, that relatively little residual overstory would be left on highly productive sites. These installations could be used to develop the understory model since they are so similar in overstory and site productivity. There are many other installations that can be brought in later to expand the model to other various levels of productivity and overstory retention.
+The site productivity of the installations was measured according to the dominate site tree which varied between ponderosa pine, douglas fir and western larch. Selecting only stands with greater than 60 small tagged ponderosa for this analysis effectively removed nearly all stands that measured site index with a species other than ponderosa pine.
 
 
+There appears to be a group of six installations with similarly low overstory retention levels and high site index values (see red colored installations in Figure \ref{fig:siteOverstory}).  It makes sense from a forest management perspective, that relatively little residual overstory would be left on highly productive sites. These installations were used to develop the understory model since they were so alike in overstory and site productivity. There are many other installations that were brought in later to expand the model to other levels of productivity and overstory retention.
 
-\begin{figure}
+
+
+\begin{figure}[!htb]
 \begin{center}
 <<fig=TRUE,echo=FALSE>>=
 library(lattice)
@@ -298,11 +293,11 @@ xyplot(sinst1$SiteIndex_Value~sinst1$minOSBA,
 
 
 
-It was also during this stage of preparation that damage codes were addressed. Over the years many of the small tagged trees endured some kind of damage (see figure \ref{fig:damageCodes}) including mortality, broken tops, forked tops, sweep or animal damage. Dead trees and those with dead tops were removed from analysis since these trees typically experienced a decrease in height growth from the previous measurement year. The histogram of annual height increments in figure *** shows that this effectively removes negative height growth increments.  See ***appendix for the complete list of damage codes recorded. 
+It was also during this stage of preparation that damage codes were addressed. Over the years many of the small tagged trees endured some kind of damage (see figure \ref{fig:damageCodes}) including mortality, broken tops, forked tops, sweep or animal damage. Dead trees and those with dead tops were removed from analysis since these trees typically experienced a decrease in height growth from the previous measurement year. See ***appendix for the complete list of damage codes recorded. 
 
-\begin{figure}
+\begin{figure}[!htb]
 \begin{center}
-<<label=damageCodes,width=6,height=3,fig=TRUE,echo=FALSE>>=
+<<label=damageCodes,width=7,height=3,fig=TRUE,echo=FALSE>>=
 damageCodes<-as.data.frame(table(droplevels(annual.gr$Damage)))
 
 names(damageCodes)[1]<-("code")
@@ -336,10 +331,10 @@ barchart(damageCodes$number ~ damageCodes$code,
 
 
 
-Within each plot, one of the six small tree plots was randomly selected as validation data. The randomness was necessary to account for the uphill orientation of the first STP on each plot and clockwise layout of remaining STPs. The check plots and installations that have sustained a post-initiation harvest are also excluded from analysis.  
+Within each plot, one of the six small tree plots was randomly selected as validation data. The randomness was necessary to account for the uphill orientation of the first STP on each plot and clockwise layout of the subsequent STPs. The check plots and installations that have sustained a post-initiation harvest were also excluded from analysis.  
 
 
-\begin{figure}
+\begin{figure}[!htb]
 \begin{center}
 <<label=numbPond, fig=TRUE,width=6,height=4,echo=FALSE>>=
 #Frequency Plot by Species#
@@ -385,12 +380,13 @@ Aikekes Information Criterion (AIC) was used to compare model fit between variab
 \textbf{Under story Tree Competition:}
 For this category of ecological competition, only stands of similar overstory basal area and site productivity were selected to compare predictor variables within. This was done to isolate the effects of inter-small tree competition.  Ranges of retained basal area and site productivity undoubtedly have influence on small tree growth rates and will be accounted for in subsequent categories. 
 
-The tallies of small trees from each small tree plot (STP) were summed by height class and then multiplied by 138.73 to obtain per acre estimates.  The number of trees greater than the subject trees was found by summing all height class tallies with class midpoints greater than the height of the subject tree. Crown length was found by subtracting the crown base from the total height.  Crown width was found as an average of the two perpendicular measurements of crown width obtained in the field. Crown ratio was obtained by dividing the crown length by the total tree height. Basal diameter and DBH required no further refinement.
+The tallies of small trees from each small tree plot (STP) were summed by height class and then multiplied by 138.73 to obtain per acre estimates.  The number of trees greater than the subject trees was found by summing all height class tallies with class midpoints greater than the height of the subject tree. Crown length was found by subtracting the crown base from the total height.  Crown width was found as an average of the two perpendicular measurements of crown width obtained in the field. Crown ratio was obtained by dividing the crown length by the total tree height. Basal diameter and diameter at breast height required no further refinement.
 
 \textbf{Understory Vegetation Competition:}
-All stands with greater than 60 tagged small ponderosa pine trees were brought into consideration for the three remaining categories. Although measurements were recorded to 4m vegetation plots in the later years or the study, only the 1m vegetation plots were utilized in this analysis since they were used for the duration of the study.  
 
-Average differences at the STP level between base and top height measurements were found separately for forbs,low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were found for poly-vegetation, forbs, low shrubs, high shrubs and grasses.  Average height differences for low shrubs, high shrubs, forbs were calculated for the 30 or 40 transect points corresponding to each small tree plot.  Percentage cover of grass obtained ocularly through a 6in by 6in grid and top height of grasses were also averaged over the length of the transect. Two relative measures of competition were created by subtracting the tallest understory vegetation height from that of the subject tree for both 1m and transect vegetation.
+All stands with greater than 60 tagged small ponderosa pine trees were brought into consideration for the three remaining categories. Although measurements were recorded to 4m vegetation plots in the later years or the study, only the 1m vegetation plots were utilized in this analysis since they were used for the entire duration of the study.  
+
+Average differences at the STP level between base and top height measurements were found separately for forbs,low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were obtained for poly-vegetation, forbs, low shrubs, high shrubs and grasses.  Average height differences for low shrubs, high shrubs, forbs were calculated for the 30 or 40 transect points corresponding to each small tree plot.  Percentage cover of grass obtained ocularly through a 6in by 6in grid and through measurement of the top height of grasses averaged over the length of the transect. Two relative measures of competition were created by subtracting the tallest understory vegetation height from that of the subject tree for both 1m and transect vegetation.
 
 \textbf{Retained Overstory Tree Competition:}
 
@@ -400,21 +396,17 @@ Trees per acre (TPA) is calculated from the plot level aggregation of the two ov
 
 \textbf{Site Quality:}
 Slope, elevation and aspect were calculated using Google Earth Engine (\cite{googleearthengine}) for each plot's GPS recorded decimal degree coordinates. Slope is in units percentage and elevation in meters. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180) and $\sin$((aspect*$\pi$)/180). Interacting effects of elevation, slope and aspect were considered according to a linear model proposed by Salas and Stage(\cite{Stage2007a}).  This model allows for the aspect effects to involve slope and varying elevation.
-%add more about equation
-
-
-% \begin{align}
-% y &= b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)] \nonumber \\ 
-% &+\text{ln}(el+1)*s[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)] \nonumber \\ 
-% &+(el^2)*s[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2 \label{seaInt}
-% 
-% % \caption{Qualitatively derived mathematical expression of aspect, slope and elevation}
-% \end{align}
+\begin{gather}
+y = b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)]+ 
+\text{ln}(el+1)*s[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)] \nonumber \\
++(el^2)*s[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2, \\      
+\text{where~$y$ is the growth response,$s$ is the slope in percent,~$el$ is elevation in feet,~$a$ is aspect in radians}\nonumber
+\end{gather}
 
 
 Site index was included from STCV records of each installation's initiation. An open grown dominate site tree was identified at the initiation of the site and site index calculated from standard site index curves. Site index species was ponderosa pine for the installations included in analysis although many other species were used at other installations. 
 
-\newpage
+
 \subsection{Model Validation}
 
 
@@ -427,9 +419,9 @@ A chi-squared test for homogeneity was then conducted to compare the actual and 
 
 Hypotheses tested:
 
-H_{0}: P.10 and P.90 =.10 and P.10to50 and P.50to90 =.40
+H_{0}: \text{The distribution of responses is .10,.40,.40,.10 for each height class}
 
-H_{A}: P.10 and P.90 $\neq$ .10 and P.10to50 and P.50to90 $\neq$ .40
+H_{A}: \text{At least one of the proportions is not .10,.40,.40,.10 for each height class}
 
 
  

@@ -16,7 +16,7 @@ CTRLandGE.volume.index<-aggregate(CTRLandGE.plot.veg[, 17:19], list(CTRLandGE.pl
                                                                     CTRLandGE.plot.veg$Treatment), mean, na.rm=TRUE)
 
 #Create a US Volume Estimate by multiplying mean ployveg% cover * mean top height for each treatment w/i each inst#
-CTRLandGE.volume.index$volume<-CTRLandGE.volume.index$Cov*CTRLandGE.volume.index$Top
+CTRLandGE.volume.index$volume<-(CTRLandGE.volume.index$Cov/100)*CTRLandGE.volume.index$Top
 
 
 library(RColorBrewer)

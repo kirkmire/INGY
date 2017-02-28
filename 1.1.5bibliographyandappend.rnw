@@ -5,7 +5,7 @@
 \newappendix{A. Bibliography} 
 \printbibliography
 All analyses were performed using the R statistical software
-\Sexpr{R.Version()$version.string}. This thesis was compiled using the document preparation program \LaTeX.
+\Sexpr{R.Version()$version.string}. This thesis and bibliography were compiled using the document preparation program \LaTeX and bibliography preperation program \hologo{BibTeX}, respectively.
 
 
 \newpage

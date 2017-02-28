@@ -189,31 +189,147 @@ barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.c
 #Chi Squared test of homogeneity
 
 
-# annual.gr6.lessthan1<-annual.gr6[annual.gr6$Height_Total<3,]
-# annual.gr6.1to3<-annual.gr6[3<annual.gr6$Height_Total&&annual.gr6$Height_Total<5,]
-# annual.gr6.3plus<-annual.gr6[annual.gr6$Height_Total>5,]
-# 
-# x.table1<-as.table(t(count(annual.gr6.lessthan1, 'response.cat')))
-# x.table1<-x.table1["freq",]
-# x.table1<-as.numeric(x.table1)
-# 
-# x.table2<-t(count(annual.gr6.1to3, 'response.cat'))
-# x.table3<-t(count(annual.gr6.3plus, 'response.cat'))
-# 
-# brkdwn<-rbind(x.table1,x.table2,x.table3)
-# 
-# 
-# min(annual.gr6$Height_Total)
-# 
-# hist(annual.gr6$Height_Total)
-# 
-# xsq<-chisq.test(x.table1,p=c(.1,.4,.4,.1))
-# 
-#                                     
-# xsq$expected
+annual.gr6.lessthan1<-annual.gr6[annual.gr6$Height_Total<4,]
+annual.gr6.1to3<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
+annual.gr6.3plus<-annual.gr6[annual.gr6$Height_Total>6,]
+
+x.table1<-as.table(t(count(annual.gr6.lessthan1, 'response.cat')))
+x.table1<-x.table1["freq",]
+x.table1<-as.numeric(x.table1)
+
+x.table2<-t(count(annual.gr6.1to3, 'response.cat'))
+x.table2<-x.table2["freq",]
+x.table2<-as.numeric(x.table2)
+
+x.table3<-t(count(annual.gr6.3plus, 'response.cat'))
+x.table3<-x.table3["freq",]
+x.table3<-as.numeric(x.table3)
+
+brkdwn<-rbind(x.table1,x.table2,x.table3)
+
+
+min(annual.gr6$Height_Total)
+
+hist(annual.gr6$Height_Total)
+
+xsq1<-chisq.test(x.table1,p=c(.1,.4,.4,.1))
+xsq2<-chisq.test(x.table2,p=c(.1,.4,.4,.1))
+xsq3<-chisq.test(x.table3,p=c(.1,.4,.4,.1))
+
+#Exact test
+
+library(XNomial)
+xmulti(x.table1,c(.1,.4,.4,.1),"Chisq")
+xmulti(x.table2,c(.1,.4,.4,.1),"Chisq")
+xmulti(x.table3,c(.1,.4,.4,.1),"Chisq")
 
 
 
+
+
+#Look at one installations trees
+KC_trees<-annual.gr4[which(annual.gr4$Installation=="KC"&
+                             annual.gr4$Year_Measurement==2002),]
+
+#Select only first year measurements (2002)
+
+KC_2002<-stagm[which(stagm$Installation=="KC"),]
+KC_2002<-KC_2002[which(KC_2002$Year_Measurement==2002),]
+KC_2006<-stagm[which(stagm$Installation=="KC"),]
+KC_2006<-KC_2006[which(KC_2006$Year_Measurement==2006),]
+
+KC_both<-merge(KC_2002,KC_2006,by=c("Plot","STP","Tree"))
+
+KC_all<-merge(KC_both,KC_trees,by=c("Plot","STP","Tree"),all.y=T)
+
+KC_all$meas.diff<-KC_all$Height_Total.y-KC_all$Height_Total.x
+
+KC_all<-KC_all[which(!KC_all$Damage.y=="DEAD"),]
+KC_all<-KC_all[which(!KC_all$Damage.y=="D"),]
+KC_all<-KC_all[which(!KC_all$Damage.y=="DT"),]
+
+
+KC_all$qr.pred.one <- predict.rq(qr.SI.1, KC_all)*8
+KC_all$qr.pred.five <- predict.rq(qr.SI.5, KC_all)*8
+KC_all$qr.pred.nine <- predict.rq(qr.SI.9, KC_all)*8
+
+KC_all<-KC_all[!is.na(KC_all$Height_Total.y),]
+
+KC_all$response.cat<-0
+
+
+detach(package:dplyr)
+
+for(i in 1:nrow(KC_all)){
+  KC_all$response.cat[i]<-valid.func(
+    KC_all$meas.diff[i],
+    KC_all$qr.pred.one[i],
+    KC_all$qr.pred.five[i],
+    KC_all$qr.pred.nine[i])
+  
+}
+
+
+plot(KC_all$qr.pred.five,KC_all$meas.diff)
+
+KC_all$qr.pred.five<-as.numeric((KC_all$qr.pred.five))
+KC_all$meas.diff<-as.numeric((KC_all$meas.diff))
+
+length(KC_all$qr.pred.five)
+length(KC_all$meas.diff)
+
+hist(KC_all$qr.pred.five)
+hist(KC_all$qr.pred.nine)
+
+library(plyr)
+sorted.totals<-count(annual.gr6, 'response.cat')
+
+
+trellis.device(color = FALSE)
+
+lattice.options(default.theme = modifyList(standard.theme(color = 
+                                                            FALSE), list(strip.background = list(col = "transparent")))) 
+
+library(RColorBrewer)
+display.brewer.all()
+
+
+myColours <- brewer.pal(6,"Greens")
+## Create your own list with
+my.settings <- list(
+  superpose.polygon=list(col=myColours[2:5], border="transparent"),
+  strip.background=list(col=myColours[6]),
+  strip.border=list(col="black")
+)
+
+
+library(plyr)
+sorted.totals<-count(KC_all, 'response.cat')
+
+
+barchart(sorted.totals$freq/length(KC_all$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",
+         xlab = "Bin", ylab = "Fraction of Installations Trees",type=density,
+         main = "KC Height Growth b/t 2002 and 2006
+         sorted by predicted quantiles",ylim=c(0,.60),
+         par.settings = my.settings,
+         par.strip.text=list(col="white", font=2),
+         panel=function(x,y,...){
+           panel.grid(h=-1, v=0); 
+           panel.barchart(x,y,...)
+         })
+
+
+###looking at predicted median vs actual ht growth increments
+
+plot(annual.gr6$ht_annual,annual.gr6$qr.pred.five)
+abline(fit<-lm(annual.gr6$qr.pred.one~annual.gr6$ht_annual),col="red")
+abline(fit<-lm(annual.gr6$qr.pred.five~annual.gr6$ht_annual),col="blue")
+abline(fit<-lm(annual.gr6$qr.pred.nine~annual.gr6$ht_annual),col="green")
+
+
+rmse <- round(sqrt(mean(resid(fit)^2)), 2)
+
+summary(fit)
 
 
 # #Sorted responses for trees <10 in initial dbh

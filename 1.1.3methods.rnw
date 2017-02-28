@@ -222,7 +222,7 @@ Small trees were defined as those that have a DBH less than 3.5 in yet are great
 
 There were two sampling methods used to measure vegetative competition. The first was transect based where point measurements of vegetation were obtained at one foot intervals along a 40 ft transect.  We also took vegetation measurements in the middle of the small tree plots in the form of both $1m^{2}$ and $4m^{2}$ grids. These vegetation measurements quantified separately the amounts of forbs, grasses and shrubs to the species level.  This is an example of how the resolution of the data goes beyond the scope of this analysis though will undoubtedly be of use in future research efforts.
 
-\newpage
+
 \subsection{Model Construction}
 
 The objective was to obtain a parsimonious model that is easily understood and informed by our understanding of the factors surrounding small tree growth. The variable selection process for each individual quantile will be guided by the ecological framework behind small tree growth. The quantile regression model was constructed in a forward stepwise selection that proceeded from one of the four previously mentioned categories of ecological competition that affect tree growth (see Figure \ref{fig:chart} on page \pageref{fig:chart}). These categories are understory tree competition, understory non-tree vegetative competition, retained overstory competition, and site productivity.  

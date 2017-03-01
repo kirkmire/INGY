@@ -55,6 +55,22 @@ latex(final.aic, file="")            # If you want all the data
 # #even in terms of the CI 
 library(quantreg)
 
+least_squares <-lm(ht_annual~srHeight_Total+
+               cratio+
+               TPA.OS+
+               slopePercent +
+               slopePercent:cos_rad_asp +
+               slopePercent:sin_rad_asp +
+               slopePercent:log(elevation+1) +
+               slopePercent:log(elevation+1):cos_rad_asp +
+               slopePercent:log(elevation+1):sin_rad_asp +
+               slopePercent:I(elevation^2) +
+               slopePercent:I(elevation^2):cos_rad_asp +
+               slopePercent:I(elevation^2):sin_rad_asp +
+               elevation +
+               I(elevation^2) ,
+            data=annual.gr4)
+
 
 qr.SI.1 <-rq(ht_annual~srHeight_Total+
                cratio+
@@ -320,12 +336,31 @@ barchart(sorted.totals$freq/length(KC_all$InstPlot)~sorted.totals$response.cat, 
 
 
 ###looking at predicted median vs actual ht growth increments
+annual.gr6<-annual.gr6[!annual.gr6$ht_annual<0,]
+annual.gr6$lm_ht<-predict(least_squares,annual.gr6)
 
-plot(annual.gr6$ht_annual,annual.gr6$qr.pred.five)
-abline(fit<-lm(annual.gr6$qr.pred.one~annual.gr6$ht_annual),col="red")
-abline(fit<-lm(annual.gr6$qr.pred.five~annual.gr6$ht_annual),col="blue")
-abline(fit<-lm(annual.gr6$qr.pred.nine~annual.gr6$ht_annual),col="green")
+plot(sqrt(annual.gr6$ht_annual),annual.gr6$qr.pred.five,col="blue")
+abline(fit<-lm(annual.gr6$qr.pred.one~sqrt(annual.gr6$ht_annual)),col="red")
+abline(fit<-lm(annual.gr6$qr.pred.five~sqrt(annual.gr6$ht_annual)),col="blue")
+abline(fit<-lm(annual.gr6$qr.pred.nine~sqrt(annual.gr6$ht_annual)),col="green")
+points(annual.gr6$ht_annual,annual.gr6$qr.pred.one,col="red")
+points(annual.gr6$ht_annual,annual.gr6$qr.pred.nine,col="green")
+points(annual.gr6$ht_annual,annual.gr6$lm_ht,col="yellow")
+abline(fit<-lm(annual.gr6$lm_ht~sqrt(annual.gr6$ht_annual)),col="black")
 
+
+###looking at predicted median vs init height
+annual.gr6<-annual.gr6[!annual.gr6$height_annual<0,]
+annual.gr6$lm_ht<-predict(least_squares,annual.gr6)
+
+plot(sqrt(annual.gr6$Height_Total),annual.gr6$qr.pred.five,col="blue")
+abline(fit<-lm(annual.gr6$qr.pred.one~sqrt(annual.gr6$Height_Total)),col="red")
+abline(fit<-lm(annual.gr6$qr.pred.five~sqrt(annual.gr6$Height_Total)),col="blue")
+abline(fit<-lm(annual.gr6$qr.pred.nine~sqrt(annual.gr6$Height_Total)),col="green")
+points(annual.gr6$Height_Total,annual.gr6$qr.pred.one,col="red")
+points(annual.gr6$Height_Total,annual.gr6$qr.pred.nine,col="green")
+points(annual.gr6$Height_Total,annual.gr6$lm_ht,col="yellow")
+abline(fit<-lm(annual.gr6$lm_ht~sqrt(annual.gr6$Height_Total)),col="black")
 
 rmse <- round(sqrt(mean(resid(fit)^2)), 2)
 

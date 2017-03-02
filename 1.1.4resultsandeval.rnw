@@ -6,6 +6,12 @@
 \newpage
 \section{Results and Evaluation}
 
+\newpage
+Zhang et al. found that the importance of shrub control on growth increment was not evident in the final years of their study, as tree-shrub competition likely switched to tree-tree compitition. However, shrub control is critical for stand development on low quality sites.
+
+A number of reports on Ponderosa Pine Level-of-Growing Stock Study found that regardless of stand age, ponderosa pine responded to thinning immediately and that average dbh and crown length and width increased with decreasing residual stand densities.(Barrett
+1983; Ronco et al. 1985; Cochran and Barrett 1995, 1999; Oliver
+1979, 1997, 2005)
 
 \begin{table}[h]
 \small
@@ -21,20 +27,20 @@
 
 \hline
 
-Nothing&683&1267.72&Nothing&2155&1952.73&Nothing&2155&1952.73\tabularnewline
-SmallTPA&683&1128.73&POLV.cov&2155&1917.27&BAPA&2155&1878.24\tabularnewline
-Trees15+&680&1211.25&F.cov&2155&1936.24&CCF&2155&1799.89\tabularnewline
-TGT&680&1164.91&LS.cov&2155&1947.57&TPA&2155&1753.38\tabularnewline
-BD&682&928.5&HS.cov&2155&1946.06&Site&n&AIC\tabularnewline
-DBH&596&928.2&G.cov&2155&1943.72&TPA&2155&1753.38\tabularnewline
-CrownWidth&680&1126.07&LS.diff&2155&1872&SI&2155&1590.61\tabularnewline
-CrownLength&680&1014.34&HS.diff&2155&1862.7&Slope&2155&1735.13\tabularnewline
-CrownRatio&680&934.79&LS.tran&2155&1875.83&Elevation&2155&1752.72\tabularnewline
-&&&HS.tran&2155&1912.21&Aspect&2155&1696.07\tabularnewline
-&&&G.tran.diff&2155&1863.14&SEA Int&2155&1518.36\tabularnewline
-&&&G.tran.cov&2153&1953.86&&&\tabularnewline
-&&&mx.vg.diff1m&2155&1925.21&&&\tabularnewline
-&&&mx.vg.diff.tr&2155&1925.21&&&\tabularnewline
+Nothing&683&1267.72&Nothing&2155&2093.37&Nothing&2155&2093.37\tabularnewline
+SmallTPA&683&1128.73&POLV.cov&2155&2080.37&BAPA&2155&2042.38\tabularnewline
+Trees15+&680&1211.25&F.cov&2155&2068.94&CCF&2155&1955.18\tabularnewline
+TGT&680&1164.91&LS.cov&2155&2079.14&TPA&2155&1894.23\tabularnewline
+BD&682&928.5&HS.cov&2155&2090.43&Site&n&AIC\tabularnewline
+DBH&596&928.2&G.cov&2155&2085.68&SI&2155&1665.62\tabularnewline
+CrownWidth&680&1126.07&LS.diff&2155&1988.55&Slope&2155&1880.17\tabularnewline
+CrownLength&680&1014.34&HS.diff&2155&2024.96&Elevation&2155&1896.23\tabularnewline
+CrownRatio&680&934.79&LS.tran&2155&2006.49&Aspect&2155&1816.48\tabularnewline
+&&&HS.tran&2155&2058.7&SEA Int&2155&1596.55\tabularnewline
+&&&G.tran.diff&2155&1986.17&&&\tabularnewline
+&&&G.tran.cov&2153&2094.48&&&\tabularnewline
+&&&mx.vg.diff1m&2155&2085.67&&&\tabularnewline
+&&&mx.vg.diff.tr&2155&2085.67&&&\tabularnewline
 
 \hline
 \end{tabular}
@@ -43,17 +49,87 @@ CrownRatio&680&934.79&LS.tran&2155&1875.83&Elevation&2155&1752.72\tabularnewline
 \end{table}
 
 
+
 \newpage
-Zhang et al. found that the importance of shrub control on growth increment was not evident in the final years of their study, as tree-shrub competition likely switched to tree-tree compitition. However, shrub control is critical for stand development on low quality sites.
 
-A number of reports on Ponderosa Pine Level-of-Growing Stock Study found that regardless of stand age, ponderosa pine responded to thinning immediately and that average dbh and crown length and width increased with decreasing residual stand densities.(Barrett
-1983; Ronco et al. 1985; Cochran and Barrett 1995, 1999; Oliver
-1979, 1997, 2005)
+\begin{figure}[!htb]
+\begin{center}
+<<fig=TRUE,echo=FALSE>>=
+
+lattice.options(default.theme = modifyList(standard.theme(color = 
+                                                            FALSE), list(strip.background = list(col = "transparent")))) 
+
+library(RColorBrewer)
+sorted.totals$freq<-sorted.totals$freq/sum(sorted.totals$freq)
+
+barchart(sorted.totals$freq~sorted.totals$response.cat, names = "Quantile Bin",
+        xlab = "Bin", ylab = "Fraction of Total Witheld Trees",
+        # main = "Witheld Data Height Growth Response
+        # sorted by Quantile Category",
+        ylim=c(0,.5),
+        par.settings = my.settings,
+        par.strip.text=list(col="white", font=2),
+        panel=function(x,y,...){
+          panel.grid(h=-1, v=0); 
+          panel.barchart(x,y,...)
+        })
+
+@
+\end{center}
+\caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:witheld}}
+\end{figure}
+
+\newpage
+
+\begin{figure}[!htb]
+\begin{center}
+<<fig=TRUE,echo=FALSE>>=
+library(plyr)
+sorted.totals1<-count(KC_all, 'response.cat')
 
 
+barchart(sorted.totals1$freq/length(KC_all$InstPlot)~sorted.totals1$response.cat, names = "Quantile Bin",
+         xlab = "Bin", ylab = "Fraction of Installations Trees",type=density,
+         main = "KC Height Growth b/t 2002 and 2006
+         sorted by predicted quantiles",ylim=c(0,.60),
+         par.settings = my.settings,
+         par.strip.text=list(col="white", font=2),
+         panel=function(x,y,...){
+           panel.grid(h=-1, v=0); 
+           panel.barchart(x,y,...)
+         })
+@
+\end{center}
+\caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:KC_proj}}
+\end{figure}
 
 
+\begin{table}[!tbp]
+\begin{center}
+\begin{tabular}{lrrr}
+\hline\hline
+\multicolumn{1}{l}{chitable}&\multicolumn{1}{c}{\textless 4}&\multicolumn{1}{c}{4-6}&\multicolumn{1}{c}{\textgreater 6}\tabularnewline
+\hline
+ChiSq&$2e-04$&$0.1019$&$0.0908$\tabularnewline
+Xact&$3e-04$&$0.0988$&$0.0898$\tabularnewline
+\hline
+\end{tabular}\end{center}
+\label{tab:chisqexact}
+\end{table}
 
+\begin{table}[!tbp]
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline\hline
+\multicolumn{1}{l}{actual}&\multicolumn{1}{c}{\textless .1}&\multicolumn{1}{c}{.1to.5}&\multicolumn{1}{c}{.5tpo.9}&\multicolumn{1}{c}{\textgreater .9}\tabularnewline
+\hline
+\textless 4&$ 4$&$ 40$&$43$&$24$\tabularnewline
+4-6&$12$&$ 42$&$24$&$ 8$\tabularnewline
+\textgreater 6&$39$&$107$&$97$&$28$\tabularnewline
+\hline
+\end{tabular}\end{center}
+\label{tab:actual}
+\end{table}
 
 
 

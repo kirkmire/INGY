@@ -1,46 +1,55 @@
 \documentclass[11pt]{article}
-
 \usepackage{setspace}
 \usepackage{enumitem}
 \usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
 \begin{document}
 \SweaveOpts{concordance=TRUE}
 \noindent 
-\begin{spacing}{1.5}
+\begin{spacing}{1.2}
 \thispagestyle{empty}
 
 \newpage
+\pagestyle{empty}
+\textbf{Required Qualifications:}
 \begin{itemize}[noitemsep]
-  \item Mastery of R and/or Python programming languages  
-  \item Proficient with forest models such as FVS, ORGANON, FPS, SPS, SAS 
-  \item Proficiency in designing and using relational databases including Oracle, PostgreSQL, and Access 
-  \item Proficiency in ArcGIS and scripting GIS processing 
-  \item Expert-level understanding of scientific method and expertise in sampling, estimation, forest modeling, mensuration, biometrics, and projection
-  \item Expertise in using remote sensing data (aerial photos, LiDAR, satellite imagery) and environmental gradient variables (slope, aspect, soils, precipitation, temperature) to predict and map forest conditions
-  \item Demonstrable expertise in managing complex projects, effectively directing a team, and delivering high-quality products in a timely manner
-  \item BS degree in forestry, computer science, or a related field
+  \item \textbf{Mastery of R and/or Python programming languages}  \\
+I am proficient working in the R programming language and environment.  The analysis for both my undergraduate and masters thesis as well as assignments for graduate level statistics and sampling courses were undertaken entirely within this program.  I utilize the document preparation software \LaTeX to seamlessly accomplish all writing within the R environment.  I use version control via GitHub to remotely store and collaborate on R scripts.  
+  \item \textbf{Proficient with forest models such as FVS, ORGANON, FPS, SPS, SAS} \\
+I have made it a priority in my education to use and understand growth and yield models, particularly FVS.  FVS has been a constant part of my forestry education; from my early experience using FVS to project stand metrics for King County Parks to taking the week-long Region 1 FVS training and teaching undergraduate students how to use the FVS Suppose GUI.  My masters research has allowed me to gain a deeper understanding of the underlying relationships and structure of this popular growth and yield model.  I have adopted portions of the FVS small tree growth routine into my model that describes \emph{Pinus ponderosa} growth under variable retention harvest.  In addition, I have helped in establishing a routine to access the underlying FVS FORTRAN code through R with the rFVS interface which allows for seamless workflow between the two programs. 
+  \item \textbf{Proficiency in designing and using relational databases including Oracle, PostgreSQL, and Access} \\
+Since my early experience with FVS was through the Suppose GUI, I have had exposure to Access for many years.  I also gained additional competency in using Access and connecting to it through R as the data for my project is compiled into an Access database. 
+  \item \textbf{Proficiency in ArcGIS and scripting GIS processing} \\
+I had several courses in ArcGIS and remote sensing at the University of Washington.  I am currently improving my spatial analysis capabilities through a course in Google Earth Engine, which combines a multi-petabyte catalog of satellite imagery and geospatial datasets interfaced through a JavaScript API.  
+  \item \textbf{Expert-level understanding of scientific method and expertise in sampling, estimation, forest modeling, mensuration, biometrics, and projection} \\
+I have a thorough knowledge of the theory and application of simple random, systematic, stratified and 3p sampling designs. I am familiar with sources of bias such as edge effects and methods of correction.  I also have an understanding of estimators associated with deriving population estimates.  I have utilized both variable and fixed radius plot sampling designs in both academic research and private sector appraisals. 
+  \item \textbf{Expertise in using remote sensing data (aerial photos, LiDAR, satellite imagery) and environmental gradient variables (slope, aspect, soils, precipitation, temperature) to predict and map forest conditions} \\
+With the aforementioned program, I can efficiently calculate a number of environmental gradient variables including slope, elevation, aspect and NDVI.  This is the platform I have used for all of my spatially derived variables including remotely sensed comparisons of productivity between plots.
+    \item \textbf{Demonstrable expertise in managing complex projects, effectively directing a team, and delivering high-quality products in a timely manner} \\
+I directed field collection efforts for my own research and constantly sought gains in efficiency when involved in other projects such as the FS Regional Biomass project. 
+  \item \textbf{BS degree in forestry, computer science, or a related field} \\
+I have a B.S. in Sustainable Forest Management from the University of Washington as well as an M.S. in Forest Biometrics from the University of Montana that is quickly approaching completion (May 2017). \\
+\textbf{Desirable Qualifications:}
+  \item \textbf{Extensive knowledge of statistics and 2 years experience working independently on complex statistical problems} \\
+I have completed fourteen semester credits in graduate level statistics that covered probability, modeling techniques and data management/visualization.  My research has been conducted independently for the last two years and involves the complex statistical problem of modeling small tree height growth. 
+  \item \textbf{Experience delegating work and managing technical staff} \\
+I lead a team of research technicians in successfully completing field measurements across three states for the past two summers. 
+  
+  
+  
 \end{itemize}
 
 
-I am proficient working in the R programming language and environment. The analysis for both my undergraduate and masters thesis as well as assignments for graduate level statistics and sampling courses were undertaken entirely within this program. I also utilize the document preperation software \LaTeX to accomplish all writing within the R environment.
-
-
-I have made it a priority in my education to use and understand growth and yield models, particularly FVS. I have used FVS to project stand metrics for King County Parks land, to projecting forest conditions in Western Montana as well as British Columbia. My masters research has allowed me to gain a deeper understanding of the underlying relationships and structure of this popular growth and yield model. In my graduate research, I have adopted portions of the FVS small tree growth routine into my model that describes \emph{Pinus ponderosa} growth under variable retention harvest. In addition, I have established a routine to access FVS through R with the rFVS interface which allows for seamless workflow between the two programs.
 
 
 
-Since my early experience with FVS was through the Suppose GUI, I have had exposure to Access for many years. I gained competency in using Access and connecting to it through R as the data for my project is compiled into an Access database. 
-
-I had several courses in ArcGIS and remote sensing at the University of Washington. I am currently improving my spatial analysis capabilities through a course in Google Earth Engine, which combines a multi-petabyte catalog of satellite imagery and geospatial datasets through a JavaScript API. With this program, I can efficiently calculate a number of environmental gradient variables including slope, elevation, aspect and NDVI. This is the platform I have used for all of my spatially derived variables and have become comfortable, although I have maintained competency with ArcGIS as well.
-
-
-I have studied extensively sampling and estimation. I have a thorough knowledge of the logic and application of simple random, systematic, stratified and 3p sampling designs. I have utilized both variable and fixed radius plot sampling designs for both research and private sector appraisals.
 
 
 
-I have a B.S. in Sustainable Forest Management from the University of Washington as well as an M.S. in Forest Biometrics from the University of Montana that is nearing completion.
 
-My research has been conducted independently for the last two years and involves the complex statistical problem of modeling small tree height growth. I have lead a team of research technicians in successfully completing field measurements for the past two summers. 
+
+
+
+
 
 
 \end{spacing}

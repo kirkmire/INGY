@@ -229,17 +229,43 @@ min(annual.gr6$Height_Total)
 hist(annual.gr6$Height_Total)
 
 xsq1<-chisq.test(x.table1,p=c(.1,.4,.4,.1))
+print(xsq1)
 xsq2<-chisq.test(x.table2,p=c(.1,.4,.4,.1))
+xsq2
 xsq3<-chisq.test(x.table3,p=c(.1,.4,.4,.1))
 
 #Exact test
 
 library(XNomial)
-xmulti(x.table1,c(.1,.4,.4,.1),"Chisq")
-xmulti(x.table2,c(.1,.4,.4,.1),"Chisq")
-xmulti(x.table3,c(.1,.4,.4,.1),"Chisq")
+xmulti1<-xmulti(x.table1,c(.1,.4,.4,.1),"Chisq")
+xmulti2<-xmulti(x.table2,c(.1,.4,.4,.1),"Chisq")
+xmulti3<-xmulti(x.table3,c(.1,.4,.4,.1),"Chisq")
+
+ 
+chisq<-cbind(xsq1$p.value,xsq2$p.value,xsq3$p.value)
+xact<-cbind(xmulti1$pChi,xmulti2$pChi,xmulti3$pChi)
+
+chitable<-rbind(chisq,xact)
+chitable<-round(chitable,digits=4)
+
+rownames(chitable)<-c("ChiSq","Xact")
+colnames(chitable)<-c("<4","4-6",">6")
+
+#The code below will produce output that can then be copied over to the .tex file
+library(Hmisc)
+
+latex(chitable, file="")     
+
+###
+actual<-rbind(x.table1,x.table2,x.table3)
+rownames(actual)<-c("<4","4-6",">6")
+colnames(actual)<-c("<.1",".1to.5",".5tpo.9",">.9")
 
 
+#The code below will produce output that can then be copied over to the .tex file
+library(Hmisc)
+
+latex(actual, file="")     
 
 
 
@@ -274,8 +300,6 @@ KC_all<-KC_all[!is.na(KC_all$Height_Total.y),]
 KC_all$response.cat<-0
 
 
-detach(package:dplyr)
-
 for(i in 1:nrow(KC_all)){
   KC_all$response.cat[i]<-valid.func(
     KC_all$meas.diff[i],
@@ -298,7 +322,7 @@ hist(KC_all$qr.pred.five)
 hist(KC_all$qr.pred.nine)
 
 library(plyr)
-sorted.totals<-count(annual.gr6, 'response.cat')
+sorted.totals1<-count(annual.gr6, 'response.cat')
 
 
 trellis.device(color = FALSE)
@@ -320,10 +344,10 @@ my.settings <- list(
 
 
 library(plyr)
-sorted.totals<-count(KC_all, 'response.cat')
+sorted.totals1<-count(KC_all, 'response.cat')
 
 
-barchart(sorted.totals$freq/length(KC_all$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",
+barchart(sorted.totals1$freq/length(KC_all$InstPlot)~sorted.totals1$response.cat, names = "Quantile Bin",
          xlab = "Bin", ylab = "Fraction of Installations Trees",type=density,
          main = "KC Height Growth b/t 2002 and 2006
          sorted by predicted quantiles",ylim=c(0,.60),
@@ -350,21 +374,21 @@ abline(fit<-lm(annual.gr6$lm_ht~sqrt(annual.gr6$ht_annual)),col="black")
 
 
 ###looking at predicted median vs init height
-annual.gr6<-annual.gr6[!annual.gr6$height_annual<0,]
-annual.gr6$lm_ht<-predict(least_squares,annual.gr6)
+# annual.gr6<-annual.gr6[!annual.gr6$height_annual<0,]
+# annual.gr6$lm_ht<-predict(least_squares,annual.gr6)
 
-plot(sqrt(annual.gr6$Height_Total),annual.gr6$qr.pred.five,col="blue")
-abline(fit<-lm(annual.gr6$qr.pred.one~sqrt(annual.gr6$Height_Total)),col="red")
-abline(fit<-lm(annual.gr6$qr.pred.five~sqrt(annual.gr6$Height_Total)),col="blue")
-abline(fit<-lm(annual.gr6$qr.pred.nine~sqrt(annual.gr6$Height_Total)),col="green")
-points(annual.gr6$Height_Total,annual.gr6$qr.pred.one,col="red")
-points(annual.gr6$Height_Total,annual.gr6$qr.pred.nine,col="green")
-points(annual.gr6$Height_Total,annual.gr6$lm_ht,col="yellow")
-abline(fit<-lm(annual.gr6$lm_ht~sqrt(annual.gr6$Height_Total)),col="black")
+# plot(sqrt(annual.gr6$Height_Total),annual.gr6$qr.pred.five,col="blue")
+# abline(fit<-lm(annual.gr6$qr.pred.one~sqrt(annual.gr6$Height_Total)),col="red")
+# abline(fit<-lm(annual.gr6$qr.pred.five~sqrt(annual.gr6$Height_Total)),col="blue")
+# abline(fit<-lm(annual.gr6$qr.pred.nine~sqrt(annual.gr6$Height_Total)),col="green")
+# points(annual.gr6$Height_Total,annual.gr6$qr.pred.one,col="red")
+# points(annual.gr6$Height_Total,annual.gr6$qr.pred.nine,col="green")
+# points(annual.gr6$Height_Total,annual.gr6$lm_ht,col="yellow")
+# abline(fit<-lm(annual.gr6$lm_ht~sqrt(annual.gr6$Height_Total)),col="black")
 
-rmse <- round(sqrt(mean(resid(fit)^2)), 2)
+# rmse <- round(sqrt(mean(resid(fit)^2)), 2)
 
-summary(fit)
+# summary(fit)
 
 
 # #Sorted responses for trees <10 in initial dbh

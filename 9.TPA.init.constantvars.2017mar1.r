@@ -30,9 +30,9 @@ dev.off()
 
 
 plot3d(df_figure$TPA.OS,df_figure$srHeight_Total,df_figure$ht_annual, 
-       ,size=3,
+       size=3,
        col=myColorRamp(c("blue","green","yellow","red"),df_figure$ht_annual),
-       xlab="Residual Overstory", ylab="Initial Height", zlab="Annualized Ht. Growth (ft)")
+       xlab="Residual Overstory", ylab="Sqrt.Initial Height", zlab="Annualized Ht. Growth (ft)")
 # axes3d(c("x+", "y-", "z-"))
 grid3d(side=c('x+', 'y-', 'z'), col="gray")
 title3d(

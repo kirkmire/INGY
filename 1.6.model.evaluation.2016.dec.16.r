@@ -291,9 +291,9 @@ KC_all<-KC_all[which(!KC_all$Damage.y=="D"),]
 KC_all<-KC_all[which(!KC_all$Damage.y=="DT"),]
 
 
-KC_all$qr.pred.one <- predict.rq(qr.SI.1, KC_all)*8
-KC_all$qr.pred.five <- predict.rq(qr.SI.5, KC_all)*8
-KC_all$qr.pred.nine <- predict.rq(qr.SI.9, KC_all)*8
+KC_all$qr.pred.one <- predict.rq(qr.SI.1, KC_all)*4
+KC_all$qr.pred.five <- predict.rq(qr.SI.5, KC_all)*4
+KC_all$qr.pred.nine <- predict.rq(qr.SI.9, KC_all)*4
 
 KC_all<-KC_all[!is.na(KC_all$Height_Total.y),]
 
@@ -350,7 +350,7 @@ sorted.totals1<-count(KC_all, 'response.cat')
 barchart(sorted.totals1$freq/length(KC_all$InstPlot)~sorted.totals1$response.cat, names = "Quantile Bin",
          xlab = "Bin", ylab = "Fraction of Installations Trees",type=density,
          main = "KC Height Growth b/t 2002 and 2006
-         sorted by predicted quantiles",ylim=c(0,.60),
+         sorted by predicted quantiles",ylim=c(0,.80),
          par.settings = my.settings,
          par.strip.text=list(col="white", font=2),
          panel=function(x,y,...){
@@ -367,9 +367,9 @@ plot(sqrt(annual.gr6$ht_annual),annual.gr6$qr.pred.five,col="blue")
 abline(fit<-lm(annual.gr6$qr.pred.one~sqrt(annual.gr6$ht_annual)),col="red")
 abline(fit<-lm(annual.gr6$qr.pred.five~sqrt(annual.gr6$ht_annual)),col="blue")
 abline(fit<-lm(annual.gr6$qr.pred.nine~sqrt(annual.gr6$ht_annual)),col="green")
-points(annual.gr6$ht_annual,annual.gr6$qr.pred.one,col="red")
-points(annual.gr6$ht_annual,annual.gr6$qr.pred.nine,col="green")
-points(annual.gr6$ht_annual,annual.gr6$lm_ht,col="yellow")
+# points(annual.gr6$ht_annual,annual.gr6$qr.pred.one,col="red")
+# points(annual.gr6$ht_annual,annual.gr6$qr.pred.nine,col="green")
+# points(annual.gr6$ht_annual,annual.gr6$lm_ht,col="yellow")
 abline(fit<-lm(annual.gr6$lm_ht~sqrt(annual.gr6$ht_annual)),col="black")
 
 
@@ -673,55 +673,55 @@ abline(fit<-lm(annual.gr6$lm_ht~sqrt(annual.gr6$ht_annual)),col="black")
 # 
 # #########Residual Plots for Q50 ########
 # cw.resid <- rq(ht_annual~CrownWidth,tau=c(.5),data=annual.gr4)
-# 
+#
 # plot(cw.resid$residuals~cw.resid$fitted.values)
-# 
-# 
+#
+#
 # TPA.resid <- rq(ht_annual~annual.gr4$TPA.OS,tau=c(.5),data=annual.gr4)
-# 
+#
 # plot(TPA.resid$residuals~TPA.resid$fitted.values)
-# 
+#
 # SI.resid <-rq(ht_annual~annual.gr4$slopePercent*aspect*elevation,tau=c(.5),data=annual.gr4)
-# 
+#
 # plot(SI.resid$residuals~SI.resid$fitted.values)
-# 
+#
 ###Sequential GAM Plots###
-# dev.off()
-# 
-# par(mfrow=c(2,3))
-# sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
-# plot(sr.ht.gam,residuals=T,se=T,pch=".",ask=F)
-# 
-# cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$CrownLength))
-# plot(cl.ht.gam,residuals=T,se=T,pch=".",ask=F)
-# 
-# veg.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+s(annual.gr4$treeminus))
-# plot(veg.ht.gam,residuals=T,se=T,pch=".",ask=F)
-# 
-# 
-# tpa.os.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+annual.gr4$treeminus+
-#            s(annual.gr4$TPA.OS))
-# plot(tpa.os.gam,residuals=T,se=T,pch=".",ask=F)
+dev.off()
+
+par(mfrow=c(2,3))
+sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
+plot(sr.ht.gam,residuals=T,se=T,pch=".",ask=F)
+
+cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$CrownLength))
+plot(cl.ht.gam,residuals=T,se=T,pch=".",ask=F)
+
+veg.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength)
+plot(veg.ht.gam,residuals=T,se=T,pch=".",ask=F)
+
+
+tpa.os.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+
+           s(annual.gr4$TPA.OS))
+plot(tpa.os.gam,residuals=T,se=T,pch=".",ask=F)
 
 #should each SEA term be added as a smoothed term?
 
-# si.gam<-gam(ht_annual~srHeight_Total+CrownLength+treeminus+TPA.OS+
-#              #how to make this below a smoothed term
-#              slopePercent + # goes with coefficient b1
-#              slopePercent:cos_rad_asp + #with b2
-#              slopePercent:sin_rad_asp + #with b3
-#              slopePercent:log(elevation+1) + #b4
-#              slopePercent:log(elevation+1):cos_rad_asp + #b5
-#              slopePercent:log(elevation+1):sin_rad_asp + #b6
-#              slopePercent:I(elevation^2) +   #b7
-#              slopePercent:I(elevation^2):cos_rad_asp +   #b8
-#              slopePercent:I(elevation^2):sin_rad_asp +   #b9
-#              elevation + # b10
-#              I(elevation^2) ,data=annual.gr4) #b11
-#             
-# plot(si.gam,residuals=T,se=T,pch=".",ask=F)
-# 
-# 
+si.gam<-gam(ht_annual~srHeight_Total+CrownLength+TPA.OS+
+             #how to make this below a smoothed term
+             slopePercent + # goes with coefficient b1
+             slopePercent:cos_rad_asp + #with b2
+             slopePercent:sin_rad_asp + #with b3
+             slopePercent:log(elevation+1) + #b4
+             slopePercent:log(elevation+1):cos_rad_asp + #b5
+             slopePercent:log(elevation+1):sin_rad_asp + #b6
+             slopePercent:I(elevation^2) +   #b7
+             slopePercent:I(elevation^2):cos_rad_asp +   #b8
+             slopePercent:I(elevation^2):sin_rad_asp +   #b9
+             elevation + # b10
+             I(elevation^2) ,data=annual.gr4) #b11
+
+plot(si.gam,residuals=T,se=T,pch=".",ask=F)
+
+
 
 
 

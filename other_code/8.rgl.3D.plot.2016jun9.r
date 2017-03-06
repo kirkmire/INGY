@@ -1,5 +1,5 @@
-source('C:/Users/Colin/Desktop/R-Projects/INGY/4.explor.plots.r')
-source('C:/Users/Colin/Desktop/R-Projects/INGY/6.OS.BAvsCTRL.plt.VEG.r')
+source('C:/Users/Colin/Desktop/R-Projects/INGY/4.explor.plots.2016.jun2.r')
+source('C:/Users/Colin/Desktop/R-Projects/INGY/other_code/6.osba.ctrl.ge.veg4x.2016.jun2.r')
 
 library(rgl)
 

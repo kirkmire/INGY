@@ -686,42 +686,41 @@ abline(fit<-lm(annual.gr6$lm_ht~sqrt(annual.gr6$ht_annual)),col="black")
 # plot(SI.resid$residuals~SI.resid$fitted.values)
 #
 ###Sequential GAM Plots###
-dev.off()
-
-par(mfrow=c(2,3))
-sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
-plot(sr.ht.gam,residuals=T,se=T,pch=".",ask=F)
-
-cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$CrownLength))
-plot(cl.ht.gam,residuals=T,se=T,pch=".",ask=F)
-
-veg.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength)
-plot(veg.ht.gam,residuals=T,se=T,pch=".",ask=F)
-
-
-tpa.os.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+
-           s(annual.gr4$TPA.OS))
-plot(tpa.os.gam,residuals=T,se=T,pch=".",ask=F)
+# dev.off()
+# 
+# par(mfrow=c(2,3))
+# sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
+# plot(sr.ht.gam,residuals=T,se=T,pch=".",ask=F)
+# 
+# cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$CrownLength))
+# plot(cl.ht.gam,residuals=T,se=T,pch=".",ask=F)
+# 
+# veg.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength)
+# plot(veg.ht.gam,residuals=T,se=T,pch=".",ask=F)
+# 
+# 
+# tpa.os.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+annual.gr4$CrownLength+
+#            s(annual.gr4$TPA.OS))
+# plot(tpa.os.gam,residuals=T,se=T,pch=".",ask=F)
 
 #should each SEA term be added as a smoothed term?
 
-si.gam<-gam(ht_annual~srHeight_Total+CrownLength+TPA.OS+
-             #how to make this below a smoothed term
-             slopePercent + # goes with coefficient b1
-             slopePercent:cos_rad_asp + #with b2
-             slopePercent:sin_rad_asp + #with b3
-             slopePercent:log(elevation+1) + #b4
-             slopePercent:log(elevation+1):cos_rad_asp + #b5
-             slopePercent:log(elevation+1):sin_rad_asp + #b6
-             slopePercent:I(elevation^2) +   #b7
-             slopePercent:I(elevation^2):cos_rad_asp +   #b8
-             slopePercent:I(elevation^2):sin_rad_asp +   #b9
-             elevation + # b10
-             I(elevation^2) ,data=annual.gr4) #b11
-
-plot(si.gam,residuals=T,se=T,pch=".",ask=F)
-
-
+# si.gam<-gam(ht_annual~srHeight_Total+CrownLength+TPA.OS+
+#              #how to make this below a smoothed term
+#              slopePercent + # goes with coefficient b1
+#              slopePercent:cos_rad_asp + #with b2
+#              slopePercent:sin_rad_asp + #with b3
+#              slopePercent:log(elevation+1) + #b4
+#              slopePercent:log(elevation+1):cos_rad_asp + #b5
+#              slopePercent:log(elevation+1):sin_rad_asp + #b6
+#              slopePercent:I(elevation^2) +   #b7
+#              slopePercent:I(elevation^2):cos_rad_asp +   #b8
+#              slopePercent:I(elevation^2):sin_rad_asp +   #b9
+#              elevation + # b10
+#              I(elevation^2) ,data=annual.gr4) #b11
+# 
+# plot(si.gam,residuals=T,se=T,pch=".",ask=F)
 
 
-
+#Table of SI and SEA values
+# unique(annual.gr4[,c("Installation","SiteIndex_Value"])

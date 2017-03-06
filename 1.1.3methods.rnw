@@ -13,45 +13,57 @@
 
 Twenty-six study sites were established on a variety of cooperative member ownership ranging from the eastern slopes of the Cascade Mountains to western Montana (see Figure \ref{fig:map}).  Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or harvested with one of the aforementioned variable retention harvest systems: shelterwood, seed tree or heavy thinning. 
 
-% 
-% <<fig=FALSE,include=FALSE, echo=FALSE>>=
-% #! 2. subset of installations
-% library(RODBC)
-% library(RgoogleMaps)
-% 
-% 
-% #! 2. subset of installations
-% locs0 <- sinstloc[sinstloc$Coordinate_Type=="DD" &
-%                     !(sinstloc$Installation %in% drp60),]
-% locs0v2 <- reshape(locs0,direction="wide",
-%                    v.names="Coordinate_Value",
-%                    timevar="Coordinate_Axis",
-%                    idvar=c("Installation","Plot"))
-% locs0v2 <- locs0v2[locs0v2$Plot==0,c(1,3,5,6)]
-% names(locs0v2)[3:4] <- c("Long","Lat")
-% 
-% 
-% #! 3. map it
-% ratio <- 6/10 #height to width ratio of map
-% 
-% png("inst_map.png",width=300*10,height=300*10*ratio,pointsize=12,res=300)
-% boxit <- qbbox(locs0v2$Lat,locs0v2$Long, TYPE="all")
-% basemap <- GetMap.bbox(boxit$lonR,boxit$latR, size=c(640,640*ratio),
-%                        destfile="temp.png", maptype="terra-in") #"mapmaker-hybrid",
-% tmp <- PlotOnStaticMap(basemap)
-% tmp <- PlotOnStaticMap(basemap,cex=3,pch=21,col="red",
-%                        lat=locs0v2$Lat,
-%                        lon=locs0v2$Long)
-% 
-% #For text labels
-% tmp <- PlotOnStaticMap(basemap,cex=1,col="black",add=T,
-% lat=locs0v2$Lat,
-% lon=locs0v2$Long,
-% FUN=text,labels=locs0v2$Installation)
-% 
-% 
-% dev.off()
-% @
+
+<<fig=FALSE,include=FALSE, echo=FALSE>>=
+#! 2. subset of installations
+library(RODBC)
+library(RgoogleMaps)
+
+
+#! 2. subset of installations
+locs0 <- sinstloc[sinstloc$Coordinate_Type=="DD" 
+                  # &!(sinstloc$Installation %in% drp60)
+                  ,]
+
+locs0$in.study<-0
+
+drpd<-locs0[locs0$Installation %in% drp60,] 
+rtnd<-locs0[!locs0$Installation %in% drp60,] 
+rtnd$in.study<-1
+
+locs1<-rbind(drpd,rtnd)
+
+
+locs0v2 <- reshape(locs1,direction="wide",
+                   v.names="Coordinate_Value",
+                   timevar="Coordinate_Axis",
+                   idvar=c("Installation","Plot"))
+locs0v2 <- locs0v2[locs0v2$Plot==0,c(1,5,6,7)]
+names(locs0v2)[3:4] <- c("Long","Lat")
+
+
+#! 3. map it
+ratio <- 6/10 #height to width ratio of map
+
+png("inst_map.png",width=300*10,height=300*10*ratio,pointsize=12,res=300)
+boxit <- qbbox(locs0v2$Lat,locs0v2$Long, TYPE="all")
+basemap <- GetMap.bbox(boxit$lonR,boxit$latR, size=c(640,640*ratio),
+                       destfile="temp.png", maptype="terra-in") #"mapmaker-hybrid",
+tmp <- PlotOnStaticMap(basemap)
+pch.list <- locs0v2$in.study
+tmp <- PlotOnStaticMap(basemap,cex=3,pch=locs0v2$in.study,
+                       lat=locs0v2$Lat,
+                       lon=locs0v2$Long)
+
+#For text labels
+# tmp <- PlotOnStaticMap(basemap,cex=1,col="black",add=T,
+# lat=locs0v2$Lat,
+# lon=locs0v2$Long,
+# FUN=text,labels=locs0v2$Installation)
+
+
+dev.off()
+@
 
 \begin{figure}[!htb]
 \begin{center}

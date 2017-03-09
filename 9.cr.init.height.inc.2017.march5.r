@@ -33,10 +33,10 @@ dev.off()
 
 
 plot3d(df_figure1$cratio,df_figure1$Height_Total,df_figure1$ht_annual, 
-       size=3,
-       col=myColorRamp(c("blue","green","yellow","red"),df_figure1$ht_annual),
-       xlab="cratio", ylab="Initial Height", 
-       zlab="")
+       size=0.001,
+      # col=myColorRamp(c("blue","green","yellow","red"),df_figure1$ht_annual),
+       xlab="", ylab="", 
+       zlab="",type="n")
 # axes3d(c("x+", "y-", "z-"))
 grid3d(side=c('x+', 'y-', 'z'), col="gray")
 title3d(
@@ -46,9 +46,13 @@ title3d(
   col="red")
 
 #Adding vertical droplines#
-# plot3d(threeDVeg$SiteIndex_Value,threeDVeg$ave.BAPA,threeDVeg$volume,type='h',add=T,
-#        col=myColorRamp(c("blue","green","yellow","red"),threeDVeg$volume))
+ plot3d(df_figure1$cratio[25],df_figure1$Height_Total[25],df_figure1$ht_annual[25],type='h',add=T,
+      col=myColorRamp(c("blue","green","yellow","red"),df_figure1$ht_annual))
+ 
+ plot3d(df_figure1$cratio[50],df_figure1$Height_Total[50],df_figure1$ht_annual[50],type='h',add=T,
+        col=myColorRamp(c("blue","green","yellow","red"),df_figure1$ht_annual))
 
+ 
 #Fitting Planes#
 
 fit1=lm(qr.pred.one~cratio+Height_Total,data=df_figure1)
@@ -56,18 +60,18 @@ summary(fit1)
 
 coefs <- coef(fit1)
 planes3d(a=coefs["cratio"], b=coefs["Height_Total"],
-         -1, coefs["(Intercept)"], alpha=0.50, col="blue")
+         -1, coefs["(Intercept)"], alpha=0.50, col="red")
 
 
 fit2=lm(qr.pred.five~cratio+Height_Total,data=df_figure1)
 summary(fit2)
 
 coefs <- coef(fit2)
-planes3d(a=coefs["cratio"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="green")
+planes3d(a=coefs["cratio"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="yellow")
 
 fit3=lm(qr.pred.nine~cratio+Height_Total,data=df_figure1)
 summary(fit3)
 
 coefs <- coef(fit3)
-planes3d(a=coefs["cratio"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="yellow")
+planes3d(a=coefs["cratio"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="green")
 

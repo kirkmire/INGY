@@ -1,6 +1,7 @@
 
 #Reads in previous scripts required (takes ~10min)
 source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/other_code/18.database.error.corrections.2016jun16.r',sep=""), echo=TRUE)
 source(paste(getwd(),'/1.1annualizedht.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
@@ -87,6 +88,28 @@ qr.SI.1 <-rq(ht_annual~srHeight_Total+
                elevation +
                I(elevation^2) ,
              tau=.1 ,  data=annual.gr4)
+
+
+qr.SI.all <-rq(ht_annual~srHeight_Total+
+               cratio+
+               TPA.OS+
+               slopePercent +
+               slopePercent:cos_rad_asp +
+               slopePercent:sin_rad_asp +
+               slopePercent:log(elevation+1) +
+               slopePercent:log(elevation+1):cos_rad_asp +
+               slopePercent:log(elevation+1):sin_rad_asp +
+               slopePercent:I(elevation^2) +
+               slopePercent:I(elevation^2):cos_rad_asp +
+               slopePercent:I(elevation^2):sin_rad_asp +
+               elevation +
+               I(elevation^2) ,
+             tau=c(.1,.5,.9) ,  data=annual.gr4)
+
+plot(summary(qr.SI.all),parm="TPA.OS")
+
+
+
 
 
 qr.SI.5 <-rq(ht_annual~srHeight_Total+

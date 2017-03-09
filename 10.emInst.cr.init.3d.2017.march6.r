@@ -36,7 +36,7 @@ dev.off()
 
 plot3d(df_figureBF1$cratio,df_figureBF1$Height_Total,df_figureBF1$ht_annual, 
        size=5,
-       col=myColorRamp(c("blue","green","yellow","red"),df_figureBF1$ht_annual),
+       col=myColorRamp(c("red","orange","yellow","green"),df_figureBF1$ht_annual),
        xlab="", ylab="", 
        zlab="")
 # axes3d(c("x+", "y-", "z-"))
@@ -58,18 +58,17 @@ summary(fit1)
 
 coefs <- coef(fit1)
 planes3d(a=coefs["cratio"], b=coefs["Height_Total"],
-         -1, coefs["(Intercept)"], alpha=0.50, col="blue")
+         -1, coefs["(Intercept)"], alpha=0.50, col="red")
 
 
 fit2=lm(qr.pred.five~cratio+Height_Total,data=df_figureBF1)
 summary(fit2)
 
 coefs <- coef(fit2)
-planes3d(a=coefs["cratio"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.40, col="green")
+planes3d(a=coefs["cratio"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="yellow")
 
 fit3=lm(qr.pred.nine~cratio+Height_Total,data=df_figureBF1)
 summary(fit3)
 
 coefs <- coef(fit3)
-planes3d(a=coefs["cratio"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.30, col="yellow")
-
+planes3d(a=coefs["cratio"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="green")

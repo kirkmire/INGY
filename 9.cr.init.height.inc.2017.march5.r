@@ -35,7 +35,8 @@ dev.off()
 plot3d(df_figure1$cratio,df_figure1$Height_Total,df_figure1$ht_annual, 
        size=3,
        col=myColorRamp(c("blue","green","yellow","red"),df_figure1$ht_annual),
-       xlab="cratio", ylab="Initial Height", zlab="Annualized Ht. Growth (ft)")
+       xlab="cratio", ylab="Initial Height", 
+       zlab="")
 # axes3d(c("x+", "y-", "z-"))
 grid3d(side=c('x+', 'y-', 'z'), col="gray")
 title3d(

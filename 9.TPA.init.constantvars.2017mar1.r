@@ -29,10 +29,12 @@ dev.off()
 
 
 
-plot3d(df_figure$TPA.OS,df_figure$srHeight_Total,df_figure$ht_annual, 
+plot3d(df_figure$TPA.OS,df_figure$Height_Total,df_figure$ht_annual, 
        size=3,
        col=myColorRamp(c("blue","green","yellow","red"),df_figure$ht_annual),
-       xlab="Residual Overstory", ylab="Sqrt.Initial Height", zlab="Annualized Ht. Growth (ft)")
+       xlab="Residual Overstory (TPA)", ylab="Initial Height (ft)",
+       zlab=""
+       )
 # axes3d(c("x+", "y-", "z-"))
 grid3d(side=c('x+', 'y-', 'z'), col="gray")
 title3d(
@@ -47,23 +49,23 @@ title3d(
 
 #Fitting Planes#
 
-fit1=lm(qr.pred.one~TPA.OS+srHeight_Total,data=df_figure)
+fit1=lm(qr.pred.one~TPA.OS+Height_Total,data=df_figure)
 summary(fit1)
 
 coefs <- coef(fit1)
-planes3d(a=coefs["TPA.OS"], b=coefs["srHeight_Total"],
+planes3d(a=coefs["TPA.OS"], b=coefs["Height_Total"],
          -1, coefs["(Intercept)"], alpha=0.50, col="blue")
 
 
-fit2=lm(qr.pred.five~TPA.OS+srHeight_Total,data=df_figure)
+fit2=lm(qr.pred.five~TPA.OS+Height_Total,data=df_figure)
 summary(fit2)
 
 coefs <- coef(fit2)
-planes3d(a=coefs["TPA.OS"], b=coefs["srHeight_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="green")
+planes3d(a=coefs["TPA.OS"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="green")
 
-fit3=lm(qr.pred.nine~TPA.OS+srHeight_Total,data=df_figure)
+fit3=lm(qr.pred.nine~TPA.OS+Height_Total,data=df_figure)
 summary(fit3)
 
 coefs <- coef(fit3)
-planes3d(a=coefs["TPA.OS"], b=coefs["srHeight_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="yellow")
+planes3d(a=coefs["TPA.OS"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="yellow")
 

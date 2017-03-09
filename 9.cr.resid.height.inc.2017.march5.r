@@ -35,7 +35,7 @@ dev.off()
 plot3d(df_figure21$cratio,df_figure21$TPA.OS,df_figure21$ht_annual, 
        size=3,
        col=myColorRamp(c("blue","green","yellow","red"),df_figure21$ht_annual),
-       xlab="cratio", ylab="Residual TPA", zlab="Annualized Ht. Growth (ft)")
+       xlab="cratio", ylab="Residual TPA", zlab="")
 # axes3d(c("x+", "y-", "z-"))
 grid3d(side=c('x+', 'y-', 'z'), col="gray")
 title3d(

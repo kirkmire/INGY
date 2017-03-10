@@ -50,23 +50,71 @@ title3d(
 
 #Fitting Planes#
 
-fit1=lm(qr.pred.one~TPA.OS+Height_Total,data=df_figure)
-summary(fit1)
+res <- 30
+hts <- seq(0,20,length=res)
+tpa <- seq(0,100,length=res)
 
-coefs <- coef(fit1)
-planes3d(a=coefs["TPA.OS"], b=coefs["Height_Total"],
-         -1, coefs["(Intercept)"], alpha=0.50, col="red")
+qfunction <- function(ht,tpa){
+  newdf <- data.frame(srHeight_Total=sqrt(ht),
+                      cratio=.5,
+                      TPA.OS=tpa,
+                      slopePercent=11.223331,
+                      elevation=1003.537,
+                      cos_rad_asp=0.0325605,
+                      sin_rad_asp=0.1114712)
+  predict(qr.SI.1,newdata=newdf)
+}
+
+htsurf1 <- matrix(qfunction(rep(hts,each=length(tpa)),
+                            rep(tpa,length(hts))),
+                  nrow=length(hts),byrow=T)
+
+qfunction5 <- function(ht,tpa){
+  newdf <- data.frame(srHeight_Total=sqrt(ht),
+                      cratio=.5,
+                      TPA.OS=tpa,
+                      slopePercent=11.223331,
+                      elevation=1003.537,
+                      cos_rad_asp=0.0325605,
+                      sin_rad_asp=0.1114712)
+  predict(qr.SI.5,newdata=newdf)
+}
+
+htsurf5 <- matrix(qfunction5(rep(hts,each=length(tpa)),
+                            rep(tpa,length(hts))),
+                  nrow=length(hts),byrow=T)
+
+qfunction9 <- function(ht,tpa){
+  newdf <- data.frame(srHeight_Total=sqrt(ht),
+                      cratio=.5,
+                      TPA.OS=tpa,
+                      slopePercent=11.223331,
+                      elevation=1003.537,
+                      cos_rad_asp=0.0325605,
+                      sin_rad_asp=0.1114712)
+  predict(qr.SI.9,newdata=newdf)
+}
+
+htsurf9 <- matrix(qfunction9(rep(hts,each=length(tpa)),
+                             rep(tpa,length(hts))),
+                  nrow=length(hts),byrow=T)
 
 
-fit2=lm(qr.pred.five~TPA.OS+Height_Total,data=df_figure)
-summary(fit2)
+plot3d(hts,tpa,htsurf9,
+       size=3,
+       col=myColorRamp(c("blue","green","yellow","red")),
+       xlab="", ylab="",
+       zlab="",
+       type="n"
+)
+# axes3d(c("x+", "y-", "z-"))
+grid3d(side=c('x+', 'y-', 'z'), col="gray")
+title3d(
+  #ylab = "Residual BAPA (ft/acre)",
+  # zlab = "Vegetation Volume (ft^3/ft^2)",
+  #xlab = "Site Index (ft)",
+  col="red")
 
-coefs <- coef(fit2)
-planes3d(a=coefs["TPA.OS"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.40, col="yellow")
-
-fit3=lm(qr.pred.nine~TPA.OS+Height_Total,data=df_figure)
-summary(fit3)
-
-coefs <- coef(fit3)
-planes3d(a=coefs["TPA.OS"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.30, col="green")
-
+surface3d(hts,tpa,htsurf1, alpha=0.50, col="red")
+surface3d(hts,tpa,htsurf5, alpha=0.40, col="yellow")
+surface3d(hts,tpa,htsurf9, alpha=0.30, col="green")

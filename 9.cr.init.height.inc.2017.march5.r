@@ -1,42 +1,64 @@
-#Rename annual.gr4 for this figure
-df_figure1<-annual.gr4
-
-#Make predictors constant
-df_figure1$elevation<-mean(df_figure1$elevation)
-df_figure1$TPA.OS<-mean(df_figure1$TPA.OS)
-df_figure1$slopePercent<-mean(df_figure1$slopePercent)
-df_figure1<-df_figure1[!is.na(df_figure1$cratio)==T,]
-# df_figure1$cratio<-mean(df_figure1$cratio)
-df_figure1$cos_rad_asp<-mean(df_figure1$cos_rad_asp)
-df_figure1$sin_rad_asp<-mean(df_figure1$sin_rad_asp)
-
-#Remove annual.ht<0 
-df_figure1<-df_figure1[!df_figure1$ht_annual<0,]
-
-#Remove cratio<0 
-df_figure1<-df_figure1[!df_figure1$cratio<0,]
-
-#use predict.rq function 
-df_figure1$qr.pred.one <- predict.rq(qr.SI.1, df_figure1)
-df_figure1$qr.pred.five <- predict.rq(qr.SI.5, df_figure1)
-df_figure1$qr.pred.nine <- predict.rq(qr.SI.9, df_figure1)
-
 library(rgl)
 
-# color ramp
-myColorRamp <- function(colors, values) {
-  v <- (values - min(values))/diff(range(values))
-  x <- colorRamp(colors)(v)
-  rgb(x[,1], x[,2], x[,3], maxColorValue = 255)
+#Fitting Planes#
+
+res <- 30
+hts <- seq(2,22,length=res)
+cra <- seq(0,1,length=res)
+
+qfunction <- function(ht,cra){
+  newdf <- data.frame(srHeight_Total=sqrt(ht),
+                      cratio=cra,
+                      TPA.OS=35,
+                      slopePercent=11.223331,
+                      elevation=1003.537,
+                      cos_rad_asp=0.0325605,
+                      sin_rad_asp=0.1114712)
+  predict(qr.SI.1,newdata=newdf)
 }
-dev.off()
+
+htsurf1 <- matrix(qfunction(rep(hts,each=length(cra)),
+                            rep(cra,length(hts))),
+                  nrow=length(hts),byrow=T)
+
+qfunction5 <- function(ht,cra){
+  newdf <- data.frame(srHeight_Total=sqrt(ht),
+                      cratio=cra,
+                      TPA.OS=35,
+                      slopePercent=11.223331,
+                      elevation=1003.537,
+                      cos_rad_asp=0.0325605,
+                      sin_rad_asp=0.1114712)
+  predict(qr.SI.5,newdata=newdf)
+}
+
+htsurf5 <- matrix(qfunction5(rep(hts,each=length(cra)),
+                            rep(cra,length(hts))),
+                  nrow=length(hts),byrow=T)
+
+qfunction9 <- function(ht,cra){
+  newdf <- data.frame(srHeight_Total=sqrt(ht),
+                      cratio=cra,
+                      TPA.OS=35,
+                      slopePercent=11.223331,
+                      elevation=1003.537,
+                      cos_rad_asp=0.0325605,
+                      sin_rad_asp=0.1114712)
+  predict(qr.SI.9,newdata=newdf)
+}
+
+htsurf9 <- matrix(qfunction9(rep(hts,each=length(cra)),
+                            rep(cra,length(hts))),
+                  nrow=length(hts),byrow=T)
 
 
-plot3d(df_figure1$cratio,df_figure1$Height_Total,df_figure1$ht_annual, 
-       size=0.001,
-      # col=myColorRamp(c("blue","green","yellow","red"),df_figure1$ht_annual),
-       xlab="", ylab="", 
-       zlab="",type="n")
+plot3d(hts,cra,c(min(htsurf1),max(htsurf9)),
+       size=3,
+       col=myColorRamp(c("blue","green","yellow","red")),
+       xlab="", ylab="",
+       zlab="",
+       type="n"
+)
 # axes3d(c("x+", "y-", "z-"))
 grid3d(side=c('x+', 'y-', 'z'), col="gray")
 title3d(
@@ -45,33 +67,6 @@ title3d(
   #xlab = "Site Index (ft)",
   col="red")
 
-#Adding vertical droplines#
- plot3d(df_figure1$cratio[25],df_figure1$Height_Total[25],df_figure1$ht_annual[25],type='h',add=T,
-      col=myColorRamp(c("blue","green","yellow","red"),df_figure1$ht_annual))
- 
- plot3d(df_figure1$cratio[50],df_figure1$Height_Total[50],df_figure1$ht_annual[50],type='h',add=T,
-        col=myColorRamp(c("blue","green","yellow","red"),df_figure1$ht_annual))
-
- 
-#Fitting Planes#
-
-fit1=lm(qr.pred.one~cratio+Height_Total,data=df_figure1)
-summary(fit1)
-
-coefs <- coef(fit1)
-planes3d(a=coefs["cratio"], b=coefs["Height_Total"],
-         -1, coefs["(Intercept)"], alpha=0.50, col="red")
-
-
-fit2=lm(qr.pred.five~cratio+Height_Total,data=df_figure1)
-summary(fit2)
-
-coefs <- coef(fit2)
-planes3d(a=coefs["cratio"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="yellow")
-
-fit3=lm(qr.pred.nine~cratio+Height_Total,data=df_figure1)
-summary(fit3)
-
-coefs <- coef(fit3)
-planes3d(a=coefs["cratio"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="green")
-
+surface3d(hts,cra,htsurf1, alpha=0.50, col="red")
+surface3d(hts,cra,htsurf5, alpha=0.40, col="yellow")
+surface3d(hts,cra,htsurf9, alpha=0.30, col="green")

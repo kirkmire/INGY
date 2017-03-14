@@ -31,33 +31,33 @@ annual.gr4<-merge(annual.gr4, ge_sea, by="InstPlot")
 
 
 
-#GAM for Site Index
-gam.SI<-gam(ht_annual~s(srHeight_Total)+s(SiteIndex_Value),data=annual.gr4, family=gaussian(link="identity"))
-summary(gam.SI)
-
-par(mfrow=c(2,4),mar=c(4,4,1,2))
-plot(gam.SI,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-
-#GAM for Slope
-gam.slope<-gam(ht_annual~s(srHeight_Total)+s(slope),data=annual.gr4, family=gaussian(link="identity"))
-summary(gam.slope)
-
-
-plot(gam.slope,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-
-
-#GAM for Elevation
-gam.elev<-gam(ht_annual~s(srHeight_Total)+s(elevation),data=annual.gr4, family=gaussian(link="identity"))
-summary(gam.elev)
-
-plot(gam.elev,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-
-#GAM for Aspect
-gam.aspect<-gam(ht_annual~s(srHeight_Total)+s(annual.gr4$cos_rad_asp),data=annual.gr4, family=gaussian(link="identity"))
-summary(gam.aspect)
-
-plot(gam.aspect,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
-
+# #GAM for Site Index
+# gam.SI<-gam(ht_annual~s(srHeight_Total)+s(SiteIndex_Value),data=annual.gr4, family=gaussian(link="identity"))
+# summary(gam.SI)
+# 
+# par(mfrow=c(2,4),mar=c(4,4,1,2))
+# plot(gam.SI,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+# 
+# #GAM for Slope
+# gam.slope<-gam(ht_annual~s(srHeight_Total)+s(slope),data=annual.gr4, family=gaussian(link="identity"))
+# summary(gam.slope)
+# 
+# 
+# plot(gam.slope,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+# 
+# 
+# #GAM for Elevation
+# gam.elev<-gam(ht_annual~s(srHeight_Total)+s(elevation),data=annual.gr4, family=gaussian(link="identity"))
+# summary(gam.elev)
+# 
+# plot(gam.elev,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+# 
+# #GAM for Aspect
+# gam.aspect<-gam(ht_annual~s(srHeight_Total)+s(annual.gr4$cos_rad_asp),data=annual.gr4, family=gaussian(link="identity"))
+# summary(gam.aspect)
+# 
+# plot(gam.aspect,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
+# 
 
 
 

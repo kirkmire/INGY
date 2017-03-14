@@ -34,41 +34,72 @@ myColorRamp <- function(colors, values) {
 dev.off()
 
 
-plot3d(df_figureBF1$cratio,df_figureBF1$Height_Total,df_figureBF1$ht_annual, 
-       size=5,
-       col=myColorRamp(c("red","orange","yellow","green"),df_figureBF1$ht_annual),
-       xlab="", ylab="", 
-       zlab="")
+library(rgl)
+
+#Fitting Planes#
+
+res <- 30
+hts <- seq(2,27,length=res)
+cra <- seq(0,1,length=res)
+
+qfunction <- function(ht,cra){
+  newdf <- data.frame(srHeight_Total=sqrt(ht),
+                      cratio=cra,
+                      TPA.OS=35,
+                      slopePercent=11.223331,
+                      elevation=1003.537,
+                      cos_rad_asp=0.0325605,
+                      sin_rad_asp=0.1114712)
+  predict(qr.SI.1,newdata=newdf)
+}
+
+htsurf1 <- matrix(qfunction(rep(hts,each=length(cra)),
+                            rep(cra,length(hts))),
+                  nrow=length(hts),byrow=T)
+
+qfunction5 <- function(ht,cra){
+  newdf <- data.frame(srHeight_Total=sqrt(ht),
+                      cratio=cra,
+                      TPA.OS=35,
+                      slopePercent=11.223331,
+                      elevation=1003.537,
+                      cos_rad_asp=0.0325605,
+                      sin_rad_asp=0.1114712)
+  predict(qr.SI.5,newdata=newdf)
+}
+
+htsurf5 <- matrix(qfunction5(rep(hts,each=length(cra)),
+                             rep(cra,length(hts))),
+                  nrow=length(hts),byrow=T)
+
+qfunction9 <- function(ht,cra){
+  newdf <- data.frame(srHeight_Total=sqrt(ht),
+                      cratio=cra,
+                      TPA.OS=35,
+                      slopePercent=11.223331,
+                      elevation=1003.537,
+                      cos_rad_asp=0.0325605,
+                      sin_rad_asp=0.1114712)
+  predict(qr.SI.9,newdata=newdf)
+}
+
+htsurf9 <- matrix(qfunction9(rep(hts,each=length(cra)),
+                             rep(cra,length(hts))),
+                  nrow=length(hts),byrow=T)
+
+
+plot3d(df_figureBF1$Height_Total,df_figureBF1$cratio,df_figureBF1$ht_annual,
+       size=5,col=myColorRamp(c("red","orange","yellow","green"),df_figureBF1$ht_annual),
+       xlab="", ylab="", zlab="")
 # axes3d(c("x+", "y-", "z-"))
-grid3d(side=c('x+', 'y-', 'z'), col="gray")
+grid3d(side=c('x+', 'y-', 'z-'), col="gray")
 title3d(
   #ylab = "Residual BAPA (ft/acre)",
   # zlab = "Vegetation Volume (ft^3/ft^2)",
   #xlab = "Site Index (ft)",
   col="red")
 
-#Adding vertical droplines#
-# plot3d(threeDVeg$SiteIndex_Value,threeDVeg$ave.BAPA,threeDVeg$volume,type='h',add=T,
-#        col=myColorRamp(c("blue","green","yellow","red"),threeDVeg$volume))
+surface3d(hts,cra,htsurf1, alpha=0.50, col="red")
+surface3d(hts,cra,htsurf5, alpha=0.40, col="yellow")
+surface3d(hts,cra,htsurf9, alpha=0.30, col="green")
 
-#Fitting Planes#
-
-fit1=lm(qr.pred.one~cratio+Height_Total,data=df_figureBF1)
-summary(fit1)
-
-coefs <- coef(fit1)
-planes3d(a=coefs["cratio"], b=coefs["Height_Total"],
-         -1, coefs["(Intercept)"], alpha=0.50, col="red")
-
-
-fit2=lm(qr.pred.five~cratio+Height_Total,data=df_figureBF1)
-summary(fit2)
-
-coefs <- coef(fit2)
-planes3d(a=coefs["cratio"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="yellow")
-
-fit3=lm(qr.pred.nine~cratio+Height_Total,data=df_figureBF1)
-summary(fit3)
-
-coefs <- coef(fit3)
-planes3d(a=coefs["cratio"], b=coefs["Height_Total"],-1, coefs["(Intercept)"], alpha=0.50, col="green")

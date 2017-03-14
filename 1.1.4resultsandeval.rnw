@@ -6,12 +6,13 @@
 \newpage
 \section{Results and Evaluation}
 
-\newpage
-Zhang et al. found that the importance of shrub control on growth increment was not evident in the final years of their study, as tree-shrub competition likely switched to tree-tree compitition. However, shrub control is critical for stand development on low quality sites.
+% \newpage
+% Zhang et al. found that the importance of shrub control on growth increment was not evident in the final years of their study, as tree-shrub competition likely switched to tree-tree compitition. However, shrub control is critical for stand development on low quality sites.
+% 
+% A number of reports on Ponderosa Pine Level-of-Growing Stock Study found that regardless of stand age, ponderosa pine responded to thinning immediately and that average dbh and crown length and width increased with decreasing residual stand densities.(Barrett
+% 1983; Ronco et al. 1985; Cochran and Barrett 1995, 1999; Oliver
+% 1979, 1997, 2005)
 
-A number of reports on Ponderosa Pine Level-of-Growing Stock Study found that regardless of stand age, ponderosa pine responded to thinning immediately and that average dbh and crown length and width increased with decreasing residual stand densities.(Barrett
-1983; Ronco et al. 1985; Cochran and Barrett 1995, 1999; Oliver
-1979, 1997, 2005)
 
 \begin{table}[h]
 \small
@@ -27,20 +28,20 @@ A number of reports on Ponderosa Pine Level-of-Growing Stock Study found that re
 
 \hline
 
-Nothing&683&1267.72&Nothing&2155&2093.37&Nothing&2155&2093.37\tabularnewline
-SmallTPA&683&1128.73&POLV.cov&2155&2080.37&BAPA&2155&2042.38\tabularnewline
-Trees15+&680&1211.25&F.cov&2155&2068.94&CCF&2155&1955.18\tabularnewline
-TGT&680&1164.91&LS.cov&2155&2079.14&TPA&2155&1894.23\tabularnewline
-BD&682&928.5&HS.cov&2155&2090.43&Site&n&AIC\tabularnewline
-DBH&596&928.2&G.cov&2155&2085.68&SI&2155&1665.62\tabularnewline
-CrownWidth&680&1126.07&LS.diff&2155&1988.55&Slope&2155&1880.17\tabularnewline
-CrownLength&680&1014.34&HS.diff&2155&2024.96&Elevation&2155&1896.23\tabularnewline
-CrownRatio&680&934.79&LS.tran&2155&2006.49&Aspect&2155&1816.48\tabularnewline
-&&&HS.tran&2155&2058.7&SEA Int&2155&1596.55\tabularnewline
-&&&G.tran.diff&2155&1986.17&&&\tabularnewline
-&&&G.tran.cov&2153&2094.48&&&\tabularnewline
-&&&mx.vg.diff1m&2155&2085.67&&&\tabularnewline
-&&&mx.vg.diff.tr&2155&2085.67&&&\tabularnewline
+Nothing&331&661.4&Nothing&555&760.97&Nothing&2155&2034.34\tabularnewline
+SmallTPA&331&540.79&POLV.cov&555&759.71&BAPA&2155&1985.29\tabularnewline
+Trees15+&331&583.64&F.cov&555&761.42&CCF&2155&1897.02\tabularnewline
+TGT&331&573.41&LS.cov&555&762.9&TPA&2155&1833.92\tabularnewline
+BD&330&435.23&HS.cov&555&762.78&Site&n&AIC\tabularnewline
+DBH&293&435.21&G.cov&555&754.97&SI&2155&1601.01\tabularnewline
+CrownWidth&329&536.31&LS.diff&555&761.01&Slope&2155&1819.75\tabularnewline
+CrownLength&329&496.26&HS.diff&555&757.18&Elevation&2155&1835.91\tabularnewline
+CrownRatio&329&496.26&LS.tran&555&761.02&Aspect&2155&1754.51\tabularnewline
+&&&HS.tran&555&762.73&SEA Int&2155&1530.23\tabularnewline
+&&&G.tran.diff&555&762.42&&&\tabularnewline
+&&&G.tran.cov&555&754.94&&&\tabularnewline
+&&&mx.vg.diff1m&555&762.2&&&\tabularnewline
+&&&mx.vg.diff.tr&555&762.2&&&\tabularnewline
 
 \hline
 \end{tabular}

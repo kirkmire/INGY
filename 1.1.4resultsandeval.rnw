@@ -13,6 +13,46 @@
 % 1983; Ronco et al. 1985; Cochran and Barrett 1995, 1999; Oliver
 % 1979, 1997, 2005)
 
+%Found by taking the installation-wide average of top and cov polyveg values in the first year of the selected measurement interval
+\begin{figure}[!htb]
+\begin{center}
+<<label=vegVol, fig=TRUE,width=7,height=4,echo=FALSE>>=
+library(RColorBrewer)
+myColours <- brewer.pal(6,"Blues")
+
+my.settings <- list(
+  superpose.polygon=list(col=myColours[2:5], border="transparent"),
+  strip.background=list(col=myColours[6]),
+  strip.border=list(col="black")
+)
+
+CTRLandGE.volume.index$Group.2<-factor(CTRLandGE.volume.index$Group.2)
+
+barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, groups=CTRLandGE.volume.index$Group.2,
+         origin=0, 
+         #main="Motor insurance claims frequency"
+         xlab="Installation", ylab="Vegetation Depth (ft.)",
+        scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)),                  
+         auto.key=list(space="right", columns=1, 
+                       points=FALSE, rectangles=TRUE,
+                       title="Treatment", cex.title=1),
+         par.settings = my.settings,
+         par.strip.text=list(col="white", font=2),
+         panel=function(x,y,...){
+           panel.grid(h=-1, v=0); 
+           panel.barchart(x,y,...)
+         }
+)
+
+@
+\end{center}
+\caption{Control and Herbicide Plot Vegetation Volume\label{fig:vegVol}}
+\end{figure}
+ 
+ 
+When comparing the vegetation depths between the control and the herbicide plots in the first year of the selected measurement intervals, it is apparent that there is a large drop in vegetation levels within installations with large amounts of understory vegetation in the control plots(see Figure \ref{fig:vegVol}). This indicates some success in establishing a wide range of non-arboreal vegetative conditions on installations. However, the herbicide applications failed to contribute to a marked difference in depth in installations of little vegetative volume in control plots. 
+
+There appears to be a group of six installations with similarly low overstory retention levels and high site index values (see red colored installations in Figure \ref{fig:siteOverstory}).  It makes sense from a forest management perspective, that relatively little residual overstory would be left on highly productive sites. These installations were used to develop the understory model since they were so alike in overstory and site productivity.
 
 \begin{table}[h]
 \small

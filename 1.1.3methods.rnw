@@ -77,56 +77,11 @@ The year of initiation of installations varied with most being established in th
 
 \begin{figure}[h]
 \begin{center}
-    \includegraphics[width=160mm]{instLayout.jpg}
-    \caption{Illustration of an STCV installation and herbicide assignments}
+    \includegraphics[width=160mm]{GS_plots_colored.jpg}
+    \caption{Griner Saddle (GS) installation in northern Idaho and associated plot treatments}
     \label{fig:instLayout}
 \end{center}
 \end{figure}
-
-The primary objective of the herbicide treatments was to decouple the harvesting and understory vegetation effects on small tree growth. It has been reported that like tree growth increases in good sites, levels of understory increase as well (Stage and Boyd 1987, Walstad and Kuch 1987). The herbicide treatments reveals how small trees grow under varying levels of site quality without the presence of a corresponding increase non-arboreal vegetation. Because the objective of the herbicide treatments was to simply provide a range of non-arboral vegetation levels, the herbicide application regimes varied greatly and not all installations recieved treatment. 
-
-Figure \ref{fig:timeline} shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at four year intervals was successful for many installations but in some cases the intervals were somewhat irregular (i.e., 3-5 years in length). Ultimately, the height growth increments were standardized to the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. 
-
-
-\begin{figure}[!htb]
-\begin{center}
-<<fig=TRUE,echo=FALSE>>=
-library(lattice)
-
-#w/ meast#########################
-timelineJan<-timelineJan[!timelineJan$Installation %in% drp60,]
-
-
-xyplot(Installation ~ Year_Measurement,
-       xlim=c(1997,2016),
-       data=timelineJan,
-       htyr=timelineJan$Assoc_OS,
-       trtyr=timelineJan$Trt,  
-     scales=list(x=list(at=1998:2015, cex=1.0,rot=45)),
-        xlab=list(label="Year",cex=1.0),
-        ylab=list(label="Installation",cex=1.0),
-           main=NULL,
-       #list(label="Installation History", cex=1.5),
-           panel=function(x,y,htyr,trtyr,...){
-           panel.abline(h = timelineJan$Installation, v = c(1998:2015), lty = "dotted", col = "light grey")
-         for (i in as.numeric(unique(y))){
-           subx <- x[as.numeric(y)==i]
-           subOS <- htyr[as.numeric(y)==i]+.15
-           trt8 <- trtyr[as.numeric(y)==i]-.15
-           panel.xyplot(subx,i,type="l",col="black")
-           panel.xyplot(subOS,i,type="p",pch=17,col="chartreuse4",cex=2)
-           panel.xyplot(subx,i,type="p",pch=15,col="black",cex=1.0)
-           panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
-           }})
-
-@
-\end{center}
-\caption{Timeline of Installation Measurements and Treatments.Green and red triangles represent years of overstory measurements and herbicide treatment, respectively. The black squares represent the years of the selected growth intervals. \label{fig:timeline}}
-\end{figure}
-
-
-A point of concern is that some measurements were taken at times that may not have allowed herbicide applications to take full effect. That is, several measurement years were concurrent with or followed too quickly after the first herbicide application such as TJ which was measured in 2001, concurrent with the first measurement year. This necessitated careful selection of the appropriate measurement years on an installation by installation basis. The ``first interval years'' were selected such that one to three years following the initial herbicide application were included to allow for the herbicide to take effect. 
-
 
 
 
@@ -197,6 +152,87 @@ Each plot contained a series of nested plots that decrease in area with physiolo
 The small trees, whose growth responses are the subject of this research, were defined as those that have a DBH less than 3.5 in. yet a height greater than .5 ft for shade tolerant species or 1 ft for shade intolerant species at the time of initial measurements. Small trees were measured on the six .007 acre plots 60 degrees apart from plot center at a distance of approximately 30 feet. Not all small trees were tagged at each plot, only those from unique species and height classes were tagged. Other seedling and sapling competition was measured in these plots through a tally by 2 foot height classes.
 
 There were two sampling methods used to measure vegetative competition. The first was transect based where point measurements of vegetation were obtained at one foot intervals along a 40 ft transect.  We also took vegetation measurements at the centers of the small tree plots using both 1 m$^{2}$ and 4 m$^{2}$ quadrats. These vegetation measurements quantified separately the amounts of forbs, grasses and shrubs to the species level.  This is an example of how the resolution of the data goes beyond the scope of this analysis though will undoubtedly be of use in future research efforts.
+
+
+The primary objective of the herbicide treatments was to decouple the harvesting and understory vegetation effects on small tree growth. It has been reported that like tree growth increases in good sites, levels of understory increase as well (Stage and Boyd 1987, Walstad and Kuch 1987). The herbicide treatments reveals how small trees grow under varying levels of site quality without the presence of a corresponding increase non-arboreal vegetation. Because the objective of the herbicide treatments was to simply provide a range of non-arboral vegetation levels, the herbicide application regimes varied greatly and not all installations recieved treatment. 
+
+Figure \ref{fig:timeline} shows the temporal scope of the data collection as well as herbicide applications and overstory measurements. An attempt to capture growth at four year intervals was successful for many installations but in some cases the intervals were somewhat irregular (i.e., 3-5 years in length). Ultimately, the height growth increments were standardized to the same temporal scale of periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. 
+
+
+\begin{figure}[!htb]
+\begin{center}
+<<fig=TRUE,echo=FALSE>>=
+library(lattice)
+
+#w/ meast#########################
+timelineJan<-timelineJan[!timelineJan$Installation %in% drp60,]
+
+
+xyplot(Installation ~ Year_Measurement,
+       xlim=c(1997,2016),
+       data=timelineJan,
+       htyr=timelineJan$Assoc_OS,
+       trtyr=timelineJan$Trt,  
+     scales=list(x=list(at=1998:2015, cex=1.0,rot=45)),
+        xlab=list(label="Year",cex=1.0),
+        ylab=list(label="Installation",cex=1.0),
+           main=NULL,
+       #list(label="Installation History", cex=1.5),
+           panel=function(x,y,htyr,trtyr,...){
+           panel.abline(h = timelineJan$Installation, v = c(1998:2015), lty = "dotted", col = "light grey")
+         for (i in as.numeric(unique(y))){
+           subx <- x[as.numeric(y)==i]
+           subOS <- htyr[as.numeric(y)==i]+.15
+           trt8 <- trtyr[as.numeric(y)==i]-.15
+           panel.xyplot(subx,i,type="l",col="black")
+           panel.xyplot(subOS,i,type="p",pch=17,col="chartreuse4",cex=2)
+           panel.xyplot(subx,i,type="p",pch=15,col="black",cex=1.0)
+           panel.xyplot(trt8,i,type="p",pch=2,col="red",cex=1.8)
+           }})
+
+@
+\end{center}
+\caption{Timeline of Installation Measurements and Treatments.Green and red triangles represent years of overstory measurements and herbicide treatment, respectively. The black squares represent the years of the selected growth intervals. \label{fig:timeline}}
+\end{figure}
+
+
+A point of concern is that some measurements were taken at times that may not have allowed herbicide applications to take full effect. That is, several measurement years were concurrent with or followed too quickly after the first herbicide application such as TJ which was measured in 2001, concurrent with the first measurement year. This necessitated careful selection of the appropriate measurement years on an installation by installation basis. The ``first interval years'' were selected such that one to three years following the initial herbicide application were included to allow for the herbicide to take effect. 
+
+
+\subsection{Variable Acquisition}
+
+\textbf{Understory Tree Competition:}
+% For this category of ecological competition, only stands of similar overstory basal area and site productivity were selected to compare predictor variables within. This was done to isolate the effects of inter-small tree competition.  Ranges of retained basal area and site productivity undoubtedly have influence on small tree growth rates and will be accounted for in subsequent categories. 
+
+The tallies of small trees from each small tree plot (STP) were summed by height class and then multiplied by 138.73 to obtain per acre estimates.  The number of trees taller than the subject tree was also found by summing all small tree tallies with height class midpoints greater than the height of the subject tree. Crown length was found by subtracting the crown base from the total height. Crown base is considered the height of the lowest contiguous branch. Crown width was found as an average of the two perpendicular measurements of crown width obtained in the field. Crown ratio was obtained by dividing the crown length by the total tree height. Basal diameter and diameter at breast height were found at 1 in. above root collar and at 4.5 ft., respectively.
+
+\textbf{Understory Vegetation Competition:}
+
+All stands with greater than 60 tagged small ponderosa pine trees were brought into consideration for the three remaining categories. Although measurements of understory vegetation and height were recorded in 4 m$^2$ quadrats in the later years of the study, only the 1 m$^2$ quadrats were utilized in this analysis since they were used for the entire duration of the study.  
+
+Average differences at the quadrat level between base and top height measurements were found separately for forbs,low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were obtained for forbs, low shrubs, high shrubs and grasses. The ocular estimates of precentage cover also included a "poly-vegetation" estimate of all forbs, shrubs and grasses combined in the quadrat.
+
+Average height differences for low shrubs, high shrubs, forbs were calculated for the 30 or 40 transect points corresponding to each small tree plot.  Percentage cover of grass obtained ocularly through a 6in by 6in grid and through measurement of the top height of grasses averaged over the length of the transect. Two relative measures of competition were created by subtracting the tallest understory vegetation height from that of the subject tree for both 1 m$^2$ and transect vegetation.
+
+\textbf{Retained Overstory Tree Competition:}
+
+Basal area was calculated for each live overstory tree and aggregated over the plots to provide an estimate of stand basal area (ft.$^2$/ac.). Crown area was obtained from the average of the two perpendicular measurements of width. Total crown area was then computed in terms of percent of an acre (taking into account the plot size that each overstory tree was sampled in). Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots.
+
+All retained overstory variables were linearly interpolated between overstory measurement years to provide estimates for intervening years of small tree and understory measurement. The initial and final years of overstory measurement provided limits of the interpolation meaning that a measurement year preceding the first overstory measurement (or following the last) would be assigned the overstory variable value calculated for the initial (or final) overstory measurement year. 
+
+\textbf{Site Quality:}
+Slope (\%), elevation (m) and aspect (degrees from North) were calculated using Google Earth Engine (\cite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180) and $\sin$((aspect*$\pi$)/180). Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (2007):
+
+\begin{gather}
+y = b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)]+ 
+\text{ln}(el+1)*s[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)] \nonumber \\
++(el^2)*s[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2,     
+\text{where~\emph{y} is the growth response,\emph{s} is the slope in percent,~\emph{el} is elevation in feet,~\alpha is aspect and the \emph{b}, are coefficients estimated from the data}\nonumber
+\end{gather}
+
+
+Site index was included from STCV records of each installation's initiation. An open grown dominate site tree was identified at the initiation of the site and site index calculated from standard site index curves. Site index species was ponderosa pine for the installations included in analysis although many other species were used at other installations. 
+
 
 
 \subsection{Model Construction}
@@ -358,53 +394,18 @@ Within each category of ecological factor, a subset of relevant predictor variab
 Akaike's Information Criterion (AIC) was used for model comparison within each category. The predictor effecting the largest drop in AIC was selected to represent that category in the model going forward. If two predictors had similarly low AIC values, then they were both carried forward into the subsequent categories until a clear advantage could be discerned. If a category was unable to supply a predictor that lowered AIC or if the predictor was deemed impractical for field measurement, no predictor was selected from that category. Refer to appendix B. Variable Selection Steps for a step-by-step guide to model construction.
 
 
-\subsection{Variable Acquisition}
-
-\textbf{Under story Tree Competition:}
-For this category of ecological competition, only stands of similar overstory basal area and site productivity were selected to compare predictor variables within. This was done to isolate the effects of inter-small tree competition.  Ranges of retained basal area and site productivity undoubtedly have influence on small tree growth rates and will be accounted for in subsequent categories. 
-
-The tallies of small trees from each small tree plot (STP) were summed by height class and then multiplied by 138.73 to obtain per acre estimates.  The number of trees greater than the subject trees was found by summing all height class tallies with class midpoints greater than the height of the subject tree. Crown length was found by subtracting the crown base from the total height.  Crown width was found as an average of the two perpendicular measurements of crown width obtained in the field. Crown ratio was obtained by dividing the crown length by the total tree height. Basal diameter and diameter at breast height required no further refinement.
-
-\textbf{Understory Vegetation Competition:}
-
-All stands with greater than 60 tagged small ponderosa pine trees were brought into consideration for the three remaining categories. Although measurements were recorded to 4m vegetation plots in the later years or the study, only the 1m vegetation plots were utilized in this analysis since they were used for the entire duration of the study.  
-
-Average differences at the STP level between base and top height measurements were found separately for forbs,low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were obtained for poly-vegetation, forbs, low shrubs, high shrubs and grasses.  Average height differences for low shrubs, high shrubs, forbs were calculated for the 30 or 40 transect points corresponding to each small tree plot.  Percentage cover of grass obtained ocularly through a 6in by 6in grid and through measurement of the top height of grasses averaged over the length of the transect. Two relative measures of competition were created by subtracting the tallest understory vegetation height from that of the subject tree for both 1m and transect vegetation.
-
-\textbf{Retained Overstory Tree Competition:}
-
-Dead overstory tree records were removed from the analysis.  Basal area was calculated for each overstory tree was aggregated from both the .26ac and .46ac overstory plots to provide a per acre estimate of basal area. Zero basal area per acre (BAPA) were assigned to installations without an overstory record due to clearcut. Basal area per acre was linearly interpolated between measurement years to provide estimates for years of small tree and understory measurement.  The initial and final years of overstory measurement provided limits of the interpolation meaning that a vegetation measurement year preceding or following the overstory measurements would be assigned the BAPA calculated for the initial or final Overstory measurement year, respectively.
-Crown competition factor (CCF) was obtained by calculating crown width as an average between the two perpendicular measurements of width and then converting crown width to crown area in square feet. Crown area was then computed in terms of percent of an acre (taking into account the plot size that each overstory tree was sampled in). Linearly interpolated estimates of plot level CCF were obtained in the manner described previously for BAPA.
-Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots.
-
-\textbf{Site Quality:}
-Slope, elevation and aspect were calculated using Google Earth Engine (\cite{googleearthengine}) for each plot's GPS recorded decimal degree coordinates. Slope is in units percentage and elevation in meters. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180) and $\sin$((aspect*$\pi$)/180). Interacting effects of elevation, slope and aspect were considered according to a linear model proposed by Salas and Stage(\cite{Stage2007a}).  This model allows for the aspect effects to involve slope and varying elevation.
-\begin{gather}
-y = b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)]+ 
-\text{ln}(el+1)*s[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)] \nonumber \\
-+(el^2)*s[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2, \\      
-\text{where~$y$ is the growth response,$s$ is the slope in percent,~$el$ is elevation in feet,~$a$ is aspect in radians}\nonumber
-\end{gather}
-
-
-Site index was included from STCV records of each installation's initiation. An open grown dominate site tree was identified at the initiation of the site and site index calculated from standard site index curves. Site index species was ponderosa pine for the installations included in analysis although many other species were used at other installations. 
-
 
 \subsection{Model Validation}
 
 
-The fact that quantile regression attempts to characterize the entire distribution of heights makes it more difficult to test and validate than an ordinary least squares regression.  The regression estimates at the selected quantile provide predictions for that specific quantile and it is likely that the predictive ability of the model changes at different quantiles.  For example, the model may better predict the median than the upper quantile. 
-
-
-To evaluate the model, three quantiles of the height growth response distribution (${\tau}$=.10,.50 and .90) were calculated for each individual tree in the validation data set. The actual recorded annualized height growth increments were then binned according which of the four quantile intervals they fell (i.e. less than .10, .10 to .50, etc.). To add further evaluate the model, the validation trees were also classified into initial height classes of ``less than 3 feet'', ``3-5 feet'' and ``greater than five feet''.
+To evaluate the performance of the selected model, three quantiles of the height growth response distribution (${\tau}$=.10,.50 and .90) were estimated for each individual tree in the validation data set. The recorded annualized height growth increments were then classified according to where they occurred among the four interquantile intervals (i.e. <.1, .1-.5,.5-.9,>.9). The validation trees were also classified into initial height classes of 4 feet', 4-6 feet and greater than 6 feet.
 
 A chi-squared test for homogeneity was then conducted to compare the actual and expected frequencies of annual tree height growth increments within each interval. 
 
-Hypotheses tested:
 
-H_{0}: \text{The distribution of responses is .10,.40,.40,.10 for each height class}
+H_{0}: \text{Actual distribution matches expected for any height classes}
 
-H_{A}: \text{At least one of the proportions is not .10,.40,.40,.10 for each height class}
+
 
 
  

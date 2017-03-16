@@ -13,6 +13,9 @@
 % 1983; Ronco et al. 1985; Cochran and Barrett 1995, 1999; Oliver
 % 1979, 1997, 2005)
 
+
+% The fact that quantile regression attempts to characterize the entire distribution of heights makes it more difficult to test and validate than an ordinary least squares regression.  The regression estimates at the selected quantile provide predictions for that specific quantile and it is likely that the predictive ability of the model changes at different quantiles.  For example, the model may better predict the median than the upper quantile. 
+
 %Found by taking the installation-wide average of top and cov polyveg values in the first year of the selected measurement interval
 \begin{figure}[!htb]
 \begin{center}

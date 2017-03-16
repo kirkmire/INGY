@@ -60,7 +60,79 @@ annual.gr4<-merge(annual.gr4, ge_sea, by="InstPlot")
 # 
 
 
+#SI Quantreg LQMM
+library(quantreg)
+library(lqmm)
 
+qr.SI<-rq(ht_annual~srHeight_Total+cratio+
+            # treeminus+
+            TPA.OS+SiteIndex_Value,random=~1,group=conc,tau=c(.5),data=annual.gr4)
+summary(qr.SI)
+aic.list.lqmm.SQ<-AIC(qr.SI)[1]
+nlist.lqmm.SQ<-length(qr.SI$y)
+
+#Slope Quantreg (Carrying forward CW and shrub transect, TPA)
+
+qr.slope<-rq(ht_annual~srHeight_Total+cratio+
+               # treeminus+
+               TPA.OS+slopePercent,random=~1,group=conc,tau=c(.5),data=annual.gr4)
+summary(qr.slope)
+aic.list.lqmm.SQ<-c(aic.list.lqmm.SQ,AIC(qr.slope)[1])
+nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.slope$y))
+
+#Elev Quantreg (Carrying forward CW and shrub transect, TPA)
+
+qr.elev<-rq(ht_annual~srHeight_Total+cratio+
+              # treeminus+
+              TPA.OS+elevation,random=~1,group=conc,tau=c(.5),data=annual.gr4)
+summary(qr.elev)
+aic.list.lqmm.SQ<-c(aic.list.lqmm.SQ,AIC(qr.elev)[1])
+nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.elev$y))
+
+#Asp Quantreg (Carrying forward CW and shrub transect, TPA)
+
+qr.asp<-rq(ht_annual~srHeight_Total+cratio+
+             # treeminus+
+             TPA.OS+cos_rad_asp,random=~1,group=conc,tau=c(.5),data=annual.gr4)
+summary(qr.asp)
+aic.list.lqmm.SQ<-c(aic.list.lqmm.SQ,AIC(qr.asp)[1])
+nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.asp$y))
+
+#Sea Interact.
+qr.sea<-rq(ht_annual~srHeight_Total+cratio+
+             # treeminus+
+             TPA.OS+
+             slopePercent + # goes with coefficient b1
+             slopePercent:cos_rad_asp + #with b2
+             slopePercent:sin_rad_asp + #with b3
+             slopePercent:log(elevation+1) + #b4
+             slopePercent:log(elevation+1):cos_rad_asp + #b5
+             slopePercent:log(elevation+1):sin_rad_asp + #b6
+             slopePercent:I(elevation^2) +   #b7
+             slopePercent:I(elevation^2):cos_rad_asp +   #b8
+             slopePercent:I(elevation^2):sin_rad_asp +   #b9
+             elevation + # b10
+             I(elevation^2) , #b11
+           random=~1,group=conc,
+           tau=c(.5) ,  data=annual.gr4)
+
+
+summary(qr.sea)
+aic.list.lqmm.SQ<-c(aic.list.lqmm.SQ,AIC(qr.sea)[1])
+nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.sea$y))
+
+
+
+
+SQ.variable<-c("SI","Slope","Elevation","Aspect","SEA Int")
+
+SQ.variable<-as.data.frame(SQ.variable)
+
+SQ.aic<-as.data.frame(cbind(nlist.lqmm.SQ,aic.list.lqmm.SQ))
+
+SQ.aic<-cbind(SQ.variable,SQ.aic)
+
+is.numeric(SQ.aic$aic.list.SQ)
 
 
 
@@ -125,7 +197,6 @@ aic.list.SQ<-c(aic.list.SQ,AIC(qr.sea)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.sea$y))
 
 
-#SI qr has an AIC> 4741 (OS TPA)
 
 
 SQ.variable<-c("SI","Slope","Elevation","Aspect","SEA Int")

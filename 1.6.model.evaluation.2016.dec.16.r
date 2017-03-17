@@ -55,6 +55,76 @@ latex(final.aic, file="")            # If you want all the data
 # #the effects at varouis quantiles differ considerably fromthe OLS coefficients
 # #even in terms of the CI 
 library(quantreg)
+library(lqmm)
+
+annual.gr4<-annual.gr4[!annual.gr4$cratio<.01,]
+annual.gr4<-annual.gr4[!annual.gr4$ht_annual<0,]
+annual.gr4<-annual.gr4[!is.na(annual.gr4$cratio)==T,]
+annual.gr4<-annual.gr4[!is.na(annual.gr4$ht_)==T,]
+
+annual.gr4[annual.gr4$cratio==NA,]
+
+qr.SI.1<-lqmm(ht_annual~srHeight_Total+
+                cratio+
+                TPA.OS+
+                slopePercent +
+                slopePercent:cos_rad_asp +
+                slopePercent:sin_rad_asp +
+                slopePercent:log(elevation+1) +
+                slopePercent:log(elevation+1):cos_rad_asp +
+                slopePercent:log(elevation+1):sin_rad_asp +
+                slopePercent:I(elevation^2) +
+                slopePercent:I(elevation^2):cos_rad_asp +
+                slopePercent:I(elevation^2):sin_rad_asp +
+                elevation +
+                I(elevation^2) ,
+              random=~1,
+              group=conc,tau=c(.1),
+              data=annual.gr4)
+
+
+
+qr.SI.5<-lqmm(ht_annual~srHeight_Total+
+                cratio+
+                TPA.OS+
+                slopePercent +
+                slopePercent:cos_rad_asp +
+                slopePercent:sin_rad_asp +
+                slopePercent:log(elevation+1) +
+                slopePercent:log(elevation+1):cos_rad_asp +
+                slopePercent:log(elevation+1):sin_rad_asp +
+                slopePercent:I(elevation^2) +
+                slopePercent:I(elevation^2):cos_rad_asp +
+                slopePercent:I(elevation^2):sin_rad_asp +
+                elevation +
+                I(elevation^2) ,
+              random=~1,
+              group=conc,tau=c(.5),
+              data=annual.gr4)
+
+qr.SI.9<-lqmm(ht_annual~srHeight_Total+
+                cratio+
+                TPA.OS+
+                slopePercent +
+                slopePercent:cos_rad_asp +
+                slopePercent:sin_rad_asp +
+                slopePercent:log(elevation+1) +
+                slopePercent:log(elevation+1):cos_rad_asp +
+                slopePercent:log(elevation+1):sin_rad_asp +
+                slopePercent:I(elevation^2) +
+                slopePercent:I(elevation^2):cos_rad_asp +
+                slopePercent:I(elevation^2):sin_rad_asp +
+                elevation +
+                I(elevation^2) ,
+              random=~1,
+              group=conc,tau=c(.9),
+              data=annual.gr4)
+
+
+
+
+
+
 
 least_squares <-lm(ht_annual~srHeight_Total+
                cratio+
@@ -150,8 +220,13 @@ annual.gr6$qr.pred.one <- predict.rq(qr.SI.1, annual.gr6)
 annual.gr6$qr.pred.five <- predict.rq(qr.SI.5, annual.gr6)
 annual.gr6$qr.pred.nine <- predict.rq(qr.SI.9, annual.gr6)
 
+annual.gr6$qr.pred.one <- predict(qr.SI.1,annual.gr6,level=1)
+annual.gr6$qr.pred.five <- predict(qr.SI.5,annual.gr6,level=1)
+annual.gr6$qr.pred.nine <- predict(qr.SI.9,annual.gr6,level=1)
+
+
  hist(annual.gr4$ht_annual)
- hist(annual.gr6$ht_annual)
+ hist(annual.gr6$qr.pred.nine)
  
  hist(annual.gr4$cratio)
  hist(annual.gr6$cratio)
@@ -203,6 +278,7 @@ lattice.options(default.theme = modifyList(standard.theme(color =
                                                             FALSE), list(strip.background = list(col = "transparent")))) 
 
 library(RColorBrewer)
+library(lattice)
 display.brewer.all()
 
 

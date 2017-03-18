@@ -50,19 +50,17 @@ latex(final.aic, file="")            # If you want all the data
 # 
 # 
 # 
-# #illustrates how the effects of predictors 
-# #cary over quantiles  and how the magnitude of 
-# #the effects at varouis quantiles differ considerably fromthe OLS coefficients
-# #even in terms of the CI 
-library(quantreg)
-library(lqmm)
+
+
+#Below is the code for quantile regression with individual subject tree as a fixed effect
+#install.packages("rqpd", repos="http://R-Forge.R-project.org")
+
+library(rqpd)
 
 annual.gr4<-annual.gr4[!annual.gr4$cratio<.01,]
 annual.gr4<-annual.gr4[!annual.gr4$ht_annual<0,]
 annual.gr4<-annual.gr4[!is.na(annual.gr4$cratio)==T,]
 annual.gr4<-annual.gr4[!is.na(annual.gr4$ht_)==T,]
-
-annual.gr4[annual.gr4$cratio==NA,]
 
 
 fe.form<-(ht_annual~
@@ -82,38 +80,104 @@ fe.form<-(ht_annual~
             I(elevation^2)|conc)
 
 
-# install.packages("rqpd", repos="http://R-Forge.R-project.org")
 
-library(rqpd)
-qr.SI.1<- rqpd(fe.form, panel(taus=c(.1),tauw=(.1)),data=annual.gr4)               
-                
-qr.SI.1<-summary(qr.SI.1)
+qr.SI.1<- rqpd(fe.form, panel(taus=c(.1,.5,.9),tauw=c(.33,.33,.33)),data=annual.gr4)    
+summary(qr.SI.1)
+#Question about tau weights, they were not a parameter in the quantreg package,
+#is it correct to distribute the weight equally among quantiles? must sum to 1
 
-coef.rqpd(qr.SI.1)
-qr.SI.1$coefficients
 
-pred.func<-function(srHeight_Total,cratio,TPA.OS,slopePercent,cos_rad_asp,sin_rad_asp,elevation){
-  pred<- (qr.SI.1$coefficients[1]+
+#Had to make prediction functions for each quantile, rqpd object not compatable with predict()
+pred.func1<-function(srHeight_Total,cratio,TPA.OS,slopePercent,cos_rad_asp,sin_rad_asp,elevation){
+
+  qr.SI.1$coefficients[1]+
   qr.SI.1$coefficients[2]*srHeight_Total+
   qr.SI.1$coefficients[3]*cratio+
   qr.SI.1$coefficients[4]*TPA.OS+
   qr.SI.1$coefficients[5]*slopePercent+
-  qr.SI.1$coefficients[6]*slopePercent:cos_rad_asp +
-  qr.SI.1$coefficients[7]*slopePercent:sin_rad_asp +
-  qr.SI.1$coefficients[7]*slopePercent:log(elevation+1) +
-  qr.SI.1$coefficients[8]*slopePercent:log(elevation+1):cos_rad_asp +
-  qr.SI.1$coefficients[9]*slopePercent:log(elevation+1):sin_rad_asp +
-  qr.SI.1$coefficients[10]*slopePercent:I(elevation^2) +
-  qr.SI.1$coefficients[11]*slopePercent:I(elevation^2):cos_rad_asp +
-  qr.SI.1$coefficients[12]*slopePercent:I(elevation^2):sin_rad_asp +
-  qr.SI.1$coefficients[13]*elevation +
-  qr.SI.1$coefficients[14]*I(elevation^2))
+  qr.SI.1$coefficients[6]*elevation+
+  qr.SI.1$coefficients[7]*I(elevation^2)+
+  qr.SI.1$coefficients[8]*slopePercent*cos_rad_asp +
+  qr.SI.1$coefficients[9]*slopePercent*sin_rad_asp +
+  qr.SI.1$coefficients[10]*slopePercent*log(elevation+1) +
+  qr.SI.1$coefficients[11]*slopePercent*I(elevation^2)+
+  qr.SI.1$coefficients[12]*slopePercent*log(elevation+1)*cos_rad_asp +
+  qr.SI.1$coefficients[13]*slopePercent*log(elevation+1)*sin_rad_asp +
+  qr.SI.1$coefficients[14]*slopePercent*I(elevation^2)*cos_rad_asp +
+  qr.SI.1$coefficients[15]*slopePercent*I(elevation^2)*sin_rad_asp 
+
+}
+
+
+pred.func5<-function(srHeight_Total,cratio,TPA.OS,slopePercent,cos_rad_asp,sin_rad_asp,elevation){
+
+  qr.SI.1$coefficients[16]+
+    qr.SI.1$coefficients[17]*srHeight_Total+
+    qr.SI.1$coefficients[18]*cratio+
+    qr.SI.1$coefficients[19]*TPA.OS+
+    qr.SI.1$coefficients[20]*slopePercent+
+    qr.SI.1$coefficients[21]*elevation+
+    qr.SI.1$coefficients[22]*I(elevation^2)+
+    qr.SI.1$coefficients[23]*slopePercent*cos_rad_asp +
+    qr.SI.1$coefficients[24]*slopePercent*sin_rad_asp +
+    qr.SI.1$coefficients[25]*slopePercent*log(elevation+1) +
+    qr.SI.1$coefficients[26]*slopePercent*I(elevation^2)+
+    qr.SI.1$coefficients[27]*slopePercent*log(elevation+1)*cos_rad_asp +
+    qr.SI.1$coefficients[28]*slopePercent*log(elevation+1)*sin_rad_asp +
+    qr.SI.1$coefficients[29]*slopePercent*I(elevation^2)*cos_rad_asp +
+    qr.SI.1$coefficients[30]*slopePercent*I(elevation^2)*sin_rad_asp 
   
-    pred
+}
+
+pred.func9<-function(srHeight_Total,cratio,TPA.OS,slopePercent,cos_rad_asp,sin_rad_asp,elevation){
+
+  qr.SI.1$coefficients[31]+
+    qr.SI.1$coefficients[32]*srHeight_Total+
+    qr.SI.1$coefficients[33]*cratio+
+    qr.SI.1$coefficients[34]*TPA.OS+
+    qr.SI.1$coefficients[35]*slopePercent+
+    qr.SI.1$coefficients[36]*elevation+
+    qr.SI.1$coefficients[37]*I(elevation^2)+
+    qr.SI.1$coefficients[38]*slopePercent*cos_rad_asp +
+    qr.SI.1$coefficients[39]*slopePercent*sin_rad_asp +
+    qr.SI.1$coefficients[40]*slopePercent*log(elevation+1) +
+    qr.SI.1$coefficients[41]*slopePercent*I(elevation^2)+
+    qr.SI.1$coefficients[42]*slopePercent*log(elevation+1)*cos_rad_asp +
+    qr.SI.1$coefficients[43]*slopePercent*log(elevation+1)*sin_rad_asp +
+    qr.SI.1$coefficients[44]*slopePercent*I(elevation^2)*cos_rad_asp +
+    qr.SI.1$coefficients[45]*slopePercent*I(elevation^2)*sin_rad_asp 
+  
 }
   
+annual.gr6<-annual.gr6[!annual.gr6$cratio<.01,]
+annual.gr6<-annual.gr6[!annual.gr6$ht_annual<0,]
+annual.gr6<-annual.gr6[!is.na(annual.gr6$cratio)==T,]
+annual.gr6<-annual.gr6[!is.na(annual.gr6$ht_annual)==T,]
+
 for(i in 1:nrow(annual.gr6)){
-  annual.gr6$qr.pred.one[i]<-pred.func(
+  annual.gr6$qr.pred.one[i]<-pred.func1(
+     annual.gr6$srHeight_Total[i],
+     annual.gr6$cratio[i],
+     annual.gr6$TPA.OS[i],
+     annual.gr6$slopePercent[i],
+     annual.gr6$cos_rad_asp[i],
+     annual.gr6$sin_rad_asp[i],
+     annual.gr6$elevation[i])
+}
+
+for(i in 1:nrow(annual.gr6)){
+  annual.gr6$qr.pred.five[i]<-pred.func5(
+    annual.gr6$srHeight_Total[i],
+    annual.gr6$cratio[i],
+    annual.gr6$TPA.OS[i],
+    annual.gr6$slopePercent[i],
+    annual.gr6$cos_rad_asp[i],
+    annual.gr6$sin_rad_asp[i],
+    annual.gr6$elevation[i])
+}
+
+for(i in 1:nrow(annual.gr6)){
+  annual.gr6$qr.pred.nine[i]<-pred.func9(
     annual.gr6$srHeight_Total[i],
     annual.gr6$cratio[i],
     annual.gr6$TPA.OS[i],
@@ -124,164 +188,104 @@ for(i in 1:nrow(annual.gr6)){
 }
 
 
-
-qr.SI.5<-lqmm( ht_annual~
-                 conc
-               +
-               srHeight_Total+
-               cratio+
-               TPA.OS+
-               slopePercent +
-               slopePercent:cos_rad_asp +
-               slopePercent:sin_rad_asp +
-               slopePercent:log(elevation+1) +
-               slopePercent:log(elevation+1):cos_rad_asp +
-               slopePercent:log(elevation+1):sin_rad_asp +
-               slopePercent:I(elevation^2) +
-               slopePercent:I(elevation^2):cos_rad_asp +
-               slopePercent:I(elevation^2):sin_rad_asp +
-               elevation +
-               I(elevation^2)
-               ,
-               random=~conc,
-              tau=.5,data=annual.gr4
-             )
-
-help(rqpd)
-
-qr.SI.9<-lqmm(ht_annual~srHeight_Total+
-                cratio+
-                TPA.OS+
-                slopePercent +
-                slopePercent:cos_rad_asp +
-                slopePercent:sin_rad_asp +
-                slopePercent:log(elevation+1) +
-                slopePercent:log(elevation+1):cos_rad_asp +
-                slopePercent:log(elevation+1):sin_rad_asp +
-                slopePercent:I(elevation^2) +
-                slopePercent:I(elevation^2):cos_rad_asp +
-                slopePercent:I(elevation^2):sin_rad_asp +
-                elevation +
-                I(elevation^2) ,
-              random=~1,
-              group=conc,tau=c(.9),
-              data=annual.gr4)
+hist(annual.gr6$qr.pred.nine)
 
 
-
-
-
-
-
-least_squares <-lm(ht_annual~srHeight_Total+
-               cratio+
-               TPA.OS+
-               slopePercent +
-               slopePercent:cos_rad_asp +
-               slopePercent:sin_rad_asp +
-               slopePercent:log(elevation+1) +
-               slopePercent:log(elevation+1):cos_rad_asp +
-               slopePercent:log(elevation+1):sin_rad_asp +
-               slopePercent:I(elevation^2) +
-               slopePercent:I(elevation^2):cos_rad_asp +
-               slopePercent:I(elevation^2):sin_rad_asp +
-               elevation +
-               I(elevation^2) ,
-            data=annual.gr4)
-
-
-qr.SI.1 <-rq(ht_annual~srHeight_Total+
-               cratio+
-               TPA.OS+
-               slopePercent +
-               slopePercent:cos_rad_asp +
-               slopePercent:sin_rad_asp +
-               slopePercent:log(elevation+1) +
-               slopePercent:log(elevation+1):cos_rad_asp +
-               slopePercent:log(elevation+1):sin_rad_asp +
-               slopePercent:I(elevation^2) +
-               slopePercent:I(elevation^2):cos_rad_asp +
-               slopePercent:I(elevation^2):sin_rad_asp +
-               elevation +
-               I(elevation^2) ,
-             tau=.1 ,  data=annual.gr4)
-
-
-qr.SI.all <-rq(ht_annual~srHeight_Total+
-               cratio+
-               TPA.OS+
-               slopePercent +
-               slopePercent:cos_rad_asp +
-               slopePercent:sin_rad_asp +
-               slopePercent:log(elevation+1) +
-               slopePercent:log(elevation+1):cos_rad_asp +
-               slopePercent:log(elevation+1):sin_rad_asp +
-               slopePercent:I(elevation^2) +
-               slopePercent:I(elevation^2):cos_rad_asp +
-               slopePercent:I(elevation^2):sin_rad_asp +
-               elevation +
-               I(elevation^2) ,
-             tau=c(.1,.5,.9) ,  data=annual.gr4)
-
-plot(summary(qr.SI.all),parm="TPA.OS")
-
-
-
-
-
-qr.SI.5 <-rq(ht_annual~srHeight_Total+
-               cratio+
-               TPA.OS+
-               slopePercent +
-               slopePercent:cos_rad_asp +
-               slopePercent:sin_rad_asp +
-               slopePercent:log(elevation+1) +
-               slopePercent:log(elevation+1):cos_rad_asp +
-               slopePercent:log(elevation+1):sin_rad_asp +
-               slopePercent:I(elevation^2) +
-               slopePercent:I(elevation^2):cos_rad_asp +
-               slopePercent:I(elevation^2):sin_rad_asp +
-               elevation +
-               I(elevation^2) ,
-             tau=.5,  data=annual.gr4)
-
-qr.SI.9 <-rq(ht_annual~srHeight_Total+
-               cratio+
-               TPA.OS+
-               slopePercent +
-               slopePercent:cos_rad_asp +
-               slopePercent:sin_rad_asp +
-               slopePercent:log(elevation+1) +
-               slopePercent:log(elevation+1):cos_rad_asp +
-               slopePercent:log(elevation+1):sin_rad_asp +
-               slopePercent:I(elevation^2) +
-               slopePercent:I(elevation^2):cos_rad_asp +
-               slopePercent:I(elevation^2):sin_rad_asp +
-               elevation +
-               I(elevation^2) ,
-             tau=.9 ,  data=annual.gr4)
-
-
-
-annual.gr6$qr.pred.one <- predict.rqpd(qr.SI.1, annual.gr6)
-annual.gr6$qr.pred.five <- predict.rq(qr.SI.5, annual.gr6)
-annual.gr6$qr.pred.nine <- predict.rq(qr.SI.9, annual.gr6)
-
-annual.gr6$qr.pred.one <- predict(qr.SI.1,annual.gr6,level=1)
-
-
-qr.SI.1$coefficients[1]
-annual.gr6$qr.pred.five <- predict(qr.SI.5,annual.gr6,level=1)
-annual.gr6$qr.pred.nine <- predict(qr.SI.9,annual.gr6,level=1)
-
-
- hist(annual.gr4$ht_annual)
- hist(annual.gr6$qr.pred.nine)
- 
- hist(annual.gr4$cratio)
- hist(annual.gr6$cratio)
-#isTRUE(predict.rq(qr.SI.1, annual.gr6)==predict(qr.SI.1, annual.gr6))
-help(lqmm)
+#commented out below is the original code for the quantreg package 
+#library(quantreg)
+# least_squares <-lm(ht_annual~srHeight_Total+
+#                cratio+
+#                TPA.OS+
+#                slopePercent +
+#                slopePercent:cos_rad_asp +
+#                slopePercent:sin_rad_asp +
+#                slopePercent:log(elevation+1) +
+#                slopePercent:log(elevation+1):cos_rad_asp +
+#                slopePercent:log(elevation+1):sin_rad_asp +
+#                slopePercent:I(elevation^2) +
+#                slopePercent:I(elevation^2):cos_rad_asp +
+#                slopePercent:I(elevation^2):sin_rad_asp +
+#                elevation +
+#                I(elevation^2) ,
+#             data=annual.gr4)
+# 
+# 
+# qr.SI.1 <-rq(ht_annual~srHeight_Total+
+#                cratio+
+#                TPA.OS+
+#                slopePercent +
+#                slopePercent:cos_rad_asp +
+#                slopePercent:sin_rad_asp +
+#                slopePercent:log(elevation+1) +
+#                slopePercent:log(elevation+1):cos_rad_asp +
+#                slopePercent:log(elevation+1):sin_rad_asp +
+#                slopePercent:I(elevation^2) +
+#                slopePercent:I(elevation^2):cos_rad_asp +
+#                slopePercent:I(elevation^2):sin_rad_asp +
+#                elevation +
+#                I(elevation^2) ,
+#              tau=.1 ,  data=annual.gr4)
+# 
+# 
+# qr.SI.all <-rq(ht_annual~srHeight_Total+
+#                cratio+
+#                TPA.OS+
+#                slopePercent +
+#                slopePercent:cos_rad_asp +
+#                slopePercent:sin_rad_asp +
+#                slopePercent:log(elevation+1) +
+#                slopePercent:log(elevation+1):cos_rad_asp +
+#                slopePercent:log(elevation+1):sin_rad_asp +
+#                slopePercent:I(elevation^2) +
+#                slopePercent:I(elevation^2):cos_rad_asp +
+#                slopePercent:I(elevation^2):sin_rad_asp +
+#                elevation +
+#                I(elevation^2) ,
+#              tau=c(.1,.5,.9) ,  data=annual.gr4)
+# 
+# plot(summary(qr.SI.all),parm="TPA.OS")
+# 
+# 
+# 
+# 
+# 
+# qr.SI.5 <-rq(ht_annual~srHeight_Total+
+#                cratio+
+#                TPA.OS+
+#                slopePercent +
+#                slopePercent:cos_rad_asp +
+#                slopePercent:sin_rad_asp +
+#                slopePercent:log(elevation+1) +
+#                slopePercent:log(elevation+1):cos_rad_asp +
+#                slopePercent:log(elevation+1):sin_rad_asp +
+#                slopePercent:I(elevation^2) +
+#                slopePercent:I(elevation^2):cos_rad_asp +
+#                slopePercent:I(elevation^2):sin_rad_asp +
+#                elevation +
+#                I(elevation^2) ,
+#              tau=.5,  data=annual.gr4)
+# 
+# qr.SI.9 <-rq(ht_annual~srHeight_Total+
+#                cratio+
+#                TPA.OS+
+#                slopePercent +
+#                slopePercent:cos_rad_asp +
+#                slopePercent:sin_rad_asp +
+#                slopePercent:log(elevation+1) +
+#                slopePercent:log(elevation+1):cos_rad_asp +
+#                slopePercent:log(elevation+1):sin_rad_asp +
+#                slopePercent:I(elevation^2) +
+#                slopePercent:I(elevation^2):cos_rad_asp +
+#                slopePercent:I(elevation^2):sin_rad_asp +
+#                elevation +
+#                I(elevation^2) ,
+#              tau=.9 ,  data=annual.gr4)
+# 
+# 
+# 
+# annual.gr6$qr.pred.one <- predict.rq(qr.SI.1, annual.gr6)
+# annual.gr6$qr.pred.five <- predict.rq(qr.SI.5, annual.gr6)
+# annual.gr6$qr.pred.nine <- predict.rq(qr.SI.9, annual.gr6)
 
 
     
@@ -378,11 +382,11 @@ min(annual.gr6$Height_Total)
 hist(annual.gr6$Height_Total)
 
 xsq1<-chisq.test(x.table1,p=c(.1,.4,.4,.1))
-print(xsq1)
+xsq1
 xsq2<-chisq.test(x.table2,p=c(.1,.4,.4,.1))
 xsq2
 xsq3<-chisq.test(x.table3,p=c(.1,.4,.4,.1))
-
+xsq3
 #Exact test
 
 library(XNomial)

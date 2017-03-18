@@ -64,43 +64,90 @@ annual.gr4<-annual.gr4[!is.na(annual.gr4$ht_)==T,]
 
 annual.gr4[annual.gr4$cratio==NA,]
 
-qr.SI.1<-lqmm(ht_annual~srHeight_Total+
-                cratio+
-                TPA.OS+
-                slopePercent +
-                slopePercent:cos_rad_asp +
-                slopePercent:sin_rad_asp +
-                slopePercent:log(elevation+1) +
-                slopePercent:log(elevation+1):cos_rad_asp +
-                slopePercent:log(elevation+1):sin_rad_asp +
-                slopePercent:I(elevation^2) +
-                slopePercent:I(elevation^2):cos_rad_asp +
-                slopePercent:I(elevation^2):sin_rad_asp +
-                elevation +
-                I(elevation^2) ,
-              random=~1,
-              group=conc,tau=c(.1),
-              data=annual.gr4)
+
+fe.form<-(ht_annual~
+            srHeight_Total+
+            cratio+
+            TPA.OS+
+            slopePercent +
+            slopePercent:cos_rad_asp +
+            slopePercent:sin_rad_asp +
+            slopePercent:log(elevation+1) +
+            slopePercent:log(elevation+1):cos_rad_asp +
+            slopePercent:log(elevation+1):sin_rad_asp +
+            slopePercent:I(elevation^2) +
+            slopePercent:I(elevation^2):cos_rad_asp +
+            slopePercent:I(elevation^2):sin_rad_asp +
+            elevation +
+            I(elevation^2)|conc)
+
+
+# install.packages("rqpd", repos="http://R-Forge.R-project.org")
+
+library(rqpd)
+qr.SI.1<- rqpd(fe.form, panel(taus=c(.1),tauw=(.1)),data=annual.gr4)               
+                
+qr.SI.1<-summary(qr.SI.1)
+
+coef.rqpd(qr.SI.1)
+qr.SI.1$coefficients
+
+pred.func<-function(srHeight_Total,cratio,TPA.OS,slopePercent,cos_rad_asp,sin_rad_asp,elevation){
+  pred<- (qr.SI.1$coefficients[1]+
+  qr.SI.1$coefficients[2]*srHeight_Total+
+  qr.SI.1$coefficients[3]*cratio+
+  qr.SI.1$coefficients[4]*TPA.OS+
+  qr.SI.1$coefficients[5]*slopePercent+
+  qr.SI.1$coefficients[6]*slopePercent:cos_rad_asp +
+  qr.SI.1$coefficients[7]*slopePercent:sin_rad_asp +
+  qr.SI.1$coefficients[7]*slopePercent:log(elevation+1) +
+  qr.SI.1$coefficients[8]*slopePercent:log(elevation+1):cos_rad_asp +
+  qr.SI.1$coefficients[9]*slopePercent:log(elevation+1):sin_rad_asp +
+  qr.SI.1$coefficients[10]*slopePercent:I(elevation^2) +
+  qr.SI.1$coefficients[11]*slopePercent:I(elevation^2):cos_rad_asp +
+  qr.SI.1$coefficients[12]*slopePercent:I(elevation^2):sin_rad_asp +
+  qr.SI.1$coefficients[13]*elevation +
+  qr.SI.1$coefficients[14]*I(elevation^2))
+  
+    pred
+}
+  
+for(i in 1:nrow(annual.gr6)){
+  annual.gr6$qr.pred.one[i]<-pred.func(
+    annual.gr6$srHeight_Total[i],
+    annual.gr6$cratio[i],
+    annual.gr6$TPA.OS[i],
+    annual.gr6$slopePercent[i],
+    annual.gr6$cos_rad_asp[i],
+    annual.gr6$sin_rad_asp[i],
+    annual.gr6$elevation[i])
+}
 
 
 
-qr.SI.5<-lqmm(ht_annual~srHeight_Total+
-                cratio+
-                TPA.OS+
-                slopePercent +
-                slopePercent:cos_rad_asp +
-                slopePercent:sin_rad_asp +
-                slopePercent:log(elevation+1) +
-                slopePercent:log(elevation+1):cos_rad_asp +
-                slopePercent:log(elevation+1):sin_rad_asp +
-                slopePercent:I(elevation^2) +
-                slopePercent:I(elevation^2):cos_rad_asp +
-                slopePercent:I(elevation^2):sin_rad_asp +
-                elevation +
-                I(elevation^2) ,
-              random=~1,
-              group=conc,tau=c(.5),
-              data=annual.gr4)
+qr.SI.5<-lqmm( ht_annual~
+                 conc
+               +
+               srHeight_Total+
+               cratio+
+               TPA.OS+
+               slopePercent +
+               slopePercent:cos_rad_asp +
+               slopePercent:sin_rad_asp +
+               slopePercent:log(elevation+1) +
+               slopePercent:log(elevation+1):cos_rad_asp +
+               slopePercent:log(elevation+1):sin_rad_asp +
+               slopePercent:I(elevation^2) +
+               slopePercent:I(elevation^2):cos_rad_asp +
+               slopePercent:I(elevation^2):sin_rad_asp +
+               elevation +
+               I(elevation^2)
+               ,
+               random=~conc,
+              tau=.5,data=annual.gr4
+             )
+
+help(rqpd)
 
 qr.SI.9<-lqmm(ht_annual~srHeight_Total+
                 cratio+
@@ -216,11 +263,14 @@ qr.SI.9 <-rq(ht_annual~srHeight_Total+
 
 
 
-annual.gr6$qr.pred.one <- predict.rq(qr.SI.1, annual.gr6)
+annual.gr6$qr.pred.one <- predict.rqpd(qr.SI.1, annual.gr6)
 annual.gr6$qr.pred.five <- predict.rq(qr.SI.5, annual.gr6)
 annual.gr6$qr.pred.nine <- predict.rq(qr.SI.9, annual.gr6)
 
 annual.gr6$qr.pred.one <- predict(qr.SI.1,annual.gr6,level=1)
+
+
+qr.SI.1$coefficients[1]
 annual.gr6$qr.pred.five <- predict(qr.SI.5,annual.gr6,level=1)
 annual.gr6$qr.pred.nine <- predict(qr.SI.9,annual.gr6,level=1)
 
@@ -231,7 +281,7 @@ annual.gr6$qr.pred.nine <- predict(qr.SI.9,annual.gr6,level=1)
  hist(annual.gr4$cratio)
  hist(annual.gr6$cratio)
 #isTRUE(predict.rq(qr.SI.1, annual.gr6)==predict(qr.SI.1, annual.gr6))
-
+help(lqmm)
 
 
     

@@ -64,7 +64,7 @@ annual.gr4<-merge(annual.gr4, ge_sea, by="InstPlot")
 library(quantreg)
 library(lqmm)
 
-qr.SI<-rq(ht_annual~srHeight_Total+cratio+
+qr.SI<-lqmm(ht_annual~srHeight_Total+cratio+
             # treeminus+
             TPA.OS+SiteIndex_Value,random=~1,group=conc,tau=c(.5),data=annual.gr4)
 summary(qr.SI)
@@ -73,7 +73,7 @@ nlist.lqmm.SQ<-length(qr.SI$y)
 
 #Slope Quantreg (Carrying forward CW and shrub transect, TPA)
 
-qr.slope<-rq(ht_annual~srHeight_Total+cratio+
+qr.slope<-lqmm(ht_annual~srHeight_Total+cratio+
                # treeminus+
                TPA.OS+slopePercent,random=~1,group=conc,tau=c(.5),data=annual.gr4)
 summary(qr.slope)
@@ -82,7 +82,7 @@ nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.slope$y))
 
 #Elev Quantreg (Carrying forward CW and shrub transect, TPA)
 
-qr.elev<-rq(ht_annual~srHeight_Total+cratio+
+qr.elev<-lqmm(ht_annual~srHeight_Total+cratio+
               # treeminus+
               TPA.OS+elevation,random=~1,group=conc,tau=c(.5),data=annual.gr4)
 summary(qr.elev)
@@ -91,7 +91,7 @@ nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.elev$y))
 
 #Asp Quantreg (Carrying forward CW and shrub transect, TPA)
 
-qr.asp<-rq(ht_annual~srHeight_Total+cratio+
+qr.asp<-lqmm(ht_annual~srHeight_Total+cratio+
              # treeminus+
              TPA.OS+cos_rad_asp,random=~1,group=conc,tau=c(.5),data=annual.gr4)
 summary(qr.asp)
@@ -99,20 +99,19 @@ aic.list.lqmm.SQ<-c(aic.list.lqmm.SQ,AIC(qr.asp)[1])
 nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.asp$y))
 
 #Sea Interact.
-qr.sea<-rq(ht_annual~srHeight_Total+cratio+
-             # treeminus+
+qr.sea<-lqmm(ht_annual~srHeight_Total+cratio+
              TPA.OS+
              slopePercent + # goes with coefficient b1
-             slopePercent:cos_rad_asp + #with b2
-             slopePercent:sin_rad_asp + #with b3
-             slopePercent:log(elevation+1) + #b4
-             slopePercent:log(elevation+1):cos_rad_asp + #b5
-             slopePercent:log(elevation+1):sin_rad_asp + #b6
-             slopePercent:I(elevation^2) +   #b7
-             slopePercent:I(elevation^2):cos_rad_asp +   #b8
-             slopePercent:I(elevation^2):sin_rad_asp +   #b9
-             elevation + # b10
-             I(elevation^2) , #b11
+             slopePercent:cos_rad_asp+#with b2
+             slopePercent:sin_rad_asp+ #with b3
+             slopePercent:log(elevation+1)+ #b4
+             slopePercent:log(elevation+1):cos_rad_asp+ #b5
+             slopePercent:log(elevation+1):sin_rad_asp+ #b6
+             slopePercent:I(elevation^2)+  #b7
+             slopePercent:I(elevation^2):cos_rad_asp+   #b8
+             slopePercent:I(elevation^2):sin_rad_asp+   #b9
+             elevation+ # b10
+             (elevation^2), #b11
            random=~1,group=conc,
            tau=c(.5) ,  data=annual.gr4)
 

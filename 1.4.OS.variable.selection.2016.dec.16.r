@@ -552,168 +552,100 @@ for(i in 1:nrow(annual.gr4)){
 
 
 #OS Quantreg LQMM
-library(quantreg)
 library(lqmm)
+annual.gr4<-annual.gr4[!is.na(annual.gr4$cratio)==T,]
+
+#QR for Nothing
+qr.OS.nothing<-lqmm(ht_annual~srHeight_Total+cratio,random=~1,group=conc
+                  ,tau=c(.5),data=annual.gr4)
+# summary(qr.OS.nothing)
+aic.list.OS.nothing<-AIC(qr.OS.nothing)[1]
+nlist.OS<-length(qr.OS.nothing$y)
 
 #QR for BAPA
-qr.BAPA<-rq(ht_annual~srHeight_Total+STP+diff.G.1m+bapa.OS,random=~1,group=conc,tau=c(.5),data=annual.gr4)
-summary(qr.BAPA)
-aic.list.lqmm.OS<-AIC(qr.BAPA)[1]
+qr.BAPA<-lqmm(ht_annual~srHeight_Total+cratio+bapa.OS,random=~1,group=conc,tau=c(.5),data=annual.gr4)
+# summary(qr.BAPA)
+aic.list.lqmm.OS<-c(aic.list.OS.nothing,AIC(qr.BAPA)[1])
+nlist.OS<-c(nlist.OS,length(qr.BAPA$y))
 
 #QR for CCF
-qr.CCF<-rq(ht_annual~srHeight_Total+STP+diff.G.1m+CCF.OS,random=~1,group=conc,tau=c(.5),data=annual.gr4)
-summary(qr.CCF)
+qr.CCF<-lqmm(ht_annual~srHeight_Total+cratio+CCF.OS,random=~1,group=conc,tau=c(.5),data=annual.gr4)
+# summary(qr.CCF)
 aic.list.lqmm.OS<-c(aic.list.lqmm.OS,AIC(qr.CCF)[1])
+nlist.OS<-c(nlist.OS,length(qr.CCF$y))
 
 #QR for TPA
-qr.TPA<-rq(ht_annual~srHeight_Total+STP+diff.G.1m+TPA.OS,random=~1,group=conc,tau=c(.5),data=annual.gr4)
-summary(qr.TPA)
+qr.TPA<-lqmm(ht_annual~srHeight_Total+cratio+TPA.OS,random=~1,group=conc,tau=c(.5),data=annual.gr4)
+# summary(qr.TPA)
 aic.list.lqmm.OS<-c(aic.list.lqmm.OS,AIC(qr.TPA)[1])
+nlist.OS<-c(nlist.OS,length(qr.TPA$y2))
 
+OS.variable<-c("Nothing","BAPA","CCF","TPA")
+OS.variable<-as.data.frame(OS.variable)
 
-OS.variable<-c("BAPA","CCF","TPA")
+OS.aic<-as.data.frame(cbind(nlist.OS,aic.list.lqmm.OS))
 
 aic.list.lqmm.OS<-t(as.data.frame(aic.list.lqmm.OS))
 
 colnames(aic.list.lqmm.OS)<-(OS.variable)
 
 
-#CW QR#####################################################
-
-#QR for Nothing
-qr.OS.nothing<-rq(ht_annual~srHeight_Total+cratio
-                  #  treeminus
-                  ,tau=c(.5),data=annual.gr4)
-summary(qr.OS.nothing)
-aic.list.OS.CW<-AIC(qr.OS.nothing)[1]
-nlist.OS<-length(qr.OS.nothing$y)
-
-#QR for BAPA CW
-qr.BAPA.CW<-rq(ht_annual~srHeight_Total+cratio+
-                 # treeminus+
-                 bapa.OS,tau=c(.5),data=annual.gr4)
-summary(qr.BAPA.CW)
-aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.BAPA.CW)[1])
-nlist.OS<-c(nlist.OS,length(qr.BAPA.CW$y))
-
-#QR for CCF CW
-qr.CCF.CW<-rq(ht_annual~srHeight_Total+cratio+
-                # treeminus+
-                CCF.OS,tau=c(.5),data=annual.gr4)
-summary(qr.CCF.CW)
-aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.CCF.CW)[1])
-nlist.OS<-c(nlist.OS,length(qr.CCF.CW$y))
-
-
-#QR for TPA CW
-qr.TPA.CW<-rq(ht_annual~srHeight_Total+cratio+
-                # treeminus+
-                TPA.OS,tau=c(.5),data=annual.gr4)
-summary(qr.TPA.CW)
-aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.TPA.CW)[1])
-nlist.OS<-c(nlist.OS,length(qr.TPA.CW$y))
-
-
-OS.variable<-c("Nothing","BAPA","CCF","TPA")
-
-OS.variable<-as.data.frame(OS.variable)
-
-
-
-OS.aic<-as.data.frame(cbind(nlist.OS,aic.list.OS.CW))
-
 OS.aic<-cbind(OS.variable,OS.aic)
 
 
-#CW has clearly seperated from stpa 
-#BAPA OS var only has a marginally lower
-#aic than the model that included the 
-#addition of shrub transect var
+# #CW QR#####################################################
+# 
+# #QR for Nothing
+# qr.OS.nothing<-rq(ht_annual~srHeight_Total+cratio
+#                   #  treeminus
+#                   ,tau=c(.5),data=annual.gr4)
+# summary(qr.OS.nothing)
+# aic.list.OS.CW<-AIC(qr.OS.nothing)[1]
+# nlist.OS<-length(qr.OS.nothing$y)
+# 
+# #QR for BAPA CW
+# qr.BAPA.CW<-rq(ht_annual~srHeight_Total+cratio+
+#                  # treeminus+
+#                  bapa.OS,tau=c(.5),data=annual.gr4)
+# summary(qr.BAPA.CW)
+# aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.BAPA.CW)[1])
+# nlist.OS<-c(nlist.OS,length(qr.BAPA.CW$y))
+# 
+# #QR for CCF CW
+# qr.CCF.CW<-rq(ht_annual~srHeight_Total+cratio+
+#                 # treeminus+
+#                 CCF.OS,tau=c(.5),data=annual.gr4)
+# summary(qr.CCF.CW)
+# aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.CCF.CW)[1])
+# nlist.OS<-c(nlist.OS,length(qr.CCF.CW$y))
+# 
+# 
+# #QR for TPA CW
+# qr.TPA.CW<-rq(ht_annual~srHeight_Total+cratio+
+#                 # treeminus+
+#                 TPA.OS,tau=c(.5),data=annual.gr4)
+# summary(qr.TPA.CW)
+# aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.TPA.CW)[1])
+# nlist.OS<-c(nlist.OS,length(qr.TPA.CW$y))
+# 
+# 
+# OS.variable<-c("Nothing","BAPA","CCF","TPA")
+# 
+# OS.variable<-as.data.frame(OS.variable)
+# 
+# 
+# 
+# OS.aic<-as.data.frame(cbind(nlist.OS,aic.list.OS.CW))
+# 
+# OS.aic<-cbind(OS.variable,OS.aic)
+# 
+# 
+# #CW has clearly seperated from stpa 
+# #BAPA OS var only has a marginally lower
+# #aic than the model that included the 
+# #addition of shrub transect var
 
 
-
-
-
-
-
-
-#OS Quantreg (Carrying forward CW/sTPA and shrub transect)
-library(quantreg)
-
-#QR for BAPA
-qr.BAPA<-rq(ht_annual~srHeight_Total+STP+diff.G.1m+bapa.OS,tau=c(.5),data=annual.gr4)
-summary(qr.BAPA)
-aic.list.OS<-AIC(qr.BAPA)[1]
-
-#QR for CCF
-qr.CCF<-rq(ht_annual~srHeight_Total+STP+diff.G.1m+CCF.OS,tau=c(.5),data=annual.gr4)
-summary(qr.CCF)
-aic.list.OS<-c(aic.list.OS,AIC(qr.CCF)[1])
-
-#QR for TPA
-qr.TPA<-rq(ht_annual~srHeight_Total+STP+diff.G.1m+TPA.OS,tau=c(.5),data=annual.gr4)
-summary(qr.TPA)
-aic.list.OS<-c(aic.list.OS,AIC(qr.TPA)[1])
-
-
-OS.variable<-c("BAPA","CCF","TPA")
-
-aic.list.OS<-t(as.data.frame(aic.list.OS))
-
-colnames(aic.list.OS)<-(OS.variable)
-
-
-#CW QR#####################################################
-
-#QR for Nothing
-qr.OS.nothing<-rq(ht_annual~srHeight_Total+cratio
-                  #  treeminus
-                  ,tau=c(.5),data=annual.gr4)
-summary(qr.OS.nothing)
-aic.list.OS.CW<-AIC(qr.OS.nothing)[1]
-nlist.OS<-length(qr.OS.nothing$y)
-
-#QR for BAPA CW
-qr.BAPA.CW<-rq(ht_annual~srHeight_Total+cratio+
-                 # treeminus+
-                 bapa.OS,tau=c(.5),data=annual.gr4)
-summary(qr.BAPA.CW)
-aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.BAPA.CW)[1])
-nlist.OS<-c(nlist.OS,length(qr.BAPA.CW$y))
-
-#QR for CCF CW
-qr.CCF.CW<-rq(ht_annual~srHeight_Total+cratio+
-                # treeminus+
-                CCF.OS,tau=c(.5),data=annual.gr4)
-summary(qr.CCF.CW)
-aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.CCF.CW)[1])
-nlist.OS<-c(nlist.OS,length(qr.CCF.CW$y))
-
-
-#QR for TPA CW
-qr.TPA.CW<-rq(ht_annual~srHeight_Total+cratio+
-                # treeminus+
-                TPA.OS,tau=c(.5),data=annual.gr4)
-summary(qr.TPA.CW)
-aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.TPA.CW)[1])
-nlist.OS<-c(nlist.OS,length(qr.TPA.CW$y))
-
-
-OS.variable<-c("Nothing","BAPA","CCF","TPA")
-
-OS.variable<-as.data.frame(OS.variable)
-
-
-
-OS.aic<-as.data.frame(cbind(nlist.OS,aic.list.OS.CW))
-
-OS.aic<-cbind(OS.variable,OS.aic)
-
-
-#CW has clearly seperated from stpa 
-#BAPA OS var only has a marginally lower
-#aic than the model that included the 
-#addition of shrub transect var
 
 
 

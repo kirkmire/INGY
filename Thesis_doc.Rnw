@@ -54,6 +54,8 @@ source(paste(getwd(),'/1.6.model.evaluation.2016.dec.16.r',sep=""))
 
 \SweaveInput{1.1.4resultsandeval.rnw}
 
+\SweaveInput{1.1.4discussion.rnw}
+
 \SweaveInput{1.1.5bibliographyandappend.rnw}
 
 

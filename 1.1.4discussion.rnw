@@ -1,0 +1,10 @@
+% !Rnw root=Thesis_doc.RNW
+
+
+\begin{center}
+\section{Discussion}
+\end{center}
+\normalsize
+\doublespacing
+
+

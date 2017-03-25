@@ -7,4 +7,48 @@
 \normalsize
 \doublespacing
 
+\subsetion{Comparison of results to related studies}
+
+Although there are no other studies that predict height growth of small ponderosa pine trees with quantile regression, we can compare our results to that of other empyrical models in a qualitative sense. We can also compare the effects of our selected predictors to studies that examine specific competitive effects on small ponderosa pine growth.
+
+Height decreased in the presence of understory vegetation (Busse, 1996). 
+
+Our results suggest that a quantile regression framework can be utilized to predict height growth in small ponderosa pine trees. The chi-squared test and exact test of homogeneity of observed vs. expected counts within the four "quantile bins" (see table \ref{tab:chisqexact}) fails to reject the null hypothesis at the .05 significance level.  However, when inital height classes of subject trees are accounted for, the chi-squared test rejects the null hypothesis for the trees in the less than four foot height class. 
+
+Our quantile regression may not be particularly good at predicting the quantile height growth of trees in the smaller height classes.  Many more trees fall below their .10 quantile prejection than expected for the less than four foot class. However, in the greater than 6 foot height class, more trees than expected achieve a height greater than the .90 quantile prediction. 
+
+
+\subsection{Qualitative Comparison to the FVS Small-Tree Height Increment Model}
+
+The FVS small tree growth routine utilizes two equations to predict the height growth of small trees (less than 3" DBH). Height growth estimates from the small-tree model are weighted with the height growth estimates from the large tree model over a range of diameters in order to smooth the transition between the two models (Dixon, 2013).
+
+\begin{equation} \label{small_eqtest}
+\begin{split}
+\emph{HTG} & = exp(\emph{X})\\
+\emph{X} & = [\emph{LOC}+\emph{HAB}+\emph{SPP}+_{C}_{1}ln\emph{HT}+_{C}_{2}*\emph{CCF}+_{C}_{3}*\emph{BAL}/100+.22157*\emph{SL}*cos(\emph{ASP})-0.12432*\emph{SL}*sin(\emph{ASP}-.10987*\emph{SL})]
+,     
+\text{where:
+\emph{HTG} is the estimated height growth for the cycle\\
+\emph{LOC} is a location-specific coefficient\\
+\emph{HAB} is a habitat type dependent intercept\\
+\emph{SPP} is a species dependent intercept\\
+\emph{CCF} is crown competition factor\\
+\emph{BAL} is total basal area in trees larger than the subject tree\\
+\emph{ASP} is stand aspect\\
+\emph{SL} is the stand slope\\
+\emph{HT} is the intitial tree height\\
+C_{1}-C_{3} are species specific coefficients\\
+
+\end{split}
+\end{equation}
+
+The FVS small growth equation \ref{small_eqtest} is quite similar to the model proposed in this thesis. The height growth in the FVS small tree grwoth equation is estimated from inital height, site quality (in terms of location, habitat type, slope and aspect), CCF and BAL. Although the FVS equation utilizes crown competition factor instead of crown ratio, both terms relate to the crown competition. However, CCF relates strictly to competition from arboreal competition whereas crown ratio relates to all forms of aboveground vegetative competition. Similarly, the FVS model uses basal area in trees larger to quantify competition from the larger trees whereas our model uses trees per acre (of trees >10.5 in. DBH).
+
+When there are many small trees, a small random error is then added to the height growth estimate. When relatively few samples represent the stand, two additional tree records are created that duplicate the characteristics of the tree except the predicted height growth and the number of trees per acre represneted by the source tree (Dixon, 2013). The two new records are given 15 and 25 percent of the original value. Each of the records correspond to a portion of the error distribution of deviations about the predicted height. 
+
+%maybe include Figure 6-2 from essential FVS, norm. dev. from pred.
+
+It is within this "tripling" framework that our quantile regression model may find its greatest utility. Instead of drawing random increments from within the normal distribution, the three tree records could be assigned predicted quantile values for \emph{Tau}=.25, .50 and .75 and weighted similarly.  These quantile derivations of height provide a more empiriccaly based distribution of possible height values for a given set of predictors.
+
+
 

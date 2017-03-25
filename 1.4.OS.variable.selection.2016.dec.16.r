@@ -556,36 +556,40 @@ library(lqmm)
 annual.gr4<-annual.gr4[!is.na(annual.gr4$cratio)==T,]
 
 #QR for Nothing
-qr.OS.nothing<-lqmm(ht_annual~srHeight_Total+cratio,random=~1,group=conc
-                  ,tau=c(.5),data=annual.gr4)
+qr.OS.nothing<-lqmm(ht_annual~srHeight_Total+cratio,random=~1,group=conc,
+                    control=list(LP_tol_ll=1e-03,LP_max_iter=1000),tau=c(.5),data=annual.gr4)
 # summary(qr.OS.nothing)
 aic.list.OS.nothing<-AIC(qr.OS.nothing)[1]
 nlist.OS<-length(qr.OS.nothing$y)
 
 #QR for BAPA
-qr.BAPA<-lqmm(ht_annual~srHeight_Total+cratio+bapa.OS,random=~1,group=conc,tau=c(.5),data=annual.gr4)
+qr.BAPA<-lqmm(ht_annual~srHeight_Total+cratio+bapa.OS,random=~1,group=conc,
+              control=list(LP_tol_ll=1e-03,LP_max_iter=1000),tau=c(.5),data=annual.gr4)
+
 # summary(qr.BAPA)
 aic.list.lqmm.OS<-c(aic.list.OS.nothing,AIC(qr.BAPA)[1])
 nlist.OS<-c(nlist.OS,length(qr.BAPA$y))
 
 #QR for CCF
-qr.CCF<-lqmm(ht_annual~srHeight_Total+cratio+CCF.OS,random=~1,group=conc,tau=c(.5),data=annual.gr4)
+qr.CCF<-lqmm(ht_annual~srHeight_Total+cratio+CCF.OS,random=~1,group=conc,
+             control=list(LP_tol_ll=1e-03,LP_max_iter=1000),tau=c(.5),data=annual.gr4)
 # summary(qr.CCF)
 aic.list.lqmm.OS<-c(aic.list.lqmm.OS,AIC(qr.CCF)[1])
 nlist.OS<-c(nlist.OS,length(qr.CCF$y))
 
 #QR for TPA
-qr.TPA<-lqmm(ht_annual~srHeight_Total+cratio+TPA.OS,random=~1,group=conc,tau=c(.5),data=annual.gr4)
+qr.TPA<-lqmm(ht_annual~srHeight_Total+cratio+TPA.OS,random=~1,group=conc,
+             control=list(LP_tol_ll=1e-03,LP_max_iter=1000),tau=c(.5), data=annual.gr4)
 # summary(qr.TPA)
 aic.list.lqmm.OS<-c(aic.list.lqmm.OS,AIC(qr.TPA)[1])
-nlist.OS<-c(nlist.OS,length(qr.TPA$y2))
+nlist.OS<-c(nlist.OS,length(qr.TPA$y))
 
 OS.variable<-c("Nothing","BAPA","CCF","TPA")
 OS.variable<-as.data.frame(OS.variable)
 
 OS.aic<-as.data.frame(cbind(nlist.OS,aic.list.lqmm.OS))
 
-aic.list.lqmm.OS<-t(as.data.frame(aic.list.lqmm.OS))
+aic.list.lqmm.OS<-(as.data.frame(aic.list.lqmm.OS))
 
 colnames(aic.list.lqmm.OS)<-(OS.variable)
 

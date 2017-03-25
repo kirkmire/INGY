@@ -1,21 +1,11 @@
 % !Rnw root=Thesis_doc.RNW
 
-% Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare small tree growth to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.
-
-
-\newpage
-\section{Results and Evaluation}
-
-% \newpage
-% Zhang et al. found that the importance of shrub control on growth increment was not evident in the final years of their study, as tree-shrub competition likely switched to tree-tree compitition. However, shrub control is critical for stand development on low quality sites.
-% 
-% A number of reports on Ponderosa Pine Level-of-Growing Stock Study found that regardless of stand age, ponderosa pine responded to thinning immediately and that average dbh and crown length and width increased with decreasing residual stand densities.(Barrett
-% 1983; Ronco et al. 1985; Cochran and Barrett 1995, 1999; Oliver
-% 1979, 1997, 2005)
-
-
-% The fact that quantile regression attempts to characterize the entire distribution of heights makes it more difficult to test and validate than an ordinary least squares regression.  The regression estimates at the selected quantile provide predictions for that specific quantile and it is likely that the predictive ability of the model changes at different quantiles.  For example, the model may better predict the median than the upper quantile. 
-
+\begin{center}
+\section{Results}
+\end{center}
+\normalsize
+\subsection{Descriptive Results}
+\doublespacing
 %Found by taking the installation-wide average of top and cov polyveg values in the first year of the selected measurement interval
 \begin{figure}[!htb]
 \begin{center}
@@ -51,11 +41,19 @@ barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, groups=
 \end{center}
 \caption{Control and Herbicide Plot Vegetation Volume\label{fig:vegVol}}
 \end{figure}
- 
- 
+
+
 When comparing the vegetation depths between the control and the herbicide plots in the first year of the selected measurement intervals, it is apparent that there is a large drop in vegetation levels within installations with large amounts of understory vegetation in the control plots(see Figure \ref{fig:vegVol}). This indicates some success in establishing a wide range of non-arboreal vegetative conditions on installations. However, the herbicide applications failed to contribute to a marked difference in depth in installations of little vegetative volume in control plots. 
 
 There appears to be a group of six installations with similarly low overstory retention levels and high site index values (see red colored installations in Figure \ref{fig:siteOverstory}).  It makes sense from a forest management perspective, that relatively little residual overstory would be left on highly productive sites. These installations were used to develop the understory model since they were so alike in overstory and site productivity.
+
+
+
+
+% Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare small tree growth to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.
+
+\subsection{Variable Selection Results}
+%AIC table
 
 \begin{table}[h]
 \small
@@ -68,23 +66,22 @@ There appears to be a group of six installations with similarly low overstory re
 {Overstory}&{n}&{AIC}&
 \\
 
-
 \hline
 
-Nothing&331&661.4&Nothing&555&760.97&Nothing&2155&2034.34\tabularnewline
-SmallTPA&331&540.79&POLV.cov&555&759.71&BAPA&2155&1985.29\tabularnewline
-Trees15+&331&583.64&F.cov&555&761.42&CCF&2155&1897.02\tabularnewline
-TGT&331&573.41&LS.cov&555&762.9&TPA&2155&1833.92\tabularnewline
-BD&330&435.23&HS.cov&555&762.78&Site&n&AIC\tabularnewline
-DBH&293&435.21&G.cov&555&754.97&SI&2155&1601.01\tabularnewline
-CrownWidth&329&536.31&LS.diff&555&761.01&Slope&2155&1819.75\tabularnewline
-CrownLength&329&496.26&HS.diff&555&757.18&Elevation&2155&1835.91\tabularnewline
-CrownRatio&329&496.26&LS.tran&555&761.02&Aspect&2155&1754.51\tabularnewline
-&&&HS.tran&555&762.73&SEA Int&2155&1530.23\tabularnewline
-&&&G.tran.diff&555&762.42&&&\tabularnewline
-&&&G.tran.cov&555&754.94&&&\tabularnewline
-&&&mx.vg.diff1m&555&762.2&&&\tabularnewline
-&&&mx.vg.diff.tr&555&762.2&&&\tabularnewline
+Nothing&292&442.06&Nothing&555&707.89&Nothing&2155&2003.18\tabularnewline
+SmallTPA&292&608.29&POLV.cov&555&776.57&BAPA&2155&3571.89\tabularnewline
+Trees15+&292&396.13&F.cov&555&765.83&CCF&2155&1849.46\tabularnewline
+TGT&292&634.46&LS.cov&555&756.68&TPA&2155&3443.16\tabularnewline
+BD&292&320.05&HS.cov&555&711.04&Site&n&AIC\tabularnewline
+DBH&292&371.03&G.cov&555&901.38&SI&2155&3309.83\tabularnewline
+CrownWidth&292&392.57&LS.diff&555&707.55&Slope&2155&3447.14\tabularnewline
+CrownLength&292&381.89&HS.diff&555&708.31&Elevation&2155&3476.63\tabularnewline
+CrownRatio&292&335.38&LS.tran&555&708.09&Aspect&2155&3402.26\tabularnewline
+&&&HS.tran&555&709.26&SEA Int&2155&3318.15\tabularnewline
+&&&G.tran.diff&555&708.54&&&\tabularnewline
+&&&G.tran.cov&555&708.94&&&\tabularnewline
+&&&mx.vg.diff1m&555&707.72&&&\tabularnewline
+&&&mx.vg.diff.tr&555&709.53&&&\tabularnewline
 
 \hline
 \end{tabular}
@@ -93,9 +90,15 @@ CrownRatio&329&496.26&LS.tran&555&761.02&Aspect&2155&1754.51\tabularnewline
 \end{table}
 
 
+%Parameter Estimates for the proposed height growth model
 
-\newpage
 
+
+
+\subsection{Model Validation Results}
+%validation bargraph
+%Chi-squared test
+%
 \begin{figure}[!htb]
 \begin{center}
 <<fig=TRUE,echo=FALSE>>=
@@ -151,7 +154,20 @@ Xact&$3e-04$&$0.0988$&$0.0898$\tabularnewline
 \label{tab:actual}
 \end{table}
 
-\newpage
+% \newpage
+% Zhang et al. found that the importance of shrub control on growth increment was not evident in the final years of their study, as tree-shrub competition likely switched to tree-tree compitition. However, shrub control is critical for stand development on low quality sites.
+% 
+% A number of reports on Ponderosa Pine Level-of-Growing Stock Study found that regardless of stand age, ponderosa pine responded to thinning immediately and that average dbh and crown length and width increased with decreasing residual stand densities.(Barrett
+% 1983; Ronco et al. 1985; Cochran and Barrett 1995, 1999; Oliver
+% 1979, 1997, 2005)
+
+
+% The fact that quantile regression attempts to characterize the entire distribution of heights makes it more difficult to test and validate than an ordinary least squares regression.  The regression estimates at the selected quantile provide predictions for that specific quantile and it is likely that the predictive ability of the model changes at different quantiles.  For example, the model may better predict the median than the upper quantile. 
+
+
+ 
+
+
 
 \begin{figure}[!htb]
 \begin{center}
@@ -191,27 +207,6 @@ plot(cl.ht.gam,residuals=T,se=T,pch=".")
 \end{center}
 \caption{Timeline of Installation Measurements and Treatments}
 \end{figure}
-
-\begin{table}[ht]
-\caption{Engel's Law\label{fit1}}
-\begin{center}
-\begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|} \hline
-\multicolumn{1}{|l||}{Quantiles}&\multicolumn{1}{c|}{(Intercept)}&\multicolumn{1}{c|}{srHeight_Total}&\multicolumn{1}{c|}{CrownLength}&\multicolumn{1}{c|}{treeminus}&\multicolumn{1}{c|}{TPA.OS}&\multicolumn{1}{c|}{slopePercent}&\multicolumn{1}{c|}{aspect}&\multicolumn{1}{c|}{elevation}&\multicolumn{1}{c|}{slopePercent:aspect}&\multicolumn{1}{c|}{slopePercent:elevation}&\multicolumn{1}{c|}{aspect:elevation}&\multicolumn{1}{c|}{slopePercent:aspect:elevation}\\ \hline
-0.1&$\underset{(~~0.120)}{~-0.270}$&$\underset{(~~0.032)}{~~0.049}$&$\underset{(~~0.007)}{~~0.074}$&$\underset{(~~0.008)}{~-0.022}$&$\underset{(~~0.000)}{~-0.003}$&$\underset{(~~0.011)}{~~0.027}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
-0.2&$\underset{(~~0.085)}{~-0.261}$&$\underset{(~~0.022)}{~~0.107}$&$\underset{(~~0.005)}{~~0.077}$&$\underset{(~~0.005)}{~-0.024}$&$\underset{(~~0.000)}{~-0.003}$&$\underset{(~~0.008)}{~~0.025}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
-0.3&$\underset{(~~0.081)}{~-0.310}$&$\underset{(~~0.018)}{~~0.111}$&$\underset{(~~0.004)}{~~0.076}$&$\underset{(~~0.004)}{~-0.021}$&$\underset{(~~0.000)}{~-0.004}$&$\underset{(~~0.008)}{~~0.039}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
-0.4&$\underset{(~~0.082)}{~-0.279}$&$\underset{(~~0.021)}{~~0.107}$&$\underset{(~~0.004)}{~~0.085}$&$\underset{(~~0.005)}{~-0.026}$&$\underset{(~~0.000)}{~-0.005}$&$\underset{(~~0.008)}{~~0.040}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
-0.5&$\underset{(~~0.097)}{~-0.231}$&$\underset{(~~0.021)}{~~0.122}$&$\underset{(~~0.005)}{~~0.096}$&$\underset{(~~0.005)}{~-0.035}$&$\underset{(~~0.000)}{~-0.005}$&$\underset{(~~0.009)}{~~0.040}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
-0.6&$\underset{(~~0.101)}{~-0.191}$&$\underset{(~~0.023)}{~~0.121}$&$\underset{(~~0.006)}{~~0.110}$&$\underset{(~~0.005)}{~-0.036}$&$\underset{(~~0.000)}{~-0.006}$&$\underset{(~~0.009)}{~~0.036}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
-0.7&$\underset{(~~0.098)}{~-0.051}$&$\underset{(~~0.024)}{~~0.116}$&$\underset{(~~0.006)}{~~0.117}$&$\underset{(~~0.006)}{~-0.038}$&$\underset{(~~0.000)}{~-0.006}$&$\underset{(~~0.008)}{~~0.038}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
-0.8&$\underset{(~~0.146)}{~-0.004}$&$\underset{(~~0.033)}{~~0.096}$&$\underset{(~~0.008)}{~~0.125}$&$\underset{(~~0.007)}{~-0.036}$&$\underset{(~~0.000)}{~-0.007}$&$\underset{(~~0.011)}{~~0.033}$&$\underset{(~~0.001)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
-0.9&$\underset{(~~0.206)}{~~0.187}$&$\underset{(~~0.053)}{~~0.108}$&$\underset{(~~0.011)}{~~0.129}$&$\underset{(~~0.012)}{~-0.040}$&$\underset{(~~0.000)}{~-0.009}$&$\underset{(~~0.022)}{~~0.050}$&$\underset{(~~0.001)}{~~0.001}$&$\underset{(~~0.000)}{~~0.001}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$&$\underset{(~~0.000)}{~~0.000}$\\ 
-\hline
-\end{tabular}
-\vspace{3mm}
-\end{center}
-\end{table}
-\end{spacing}
 
 
 

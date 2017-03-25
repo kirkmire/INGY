@@ -221,7 +221,7 @@ Basal area was calculated for each live overstory tree and aggregated over the p
 All retained overstory variables were linearly interpolated between overstory measurement years to provide estimates for intervening years of small tree and understory measurement. The initial and final years of overstory measurement provided limits of the interpolation meaning that a measurement year preceding the first overstory measurement (or following the last) would be assigned the overstory variable value calculated for the initial (or final) overstory measurement year. 
 
 \textbf{Site Quality:}
-Slope (\%), elevation (m) and aspect (degrees from North) were calculated using Google Earth Engine (\cite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180) and $\sin$((aspect*$\pi$)/180). Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (2007):
+Slope (\%), elevation (m) and aspect (degrees from North) were calculated using Google Earth Engine (\cite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180) and $\sin$((aspect*$\pi$)/180). Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (\cite{Stage2007a}):
 
 \begin{gather}
 y = b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)]+ 

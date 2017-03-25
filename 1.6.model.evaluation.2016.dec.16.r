@@ -50,6 +50,9 @@ latex(final.aic, file="")            # If you want all the data
 # 
 # 
 # 
+qr.sum<-data.frame(qr.SI.all$coefficients)
+
+latex(qr.sum,file="")
 
 
 
@@ -121,11 +124,22 @@ qr.SI.all <-rq(ht_annual~srHeight_Total+
                slopePercent:I(elevation^2):cos_rad_asp +
                slopePercent:I(elevation^2):sin_rad_asp +
                elevation +
-               I(elevation^2) ,
-             tau=c(.1,.5,.9) ,  data=annual.gr4)
+               (elevation^2) ,
+             tau=c(1:9/10) ,  data=annual.gr4)
+
+qr.SI.all <-rq(ht_annual~srHeight_Total+
+                 cratio+
+                 TPA.OS+
+                 SiteIndex_Value ,
+               tau=c(1:9/10) ,  data=annual.gr4)
+
+
+summary(qr.SI.all)
+
 
 plot(summary(qr.SI.all),parm="TPA.OS")
-
+plot(summary(qr.SI.all),parm="cratio")
+plot(summary(qr.SI.all),parm="srHeight_Total")
 
 
 
@@ -243,7 +257,7 @@ annual.gr6.lessthan1<-annual.gr6[annual.gr6$Height_Total<4,]
 annual.gr6.1to3<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
 annual.gr6.3plus<-annual.gr6[annual.gr6$Height_Total>6,]
 
-x.table1<-as.table(t(count(annual.gr6.lessthan1, 'response.cat')))
+x.table1<-t(count(annual.gr6.lessthan1, 'response.cat'))
 x.table1<-x.table1["freq",]
 x.table1<-as.numeric(x.table1)
 

@@ -21,6 +21,9 @@ merged_stagm_stag<-merged_stagm_stag[(merged_stagm_stag$Height_Total!=0 & !is.na
 
 #remove any for height total missing/0
 
+#Removes all PIPO with DBH> 3.5 (no longer a small tree by definition)
+merged_stagm_stag<-merged_stagm_stag[which(merged_stagm_stag$DBH<3.5),]
+
 
 #Concatenates Inst and Plot for unique STP identification
 merged_stagm_stag$InstPlot<-paste(merged_stagm_stag$Installation,

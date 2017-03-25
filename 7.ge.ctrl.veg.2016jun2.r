@@ -29,11 +29,12 @@ my.settings <- list(
 )
 
 CTRLandGE.volume.index$Group.2<-factor(CTRLandGE.volume.index$Group.2)
+library (lattice)
 
 barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, groups=CTRLandGE.volume.index$Group.2,
          origin=0, 
          #main="Motor insurance claims frequency"
-         xlab="Installation", ylab="Vegetation Volume",
+         xlab="Installation", ylab="Vegetation Volume (ft.^3)",
          scales=list(alternating=1),                  
          auto.key=list(space="right", columns=1, 
                        points=FALSE, rectangles=TRUE,

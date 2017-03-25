@@ -65,8 +65,9 @@ library(quantreg)
 library(lqmm)
 
 qr.SI<-lqmm(ht_annual~srHeight_Total+cratio+
-            TPA.OS+SiteIndex_Value,random=~1,group=conc,tau=c(.5),data=annual.gr4)
-summary(qr.SI)
+            TPA.OS+SiteIndex_Value,random=~1,
+            control=list(LP_tol_ll=1e-03,LP_max_iter=1000),group=conc,tau=c(.5),data=annual.gr4)
+# summary(qr.SI)
 aic.list.lqmm.SQ<-AIC(qr.SI)[1]
 nlist.lqmm.SQ<-length(qr.SI$y)
 
@@ -74,8 +75,9 @@ nlist.lqmm.SQ<-length(qr.SI$y)
 
 qr.slope<-lqmm(ht_annual~srHeight_Total+cratio+
                # treeminus+
-               TPA.OS+slopePercent,random=~1,group=conc,tau=c(.5),data=annual.gr4)
-summary(qr.slope)
+               TPA.OS+slopePercent,
+               control=list(LP_tol_ll=1e-03,LP_max_iter=1000),random=~1,group=conc,tau=c(.5),data=annual.gr4)
+# summary(qr.slope)
 aic.list.lqmm.SQ<-c(aic.list.lqmm.SQ,AIC(qr.slope)[1])
 nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.slope$y))
 
@@ -83,8 +85,9 @@ nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.slope$y))
 
 qr.elev<-lqmm(ht_annual~srHeight_Total+cratio+
               # treeminus+
-              TPA.OS+elevation,random=~1,group=conc,tau=c(.5),data=annual.gr4)
-summary(qr.elev)
+              TPA.OS+elevation,
+              control=list(LP_tol_ll=1e-03,LP_max_iter=1000),random=~1,group=conc,tau=c(.5),data=annual.gr4)
+# summary(qr.elev)
 aic.list.lqmm.SQ<-c(aic.list.lqmm.SQ,AIC(qr.elev)[1])
 nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.elev$y))
 
@@ -92,8 +95,9 @@ nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.elev$y))
 
 qr.asp<-lqmm(ht_annual~srHeight_Total+cratio+
              # treeminus+
-             TPA.OS+cos_rad_asp,random=~1,group=conc,tau=c(.5),data=annual.gr4)
-summary(qr.asp)
+             TPA.OS+cos_rad_asp,control=list(LP_tol_ll=1e-03,LP_max_iter=1000),
+             random=~1,group=conc,tau=c(.5),data=annual.gr4)
+# summary(qr.asp)
 aic.list.lqmm.SQ<-c(aic.list.lqmm.SQ,AIC(qr.asp)[1])
 nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.asp$y))
 
@@ -110,12 +114,13 @@ qr.sea<-lqmm(ht_annual~srHeight_Total+cratio+
              slopePercent:I(elevation^2):cos_rad_asp+   #b8
              slopePercent:I(elevation^2):sin_rad_asp+   #b9
              elevation+ # b10
-             (elevation^2), #b11
+             (elevation^2),
+             control=list(LP_tol_ll=1e-03,LP_max_iter=1000),#b11
            random=~1,group=conc,
            tau=c(.5) ,  data=annual.gr4)
 
 
-summary(qr.sea)
+# summary(qr.sea)
 aic.list.lqmm.SQ<-c(aic.list.lqmm.SQ,AIC(qr.sea)[1])
 nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.sea$y))
 

@@ -196,17 +196,17 @@ Xact&$3e-04$&$0.0988$&$0.0898$\tabularnewline
 
 
 
-\begin{figure}
-\begin{center}
-<<fig=TRUE,width=4,height=3,echo=FALSE>>=
-sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
-plot(sr.ht.gam,residuals=T,se=T,pch=".")
-cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$cratio))
-plot(cl.ht.gam,residuals=T,se=T,pch=".")
-@
-\end{center}
-\caption{Timeline of Installation Measurements and Treatments}
-\end{figure}
+% \begin{figure}
+% \begin{center}
+% <<fig=TRUE,width=4,height=3,echo=FALSE>>=
+% sr.ht.gam<-gam(annual.gr4$ht_annual~s(annual.gr4$srHeight_Total))
+% plot(sr.ht.gam,residuals=T,se=T,pch=".")
+% cl.ht.gam<-gam(annual.gr4$ht_annual~annual.gr4$srHeight_Total+s(annual.gr4$cratio))
+% plot(cl.ht.gam,residuals=T,se=T,pch=".")
+% @
+% \end{center}
+% \caption{Timeline of Installation Measurements and Treatments}
+% \end{figure}
 
 
 

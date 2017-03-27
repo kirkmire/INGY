@@ -197,7 +197,27 @@ xyplot(Installation ~ Year_Measurement,
 
 
 A point of concern is that some measurements were taken at times that may not have allowed herbicide applications to take full effect. That is, several measurement years were concurrent with or followed too quickly after the first herbicide application such as TJ which was measured in 2001, concurrent with the first measurement year. This necessitated careful selection of the appropriate measurement years on an installation by installation basis. The ``first interval years'' were selected such that one to three years following the initial herbicide application were included to allow for the herbicide to take effect. 
+\subsection{Modelling Framework: Introduction to Quantile Regression}
 
+The desire to focus on the full distribution of growth rates naturally led to an investigation of quantile regression (\cite{Koenker_2009}, this technique allows for the characterization of multiple quantiles of the height growth responses of small trees. Quantile regression utilizes the simplex algorithm (as opposed to least-squares) to calibrate linear regression functions to describe a through specified or set of specified quantiles (${\tau}$) of the response distribution. Specifying the .90 quantile (${\tau}$=.90), for example, allows for the examination of the ``maximum'' or upper portion of the height growth response distribution and its relationship with stand and site factors. By contrast, ${\tau}$=.50 would describe the median height growth response.
+
+
+This characterization of the response distribution also allows for predictor variables to have entirely different effects accross quantiles. The quantile regression visualization shown below (Figure \ref{fig:quantRegvis}) compares three quantiles of the annual height growth response against overstory basal area and site index. In the example above, the ${\tau}$=.10 quantile plane shows very little response for both overstory basal area and site index. However, the height growth in the ${\tau}$=.90,.50 quantile planes change readily as site index and retained basal area respectively increase and decrease. Although not the case in this example, the factors that affect the growth of the slowest growing trees may not be significant predicting the growth of the fastest growing trees. In an extreme case, the factors may even have opposing signs between quantile planes.
+
+
+Quantile regression allows for the description of the impact of both measured and unmeasured competitive factors that may be explaining much of the variance in height growth response. Two subject trees within the same 10 foot radius plot may experience vastly different growth rates despite having the same values of measured factors.  For ponderosa pine small tree growth, unmeasured factors may relate to such things as genetic characteristics, micro-climate, micro-site suitability or other location specific factors such as distance from a retained overstory tree or competing vegetation. Vegetation is known to have a major effect on micro-climate, affecting light, temperature, precipitation and wind (Tappenier). However, most growth and yield field sampling methods attempt to maintain a degree of simplicity and reproducibility and therefore avoid sampling at a micro-resolution. This inevitably leads to variance since there are many unmeasured factors and is well-suited to quantile regression since the homogeneity of variance assumption does not apply to this semi-parametric approach. 
+
+
+The description of growth in terms of centiles has been used since the 19th century as a graphical method to monitor height-for-age and weight-for-age trajection of infants and children (\cite{Wei2004},Koenker). Although most of these charts were created through parametric methods (LMS, Cole), recognizing what may be considered out of the ordinary or what the maximum expected growth could be has undoubtedly provided medical practitioners with a useful tool in caring for patients. It has more recently been proven useful in evaluating and predicting other rates of change of biological growth functions near the upper boundary(\cite{Cade2003a}).
+
+% estimating the desired percentile and then applying a smoothed curve using the LMS method (Cole) which calculates the optimum power to achieve normality in each age group and the trend summarized by a smoothed (L) curve, the mean (M) and coefficient of variation(S)(Flegal, CDC).
+
+Applications of quantile regression in ecology are increasingly realized. Examples include pronghorn density by forage availability where least squares fails to recognize that pronghorn densities changed at different rates as a function of shrub cover in the higher and lower quantiles. Quantile regression has also been used to reveal the effects of density dependent self-thinning procceses of annual plants in the Southwestern US. This process was most evident in the upper quantiles, where competition for resources was greatest and other effects minimal (Cade and Guo). Just as growth charts have assisted doctors, ecologists are benefiting from an enhanced window into the entire distribution of the response variable.
+
+
+There are few examples of quantile regression in applied forest growth modeling. However, Bohora and Cao have compared quantile regression models to mixed effect models in predicting the diameter growth of \emph{Pinus taeda}. The authors concluded that the quantile regression predictions of diameter growth increment were adequate but that the mixed model had lower bias. Coomes and Allen (\cite{Coomes2007}) used quantile regression to fit an upper boundary curve to a size-growth distribution to test similarity to the Enquist model of uninhibited growth (stem-diameter growth scales as the one-third power of stem diameter).
+
+More recently, Araujo et al. utilized quantile regression to obtain localized site index curves in Eucalyptus plantation stands. The authors found that estimates made with quantile regression generate a more accurate family of height growth curves between the observed data than by the guide curve method, obtained using standard regression. These examples of successful use of quantile regression in forestry are encouraging and lend support to this effort to use it to describe the growth of ponderosa pine.
 
 \subsection{Variable Acquisition}
 
@@ -223,12 +243,18 @@ All retained overstory variables were linearly interpolated between overstory me
 \textbf{Site Quality:}
 Slope (\%), elevation (m) and aspect (degrees from North) were calculated using Google Earth Engine (\cite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180) and $\sin$((aspect*$\pi$)/180). Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (\cite{Stage2007a}):
 
-\begin{gather}
-y = b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)]+ 
-\text{ln}(el+1)*s[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)] \nonumber \\
-+(el^2)*s[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2,     
-\text{where~\emph{y} is the growth response,\emph{s} is the slope in percent,~\emph{el} is elevation in feet,~\alpha is aspect and the \emph{b}, are coefficients estimated from the data}\nonumber
-\end{gather}
+\begin{equation}
+\begin{aligned}
+y &= b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)]+\text{ln}(el+1)*s[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)]+  \\
+& (el^2)*s[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2, \\
+\\
+& 
+\text{where $y$ is the growth response, $s$ is the slope in percent}, \\
+& \text{$el$ is elevation in feet, } \alpha \text{ is aspect and the $b$ are coefficients estimated from the data}
+
+ 
+\end{aligned}
+\end{equation}
 
 
 Site index was included from STCV records of each installation's initiation. An open grown dominate site tree was identified at the initiation of the site and site index calculated from standard site index curves. Site index species was ponderosa pine for the installations included in analysis although many other species were used at other installations. 
@@ -241,12 +267,15 @@ The objective was to obtain a parsimonious model that is informed by our underst
 
 Only the installations with greater than 60 ponderosa pine tagged small trees at initiation were used for model development (see Figure \ref{fig:numbPond}). This minimum number of trees ensured that installations included in model building would have enough tagged small trees to contribute to model development. At these installations annual height increment, was calculated by finding the appropriate measurement intervals according to the timeline in Figure \ref{fig:timeline}, then subtracting earlier height increments from the latter and then dividing by the difference between measurement years. 
 
-\begin{gather}
-y_{i,j} = \frac{(h_{i,j+1}-h_{i,j})}{(t_{i,j+1}-t_{i,j})}
+\begin{equation}
+\begin{aligned}
+y_{i,j} = \frac{(h_{i,j+1}-h_{i,j})}{(t_{i,j+1}-t_{i,j})} \\
 
-\\      
-\text{where~$y$ is the annualized growth response in feet,$h$ is the height in feet,~$i$ is the unique tree,~$t$ is year,~$j$ is the measurement period}\nonumber
-\end{gather}
+&
+\text{where~$y$ is the annualized growth response in feet, $h$ is the height in feet}, \\
+& \text{$i$ is the unique tree,~$t$ is year, &~$j$ is the measurement period}
+\end{aligned}
+\end{equation}
 
 The inherent site productivity of the installations was measured using site trees (undamaged, dominant individuals) which varied in species from ponderosa pine, Douglas fir and western larch. Selecting only stands with greater than 60 small tagged ponderosa for this analysis removed all but one stand that measured site productivity with a species other than ponderosa pine.
 

@@ -169,27 +169,27 @@ Xact&$3e-04$&$0.0988$&$0.0898$\tabularnewline
 
 
 
-\begin{figure}[!htb]
-\begin{center}
-<<fig=TRUE,echo=FALSE>>=
-library(plyr)
-sorted.totals1<-count(KC_all, 'response.cat')
-
-
-barchart(sorted.totals1$freq/length(KC_all$InstPlot)~sorted.totals1$response.cat, names = "Quantile Bin",
-         xlab = "Bin", ylab = "Fraction of Installations Trees",type=density,
-         main = "KC Height Growth b/t 2002 and 2006
-         sorted by predicted quantiles",ylim=c(0,.65),
-         par.settings = my.settings,
-         par.strip.text=list(col="white", font=2),
-         panel=function(x,y,...){
-           panel.grid(h=-1, v=0); 
-           panel.barchart(x,y,...)
-         })
-@
-\end{center}
-\caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:KC_proj}}
-\end{figure}
+% \begin{figure}[!htb]
+% \begin{center}
+% <<fig=TRUE,echo=FALSE>>=
+% library(plyr)
+% sorted.totals1<-count(KC_all, 'response.cat')
+% 
+% 
+% barchart(sorted.totals1$freq/length(KC_all$InstPlot)~sorted.totals1$response.cat, names = "Quantile Bin",
+%          xlab = "Bin", ylab = "Fraction of Installations Trees",type=density,
+%          main = "KC Height Growth b/t 2002 and 2006
+%          sorted by predicted quantiles",ylim=c(0,.65),
+%          par.settings = my.settings,
+%          par.strip.text=list(col="white", font=2),
+%          panel=function(x,y,...){
+%            panel.grid(h=-1, v=0); 
+%            panel.barchart(x,y,...)
+%          })
+% @
+% \end{center}
+% \caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:KC_proj}}
+% \end{figure}
 
 
 

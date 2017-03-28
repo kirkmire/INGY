@@ -336,7 +336,6 @@ newRow22<- data.frame(Installation="PC",Plot=7,Year_MeasurementOS=2008,CCF=0,con
 agg.over.data.CCF<-rbind(newRow22,agg.over.data.CCF)
 
 library(lattice)
-xyplot(agg.over.data.CCF$CCF~agg.over.data.CCF$Year_MeasurementOS|factor(agg.over.data.CCF$Installation))
 
 
 
@@ -566,7 +565,6 @@ nlist.OS<-length(qr.OS.nothing$y)
 qr.BAPA<-lqmm(ht_annual~srHeight_Total+cratio+bapa.OS,random=~1,group=conc,
               control=list(LP_tol_ll=1e-03,LP_max_iter=1000),tau=c(.5),data=annual.gr4)
 
-summary(qr.BAPA)
 # summary(qr.BAPA)
 aic.list.lqmm.OS<-c(aic.list.OS.nothing,AIC(qr.BAPA)[1])
 nlist.OS<-c(nlist.OS,length(qr.BAPA$y))

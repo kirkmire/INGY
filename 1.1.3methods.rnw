@@ -395,7 +395,7 @@ library(lattice)
 barchart(pipond$Freq ~ pipond$Installation,
          origin=0, 
          #main="Motor insurance claims frequency"
-         xlab="Installation", ylab="Number of Tagged Small Trees",
+         xlab="Installation", ylab="Number of Tagged Small Ponderosa Pine Trees",
         scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)), 
          ylim=c(0,270),
          # auto.key=list(space="right", columns=1, 

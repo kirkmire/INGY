@@ -11,18 +11,18 @@ merged_stagm_stag<-merged_stagm_stag[! merged_stagm_stag$Installation %in% drp60
 merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Year_Measurement==merged_stagm_stag$Year_Growth,]
 
 #Removes all non-PIPO tree records
-merged_stagm_stag<-merged_stagm_stag[which(merged_stagm_stag$Species=="PIPO"),]
+merged_stagm_stag<-merged_stagm_stag[merged_stagm_stag$Species=="PIPO",]
 
 #Removes all Dead tree records
-merged_stagm_stag<-merged_stagm_stag[which(!merged_stagm_stag$Damage=="DEAD"),]
-merged_stagm_stag<-merged_stagm_stag[which(!merged_stagm_stag$Damage=="D"),]
-merged_stagm_stag<-merged_stagm_stag[which(!merged_stagm_stag$Damage=="DT"),]
+merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Damage=="DEAD",]
+merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Damage=="D",]
+merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Damage=="DT",]
 merged_stagm_stag<-merged_stagm_stag[(merged_stagm_stag$Height_Total!=0 & !is.na(merged_stagm_stag$Height_Total)),]
 
 #remove any for height total missing/0
 
 #Removes all PIPO with DBH> 3.5 (no longer a small tree by definition)
-merged_stagm_stag<-merged_stagm_stag[which(merged_stagm_stag$DBH<3.5),]
+# merged_stagm_stag<-merged_stagm_stag[which(merged_stagm_stag$DBH<3.5),]
 
 
 #Concatenates Inst and Plot for unique STP identification

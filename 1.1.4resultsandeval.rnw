@@ -9,7 +9,7 @@
 %Found by taking the installation-wide average of top and cov polyveg values in the first year of the selected measurement interval
 \begin{figure}[!htb]
 \begin{center}
-<<label=vegVol, fig=TRUE,width=7,height=4,echo=FALSE>>=
+<<fig=TRUE,width=7,height=4,echo=FALSE>>=
 
 library(lattice)
 trellis.device(color = FALSE)
@@ -40,13 +40,14 @@ barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, groups=
 \end{figure}
 
 
+
 When comparing the vegetation depths between the control and the herbicide plots in the first year of the selected measurement intervals, it is apparent that there is a large drop in vegetation levels within installations with large amounts of understory vegetation in the control plots(see Figure \ref{fig:vegVol}). This indicates some success in establishing a wide range of non-arboreal vegetative conditions on installations. However, the herbicide applications failed to contribute to a marked difference in depth in installations of little vegetative volume in control plots. 
 
 There appears to be a group of six installations with similarly low overstory retention levels and high site index values (see red colored installations in Figure \ref{fig:siteOverstory}).  It makes sense from a forest management perspective, that relatively little residual overstory would be left on highly productive sites. These installations were used to develop the understory model since they were so alike in overstory and site productivity.
 
 \begin{figure}
 \begin{center}
-<<label=speccomp,fig=TRUE,width=8,height=8,echo=FALSE>>=
+<<fig=TRUE,width=8,height=8,echo=FALSE>>=
 
 library(lattice)
 trellis.device(color = FALSE)
@@ -67,12 +68,12 @@ barchart(Species~Freq| Installation, data=spec.freq.table1,
          ylab="Species")
 @
  \end{center}
- \caption{Species Composition of Small Tagged Trees in Installations with more than 60 Ponderosa Pine}
+ \caption{Species Composition of Small Tagged Trees in Installations with more than 60 Ponderosa Pine\label{fig:speccomp}}
  \end{figure}
  
 \begin{figure}
 \begin{center}
-<<label=polar_plot,fig=TRUE,width=9,height=9,echo=FALSE>>=
+<<fig=TRUE,width=9,height=9,echo=FALSE>>=
 library(plotly)
 # packageVersion('plotly')
 
@@ -83,12 +84,12 @@ p <- plot_ly(
 layout(p, title = "Aspect (N) and Elevation (M)", orientation = -90)
 @
  \end{center}
- \caption{Plot }
+ \caption{Polar Plot...speccomp\label{fig:polar_plot} }
  \end{figure}
  
 \begin{figure}
 \begin{center}
-<<label=annual_ht,fig=TRUE,width=8,height=8,echo=FALSE>>=
+<<fig=TRUE,width=8,height=8,echo=FALSE>>=
 library(lattice)
 trellis.device(color = FALSE)
 
@@ -100,12 +101,12 @@ histogram(~annual.gr4$ht_annual,
           xlab="Annual height growth in feet")
 @
  \end{center}
- \caption{Histogram of all annualized height growth}
+ \caption{Histogram of all annualized height growth\label{fig:annual_ht}}
  \end{figure}
  
 \begin{figure}
 \begin{center}
-<<label=total_ht,fig=TRUE,width=8,height=8,echo=FALSE>>=
+<<fig=TRUE,width=8,height=8,echo=FALSE>>=
 library(lattice)
 trellis.device(color = FALSE)
 
@@ -117,12 +118,12 @@ histogram(~annual.gr4$Height_Total,
           xlab="Total height in feet at beginning of period")
 @
  \end{center}
- \caption{Histogram subject tree total height (in feet) at beginning of period}
+ \caption{Histogram subject tree total height (in feet) at beginning of period\label{fig:total_ht}}
  \end{figure}
 
 \begin{figure}
 \begin{center}
-<<label=ht_by_inst,fig=TRUE,width=8,height=8,echo=FALSE>>=
+<<fig=TRUE,width=8,height=8,echo=FALSE>>=
 
 library(lattice)
 trellis.device(color = FALSE)
@@ -147,13 +148,13 @@ histogram(~annual.gr4$ht_annual| annual.gr4$Installation,
 
 @
  \end{center}
- \caption{Annualized Height Growth of Small Tagged Trees by Installations }
+ \caption{Annualized Height Growth of Small Tagged Trees by Installations\label{fig:ht_by_inst} }
  \end{figure}
  
  
 \begin{figure}
 \begin{center}
-<<label=small_tree_inst,fig=TRUE,width=8,height=8,echo=FALSE>>=
+<<fig=TRUE,width=8,height=8,echo=FALSE>>=
 
 library(lattice)
 trellis.device(color = FALSE)
@@ -177,13 +178,13 @@ xyplot(annual.gr4$small.tpa~annual.gr4$Year_Measurement  | annual.gr4$Installati
 
 @
  \end{center}
- \caption{Small trees per acre by installation}
+ \caption{Small trees per acre by installation\label{fig:small_tree_inst}}
  \end{figure}
  
  
  \begin{figure}
 \begin{center}
-<<label=os_tpa_inst,fig=TRUE,width=8,height=8,echo=FALSE>>=
+<<fig=TRUE,width=8,height=8,echo=FALSE>>=
 
 library(lattice)
 trellis.device(color = FALSE)
@@ -205,7 +206,7 @@ xyplot(agg.over.data.TPA$TPA~ agg.over.data.TPA$Year_MeasurementOS | factor(agg.
     
 @
  \end{center}
- \caption{Interpolated Overstory Basal Area}
+ \caption{Interpolated Overstory Basal Area\label{fig:os_tpa_inst}}
  \end{figure}
 
 

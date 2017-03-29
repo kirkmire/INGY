@@ -540,7 +540,7 @@ nlqmm.list.UV<-c(nlqmm.list.UV, length(qr.HS.tran$y))
 #aic.lqmm.list.vegCW<-c(aic.lqmm.list.vegCW,AIC(qrCW.forb.shrub.tran)[1])
 
 #QR for transect grass height
-qrCW.tran.gr<-lqmm(ht_annual~srHeight_Total+grass.ht+cratio,random=~1,nK=100,nK=100,
+qrCW.tran.gr<-lqmm(ht_annual~srHeight_Total+grass.ht+cratio,random=~1,nK=100,
                    group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qrCW.tran.gr)
 aic.lqmm.list.vegCW<-c(aic.lqmm.list.vegCW,AIC(qrCW.tran.gr)[1])

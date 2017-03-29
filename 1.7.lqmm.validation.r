@@ -1,6 +1,3 @@
-group=conc,
-control=list(LP_tol_ll=1e-03,LP_max_iter=1000),tau=c(.5)
-
 
 #Reads in previous scripts required (takes ~10min)
 source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=TRUE)
@@ -59,26 +56,24 @@ latex(final.aic, file="")            # If you want all the data
 
 
 
-annual.gr4<-annual.gr4[!annual.gr4$cratio<.01,]
+# annual.gr4<-annual.gr4[!annual.gr4$cratio<.01,]
 annual.gr4<-annual.gr4[!annual.gr4$ht_annual<0,]
-annual.gr4<-annual.gr4[!is.na(annual.gr4$cratio)==T,]
-
-
-
-#Would it be okay to use a mixed model in variable selection to account for within group
-#(subject) correlation and then use regular rq in prediction?
-
-
-
-annual.gr6<-annual.gr6[!annual.gr6$cratio<.01,]
+# annual.gr4<-annual.gr4[!is.na(annual.gr4$cratio)==T,]
+# 
+# 
+# 
+# #Would it be okay to use a mixed model in variable selection to account for within group
+# #(subject) correlation and then use regular rq in prediction?
+# 
+# 
+# 
+# annual.gr6<-annual.gr6[!annual.gr6$cratio<.01,]
 annual.gr6<-annual.gr6[!annual.gr6$ht_annual<0,]
 annual.gr6<-annual.gr6[!is.na(annual.gr6$cratio)==T,]
-annual.gr6<-annual.gr6[!is.na(annual.gr6$ht_annual)==T,]
+# 
+# 
+# annual.gr4<-annual.gr4[!annual.gr4$ht_annual<0.2,]
 
-
-annual.gr4<-annual.gr4[!annual.gr4$ht_annual<0.2,]
-hist(annual.gr4$ht_annual)
-hist(annual.gr6$qr.pred.one)
 
 
 
@@ -98,9 +93,9 @@ qr.SI.1 <-lqmm(ht_annual~srHeight_Total+
                slopePercent:I(elevation^2):cos_rad_asp +
                slopePercent:I(elevation^2):sin_rad_asp +
                elevation +
-               (elevation^2) ,
-               group=conc,random=~1,
-               control=list(LP_tol_ll=1e-03,LP_max_iter=1000),tau=c(.1),  data=annual.gr4)
+               I(elevation^2) ,
+               group=conc,random=~1,nK=100,
+               control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),tau=c(.1),data=annual.gr4)
 
 
 qr.SI.5 <-lqmm(ht_annual~srHeight_Total+
@@ -116,9 +111,9 @@ qr.SI.5 <-lqmm(ht_annual~srHeight_Total+
                  slopePercent:I(elevation^2):cos_rad_asp +
                  slopePercent:I(elevation^2):sin_rad_asp +
                  elevation +
-                 (elevation^2) ,
-               group=conc,random=~1,
-               control=list(LP_tol_ll=1e-03,LP_max_iter=1000),tau=c(.5),  data=annual.gr4)
+                 I(elevation^2) ,
+               group=conc,random=~1,nK=100,
+               control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),tau=c(.5),data=annual.gr4)
 
 
 qr.SI.9 <-lqmm(ht_annual~srHeight_Total+
@@ -134,26 +129,27 @@ qr.SI.9 <-lqmm(ht_annual~srHeight_Total+
                  slopePercent:I(elevation^2):cos_rad_asp +
                  slopePercent:I(elevation^2):sin_rad_asp +
                  elevation +
-                 (elevation^2) ,
-               group=conc,random=~1,
-               control=list(LP_tol_ll=1e-03,LP_max_iter=1000),tau=c(.9),  data=annual.gr4)
+                 I(elevation^2) ,
+               group=conc,random=~1,nK=100,
+               control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),tau=c(.9),data=annual.gr4)
 
 one.func<-function(srHeight_Total,cratio,TPA.OS, slopePercent,cos_rad_asp,sin_rad_asp,
   elevation){
 pred<-(coef(qr.SI.1)[1]+
-coef(qr.SI.1)[2]*srHeight_Total+
-coef(qr.SI.1)[3]*cratio+
-coef(qr.SI.1)[4]*TPA.OS+
-coef(qr.SI.1)[5]*slopePercent+
-coef(qr.SI.1)[6]*elevation+
-coef(qr.SI.1)[7]*slopePercent*cos_rad_asp+
-coef(qr.SI.1)[8]*slopePercent*sin_rad_asp+
-coef(qr.SI.1)[9]*slopePercent*log(elevation+1)+
-coef(qr.SI.1)[10]*slopePercent*I(elevation^2)+
-coef(qr.SI.1)[11]*slopePercent*cos_rad_asp*log(elevation+1)+
-coef(qr.SI.1)[12]*slopePercent*sin_rad_asp*log(elevation+1)+
-coef(qr.SI.1)[13]*slopePercent*cos_rad_asp*I(elevation^2)+
-coef(qr.SI.1)[14]*slopePercent*sin_rad_asp*I(elevation^2))
+         coef(qr.SI.1)[2]*srHeight_Total+
+         coef(qr.SI.1)[3]*cratio+
+         coef(qr.SI.1)[4]*TPA.OS+
+         coef(qr.SI.1)[5]*slopePercent+
+         coef(qr.SI.1)[6]*elevation+
+         coef(qr.SI.1)[7]*I(elevation^2)+
+         coef(qr.SI.1)[8]*slopePercent*cos_rad_asp+
+         coef(qr.SI.1)[9]*slopePercent*sin_rad_asp+
+         coef(qr.SI.1)[10]*slopePercent*log(elevation+1)+
+         coef(qr.SI.1)[11]*slopePercent*I(elevation^2)+
+         coef(qr.SI.1)[12]*slopePercent*cos_rad_asp*log(elevation+1)+
+         coef(qr.SI.1)[13]*slopePercent*sin_rad_asp*log(elevation+1)+
+         coef(qr.SI.1)[14]*slopePercent*cos_rad_asp*I(elevation^2)+
+         coef(qr.SI.1)[15]*slopePercent*sin_rad_asp*I(elevation^2))
 
 pred}
 
@@ -166,14 +162,15 @@ five.func<-function(srHeight_Total,cratio,TPA.OS, slopePercent,cos_rad_asp,sin_r
            coef(qr.SI.5)[4]*TPA.OS+
            coef(qr.SI.5)[5]*slopePercent+
            coef(qr.SI.5)[6]*elevation+
-           coef(qr.SI.5)[7]*slopePercent*cos_rad_asp+
-           coef(qr.SI.5)[8]*slopePercent*sin_rad_asp+
-           coef(qr.SI.5)[9]*slopePercent*log(elevation+1)+
-           coef(qr.SI.5)[10]*slopePercent*I(elevation^2)+
-           coef(qr.SI.5)[11]*slopePercent*cos_rad_asp*log(elevation+1)+
-           coef(qr.SI.5)[12]*slopePercent*sin_rad_asp*log(elevation+1)+
-           coef(qr.SI.5)[13]*slopePercent*cos_rad_asp*I(elevation^2)+
-           coef(qr.SI.5)[14]*slopePercent*sin_rad_asp*I(elevation^2))
+           coef(qr.SI.5)[7]*I(elevation^2)+
+           coef(qr.SI.5)[8]*slopePercent*cos_rad_asp+
+           coef(qr.SI.5)[9]*slopePercent*sin_rad_asp+
+           coef(qr.SI.5)[10]*slopePercent*log(elevation+1)+
+           coef(qr.SI.5)[11]*slopePercent*I(elevation^2)+
+           coef(qr.SI.5)[12]*slopePercent*cos_rad_asp*log(elevation+1)+
+           coef(qr.SI.5)[13]*slopePercent*sin_rad_asp*log(elevation+1)+
+           coef(qr.SI.5)[14]*slopePercent*cos_rad_asp*I(elevation^2)+
+           coef(qr.SI.5)[15]*slopePercent*sin_rad_asp*I(elevation^2))
   
   pred}
 
@@ -185,31 +182,35 @@ nine.func<-function(srHeight_Total,cratio,TPA.OS, slopePercent,cos_rad_asp,sin_r
            coef(qr.SI.9)[4]*TPA.OS+
            coef(qr.SI.9)[5]*slopePercent+
            coef(qr.SI.9)[6]*elevation+
-           coef(qr.SI.9)[7]*slopePercent*cos_rad_asp+
-           coef(qr.SI.9)[8]*slopePercent*sin_rad_asp+
-           coef(qr.SI.9)[9]*slopePercent*log(elevation+1)+
-           coef(qr.SI.9)[10]*slopePercent*I(elevation^2)+
-           coef(qr.SI.9)[11]*slopePercent*cos_rad_asp*log(elevation+1)+
-           coef(qr.SI.9)[12]*slopePercent*sin_rad_asp*log(elevation+1)+
-           coef(qr.SI.9)[13]*slopePercent*cos_rad_asp*I(elevation^2)+
-           coef(qr.SI.9)[14]*slopePercent*sin_rad_asp*I(elevation^2))
+           coef(qr.SI.9)[7]*I(elevation^2)+
+           coef(qr.SI.9)[8]*slopePercent*cos_rad_asp+
+           coef(qr.SI.9)[9]*slopePercent*sin_rad_asp+
+           coef(qr.SI.9)[10]*slopePercent*log(elevation+1)+
+           coef(qr.SI.9)[11]*slopePercent*I(elevation^2)+
+           coef(qr.SI.9)[12]*slopePercent*cos_rad_asp*log(elevation+1)+
+           coef(qr.SI.9)[13]*slopePercent*sin_rad_asp*log(elevation+1)+
+           coef(qr.SI.9)[14]*slopePercent*cos_rad_asp*I(elevation^2)+
+           coef(qr.SI.9)[15]*slopePercent*sin_rad_asp*I(elevation^2))
   
   pred}
 
+# annual.gr6<-annual.gr6[!annual.gr6$DBH>3.5,]
 annual.gr6$qr.pred.one<-0
 annual.gr6$qr.pred.five<-0
 annual.gr6$qr.pred.nine<-0
 
+
 for(i in 1:nrow(annual.gr6)){
   annual.gr6$qr.pred.one[i]<-one.func(
-  annual.gr6$srHeight_Total[i],
-  annual.gr6$cratio[i],
-  annual.gr6$TPA.OS[i],
-  annual.gr6$slopePercent[i],
-  annual.gr6$cos_rad_asp[i],
-  annual.gr6$sin_rad_asp[i],
-  annual.gr6$elevation[i])
+    annual.gr6$srHeight_Total[i],
+    annual.gr6$cratio[i],
+    annual.gr6$TPA.OS[i],
+    annual.gr6$slopePercent[i],
+    annual.gr6$cos_rad_asp[i],
+    annual.gr6$sin_rad_asp[i],
+    annual.gr6$elevation[i])
 }
+
 
 for(i in 1:nrow(annual.gr6)){
   annual.gr6$qr.pred.five[i]<-five.func(
@@ -234,7 +235,7 @@ for(i in 1:nrow(annual.gr6)){
 }
 
 
-
+hist(annual.gr6$qr.pred.one)
 
 
 

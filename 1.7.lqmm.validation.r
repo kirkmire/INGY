@@ -67,24 +67,24 @@ qr.SI.9 <-lqmm(ht_annual~srHeight_Total+
                group=conc,random=~1,nK=100,
                control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),tau=c(.9),data=annual.gr4)
 
-
-qr.SI.all <-lqmm(ht_annual~srHeight_Total+
-                 cratio+
-                 TPA.OS+
-                 slopePercent +
-                 slopePercent:cos_rad_asp +
-                 slopePercent:sin_rad_asp +
-                 slopePercent:log(elevation+1) +
-                 slopePercent:log(elevation+1):cos_rad_asp +
-                 slopePercent:log(elevation+1):sin_rad_asp +
-                 slopePercent:I(elevation^2) +
-                 slopePercent:I(elevation^2):cos_rad_asp +
-                 slopePercent:I(elevation^2):sin_rad_asp +
-                 elevation +
-                 I(elevation^2) ,
-               group=conc,random=~1,nK=100,
-               control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),
-               tau=c(.1,.5,.9),data=annual.gr4)
+#Below is for engel plots of coefficients
+# qr.SI.all <-lqmm(ht_annual~srHeight_Total+
+#                  cratio+
+#                  TPA.OS+
+#                  slopePercent +
+#                  slopePercent:cos_rad_asp +
+#                  slopePercent:sin_rad_asp +
+#                  slopePercent:log(elevation+1) +
+#                  slopePercent:log(elevation+1):cos_rad_asp +
+#                  slopePercent:log(elevation+1):sin_rad_asp +
+#                  slopePercent:I(elevation^2) +
+#                  slopePercent:I(elevation^2):cos_rad_asp +
+#                  slopePercent:I(elevation^2):sin_rad_asp +
+#                  elevation +
+#                  I(elevation^2) ,
+#                group=conc,random=~1,nK=100,
+#                control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),
+#                tau=c(.1,.5,.9),data=annual.gr4)
 
 
 

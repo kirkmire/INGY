@@ -11,8 +11,6 @@
 # source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
 
 
- 
-
 library(lqmm)
 
 
@@ -234,6 +232,37 @@ library(plyr)
 sorted.totals<-count(annual.gr6, 'response.cat')
 
 
+
+#Creates column of SEA effect
+
+SEA.func<-function(slopePercent,cos_rad_asp,sin_rad_asp,
+                   elevation){
+  pred<-(  
+    coef(qr.SI.5)[5]*slopePercent+
+      coef(qr.SI.5)[6]*elevation+
+      coef(qr.SI.5)[7]*I(elevation^2)+
+      coef(qr.SI.5)[8]*slopePercent*cos_rad_asp+
+      coef(qr.SI.5)[9]*slopePercent*sin_rad_asp+
+      coef(qr.SI.5)[10]*slopePercent*log(elevation+1)+
+      coef(qr.SI.5)[11]*slopePercent*I(elevation^2)+
+      coef(qr.SI.5)[12]*slopePercent*cos_rad_asp*log(elevation+1)+
+      coef(qr.SI.5)[13]*slopePercent*sin_rad_asp*log(elevation+1)+
+      coef(qr.SI.5)[14]*slopePercent*cos_rad_asp*I(elevation^2)+
+      coef(qr.SI.5)[15]*slopePercent*sin_rad_asp*I(elevation^2))
+  
+  pred}
+
+# annual.gr6<-annual.gr6[!annual.gr6$DBH>3.5,]
+annual.gr4$SEA.val<-0
+
+
+for(i in 1:nrow(annual.gr4)){
+  annual.gr4$SEA.val[i]<-SEA.func(
+    annual.gr4$slopePercent[i],
+    annual.gr4$cos_rad_asp[i],
+    annual.gr4$sin_rad_asp[i],
+    annual.gr4$elevation[i])
+}
 
 
 # barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",

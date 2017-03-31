@@ -175,11 +175,11 @@ agg.over.data<-rbind(newRow22,agg.over.data)
 #Obtains an estimate of bapa at the plot level 
 
 bapa.OS.lm<-function(installation, plot, year){
-  # installation<-"BB"
-  # plot<-1
-  # year<-2008
+# installation<-"CR"
+# plot<-6
+# year<-2004
   plotinfo<-agg.over.data[agg.over.data$Installation==installation&agg.over.data$Plot==plot,]
-  if(min(plotinfo$Year_MeasurementOS)>=year){
+  if((min(plotinfo$Year_MeasurementOS))>=year){
     est.bapa.OS<-plotinfo$over.sum.bapa[plotinfo$Year_MeasurementOS==min(plotinfo$Year_MeasurementOS)]
   } else  if(max(plotinfo$Year_MeasurementOS)<=year){
     est.bapa.OS<-plotinfo$over.sum.bapa[plotinfo$Year_MeasurementOS==max(plotinfo$Year_MeasurementOS)]
@@ -193,6 +193,7 @@ bapa.OS.lm<-function(installation, plot, year){
   }
   est.bapa.OS
 }
+
 #Example:
 #plot.info<-agg.over.data[agg.over.data$Installation=="BB"&agg.over.data$Plot==1,]
 #bapa.model<-lm(plotinfo$over.sum.bapa~plotinfo$Year_MeasurementOS)
@@ -200,13 +201,19 @@ bapa.OS.lm<-function(installation, plot, year){
 #summary(bapa.model)
 #plot(bapa.model)
 
-bapa.OS.lm("GC",5,1999)
+bapa.OS.lm("CR",5,2004)
 
 
 annual.gr4$bapa.OS<-0
 
 annual.gr4$Installation<-as.character(annual.gr4$Installation)
 agg.over.data$Installation<-as.character(agg.over.data$Installation)
+annual.gr4$Plot<-as.character(annual.gr4$Plot)
+agg.over.data$Plot<-as.character(agg.over.data$Plot)
+annual.gr4$Year_Measurement<-as.numeric(annual.gr4$Year_Measurement)
+agg.over.data$Year_MeasurementOS<-as.numeric(agg.over.data$Year_MeasurementOS)
+
+
 
 for(i in 1:nrow(annual.gr4)){
   annual.gr4$bapa.OS[i]<-bapa.OS.lm(
@@ -215,14 +222,11 @@ for(i in 1:nrow(annual.gr4)){
     annual.gr4$Year_Measurement[i])
 }
 
-#Installation PC missing from OS, check for it
+
+
 
 #OLS appropriate considering that 
 #CCF and BAPA are plot level aggregates 
-
-
-
-
 
 ###Crown Competition Factor
 #Crown width variable found in "CrownWidth1" and "CrownWidth2"
@@ -548,6 +552,7 @@ annual.gr4<-annual.gr4[!is.na(annual.gr4$cratio)==T,]
 
 #QR for Nothing
 qr.OS.nothing<-lqmm(ht_annual~srHeight_Total+cratio,random=~1,group=conc,nK=100,
+                    na.action=na.exclude,
                     control=list(LP_tol_ll=1e-1,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr4)
 # summary(qr.OS.nothing)
 aic.list.OS.nothing<-AIC(qr.OS.nothing)[1]
@@ -555,6 +560,7 @@ nlist.OS<-length(qr.OS.nothing$y)
 
 #QR for BAPA
 qr.BAPA<-lqmm(ht_annual~srHeight_Total+cratio+bapa.OS,random=~1,group=conc,nK=100,
+              na.action=na.exclude,
               control=list(LP_tol_ll=1e-1,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr4)
 
 AIC(qr.BAPA)
@@ -564,6 +570,7 @@ nlist.OS<-c(nlist.OS,length(qr.BAPA$y))
 
 #QR for CCF
 qr.CCF<-lqmm(ht_annual~srHeight_Total+cratio+CCF.OS,random=~1,group=conc,nK=100,
+             na.action=na.exclude,
              control=list(LP_tol_ll=1e-1,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr4)
 # summary(qr.CCF)
 aic.list.lqmm.OS<-c(aic.list.lqmm.OS,AIC(qr.CCF)[1])
@@ -571,6 +578,7 @@ nlist.OS<-c(nlist.OS,length(qr.CCF$y))
 
 #QR for TPA
 qr.TPA<-lqmm(ht_annual~srHeight_Total+cratio+TPA.OS,random=~1,group=conc,nK=100,
+             na.action=na.exclude,
              control=list(LP_tol_ll=1e-1,LP_max_iter=1000,method="df"),tau=c(.5), data=annual.gr4)
 # summary(qr.TPA)
 aic.list.lqmm.OS<-c(aic.list.lqmm.OS,AIC(qr.TPA)[1])

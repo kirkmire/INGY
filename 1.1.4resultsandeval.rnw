@@ -1,3 +1,15 @@
+
+<<echo=F,results=hide>>=
+source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=FALSE)
+source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=FALSE)
+source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=FALSE)
+source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=FALSE)
+source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=FALSE)
+source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=FALSE)
+source(paste(getwd(),'/1.7.lqmm.validation.r',sep=""), echo=FALSE)
+@
+
+
 % !Rnw root=Thesis_doc.RNW
 \newpage
 \begin{center}
@@ -71,36 +83,31 @@ print(barchart(Species~Freq| Installation, data=spec.freq.table1,
  
 % \begin{figure}
 % \begin{center}
-% # <<label=polar_plot,fig=FALSE,width=9,height=9,echo=FALSE>>=
-% #  library(plotly)
-% # # packageVersion('plotly')
-% # 
-% # colourCount = 15
-% # getPalette = colorRampPalette(brewer.pal(9, "Set1"))
-% #  
-% # 
-% #  p <- plot_ly(
-% #    plotly::mic, r = ~annual.gr4$elevation, t = ~annual.gr4$aspect,
-% #    color = ~annual.gr4$Installation,
-% #    # alpha = 0.7,
-% #    type = "scatter")
-% #    # ,
-% #    # mode="markers",
-% #    # marker=list(color=getPalette(colourCount)))
-% # 
-% # layout(p, title = "Aspect (N) and Elevation (M)", orientation = -90,margin=list(b=90,r=90))
+% <<label=polar_plot,fig=FALSE,width=9,height=9,echo=FALSE>>=
+%  library(plotly)
+% # packageVersion('plotly')
 % 
-% # % @
- % \end{center}
- % \caption{Polar Plot...speccomp\label{fig:polar_plot}}
- % \end{figure}
+% colourCount = 15
+% getPalette = colorRampPalette(brewer.pal(9, "Set1"))
+% 
+% 
+%  p <- plot_ly(
+%    plotly::mic, r = ~annual.gr4$elevation, t = ~annual.gr4$aspect,
+%    color = ~annual.gr4$Installation,
+%    # alpha = 0.7,
+%    type = "scatter")
+%    # ,
+%    # mode="markers",
+%    # marker=list(color=getPalette(colourCount)))
+% 
+% layout(p, title = "Aspect (N) and Elevation (M)", orientation = -90,margin=list(b=90,r=90))
+% 
+% @
+% \end{center}
+% \caption{Polar Plot...speccomp\label{fig:polar_plot}}
+% \end{figure}
  
-\begin{figure}[!htb]
-\begin{center}
-    \includegraphics[width=160mm]{polar_plot.jpg}
-    \caption{Polar Plot\label{fig:polar_plot}}
-\end{center}
-\end{figure}
+
  
  
 \begin{figure}
@@ -298,7 +305,7 @@ plot(cr.ht.gam,residuals=T,se=T,
 
 @
 \end{center}
-\caption{Generalized additive model of square-root of height residualsand smoothed crown ratios\label{fig:seqgamCR}}
+\caption{Generalized additive model of square-root of height residual sand smoothed crown ratios\label{fig:seqgamCR}}
 \end{figure}
 
 
@@ -392,7 +399,8 @@ print(barchart(sorted.totals$freq~sorted.totals$response.cat, names = "Quantile 
 
 plot(annual.gr6$ht_annual,annual.gr6$qr.pred.five,
          pch = 16,
-         col ="grey60")
+         col ="Median Predicted Annual Height Growth Increment (feet/year)",
+         xlab="Actual Height Growth Increment (feet/year)")
 
 # abline(fit<-lm(annual.gr6$qr.pred.one~sqrt(annual.gr6$ht_annual)),col="red")
 # abline(fit<-lm(annual.gr6$qr.pred.five~sqrt(annual.gr6$ht_annual)),col="blue")
@@ -404,7 +412,7 @@ plot(annual.gr6$ht_annual,annual.gr6$qr.pred.five,
 
 @
 \end{center}
-\caption{Annual height increment vs predicted lqmm median height increment\label{fig:predmean}}
+\caption{Annual height increment vs predicted LQMM median height increment\label{fig:predmean}}
 \end{figure}
 
 

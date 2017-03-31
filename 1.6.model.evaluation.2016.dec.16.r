@@ -9,7 +9,8 @@ source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=
 source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
 source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
-source(paste(getwd(),'/1.7.lqmm.validation.r',sep=""), echo=TRUE)
+
+
 
 #combines all aic.lists into one dataframe
 

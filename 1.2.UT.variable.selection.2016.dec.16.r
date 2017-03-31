@@ -117,7 +117,7 @@ annual.gr2$cratio<- annual.gr2$CrownLength/annual.gr2$Height_Total
 
 #Removes trees with crown ratio <0
 
-annual.gr2<-annual.gr2[!annual.gr2$cratio<0,]
+annual.gr2 <- annual.gr2[!is.na(annual.gr2$cratio) & annual.gr2$cratio>=0,]
 
 # #GAM for Crownwidth ht class
 # gam.stCW<-gam(ht_annual~s(srHeight_Total)+s(CrownWidth),data=annual.gr2, family=gaussian(link="identity"))
@@ -253,14 +253,17 @@ library(lqmm)
 
 #QR for nothing
 qr.nothing.lqmm<-lqmm(fixed=ht_annual~srHeight_Total,random=~1,
-                      group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
+                      na.action=na.exclude,
+                      group=conc,control=list(LP_tol_ll=1e-01,
+                      LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
 # summary(qr.nothing.lqmm)
 aic.list.lqmm<-AIC(qr.nothing.lqmm)[1]
 nlist.lqmm<-length(qr.nothing.lqmm$y)
 
-
+length(annual.gr2$ht_annual)
 #QR for small.tpa
 qr.stpa<-lqmm(ht_annual ~ srHeight_Total+small.tpa,random=~1,
+              na.action=na.exclude,
               group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
 # summary(qr.stpa)
 aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stpa)[1])
@@ -313,6 +316,7 @@ nlist.lqmm<-c(nlist.lqmm,length(qr.stpa$y))
 # 
 #QR for height class 15
 qr.stp15<-lqmm(ht_annual~srHeight_Total+other,random=~1,nK=100,
+               na.action=na.exclude,
                group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
 # summary(qr.stp15)
 aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp15)[1])
@@ -321,6 +325,7 @@ nlist.lqmm<-c(nlist.lqmm,length(qr.stp15$y))
 # 
 #QR for trees greater than
 qr.sttgt<-lqmm(ht_annual~srHeight_Total+tpa.gt,random=~1,nK=100,
+               na.action=na.exclude,
                group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
 # summary(qr.sttgt)
 aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.sttgt)[1])
@@ -329,6 +334,7 @@ nlist.lqmm<-c(nlist.lqmm,length(qr.sttgt$y))
 #QR for basal diameter
 annual.gr2<-annual.gr2[!is.na(annual.gr2$BasalDiameter)==T,]
 qr.stbd<-lqmm(ht_annual~srHeight_Total+BasalDiameter,random=~1,nK=100,
+              na.action=na.exclude,
               group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
 # summary(qr.stbd)
 aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stbd)[1])
@@ -338,6 +344,7 @@ nlist.lqmm<-c(nlist.lqmm,length(qr.stbd$y))
 annual.gr2<-annual.gr2[!is.na(annual.gr2$DBH)==T,]
 
 qr.stdbh<-lqmm(ht_annual~srHeight_Total+DBH,random=~1,nK=100,
+               na.action=na.exclude,
                group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
 # summary(qr.stdbh)
 aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stdbh)[1])
@@ -345,6 +352,7 @@ nlist.lqmm<-c(nlist.lqmm,length(qr.stdbh$y))
 
 #QR for Crown Width
 qr.stcw<-lqmm(ht_annual~srHeight_Total+CrownWidth,random=~1,nK=100,
+              na.action=na.exclude,
               group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
 # summary(qr.stcw)
 aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stcw)[1])
@@ -353,6 +361,7 @@ nlist.lqmm<-c(nlist.lqmm,length(qr.stcw$y))
 
 #QR for Crown Length
 qr.stcl<-lqmm(ht_annual~srHeight_Total+CrownLength,random=~1,nK=100,
+              na.action=na.exclude,
               group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
 # summary(qr.stcl)
 aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stcl)[1])
@@ -360,6 +369,7 @@ nlist.lqmm<-c(nlist.lqmm,length(qr.stcl$y))
 
 #QR for Crown Ratio
 qr.stcl<-lqmm(ht_annual~srHeight_Total+cratio,random=~1,nK=100,
+              na.action=na.exclude,
               group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
 # summary(qr.stcl)
 aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stcl)[1])

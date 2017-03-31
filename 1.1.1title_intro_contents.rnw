@@ -67,18 +67,6 @@ Co-Chairperson: Committee Member Name (remove this line if not applicable)
 Abstract Content (Single spaced, one page, two space paragraph indent, no more than 350
 words.)
 
-\newpage
-\large 
-\begin{center}
-\textbf{DEDICATION}\\[1pt]
-\end{center}
-
-\newpage
-\large 
-\begin{center}
-\textbf{BIOGRAPHY}\\[1pt]
-\end{center}
-\normalsize
 
 \newpage
 \large 
@@ -87,18 +75,13 @@ words.)
 \end{center}
 \normalsize
 
-I would first like to extend appreciation to the INGY Cooperators, particularly those who participated in the Small Tree Competing Vegetation Study (STCV) for their commitment to this long term study. Their participation required that many stands not be harvested for the duration of the study and a substantial monitary cost over 15 years.
+\noindent I would first like to extend appreciation to the INGY Cooperators, particularly those who participated in the Small Tree Competing Vegetation Study (STCV) for their commitment to this long term study. Their participation required that many stands not be harvested for the duration of the study and a substantial monitary cost over 15 years.
 
-I also owe a debt of gratitude to the many INGY technicians and researchers who have worked on the STCV before me. The completion of the dataset would not have been possible without your ``boots on the ground'' and careful acquisition of measurements.
+\noindent I also owe a debt of gratitude to the many INGY technicians and researchers who have worked on the STCV before me. The completion of the dataset would not have been possible without your ``boots on the ground'' and careful acquisition of measurements.
 
-Thank you to my advisors Dr. David Affleck and Dr. John Goodburn for giving me the opportunity to choose a challenging research topic and for support as I developed the skills to accomplish this research.
+\noindent Thank you to my advisors Dr. David Affleck and Dr. John Goodburn for giving me the opportunity to choose a challenging research topic and for support as I developed the skills to accomplish this research.
 
-I thank my family for their support and excusing my absense while pursuing this research.  I would also like to thank all of the previous generations of my family that have enjoyed careers in forestry in the Western United States.  Your life-long passion for our forests and the communities they support is something that constantly motivates me.
-
-
-
-
-
+\noindent I thank my family for their support and excusing my absense while pursuing this research.  I would also like to thank all of the previous generations of my family that have enjoyed careers in forestry in the Western United States.  Your life-long passion for our forests and the communities they support is something that constantly motivates me.
 
 
 \newpage

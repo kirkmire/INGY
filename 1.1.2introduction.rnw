@@ -15,10 +15,10 @@ Variable retention harvesting is an increasingly viable option in multiple objec
 %Basic Silvics of Ponderosa Pine
 Ponderosa pine is an important species both ecologically and commercially in the Inland Northwest. It is a key species in a range of silvicultural systems that vary widely by region and site conditions. Although a full array of silvicultural systems are found applied to ponderosa pine stands in the Northern Rocky Mountains, group selection, seed tree, or shelterwood systems are often recommended (\cite{adams_1994}). In the Pacific Northwest, multiple-entry management using either long-rotation even-aged systems or uneven-aged systems are suggested, with group selection being the most highly recommended (\cite{tesch_1994}). These groups provide openings with sufficient light to allow shade intolerant species to germinate and be competitive in mixed species stands (\cite{O'Hara2005}). The resultant multi-aged stand is suitable for achieving a variety of objectives including timber production, aesthetics, and restoring presettlement stands structures (\cite{O'Hara2005}). Nearly all of the proposed systems include a retained overstory component which is achieved through variable retention harvesting. 
 
-Ponderosa pine exists in two typical stand structures within silvicultural systems: even-aged and uneven-aged. An even aged stand consists of a cohort of trees at a single age class where most trees cluster near  an average diamter.
-Growth in young even-aged ponderosa pine stands is governed primarily by size-density relationships and the site quality. Therefore, density management diagrams (DMS) that incorporate fundemental assumptions about density dependent behavoir of populations can be used used to guide management (James Long). 
+Ponderosa pine exists in two typical stand structures within silvicultural systems: even-aged and uneven-aged. An even aged stand consists of a cohort of trees at a single age class where most trees cluster near  an average diameter.
+Growth in young even-aged ponderosa pine stands is governed primarily by size-density relationships and the site quality. Therefore, density management diagrams (DMS) that incorporate fundamental assumptions about density dependent behavior of populations can be used used to guide management (James Long). 
 
-Uneven-aged aged stands have high variation in height resulting in an irregular stand profile in the vertical dimension (Peng 2000). As the area of the uneven aged-stand or forest increases, the irregularites tend to even out. The difficulty of modelling forest growth in uneven-aged stands stems from a historical lack of experimental data (Murphy and Farrar, 1883), a lack of temporal reference system (since neither stand age, nor tree age have meaning) and a canonical way to describe the structure of such stands.
+Uneven-aged aged stands have high variation in height resulting in an irregular stand profile in the vertical dimension (Peng 2000). As the area of the uneven aged-stand or forest increases, the irregularities tend to even out. The difficulty of modelling forest growth in uneven-aged stands stems from a historical lack of experimental data (Murphy and Farrar, 1883), a lack of temporal reference system (since neither stand age, nor tree age have meaning) and a canonical way to describe the structure of such stands.
 
 
 
@@ -30,11 +30,21 @@ Natural regeneration of ponderosa pine is dependent upon the combination of adeq
 %Overstory effects on sapling vigor and survival
 Powers et al.(\cite{Powers2011a}) found that variable retention harvesting can result in improved seedling photosynthetic capacity, water relations and growth compared to unharvested stands.  The enhanced growth of the small trees on sites without much overstory may be perpetuated throughout the growth of the stand. However, there is limited work examining the factors that affect the developmental responses of the small trees released through variable retention harvests.
 
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width=160mm]{comp_flowchart.jpg}
+    \caption{Biological framework of small tree growth. Small trees are defined as those that have a DBH less than 3.5 in}
+    \label{fig:chart}
+\end{center}
+\end{figure}
+
 %Understory competition effects on sapling vigor
-Following germination, the importance of competing vegetation as an impediment to early survival and development of young seedlings is well-established. In central Idaho, soil moisture remained above the wilting point at depths below 15 cm (6 in) on areas free of competing vegetation throughout the growing season but dropped to or below that critical point on the majority of vegetated plots (Curtis). Shrub competition also reduced the height and diameter growth of ponderosa pine planted in northern California (\cite{oliver_1979}); similar growth reductions have been reported for stands in Oregon (Barrett). Busse et al. also found that the presence of understory vegetation adversely affected the growth of ponderosa pine for an estimated 20 years (\cite{Busse1996}). In a central Oregon study, trees completely surrounded by understory shrubs grew only 9 cm (3.5 in) per decade. Those trees with no competitive ground cover averaged 12 cm (4.7 in) of growth per decade. The severity of understory effects on growth also varies by site, in California on a droughty soil, severe shrub competition reduced diameter growth to less than half that of competition-free trees(\cite{oliver_1984}).  
+Following germination, the importance of competing vegetation as an impediment to early survival and development of young seedlings is well-established. In central Idaho, soil moisture remained above the wilting point at depths below 15 cm (6 in) on areas free of competing vegetation throughout the growing season but dropped to or below that critical point on the majority of vegetated plots (Curtis). Shrub competition also reduced the height and diameter growth of ponderosa pine planted in northern California (\cite{oliver_1979}); similar growth reductions have been reported for stands in Oregon (Barrett). 
+
+Busse et al. also found that the presence of understory vegetation adversely affected the growth of ponderosa pine for an estimated 20 years (\cite{Busse1996}). In a central Oregon study, trees completely surrounded by understory shrubs grew only 9 cm (3.5 in) per decade. Those trees with no competitive ground cover averaged 12 cm (4.7 in) of growth per decade. The severity of understory effects on growth also varies by site, in California on a droughty soil, severe shrub competition reduced diameter growth to less than half that of competition-free trees(\cite{oliver_1984}).  
 
 %Variation in effects of understory competition
-Overstory trees and other small trees can effectively restrict growth. Stagnation in diameter, and often in height, represents a problem in densely stocked stands, but especially on poor sites (Oliver and Ryker). Just as juvenile trees must face this often severe competition from overstory trees, so must the understory vegetation. The productivity of ponderosa pine forest understory (in terms of total herbage production, perennial grass prouction, and forage consumed in weight per unit area) has been found to be inversely related to the density of overstory trees, regardless of whether expressed in basal area, trees per acre, percent canopy cover, or stand density index (\cite{Ffolliott1982}, \cite{MooreM.M1992}). The species composition of forest understory is also controlled by overstory trees which filter light, moderate understory air and soil temperature, and directly compete for soil water and nutrients (\cite{spurr_barnes}). For example, conifer reforestation efforts are often hampered by the competitive ability of \emph{Carex} and \emph{Calamagrostis} because they respond positively to the removal of the overstory (\cite{Sloan1987}). 
+Overstory trees and other small trees can effectively restrict growth. Stagnation in diameter, and often in height, represents a problem in densely stocked stands, but especially on poor sites (Oliver and Ryker). Just as juvenile trees must face this often severe competition from overstory trees, so must the understory vegetation. The productivity of ponderosa pine forest understory (in terms of total herbage production, perennial grass production, and forage consumed in weight per unit area) has been found to be inversely related to the density of overstory trees, regardless of whether expressed in basal area, trees per acre, percent canopy cover, or stand density index (\cite{Ffolliott1982}, \cite{MooreM.M1992}). The species composition of forest understory is also controlled by overstory trees which filter light, moderate understory air and soil temperature, and directly compete for soil water and nutrients (\cite{spurr_barnes}). For example, conifer reforestation efforts are often hampered by the competitive ability of \emph{Carex} and \emph{Calamagrostis} because they respond positively to the removal of the overstory (\cite{Sloan1987}). 
 
 %...related to SITE PRODUCTIVITY
 
@@ -45,7 +55,7 @@ Overstory trees and other small trees can effectively restrict growth. Stagnatio
 
 
 
-The direct competition for light, water and nutrients is not the only way that ponderosa pine is affected by understory vegetation. Insect damage has also been found to be greater on the trees competing with shrubs, accounting for some of the growth depression (\cite{Oliver1984}). Despite the numerous examples of adversely affected growth attributed to competing vegetation, the presence of vegetation is not without some benefit to the stand. There is a long term carbon and nitrogen benefit to the upper soil horizon from maintaining understory vegetation (\cite{Busse1996}). Understory vegetation also provides forage and habitat for a wide range of species, stabilizes soil, and captures nutrients after disturbance. Fireweed (\emph{Chamerion angustifolium} (L.) Holub), for example, regenerates after fire and captures and recycles nitrogen
+The direct competition for light, water and nutrients is not the only way that ponderosa pine is affected by understory vegetation. Insect damage has also been found to be greater on the trees competing with shrubs, accounting for some of the growth depression (\cite{oliver_1984}). Despite the numerous examples of adversely affected growth attributed to competing vegetation, the presence of vegetation is not without some benefit to the stand. There is a long term carbon and nitrogen benefit to the upper soil horizon from maintaining understory vegetation (\cite{Busse1996}). Understory vegetation also provides forage and habitat for a wide range of species, stabilizes soil, and captures nutrients after disturbance. Fireweed (\emph{Chamerion angustifolium} (L.) Holub), for example, regenerates after fire and captures and recycles nitrogen
 (\cite{daubenmire_daubenmire_1968}). 
 
 
@@ -58,30 +68,18 @@ Regardless of why ponderosa pine growth is suppressed and for how long, this spe
 
 %How we might decouple site and competition effects...STCV
 
-The Small Tree Competing Vegetation Study (STCV) was initiated by the Inland Northwest Growth and Yield Cooperative in 1999 to examine seedling and sapling growth response to the density of residual overstory cover and to the abundance of understory vegetation. Data from 29 installations distributed accross eastern Washington, Idaho and Western Montana included measurements of tagged small trees, understory vegetation and retained overstory over the course of 16 years. 
+The Small Tree Competing Vegetation Study (STCV) was initiated by the Inland Northwest Growth and Yield Cooperative in 1999 to examine seedling and sapling growth response to the density of residual overstory cover and to the abundance of understory vegetation. Data from 29 installations distributed across eastern Washington, Idaho and Western Montana included measurements of tagged small trees, understory vegetation and retained overstory over the course of 16 years. 
 
-\begin{figure}[H]
-\begin{center}
-    \includegraphics[width=160mm]{threedOSBA_SI.jpg}
-    \caption{Quantile Regression Visualization.  \label{fig:quantRegvis}}
-    
-\end{center}
-\end{figure}
+
 
 
 %Modeling and prediction of mean sapling growth less helpful...
-Stand initiation is a critical stage in stand development. Growth trajectory can be largely altered by suppressing forces during this stage. Moreover, it may be difficult to diagnose issues early enough to implement treatments to help facilitate growth if managers are focusing on the mean growth response. For instance, they may be overlooking the fact that the fastest growing trees are not thriving. After all, these are the trees which will likely occupy space in the canopy and ultimately become commercially viable. Just as medical practitioners use growth charts to monitor indicators of health in children, forest managers in the Inland Northwest could use this model to evaluate whether sufficent numbers of trees are young ponderosa pine stands are achieving optimal growth.
+Stand initiation is a critical stage in stand development. Growth trajectory can be largely altered by suppressing forces during this stage. Moreover, it may be difficult to diagnose issues early enough to implement treatments to help facilitate growth if managers are focusing on the mean growth response. For instance, they may be overlooking the fact that the fastest growing trees are not thriving. After all, these are the trees which will likely occupy space in the canopy and ultimately become commercially viable. Just as medical practitioners use growth charts to monitor indicators of health in children, forest managers in the Inland Northwest could use this model to evaluate whether sufficient numbers of trees are young ponderosa pine stands are achieving optimal growth.
 
-Preliminary findings revealed an extrememly skewed distribution of height growth responses on the tagged trees. Specifically, many trees over many periods exhibited annualized height growth <x feet per year while a number of trees attained much more rapid growth. This pattern suggested a broad range of growing conditions had been captured by the STCV, ranging from those resulting in near stagnation of growth to those promoting rapid differentiation. It was also revealed that efforts to describe mean growth would be of limited utility.What was needed instead was a method of characterizing the full distribution of height growth rates and the factors associated with the levels and differentiation of those rates.
+Preliminary findings revealed an extremely skewed distribution of height growth responses on the tagged trees. Specifically, many trees over many periods exhibited annualized height growth <x feet per year while a number of trees attained much more rapid growth. This pattern suggested a broad range of growing conditions had been captured by the STCV, ranging from those resulting in near stagnation of growth to those promoting rapid differentiation. It was also revealed that efforts to describe mean growth would be of limited utility. What was needed instead was a method of characterizing the full distribution of height growth rates and the factors associated with the levels and differentiation of those rates.
 
 
-% \begin{figure}[ht]
-% \begin{center}
-%     \includegraphics[width=160mm]{comp_flowchart.jpg}
-%     \caption{Biological framework of small tree growth. Small trees are defined as those that have a DBH less than 3.5 in}
-%     \label{fig:chart}
-% \end{center}
-% \end{figure}
+
 
 
 

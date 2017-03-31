@@ -178,8 +178,9 @@ factor(annual.gr4$Treatment.x)
 
 
 print(xyplot(annual.gr4$small.tpa~annual.gr4$Year_Measurement  | annual.gr4$Installation,
-        col=myColours[6],
          par.settings = my.settings,
+          pch = 16,
+           col ="grey60",
        strip = strip.custom(bg="lightgrey"),
          par.strip.text=list(col="black"),
          scales=list(
@@ -205,8 +206,7 @@ agg.over.data.TPA<-agg.over.data.TPA[!agg.over.data.TPA$Installation %in% drp60,
 
 print(xyplot(agg.over.data.TPA$TPA~ agg.over.data.TPA$Year_MeasurementOS | factor(agg.over.data.TPA$Installation),
        type = "o",  
-       col=myColours[6],
-       par.settings = my.settings,
+        par.settings = my.settings,
          pch = 16,
          col ="grey60",
        groups = agg.over.data.TPA$Plot, 

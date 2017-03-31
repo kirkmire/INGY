@@ -158,8 +158,6 @@ agg.over.data<-rbind(newRow22,agg.over.data)
 
 
 
-
-
 #plot basal areas to check for missing inst/years
 # library(lattice)
 # xyplot(agg.over.data$over.sum.bapa~agg.over.data$Year_MeasurementOS|agg.over.data$Installation,groups=agg.over.data$Plot)
@@ -519,9 +517,6 @@ for(i in 1:nrow(annual.gr4)){
     annual.gr4$Plot[i],
     annual.gr4$Year_Measurement[i])
 }
-
-
-
 
 
 # #GAM for BAPA

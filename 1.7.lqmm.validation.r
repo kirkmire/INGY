@@ -297,11 +297,13 @@ sorted.totals<-count(annual.gr6, 'response.cat')
 # colnames(chitable)<-c("<4","4-6",">6")
 # 
 # #The code below will produce output that can then be copied over to the .tex file
-library(Hmisc)
+# library(Hmisc)
+# # 
+# sum.all<-summary(qr.SI.1)
 # 
-
-
-latex(qr.SI.5, file="")     
+# #Try doing it individually instead ex: .1 then .5
+# 
+# latex(sum.all, file="")     
 # 
 # ###
 # actual<-rbind(x.table1,x.table2,x.table3)

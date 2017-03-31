@@ -3,7 +3,6 @@
 
 
 \newpage
-\clearpage
 \begin{center}
 \section{Methods}
 \end{center}
@@ -14,63 +13,63 @@
 Twenty-six study sites were established on private, public and tribal forestlands ranging from the eastern slopes of the Cascade Mountains to western Montana (see Figure \ref{fig:map}).  Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or harvested according to a shelterwood, seed tree or heavy thinning variable retention harvest system.
 
 
-<<fig=FALSE,include=FALSE, echo=FALSE>>=
-#! 2. subset of installations
-library(RODBC)
-library(RgoogleMaps)
-
-
-#! 2. subset of installations
-locs0 <- sinstloc[sinstloc$Coordinate_Type=="DD" 
-                  # &!(sinstloc$Installation %in% drp60)
-                  ,]
-
-locs0$in.study<-0
-
-drpd<-locs0[locs0$Installation %in% drp60,] 
-rtnd<-locs0[!locs0$Installation %in% drp60,] 
-rtnd$in.study<-1
-
-locs1<-rbind(drpd,rtnd)
-
-
-locs0v2 <- reshape(locs1,direction="wide",
-                   v.names="Coordinate_Value",
-                   timevar="Coordinate_Axis",
-                   idvar=c("Installation","Plot"))
-locs0v2 <- locs0v2[locs0v2$Plot==0,c(1,5,6,7)]
-names(locs0v2)[3:4] <- c("Long","Lat")
-
-
-#! 3. map it
-ratio <- 6/10 #height to width ratio of map
-
-png("inst_map.png",width=300*10,height=300*10*ratio,pointsize=12,res=300)
-boxit <- qbbox(locs0v2$Lat,locs0v2$Long, TYPE="all")
-basemap <- GetMap.bbox(boxit$lonR,boxit$latR, size=c(640,640*ratio),
-                       destfile="temp.png", maptype="terra-in") #"mapmaker-hybrid",
-tmp <- PlotOnStaticMap(basemap)
-pch.list <- locs0v2$in.study
-tmp <- PlotOnStaticMap(basemap,cex=3,pch=locs0v2$in.study,
-                       lat=locs0v2$Lat,
-                       lon=locs0v2$Long)
-
-#For text labels
-# tmp <- PlotOnStaticMap(basemap,cex=1,col="black",add=T,
-# lat=locs0v2$Lat,
-# lon=locs0v2$Long,
-# FUN=text,labels=locs0v2$Installation)
-
-
-dev.off()
-@
-
-\begin{figure}[!htb]
-\begin{center}
-    \includegraphics[width=.8\textwidth]{map_w_dots.jpg}
-    \caption{Map of STCV Installations, those included in this study labeled with a black dot\label{fig:map}}
-\end{center}
-\end{figure}
+% # <<fig=FALSE,include=FALSE, echo=FALSE>>=
+% # #! 2. subset of installations
+% # library(RODBC)
+% # library(RgoogleMaps)
+% # 
+% # 
+% # #! 2. subset of installations
+% # locs0 <- sinstloc[sinstloc$Coordinate_Type=="DD" 
+% #                   # &!(sinstloc$Installation %in% drp60)
+% #                   ,]
+% # 
+% # locs0$in.study<-0
+% # 
+% # drpd<-locs0[locs0$Installation %in% drp60,] 
+% # rtnd<-locs0[!locs0$Installation %in% drp60,] 
+% # rtnd$in.study<-1
+% # 
+% # locs1<-rbind(drpd,rtnd)
+% # 
+% # 
+% # locs0v2 <- reshape(locs1,direction="wide",
+% #                    v.names="Coordinate_Value",
+% #                    timevar="Coordinate_Axis",
+% #                    idvar=c("Installation","Plot"))
+% # locs0v2 <- locs0v2[locs0v2$Plot==0,c(1,5,6,7)]
+% # names(locs0v2)[3:4] <- c("Long","Lat")
+% # 
+% # 
+% # #! 3. map it
+% # ratio <- 6/10 #height to width ratio of map
+% # 
+% # png("inst_map.png",width=300*10,height=300*10*ratio,pointsize=12,res=300)
+% # boxit <- qbbox(locs0v2$Lat,locs0v2$Long, TYPE="all")
+% # basemap <- GetMap.bbox(boxit$lonR,boxit$latR, size=c(640,640*ratio),
+% #                        destfile="temp.png", maptype="terra-in") #"mapmaker-hybrid",
+% # tmp <- PlotOnStaticMap(basemap)
+% # pch.list <- locs0v2$in.study
+% # tmp <- PlotOnStaticMap(basemap,cex=3,pch=locs0v2$in.study,
+% #                        lat=locs0v2$Lat,
+% #                        lon=locs0v2$Long)
+% # 
+% # #For text labels
+% # # tmp <- PlotOnStaticMap(basemap,cex=1,col="black",add=T,
+% # # lat=locs0v2$Lat,
+% # # lon=locs0v2$Long,
+% # # FUN=text,labels=locs0v2$Installation)
+% # 
+% # 
+% # dev.off()
+% # @
+% # 
+% # \begin{figure}[!htb]
+% # \begin{center}
+% #     \includegraphics[width=.8\textwidth]{map_w_dots.jpg}
+% #     \caption{Map of STCV Installations, those included in this study labeled with a black dot\label{fig:map}}
+% # \end{center}
+% # \end{figure}
 
 
 The year of initiation of installations varied with most being established in the last years of the 1990s and early 2000s.  Treatments were randomly assigned to seven plots within each installation (see Figure \ref{fig:instLayout}).  Three plots received multiple applications of regionally effective herbicide (e.g. Pronone).  The remaining four plots were split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.
@@ -78,8 +77,7 @@ The year of initiation of installations varied with most being established in th
 \begin{figure}[h]
 \begin{center}
     \includegraphics[width=160mm]{GS_plots_colored.jpg}
-    \caption{Griner Saddle (GS) installation in northern Idaho and associated plot treatments}
-    \label{fig:instLayout}
+    \caption{Griner Saddle (GS) installation in northern Idaho and associated plot treatments\label{fig:instLayout}}
 \end{center}
 \end{figure}
 
@@ -161,7 +159,7 @@ Figure \ref{fig:timeline} shows the temporal scope of the data collection as wel
 
 \begin{figure}[!htb]
 \begin{center}
-<<fig=TRUE,echo=FALSE>>=
+<<label=timeline,fig=TRUE,echo=FALSE>>=
 library(lattice)
 
 #w/ meast#########################
@@ -286,9 +284,17 @@ There are nine other installations that were brought in later to expand the mode
 
 \begin{figure}[!htb]
 \begin{center}
-<<fig=TRUE,echo=FALSE>>=
+<<label=siteOverstory,fig=TRUE,echo=FALSE>>=
+
 library(lattice)
- 
+library(RColorBrewer)
+myColours <- brewer.pal(6,"Greys")
+my.settings <- list(
+  superpose.polygon=list(col=myColours[2:5], border="transparent"),
+  strip.background=list(col=myColours[6]),
+  strip.border=list(col="black"))
+
+
 minOSBA.func<-function(Installation1){
   #Installation1<-"DF"
   minOSBA<-annual.gr4[which(annual.gr4$Installation==Installation1),]
@@ -313,7 +319,7 @@ sim<-as.factor(sim)
 simInst<-sinst1[sinst1$Installation %in% sim,]
 difInst<-sinst1[!sinst1$Installation %in% sim,]
 
-xyplot(sinst1$SiteIndex_Value~sinst1$minOSBA,
+print(xyplot(sinst1$SiteIndex_Value~sinst1$minOSBA,
         xlab=list("Retained Overstory Basal Area (Per acre)",cex=1),
         col="white",cex=.001,
         ylab=list("Site Index (Height at 50 yrs).",cex=1),
@@ -329,10 +335,9 @@ xyplot(sinst1$SiteIndex_Value~sinst1$minOSBA,
                ltext(x=simInst$minOSBA, y=simInst$SiteIndex_Value,
                      labels=simInst$Installation , offset=0, cex=1, col="red3"
                      )
-            }) 
+            }) )
 
 #add text labels that indicate installation
-
 
 @
 \end{center}
@@ -353,14 +358,14 @@ names(damageCodes)[2]<-("number")
 
 damageCodes<-damageCodes[!damageCodes$number<5&!damageCodes$number>100,]
 
-library(lattice)
 
-barchart(damageCodes$number ~ damageCodes$code,
+print(barchart(damageCodes$number ~ damageCodes$code,
          origin=0, 
          #main="Motor insurance claims frequency"
          xlab="Damage Code", ylab="Number of Tagged Small Trees",
         scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)), 
          ylim=c(0,100),
+        col=myColours[4],
          # auto.key=list(space="right", columns=1, 
          #               points=FALSE, rectangles=TRUE,
          #               title="Treatment", cex.title=1),
@@ -370,7 +375,7 @@ barchart(damageCodes$number ~ damageCodes$code,
            panel.grid(h=-1, v=0); 
            panel.barchart(x,y,...)
          }
-)
+))
 @
 \end{center}
 \caption{Number of Small Tagged Ponderosa Pine Trees by Damage Code\label{fig:damageCodes}}
@@ -390,24 +395,24 @@ pipond<-pi[!pi$Installation %in% drp60,]
 #sort(pipond$Freq,decreasing=F)
 pipond<- pipond[order(pipond$Freq),] 
 
+
+
 library(lattice)
 
-barchart(pipond$Freq ~ pipond$Installation,
+print(barchart(pipond$Freq ~ pipond$Installation,
          origin=0, 
          #main="Motor insurance claims frequency"
          xlab="Installation", ylab="Number of Tagged Small Ponderosa Pine Trees",
         scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)), 
          ylim=c(0,270),
-         # auto.key=list(space="right", columns=1, 
-         #               points=FALSE, rectangles=TRUE,
-         #               title="Treatment", cex.title=1),
+          col=myColours[4],
          par.settings = my.settings,
          par.strip.text=list(col="white", font=2),
          panel=function(x,y,...){
            panel.grid(h=-1, v=0); 
            panel.barchart(x,y,...)
          }
-)
+))
 
 
 @

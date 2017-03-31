@@ -61,7 +61,6 @@ annual.gr4<-merge(annual.gr4, ge_sea, by="InstPlot")
 
 
 #SI Quantreg LQMM
-library(quantreg)
 library(lqmm)
 
 qr.SI<-lqmm(ht_annual~srHeight_Total+cratio+
@@ -129,7 +128,6 @@ nlist.lqmm.SQ<-c(nlist.lqmm.SQ,length(qr.sea$y))
 
 
 
-
 SQ.variable<-c("SI","Slope","Elevation","Aspect","SEA Int")
 
 SQ.variable<-as.data.frame(SQ.variable)
@@ -139,7 +137,40 @@ SQ.aic<-as.data.frame(cbind(nlist.lqmm.SQ,aic.list.lqmm.SQ))
 SQ.aic<-cbind(SQ.variable,SQ.aic)
 
 
+#Creates column of SEA effect
 
+SEA.func<-function(slopePercent,cos_rad_asp,sin_rad_asp,
+                    elevation){
+  pred<-(  
+           coef(qr.SI.5)[5]*slopePercent+
+           coef(qr.SI.5)[6]*elevation+
+           coef(qr.SI.5)[7]*I(elevation^2)+
+           coef(qr.SI.5)[8]*slopePercent*cos_rad_asp+
+           coef(qr.SI.5)[9]*slopePercent*sin_rad_asp+
+           coef(qr.SI.5)[10]*slopePercent*log(elevation+1)+
+           coef(qr.SI.5)[11]*slopePercent*I(elevation^2)+
+           coef(qr.SI.5)[12]*slopePercent*cos_rad_asp*log(elevation+1)+
+           coef(qr.SI.5)[13]*slopePercent*sin_rad_asp*log(elevation+1)+
+           coef(qr.SI.5)[14]*slopePercent*cos_rad_asp*I(elevation^2)+
+           coef(qr.SI.5)[15]*slopePercent*sin_rad_asp*I(elevation^2))
+  
+  pred}
+
+# annual.gr6<-annual.gr6[!annual.gr6$DBH>3.5,]
+annual.gr4$SEA.val<-0
+
+
+for(i in 1:nrow(annual.gr4)){
+  annual.gr4$SEA.val[i]<-SEA.func(
+    annual.gr4$slopePercent[i],
+    annual.gr4$cos_rad_asp[i],
+    annual.gr4$sin_rad_asp[i],
+    annual.gr4$elevation[i])
+}
+
+sea.si<-lm(annual.gr4$SEA.val~annual.gr4$SiteIndex_Value)
+plot(annual.gr4$SEA.val~annual.gr4$SiteIndex_Value)
+abline(sea.si)
 
 
 

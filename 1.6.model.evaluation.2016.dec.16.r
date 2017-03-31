@@ -9,6 +9,7 @@ source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=
 source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
 source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
+source(paste(getwd(),'/1.7.lqmm.validation.r',sep=""), echo=TRUE)
 
 #combines all aic.lists into one dataframe
 
@@ -44,74 +45,34 @@ final.aic$X9[6:10]<-aic.lists$AIC[28:32]
 
 
 #The code below will produce output that can then be copied over to the .tex file
-library(Hmisc)
-
-latex(final.aic, file="")            # If you want all the data
+# library(Hmisc)
+# 
+# latex(final.aic, file="")            # If you want all the data
+# # 
+# # 
+# # 
+# # qr.sum<-data.frame(qr.SI.all$coefficients)
+# # 
+# # latex(qr.sum,file="")
+# 
+# 
+# annual.gr4<-annual.gr4[!is.na(annual.gr4$cratio)==T,]
 # 
 # 
 # 
-# qr.sum<-data.frame(qr.SI.all$coefficients)
+# #Would it be okay to use a mixed model in variable selection to account for within group
+# #(subject) correlation and then use regular rq in prediction?
 # 
-# latex(qr.sum,file="")
-
-
-
-annual.gr4<-annual.gr4[!annual.gr4$cratio<.01,]
-annual.gr4<-annual.gr4[!annual.gr4$ht_annual<0,]
-annual.gr4<-annual.gr4[!is.na(annual.gr4$cratio)==T,]
-
-
-
-#Would it be okay to use a mixed model in variable selection to account for within group
-#(subject) correlation and then use regular rq in prediction?
-
-
-  
-annual.gr6<-annual.gr6[!annual.gr6$cratio<.01,]
-annual.gr6<-annual.gr6[!annual.gr6$ht_annual<0,]
-annual.gr6<-annual.gr6[!is.na(annual.gr6$cratio)==T,]
-annual.gr6<-annual.gr6[!is.na(annual.gr6$ht_annual)==T,]
-
-
-
-
-
-library(quantreg)
-least_squares <-lm(ht_annual~srHeight_Total+
-               cratio+
-               TPA.OS+
-               slopePercent +
-               slopePercent:cos_rad_asp +
-               slopePercent:sin_rad_asp +
-               slopePercent:log(elevation+1) +
-               slopePercent:log(elevation+1):cos_rad_asp +
-               slopePercent:log(elevation+1):sin_rad_asp +
-               slopePercent:I(elevation^2) +
-               slopePercent:I(elevation^2):cos_rad_asp +
-               slopePercent:I(elevation^2):sin_rad_asp +
-               elevation +
-               I(elevation^2) ,
-            data=annual.gr4)
-
-
-qr.SI.1 <-rq(ht_annual~srHeight_Total+
-               cratio+
-               TPA.OS+
-               slopePercent +
-               slopePercent:cos_rad_asp +
-               slopePercent:sin_rad_asp +
-               slopePercent:log(elevation+1) +
-               slopePercent:log(elevation+1):cos_rad_asp +
-               slopePercent:log(elevation+1):sin_rad_asp +
-               slopePercent:I(elevation^2) +
-               slopePercent:I(elevation^2):cos_rad_asp +
-               slopePercent:I(elevation^2):sin_rad_asp +
-               elevation +
-               I(elevation^2) ,
-             tau=.1 ,  data=annual.gr4)
-
-
-# qr.SI.all <-rq(ht_annual~srHeight_Total+
+# 
+# annual.gr6<-annual.gr6[!is.na(annual.gr6$cratio)==T,]
+# annual.gr6<-annual.gr6[!is.na(annual.gr6$ht_annual)==T,]
+# 
+# 
+# 
+# 
+# 
+# library(quantreg)
+# least_squares <-lm(ht_annual~srHeight_Total+
 #                cratio+
 #                TPA.OS+
 #                slopePercent +
@@ -124,131 +85,152 @@ qr.SI.1 <-rq(ht_annual~srHeight_Total+
 #                slopePercent:I(elevation^2):cos_rad_asp +
 #                slopePercent:I(elevation^2):sin_rad_asp +
 #                elevation +
-#                (elevation^2) ,
-#              tau=c(1:9/10) ,  data=annual.gr4)
-
-# qr.SI.all <-rq(ht_annual~srHeight_Total+
-#                  cratio+
-#                  TPA.OS+
-#                  SiteIndex_Value ,
-#                tau=c(1:9/10) ,  data=annual.gr4)
-
-
-# summary(qr.SI.all)
-
-
-# plot(summary(qr.SI.all),parm="TPA.OS")
-# plot(summary(qr.SI.all),parm="cratio")
-# plot(summary(qr.SI.all),parm="srHeight_Total")
-
-
-
-
-qr.SI.5 <-rq(ht_annual~srHeight_Total+
-               cratio+
-               TPA.OS+
-               slopePercent +
-               slopePercent:cos_rad_asp +
-               slopePercent:sin_rad_asp +
-               slopePercent:log(elevation+1) +
-               slopePercent:log(elevation+1):cos_rad_asp +
-               slopePercent:log(elevation+1):sin_rad_asp +
-               slopePercent:I(elevation^2) +
-               slopePercent:I(elevation^2):cos_rad_asp +
-               slopePercent:I(elevation^2):sin_rad_asp +
-               elevation +
-               I(elevation^2) ,
-             tau=.5,  data=annual.gr4)
-
-qr.SI.9 <-rq(ht_annual~srHeight_Total+
-               cratio+
-               TPA.OS+
-               slopePercent +
-               slopePercent:cos_rad_asp +
-               slopePercent:sin_rad_asp +
-               slopePercent:log(elevation+1) +
-               slopePercent:log(elevation+1):cos_rad_asp +
-               slopePercent:log(elevation+1):sin_rad_asp +
-               slopePercent:I(elevation^2) +
-               slopePercent:I(elevation^2):cos_rad_asp +
-               slopePercent:I(elevation^2):sin_rad_asp +
-               elevation +
-               I(elevation^2) ,
-             tau=.9 ,  data=annual.gr4)
-
-
-
-annual.gr6$qr.pred.one <- predict.rq(qr.SI.1, annual.gr6)
-annual.gr6$qr.pred.five <- predict.rq(qr.SI.5, annual.gr6)
-annual.gr6$qr.pred.nine <- predict.rq(qr.SI.9, annual.gr6)
-
-
-    
-valid.func<-function(annualht,qr.pred.one,qr.pred.five,qr.pred.nine){
-  # annualht<-1.2
-  # qr.pred.one<-1
-  # qr.pred.five<-1.6
-  # qr.pred.nine<-1.6
-  
- ifelse(annualht>qr.pred.nine,
-       #yes
-       cat<-"top10",
-       #no
-       ifelse(qr.pred.five<annualht&&annualht<qr.pred.nine,
-              #yes
-              cat<- "fiftytoninety",
-              #no
-              ifelse(qr.pred.one<annualht&&annualht<qr.pred.five,
-                     cat<-"bottom10tofifty",
-                     cat<-"bottom10")))
-
-cat
-
-}
-
-annual.gr6$response.cat<-0
-
-for(i in 1:nrow(annual.gr6)){
-  annual.gr6$response.cat[i]<-valid.func(
-    annual.gr6$ht_annual[i],
-    annual.gr6$qr.pred.one[i],
-    annual.gr6$qr.pred.five[i],
-    annual.gr6$qr.pred.nine[i])
-
-}
-
-library(plyr)
-sorted.totals<-count(annual.gr6, 'response.cat')
-
-
-trellis.device(color = FALSE)
-
-lattice.options(default.theme = modifyList(standard.theme(color = 
-                                                            FALSE), list(strip.background = list(col = "transparent")))) 
-
-library(RColorBrewer)
-library(lattice)
-display.brewer.all()
-
-
-myColours <- brewer.pal(6,"Greens")
-## Create your own list with
-my.settings <- list(
-  superpose.polygon=list(col=myColours[2:5], border="transparent"),
-  strip.background=list(col=myColours[6]),
-  strip.border=list(col="black")
-)
-
-barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",
-        xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
-        main = "Witheld Data Height Growth Response
-        sorted by Quantile Category",ylim=c(0,.60),
-        par.settings = my.settings,
-        par.strip.text=list(col="white", font=2),
-        panel=function(x,y,...){
-          panel.grid(h=-1, v=0); 
-          panel.barchart(x,y,...)
-        })
+#                I(elevation^2) ,
+#             data=annual.gr4)
+# 
+# 
+# qr.SI.1 <-rq(ht_annual~srHeight_Total+
+#                cratio+
+#                TPA.OS+
+#                slopePercent +
+#                slopePercent:cos_rad_asp +
+#                slopePercent:sin_rad_asp +
+#                slopePercent:log(elevation+1) +
+#                slopePercent:log(elevation+1):cos_rad_asp +
+#                slopePercent:log(elevation+1):sin_rad_asp +
+#                slopePercent:I(elevation^2) +
+#                slopePercent:I(elevation^2):cos_rad_asp +
+#                slopePercent:I(elevation^2):sin_rad_asp +
+#                elevation +
+#                I(elevation^2) ,
+#              tau=.1 ,  data=annual.gr4)
+# 
+# 
+# # qr.SI.all <-rq(ht_annual~srHeight_Total+
+# #                cratio+
+# #                TPA.OS+
+# #                slopePercent +
+# #                slopePercent:cos_rad_asp +
+# #                slopePercent:sin_rad_asp +
+# #                slopePercent:log(elevation+1) +
+# #                slopePercent:log(elevation+1):cos_rad_asp +
+# #                slopePercent:log(elevation+1):sin_rad_asp +
+# #                slopePercent:I(elevation^2) +
+# #                slopePercent:I(elevation^2):cos_rad_asp +
+# #                slopePercent:I(elevation^2):sin_rad_asp +
+# #                elevation +
+# #                (elevation^2) ,
+# #              tau=c(1:9/10) ,  data=annual.gr4)
+# 
+# # qr.SI.all <-rq(ht_annual~srHeight_Total+
+# #                  cratio+
+# #                  TPA.OS+
+# #                  SiteIndex_Value ,
+# #                tau=c(1:9/10) ,  data=annual.gr4)
+# 
+# 
+# # summary(qr.SI.all)
+# 
+# 
+# # plot(summary(qr.SI.all),parm="TPA.OS")
+# # plot(summary(qr.SI.all),parm="cratio")
+# # plot(summary(qr.SI.all),parm="srHeight_Total")
+# 
+# 
+# 
+# 
+# qr.SI.5 <-rq(ht_annual~srHeight_Total+
+#                cratio+
+#                TPA.OS+
+#                slopePercent +
+#                slopePercent:cos_rad_asp +
+#                slopePercent:sin_rad_asp +
+#                slopePercent:log(elevation+1) +
+#                slopePercent:log(elevation+1):cos_rad_asp +
+#                slopePercent:log(elevation+1):sin_rad_asp +
+#                slopePercent:I(elevation^2) +
+#                slopePercent:I(elevation^2):cos_rad_asp +
+#                slopePercent:I(elevation^2):sin_rad_asp +
+#                elevation +
+#                I(elevation^2) ,
+#              tau=.5,  data=annual.gr4)
+# 
+# qr.SI.9 <-rq(ht_annual~srHeight_Total+
+#                cratio+
+#                TPA.OS+
+#                slopePercent +
+#                slopePercent:cos_rad_asp +
+#                slopePercent:sin_rad_asp +
+#                slopePercent:log(elevation+1) +
+#                slopePercent:log(elevation+1):cos_rad_asp +
+#                slopePercent:log(elevation+1):sin_rad_asp +
+#                slopePercent:I(elevation^2) +
+#                slopePercent:I(elevation^2):cos_rad_asp +
+#                slopePercent:I(elevation^2):sin_rad_asp +
+#                elevation +
+#                I(elevation^2) ,
+#              tau=.9 ,  data=annual.gr4)
+# 
+# 
+# 
+# annual.gr6$qr.pred.one <- predict.rq(qr.SI.1, annual.gr6)
+# annual.gr6$qr.pred.five <- predict.rq(qr.SI.5, annual.gr6)
+# annual.gr6$qr.pred.nine <- predict.rq(qr.SI.9, annual.gr6)
+# 
+# 
+#     
+# valid.func<-function(annualht,qr.pred.one,qr.pred.five,qr.pred.nine){
+#   # annualht<-1.2
+#   # qr.pred.one<-1
+#   # qr.pred.five<-1.6
+#   # qr.pred.nine<-1.6
+#   
+#  ifelse(annualht>qr.pred.nine,
+#        #yes
+#        cat<-"top10",
+#        #no
+#        ifelse(qr.pred.five<annualht&&annualht<qr.pred.nine,
+#               #yes
+#               cat<- "fiftytoninety",
+#               #no
+#               ifelse(qr.pred.one<annualht&&annualht<qr.pred.five,
+#                      cat<-"bottom10tofifty",
+#                      cat<-"bottom10")))
+# 
+# cat
+# 
+# }
+# 
+# annual.gr6$response.cat<-0
+# 
+# for(i in 1:nrow(annual.gr6)){
+#   annual.gr6$response.cat[i]<-valid.func(
+#     annual.gr6$ht_annual[i],
+#     annual.gr6$qr.pred.one[i],
+#     annual.gr6$qr.pred.five[i],
+#     annual.gr6$qr.pred.nine[i])
+# 
+# }
+# 
+# library(plyr)
+# sorted.totals<-count(annual.gr6, 'response.cat')
+# 
+# 
+# library(RColorBrewer)
+# library(lattice)
+# 
+# 
+# 
+# barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",
+#         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
+#         main = "Witheld Data Height Growth Response
+#         sorted by Quantile Category",ylim=c(0,.60),
+#         par.settings = my.settings,
+#         par.strip.text=list(col="white", font=2),
+#         panel=function(x,y,...){
+#           panel.grid(h=-1, v=0); 
+#           panel.barchart(x,y,...)
+#         })
 
 #Chi Squared test of homogeneity
 

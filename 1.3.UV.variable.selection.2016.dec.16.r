@@ -27,7 +27,7 @@ veg_record<- merge(splot, stp,by=c("Installation","Plot"))
 
 #Merges annual small tree growth records with 1m veg records for each year
 annual.gr3<- merge(annual.gr, veg_record,by=c("Installation","Plot","STP","Year_Measurement"))
-veg_record$STP[1]
+
 
 #4m data not collected until 2007, ok to compare to 1m data 
 #that was colected throughout study (1998)?
@@ -293,9 +293,6 @@ for(i in 1:nrow(annual.gr4)){
   )
 }
 
-mean(annual.gr4$treeminus_trans)
-mean(annual.gr4$treeminus)
-
 
 
 #Removes 6th stp plots from analysis
@@ -307,6 +304,9 @@ annual.gr4<-annual.gr4[!annual.gr4$STP_rand==6,]
 
 #Creates crown ratio variable for annual gr4
 annual.gr4$cratio<- annual.gr4$CrownLength/annual.gr4$Height_Total
+
+#Removes tree records with negative CR
+annual.gr4<-annual.gr4[!annual.gr4$cratio<0,]
 
 #Selects tree record of annual growth from similar installations
 annual.grUV<-annual.gr4[annual.gr4$Installation %in% sim, ]

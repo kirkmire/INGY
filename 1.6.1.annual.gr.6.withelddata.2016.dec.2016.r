@@ -1,8 +1,11 @@
 ######Overstory Tree Variables######
 #TPA, BAPA, Crown Competition Factor#
 
-
+#Creates CR variable
 annual.gr6$cratio<-annual.gr6$CrownLength/annual.gr6$Height_Total
+
+#Removes tree records with CR <0
+annual.gr6<-annual.gr6[!annual.gr6$cratio<0,]
 
 #Makes OS dbh that are NA = zero, NA typically corresponds to 
 #cut or dead trees, subsequent code wont (sum) aggregate NAs

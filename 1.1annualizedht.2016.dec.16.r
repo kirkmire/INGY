@@ -136,9 +136,12 @@ annual.gr<-annual.gr[,!(names(annual.gr) %in% other.names)]
 
 annual.gr<-annual.gr[!annual.gr$conc=="EM,1,5,636",]
 
+#Removes trees with negative height increments
+annual.gr<-annual.gr[!annual.gr$ht_annual<0,]
+
 
 # Look at damage codes
-table(droplevels(annual.gr$Damage)) # how many of these codes can you decipher?
+# table(droplevels(annual.gr$Damage)) # how many of these codes can you decipher?
 #SW=sweep
 #FT=forked top
 #FUT= damaged (f**ed up) top catchall
@@ -152,17 +155,17 @@ table(droplevels(annual.gr$Damage)) # how many of these codes can you decipher?
 #X=? (160 have this code), no damage?
 
 
-
-annual.gr[annual.gr$Damage=="D",] # dead? remove
-#will look up
-tempdf<-annual.gr[grep("RT",annual.gr$Damage,invert=F),] # dead top?
-
-
-table(droplevels(tempdf$Damage)) # how many of these codes can you decipher?
-
-
-hist(annual.gr$ht_annual)
-hist(tempdf$ht_annual)
+# 
+# annual.gr[annual.gr$Damage=="D",] # dead? remove
+# #will look up
+# tempdf<-annual.gr[grep("RT",annual.gr$Damage,invert=F),] # dead top?
+# 
+# 
+# table(droplevels(tempdf$Damage)) # how many of these codes can you decipher?
+# 
+# 
+# hist(annual.gr$ht_annual)
+# hist(tempdf$ht_annual)
 
 
 

@@ -1,81 +1,17 @@
 
 #Reads in previous scripts required (takes ~10min)
-source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/other_code/18.database.error.corrections.2016jun16.r',sep=""), echo=TRUE)
-source(paste(getwd(),'/1.1annualizedht.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
-source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
-
-#combines all aic.lists into one dataframe
-
-colnames(UT.aic)<-c("Variable","n","AIC")
-
-colnames(UV.aic)<-c("Variable","n","AIC")
-
-colnames(OS.aic)<-c("Variable","n","AIC")
-
-colnames(SQ.aic)<-c("Variable","n","AIC")
-
-aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
-
-aic.lists$AIC<-round(aic.lists$AIC,2)
-
-final.aic<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
-final.aic$X1[1:9]<-as.character(aic.lists$Variable[1:9])
-final.aic$X2[1:9]<-aic.lists$n[1:9]
-final.aic$X3[1:9]<-aic.lists$AIC[1:9]
-final.aic$X4[1:14]<-as.character(aic.lists$Variable[10:23])
-final.aic$X5[1:14]<-aic.lists$n[10:23]
-final.aic$X6[1:14]<-aic.lists$AIC[10:23]
-final.aic$X7[1:4]<-as.character(aic.lists$Variable[24:27])
-final.aic$X8[1:4]<-aic.lists$n[24:27]
-final.aic$X9[1:4]<-aic.lists$AIC[24:27]
-final.aic$X7[5]<-"Site"
-final.aic$X8[5]<-"n"
-final.aic$X9[5]<-"AIC"
-final.aic$X7[6:10]<-as.character(aic.lists$Variable[28:32])
-final.aic$X8[6:10]<-aic.lists$n[28:32]
-final.aic$X9[6:10]<-aic.lists$AIC[28:32]
+# source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/other_code/18.database.error.corrections.2016jun16.r',sep=""), echo=TRUE)
+# source(paste(getwd(),'/1.1annualizedht.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
+# source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
 
 
-
-#The code below will produce output that can then be copied over to the .tex file
-library(Hmisc)
-
-latex(final.aic, file="")            # If you want all the data
-# 
-# 
-# 
-# qr.sum<-data.frame(qr.SI.all$coefficients)
-# 
-# latex(qr.sum,file="")
-
-
-
-# annual.gr4<-annual.gr4[!annual.gr4$cratio<.01,]
-annual.gr4<-annual.gr4[!annual.gr4$ht_annual<0,]
-# annual.gr4<-annual.gr4[!is.na(annual.gr4$cratio)==T,]
-# 
-# 
-# 
-# #Would it be okay to use a mixed model in variable selection to account for within group
-# #(subject) correlation and then use regular rq in prediction?
-# 
-# 
-# 
-# annual.gr6<-annual.gr6[!annual.gr6$cratio<.01,]
-annual.gr6<-annual.gr6[!annual.gr6$ht_annual<0,]
-annual.gr6<-annual.gr6[!is.na(annual.gr6$cratio)==T,]
-# 
-# 
-# annual.gr4<-annual.gr4[!annual.gr4$ht_annual<0.2,]
-
-
-
+ 
 
 library(lqmm)
 
@@ -277,23 +213,7 @@ library(plyr)
 sorted.totals<-count(annual.gr6, 'response.cat')
 
 
-trellis.device(color = FALSE)
 
-lattice.options(default.theme = modifyList(standard.theme(color = 
-                                                            FALSE), list(strip.background = list(col = "transparent")))) 
-
-library(RColorBrewer)
-library(lattice)
-display.brewer.all()
-
-
-myColours <- brewer.pal(6,"Greens")
-## Create your own list with
-my.settings <- list(
-  superpose.polygon=list(col=myColours[2:5], border="transparent"),
-  strip.background=list(col=myColours[6]),
-  strip.border=list(col="black")
-)
 
 barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",
          xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
@@ -308,52 +228,52 @@ barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.c
 
 #Chi Squared test of homogeneity
 
-# 
-# annual.gr6.lessthan1<-annual.gr6[annual.gr6$Height_Total<4,]
-# annual.gr6.1to3<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
-# annual.gr6.3plus<-annual.gr6[annual.gr6$Height_Total>6,]
-# 
-# x.table1<-t(count(annual.gr6.lessthan1, 'response.cat'))
-# x.table1<-x.table1["freq",]
-# x.table1<-as.numeric(x.table1)
-# 
-# x.table2<-t(count(annual.gr6.1to3, 'response.cat'))
-# x.table2<-x.table2["freq",]
-# x.table2<-as.numeric(x.table2)
-# 
-# x.table3<-t(count(annual.gr6.3plus, 'response.cat'))
-# x.table3<-x.table3["freq",]
-# x.table3<-as.numeric(x.table3)
-# 
-# brkdwn<-rbind(x.table1,x.table2,x.table3)
-# 
-# 
-# min(annual.gr6$Height_Total)
-# 
-# hist(annual.gr6$Height_Total)
-# 
-# xsq1<-chisq.test(x.table1,p=c(.1,.4,.4,.1))
-# xsq1
-# xsq2<-chisq.test(x.table2,p=c(.1,.4,.4,.1))
-# xsq2
-# xsq3<-chisq.test(x.table3,p=c(.1,.4,.4,.1))
-# xsq3
-# #Exact test
-# 
-# library(XNomial)
-# xmulti1<-xmulti(x.table1,c(.1,.4,.4,.1),"Chisq")
-# xmulti2<-xmulti(x.table2,c(.1,.4,.4,.1),"Chisq")
-# xmulti3<-xmulti(x.table3,c(.1,.4,.4,.1),"Chisq")
-# 
-#  
-# chisq<-cbind(xsq1$p.value,xsq2$p.value,xsq3$p.value)
-# xact<-cbind(xmulti1$pChi,xmulti2$pChi,xmulti3$pChi)
-# 
-# chitable<-rbind(chisq,xact)
-# chitable<-round(chitable,digits=4)
-# 
-# rownames(chitable)<-c("ChiSq","Xact")
-# colnames(chitable)<-c("<4","4-6",">6")
+
+annual.gr6.lessthan1<-annual.gr6[annual.gr6$Height_Total<4,]
+annual.gr6.1to3<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
+annual.gr6.3plus<-annual.gr6[annual.gr6$Height_Total>6,]
+
+x.table1<-t(count(annual.gr6.lessthan1, 'response.cat'))
+x.table1<-x.table1["freq",]
+x.table1<-as.numeric(x.table1)
+
+x.table2<-t(count(annual.gr6.1to3, 'response.cat'))
+x.table2<-x.table2["freq",]
+x.table2<-as.numeric(x.table2)
+
+x.table3<-t(count(annual.gr6.3plus, 'response.cat'))
+x.table3<-x.table3["freq",]
+x.table3<-as.numeric(x.table3)
+
+brkdwn<-rbind(x.table1,x.table2,x.table3)
+
+
+min(annual.gr6$Height_Total)
+
+hist(annual.gr6$Height_Total)
+
+xsq1<-chisq.test(x.table1,p=c(.1,.4,.4,.1))
+xsq1
+xsq2<-chisq.test(x.table2,p=c(.1,.4,.4,.1))
+xsq2
+xsq3<-chisq.test(x.table3,p=c(.1,.4,.4,.1))
+xsq3
+#Exact test
+
+library(XNomial)
+xmulti1<-xmulti(x.table1,c(.1,.4,.4,.1),"Chisq")
+xmulti2<-xmulti(x.table2,c(.1,.4,.4,.1),"Chisq")
+xmulti3<-xmulti(x.table3,c(.1,.4,.4,.1),"Chisq")
+
+
+chisq<-cbind(xsq1$p.value,xsq2$p.value,xsq3$p.value)
+xact<-cbind(xmulti1$pChi,xmulti2$pChi,xmulti3$pChi)
+
+chitable<-rbind(chisq,xact)
+chitable<-round(chitable,digits=4)
+
+rownames(chitable)<-c("ChiSq","Xact")
+colnames(chitable)<-c("<4","4-6",">6")
 # 
 # #The code below will produce output that can then be copied over to the .tex file
 # library(Hmisc)

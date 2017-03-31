@@ -115,6 +115,9 @@ annual.gr2$CrownLength<-annual.gr2$Height_Total-annual.gr2$Height_CrownBase
 #Creates Crown Ratio Variable
 annual.gr2$cratio<- annual.gr2$CrownLength/annual.gr2$Height_Total
 
+#Removes trees with crown ratio <0
+
+annual.gr2<-annual.gr2[!annual.gr2$cratio<0,]
 
 # #GAM for Crownwidth ht class
 # gam.stCW<-gam(ht_annual~s(srHeight_Total)+s(CrownWidth),data=annual.gr2, family=gaussian(link="identity"))

@@ -243,20 +243,19 @@ print(xyplot(agg.over.data.TPA$TPA~ agg.over.data.TPA$Year_MeasurementOS | facto
 
 \hline
 
-Nothing&292&442.06&Nothing&555&707.89&Nothing&2155&2003.18\tabularnewline
-SmallTPA&292&608.29&POLV.cov&555&776.57&BAPA&2155&3571.89\tabularnewline
-Trees15+&292&396.13&F.cov&555&765.83&CCF&2155&1849.46\tabularnewline
-TGT&292&634.46&LS.cov&555&756.68&TPA&2155&3443.16\tabularnewline
-BD&292&320.05&HS.cov&555&711.04&Site&n&AIC\tabularnewline
-DBH&292&371.03&G.cov&555&901.38&SI&2155&3309.83\tabularnewline
-CrownWidth&292&392.57&LS.diff&555&707.55&Slope&2155&3447.14\tabularnewline
-CrownLength&292&381.89&HS.diff&555&708.31&Elevation&2155&3476.63\tabularnewline
-CrownRatio&292&335.38&LS.tran&555&708.09&Aspect&2155&3402.26\tabularnewline
-&&&HS.tran&555&709.26&SEA Int&2155&3318.15\tabularnewline
-&&&G.tran.diff&555&708.54&&&\tabularnewline
-&&&G.tran.cov&555&708.94&&&\tabularnewline
-&&&mx.vg.diff1m&555&707.72&&&\tabularnewline
-&&&mx.vg.diff.tr&555&709.53&&&\tabularnewline
+Nothing&286&405.95&Nothing&542&602.54&Nothing&2101&1753.78\tabularnewline
+SmallTPA&286&325.15&POLV.cov&542&602.01&BAPA&2101&1683.35\tabularnewline
+Trees15+&286&350.99&F.cov&542&603.99&CCF&2101&1591.72\tabularnewline
+TGT&286&326.18&LS.cov&542&604.02&TPA&2101&1535.55\tabularnewline
+BD&286&284.47&HS.cov&542&603.72&Site&n&AIC\tabularnewline
+DBH&286&332.4&LS.diff&542&604.19&SI&2101&1345.59\tabularnewline
+CrownWidth&286&348.06&HS.diff&542&601.58&Slope&2101&1531.85\tabularnewline
+CrownLength&286&344&LS.tran&542&604.37&Elevation&2101&1533.34\tabularnewline
+CrownRatio&286&297.61&HS.tran&542&603.68&Aspect&2101&1489.3\tabularnewline
+&&&G.tran.diff&542&604.47&SEA Int&2101&1284.24\tabularnewline
+&&&G.tran.cov&542&604.16&&&\tabularnewline
+&&&mx.vg.diff1m&542&603.73&&&\tabularnewline
+&&&mx.vg.diff.tr&542&604.78&&&\tabularnewline
 
 \hline
 \end{tabular}
@@ -384,14 +383,42 @@ print(barchart(sorted.totals$freq~sorted.totals$response.cat, names = "Quantile 
 \end{figure}
 
 
+\begin{figure}[!htb]
+\begin{center}
+<<label=predmean,fig=TRUE,echo=FALSE>>=
+
+###looking at predicted median vs actual ht growth increments
+
+
+plot(annual.gr6$ht_annual,annual.gr6$qr.pred.five,
+         pch = 16,
+         col ="grey60")
+
+# abline(fit<-lm(annual.gr6$qr.pred.one~sqrt(annual.gr6$ht_annual)),col="red")
+# abline(fit<-lm(annual.gr6$qr.pred.five~sqrt(annual.gr6$ht_annual)),col="blue")
+# abline(fit<-lm(annual.gr6$qr.pred.nine~sqrt(annual.gr6$ht_annual)),col="green")
+# # points(annual.gr6$ht_annual,annual.gr6$qr.pred.one,col="red")
+# # points(annual.gr6$ht_annual,annual.gr6$qr.pred.nine,col="green")
+# # points(annual.gr6$ht_annual,annual.gr6$lm_ht,col="yellow")
+# abline(fit<-lm(annual.gr6$lm_ht~sqrt(annual.gr6$ht_annual)),col="black")
+
+@
+\end{center}
+\caption{Annual height increment vs predicted lqmm median height increment\label{fig:predmean}}
+\end{figure}
+
+
+
+
+
 \begin{table}[!tbp]
 \begin{center}
 \begin{tabular}{lrrr}
 \hline\hline
 \multicolumn{1}{l}{chitable}&\multicolumn{1}{c}{\textless 4}&\multicolumn{1}{c}{4-6}&\multicolumn{1}{c}{\textgreater 6}\tabularnewline
 \hline
-ChiSq&$2e-04$&$0.1019$&$0.0908$\tabularnewline
-Xact&$3e-04$&$0.0988$&$0.0898$\tabularnewline
+ChiSq&$0.0098$&$0e+00$&$0$\tabularnewline
+Xact&$0.0102$&$1e-04$&$0$\tabularnewline
 \hline
 \end{tabular}\end{center}
 \label{tab:chisqexact}
@@ -403,9 +430,9 @@ Xact&$3e-04$&$0.0988$&$0.0898$\tabularnewline
 \hline\hline
 \multicolumn{1}{l}{actual}&\multicolumn{1}{c}{\textless .1}&\multicolumn{1}{c}{.1to.5}&\multicolumn{1}{c}{.5tpo.9}&\multicolumn{1}{c}{\textgreater .9}\tabularnewline
 \hline
-\textless 4&$ 4$&$ 40$&$43$&$24$\tabularnewline
-4-6&$12$&$ 42$&$24$&$ 8$\tabularnewline
-\textgreater 6&$39$&$107$&$97$&$28$\tabularnewline
+\textless 4&$ 8$&$33$&$48$&$20$\tabularnewline
+4-6&$21$&$33$&$21$&$10$\tabularnewline
+\textgreater 6&$57$&$88$&$74$&$49$\tabularnewline
 \hline
 \end{tabular}\end{center}
 \label{tab:actual}

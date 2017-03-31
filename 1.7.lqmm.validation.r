@@ -69,6 +69,28 @@ qr.SI.9 <-lqmm(ht_annual~srHeight_Total+
                group=conc,random=~1,nK=100,
                control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),tau=c(.9),data=annual.gr4)
 
+
+qr.SI.all <-lqmm(ht_annual~srHeight_Total+
+                 cratio+
+                 TPA.OS+
+                 slopePercent +
+                 slopePercent:cos_rad_asp +
+                 slopePercent:sin_rad_asp +
+                 slopePercent:log(elevation+1) +
+                 slopePercent:log(elevation+1):cos_rad_asp +
+                 slopePercent:log(elevation+1):sin_rad_asp +
+                 slopePercent:I(elevation^2) +
+                 slopePercent:I(elevation^2):cos_rad_asp +
+                 slopePercent:I(elevation^2):sin_rad_asp +
+                 elevation +
+                 I(elevation^2) ,
+               group=conc,random=~1,nK=100,
+               control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),
+               tau=c(.1,.5,.9),data=annual.gr4)
+
+
+
+
 one.func<-function(srHeight_Total,cratio,TPA.OS, slopePercent,cos_rad_asp,sin_rad_asp,
   elevation){
 pred<-(coef(qr.SI.1)[1]+
@@ -171,7 +193,6 @@ for(i in 1:nrow(annual.gr6)){
 }
 
 
-hist(annual.gr6$qr.pred.one)
 
 
 
@@ -215,82 +236,84 @@ sorted.totals<-count(annual.gr6, 'response.cat')
 
 
 
-barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",
-         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
-         main = "Witheld Data Height Growth Response
-         sorted by Quantile Category",ylim=c(0,.60),
-         par.settings = my.settings,
-         par.strip.text=list(col="white", font=2),
-         panel=function(x,y,...){
-           panel.grid(h=-1, v=0); 
-           panel.barchart(x,y,...)
-         })
+# barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",
+#          xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
+#          main = "Witheld Data Height Growth Response
+#          sorted by Quantile Category",ylim=c(0,.60),
+#          # par.settings = my.settings,
+#          par.strip.text=list(col="white", font=2),
+#          panel=function(x,y,...){
+#            panel.grid(h=-1, v=0); 
+#            panel.barchart(x,y,...)
+#          })
 
 #Chi Squared test of homogeneity
 
 
-annual.gr6.lessthan1<-annual.gr6[annual.gr6$Height_Total<4,]
-annual.gr6.1to3<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
-annual.gr6.3plus<-annual.gr6[annual.gr6$Height_Total>6,]
-
-x.table1<-t(count(annual.gr6.lessthan1, 'response.cat'))
-x.table1<-x.table1["freq",]
-x.table1<-as.numeric(x.table1)
-
-x.table2<-t(count(annual.gr6.1to3, 'response.cat'))
-x.table2<-x.table2["freq",]
-x.table2<-as.numeric(x.table2)
-
-x.table3<-t(count(annual.gr6.3plus, 'response.cat'))
-x.table3<-x.table3["freq",]
-x.table3<-as.numeric(x.table3)
-
-brkdwn<-rbind(x.table1,x.table2,x.table3)
-
-
-min(annual.gr6$Height_Total)
-
-hist(annual.gr6$Height_Total)
-
-xsq1<-chisq.test(x.table1,p=c(.1,.4,.4,.1))
-xsq1
-xsq2<-chisq.test(x.table2,p=c(.1,.4,.4,.1))
-xsq2
-xsq3<-chisq.test(x.table3,p=c(.1,.4,.4,.1))
-xsq3
-#Exact test
-
-library(XNomial)
-xmulti1<-xmulti(x.table1,c(.1,.4,.4,.1),"Chisq")
-xmulti2<-xmulti(x.table2,c(.1,.4,.4,.1),"Chisq")
-xmulti3<-xmulti(x.table3,c(.1,.4,.4,.1),"Chisq")
-
-
-chisq<-cbind(xsq1$p.value,xsq2$p.value,xsq3$p.value)
-xact<-cbind(xmulti1$pChi,xmulti2$pChi,xmulti3$pChi)
-
-chitable<-rbind(chisq,xact)
-chitable<-round(chitable,digits=4)
-
-rownames(chitable)<-c("ChiSq","Xact")
-colnames(chitable)<-c("<4","4-6",">6")
+# annual.gr6.lessthan1<-annual.gr6[annual.gr6$Height_Total<4,]
+# annual.gr6.1to3<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
+# annual.gr6.3plus<-annual.gr6[annual.gr6$Height_Total>6,]
+# 
+# x.table1<-t(count(annual.gr6.lessthan1, 'response.cat'))
+# x.table1<-x.table1["freq",]
+# x.table1<-as.numeric(x.table1)
+# 
+# x.table2<-t(count(annual.gr6.1to3, 'response.cat'))
+# x.table2<-x.table2["freq",]
+# x.table2<-as.numeric(x.table2)
+# 
+# x.table3<-t(count(annual.gr6.3plus, 'response.cat'))
+# x.table3<-x.table3["freq",]
+# x.table3<-as.numeric(x.table3)
+# 
+# brkdwn<-rbind(x.table1,x.table2,x.table3)
+# 
+# 
+# min(annual.gr6$Height_Total)
+# 
+# hist(annual.gr6$Height_Total)
+# 
+# xsq1<-chisq.test(x.table1,p=c(.1,.4,.4,.1))
+# xsq1
+# xsq2<-chisq.test(x.table2,p=c(.1,.4,.4,.1))
+# xsq2
+# xsq3<-chisq.test(x.table3,p=c(.1,.4,.4,.1))
+# xsq3
+# #Exact test
+# 
+# library(XNomial)
+# xmulti1<-xmulti(x.table1,c(.1,.4,.4,.1),"Chisq")
+# xmulti2<-xmulti(x.table2,c(.1,.4,.4,.1),"Chisq")
+# xmulti3<-xmulti(x.table3,c(.1,.4,.4,.1),"Chisq")
+# 
+# 
+# chisq<-cbind(xsq1$p.value,xsq2$p.value,xsq3$p.value)
+# xact<-cbind(xmulti1$pChi,xmulti2$pChi,xmulti3$pChi)
+# 
+# chitable<-rbind(chisq,xact)
+# chitable<-round(chitable,digits=4)
+# 
+# rownames(chitable)<-c("ChiSq","Xact")
+# colnames(chitable)<-c("<4","4-6",">6")
 # 
 # #The code below will produce output that can then be copied over to the .tex file
-# library(Hmisc)
+library(Hmisc)
 # 
-# latex(chitable, file="")     
+
+
+latex(qr.SI.5, file="")     
 # 
 # ###
 # actual<-rbind(x.table1,x.table2,x.table3)
 # rownames(actual)<-c("<4","4-6",">6")
 # colnames(actual)<-c("<.1",".1to.5",".5tpo.9",">.9")
-# 
-# 
+
+
 # #The code below will produce output that can then be copied over to the .tex file
 # library(Hmisc)
-# 
+# # 
 # latex(actual, file="")     
-
+# 
 
 
 #Look at one installations trees

@@ -168,9 +168,9 @@ for(i in 1:nrow(annual.gr4)){
     annual.gr4$elevation[i])
 }
 
-sea.si<-lm(annual.gr4$SEA.val~annual.gr4$SiteIndex_Value)
-plot(annual.gr4$SEA.val~annual.gr4$SiteIndex_Value)
-abline(sea.si)
+# sea.si<-lm(annual.gr4$SEA.val~annual.gr4$SiteIndex_Value)
+# plot(annual.gr4$SEA.val~annual.gr4$SiteIndex_Value)
+# abline(sea.si)
 
 
 

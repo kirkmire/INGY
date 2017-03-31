@@ -248,7 +248,7 @@ annual.gr2<-annual.gr2[!annual.gr2$cratio<0,]
 
 
 #####Quantile Regression
-library(quantreg)
+
 library(lqmm)
 
 #QR for nothing
@@ -364,9 +364,6 @@ qr.stcl<-lqmm(ht_annual~srHeight_Total+cratio,random=~1,nK=100,
 # summary(qr.stcl)
 aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stcl)[1])
 nlist.lqmm<-c(nlist.lqmm,length(qr.stcl$y))
-
-length(aic.list.lqmm)
-length(nlist.lqmm)
 
 UT.aic<-as.data.frame(cbind(nlist.lqmm,aic.list.lqmm))
 

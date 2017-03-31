@@ -161,8 +161,8 @@ agg.over.data<-rbind(newRow22,agg.over.data)
 
 
 #plot basal areas to check for missing inst/years
-library(lattice)
-xyplot(agg.over.data$over.sum.bapa~agg.over.data$Year_MeasurementOS|agg.over.data$Installation,groups=agg.over.data$Plot)
+# library(lattice)
+# xyplot(agg.over.data$over.sum.bapa~agg.over.data$Year_MeasurementOS|agg.over.data$Installation,groups=agg.over.data$Plot)
 
 #Upper Metcalf OSBA decreased bt 1999 and 2010 across all installations
 #possible reasons are mortality, harvest or measurement error
@@ -335,9 +335,6 @@ agg.over.data.CCF<-rbind(newRow21,agg.over.data.CCF)
 newRow22<- data.frame(Installation="PC",Plot=7,Year_MeasurementOS=2008,CCF=0,conc="PC,7,2008")
 agg.over.data.CCF<-rbind(newRow22,agg.over.data.CCF)
 
-library(lattice)
-
-
 
 #Obtains an estimate of CCF at the plot level
 
@@ -475,9 +472,9 @@ agg.over.data.TPA<-rbind(newRow21,agg.over.data.TPA)
 
 newRow22<- data.frame(Installation="PC",Plot=7,Year_MeasurementOS=2008,TPA=0,conc="PC,7,2008")
 agg.over.data.TPA<-rbind(newRow22,agg.over.data.TPA)
-
-library(lattice)
-xyplot(agg.over.data.TPA$TPA~agg.over.data.TPA$Year_MeasurementOS|factor(agg.over.data.TPA$Installation))
+# 
+# library(lattice)
+# xyplot(agg.over.data.TPA$TPA~agg.over.data.TPA$Year_MeasurementOS|factor(agg.over.data.TPA$Installation))
 
 #Obtains an estimate of TPA at the plot level 
 #Is it proper to linearly model the TPA...it doesnt change 

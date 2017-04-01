@@ -14,47 +14,47 @@ source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
 
 #combines all aic.lists into one dataframe
 
-# colnames(UT.aic)<-c("Variable","n","AIC")
-# 
-# colnames(UV.aic)<-c("Variable","n","AIC")
-# 
-# colnames(OS.aic)<-c("Variable","n","AIC")
-# 
-# colnames(SQ.aic)<-c("Variable","n","AIC")
-# 
-# aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
-# 
-# aic.lists$AIC<-round(aic.lists$AIC,2)
-# 
-# final.aic<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
-# final.aic$X1[1:9]<-as.character(aic.lists$Variable[1:9])
-# final.aic$X2[1:9]<-aic.lists$n[1:9]
-# final.aic$X3[1:9]<-aic.lists$AIC[1:9]
-# final.aic$X4[1:13]<-as.character(aic.lists$Variable[10:22])
-# final.aic$X5[1:13]<-aic.lists$n[10:22]
-# final.aic$X6[1:13]<-aic.lists$AIC[10:22]
-# final.aic$X7[1:4]<-as.character(aic.lists$Variable[23:26])
-# final.aic$X8[1:4]<-aic.lists$n[23:26]
-# final.aic$X9[1:4]<-aic.lists$AIC[23:26]
-# final.aic$X7[5]<-"Site"
-# final.aic$X8[5]<-"n"
-# final.aic$X9[5]<-"AIC"
-# final.aic$X7[6:10]<-as.character(aic.lists$Variable[27:31])
-# final.aic$X8[6:10]<-aic.lists$n[27:31]
-# final.aic$X9[6:10]<-aic.lists$AIC[27:31]
+colnames(UT.aic)<-c("Variable","n","AIC")
+
+colnames(UV.aic)<-c("Variable","n","AIC")
+
+colnames(OS.aic)<-c("Variable","n","AIC")
+
+colnames(SQ.aic)<-c("Variable","n","AIC")
+
+aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
+
+aic.lists$AIC<-round(aic.lists$AIC,2)
+
+final.aic<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
+final.aic$X1[1:9]<-as.character(aic.lists$Variable[1:9])
+final.aic$X2[1:9]<-aic.lists$n[1:9]
+final.aic$X3[1:9]<-aic.lists$AIC[1:9]
+final.aic$X4[1:13]<-as.character(aic.lists$Variable[10:22])
+final.aic$X5[1:13]<-aic.lists$n[10:22]
+final.aic$X6[1:13]<-aic.lists$AIC[10:22]
+final.aic$X7[1:4]<-as.character(aic.lists$Variable[23:26])
+final.aic$X8[1:4]<-aic.lists$n[23:26]
+final.aic$X9[1:4]<-aic.lists$AIC[23:26]
+final.aic$X7[5]<-"Site"
+final.aic$X8[5]<-"n"
+final.aic$X9[5]<-"AIC"
+final.aic$X7[6:10]<-as.character(aic.lists$Variable[27:31])
+final.aic$X8[6:10]<-aic.lists$n[27:31]
+final.aic$X9[6:10]<-aic.lists$AIC[27:31]
 
 
 
 #The code below will produce output that can then be copied over to the .tex file
-# library(Hmisc)
-# 
-# latex(final.aic, file="")            # If you want all the data
-#
-#
-#
-# qr.sum<-data.frame(qr.SI.all$coefficients)
-#
-# latex(qr.sum,file="")
+library(Hmisc)
+
+latex(final.aic, file="")            # If you want all the data
+
+
+
+qr.sum<-data.frame(qr.SI.all$coefficients)
+
+latex(qr.sum,file="")
 
 
 # annual.gr4<-annual.gr4[!is.na(annual.gr4$cratio)==T,]

@@ -28,7 +28,7 @@ qr.SI.1 <-lqmm(ht_annual~srHeight_Total+
                slopePercent:I(elevation^2):sin_rad_asp +
                elevation +
                I(elevation^2) ,
-               group=conc,random=~1,nK=100,
+               group=conc,random=~1,
                control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),tau=c(.1),data=annual.gr4)
 
 
@@ -46,7 +46,7 @@ qr.SI.5 <-lqmm(ht_annual~srHeight_Total+
                  slopePercent:I(elevation^2):sin_rad_asp +
                  elevation +
                  I(elevation^2) ,
-               group=conc,random=~1,nK=100,
+               group=conc,random=~1,
                control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),tau=c(.5),data=annual.gr4)
 
 
@@ -64,7 +64,7 @@ qr.SI.9 <-lqmm(ht_annual~srHeight_Total+
                  slopePercent:I(elevation^2):sin_rad_asp +
                  elevation +
                  I(elevation^2) ,
-               group=conc,random=~1,nK=100,
+               group=conc,random=~1,
                control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),tau=c(.9),data=annual.gr4)
 
 #Below is for engel plots of coefficients

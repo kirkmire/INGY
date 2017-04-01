@@ -17,9 +17,10 @@ source(paste(getwd(),'/1.6.model.evaluation.2016.dec.16.r',sep=""))
 \usepackage{times}
 \usepackage{array}
 \usepackage{setspace}
-\usepackage[style=authoryear, backend=biber]{biblatex}
+\usepackage[style=authoryear, backend=bibtex]{biblatex}
 \usepackage{filecontents}
-\bibliography{library.bib,other.bib}
+\addbibresource{library.bib}
+\addbibresource{other.bib}
 \usepackage{tocloft}
 \usepackage{tocbibind}
 \usepackage{xpatch}

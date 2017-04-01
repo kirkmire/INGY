@@ -67,7 +67,7 @@ Twenty-six study sites were established on private, public and tribal forestland
 
 \begin{figure}[!htb]
 \begin{center}
-    \includegraphics[width=.8\textwidth]{map_w_dots.jpg}
+    \includegraphics{map_w_dots.jpg}
     \caption{Map of STCV Installations, those included in this study labeled with a black \label{fig:map}}
 \end{center}
 \end{figure}
@@ -237,7 +237,7 @@ There are few examples of quantile regression in applied forest growth modeling.
 
 \begin{figure}[!htb]
 \begin{center}
-    \includegraphics[width=160mm]{threedOSBA_SI.jpg}
+    \includegraphics{threedOSBA_SI.jpg}
     \caption{Quantile Regression Visualization.  \label{fig:quantRegvis}}
     
 \end{center}
@@ -245,7 +245,7 @@ There are few examples of quantile regression in applied forest growth modeling.
 
 More recently, Araujo et al. utilized quantile regression to obtain localized site index curves in Eucalyptus plantation stands. The authors found that estimates made with quantile regression generate a more accurate family of height growth curves between the observed data than by the guide curve method, obtained using standard regression. These examples of successful use of quantile regression in forestry are encouraging and lend support to this effort to use it to describe the growth of ponderosa pine.
 
-A recently developed class of models called linear quantile mixed models (LQMMs, \cite{marcoLQMMart}) extend quantile regression framework to models with random intercepts. These models are based on the asymmetric Laplace (AL) likelihood and will be used to account for the correlation between repeated measures of individual subject trees. A random intercept is included in the linear predictor to account this correlation and the rest of the selected variables are considered as fixed effects. The optimization algorithm utilizes a derivative-free minimization of the negative integrated log-likelihood. The parameters of this optimization will be set to a ${\omega_1}$=.1, number of max iterations set to 1000 and the number of quadrature points set to 100. 
+While quantile regression allows us to describe the distribution of the response variable, there remains an issue of within subject variability that should be addressed to avoid bias in the parameter estimates. Fortunately, a recently developed class of models called linear quantile mixed models (LQMMs, \cite{marcoLQMMart}) extend quantile regression framework to the analysis of longitudinal data. This method estimates the conditional quantile functions with subject-specific location-shift random effects (\cite{Geraci2007a}). The likelihood is based on the asmmetric Laplace density (ALD), which provides an optimum level of penalization. The optimization algorithm utilizes a derivative-free minimization of the negative integrated log-likelihood. The parameters of this optimization will be set to a ${\omega_1}$=.1, number of max iterations set to 1000 and the number of quadrature points set to 7. 
 
 
 \subsection{Variable Acquisition}
@@ -298,38 +298,7 @@ Only the installations with greater than 60 ponderosa pine tagged small trees at
 
 
 
-\begin{figure}[!htb]
-\begin{center}
-<<label=numbPond, fig=TRUE,width=6,height=4,echo=FALSE>>=
-#Frequency Plot by Species#
-pipond<-pi[!pi$Installation %in% drp60,]
-#sort(pipond$Freq,decreasing=F)
-pipond<- pipond[order(pipond$Freq),] 
 
-
-
-library(lattice)
-
-print(barchart(pipond$Freq ~ pipond$Installation,
-         origin=0, 
-         #main="Motor insurance claims frequency"
-         xlab="Installation", ylab="Number of Tagged Small Ponderosa Pine Trees",
-        scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)), 
-         ylim=c(0,270),
-          col=myColours[4],
-         par.settings = my.settings,
-         par.strip.text=list(col="white", font=2),
-         panel=function(x,y,...){
-           panel.grid(h=-1, v=0); 
-           panel.barchart(x,y,...)
-         }
-))
-
-
-@
-\end{center}
-\caption{Number of Small Tagged Ponderosa Pine Trees\label{fig:numbPond}}
-\end{figure}
 
 
 \begin{equation}\label{eq:Eq2}
@@ -416,12 +385,7 @@ The inherent site productivity of the installations was measured using site tree
 \end{center}
 \end{figure}
 
-\begin{figure}[!htb]
-\begin{center}
-    \includegraphics{polar_plot.jpg}
-    \caption{Aspect and Elevation of each Plot\label{fig:polar_plot}}
-\end{center}
-\end{figure}
+
 
 
 

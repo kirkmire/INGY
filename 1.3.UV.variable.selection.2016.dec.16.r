@@ -306,7 +306,7 @@ annual.gr4<-annual.gr4[!annual.gr4$STP_rand==6,]
 annual.gr4$cratio<- annual.gr4$CrownLength/annual.gr4$Height_Total
 
 #Removes tree records with negative CR
-annual.gr4<-annual.gr4[!annual.gr4$cratio<0,]
+annual.gr4 <- annual.gr4[!is.na(annual.gr4$cratio) & annual.gr4$cratio>=0,]
 
 #Selects tree record of annual growth from similar installations
 annual.grUV<-annual.gr4[annual.gr4$Installation %in% sim, ]
@@ -445,7 +445,7 @@ library(lqmm)
 #QR for nothing
 annual.grUV<-annual.grUV[!is.na(annual.grUV$cratio)==T,]
 
-qrCW.noth<-lqmm(ht_annual~srHeight_Total+cratio,random=~1,nK=100,
+qrCW.noth<-lqmm(ht_annual~srHeight_Total+cratio,random=~1,
                 na.action=na.exclude,
                 group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qrCW.noth)
@@ -454,7 +454,7 @@ nlqmm.list.UV<-length(qrCW.noth$y)
 
 
 #QR for 1m polyveg cover
-qrCW.1m.polv<-lqmm(ht_annual~srHeight_Total+Cov.POLV+cratio,random=~1,nK=100,
+qrCW.1m.polv<-lqmm(ht_annual~srHeight_Total+Cov.POLV+cratio,random=~1,
                    na.action=na.exclude,
                    group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qrCW.1m.polv)
@@ -463,7 +463,7 @@ nlqmm.list.UV<-c(nlqmm.list.UV,length(qrCW.1m.polv$y))
 
 
 #QR for 1m Forb cover
-qrCW.1m.F<-lqmm(ht_annual~srHeight_Total+Cov.F+cratio,random=~1,nK=100,
+qrCW.1m.F<-lqmm(ht_annual~srHeight_Total+Cov.F+cratio,random=~1,
                 na.action=na.exclude,
                 group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qrCW.1m.F)
@@ -471,7 +471,7 @@ aic.lqmm.list.vegCW<-c(aic.lqmm.list.vegCW,AIC(qrCW.1m.F)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.F$y))
 
 #QR for 1m LOW Shrub cover
-qrCW.1m.LS<-lqmm(ht_annual~srHeight_Total+Cov.LS+cratio,random=~1,nK=100,
+qrCW.1m.LS<-lqmm(ht_annual~srHeight_Total+Cov.LS+cratio,random=~1,
                  na.action=na.exclude,
                  group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qrCW.1m.LS)
@@ -479,7 +479,7 @@ aic.lqmm.list.vegCW<-c(aic.lqmm.list.vegCW,AIC(qrCW.1m.LS)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.LS$y))
 
 #QR for 1m High Shrub cover
-qrCW.1m.HS<-lqmm(ht_annual~srHeight_Total+Cov.HS+cratio,random=~1,nK=100,
+qrCW.1m.HS<-lqmm(ht_annual~srHeight_Total+Cov.HS+cratio,random=~1,
                  na.action=na.exclude,
                  group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qrCW.1m.HS)
@@ -499,7 +499,7 @@ nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.HS$y))
 #nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.F$y))
 
 #QR for 1m LOW Shrub diff
-qrCW.1m.LS<-lqmm(ht_annual~srHeight_Total+diff.LS.1m+cratio,random=~1,nK=100,
+qrCW.1m.LS<-lqmm(ht_annual~srHeight_Total+diff.LS.1m+cratio,random=~1,
                  na.action=na.exclude,
                  group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qrCW.1m.LS)
@@ -507,7 +507,7 @@ aic.lqmm.list.vegCW<-c(aic.lqmm.list.vegCW,AIC(qrCW.1m.LS)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.LS$y))
 
 #QR for 1m High Shrub diff
-qrCW.1m.HS<-lqmm(ht_annual~srHeight_Total+diff.HS.1m+cratio,random=~1,nK=100,
+qrCW.1m.HS<-lqmm(ht_annual~srHeight_Total+diff.HS.1m+cratio,random=~1,
                  na.action=na.exclude,
                  group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qrCW.1m.HS)
@@ -528,7 +528,7 @@ nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.HS$y))
 #nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.forb.tran$y))
 
 #QR for LS transect cover
-qr.LS.tran<-lqmm(ht_annual~srHeight_Total+diff.LS+cratio,random=~1,nK=100,
+qr.LS.tran<-lqmm(ht_annual~srHeight_Total+diff.LS+cratio,random=~1,
                  na.action=na.exclude,
                  group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qr.LS.tran)
@@ -536,7 +536,7 @@ aic.lqmm.list.vegCW<-c(aic.lqmm.list.vegCW,AIC(qr.LS.tran)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV, length(qr.LS.tran$y))
 
 #QR for HS transect cover
-qr.HS.tran<-lqmm(ht_annual~srHeight_Total+diff.HS+cratio,random=~1,nK=100,
+qr.HS.tran<-lqmm(ht_annual~srHeight_Total+diff.HS+cratio,random=~1,
                  na.action=na.exclude,
                  group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qr.HS.tran)
@@ -549,7 +549,7 @@ nlqmm.list.UV<-c(nlqmm.list.UV, length(qr.HS.tran$y))
 #aic.lqmm.list.vegCW<-c(aic.lqmm.list.vegCW,AIC(qrCW.forb.shrub.tran)[1])
 
 #QR for transect grass height
-qrCW.tran.gr<-lqmm(ht_annual~srHeight_Total+grass.ht+cratio,random=~1,nK=100,
+qrCW.tran.gr<-lqmm(ht_annual~srHeight_Total+grass.ht+cratio,random=~1,
                    na.action=na.exclude,
                    group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qrCW.tran.gr)
@@ -557,7 +557,7 @@ aic.lqmm.list.vegCW<-c(aic.lqmm.list.vegCW,AIC(qrCW.tran.gr)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.tran.gr$y))
 
 #QR for transect grass cover
-qrCW.tran.gr.cov<-lqmm(ht_annual~srHeight_Total+tran.G+cratio,random=~1,nK=100,
+qrCW.tran.gr.cov<-lqmm(ht_annual~srHeight_Total+tran.G+cratio,random=~1,
                        na.action=na.exclude,
                       group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qrCW.tran.gr.cov)
@@ -565,7 +565,7 @@ aic.lqmm.list.vegCW<-c(aic.lqmm.list.vegCW,AIC(qrCW.tran.gr.cov)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.tran.gr.cov$y))
 
 #QR for init tree height max veg difference (1m veg plot)
-qrCW.1m.max.vg.diff<-lqmm(ht_annual~srHeight_Total+treeminus+cratio,random=~1,nK=100,
+qrCW.1m.max.vg.diff<-lqmm(ht_annual~srHeight_Total+treeminus+cratio,random=~1,
                           na.action=na.exclude,
                           group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qrCW.1m.max.vg.diff)
@@ -573,7 +573,7 @@ aic.lqmm.list.vegCW<-c(aic.lqmm.list.vegCW,AIC(qrCW.1m.max.vg.diff)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.max.vg.diff$y))
 
 #QR for init tree height max veg difference (transect)
-qrCW.1m.max.vg.diff.tran<-lqmm(ht_annual~srHeight_Total+treeminus_trans+cratio,random=~1,nK=100,
+qrCW.1m.max.vg.diff.tran<-lqmm(ht_annual~srHeight_Total+treeminus_trans+cratio,random=~1,
                                na.action=na.exclude,
                                group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.grUV)
 # summary(qrCW.1m.max.vg.diff.tran)

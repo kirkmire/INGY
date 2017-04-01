@@ -5,7 +5,6 @@
 \setcounter{page}{1}
 \normalsize
 \noindent 
-\doublespace
 
 \section{Introduction}
 

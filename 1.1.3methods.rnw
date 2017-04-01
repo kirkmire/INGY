@@ -274,7 +274,7 @@ All retained overstory variables were linearly interpolated between overstory me
 \noindent\textbf{Site Quality:}
 Slope (\%), elevation (m) and aspect (degrees from North) were calculated using Google Earth Engine (\cite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180) and $\sin$((aspect*$\pi$)/180). Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (\cite{Stage2007a}):
 
-\begin{singlespace}
+
 \begin{equation}\label{eq:Eq1}
 \begin{aligned}
 y &= b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)]+\text{ln}(el+1)*s[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)]+  \\
@@ -286,7 +286,7 @@ y &= b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)]+\text{ln}(el+1
 \end{aligned}
 \end{equation}
 \myequations{Equation number \ref{eq:Eq1}}
-\end{singlespace}
+
 
 
 Site index was included from STCV records of each installation's initiation. An open grown dominate site tree was identified at the initiation of the site and site index calculated from standard site index curves. Site index species was ponderosa pine for the installations included in analysis although many other species were used at other installations. 

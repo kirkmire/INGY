@@ -67,7 +67,7 @@ Twenty-six study sites were established on private, public and tribal forestland
 
 \begin{figure}[!htb]
 \begin{center}
-    \includegraphics{map_w_dots.jpg}
+    \includegraphics{map_w_dots2.jpg}
     \caption{Map of STCV Installations, those included in this study labeled with a black \label{fig:map}}
 \end{center}
 \end{figure}
@@ -237,8 +237,8 @@ There are few examples of quantile regression in applied forest growth modeling.
 
 \begin{figure}[!htb]
 \begin{center}
-    \includegraphics{threedOSBA_SI.jpg}
-    \caption{Quantile Regression Visualization.  \label{fig:quantRegvis}}
+    \includegraphics{quant.reg.ex.jpg}
+    \caption{Quantile Regression Visualization. The green, yellow and red surfaces represent the $\tau$= .1, .5 and .9 quantiles, respectively.  \label{fig:quant.reg.ex}}
     
 \end{center}
 \end{figure}

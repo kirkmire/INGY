@@ -10,6 +10,10 @@
 \usepackage{times}
 \usepackage{array}
 \usepackage{setspace}
+\usepackage{etoolbox}
+\BeforeBeginEnvironment{equation}{\begin{singlespace}}
+\AfterEndEnvironment{equation}{\end{singlespace}\noindent\ignorespaces}
+
 \usepackage[style=authoryear, backend=bibtex]{biblatex}
 \usepackage{filecontents}
 \addbibresource{library.bib}
@@ -26,6 +30,7 @@
 \newlistof{appendices}{apc}{\listappendicesname}
 \newcommand{\appendices}[1]{\addcontentsline{apc}{appendices}{#1}}
 \newcommand{\newappendix}[1]{\section*{#1}\appendices{#1}}
+
 
 \newcommand{\listequationsname}{List of Equations}
 \newlistof{myequations}{equ}{\listequationsname}
@@ -52,6 +57,6 @@
 
 \SweaveInput{1.1.5bibliographyandappend.rnw}
 
-
+ 
 
 \end{document}

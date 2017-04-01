@@ -29,3 +29,7 @@ stagm<-stagm[!(stagm$Plot=="1"&stagm$Tree=="673"),]
 #LF
 #Tree 782 goes from 13.2ft to 7.8ft, should read 17.8ft
 stagm$Height_Total[stagm$Installation=="LF"&stagm$Plot==3&stagm$Tree==782&stagm$Year_Measurement==2014]<-17.80
+
+
+
+

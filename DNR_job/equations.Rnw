@@ -1,0 +1,62 @@
+\documentclass[11pt]{article}
+\usepackage[fleqn]{amsmath}
+
+\usepackage{setspace}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+
+% \begin{equation} 
+% \begin{aligned}
+% % \label{small_eqtest}
+% \emph{HTG} &= exp(\emph{X}) \\
+% \emph{X}  &= [\emph{LOC}+\emph{HAB}+\emph{SPP}+_{C_1}ln\emph{HT}+_{C_2}*\emph{CCF}+ 
+% _{C_3}*\emph{BAL}/100+.22157*\emph{SL}* \\
+% &cos(\emph{ASP}) -0.12432*\emph{SL} 
+% *sin(\emph{ASP}-.10987*\emph{SL})], \\ \text{where}~\emph{HTG} &= \text{the estimated height growth for the cycle}, \\  
+% \emph{LOC} &= \text{is a location-specific coefficient}, \\
+% \emph{HAB} &= \text{habitat type dependent intercept}, \\ 
+% \emph{SPP} &= \text{species dependent intercept}, \\
+% \emph{CCF} &= \text{crown competition factor}, \\
+% \emph{BAL} &= \text{total basal area in trees larger than the subject tree},\\
+% \emph{ASP} &= \text{stand aspect}, \\
+% \emph{SL} &= \text{the stand slope}, \\
+% \emph{HT} &= \text{intitial tree height}, \\
+% _{C_1}-_{C_3}  &= \text{species specific coefficients}
+% 
+% 
+% \end{aligned}
+% \end{equation}
+% 
+% \begin{equation}
+% \begin{aligned}
+% y_{i,j} = \frac{(h_{i,j+1}-h_{i,j})}{(t_{i,j+1}-t_{i,j})} \\
+% 
+% &
+% \text{where y is the annualized growth response in feet, h is the height in feet}, \\
+% & \text{$i$ is the unique tree,~$t$ is year, &~$j$ is the measurement period}
+% \end{aligned}
+% \end{equation}
+% 
+
+\begin{singlespace}
+\begin{equation}
+\begin{aligned}
+y &= b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)]+\text{ln}(el+1)*s[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)]+  \\
+& (el^2)*s[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2, \\
+\\
+& 
+\text{where $y$ is the growth response, $s$ is the slope in percent}, \\
+& \text{$el$ is elevation in feet, } \alpha \text{ is aspect and the $b$ are coefficients estimated from the data}
+\end{aligned}
+\end{equation}
+\end{singlespace}
+
+
+
+% & 
+% \text{where \emph{y} is the growth response,\emph{s} is the slope in percent}, \\
+% & \text{\emph{el} is elevation in feet,\alpha is aspect and the \emph{b}, are coefficients estimated from the data}
+
+ \end{document}

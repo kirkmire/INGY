@@ -45,12 +45,12 @@
 \SweaveInput{1.1.2introduction.rnw}
 
 \SweaveInput{1.1.3methods.rnw}
-% 
-% \SweaveInput{1.1.4resultsandeval.rnw}
-% 
-% \SweaveInput{1.1.4discussion.rnw}
-% 
-% \SweaveInput{1.1.5bibliographyandappend.rnw}
+
+\SweaveInput{1.1.4resultsandeval.rnw}
+
+\SweaveInput{1.1.4discussion.rnw}
+
+\SweaveInput{1.1.5bibliographyandappend.rnw}
 
 
 

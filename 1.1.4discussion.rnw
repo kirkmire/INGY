@@ -1,6 +1,6 @@
 % !Rnw root=Thesis_doc.RNW
 
-
+\newpage
 \begin{center}
 \section{Discussion}
 \end{center}
@@ -26,8 +26,8 @@ In the Inland Northwest, FVS is a distance independent growth model used to proj
 
 
 The FVS small tree growth routine utilizes two equations to predict the height growth of small trees (less than 3" DBH). Height growth estimates from the small-tree model are weighted with the height growth estimates from the large tree model over a range of diameters in order to smooth the transition between the two models (Dixon, 2013).
-
-\begin{equation} 
+\begin{singlespace}
+\begin{equation} \label{eq:Eq3}
 \begin{aligned}
 % \label{small_eqtest}
 \emph{HTG} &= exp(\emph{X}) \\
@@ -36,7 +36,7 @@ _{C_3}*\emph{BAL}/100+.22157*\emph{SL}* \\
 &cos(\emph{ASP}) -0.12432*\emph{SL} 
 *sin(\emph{ASP}-.10987*\emph{SL})], \\ \text{where}~\emph{HTG} &= \text{the estimated height growth for the cycle}, \\  
 \emph{LOC} &= \text{is a location-specific coefficient}, \\
-\emph{HAB} &= \text{habitat type dependent intercept}, \\ 
+\emph{HAB} &= \text{habitat type dependent intercept}, \\
 \emph{SPP} &= \text{species dependent intercept}, \\
 \emph{CCF} &= \text{crown competition factor}, \\
 \emph{BAL} &= \text{total basal area in trees larger than the subject tree},\\
@@ -44,12 +44,11 @@ _{C_3}*\emph{BAL}/100+.22157*\emph{SL}* \\
 \emph{SL} &= \text{the stand slope}, \\
 \emph{HT} &= \text{initial tree height}, \\
 _{C_1}-_{C_3}  &= \text{species specific coefficients}
-
-
 \end{aligned}
 \end{equation}
-
-The FVS small growth equation \ref{small_eqtest} is quite similar to the model proposed in this thesis. The height growth in the FVS small tree growth equation is estimated from initial height, site quality (in terms of location, habitat type, slope and aspect), CCF and BAL. Although the FVS equation utilizes crown competition factor instead of crown ratio, both terms relate to the crown competition. However, CCF relates strictly to competition from arboreal competition whereas crown ratio relates to all forms of aboveground vegetative competition. Similarly, the FVS model uses basal area in trees larger to quantify competition from the larger trees whereas our model uses trees per acre (of trees >10.5 in. DBH).
+\myequations{Equation number \ref{eq:Eq3}}
+\end{singlespace}
+The FVS small growth equation (Eq. \ref{eq:Eq3}) is quite similar to the model proposed in this thesis. The height growth in the FVS small tree growth equation is estimated from initial height, site quality (in terms of location, habitat type, slope and aspect), CCF and BAL. Although the FVS equation utilizes crown competition factor instead of crown ratio, both terms relate to the crown competition. However, CCF relates strictly to competition from arboreal competition whereas crown ratio relates to all forms of aboveground vegetative competition. Similarly, the FVS model uses basal area in trees larger to quantify competition from the larger trees whereas our model uses trees per acre (of trees >10.5 in. DBH).
 
 When there are many small trees, a small random error is then added to the height growth estimate. When relatively few samples represent the stand, two additional tree records are created that duplicate the characteristics of the tree except the predicted height growth and the number of trees per acre represented by the source tree (Dixon, 2013). The two new records are given 15 and 25 percent of the original value. Each of the records correspond to a portion of the error distribution of deviations about the predicted height. 
 

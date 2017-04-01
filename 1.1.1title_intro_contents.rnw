@@ -8,6 +8,7 @@
 \setkeys{Gin}{width=0.7\textwidth} 
 \pagenumbering{roman}
 \thispagestyle{empty}
+\singlespacing
 
 \vspace*{1\baselineskip}
 \begin{center}

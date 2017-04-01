@@ -52,10 +52,37 @@ latex(final.aic, file="")            # If you want all the data
 
 
 
-qr.sum<-data.frame(qr.SI.all$coefficients)
+qr.sum<-data.frame(summary(qr.SI.1))
 
-latex(qr.sum,file="")
+latex(coef9,file="")
 
+coef1<-data.frame(coef(qr.SI.1))
+coef5<-data.frame(coef(qr.SI.5))
+coef9<-data.frame(coef(qr.SI.9))
+
+plot(qr.SI.1$)
+aic.lists$AIC<-round(aic.lists$AIC,2)
+
+library(coefplot)
+VarCorr(qr.SI.1)
+
+
+finalcoef<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
+finalcoef$X1[1:9]<-as.character(aic.lists$Variable[1:9])
+finalcoef$X2[1:9]<-aic.lists$n[1:9]
+finalcoef$X3[1:9]<-aic.lists$AIC[1:9]
+finalcoef$X4[1:13]<-as.character(aic.lists$Variable[10:22])
+finalcoef$X5[1:13]<-aic.lists$n[10:22]
+finalcoef$X6[1:13]<-aic.lists$AIC[10:22]
+finalcoef$X7[1:4]<-as.character(aic.lists$Variable[23:26])
+finalcoef$X8[1:4]<-aic.lists$n[23:26]
+finalcoef$X9[1:4]<-aic.lists$AIC[23:26]
+finalcoef$X7[5]<-"Site"
+finalcoef$X8[5]<-"n"
+finalcoef$X9[5]<-"AIC"
+finalcoef$X7[6:10]<-as.character(aic.lists$Variable[27:31])
+finalcoef$X8[6:10]<-aic.lists$n[27:31]
+finalcoef$X9[6:10]<-aic.lists$AIC[27:31]
 
 # annual.gr4<-annual.gr4[!is.na(annual.gr4$cratio)==T,]
 # 

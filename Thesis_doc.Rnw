@@ -1,10 +1,3 @@
-<<echo=F,results=hide>>=
-#setwd("C:/Users/Colin/Desktop/R-Projects/INGY/Thesis_files")
-setwd("C:/Users/Colin/Desktop/R-Projects/INGY")
-source(paste(getwd(),'/1.6.model.evaluation.2016.dec.16.r',sep=""))
-#source('C:/Users/Colin/Desktop/R-Projects/INGY/1.6.model.evaluation.2016.dec.16.r', echo=TRUE)
-@
-
 %%%%%%%%  Document class  %%%%%%%%%%%%
 \documentclass[11pt, letterpaper, fleqn]{article}
 % fleqn is for left aligned equations
@@ -52,12 +45,12 @@ source(paste(getwd(),'/1.6.model.evaluation.2016.dec.16.r',sep=""))
 \SweaveInput{1.1.2introduction.rnw}
 
 \SweaveInput{1.1.3methods.rnw}
-
-\SweaveInput{1.1.4resultsandeval.rnw}
-
-\SweaveInput{1.1.4discussion.rnw}
-
-\SweaveInput{1.1.5bibliographyandappend.rnw}
+% 
+% \SweaveInput{1.1.4resultsandeval.rnw}
+% 
+% \SweaveInput{1.1.4discussion.rnw}
+% 
+% \SweaveInput{1.1.5bibliographyandappend.rnw}
 
 
 

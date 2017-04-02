@@ -324,11 +324,36 @@ print(xyplot(agg.over.data.TPA$TPA~ agg.over.data.TPA$Year_MeasurementOS | facto
  Figure \ref{fig:os_tpa_inst} shows the plot-level interpolations of overstory trees per acre. Most plots stayed constant in the number of overstory trees. However, due to mortality or recruitment, there may be slight differences. Within installations, there is noticable variation in overstory trees per acre between plots. This is usually advantageous in model-building as it provides a range of overstory conditions within each installation. However, due to the understory treatments, a homogenous overstory condition if favorable to isolate the understory effects. Fortunately, for most installations the plot levels are similar (LF seems to be the exception).
  
  % Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare small tree growth to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.
-\newpage
-\subsection{Variable Selection Results}
-%AIC table
 
-\begin{table} 
+\newpage
+\subsection{Model Specification Results}
+
+Although generalized additive models (GAMs) were evaluated for every variable to check for any possible improvements in linearity, only those of the selected variables were shown in the results (in sequence). The GAMs suggested no improvement in the relationship between annual height increment and a given variable via transformation. The included GAMS (Figures \fig{fig:seqgamCR},\fig{fig:seqgamOSTPA},\fig{fig:seqgamSEA}) show a strong linear relationship between 
+
+The AIC of crown ratio variable for the small tree category of competition is much lower than the other candidate variables (see Figure \ref{tab:AIC}). The sample of trees that lack diameter at breast height and crown measurements is less than that of the other variables which is undoubtedly contributing to a lower AIC. Despite the lower number of samples, crown ratio was selected as the variable to represent competition from small trees.
+
+The understory non-arboreal vegetation candidate variables failed to provide an AIC significantly less than that of including only the two previously selected variables. The only variable that offered any improvement over the previous iteration of the model was the poly-vegetation variable, which is a measure of all understory vegetation regardless of lifeform (forb, shrub, grass). However, the inclusion of this variable is hardly justified considering the modest improvement it provides and the impracticality of measuring it in the field. Therefore, no variable was selected from this category of competition.
+
+The overstory variable model with the lowest AIC was trees per acre (TPA). The measure of crown area per acre (CAPA) provided a close second and basal area per acre (BAPA) was also much lower than the previous iteration of the model. Site metrics of slope, aspect and elevation failed to provide an improvement over the null model. However, when considered together in the slope, aspect and elevation (SEA) interaction model (\cite{Stage2007a}), these terms provided the lowest AIC by a wide margin. The AIC of the site index metric was also quite low but failed to surpass that of the SEA term.
+
+The resultant model is specified as follows:
+
+\begin{equation}\label{eq:Eq3.1}
+\begin{aligned}
+
+h_{\tau} &= b_{0,\tau}\sqrt{i}+b_{cr,\tau}cr 
++b_{TPA,\tau}TPA+b_{S,\tau}S 
+
+& 
+\text{where $h$ is the predicted growth response, $i$ is the initial height in feet}, 
+\text{$cr$ is the crown ratio}, \\
+&
+\text{$TPA$ is the trees per acre}  and \text{$S$ is the slope, aspect and elevation term}
+\end{aligned}
+\end{equation}
+
+
+\begin{table} \label{tab:AIC}
 \small
 \caption{Akaike Information Criterion (AIC) for .5 Quantile Regression by Category of Small Tree Competition  }
 \begin{center}
@@ -376,7 +401,7 @@ plot(sr.ht.gam,residuals=T,se=T,
          pch = ".",
          col ="grey60",
              xlab="Square Root of Total Height",
-             ylab="Residual of Annual Height Growth (feet)")
+             ylab="s(Initial Height)")
 
 
 @
@@ -394,7 +419,7 @@ plot(cr.ht.gam,residuals=T,se=T,
       pch = ".",
       col ="grey60",
       xlab="Crown Ratio",
-      ylab="Residual of Annual Height Growth (feet)")
+      ylab="s(crown ratio) + Sqrt(Initial Height)")
 
 
 @
@@ -411,7 +436,7 @@ plot(tpa.ht.gam,residuals=T,se=T,
          pch = ".",
          col ="grey60",
        xlab="Residual Trees Per Acre",
-       ylab="Residual of Annual Height Growth (feet)")
+       ylab="s(TPA.OS) + crown ratio + Sqrt(Initial Height)")
 @
 \end{center}
 \caption{Generalized additive model of square-root of height residuals, crown ratios and smoothed overstory trees per acre\label{fig:seqgamOSTPA}}
@@ -424,8 +449,8 @@ sea.ht.gam<-gam(ht_annual~srHeight_Total+cratio+TPA.OS+s(SEA.val),data=annual.gr
 plot(sea.ht.gam,residuals=T,se=T,
       pch = ".",
       col ="grey60",
-      xlab="Slope, Aspect, Elevation Term",
-      ylab="Residual of Annual Height Growth (feet)")
+      xlab="Slope, Aspect, Elevation (SEA) Term",
+      ylab="s(SEA term) + TPA.OS + crown ratio + Sqrt(Initial Height)")
 
 @
 \end{center}
@@ -464,6 +489,7 @@ abline(sea.si)
 <<label=validres,fig=TRUE,echo=FALSE>>=
 
 sorted.totals$freq<-sorted.totals$freq/sum(sorted.totals$freq)
+
 
 print(barchart(sorted.totals$freq~sorted.totals$response.cat, names = "Quantile Bin",
         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",
@@ -514,34 +540,51 @@ plot(annual.gr6$ht_annual,annual.gr6$qr.pred.five,
 
 
 
-\begin{table} 
-\caption{Chi-Square and Exact Test Results by Initial Height Class (ft.)}
-\begin{center}
-\begin{tabular}{lrrr}
-\hline\hline
-\multicolumn{1}{l}{chitable}&\multicolumn{1}{c}{\textless 4}&\multicolumn{1}{c}{4-6}&\multicolumn{1}{c}{\textgreater 6}\tabularnewline
-\hline
-Chi-Sq.&$0.0098$&$0e+00$&$0$\tabularnewline
-Exact&$0.0102$&$1e-04$&$0$\tabularnewline
-\hline
-\end{tabular}\end{center}
-\label{tab:chisqexact}
-\end{table}
 
-\begin{table} 
-\caption{Sorted Actual Height Increments by Initial Height Class and Quantile Bin}
+\begin{table}
+\caption{Expected Height Increments by Initial Height Class and Quantile Bin}
 \begin{center}
 \begin{tabular}{lrrrr}
 \hline\hline
-\multicolumn{1}{l}{}&\multicolumn{1}{c}{\textless .1}&\multicolumn{1}{c}{.1 to .5}&\multicolumn{1}{c}{.5 to .9}&\multicolumn{1}{c}{\textgreater .9}\tabularnewline
+\multicolumn{1}{l}{}&\multicolumn{1}{c}{\textless .1}&\multicolumn{1}{c}{.1-.5}&\multicolumn{1}{c}{.5-.9}&\multicolumn{1}{c}{\textgreater .9}\tabularnewline
 \hline
-\textless 4&$ 8$&$33$&$48$&$20$\tabularnewline
-4-6&$21$&$33$&$21$&$10$\tabularnewline
-\textgreater 6&$57$&$88$&$74$&$49$\tabularnewline
+\textless 4&$10.9$&$ 43.6$&$ 43.6$&$10.9$\tabularnewline
+4-6&$ 8.5$&$ 34.0$&$ 34.0$&$ 8.5$\tabularnewline
+\textgreater 6&$26.8$&$107.2$&$107.2$&$26.8$\tabularnewline
 \hline
 \end{tabular}\end{center}
-\label{tab:actual}
 \end{table}
+
+\begin{table}
+\caption{Actual Height Increments by Initial Height Class and Quantile Bin}
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline\hline
+\multicolumn{1}{l}{}&\multicolumn{1}{c}{\textless .1}&\multicolumn{1}{c}{.1-.5}&\multicolumn{1}{c}{.5-.9}&\multicolumn{1}{c}{\textgreater .9}\tabularnewline
+\hline
+\textless 4&$ 9$&$33$&$45$&$22$\tabularnewline
+4-6&$21$&$36$&$21$&$ 7$\tabularnewline
+\textgreater 6&$59$&$87$&$83$&$39$\tabularnewline
+\hline
+\end{tabular}\end{center}
+\end{table}
+
+\begin{table}
+\caption{Chi-Squared P-Value Results by Height Class}
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline\hline
+\multicolumn{1}{l}{Height Class}&\multicolumn{1}{c}{\textless 4}&\multicolumn{1}{c}{4-6}&\multicolumn{1}{c}{\textgreater 6}&\multicolumn{1}{c}{All}\tabularnewline
+\hline
+P-Value&$0.00258$&$3e-05$&$0$&$0$\tabularnewline
+\hline
+\end{tabular}\end{center}
+\end{table}
+
+
+
+
+
 
 % \newpage
 % Zhang et al. found that the importance of shrub control on growth increment was not evident in the final years of their study, as tree-shrub competition likely switched to tree-tree compitition. However, shrub control is critical for stand development on low quality sites.

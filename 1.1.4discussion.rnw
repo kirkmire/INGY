@@ -7,6 +7,17 @@
 \normalsize
 \doublespacing
 
+
+
+\subsection{Discussion of Validation Results}
+
+The results of the chi-squared test are not suprising considering \ref{fig:validres} on \pageref{fig:validres}. The model is clearly overestimating both the number of trees that experienced growth under their $\tau$=.1 prediction and the number of trees whose growth exceeded their $\tau$=.9 projection. Likewise, the model underestimated the number of trees that experienced annual height growth near their median ($\tau$=.5) prediction. 
+
+Despite the failure of the model to conform to the witheld dataset in the validation step, it is visually apparent that the model is providing an appropriate range of possible growth outcomes for most trees. The .1 and .9 quantile predicted height increments are simply too near the median for some trees and therefore the actual height increments tend to overpopulate the extremes of the four lqmm predicted interquantile intervals. Some possible reasons for this error may be 
+
+One way to consider this model behavoir is that it provides conservative estimates for the most extreme predictions of height growth. That is, one might expect more than \%10 of small trees to experience growth that did not meet or exceed their $\tau$= .10 or .90 predictions, respectively. 
+
+
 \subsetion{Comparison of results to related studies}
 
 Although there are no other studies that predict height growth of small ponderosa pine trees with quantile regression, we can compare our results to that of other empirical models in a qualitative sense. We can also compare the effects of our selected predictors to studies that examine specific competitive effects on small ponderosa pine growth.

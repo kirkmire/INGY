@@ -7,6 +7,22 @@
 \SweaveOpts{concordance=TRUE}
 
 
+\begin{equation}\label{eq:Eq3.1}
+\begin{aligned}
+
+h_{\tau} &= b_{0,\tau}\sqrt{i}+b_{cr,\tau}cr 
++b_{TPA,\tau}TPA+b_{S,\tau}S 
+
+& 
+\text{where $h$ is the predicted growth response, $i$ is the initial height in feet}, 
+\text{$cr$ is the crown ratio}, \\
+&
+\text{$TPA$ is the trees per acre}  and \text{$S$ is the slope, aspect and elevation term}
+\end{aligned}
+\end{equation}
+
+
+
 % \begin{equation} 
 % \begin{aligned}
 % % \label{small_eqtest}
@@ -40,18 +56,18 @@
 % \end{equation}
 % 
 
-\begin{singlespace}
-\begin{equation}
-\begin{aligned}
-y &= b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)]+\text{ln}(el+1)*s[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)]+  \\
-& (el^2)*s[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2, \\
-\\
-& 
-\text{where $y$ is the growth response, $s$ is the slope in percent}, \\
-& \text{$el$ is elevation in feet, } \alpha \text{ is aspect and the $b$ are coefficients estimated from the data}
-\end{aligned}
-\end{equation}
-\end{singlespace}
+% \begin{singlespace}
+% \begin{equation}
+% \begin{aligned}
+% y &= b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)]+\text{ln}(el+1)*s[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)]+  \\
+% & (el^2)*s[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2, \\
+% \\
+% & 
+% \text{where $y$ is the growth response, $s$ is the slope in percent}, \\
+% & \text{$el$ is elevation in feet, } \alpha \text{ is aspect and the $b$ are coefficients estimated from the data}
+% \end{aligned}
+% \end{equation}
+% \end{singlespace}
 
 
 

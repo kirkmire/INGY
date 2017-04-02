@@ -91,7 +91,7 @@ qr.SI.9 <-lqmm(ht_annual~srHeight_Total+
 
 one.func<-function(srHeight_Total,cratio,TPA.OS, slopePercent,cos_rad_asp,sin_rad_asp,
   elevation){
-pred<-(coef(qr.SI.1)[1]+
+pred<-(  coef(qr.SI.1)[1]+
          coef(qr.SI.1)[2]*srHeight_Total+
          coef(qr.SI.1)[3]*cratio+
          coef(qr.SI.1)[4]*TPA.OS+
@@ -112,7 +112,7 @@ pred}
 
 five.func<-function(srHeight_Total,cratio,TPA.OS, slopePercent,cos_rad_asp,sin_rad_asp,
                    elevation){
-  pred<-(coef(qr.SI.5)[1]+
+  pred<-( coef(qr.SI.5)[1]+
            coef(qr.SI.5)[2]*srHeight_Total+
            coef(qr.SI.5)[3]*cratio+
            coef(qr.SI.5)[4]*TPA.OS+
@@ -132,7 +132,7 @@ five.func<-function(srHeight_Total,cratio,TPA.OS, slopePercent,cos_rad_asp,sin_r
 
 nine.func<-function(srHeight_Total,cratio,TPA.OS, slopePercent,cos_rad_asp,sin_rad_asp,
                    elevation){
-  pred<-(coef(qr.SI.9)[1]+
+  pred<-(  coef(qr.SI.9)[1]+
            coef(qr.SI.9)[2]*srHeight_Total+
            coef(qr.SI.9)[3]*cratio+
            coef(qr.SI.9)[4]*TPA.OS+
@@ -203,15 +203,15 @@ valid.func<-function(annualht,qr.pred.one,qr.pred.five,qr.pred.nine){
   
   ifelse(annualht>qr.pred.nine,
          #yes
-         cat<-"top10",
+         cat<-"> .9",
          #no
          ifelse(qr.pred.five<annualht&&annualht<qr.pred.nine,
                 #yes
-                cat<- "fiftytoninety",
+                cat<- ".5 - .9",
                 #no
                 ifelse(qr.pred.one<annualht&&annualht<qr.pred.five,
-                       cat<-"bottom10tofifty",
-                       cat<-"bottom10")))
+                       cat<-".1 - .5",
+                       cat<-"< .1")))
   
   cat
   
@@ -296,18 +296,30 @@ for(i in 1:nrow(annual.gr4)){
 # x.table3<-as.numeric(x.table3)
 # 
 # brkdwn<-rbind(x.table1,x.table2,x.table3)
-# 
+# rownames(brkdwn)<-c("<4","4-6",">6")
+# colnames(brkdwn)<-c("<.1",".1-.5",".5-.9",">.9")
 # 
 # min(annual.gr6$Height_Total)
 # 
 # hist(annual.gr6$Height_Total)
 # 
 # xsq1<-chisq.test(x.table1,p=c(.1,.4,.4,.1))
-# xsq1
+# xsq1$expected
 # xsq2<-chisq.test(x.table2,p=c(.1,.4,.4,.1))
 # xsq2
 # xsq3<-chisq.test(x.table3,p=c(.1,.4,.4,.1))
 # xsq3
+# 
+# exp.tab<-rbind(xsq1$expected,xsq2$expected,xsq3$expected)
+# rownames(exp.tab)<-c("<4","4-6",">6")
+# colnames(exp.tab)<-c("<.1",".1-.5",".5-.9",">.9")
+# 
+# 
+# totals<-c(sum(brkdwn[,1]),sum(brkdwn[,2]),sum(brkdwn[,3]),sum(brkdwn[,4]))
+# tot.test<-chisq.test(totals,p=c(.1,.4,.4,.1))
+# 
+# summary(tot.test)
+# tot.test$expected
 # #Exact test
 # 
 # library(XNomial)
@@ -316,20 +328,28 @@ for(i in 1:nrow(annual.gr4)){
 # xmulti3<-xmulti(x.table3,c(.1,.4,.4,.1),"Chisq")
 # 
 # 
-# chisq<-cbind(xsq1$p.value,xsq2$p.value,xsq3$p.value)
+# chisq<-cbind(xsq1$p.value,xsq2$p.value,xsq3$p.value,tot.test$p.value)
 # xact<-cbind(xmulti1$pChi,xmulti2$pChi,xmulti3$pChi)
 # 
 # chitable<-rbind(chisq,xact)
 # chitable<-round(chitable,digits=4)
 # 
-# rownames(chitable)<-c("ChiSq","Xact")
-# colnames(chitable)<-c("<4","4-6",">6")
+# chisq<-round(chisq,5)
+# rownames(chisq)<-c("P-Value")
+# colnames(chisq)<-c("<4","4-6",">6","All")
+# 
 # 
 # #The code below will produce output that can then be copied over to the .tex file
 # library(Hmisc)
-# # 
-# sum.all<-summary(qr.SI.1)
+# #
+# latex(chisq,file="")
 # 
+
+
+
+
+
+
 # #Try doing it individually instead ex: .1 then .5
 # 
 # latex(sum.all, file="")     

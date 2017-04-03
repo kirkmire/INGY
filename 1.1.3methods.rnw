@@ -68,7 +68,7 @@ Twenty-six study sites were established on private, public and tribal forestland
 \begin{figure} 
 \begin{center}
     \includegraphics{map_w_dots2.jpg}
-    \caption{Map of STCV Installations, those included in this study labeled with a black
+    \caption{Map of STCV Installations, those included in this study labeled with a black circle
     \label{fig:map}}
 \end{center}
 \end{figure}

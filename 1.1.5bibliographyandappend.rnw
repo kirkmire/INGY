@@ -153,81 +153,80 @@ All analyses were performed using the R statistical software
 \label{appendix:par_est}\\
 
 %Parameter Estimates for the proposed height growth model
-\begin{table} 
+\begin{table}
 \caption{Parameter Estimates for the $\tau$=.1 LQMM}
 \begin{center}
-\begin{tabular}{lr}
+\begin{tabular}{lrrrrr}
 \hline\hline
-\multicolumn{1}{l}{coef1}&\multicolumn{1}{c}{coef.qr.SI.1.}\tabularnewline
+\multicolumn{1}{l}{$\tau$=.1 LQMM}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{lower bound}&\multicolumn{1}{c}{upper bound}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
 \hline
-(Intercept)&$-4.90471955431981e-01$\tabularnewline
-srHeight_Total&$ 2.53046469179619e-01$\tabularnewline
-cratio&$ 4.13825553314558e-01$\tabularnewline
-TPA.OS&$-1.81689881296037e-03$\tabularnewline
-slopePercent&$-9.58755100236528e-01$\tabularnewline
-elevation&$-1.06118239083704e-05$\tabularnewline
-I(elevation^2)&$ 2.64249253947172e-07$\tabularnewline
-slopePercent:cos_rad_asp&$ 2.45997950851379e+00$\tabularnewline
-slopePercent:sin_rad_asp&$ 1.30981846276131e+00$\tabularnewline
-slopePercent:log(elevation + 1)&$ 1.50862048647905e-01$\tabularnewline
-slopePercent:I(elevation^2)&$-8.21260786928543e-08$\tabularnewline
-slopePercent:cos_rad_asp:log(elevation + 1)&$-3.78542647857647e-01$\tabularnewline
-slopePercent:sin_rad_asp:log(elevation + 1)&$-2.04671544686681e-01$\tabularnewline
-slopePercent:cos_rad_asp:I(elevation^2)&$ 1.54450030672236e-07$\tabularnewline
-slopePercent:sin_rad_asp:I(elevation^2)&$ 9.75907303345319e-08$\tabularnewline
+(Intercept)&$-0.4905$&$0.3930$&$-1.2802$&$ 0.2993$&$0.2179$\tabularnewline
+srHeight_Total&$ 0.2530$&$0.0244$&$ 0.2040$&$ 0.3021$&$0.0000$\tabularnewline
+cratio&$ 0.4138$&$0.0817$&$ 0.2497$&$ 0.5779$&$0.0000$\tabularnewline
+TPA.OS&$-0.0018$&$0.0009$&$-0.0037$&$ 0.0001$&$0.0592$\tabularnewline
+slopePercent&$-0.9588$&$0.2409$&$-1.4430$&$-0.4745$&$0.0002$\tabularnewline
+elevation&$ 0.0000$&$0.0008$&$-0.0016$&$ 0.0016$&$0.9894$\tabularnewline
+I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.5122$\tabularnewline
+slopePercent:cos_rad_asp&$ 2.4600$&$0.4655$&$ 1.5245$&$ 3.3955$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp&$ 1.3098$&$0.3153$&$ 0.6763$&$ 1.9434$&$0.0001$\tabularnewline
+slopePercent:log(elevation + 1)&$ 0.1509$&$0.0374$&$ 0.0757$&$ 0.2260$&$0.0002$\tabularnewline
+slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0000$\tabularnewline
+slopePercent:cos_rad_asp:log(elevation + 1)&$-0.3785$&$0.0722$&$-0.5236$&$-0.2335$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp:log(elevation + 1)&$-0.2047$&$0.0491$&$-0.3033$&$-0.1060$&$0.0001$\tabularnewline
+slopePercent:cos_rad_asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0002$\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}
 
-\begin{table} 
+\begin{table}
 \caption{Parameter Estimates for the $\tau$=.5 LQMM}
 \begin{center}
-\begin{tabular}{lr}
+\begin{tabular}{lrrrrr}
 \hline\hline
-\multicolumn{1}{l}{coef5}&\multicolumn{1}{c}{coef.qr.SI.5.}\tabularnewline
+\multicolumn{1}{l}{$\tau$=.5 LQMM}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{lower bound}&\multicolumn{1}{c}{upper bound}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
 \hline
-(Intercept)&$-3.84144616083396e-01$\tabularnewline
-srHeight_Total&$ 2.73386145944154e-01$\tabularnewline
-cratio&$ 6.70043330802373e-01$\tabularnewline
-TPA.OS&$-3.30247373745673e-03$\tabularnewline
-slopePercent&$-9.49081754180991e-01$\tabularnewline
-elevation&$ 1.85989712906282e-04$\tabularnewline
-I(elevation^2)&$ 1.00690586766266e-07$\tabularnewline
-slopePercent:cos_rad_asp&$ 2.49147169196564e+00$\tabularnewline
-slopePercent:sin_rad_asp&$ 1.24257236975887e+00$\tabularnewline
-slopePercent:log(elevation + 1)&$ 1.49179249430633e-01$\tabularnewline
-slopePercent:I(elevation^2)&$-7.89694248607529e-08$\tabularnewline
-slopePercent:cos_rad_asp:log(elevation + 1)&$-3.84448109210732e-01$\tabularnewline
-slopePercent:sin_rad_asp:log(elevation + 1)&$-1.92857535917523e-01$\tabularnewline
-slopePercent:cos_rad_asp:I(elevation^2)&$ 1.61468169931466e-07$\tabularnewline
-slopePercent:sin_rad_asp:I(elevation^2)&$ 8.57164394711480e-08$\tabularnewline
+(Intercept)&$-3.84144616083173e-01$&$4.32893599586427e-01$&$-1.25407687412380e+00$&$ 4.85787641957451e-01$&$3.79205069091642e-01$\tabularnewline
+srHeight_Total&$ 2.73386145943962e-01$&$1.72744080159011e-02$&$ 2.38671923359140e-01$&$ 3.08100368528784e-01$&$6.77810229255237e-21$\tabularnewline
+cratio&$ 6.70043330802077e-01$&$6.19897131779161e-02$&$ 5.45470338242993e-01$&$ 7.94616323361161e-01$&$1.42897110636342e-14$\tabularnewline
+TPA.OS&$-3.30247373745854e-03$&$4.42621012623165e-04$&$-4.19195396385913e-03$&$-2.41299351105796e-03$&$1.28458987459445e-09$\tabularnewline
+slopePercent&$-9.49081754180989e-01$&$2.99785945926687e-01$&$-1.55152416755463e+00$&$-3.46639340807353e-01$&$2.65895673954448e-03$\tabularnewline
+elevation&$ 1.85989712906017e-04$&$9.09211500282911e-04$&$-1.64113920337565e-03$&$ 2.01311862918768e-03$&$8.38762032426879e-01$\tabularnewline
+I(elevation^2)&$ 1.00690586766324e-07$&$4.66911957093866e-07$&$-8.37604120129060e-07$&$ 1.03898529366171e-06$&$8.30154041578101e-01$\tabularnewline
+slopePercent:cos_rad_asp&$ 2.49147169196513e+00$&$3.52864001329025e-01$&$ 1.78236493281998e+00$&$ 3.20057845111028e+00$&$5.34243087997915e-09$\tabularnewline
+slopePercent:sin_rad_asp&$ 1.24257236975764e+00$&$2.59733090168331e-01$&$ 7.20619183492301e-01$&$ 1.76452555602297e+00$&$1.61564297619221e-05$\tabularnewline
+slopePercent:log(elevation + 1)&$ 1.49179249430624e-01$&$4.64590868329456e-02$&$ 5.58162189914991e-02$&$ 2.42542279869748e-01$&$2.33729847560511e-03$\tabularnewline
+slopePercent:I(elevation^2)&$-7.89694248607463e-08$&$2.02869969750084e-08$&$-1.19737671617439e-07$&$-3.82011781040537e-08$&$2.99800442068028e-04$\tabularnewline
+slopePercent:cos_rad_asp:log(elevation + 1)&$-3.84448109210615e-01$&$5.46205413712087e-02$&$-4.94212196588789e-01$&$-2.74684021832441e-01$&$5.78221052599140e-09$\tabularnewline
+slopePercent:sin_rad_asp:log(elevation + 1)&$-1.92857535917717e-01$&$4.00042526675585e-02$&$-2.73249091458304e-01$&$-1.12465980377130e-01$&$1.42559109414858e-05$\tabularnewline
+slopePercent:cos_rad_asp:I(elevation^2)&$ 1.61468169931406e-07$&$2.36879072389458e-08$&$ 1.13865538124607e-07$&$ 2.09070801738206e-07$&$1.27673269338017e-08$\tabularnewline
+slopePercent:sin_rad_asp:I(elevation^2)&$ 8.57164394711049e-08$&$1.64781067034032e-08$&$ 5.26024442851726e-08$&$ 1.18830434657037e-07$&$3.85794518411192e-06$\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}
 
-
-\begin{table} 
-\caption{Parameter Estimates for the $\tau$=.9 LQMM}
+\begin{table}
+\caption{Parameter Estimates for the $\tau$=.5 LQMM}
 \begin{center}
-\begin{tabular}{lr}
+\begin{tabular}{lrrrrr}
 \hline\hline
-\multicolumn{1}{l}{coef9}&\multicolumn{1}{c}{coef.qr.SI.9.}\tabularnewline
+\multicolumn{1}{l}{$\tau$=.5 LQMM}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{lower bound}&\multicolumn{1}{c}{upper bound}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
 \hline
-(Intercept)&$ 1.33435616082294e-01$\tabularnewline
-srHeight_Total&$ 2.95344808528703e-01$\tabularnewline
-cratio&$ 6.84176990757794e-01$\tabularnewline
-TPA.OS&$-6.53957637817233e-03$\tabularnewline
-slopePercent&$-8.01835443935741e-01$\tabularnewline
-elevation&$-1.51141527402898e-04$\tabularnewline
-I(elevation^2)&$ 3.20273432951660e-07$\tabularnewline
-slopePercent:cos_rad_asp&$ 2.49508425849140e+00$\tabularnewline
-slopePercent:sin_rad_asp&$ 1.25857946842213e+00$\tabularnewline
-slopePercent:log(elevation + 1)&$ 1.26687303487468e-01$\tabularnewline
-slopePercent:I(elevation^2)&$-7.03023678980827e-08$\tabularnewline
-slopePercent:cos_rad_asp:log(elevation + 1)&$-3.82892621054974e-01$\tabularnewline
-slopePercent:sin_rad_asp:log(elevation + 1)&$-1.97373518145164e-01$\tabularnewline
-slopePercent:cos_rad_asp:I(elevation^2)&$ 1.52240386999032e-07$\tabularnewline
-slopePercent:sin_rad_asp:I(elevation^2)&$ 9.46253865343298e-08$\tabularnewline
+(Intercept)&$ 0.1334$&$0.5355$&$-0.9427$&$ 1.2095$&$0.8043$\tabularnewline
+srHeight_Total&$ 0.2953$&$0.0380$&$ 0.2191$&$ 0.3716$&$0.0000$\tabularnewline
+cratio&$ 0.6842$&$0.1195$&$ 0.4439$&$ 0.9244$&$0.0000$\tabularnewline
+TPA.OS&$-0.0065$&$0.0009$&$-0.0084$&$-0.0047$&$0.0000$\tabularnewline
+slopePercent&$-0.8018$&$0.3062$&$-1.4172$&$-0.1864$&$0.0117$\tabularnewline
+elevation&$-0.0002$&$0.0009$&$-0.0019$&$ 0.0016$&$0.8643$\tabularnewline
+I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.4035$\tabularnewline
+slopePercent:cos_rad_asp&$ 2.4951$&$0.3536$&$ 1.7846$&$ 3.2056$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp&$ 1.2586$&$0.2901$&$ 0.6756$&$ 1.8415$&$0.0001$\tabularnewline
+slopePercent:log(elevation + 1)&$ 0.1267$&$0.0468$&$ 0.0327$&$ 0.2207$&$0.0093$\tabularnewline
+slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0010$\tabularnewline
+slopePercent:cos_rad_asp:log(elevation + 1)&$-0.3829$&$0.0546$&$-0.4926$&$-0.2732$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp:log(elevation + 1)&$-0.1974$&$0.0444$&$-0.2865$&$-0.1082$&$0.0000$\tabularnewline
+slopePercent:cos_rad_asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0000$\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}

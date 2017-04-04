@@ -29,7 +29,7 @@ qr.SI.1 <-lqmm(ht_annual~srHeight_Total+
                elevation +
                I(elevation^2) ,
                group=conc,random=~1,
-               control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),tau=c(.1),data=annual.gr4)
+               control=lqmmControl(LP_tol_ll=.1,LP_max_iter=30000,method="df"),tau=.1,data=annual.gr4)
 
 
 qr.SI.5 <-lqmm(ht_annual~srHeight_Total+
@@ -47,7 +47,9 @@ qr.SI.5 <-lqmm(ht_annual~srHeight_Total+
                  elevation +
                  I(elevation^2) ,
                group=conc,random=~1,
-               control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),tau=c(.5),data=annual.gr4)
+               control=lqmmControl(LP_tol_ll=.1,LP_max_iter=3000,method="df"),tau=.5,data=annual.gr4)
+
+
 
 
 qr.SI.9 <-lqmm(ht_annual~srHeight_Total+
@@ -65,7 +67,24 @@ qr.SI.9 <-lqmm(ht_annual~srHeight_Total+
                  elevation +
                  I(elevation^2) ,
                group=conc,random=~1,
-               control=list(LP_tol_ll=1e-01,LP_max_iter=3000,method="df"),tau=c(.9),data=annual.gr4)
+               control=lqmmControl(LP_tol_ll=.1,LP_max_iter=3000,method="df"),tau=.9,data=annual.gr4)
+
+#below is for the latex summarys of parameter estimates
+library(Hmisc)
+qr.SI.1.sum<-summary.lqmm(qr.SI.1)
+print.summary.lqmm(qr.SI.1.sum)
+qr.SI.1.tab<-round(qr.SI.1.sum$tTable,4)
+latex(qr.SI.1.tab, file="")
+
+qr.SI.5.sum<-summary.lqmm(qr.SI.5)
+print.summary.lqmm(qr.SI.5.sum)
+qr.SI.5.tab<-round(qr.SI.5.sum$tTable,4)
+latex(qr.SI.5.tab, file="")
+
+qr.SI.9.sum<-summary.lqmm(qr.SI.9)
+print.summary.lqmm(qr.SI.9.sum)
+qr.SI.9.tab<-round(qr.SI.9.sum$tTable,4)
+latex(qr.SI.9.tab, file="")
 
 #Below is for engel plots of coefficients
 # qr.SI.all <-lqmm(ht_annual~srHeight_Total+
@@ -231,6 +250,17 @@ for(i in 1:nrow(annual.gr6)){
 library(plyr)
 sorted.totals<-count(annual.gr6, 'response.cat')
 
+barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",
+         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
+         main = "Witheld Data Height Growth Response
+         sorted by Quantile Category",ylim=c(0,.60),
+         # par.settings = my.settings,
+         par.strip.text=list(col="white", font=2),
+         panel=function(x,y,...){
+           panel.grid(h=-1, v=0);
+           panel.barchart(x,y,...)
+         })
+
 
 
 #Creates column of SEA effect
@@ -265,16 +295,6 @@ for(i in 1:nrow(annual.gr4)){
 }
 
 
-# barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",
-#          xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
-#          main = "Witheld Data Height Growth Response
-#          sorted by Quantile Category",ylim=c(0,.60),
-#          # par.settings = my.settings,
-#          par.strip.text=list(col="white", font=2),
-#          panel=function(x,y,...){
-#            panel.grid(h=-1, v=0); 
-#            panel.barchart(x,y,...)
-#          })
 
 #Chi Squared test of homogeneity
 

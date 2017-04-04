@@ -561,6 +561,102 @@ print(barchart(sorted.totals$freq~sorted.totals$response.cat, names = "Quantile 
 \caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres}}
 \end{figure}
 
+\begin{figure} 
+\begin{center}
+<<label=validres.below4,fig=TRUE,echo=FALSE>>=
+
+annual.gr6.lessthan4<-annual.gr6[annual.gr6$Height_Total<4,]
+sorted.totals<-aggregate(annual.gr6.lessthan4$counts,
+                         by=list(Category=annual.gr6.lessthan4$response.cat), FUN=sum)
+
+sorted.totals$x<-sorted.totals$x/sum(sorted.totals$x)
+
+library(RColorBrewer)
+library(lattice)
+
+
+
+barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
+        xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
+        main = "Witheld Data Height Growth Response
+        sorted by Quantile Category",ylim=c(0,.60),
+        par.settings = my.settings,
+        par.strip.text=list(col="white", font=2),
+        panel=function(x,y,...){
+          panel.grid(h=-1, v=0);
+          panel.barchart(x,y,...)
+        })
+
+@
+\end{center}
+\caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres.below4}}
+\end{figure}
+
+\begin{figure} 
+\begin{center}
+<<label=validres.4.6,fig=TRUE,echo=FALSE>>=
+annual.gr6.4to6<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
+
+
+sorted.totals<-aggregate(annual.gr6.4to6$counts,
+                         by=list(Category=annual.gr6.4to6$response.cat), FUN=sum)
+
+sorted.totals$x<-sorted.totals$x/sum(sorted.totals$x)
+
+library(RColorBrewer)
+library(lattice)
+
+
+
+barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
+        xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
+        main = "Witheld Data Height Growth Response
+        sorted by Quantile Category",ylim=c(0,.60),
+        par.settings = my.settings,
+        par.strip.text=list(col="white", font=2),
+        panel=function(x,y,...){
+          panel.grid(h=-1, v=0);
+          panel.barchart(x,y,...)
+        })
+
+@
+\end{center}
+\caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres.4.6}}
+\end{figure}
+
+\begin{figure} 
+\begin{center}
+<<label=validres.6,fig=TRUE,echo=FALSE>>=
+annual.gr6.6<-annual.gr6[annual.gr6$Height_Total>6,]
+
+
+sorted.totals<-aggregate(annual.gr6.6$counts,
+                         by=list(Category=annual.gr6.6$response.cat), FUN=sum)
+
+sorted.totals$x<-sorted.totals$x/sum(sorted.totals$x)
+
+library(RColorBrewer)
+library(lattice)
+
+
+
+barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
+        xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
+        main = "Witheld Data Height Growth Response
+        sorted by Quantile Category",ylim=c(0,.60),
+        par.settings = my.settings,
+        par.strip.text=list(col="white", font=2),
+        panel=function(x,y,...){
+          panel.grid(h=-1, v=0);
+          panel.barchart(x,y,...)
+        })
+
+@
+\end{center}
+\caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres.6}}
+\end{figure}
+
+
 
 \begin{figure} 
 \begin{center}

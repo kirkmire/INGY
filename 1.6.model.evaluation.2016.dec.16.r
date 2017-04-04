@@ -191,16 +191,19 @@ for(i in 1:nrow(annual.gr6)){
 
 }
 
-library(plyr)
-sorted.totals<-count(annual.gr6, 'response.cat')
 
+annual.gr6$counts<-1
+sorted.totals<-aggregate(annual.gr6$counts,
+                         by=list(Category=annual.gr6$response.cat), FUN=sum)
+
+sorted.totals$x<-sorted.totals$x/sum(sorted.totals$x)
 
 library(RColorBrewer)
 library(lattice)
 
 
 
-barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",
+barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
         main = "Witheld Data Height Growth Response
         sorted by Quantile Category",ylim=c(0,.60),
@@ -280,46 +283,51 @@ annual.gr6.lessthan4<-annual.gr6[annual.gr6$Height_Total<4,]
 annual.gr6.4to6<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
 annual.gr6.6plus<-annual.gr6[annual.gr6$Height_Total>6,]
 
-x.table1<-t(count(annual.gr6.lessthan4, 'response.cat'))
-x.table1<-x.table1["freq",]
+x.table1<-t(aggregate(annual.gr6.lessthan4$counts, by=list(Category=annual.gr6.lessthan4$response.cat), FUN=sum))
+x.table1<-x.table1["x",]
 x.table1<-as.numeric(x.table1)
 
-x.table2<-t(count(annual.gr6.4to6, 'response.cat'))
-x.table2<-x.table2["freq",]
+x.table2<-t(aggregate(annual.gr6.4to6$counts, by=list(Category=annual.gr6.4to6$response.cat), FUN=sum))
+x.table2<-x.table2["x",]
 x.table2<-as.numeric(x.table2)
 
-x.table3<-t(count(annual.gr6.6plus, 'response.cat'))
-x.table3<-x.table3["freq",]
+x.table3<-t(aggregate(annual.gr6.6plus$counts, by=list(Category=annual.gr6.6plus$response.cat), FUN=sum))
+x.table3<-x.table3["x",]
 x.table3<-as.numeric(x.table3)
 
 brkdwn<-rbind(x.table1,x.table2,x.table3)
 rownames(brkdwn)<-c("<4","4-6",">6")
-colnames(brkdwn)<-c("<.1",".1-.5",".5-.9",">.9")
+colnames(brkdwn)<-c(".1-.5",".5-.9","<.1",">.9")
 
 
-xsq1<-chisq.test(x.table1,p=c(.1,.4,.4,.1))
-xsq1
-xsq2<-chisq.test(x.table2,p=c(.1,.4,.4,.1))
+xsq1<-chisq.test(x.table1,p=c(.4,.4,.1,.1))
+p=.0001
+xsq2<-chisq.test(x.table2,p=c(.4,.4,.1,.1))
 xsq2
-xsq3<-chisq.test(x.table3,p=c(.1,.4,.4,.1))
+xsq3<-chisq.test(x.table3,p=c(.4,.4,.1,.1))
 xsq3
 
 exp.tab<-rbind(xsq1$expected,xsq2$expected,xsq3$expected)
 rownames(exp.tab)<-c("<4","4-6",">6")
-colnames(exp.tab)<-c("<.1",".1-.5",".5-.9",">.9")
+colnames(exp.tab)<-c(".1-.5",".5-.9","<.1",">.9")
 
 
 totals<-c(sum(brkdwn[,1]),sum(brkdwn[,2]),sum(brkdwn[,3]),sum(brkdwn[,4]))
-tot.test<-chisq.test(totals,p=c(.1,.4,.4,.1))
+tot.test<-chisq.test(totals,p=c(.4,.4,.1,.1))
 
 summary(tot.test)
 tot.test$expected
 
 chisq<-cbind(xsq1$p.value,xsq2$p.value,xsq3$p.value,tot.test$p.value)
+numb.trees.ht.class<-c(sum(x.table1),sum(x.table2),sum(x.table3),sum(x.table1,x.table2,x.table3))
 
-chisq<-round(chisq,5)
-rownames(chisq)<-c("P-Value")
+chisq<-rbind(chisq,numb.trees.ht.class)
+chisq<-round(chisq,3)
+
+
+rownames(chisq)<-c("P-Value","Number of Trees")
 colnames(chisq)<-c("<4","4-6",">6","All")
+
 # 
 # 
 # #The code below will produce output that can then be copied over to the .tex file

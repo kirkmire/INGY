@@ -1,313 +1,333 @@
 
 #Reads in previous scripts required (takes ~10min)
-source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/other_code/18.database.error.corrections.2016jun16.r',sep=""), echo=TRUE)
-source(paste(getwd(),'/1.1annualizedht.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
-source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
-
+# source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/other_code/18.database.error.corrections.2016jun16.r',sep=""), echo=TRUE)
+# source(paste(getwd(),'/1.1annualizedht.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
+# source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
+# 
 
 
 #combines all aic.lists into one dataframe
 
-colnames(UT.aic)<-c("Variable","n","AIC")
-
-colnames(UV.aic)<-c("Variable","n","AIC")
-
-colnames(OS.aic)<-c("Variable","n","AIC")
-
-colnames(SQ.aic)<-c("Variable","n","AIC")
-
-aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
-
-aic.lists$AIC<-round(aic.lists$AIC,2)
-
-final.aic<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
-final.aic$X1[1:9]<-as.character(aic.lists$Variable[1:9])
-final.aic$X2[1:9]<-aic.lists$n[1:9]
-final.aic$X3[1:9]<-aic.lists$AIC[1:9]
-final.aic$X4[1:13]<-as.character(aic.lists$Variable[10:22])
-final.aic$X5[1:13]<-aic.lists$n[10:22]
-final.aic$X6[1:13]<-aic.lists$AIC[10:22]
-final.aic$X7[1:4]<-as.character(aic.lists$Variable[23:26])
-final.aic$X8[1:4]<-aic.lists$n[23:26]
-final.aic$X9[1:4]<-aic.lists$AIC[23:26]
-final.aic$X7[5]<-"Site"
-final.aic$X8[5]<-"n"
-final.aic$X9[5]<-"AIC"
-final.aic$X7[6:10]<-as.character(aic.lists$Variable[27:31])
-final.aic$X8[6:10]<-aic.lists$n[27:31]
-final.aic$X9[6:10]<-aic.lists$AIC[27:31]
+# colnames(UT.aic)<-c("Variable","n","AIC")
+# 
+# colnames(UV.aic)<-c("Variable","n","AIC")
+# 
+# colnames(OS.aic)<-c("Variable","n","AIC")
+# 
+# colnames(SQ.aic)<-c("Variable","n","AIC")
+# 
+# aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
+# 
+# aic.lists$AIC<-round(aic.lists$AIC,2)
+# 
+# final.aic<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
+# final.aic$X1[1:9]<-as.character(aic.lists$Variable[1:9])
+# final.aic$X2[1:9]<-aic.lists$n[1:9]
+# final.aic$X3[1:9]<-aic.lists$AIC[1:9]
+# final.aic$X4[1:13]<-as.character(aic.lists$Variable[10:22])
+# final.aic$X5[1:13]<-aic.lists$n[10:22]
+# final.aic$X6[1:13]<-aic.lists$AIC[10:22]
+# final.aic$X7[1:4]<-as.character(aic.lists$Variable[23:26])
+# final.aic$X8[1:4]<-aic.lists$n[23:26]
+# final.aic$X9[1:4]<-aic.lists$AIC[23:26]
+# final.aic$X7[5]<-"Site"
+# final.aic$X8[5]<-"n"
+# final.aic$X9[5]<-"AIC"
+# final.aic$X7[6:10]<-as.character(aic.lists$Variable[27:31])
+# final.aic$X8[6:10]<-aic.lists$n[27:31]
+# final.aic$X9[6:10]<-aic.lists$AIC[27:31]
 
 
 
 #The code below will produce output that can then be copied over to the .tex file
-library(Hmisc)
-
-latex(final.aic, file="")            # If you want all the data
-
-
-
-qr.sum<-data.frame(summary(qr.SI.1))
-
-latex(coef9,file="")
-
-coef1<-data.frame(coef(qr.SI.1))
-coef5<-data.frame(coef(qr.SI.5))
-coef9<-data.frame(coef(qr.SI.9))
-
-plot(qr.SI.1$)
-aic.lists$AIC<-round(aic.lists$AIC,2)
-
-library(coefplot)
-VarCorr(qr.SI.1)
+# library(Hmisc)
+# 
+# latex(final.aic, file="")            # If you want all the data
+# 
+# 
+# 
+# qr.sum<-data.frame(summary(qr.SI.1))
+# 
+# latex(coef9,file="")
+# 
+# coef1<-data.frame(coef(qr.SI.1))
+# coef5<-data.frame(coef(qr.SI.5))
+# coef9<-data.frame(coef(qr.SI.9))
 
 
-finalcoef<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
-finalcoef$X1[1:9]<-as.character(aic.lists$Variable[1:9])
-finalcoef$X2[1:9]<-aic.lists$n[1:9]
-finalcoef$X3[1:9]<-aic.lists$AIC[1:9]
-finalcoef$X4[1:13]<-as.character(aic.lists$Variable[10:22])
-finalcoef$X5[1:13]<-aic.lists$n[10:22]
-finalcoef$X6[1:13]<-aic.lists$AIC[10:22]
-finalcoef$X7[1:4]<-as.character(aic.lists$Variable[23:26])
-finalcoef$X8[1:4]<-aic.lists$n[23:26]
-finalcoef$X9[1:4]<-aic.lists$AIC[23:26]
-finalcoef$X7[5]<-"Site"
-finalcoef$X8[5]<-"n"
-finalcoef$X9[5]<-"AIC"
-finalcoef$X7[6:10]<-as.character(aic.lists$Variable[27:31])
-finalcoef$X8[6:10]<-aic.lists$n[27:31]
-finalcoef$X9[6:10]<-aic.lists$AIC[27:31]
+# finalcoef<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
+# finalcoef$X1[1:9]<-as.character(aic.lists$Variable[1:9])
+# finalcoef$X2[1:9]<-aic.lists$n[1:9]
+# finalcoef$X3[1:9]<-aic.lists$AIC[1:9]
+# finalcoef$X4[1:13]<-as.character(aic.lists$Variable[10:22])
+# finalcoef$X5[1:13]<-aic.lists$n[10:22]
+# finalcoef$X6[1:13]<-aic.lists$AIC[10:22]
+# finalcoef$X7[1:4]<-as.character(aic.lists$Variable[23:26])
+# finalcoef$X8[1:4]<-aic.lists$n[23:26]
+# finalcoef$X9[1:4]<-aic.lists$AIC[23:26]
+# finalcoef$X7[5]<-"Site"
+# finalcoef$X8[5]<-"n"
+# finalcoef$X9[5]<-"AIC"
+# finalcoef$X7[6:10]<-as.character(aic.lists$Variable[27:31])
+# finalcoef$X8[6:10]<-aic.lists$n[27:31]
+# finalcoef$X9[6:10]<-aic.lists$AIC[27:31]
+# 
 
-# annual.gr4<-annual.gr4[!is.na(annual.gr4$cratio)==T,]
+library(quantreg)
+
+
+qr.SI.1 <-rq(ht_annual~srHeight_Total+
+               cratio+
+               TPA.OS+
+               slopePercent +
+               slopePercent:cos_rad_asp +
+               slopePercent:sin_rad_asp +
+               slopePercent:log(elevation+1) +
+               slopePercent:log(elevation+1):cos_rad_asp +
+               slopePercent:log(elevation+1):sin_rad_asp +
+               slopePercent:I(elevation^2) +
+               slopePercent:I(elevation^2):cos_rad_asp +
+               slopePercent:I(elevation^2):sin_rad_asp +
+               elevation +
+               I(elevation^2) ,
+             tau=.1 ,  data=annual.gr4)
+
+
+
+
+
+
+
+qr.SI.5 <-rq(ht_annual~srHeight_Total+
+               cratio+
+               TPA.OS+
+               slopePercent +
+               slopePercent:cos_rad_asp +
+               slopePercent:sin_rad_asp +
+               slopePercent:log(elevation+1) +
+               slopePercent:log(elevation+1):cos_rad_asp +
+               slopePercent:log(elevation+1):sin_rad_asp +
+               slopePercent:I(elevation^2) +
+               slopePercent:I(elevation^2):cos_rad_asp +
+               slopePercent:I(elevation^2):sin_rad_asp +
+               elevation +
+               I(elevation^2) ,
+             tau=.5,  data=annual.gr4)
+
+qr.SI.9 <-rq(ht_annual~srHeight_Total+
+               cratio+
+               TPA.OS+
+               slopePercent +
+               slopePercent:cos_rad_asp +
+               slopePercent:sin_rad_asp +
+               slopePercent:log(elevation+1) +
+               slopePercent:log(elevation+1):cos_rad_asp +
+               slopePercent:log(elevation+1):sin_rad_asp +
+               slopePercent:I(elevation^2) +
+               slopePercent:I(elevation^2):cos_rad_asp +
+               slopePercent:I(elevation^2):sin_rad_asp +
+               elevation +
+               I(elevation^2) ,
+             tau=.9 ,  data=annual.gr4)
+
+#below is for the latex summarys of parameter estimates
+# library(Hmisc)
+# qr.SI.1.sum<-summary(qr.SI.1)
+# qr.SI.1.tab<-round(qr.SI.1.sum$coefficients,4)
+# latex(qr.SI.1.tab, file="")
 # 
+# qr.SI.5.sum<-summary(qr.SI.5)
+# qr.SI.5.tab<-round(qr.SI.5.sum$coefficients,4)
+# latex(qr.SI.5.tab, file="")
 # 
-# 
-# #Would it be okay to use a mixed model in variable selection to account for within group
-# #(subject) correlation and then use regular rq in prediction?
-# 
-# 
-# annual.gr6<-annual.gr6[!is.na(annual.gr6$cratio)==T,]
-# annual.gr6<-annual.gr6[!is.na(annual.gr6$ht_annual)==T,]
-# 
-# 
-# 
-# 
-# 
-# library(quantreg)
-# least_squares <-lm(ht_annual~srHeight_Total+
-#                cratio+
-#                TPA.OS+
-#                slopePercent +
-#                slopePercent:cos_rad_asp +
-#                slopePercent:sin_rad_asp +
-#                slopePercent:log(elevation+1) +
-#                slopePercent:log(elevation+1):cos_rad_asp +
-#                slopePercent:log(elevation+1):sin_rad_asp +
-#                slopePercent:I(elevation^2) +
-#                slopePercent:I(elevation^2):cos_rad_asp +
-#                slopePercent:I(elevation^2):sin_rad_asp +
-#                elevation +
-#                I(elevation^2) ,
-#             data=annual.gr4)
-# 
-# 
-# qr.SI.1 <-rq(ht_annual~srHeight_Total+
-#                cratio+
-#                TPA.OS+
-#                slopePercent +
-#                slopePercent:cos_rad_asp +
-#                slopePercent:sin_rad_asp +
-#                slopePercent:log(elevation+1) +
-#                slopePercent:log(elevation+1):cos_rad_asp +
-#                slopePercent:log(elevation+1):sin_rad_asp +
-#                slopePercent:I(elevation^2) +
-#                slopePercent:I(elevation^2):cos_rad_asp +
-#                slopePercent:I(elevation^2):sin_rad_asp +
-#                elevation +
-#                I(elevation^2) ,
-#              tau=.1 ,  data=annual.gr4)
-# 
-# 
-# # qr.SI.all <-rq(ht_annual~srHeight_Total+
-# #                cratio+
-# #                TPA.OS+
-# #                slopePercent +
-# #                slopePercent:cos_rad_asp +
-# #                slopePercent:sin_rad_asp +
-# #                slopePercent:log(elevation+1) +
-# #                slopePercent:log(elevation+1):cos_rad_asp +
-# #                slopePercent:log(elevation+1):sin_rad_asp +
-# #                slopePercent:I(elevation^2) +
-# #                slopePercent:I(elevation^2):cos_rad_asp +
-# #                slopePercent:I(elevation^2):sin_rad_asp +
-# #                elevation +
-# #                (elevation^2) ,
-# #              tau=c(1:9/10) ,  data=annual.gr4)
-# 
-# # qr.SI.all <-rq(ht_annual~srHeight_Total+
-# #                  cratio+
-# #                  TPA.OS+
-# #                  SiteIndex_Value ,
-# #                tau=c(1:9/10) ,  data=annual.gr4)
-# 
-# 
-# # summary(qr.SI.all)
-# 
-# 
-# # plot(summary(qr.SI.all),parm="TPA.OS")
-# # plot(summary(qr.SI.all),parm="cratio")
-# # plot(summary(qr.SI.all),parm="srHeight_Total")
-# 
-# 
-# 
-# 
-# qr.SI.5 <-rq(ht_annual~srHeight_Total+
-#                cratio+
-#                TPA.OS+
-#                slopePercent +
-#                slopePercent:cos_rad_asp +
-#                slopePercent:sin_rad_asp +
-#                slopePercent:log(elevation+1) +
-#                slopePercent:log(elevation+1):cos_rad_asp +
-#                slopePercent:log(elevation+1):sin_rad_asp +
-#                slopePercent:I(elevation^2) +
-#                slopePercent:I(elevation^2):cos_rad_asp +
-#                slopePercent:I(elevation^2):sin_rad_asp +
-#                elevation +
-#                I(elevation^2) ,
-#              tau=.5,  data=annual.gr4)
-# 
-# qr.SI.9 <-rq(ht_annual~srHeight_Total+
-#                cratio+
-#                TPA.OS+
-#                slopePercent +
-#                slopePercent:cos_rad_asp +
-#                slopePercent:sin_rad_asp +
-#                slopePercent:log(elevation+1) +
-#                slopePercent:log(elevation+1):cos_rad_asp +
-#                slopePercent:log(elevation+1):sin_rad_asp +
-#                slopePercent:I(elevation^2) +
-#                slopePercent:I(elevation^2):cos_rad_asp +
-#                slopePercent:I(elevation^2):sin_rad_asp +
-#                elevation +
-#                I(elevation^2) ,
-#              tau=.9 ,  data=annual.gr4)
-# 
-# 
-# 
-# annual.gr6$qr.pred.one <- predict.rq(qr.SI.1, annual.gr6)
-# annual.gr6$qr.pred.five <- predict.rq(qr.SI.5, annual.gr6)
-# annual.gr6$qr.pred.nine <- predict.rq(qr.SI.9, annual.gr6)
-# 
-# 
-#     
-# valid.func<-function(annualht,qr.pred.one,qr.pred.five,qr.pred.nine){
-#   # annualht<-1.2
-#   # qr.pred.one<-1
-#   # qr.pred.five<-1.6
-#   # qr.pred.nine<-1.6
-#   
-#  ifelse(annualht>qr.pred.nine,
-#        #yes
-#        cat<-"top10",
-#        #no
-#        ifelse(qr.pred.five<annualht&&annualht<qr.pred.nine,
-#               #yes
-#               cat<- "fiftytoninety",
-#               #no
-#               ifelse(qr.pred.one<annualht&&annualht<qr.pred.five,
-#                      cat<-"bottom10tofifty",
-#                      cat<-"bottom10")))
-# 
-# cat
-# 
-# }
-# 
-# annual.gr6$response.cat<-0
-# 
-# for(i in 1:nrow(annual.gr6)){
-#   annual.gr6$response.cat[i]<-valid.func(
-#     annual.gr6$ht_annual[i],
-#     annual.gr6$qr.pred.one[i],
-#     annual.gr6$qr.pred.five[i],
-#     annual.gr6$qr.pred.nine[i])
-# 
-# }
-# 
-# library(plyr)
-# sorted.totals<-count(annual.gr6, 'response.cat')
-# 
-# 
-# library(RColorBrewer)
-# library(lattice)
-# 
-# 
-# 
-# barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",
-#         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
-#         main = "Witheld Data Height Growth Response
-#         sorted by Quantile Category",ylim=c(0,.60),
-#         par.settings = my.settings,
-#         par.strip.text=list(col="white", font=2),
-#         panel=function(x,y,...){
-#           panel.grid(h=-1, v=0); 
-#           panel.barchart(x,y,...)
-#         })
+# qr.SI.9.sum<-summary(qr.SI.9)
+# qr.SI.9.tab<-round(qr.SI.9.sum$coefficients,4)
+# latex(qr.SI.9.tab, file="")
+
+
+
+annual.gr6$qr.pred.one <- predict.rq(qr.SI.1, annual.gr6)
+annual.gr6$qr.pred.five <- predict.rq(qr.SI.5, annual.gr6)
+annual.gr6$qr.pred.nine <- predict.rq(qr.SI.9, annual.gr6)
+
+
+
+valid.func<-function(annualht,qr.pred.one,qr.pred.five,qr.pred.nine){
+  # annualht<-1.2
+  # qr.pred.one<-1
+  # qr.pred.five<-1.6
+  # qr.pred.nine<-1.6
+
+ ifelse(annualht>qr.pred.nine,
+       #yes
+       cat<-"> .9",
+       #no
+       ifelse(qr.pred.five<annualht&&annualht<qr.pred.nine,
+              #yes
+              cat<- ".5 - .9",
+              #no
+              ifelse(qr.pred.one<annualht&&annualht<qr.pred.five,
+                     cat<-".1 - .5",
+                     cat<-"< .1")))
+
+cat
+
+}
+
+annual.gr6$response.cat<-0
+
+for(i in 1:nrow(annual.gr6)){
+  annual.gr6$response.cat[i]<-valid.func(
+    annual.gr6$ht_annual[i],
+    annual.gr6$qr.pred.one[i],
+    annual.gr6$qr.pred.five[i],
+    annual.gr6$qr.pred.nine[i])
+
+}
+
+library(plyr)
+sorted.totals<-count(annual.gr6, 'response.cat')
+
+
+library(RColorBrewer)
+library(lattice)
+
+
+
+barchart(sorted.totals$freq/length(annual.gr6$InstPlot)~sorted.totals$response.cat, names = "Quantile Bin",
+        xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
+        main = "Witheld Data Height Growth Response
+        sorted by Quantile Category",ylim=c(0,.60),
+        par.settings = my.settings,
+        par.strip.text=list(col="white", font=2),
+        panel=function(x,y,...){
+          panel.grid(h=-1, v=0);
+          panel.barchart(x,y,...)
+        })
+
+#Creates Coefficient Plots Across Quantiles
+
+qr.SI.all <-rq(ht_annual~srHeight_Total+
+               cratio+
+               TPA.OS+
+               slopePercent +
+               slopePercent:cos_rad_asp +
+               slopePercent:sin_rad_asp +
+               slopePercent:log(elevation+1) +
+               slopePercent:log(elevation+1):cos_rad_asp +
+               slopePercent:log(elevation+1):sin_rad_asp +
+               slopePercent:I(elevation^2) +
+               slopePercent:I(elevation^2):cos_rad_asp +
+               slopePercent:I(elevation^2):sin_rad_asp +
+               elevation +
+               (elevation^2) ,
+             tau=c(1:9/10) ,  data=annual.gr4)
+
+
+
+# summary(qr.SI.all)
+
+plot(summary(qr.SI.all),parm="srHeight_Total",main="")
+plot(summary(qr.SI.all),parm="cratio",main="")
+plot(summary(qr.SI.all),parm="TPA.OS",main="")
+
+
+
+
+#Creates column of SEA effect
+
+SEA.func<-function(slopePercent,cos_rad_asp,sin_rad_asp,
+                   elevation){
+  pred<-(  
+    coef(qr.SI.5)[5]*slopePercent+
+      coef(qr.SI.5)[6]*elevation+
+      coef(qr.SI.5)[7]*I(elevation^2)+
+      coef(qr.SI.5)[8]*slopePercent*cos_rad_asp+
+      coef(qr.SI.5)[9]*slopePercent*sin_rad_asp+
+      coef(qr.SI.5)[10]*slopePercent*log(elevation+1)+
+      coef(qr.SI.5)[11]*slopePercent*I(elevation^2)+
+      coef(qr.SI.5)[12]*slopePercent*cos_rad_asp*log(elevation+1)+
+      coef(qr.SI.5)[13]*slopePercent*sin_rad_asp*log(elevation+1)+
+      coef(qr.SI.5)[14]*slopePercent*cos_rad_asp*I(elevation^2)+
+      coef(qr.SI.5)[15]*slopePercent*sin_rad_asp*I(elevation^2))
+  
+  pred}
+
+# annual.gr6<-annual.gr6[!annual.gr6$DBH>3.5,]
+annual.gr4$SEA.val<-0
+
+
+for(i in 1:nrow(annual.gr4)){
+  annual.gr4$SEA.val[i]<-SEA.func(
+    annual.gr4$slopePercent[i],
+    annual.gr4$cos_rad_asp[i],
+    annual.gr4$sin_rad_asp[i],
+    annual.gr4$elevation[i])
+}
+
+
 
 #Chi Squared test of homogeneity
 
+
+annual.gr6.lessthan4<-annual.gr6[annual.gr6$Height_Total<4,]
+annual.gr6.4to6<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
+annual.gr6.6plus<-annual.gr6[annual.gr6$Height_Total>6,]
+
+x.table1<-t(count(annual.gr6.lessthan4, 'response.cat'))
+x.table1<-x.table1["freq",]
+x.table1<-as.numeric(x.table1)
+
+x.table2<-t(count(annual.gr6.4to6, 'response.cat'))
+x.table2<-x.table2["freq",]
+x.table2<-as.numeric(x.table2)
+
+x.table3<-t(count(annual.gr6.6plus, 'response.cat'))
+x.table3<-x.table3["freq",]
+x.table3<-as.numeric(x.table3)
+
+brkdwn<-rbind(x.table1,x.table2,x.table3)
+rownames(brkdwn)<-c("<4","4-6",">6")
+colnames(brkdwn)<-c("<.1",".1-.5",".5-.9",">.9")
+
+
+xsq1<-chisq.test(x.table1,p=c(.1,.4,.4,.1))
+xsq1
+xsq2<-chisq.test(x.table2,p=c(.1,.4,.4,.1))
+xsq2
+xsq3<-chisq.test(x.table3,p=c(.1,.4,.4,.1))
+xsq3
+
+exp.tab<-rbind(xsq1$expected,xsq2$expected,xsq3$expected)
+rownames(exp.tab)<-c("<4","4-6",">6")
+colnames(exp.tab)<-c("<.1",".1-.5",".5-.9",">.9")
+
+
+totals<-c(sum(brkdwn[,1]),sum(brkdwn[,2]),sum(brkdwn[,3]),sum(brkdwn[,4]))
+tot.test<-chisq.test(totals,p=c(.1,.4,.4,.1))
+
+summary(tot.test)
+tot.test$expected
+
+chisq<-cbind(xsq1$p.value,xsq2$p.value,xsq3$p.value,tot.test$p.value)
+
+chisq<-round(chisq,5)
+rownames(chisq)<-c("P-Value")
+colnames(chisq)<-c("<4","4-6",">6","All")
 # 
-# annual.gr6.lessthan1<-annual.gr6[annual.gr6$Height_Total<4,]
-# annual.gr6.1to3<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
-# annual.gr6.3plus<-annual.gr6[annual.gr6$Height_Total>6,]
 # 
-# x.table1<-t(count(annual.gr6.lessthan1, 'response.cat'))
-# x.table1<-x.table1["freq",]
-# x.table1<-as.numeric(x.table1)
+# #The code below will produce output that can then be copied over to the .tex file
+# library(Hmisc)
+# #
+# latex(chisq,file="")
 # 
-# x.table2<-t(count(annual.gr6.1to3, 'response.cat'))
-# x.table2<-x.table2["freq",]
-# x.table2<-as.numeric(x.table2)
-# 
-# x.table3<-t(count(annual.gr6.3plus, 'response.cat'))
-# x.table3<-x.table3["freq",]
-# x.table3<-as.numeric(x.table3)
-# 
-# brkdwn<-rbind(x.table1,x.table2,x.table3)
-# 
-# 
-# min(annual.gr6$Height_Total)
-# 
-# hist(annual.gr6$Height_Total)
-# 
-# xsq1<-chisq.test(x.table1,p=c(.1,.4,.4,.1))
-# xsq1
-# xsq2<-chisq.test(x.table2,p=c(.1,.4,.4,.1))
-# xsq2
-# xsq3<-chisq.test(x.table3,p=c(.1,.4,.4,.1))
-# xsq3
-# #Exact test
-# 
-# library(XNomial)
-# xmulti1<-xmulti(x.table1,c(.1,.4,.4,.1),"Chisq")
-# xmulti2<-xmulti(x.table2,c(.1,.4,.4,.1),"Chisq")
-# xmulti3<-xmulti(x.table3,c(.1,.4,.4,.1),"Chisq")
-# 
-#  
-# chisq<-cbind(xsq1$p.value,xsq2$p.value,xsq3$p.value)
-# xact<-cbind(xmulti1$pChi,xmulti2$pChi,xmulti3$pChi)
-# 
-# chitable<-rbind(chisq,xact)
-# chitable<-round(chitable,digits=4)
-# 
-# rownames(chitable)<-c("ChiSq","Xact")
-# colnames(chitable)<-c("<4","4-6",">6")
+
 # 
 # #The code below will produce output that can then be copied over to the .tex file
 # library(Hmisc)
@@ -324,6 +344,7 @@ finalcoef$X9[6:10]<-aic.lists$AIC[27:31]
 # library(Hmisc)
 # 
 # latex(actual, file="")     
+
 
 
 

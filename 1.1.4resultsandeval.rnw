@@ -6,7 +6,8 @@ source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=
 source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=FALSE)
 source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=FALSE)
 source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=FALSE)
-source(paste(getwd(),'/1.7.lqmm.validation.r',sep=""), echo=FALSE)
+source(paste(getwd(),'/1.6.model.evaluation.2016.dec.16.r',sep=""), echo=FALSE)
+
 @
 
 
@@ -255,6 +256,8 @@ print(histogram(~annual.gr4$ht_annual| annual.gr4$Installation,
  \caption{Annualized Height Growth of Small Tagged Trees by Installations\label{fig:ht_by_inst} }
  \end{figure}
  
+
+ 
 Ponderosa pine vary in annual height growth according to which installation they are located within. These site differences are
 accounted for by the selection of site quality and residual overstory predictors. Note that the distribution itself changes between installations. Some installations such as SG and KC have a vary narrow distribution of annualized height growth which indicates that most trees are experiencing similar levels of growth.  In these stands, this can likely be attributed to their dense understory regeneration in which trees struggle similarly for resources. In contrast, installations such as GC and BC have fairly even distributions of annual height which indicates differentiation in competition and a resulting wide range of initial heights.
  
@@ -292,7 +295,20 @@ As suspected, KC and LL have especially narrow distributions of inital height. T
 Ponderosa pine vary in annual height growth according to which installation they are located within. These site differences are
 accounted for by the selection of site quality and residual overstory predictors. Note that the distribution itself changes between installations. Some installations such as SG and KC have a vary narrow distribution of annualized height growth which indicates that most trees are experiencing similar levels of growth.  In these stands, this can likely be attributed to their dense understory regeneration in which trees struggle similarly for resources. In contrast, installations such as GC and BC have fairly even distributions of annual height which indicates differentiation in competition and a resulting wide range of initial heights.
 
- 
+
+\begin{table}\label{tab:tree.counts}
+\caption{Number of Observations Per Individual Small Tagged Tree}
+\begin{center}
+\begin{tabular}{rr}
+\hline\hline
+\multicolumn{1}{c}{Number of Observations}&\multicolumn{1}{c}{Number of Trees}\tabularnewline
+\hline
+$1$&$592$\tabularnewline
+$2$&$582$\tabularnewline
+$3$&$115$\tabularnewline
+\hline
+\end{tabular}\end{center}
+\end{table}
  
 \begin{figure} 
 \begin{center}
@@ -457,6 +473,42 @@ plot(sea.ht.gam,residuals=T,se=T,
 \caption{Generalized additive model of square-root of height residuals, crown ratios and overstory trees per acre and smoothed SEA interaction\label{fig:seqgamSEA}}
 \end{figure}
 
+\begin{figure} 
+\begin{center}
+<<label=sr.init.coef,fig=TRUE,echo=FALSE>>=
+
+plot(summary(qr.SI.all),parm="srHeight_Total",main="")
+
+
+@
+\end{center}
+\caption{Coefficient Plots of Initial Height Accross All Quantiles\label{fig:sr.init.coef}}
+\end{figure}
+
+\begin{figure} 
+\begin{center}
+<<label=cr.coef,fig=TRUE,echo=FALSE>>=
+
+plot(summary(qr.SI.all),parm="cratio")
+
+@
+\end{center}
+\caption{Coefficient Plot of Crown Ratio Accross All Quantiles\label{fig:cr.coef}}
+\end{figure}
+
+\begin{figure} 
+\begin{center}
+<<label=os.tpa.coef,fig=TRUE,echo=FALSE>>=
+
+plot(summary(qr.SI.all),parm="TPA.OS",main="")
+
+@
+\end{center}
+\caption{Coefficient Plot of Overstory Trees Per Acre Accross All Quantiles\label{fig:os.tpa.coef}}
+\end{figure}
+
+
+
 
 \begin{figure} 
 \begin{center}
@@ -541,7 +593,7 @@ plot(annual.gr6$ht_annual,annual.gr6$qr.pred.five,
 
 
 
-\begin{table}
+\begin{table}\label{tab:expected}
 \caption{Expected Height Increments by Initial Height Class and Quantile Bin}
 \begin{center}
 \begin{tabular}{lrrrr}
@@ -555,7 +607,7 @@ plot(annual.gr6$ht_annual,annual.gr6$qr.pred.five,
 \end{tabular}\end{center}
 \end{table}
 
-\begin{table}
+\begin{table}\label{tab:actual}
 \caption{Actual Height Increments by Initial Height Class and Quantile Bin}
 \begin{center}
 \begin{tabular}{lrrrr}
@@ -569,8 +621,8 @@ plot(annual.gr6$ht_annual,annual.gr6$qr.pred.five,
 \end{tabular}\end{center}
 \end{table}
 
-\begin{table}
-\caption{Chi-Squared P-Value Results by Height Class}
+\begin{table}\label{tab:chisqtab}
+\caption{Chi-Squared P-Value Results by Height Class}\lable{}
 \begin{center}
 \begin{tabular}{lrrrr}
 \hline\hline

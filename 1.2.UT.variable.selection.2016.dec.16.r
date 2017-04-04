@@ -248,272 +248,247 @@ annual.gr2 <- annual.gr2[!is.na(annual.gr2$cratio) & annual.gr2$cratio>=0,]
 
 
 #####Quantile Regression
+library(quantreg)
 
-library(lqmm)
-
-#QR for nothing
-qr.nothing.lqmm<-lqmm(fixed=ht_annual~srHeight_Total,random=~1,
-                      na.action=na.exclude,
-                      group=conc,control=list(LP_tol_ll=1e-01,
-                      LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
-# summary(qr.nothing.lqmm)
-aic.list.lqmm<-AIC(qr.nothing.lqmm)[1]
-nlist.lqmm<-length(qr.nothing.lqmm$y)
-
-length(annual.gr2$ht_annual)
+# 
 #QR for small.tpa
-qr.stpa<-lqmm(ht_annual ~ srHeight_Total+small.tpa,random=~1,
-              na.action=na.exclude,
-              group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
-# summary(qr.stpa)
-aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stpa)[1])
+qr.nothing<-rq(ht_annual~srHeight_Total,tau=c(.5),data=annual.gr2)
+summary(qr.nothing)
+aic.list<-AIC(qr.nothing)[1]
+nlist<-length(qr.nothing$y)
 
-nlist.lqmm<-c(nlist.lqmm,length(qr.stpa$y))
+#QR for small.tpa
+qr.stpa<-rq(ht_annual ~ srHeight_Total+small.tpa,tau=c(.5),data=annual.gr2)
+summary(qr.stpa)
+aic.list<-c(aic.list,AIC(qr.stpa)[1])
+
+nlist<-c(nlist,length(qr.stpa$y))
 
 #QR for height class 2
-# qr.stp2<-lqmm(ht_annual~srHeight_Total+two,random=~1,group=conc,tau=c(.5),data=annual.gr2)
-# summary(qr.stp2)
-#aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp2)[1])
+qr.stp2<-rq(ht_annual~srHeight_Total+two,tau=c(.5),data=annual.gr2)
+summary(qr.stp2)
+#aic.list<-c(aic.list,AIC(qr.stp2)[1])
 
-#nlist.lqmm<-c(nlist.lqmm,length(qr.stp2$y))
+#nlist<-c(nlist,length(qr.stp2$y))
 
 
 # #QR for height class 4
-# qr.stp4<-lqmm(ht_annual~srHeight_Total+four,tau=c(.5),data=annual.gr2)
+# qr.stp4<-rq(ht_annual~srHeight_Total+four,tau=c(.5),data=annual.gr2)
 # summary(qr.stp4)
-# #aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp4)[1])
-# #nlist.lqmm<-c(nlist.lqmm,length(qr.stp4$y))
-# 
+# #aic.list<-c(aic.list,AIC(qr.stp4)[1])
+# #nlist<-c(nlist,length(qr.stp4$y))
+#
 # #QR for height class 6
-# qr.stp6<-lqmm(ht_annual~srHeight_Total+six,tau=c(.5),data=annual.gr2)
+# qr.stp6<-rq(ht_annual~srHeight_Total+six,tau=c(.5),data=annual.gr2)
 # summary(qr.stp6)
-# #aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp6)[1])
-# #nlist.lqmm<-c(nlist.lqmm,length(qr.stp6$y))
-# 
+# #aic.list<-c(aic.list,AIC(qr.stp6)[1])
+# #nlist<-c(nlist,length(qr.stp6$y))
+#
 # #QR for height class 8
-# qr.stp8<-lqmm(ht_annual~srHeight_Total+eight,tau=c(.5),data=annual.gr2)
+# qr.stp8<-rq(ht_annual~srHeight_Total+eight,tau=c(.5),data=annual.gr2)
 # summary(qr.stp8)
-# #aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp8)[1])
-# #nlist.lqmm<-c(nlist.lqmm,length(qr.stp8$y))
-# 
+# #aic.list<-c(aic.list,AIC(qr.stp8)[1])
+# #nlist<-c(nlist,length(qr.stp8$y))
+#
 # #QR for height class 10
-# qr.stp10<-lqmm(ht_annual~srHeight_Total+ten,tau=c(.5),data=annual.gr2)
+# qr.stp10<-rq(ht_annual~srHeight_Total+ten,tau=c(.5),data=annual.gr2)
 # summary(qr.stp10)
-# #aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp10)[1])
-# #nlist.lqmm<-c(nlist.lqmm,length(qr.stp10$y))
-# 
+# #aic.list<-c(aic.list,AIC(qr.stp10)[1])
+# #nlist<-c(nlist,length(qr.stp10$y))
+#
 # #QR for height class 12
-# qr.stp12<-lqmm(ht_annual~srHeight_Total+twelve,tau=c(.5),data=annual.gr2)
+# qr.stp12<-rq(ht_annual~srHeight_Total+twelve,tau=c(.5),data=annual.gr2)
 # summary(qr.stp12)
-# #aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp12)[1])
-# #nlist.lqmm<-c(nlist.lqmm,length(qr.stp12$y))
-# 
+# #aic.list<-c(aic.list,AIC(qr.stp12)[1])
+# #nlist<-c(nlist,length(qr.stp12$y))
+#
 # #QR for height class 14
-# qr.stp14<-lqmm(ht_annual~srHeight_Total+fourteen,tau=c(.5),data=annual.gr2)
+# qr.stp14<-rq(ht_annual~srHeight_Total+fourteen,tau=c(.5),data=annual.gr2)
 # summary(qr.stp14)
-# #aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp14)[1])
-# #nlist.lqmm<-c(nlist.lqmm,length(qr.stp14$y))
-# 
+# #aic.list<-c(aic.list,AIC(qr.stp14)[1])
+# #nlist<-c(nlist,length(qr.stp14$y))
+#
 #QR for height class 15
-qr.stp15<-lqmm(ht_annual~srHeight_Total+other,random=~1,
-               na.action=na.exclude,
-               group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
-# summary(qr.stp15)
-aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp15)[1])
-nlist.lqmm<-c(nlist.lqmm,length(qr.stp15$y))
-# 
-# 
+qr.stp15<-rq(ht_annual~srHeight_Total+other,tau=c(.5),data=annual.gr2)
+summary(qr.stp15)
+aic.list<-c(aic.list,AIC(qr.stp15)[1])
+nlist<-c(nlist,length(qr.stp15$y))
+#
+#
 #QR for trees greater than
-qr.sttgt<-lqmm(ht_annual~srHeight_Total+tpa.gt,random=~1,
-               na.action=na.exclude,
-               group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
-# summary(qr.sttgt)
-aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.sttgt)[1])
-nlist.lqmm<-c(nlist.lqmm,length(qr.sttgt$y))
+qr.sttgt<-rq(ht_annual~srHeight_Total+tpa.gt,tau=c(.5),data=annual.gr2)
+summary(qr.sttgt)
+aic.list<-c(aic.list,AIC(qr.sttgt)[1])
+nlist<-c(nlist,length(qr.sttgt$y))
 
 #QR for basal diameter
-annual.gr2<-annual.gr2[!is.na(annual.gr2$BasalDiameter)==T,]
-qr.stbd<-lqmm(ht_annual~srHeight_Total+BasalDiameter,random=~1,
-              na.action=na.exclude,
-              group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
-# summary(qr.stbd)
-aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stbd)[1])
-nlist.lqmm<-c(nlist.lqmm,length(qr.stbd$y))
+qr.stbd<-rq(ht_annual~srHeight_Total+BasalDiameter,tau=c(.5),data=annual.gr2)
+summary(qr.stbd)
+aic.list<-c(aic.list,AIC(qr.stbd)[1])
+nlist<-c(nlist,length(qr.stbd$y))
 
 #QR for DBH
-annual.gr2<-annual.gr2[!is.na(annual.gr2$DBH)==T,]
-
-qr.stdbh<-lqmm(ht_annual~srHeight_Total+DBH,random=~1,
-               na.action=na.exclude,
-               group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
-# summary(qr.stdbh)
-aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stdbh)[1])
-nlist.lqmm<-c(nlist.lqmm,length(qr.stdbh$y))
+qr.stdbh<-rq(ht_annual~srHeight_Total+DBH,tau=c(.5),data=annual.gr2)
+summary(qr.stdbh)
+aic.list<-c(aic.list,AIC(qr.stdbh)[1])
+nlist<-c(nlist,length(qr.stdbh$y))
 
 #QR for Crown Width
-qr.stcw<-lqmm(ht_annual~srHeight_Total+CrownWidth,random=~1,
-              na.action=na.exclude,
-              group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
-# summary(qr.stcw)
-aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stcw)[1])
-nlist.lqmm<-c(nlist.lqmm,length(qr.stcw$y))
+qr.stcw<-rq(ht_annual~srHeight_Total+CrownWidth,tau=c(.5),data=annual.gr2)
+summary(qr.stcw)
+aic.list<-c(aic.list,AIC(qr.stcw)[1])
+nlist<-c(nlist,length(qr.stcw$y))
 
 
 #QR for Crown Length
-qr.stcl<-lqmm(ht_annual~srHeight_Total+CrownLength,random=~1,
-              na.action=na.exclude,
-              group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
-# summary(qr.stcl)
-aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stcl)[1])
-nlist.lqmm<-c(nlist.lqmm,length(qr.stcl$y))
+qr.stcl<-rq(ht_annual~srHeight_Total+CrownLength,tau=c(.5),data=annual.gr2)
+summary(qr.stcl)
+aic.list<-c(aic.list,AIC(qr.stcl)[1])
+nlist<-c(nlist,length(qr.stcl$y))
 
 #QR for Crown Ratio
-qr.stcl<-lqmm(ht_annual~srHeight_Total+cratio,random=~1,
-              na.action=na.exclude,
-              group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
-# summary(qr.stcl)
-aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stcl)[1])
-nlist.lqmm<-c(nlist.lqmm,length(qr.stcl$y))
+qr.stcl<-rq(ht_annual~srHeight_Total+cratio,tau=c(.5),data=annual.gr2)
+summary(qr.stcl)
+aic.list<-c(aic.list,AIC(qr.stcl)[1])
+nlist<-c(nlist,length(qr.stcl$y))
 
-UT.aic<-as.data.frame(cbind(nlist.lqmm,aic.list.lqmm))
 
-UT.aic$aic.list.lqmm<-as.numeric(UT.aic$aic.list.lqmm)
+
+
+UT.aic<-as.data.frame(cbind(nlist,aic.list))
+
+UT.aic$aic.list<-as.numeric(UT.aic$aic.list)
 
 variable<-c("Nothing","SmallTPA","Trees15+",
-            "TGT","BD","DBH","CrownWidth","CrownLength","CrownRatio")
+                      "TGT","BD","DBH","CrownWidth","CrownLength","CrownRatio")
 
 variableUT<-as.data.frame(variable)
 
 UT.aic<-cbind(variableUT,UT.aic)
 
+
+####LQMM############
+# library(lqmm)
 # 
+# #QR for nothing
+# qr.nothing.lqmm<-lqmm(fixed=ht_annual~srHeight_Total,random=~1,
+#                       na.action=na.exclude,
+#                       group=conc,control=list(LP_tol_ll=1e-01,
+#                       LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
+# aic.list.lqmm<-AIC(qr.nothing.lqmm)[1]
+# nlist.lqmm<-length(qr.nothing.lqmm$y)
 # 
+# length(annual.gr2$ht_annual)
 # #QR for small.tpa
-# qr.nothing<-rq(ht_annual~srHeight_Total,tau=c(.5),data=annual.gr2)
-# summary(qr.nothing)
-# aic.list<-AIC(qr.nothing)[1]
-# nlist<-length(qr.nothing$y)
+# qr.stpa<-lqmm(ht_annual ~ srHeight_Total+small.tpa,random=~1,
+#               na.action=na.exclude,
+#               group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
+# aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stpa)[1])
 # 
-# #QR for small.tpa
-# qr.stpa<-rq(ht_annual ~ srHeight_Total+small.tpa,tau=c(.5),data=annual.gr2)
-# summary(qr.stpa)
-# aic.list<-c(aic.list,AIC(qr.stpa)[1])
-# 
-# nlist<-c(nlist,length(qr.stpa$y))
+# nlist.lqmm<-c(nlist.lqmm,length(qr.stpa$y))
 # 
 # #QR for height class 2
-# qr.stp2<-rq(ht_annual~srHeight_Total+two,tau=c(.5),data=annual.gr2)
-# summary(qr.stp2)
-# #aic.list<-c(aic.list,AIC(qr.stp2)[1])
+# # qr.stp2<-lqmm(ht_annual~srHeight_Total+two,random=~1,group=conc,tau=c(.5),data=annual.gr2)
+# #aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp2)[1])
 # 
-# #nlist<-c(nlist,length(qr.stp2$y))
+# #nlist.lqmm<-c(nlist.lqmm,length(qr.stp2$y))
 # 
 # 
 # # #QR for height class 4
-# # qr.stp4<-rq(ht_annual~srHeight_Total+four,tau=c(.5),data=annual.gr2)
-# # summary(qr.stp4)
-# # #aic.list<-c(aic.list,AIC(qr.stp4)[1])
-# # #nlist<-c(nlist,length(qr.stp4$y))
+# # qr.stp4<-lqmm(ht_annual~srHeight_Total+four,tau=c(.5),data=annual.gr2)
+# # #aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp4)[1])
+# # #nlist.lqmm<-c(nlist.lqmm,length(qr.stp4$y))
 # # 
 # # #QR for height class 6
-# # qr.stp6<-rq(ht_annual~srHeight_Total+six,tau=c(.5),data=annual.gr2)
-# # summary(qr.stp6)
-# # #aic.list<-c(aic.list,AIC(qr.stp6)[1])
-# # #nlist<-c(nlist,length(qr.stp6$y))
+# # qr.stp6<-lqmm(ht_annual~srHeight_Total+six,tau=c(.5),data=annual.gr2)
+# # #aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp6)[1])
+# # #nlist.lqmm<-c(nlist.lqmm,length(qr.stp6$y))
 # # 
 # # #QR for height class 8
-# # qr.stp8<-rq(ht_annual~srHeight_Total+eight,tau=c(.5),data=annual.gr2)
-# # summary(qr.stp8)
-# # #aic.list<-c(aic.list,AIC(qr.stp8)[1])
-# # #nlist<-c(nlist,length(qr.stp8$y))
+# # qr.stp8<-lqmm(ht_annual~srHeight_Total+eight,tau=c(.5),data=annual.gr2)
+# # #aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp8)[1])
+# # #nlist.lqmm<-c(nlist.lqmm,length(qr.stp8$y))
 # # 
 # # #QR for height class 10
-# # qr.stp10<-rq(ht_annual~srHeight_Total+ten,tau=c(.5),data=annual.gr2)
-# # summary(qr.stp10)
-# # #aic.list<-c(aic.list,AIC(qr.stp10)[1])
-# # #nlist<-c(nlist,length(qr.stp10$y))
+# # qr.stp10<-lqmm(ht_annual~srHeight_Total+ten,tau=c(.5),data=annual.gr2)
+# # #aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp10)[1])
+# # #nlist.lqmm<-c(nlist.lqmm,length(qr.stp10$y))
 # # 
 # # #QR for height class 12
-# # qr.stp12<-rq(ht_annual~srHeight_Total+twelve,tau=c(.5),data=annual.gr2)
-# # summary(qr.stp12)
-# # #aic.list<-c(aic.list,AIC(qr.stp12)[1])
-# # #nlist<-c(nlist,length(qr.stp12$y))
+# # qr.stp12<-lqmm(ht_annual~srHeight_Total+twelve,tau=c(.5),data=annual.gr2)
+# # #aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp12)[1])
+# # #nlist.lqmm<-c(nlist.lqmm,length(qr.stp12$y))
 # # 
 # # #QR for height class 14
-# # qr.stp14<-rq(ht_annual~srHeight_Total+fourteen,tau=c(.5),data=annual.gr2)
-# # summary(qr.stp14)
-# # #aic.list<-c(aic.list,AIC(qr.stp14)[1])
-# # #nlist<-c(nlist,length(qr.stp14$y))
+# # qr.stp14<-lqmm(ht_annual~srHeight_Total+fourteen,tau=c(.5),data=annual.gr2)
+# # #aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp14)[1])
+# # #nlist.lqmm<-c(nlist.lqmm,length(qr.stp14$y))
 # # 
 # #QR for height class 15
-# qr.stp15<-rq(ht_annual~srHeight_Total+other,tau=c(.5),data=annual.gr2)
-# summary(qr.stp15)
-# aic.list<-c(aic.list,AIC(qr.stp15)[1])
-# nlist<-c(nlist,length(qr.stp15$y))
+# qr.stp15<-lqmm(ht_annual~srHeight_Total+other,random=~1,
+#                na.action=na.exclude,
+#                group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
+# aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stp15)[1])
+# nlist.lqmm<-c(nlist.lqmm,length(qr.stp15$y))
 # # 
 # # 
 # #QR for trees greater than
-# qr.sttgt<-rq(ht_annual~srHeight_Total+tpa.gt,tau=c(.5),data=annual.gr2)
-# summary(qr.sttgt)
-# aic.list<-c(aic.list,AIC(qr.sttgt)[1])
-# nlist<-c(nlist,length(qr.sttgt$y))
+# qr.sttgt<-lqmm(ht_annual~srHeight_Total+tpa.gt,random=~1,
+#                na.action=na.exclude,
+#                group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
+# aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.sttgt)[1])
+# nlist.lqmm<-c(nlist.lqmm,length(qr.sttgt$y))
 # 
 # #QR for basal diameter
-# qr.stbd<-rq(ht_annual~srHeight_Total+BasalDiameter,tau=c(.5),data=annual.gr2)
-# summary(qr.stbd)
-# aic.list<-c(aic.list,AIC(qr.stbd)[1])
-# nlist<-c(nlist,length(qr.stbd$y))
+# annual.gr2<-annual.gr2[!is.na(annual.gr2$BasalDiameter)==T,]
+# qr.stbd<-lqmm(ht_annual~srHeight_Total+BasalDiameter,random=~1,
+#               na.action=na.exclude,
+#               group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
+# aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stbd)[1])
+# nlist.lqmm<-c(nlist.lqmm,length(qr.stbd$y))
 # 
 # #QR for DBH
-# qr.stdbh<-rq(ht_annual~srHeight_Total+DBH,tau=c(.5),data=annual.gr2)
-# summary(qr.stdbh)
-# aic.list<-c(aic.list,AIC(qr.stdbh)[1])
-# nlist<-c(nlist,length(qr.stdbh$y))
+# annual.gr2<-annual.gr2[!is.na(annual.gr2$DBH)==T,]
+# 
+# qr.stdbh<-lqmm(ht_annual~srHeight_Total+DBH,random=~1,
+#                na.action=na.exclude,
+#                group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
+# aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stdbh)[1])
+# nlist.lqmm<-c(nlist.lqmm,length(qr.stdbh$y))
 # 
 # #QR for Crown Width
-# qr.stcw<-rq(ht_annual~srHeight_Total+CrownWidth,tau=c(.5),data=annual.gr2)
-# summary(qr.stcw)
-# aic.list<-c(aic.list,AIC(qr.stcw)[1])
-# nlist<-c(nlist,length(qr.stcw$y))
+# qr.stcw<-lqmm(ht_annual~srHeight_Total+CrownWidth,random=~1,
+#               na.action=na.exclude,
+#               group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
+# aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stcw)[1])
+# nlist.lqmm<-c(nlist.lqmm,length(qr.stcw$y))
 # 
 # 
 # #QR for Crown Length
-# qr.stcl<-rq(ht_annual~srHeight_Total+CrownLength,tau=c(.5),data=annual.gr2)
-# summary(qr.stcl)
-# aic.list<-c(aic.list,AIC(qr.stcl)[1])
-# nlist<-c(nlist,length(qr.stcl$y))
+# qr.stcl<-lqmm(ht_annual~srHeight_Total+CrownLength,random=~1,
+#               na.action=na.exclude,
+#               group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
+# aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stcl)[1])
+# nlist.lqmm<-c(nlist.lqmm,length(qr.stcl$y))
 # 
 # #QR for Crown Ratio
-# qr.stcl<-rq(ht_annual~srHeight_Total+cratio,tau=c(.5),data=annual.gr2)
-# summary(qr.stcl)
-# aic.list<-c(aic.list,AIC(qr.stcl)[1])
-# nlist<-c(nlist,length(qr.stcl$y))
+# qr.stcl<-lqmm(ht_annual~srHeight_Total+cratio,random=~1,
+#               na.action=na.exclude,
+#               group=conc,control=list(LP_tol_ll=1e-01,LP_max_iter=1000,method="df"),tau=c(.5),data=annual.gr2)
+# aic.list.lqmm<-c(aic.list.lqmm,AIC(qr.stcl)[1])
+# nlist.lqmm<-c(nlist.lqmm,length(qr.stcl$y))
 # 
+# UT.aic<-as.data.frame(cbind(nlist.lqmm,aic.list.lqmm))
 # 
-# 
-# 
-# UT.aic<-as.data.frame(cbind(nlist,aic.list))
-# 
-# UT.aic$aic.list<-as.numeric(UT.aic$aic.list)
+# UT.aic$aic.list.lqmm<-as.numeric(UT.aic$aic.list.lqmm)
 # 
 # variable<-c("Nothing","SmallTPA","Trees15+",
-#                       "TGT","BD","DBH","CrownWidth","CrownLength","CrownRatio")
+#             "TGT","BD","DBH","CrownWidth","CrownLength","CrownRatio")
 # 
 # variableUT<-as.data.frame(variable)
 # 
 # UT.aic<-cbind(variableUT,UT.aic)
 
-
-
-
-
-#Initial DBH has the lowest aic, however, it is not really a measure of other small tree
-#competition. The number of trees in the fourteen foot ht. class is and has the next lowest 
-#aic
-
-#Maintain both smallTPA and CrownWidth as predictors of small tree growth
-#going forward. These variables are related because CW reflects the effects
-#of other small tree competition
 
 
 

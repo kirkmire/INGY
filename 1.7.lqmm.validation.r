@@ -70,21 +70,21 @@ qr.SI.9 <-lqmm(ht_annual~srHeight_Total+
                control=lqmmControl(LP_tol_ll=.1,LP_max_iter=3000,method="df"),tau=.9,data=annual.gr4)
 
 #below is for the latex summarys of parameter estimates
-library(Hmisc)
-qr.SI.1.sum<-summary.lqmm(qr.SI.1)
-print.summary.lqmm(qr.SI.1.sum)
-qr.SI.1.tab<-round(qr.SI.1.sum$tTable,4)
-latex(qr.SI.1.tab, file="")
-
-qr.SI.5.sum<-summary.lqmm(qr.SI.5)
-print.summary.lqmm(qr.SI.5.sum)
-qr.SI.5.tab<-round(qr.SI.5.sum$tTable,4)
-latex(qr.SI.5.tab, file="")
-
-qr.SI.9.sum<-summary.lqmm(qr.SI.9)
-print.summary.lqmm(qr.SI.9.sum)
-qr.SI.9.tab<-round(qr.SI.9.sum$tTable,4)
-latex(qr.SI.9.tab, file="")
+# library(Hmisc)
+# qr.SI.1.sum<-summary.lqmm(qr.SI.1)
+# print.summary.lqmm(qr.SI.1.sum)
+# qr.SI.1.tab<-round(qr.SI.1.sum$tTable,4)
+# latex(qr.SI.1.tab, file="")
+# 
+# qr.SI.5.sum<-summary.lqmm(qr.SI.5)
+# print.summary.lqmm(qr.SI.5.sum)
+# qr.SI.5.tab<-round(qr.SI.5.sum$tTable,4)
+# latex(qr.SI.5.tab, file="")
+# 
+# qr.SI.9.sum<-summary.lqmm(qr.SI.9)
+# print.summary.lqmm(qr.SI.9.sum)
+# qr.SI.9.tab<-round(qr.SI.9.sum$tTable,4)
+# latex(qr.SI.9.tab, file="")
 
 #Below is for engel plots of coefficients
 # qr.SI.all <-lqmm(ht_annual~srHeight_Total+

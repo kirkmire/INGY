@@ -61,12 +61,16 @@ for the degree of}
 \newpage
 Kirkmire, Colin, M.SC, May 2017                Forestry
 
-Abstract Title
-Chairperson or Co-Chairperson: Committee Member Name
-Co-Chairperson: Committee Member Name (remove this line if not applicable)
+Effects of tree size, competition, and site on the distribution of sapling height growth
 
-Abstract Content (Single spaced, one page, two space paragraph indent, no more than 350
-words.)
+Dr. David L.R. Affleck, Co-Chair
+Dr. John Goodburn, Co-Chair
+
+Variable retention harvesting is an increasingly viable option in multiple objective silviculture. As a shade-intolerant, fire-adapted species, ponderosa pine is especially well-suited to the simulated disturbance represented by variable retention harvests. Stand initiation following harvest is a critical stage in stand development yet little is known about how small ponderosa pine trees in the understory respond to competitive factors. To assess these sources of competition, we examined post-harvest understory non-arboreal vegetation, overstory trees, and a subsample of tagged small trees over a period of 16 years on 29 sites throughout the Inland Northwest. 
+
+Modeling difficulties including a skewed response distribution and longitudinal data led to an examination of Linear Quantile Mixed Models. Initial height, crown ratio, overstory trees per acre and slope/elevation/aspect were found to be significant predictors of height growth accross all predicted quantiles ($\tau$=.1,.5 and .9). However, the effects of these predictors were found to be different between quantiles which suggests that the predictors influence the fastest growing trees in a different way than the slowest and median trees. We found that quantile regression models could be used to provide an empirically based distribution of height growth under a retained overstory.
+
+
 
 
 \newpage

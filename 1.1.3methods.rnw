@@ -268,6 +268,7 @@ This characterization of the response distribution also allows for predictor var
 \begin{center}
     \includegraphics{quant_reg.jpg}
     \caption{Hypothetical seperation of the distribution of annual height increments according to 3 quantile regression surfaces as a function of trees per acre and initial tree height.\label{fig:quant_reg}}
+    \subcaption{The green, yellow and red surfaces represent the $\tau$= .1, .5 and .9 quantiles, respectively.}
     
 \end{center}
 \end{figure}

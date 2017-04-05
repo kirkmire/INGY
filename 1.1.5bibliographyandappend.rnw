@@ -4,8 +4,7 @@
 \newpage
 \newappendix{1. Bibliography} 
 \label{appendix:bib}
-All analyses were performed using the R statistical software
-\Sexpr{R.Version()$version.string}. This thesis and bibliography were compiled using the document preparation program \verb@Sweave@, and bibliography preperation program \hologo{BibTeX}, respectively.
+All analyses were performed using the R statistical software \Sexpr{R.Version()$version.string}.
 
 \printbibliography
 
@@ -74,12 +73,7 @@ All analyses were performed using the R statistical software
 
 
 \newpage
-\newappendix{3. Equations}
-\label{appendix:eq}
-\listofmyequations
-
-\newpage
-\newappendix{4. Damage Codes}
+\newappendix{3. Damage Codes}
 \label{appendix:Damage_Codes}
 
 % %<<echo=FALSE>>=
@@ -153,87 +147,8 @@ All analyses were performed using the R statistical software
 \label{appendix:par_est}\\
 
 %Parameter Estimates for the proposed height growth model
-\begin{table}
+
 \caption{Parameter Estimates for the $\tau$=.1 LQMM}
-\begin{center}
-\begin{tabular}{lrrrrr}
-\hline\hline
-\multicolumn{1}{l}{$\tau$=.1 LQMM}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{lower bound}&\multicolumn{1}{c}{upper bound}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
-\hline
-(Intercept)&$-0.4905$&$0.3930$&$-1.2802$&$ 0.2993$&$0.2179$\tabularnewline
-srHeightTotal&$ 0.2530$&$0.0244$&$ 0.2040$&$ 0.3021$&$0.0000$\tabularnewline
-cratio&$ 0.4138$&$0.0817$&$ 0.2497$&$ 0.5779$&$0.0000$\tabularnewline
-TPA.OS&$-0.0018$&$0.0009$&$-0.0037$&$ 0.0001$&$0.0592$\tabularnewline
-slopePercent&$-0.9588$&$0.2409$&$-1.4430$&$-0.4745$&$0.0002$\tabularnewline
-elevation&$ 0.0000$&$0.0008$&$-0.0016$&$ 0.0016$&$0.9894$\tabularnewline
-I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.5122$\tabularnewline
-slopePercent:cosradasp&$ 2.4600$&$0.4655$&$ 1.5245$&$ 3.3955$&$0.0000$\tabularnewline
-slopePercent:sinradasp&$ 1.3098$&$0.3153$&$ 0.6763$&$ 1.9434$&$0.0001$\tabularnewline
-slopePercent:log(elevation + 1)&$ 0.1509$&$0.0374$&$ 0.0757$&$ 0.2260$&$0.0002$\tabularnewline
-slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0000$\tabularnewline
-slopePercent:cosradasp:log(elevation + 1)&$-0.3785$&$0.0722$&$-0.5236$&$-0.2335$&$0.0000$\tabularnewline
-slopePercent:sinradasp:log(elevation + 1)&$-0.2047$&$0.0491$&$-0.3033$&$-0.1060$&$0.0001$\tabularnewline
-slopePercent:cosradasp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0000$\tabularnewline
-slopePercent:sinradasp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0002$\tabularnewline
-\hline
-\end{tabular}\end{center}
-\end{table}
-
-
-\begin{table}
-\caption{Parameter Estimates for the $\tau$=.5 LQMM}
-\begin{center}
-\begin{tabular}{lrrrrr}
-\hline\hline
-\multicolumn{1}{l}{$\tau$=.5 LQMM}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{lower bound}&\multicolumn{1}{c}{upper bound}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
-\hline
-(Intercept)&$-0.3841$&$0.2598$&$-0.9062$&$ 0.1379$&$0.1456$\tabularnewline
-srHeightTotal&$ 0.2734$&$0.0141$&$ 0.2451$&$ 0.3017$&$0.0000$\tabularnewline
-cratio&$ 0.6700$&$0.0415$&$ 0.5866$&$ 0.7535$&$0.0000$\tabularnewline
-TPA.OS&$-0.0033$&$0.0005$&$-0.0043$&$-0.0023$&$0.0000$\tabularnewline
-slopePercent&$-0.9491$&$0.2701$&$-1.4919$&$-0.4063$&$0.0010$\tabularnewline
-elevation&$ 0.0002$&$0.0006$&$-0.0009$&$ 0.0013$&$0.7435$\tabularnewline
-I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.7180$\tabularnewline
-slopePercent:cosradasp&$ 2.4915$&$0.3849$&$ 1.7181$&$ 3.2649$&$0.0000$\tabularnewline
-slopePercent:sinradasp&$ 1.2426$&$0.2376$&$ 0.7652$&$ 1.7200$&$0.0000$\tabularnewline
-slopePercent:log(elevation + 1)&$ 0.1492$&$0.0418$&$ 0.0651$&$ 0.2333$&$0.0008$\tabularnewline
-slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0001$\tabularnewline
-slopePercent:cosradasp:log(elevation + 1)&$-0.3844$&$0.0595$&$-0.5040$&$-0.2649$&$0.0000$\tabularnewline
-slopePercent:sinradasp:log(elevation + 1)&$-0.1929$&$0.0368$&$-0.2668$&$-0.1189$&$0.0000$\tabularnewline
-slopePercent:cosradasp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0000$\tabularnewline
-slopePercent:sinradasp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0000$\tabularnewline
-\hline
-\end{tabular}\end{center}
-\end{table}
-
-
-
-\begin{table}
-\caption{Parameter Estimates for the $\tau$=.9 LQMM}
-\begin{center}
-\begin{tabular}{lrrrrr}
-\hline\hline
-\multicolumn{1}{l}{$\tau$=.5 LQMM}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{lower bound}&\multicolumn{1}{c}{upper bound}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
-\hline
-(Intercept)&$ 0.1334$&$0.4972$&$-0.8656$&$ 1.1325$&$0.7895$\tabularnewline
-srHeightTotal&$ 0.2953$&$0.0336$&$ 0.2278$&$ 0.3629$&$0.0000$\tabularnewline
-cratio&$ 0.6842$&$0.1366$&$ 0.4098$&$ 0.9586$&$0.0000$\tabularnewline
-TPA.OS&$-0.0065$&$0.0008$&$-0.0081$&$-0.0049$&$0.0000$\tabularnewline
-slopePercent&$-0.8018$&$0.3445$&$-1.4941$&$-0.1095$&$0.0241$\tabularnewline
-elevation&$-0.0002$&$0.0008$&$-0.0018$&$ 0.0015$&$0.8569$\tabularnewline
-I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.4082$\tabularnewline
-slopePercent:cosradasp&$ 2.4951$&$0.4298$&$ 1.6313$&$ 3.3589$&$0.0000$\tabularnewline
-slopePercent:sinradasp&$ 1.2586$&$0.3348$&$ 0.5857$&$ 1.9315$&$0.0005$\tabularnewline
-slopePercent:log(elevation + 1)&$ 0.1267$&$0.0529$&$ 0.0203$&$ 0.2330$&$0.0205$\tabularnewline
-slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0025$\tabularnewline
-slopePercent:cosradasp:log(elevation + 1)&$-0.3829$&$0.0671$&$-0.5178$&$-0.2480$&$0.0000$\tabularnewline
-slopePercent:sinradasp:log(elevation + 1)&$-0.1974$&$0.0516$&$-0.3010$&$-0.0937$&$0.0004$\tabularnewline
-slopePercent:cosradasp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0000$\tabularnewline
-slopePercent:sinradasp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 0.0000$&$ 0.0000$&$0.0001$\tabularnewline
-\hline
-\end{tabular}\end{center}
-\end{table}
-
 
 
 

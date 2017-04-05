@@ -88,7 +88,7 @@ nlist.SQ<-c(nlist.SQ,length(qr.elev$y))
 
 qr.asp<-rq(ht_annual~srHeight_Total+cratio+
              # treeminus+
-             TPA.OS+cos_rad_asp,tau=c(.5),data=annual.gr4)
+             TPA.OS+aspect,tau=c(.5),data=annual.gr4)
 aic.list.SQ<-c(aic.list.SQ,AIC(qr.asp)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.asp$y))
 

@@ -1,5 +1,5 @@
 #Select Control and GE Plots from list of inst and plots#
-CTRLandGE.plots <- splot[!splot$Treatment=='1X',]
+CTRLandGE.plots <- splot
 
 #Merge Control&GE plots with 1m^2 plot data#
 CTRLandGE.plot.veg <- merge(CTRLandGE.plots,sstp1,by=c("Installation","Plot"))

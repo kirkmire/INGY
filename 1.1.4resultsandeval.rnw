@@ -17,7 +17,7 @@ source(paste(getwd(),'/1.6.model.evaluation.2016.dec.16.r',sep=""), echo=FALSE)
 \section{Results}
 \end{center}
 \normalsize
-\subsection{Descriptive Installation Results}
+\subsection{Installation Characteristics}
 \doublespacing
 
 \begin{figure} 
@@ -35,7 +35,7 @@ library(lattice)
 print(barchart(pipond$Freq ~ pipond$Installation,
          origin=0, 
          #main="Motor insurance claims frequency"
-         xlab="Installation", ylab="Number of Tagged Small Ponderosa Pine Trees",
+         xlab="Installation", ylab="Number of Tagged Small Ponderosa Pine Trees by STCV ",
         scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)), 
          ylim=c(0,270),
           col=myColours[4],
@@ -50,7 +50,7 @@ print(barchart(pipond$Freq ~ pipond$Installation,
 
 @
 \end{center}
-\caption{Number of Small Tagged Ponderosa Pine Trees\label{fig:numbPond}}
+\caption{Number of small tagged ponderosa pine trees by STCV study site.\label{fig:numbPond}}
 \end{figure}
 
 \begin{figure}
@@ -59,60 +59,69 @@ print(barchart(pipond$Freq ~ pipond$Installation,
 
 library(lattice)
 
-spec.freq.table<-spec.freq.table[! spec.freq.table$Installation %in% drp60,]
-spec.freq.table1<-spec.freq.table[! spec.freq.table$Freq==0 ,]
+tallied<-sstpt[!sstpt$Installation %in% drp60,]
+tallied$Installation<-factor(tallied$Installation)
+
+tallied<-tallied[tallied$Species %in% c("THPL","PSME","PIPO","PIMO","PICO","LAOC","ABGR"),]
+timelineJan1<-timelineJan[!timelineJan$Installation %in% drp60,]
+timelineJan1$Installation<-factor(timelineJan1$Installation)
+
+min.yr.func<-function(inst,year){
+  # inst="RM"
+  # year=2000
+  just.inst<-timelineJan1[timelineJan1$Installation==inst,]
+  ifelse(min(just.inst$Year_Measurement,na.rm=T)==year,
+         min.yr<-min(just.inst$Year_Measurement,na.rm=T),
+         ifelse(min(just.inst$Year_Measurement,na.rm=T)==year-1,
+         min.yr<-min(just.inst$Year_Measurement,na.rm=T)+1,
+         min.yr<-max(just.inst$Year_Measurement,na.rm=T)))
+  min.yr
+}
+
+tallied$inst.min<-0
+
+for(i in 1:nrow(tallied)) {
+  tallied$inst.min[i]<-min.yr.func(tallied$Installation[i],tallied$Year_Measurement[i])
+}
 
 
-print(barchart(Species~Freq| Installation, data=spec.freq.table1, 
+tallied.mins<-tallied[tallied$Year_Measurement== tallied$inst.min,]
+tallied.mins<-aggregate(tallied.mins$Count, by=list(tallied.mins$Installation,tallied.mins$Species),FUN=sum)
+
+# spec.freq.table<-spec.freq.table[! spec.freq.table$Installation %in% drp60,]
+# spec.freq.table1<-spec.freq.table[! spec.freq.table$Freq==0 ,]
+
+
+print(barchart(x~ Group.2| Group.1, data=tallied.mins, 
        strip = strip.custom(bg="lightgrey"),
          col=myColours[4],
          par.settings = my.settings,
+         xlab="Species",
+         ylab="Count",
  par.strip.text=list(col="black", cex=.8)),
        scales=list(
-         x=list(limits=c(0,260))),
-         xlab="Number of Small Tagged Subject Trees",
-         ylab="Species")
+         x=list(limits=c(0,260)))
+       )
 
 
 @
  \end{center}
- \caption{Species Composition of Small Tagged Trees in Installations with more than 60 Ponderosa Pine\label{fig:speccomp}}
+ \caption{Species composition of small tagged trees in installations with more than 60 ponderosa pine at initiation.\label{fig:speccomp}}
  \end{figure}
  
- Out of the 26 installations, only 15 had sufficient number of ponderosa pine tagged subject trees to be considered 
+ Out of the 29 installations, only 15 had sufficient numbers of ponderosa pine tagged trees to be considered 
  in this analysis. This threshold number of tagged ponderosa pine limits the analysis to installations with a significant 
- ponderosa pine understory component. Including installations that are dominated by the relatively shade-tolerant douglas-fir may 
- have led to the the inclusion of stagnated ponderosa pine subject trees that would struggle on such a site. Based on the frequencies of small trees by species and installation in Figure \ref{fig:speccomp}, the selected installations are not dominated by dougla-fir regeneration although there are two installations that are very closely split between the two species (LF and DF).
-
-\begin{figure} 
-\begin{center}
-<<label=small_tree_inst,fig=TRUE,width=8,height=8,echo=FALSE>>=
-
-library(lattice)
-
-annual.gr4<-annual.gr4[!annual.gr4$Treatment.x=="DEST",]
-annual.gr4$Treatment.x<-factor(annual.gr4$Treatment.x)
-
-
-print(xyplot(annual.gr4$small.tpa~annual.gr4$Year_Measurement  | annual.gr4$Installation,
-         par.settings = my.settings,
-          pch = 16,
-           col ="grey60",
-          xlab="Annualized Height Growth",
-         ylab="Number of small trees per acre",
-       strip = strip.custom(bg="lightgrey"),
-         par.strip.text=list(col="black"),
-         scales=list(
-               )))
-
-
-
-@
- \end{center}
- \caption{Small trees per acre by installation\label{fig:small_tree_inst}}
- \end{figure}
+ ponderosa pine understory component.  Based on the frequencies of small trees by species and installation in Figure \ref{fig:speccomp}, the selected installations are not dominated by Douglas-fir (Pseudotsuga men.) regeneration although there are two installations that are very closely split between the two species (LF and DF).
  
-The number of tallied small trees varies widely by installation and small tree plot. Keifer Cabin (KC), Loon Lake (LL) and (TP) had exceptionnally dense regeneration. Small trees may represent severe competition since they compete in the same ecological niche as the subject trees. Especially high numbers of small trees may result in stagnation in the emerging cohort of understory trees. Selction of a predictor that describes small tree competition 
+ %To discussion?
+ % Including installations that are dominated by the relatively shade-tolerant Douglas-fir may 
+ % have led to the the inclusion of stagnated ponderosa pine subject trees that would struggle on such a site.
+ 
+ % Small trees may represent severe competition since they occupy the same ecological niche as the subject trees. Especially high numbers of small trees may result in stagnation in the emerging cohort of understory trees.  
+
+The number of tallied small trees varies widely by installation and small tree plot. Keifer Cabin (KC), Loon Lake (LL) and (TP) had dense regeneration. 
+
+% 
  
 
 
@@ -125,33 +134,29 @@ library(lattice)
 
 CTRLandGE.volume.index$Group.2<-factor(CTRLandGE.volume.index$Group.2)
 
+myColors<-c("white","darkgray","gray22")
+
 print(barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, groups=CTRLandGE.volume.index$Group.2,
          origin=0,
          #main="Motor insurance claims frequency"
         xlab="Installation", ylab="Vegetation Depth (ft.)",
         scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)),
-        auto.key=list(space="right", columns=1,
+        par.settings=list(superpose.polygon=list(col=myColors[2:5])),
+        auto.key=list(space="right", columns=1, 
                        points=FALSE, rectangles=TRUE,
-                       title="Treatment", cex.title=1),
-         par.settings = list(superpose.polygon = list(col = gray.colors(2)),
-         par.strip.text=list(col="white", font=2),
-         panel=function(x,y,...){
-           panel.grid(h=-1, v=0);
-           panel.barchart(x,y,...)
-             }
-)))
+                       title="Treatment", cex.title=1)))
 
 @
 \end{center}
-\caption{Control and Herbicide Plot Vegetation Volume\label{fig:vegVol}}
+\caption{Plot vegetation volumes by herbicide treatment (GE = multiple applications, 1X = one time application, CTRL = noherbicide)\label{fig:vegVol}}
 \end{figure}
 
 
 
-When comparing the vegetation depths between the control and the herbicide plots in the first year of the selected measurement intervals, it is apparent that there is a large drop in vegetation levels within installations with large amounts of understory vegetation in the control plots(see Figure \ref{fig:vegVol}). This indicates some success in establishing a wide range of non-arboreal vegetative conditions on installations. However, the herbicide applications failed to contribute to a marked difference in depth in installations of little vegetative volume in control plots. 
+When comparing the vegetation depths between the control and the herbicide plots in the first year of the selected measurement intervals, it is apparent that there is a large drop in vegetation levels within installations with large amounts of understory vegetation in the control plots (see Figure \ref{fig:vegVol}). This indicates some success in establishing a wide range of non-arboreal vegetative conditions on installations. However, the herbicide applications failed to contribute to a marked difference in depth in installations of little vegetative volume in control plots. 
 
 
-Site index was obtained from a dominate tree and calculated using the Milner site index curves for the Inland Northwest. The minimum poderosa pine small tree threshold effectively limited site index species to ponderosa pine, however, there is a single installation (Grouse Creek) that utilized douglas-fir as the site tree. Overstory basal area per acre was calculated from the initial overstory sample plots. There appears to be a group of six installations with similarly low overstory retention levels and high site index values (see red colored installations in Figure \ref{fig:SI.vs.BAPA}) on page \pageref{fig:SI.vs.BAPA}. These installations were used to develop the understory model since they were so alike in overstory and site productivity. 
+Overstory basal area per acre was calculated from the initial overstory sample plots. There appears to be a group of six installations with similarly low overstory retention levels and high site index values (see red colored installations in Figure \ref{fig:SI.vs.BAPA}) on page \pageref{fig:SI.vs.BAPA}. These installations were used to develop the understory model since they were so alike in overstory and site productivity. 
 
 \begin{figure} 
 \begin{center}
@@ -186,44 +191,16 @@ Site index was obtained from a dominate tree and calculated using the Milner sit
 % \caption{Polar Plot...speccomp\label{fig:polar_plot}}
 % \end{figure}
 \newpage
-\subsection{Subject Tree Growth Characteristics}
- 
-\begin{figure} 
-\begin{center}
-<<label=annual_ht,fig=TRUE,width=8,height=8,echo=FALSE>>=
-library(lattice)
-
-print(histogram(~annual.gr4$ht_annual,
-          xlab="Annual Height Growth in Feet",
-          col=myColours[4],
-          par.settings = my.settings))
-
-
-@
- \end{center}
- \caption{Histogram of all annualized height growth\label{fig:annual_ht}}
- \end{figure}
- 
-Most subject trees experience annual height growth between 0 and 2 feet. The assymetric, right skewed distribution reveals that very few of the subject trees grew more than 2 feet annually.
- 
-\begin{figure} 
-\begin{center}
-<<label=total_ht,fig=TRUE,width=8,height=8,echo=FALSE>>=
-library(lattice)
-
-print(histogram(~annual.gr4$Height_Total,
-          col=myColours[4],
-          par.settings = my.settings,
-          xlab="Total Height in Feet at Beginning of Period"))
-
-@
- \end{center}
- \caption{Histogram subject tree total height (in feet) at beginning of period\label{fig:total_ht}}
- \end{figure}
+\subsection{Subject Tree Characteristics}
  
 
-The initial height of small ponderosa pine trees ranges between 1 foot (the minimum height to be included in the sample) to just under 30 feet. A similar distribution to \ref{fig:annual_ht} shows that the majority of tagged trees are between 1 and 15 feet in initial height.
+ 
+Most subject trees experience annual height growth between 0 and 2 feet (Figure \ref{ht_by_inst}). The asymmetric, right skewed distribution reveals that very few of the subject trees grew more than 2 feet annually.
+ 
+The initial height of small ponderosa pine trees ranges between 1 foot (the minimum height to be included in the sample) to just under 30 feet with the majority of tagged trees are between 1 and 15 feet in initial height.
   
+Ponderosa pine vary in annual height growth according to which installation they are located within. These site differences are
+accounted for by the selection of site quality and residual overstory predictors. Note that the distribution itself changes between installations. Some installations such as SG and KC have a vary narrow distribution of annualized height growth which indicates that most trees are experiencing similar levels of growth.  In these stands, this can likely be attributed to their dense understory regeneration in which trees struggle similarly for resources. In contrast, installations such as GC and BC have fairly even distributions of annual height which indicates differentiation in competition and a resulting wide range of initial heights.
 
 \begin{figure} 
 \begin{center}
@@ -258,10 +235,6 @@ print(histogram(~annual.gr4$ht_annual| annual.gr4$Installation,
  
 
  
-Ponderosa pine vary in annual height growth according to which installation they are located within. These site differences are
-accounted for by the selection of site quality and residual overstory predictors. Note that the distribution itself changes between installations. Some installations such as SG and KC have a vary narrow distribution of annualized height growth which indicates that most trees are experiencing similar levels of growth.  In these stands, this can likely be attributed to their dense understory regeneration in which trees struggle similarly for resources. In contrast, installations such as GC and BC have fairly even distributions of annual height which indicates differentiation in competition and a resulting wide range of initial heights.
- 
- 
 \begin{figure} 
 \begin{center}
 <<label=init_ht_by_inst,fig=TRUE,width=8,height=8,echo=FALSE>>=
@@ -292,8 +265,82 @@ print(histogram(~annual.gr4$Height_Total| annual.gr4$Installation,
  
 As suspected, KC and LL have especially narrow distributions of inital height. These installations have very dense, vertically homogenous ponderosa pine regeneration that are slowly growing. These conditions are not typically found in a natural ponderosa pine stand and these installations may benefit from an understory treatment such as a prescribed burn or non-commercial thinning that promotes differentiation among understory ponderosa pine so they can emerge into the canopy. Although, these stands may not represent optimum management, they are important to include to estimate the effects of small tree competition in extremely dense conditions. 
  
-Ponderosa pine vary in annual height growth according to which installation they are located within. These site differences are
-accounted for by the selection of site quality and residual overstory predictors. Note that the distribution itself changes between installations. Some installations such as SG and KC have a vary narrow distribution of annualized height growth which indicates that most trees are experiencing similar levels of growth.  In these stands, this can likely be attributed to their dense understory regeneration in which trees struggle similarly for resources. In contrast, installations such as GC and BC have fairly even distributions of annual height which indicates differentiation in competition and a resulting wide range of initial heights.
+
+
+
+
+
+\begin{figure} 
+\begin{center}
+<<label=delta_ht_init,fig=TRUE,width=8,height=8,echo=FALSE>>=
+
+library(lattice)
+
+
+print(xyplot(annual.gr4$ht_annual~annual.gr4$Height_Total,
+         par.settings = my.settings,
+          pch = 1,
+           col ="grey60",
+          xlab="Initial Height (ft)",
+         ylab="Annualized Height Growth Increment (ft/yr)",
+       strip = strip.custom(bg="lightgrey"),
+         par.strip.text=list(col="black"),
+         scales=list(
+               )))
+
+
+@
+ \end{center}
+ \caption{Annualized height growth increment vs. initial height\label{fig:delta_ht_init}}
+ \end{figure}
+ 
+\begin{figure} 
+\begin{center}
+<<label=delta_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
+
+library(lattice)
+
+
+print(xyplot(annual.gr4$ht_annual~annual.gr4$cratio,
+         par.settings = my.settings,
+          pch = 1,
+           col ="grey60",
+          xlab="Crown Ratio (%)",
+         ylab="Annualized Height Growth Increment (ft/yr)",
+       strip = strip.custom(bg="lightgrey"),
+         par.strip.text=list(col="black"),
+         scales=list(
+               )))
+
+
+@
+ \end{center}
+ \caption{Annualized height growth increment vs. crown ratio\label{fig:delta_ht_cratio}}
+ \end{figure}
+ 
+ \begin{figure} 
+\begin{center}
+<<label=delta_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
+
+library(lattice)
+
+
+print(xyplot(annual.gr4$cratio~annual.gr4$Height_Total,
+         par.settings = my.settings,
+          pch = 1,
+           col ="grey60",
+          xlab="Crown Ratio (%)",
+         ylab="Initial Height (ft)",
+       strip = strip.custom(bg="lightgrey"),
+         par.strip.text=list(col="black"),
+         scales=list(
+               )))
+
+
+@
+ \end{center}
+ \caption{Annualized height growth increment vs. crown ratio\label{fig:delta_ht_cratio}}
+ \end{figure}
 
 
 \begin{table}\label{tab:tree.counts}
@@ -334,17 +381,17 @@ print(xyplot(agg.over.data.TPA$TPA~ agg.over.data.TPA$Year_MeasurementOS | facto
 
 @
  \end{center}
- \caption{Interpolated Overstory Basal Area\label{fig:os_tpa_inst}}
+ \caption{Interpolated overstory TPA by study site, plot and year.\label{fig:os_tpa_inst}}
  \end{figure}
  
- Figure \ref{fig:os_tpa_inst} shows the plot-level interpolations of overstory trees per acre. Most plots stayed constant in the number of overstory trees. However, due to mortality or recruitment, there may be slight differences. Within installations, there is noticable variation in overstory trees per acre between plots. This is usually advantageous in model-building as it provides a range of overstory conditions within each installation. However, due to the understory treatments, a homogenous overstory condition if favorable to isolate the understory effects. Fortunately, for most installations the plot levels are similar (LF seems to be the exception).
+Figure \ref{fig:os_tpa_inst} shows the plot-level interpolations of overstory trees per acre. Most plots stayed constant in the number of overstory trees. However, due to mortality or recruitment, there may be slight differences. Within installations, there is noticable variation in overstory trees per acre between plots. This is usually advantageous in model-building as it provides a range of overstory conditions within each installation. However, due to the understory treatments, a homogenous overstory condition is favorable to isolate the understory effects. Fortunately, for most installations the plot levels are similar (LF seems to be the exception).
  
  % Selecting a single dimension from each ecological category of small tree competition also has practical advantages.  If a land manager desired to reproduce a similar set of quantile curves for another ecological system or wanted to compare small tree growth to that of the curves produced in this effort, they would need only to collect a singular measure of competition from each of these categories rather than the extensive measurements that the STCV study has undertaken.
 
 \newpage
 \subsection{Model Specification Results}
 
-Although generalized additive models (GAMs) were evaluated for every variable to check for any possible improvements in linearity, only those of the selected variables were shown in the results (in sequence). The GAMs suggested no improvement in the relationship between annual height increment and a given variable via transformation. The included GAMS (Figures \fig{fig:seqgamCR},\fig{fig:seqgamOSTPA},\fig{fig:seqgamSEA}) show a strong linear relationship between 
+Although generalized additive models (GAMs) were evaluated for every variable to check for any non-linear relationships, only those of the selected variables are shown below. The GAMs suggested no improvement in the relationship between annual height increment and a given variable via transformation. The included GAMS (Figures \ref{fig:seqgamCR},\ref{fig:seqgamOSTPA},\ref{fig:seqgamSEA}) show a strong linear relationship between 
 
 The AIC of crown ratio variable for the small tree category of competition is much lower than the other candidate variables (see Figure \ref{tab:AIC}). The sample of trees that lack diameter at breast height and crown measurements is less than that of the other variables which is undoubtedly contributing to a lower AIC. Despite the lower number of samples, crown ratio was selected as the variable to represent competition from small trees.
 

@@ -7,12 +7,14 @@
 \normalsize
 \doublespacing
 
+\subsection{Design}
+
 The repeated measures of small tagged trees may introduce some underestimaion of the standard errors of the parameter estimates, since the calculation of standard error assumes that each observation is unique. This could be important if model building criteria was based on standard error of the candidate variables. Table \ref{tab:tree.counts} on page \pageref{tab:tree.counts} shows that the number of times trees were repeatedly measured were quite low with the majority being included in only one measurement period. This could be due to a number of factors including sustained damaged, missing, or simply only one measurement period being included from an installation.
 
 To address this issue in the future, Linear Quantile Mixed Models (LQMMs, \cite{marcoLQMMart}) could be pursued as a way to account for lack of independent observations.  extend quantile regression framework to the analysis of longitudinal data. This method estimates the conditional quantile functions with subject-specific location-shift random effects (\cite{Geraci2007a}). The likelihood is based on the asmmetric Laplace density (ALD), which provides an optimum level of penalization. 
 
 
-\subsection{Discussion of Validation Results}
+\subsection{Model Form}
 
 Visually, the model appears to provide good estimates of tree height growth increment for the specified quantiles (figure \ref{fig:validres} on page \pageref{fig:validres}). The results of the chi-squared test (Tables \ref{chisqtab}) provide additional evidence that the actual distribution of height growth increments (Table \ref{tab:actual}) is equal to the expected distribution (Table \ref{tab:expected}). The p-value for the chi-squared test was .052 which fails to provide sufficient evidence to reject the null hypothesis (that the distributions are equal) at the .05 significance level. When broken into intial height classes, the model is best at predicting the growth response distribution for trees between 4 and six feet in initial height (p=.13). The model also performs quite well for trees greater than six feet in initial height (.07). 
 

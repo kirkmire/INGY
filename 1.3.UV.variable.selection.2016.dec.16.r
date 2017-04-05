@@ -433,8 +433,8 @@ annual.grUV<-annual.gr4[annual.gr4$Installation %in% sim, ]
 
 
 veg.variable<-c("Nothing","POLV.cov","F.cov","LS.cov","HS.cov",
-               "LS.diff","HS.diff",
-                "LS.tran","HS.tran","G.tran.diff",
+                "F.diff","LS.diff","HS.diff",
+                "F.tran","LS.tran","HS.tran","G.tran.diff",
                 "G.tran.cov","mx.vg.diff1m","mx.vg.diff.tr"
                )
 ###Quantreg
@@ -475,10 +475,9 @@ nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.HS$y))
 # nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.G$y))
 
 #QR for 1m Forb diff
-#qrCW.1m.F<- rq(ht_annual~srHeight_Total+diff.F.1m+cratio,tau=c(.5),data=annual.grUV)
-#summary(qrCW.1m.F)
-#aic list.vegCW<-c(aic list.vegCW,AIC(qrCW.1m.F)[1])
-#nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.F$y))
+qrCW.1m.F<- rq(ht_annual~srHeight_Total+diff.F.1m+cratio,tau=c(.5),data=annual.grUV)
+aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.F)[1])
+nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.F$y))
 
 #QR for 1m LOW Shrub diff
 qrCW.1m.LS<- rq(ht_annual~srHeight_Total+diff.LS.1m+cratio,tau=c(.5),data=annual.grUV)
@@ -498,10 +497,10 @@ nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.HS$y))
 
 
 #QR for Forb transect cover
-#qrCW.forb.tran<- rq(ht_annual~srHeight_Total+diff.F+cratio,tau=c(.5),data=annual.grUV)
-#summary(qrCW.forb.tran)
-#aic list.vegCW<-c(aic list.vegCW,AIC(qrCW.forb.tran)[1])
-#nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.forb.tran$y))
+qrCW.forb.tran<- rq(ht_annual~srHeight_Total+diff.F+cratio,tau=c(.5),data=annual.grUV)
+summary(qrCW.forb.tran)
+aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.forb.tran)[1])
+nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.forb.tran$y))
 
 #QR for LS transect cover
 qr.LS.tran<- rq(ht_annual~srHeight_Total+diff.LS+cratio,tau=c(.5),data=annual.grUV)

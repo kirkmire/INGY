@@ -254,7 +254,8 @@ $el$ is elevation in feet, $\alpha$ is aspect and the $b$ are coefficients estim
 
 % Now check out \eqref{eq:Eq1}!
 
-Site index from STCV records of each installation's initiation. One or more open grown, undamaged, dominant site tree was identified at the initiation of the site and site index calculated from standard site index curves (\cite{Milner1992}) with a base age of 50 years at breast height. The site index species was ponderosa pine for the installations included in this analysis although many other species were used at other installations. 
+
+Site index from STCV records of each installation's initiation. One or more open grown, undamaged, dominant ponderosa pine site tree was identified at the initiation of the site and site index calculated from standard site index curves for the Inland Northwest (\cite{Milner1992}) with a base age of 50 years at breast height. However, there was a single installation (Grouse Creek) that utilized douglas-fir as the site tree.
 
 \newpage
 \subsection{Quantile Regression Modelling Framework}
@@ -267,9 +268,8 @@ This characterization of the response distribution also allows for predictor var
 \begin{figure} 
 \begin{center}
     \includegraphics{quant_reg.jpg}
-    \caption{Hypothetical seperation of the distribution of annual height increments according to 3 quantile regression surfaces as a function of trees per acre and initial tree height.\label{fig:quant_reg}}
-    \subcaption{The green, yellow and red surfaces represent the $\tau$= .1, .5 and .9 quantiles, respectively.}
-    
+    \caption{Hypothetical seperation of the distribution of annual height increments according to 3 quantile regression surfaces as a function of trees per acre and initial tree height. The green, yellow and red surfaces represent the $\tau$= .1, .5 and .9 quantiles, respectively.\label{fig:quant_reg}}
+ 
 \end{center}
 \end{figure}
 
@@ -281,7 +281,7 @@ Quantile regression allows for the description of the impact of both measured an
 \newpage
 \subsection{Model Specification}
 
-The objective was to obtain a parsimonious system of quantile regression models informed by our understanding of the factors surrounding small tree growth (see Figure \ref{fig:chart}). These quantile regression models were constructed in a forward stepwise process that proceeded from one of the four categories of ecological factors that affect tree growth (LISTED IN TABLE OF PREDICTORS). 
+The objective was to obtain a parsimonious system of quantile regression models informed by our understanding of the factors surrounding small tree growth (see Figure \ref{fig:chart}). These quantile regression models were constructed in a forward stepwise process that proceeded from one of the four categories of ecological factors that affect tree growth (see Appendix 4). 
 
 Only the installations with greater than 60 ponderosa pine tagged small trees at initiation were used for model development. This minimum number of trees ensured that installations included in model building would have a sufficient number of tagged small trees to contribute to model development. The installations that sustained a post-initiation harvest were also excluded from analysis. At these installations annual height increment was calculated by finding the appropriate measurement intervals according to the timeline in Figure \ref{fig:timeline}, then subtracting earlier height measurements from the later oner and dividing by the difference between measurement years. 
 
@@ -362,55 +362,19 @@ $i$ is the unique tree,~$t$ is year, &~$j$ is the measurement period
 % \caption{Site Index and Overstory Basal Area at Initiation\label{fig:siteOverstory}}
 % \end{figure}
 
-\begin{figure} 
-\begin{center}
-    \includegraphics{SI_OSBA_inst.jpg}
-    \caption{Site Index and Initial Basal Area per Acre (ft$^2$/ac)\label{fig:SI.vs.BAPA}}
-\end{center}
-\end{figure}
 
 
 
 
-It was also during this stage of preparation that small tree damage codes were screened. Over the years many of the small tagged trees endured some kind of damage (see Figure \ref{fig:damageCodes}) including mortality, broken tops, forked tops, sweep or animal damage. Dead trees and those with dead tops were removed from analysis since these trees typically experienced a decrease in height growth from the previous measurement year. See Appendix 3 for the complete list of damage codes recorded. 
 
-\begin{figure} 
-\begin{center}
-<<label=damageCodes,width=8,height=4,fig=TRUE,echo=FALSE>>=
-damageCodes<-as.data.frame(table(droplevels(annual.gr$Damage)))
-
-names(damageCodes)[1]<-("code")
-names(damageCodes)[2]<-("number")
-
-damageCodes<-damageCodes[!damageCodes$number<5&!damageCodes$number>100,]
-
-
-print(barchart(damageCodes$number ~ damageCodes$code,
-         origin=0, 
-         #main="Motor insurance claims frequency"
-         xlab="Damage Code", ylab="Number Small Trees Measurements",
-        scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)), 
-         ylim=c(0,100),
-        col=myColours[4],
-         # auto.key=list(space="right", columns=1, 
-         #               points=FALSE, rectangles=TRUE,
-         #               title="Treatment", cex.title=1),
-         par.settings = my.settings,
-         par.strip.text=list(col="white", font=2),
-         panel=function(x,y,...){
-           panel.grid(h=-1, v=0); 
-           panel.barchart(x,y,...)
-         }
-))
-@
-\end{center}
-\caption{Number of Small Tagged Ponderosa Pine Trees by Damage Code\label{fig:damageCodes}}
-\end{figure}
+It was also during this stage of preparation that small tree damage codes were screened. Over the years many of the small tagged trees endured some kind of damage including mortality, broken tops, forked tops, sweep or animal damage. Dead trees and those with dead tops were removed from analysis since these trees typically experienced a decrease in height growth from the previous measurement year. See Appendix 3 for the complete list of damage codes recorded. All tree records that exhibited a negative height growth increment were also removed from consideration since this indicated either a measurement error or some misrecorded damage to the top.
 
 
 
 
-Within each plot, one of the six small tree subplots was randomly selected to serve as validation data. The randomness was necessary to account for the systematic uphill orientation of the first STP on each plot and the clockwise layout of the subsequent STPs. 
+
+
+Within each plot, one of the six small tree subplots was randomly selected to serve as validation data. The randomness was necessary to account for the systematic uphill orientation of the first STP on each plot and the clockwise layout of the subsequent STPs (Figure \ref{fig:samplePlot}). 
 
 
 Within each category of ecological factor, a subset of relevant predictor variables were considered. Their effects on annual height growth were initially assessed using generalized additive models (GAM). If the partial residual plot of a GAM suggested the inclusion of quadratic terms, then these were considered alongside all other predictors and as interaction terms. Variable selection within these categories was made with respect to their importance in describing trends in the median ($\tau$=.5) quantile regression surface using the \texttt{quantreg} package \cite{Koenker2015}. The square root of initial height (height at the beginning of measurement period) was included as a predictor in the base model.
@@ -418,10 +382,10 @@ Within each category of ecological factor, a subset of relevant predictor variab
 
 Akaike's Information Criterion (AIC) was used for model comparison within each category. The predictor effecting the largest drop in AIC was selected to represent that category in the model going forward. If two predictors had similarly low AIC values, then they were both carried forward into the subsequent categories until a clear advantage could be discerned. If a category was unable to supply a predictor that lowered AIC or if the predictor was deemed impractical for field measurement, no predictor was selected from that category. Refer to appendix B. Variable Selection Steps for a step-by-step guide to model construction.
 
-In the first category (understory tree competition), only plots that recieved multiple applications of herbicide within installations of similar site index and overstory stocking were used (see Figure \ref{fig:SI.vs.BAPA}). This was done tominimize difference in non-arboreal vegetation levels, overstory competition, and site productivity, and to focus on small-tree competitive effects. Plots of all levels of vegetation treatment (control, one time herbicide treatment and multiple herbicide treatment), were brought into the modeling for the understory vegetation variable selection. Finally, all installations in Figure \ref{fig:SI.vs.BAPA} were considered for the site level variable selection steps of overstory competition and site quality. For a step-by-step outline of the stepwise regression, see Appendix 2.
+In the first category (understory tree competition), only plots that recieved multiple applications of herbicide within installations of similar site index and overstory stocking were used. This was done tominimize difference in non-arboreal vegetation levels, overstory competition, and site productivity, and to focus on small-tree competitive effects. Plots of all levels of vegetation treatment (control, one time herbicide treatment and multiple herbicide treatment), were brought into the modeling for the understory vegetation variable selection. Finally, all installations in Figure \ref{fig:SI.vs.BAPA} were considered for the site level variable selection steps of overstory competition and site quality. For a step-by-step outline of the stepwise regression, see Appendix 2.
 
 
-\newpage
+
 \subsection{Model Validation}
 
 

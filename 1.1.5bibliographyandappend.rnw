@@ -141,19 +141,152 @@ All analyses were performed using the R statistical software \Sexpr{R.Version()$
 \end{tabular}\end{center}
 \end{table}
 
+\newpage
+\newappendix{4. Tables of Predictor Variables}
+\label{appendix:pred_var}\\
+
+
+\begin{table}[!htb]
+\begin{center}
+\begin{tabular}{lllll}
+\hline\hline
+\multicolumn{1}{c}{Predictor}&\multicolumn{1}{c}{Unit}&\multicolumn{1}{c}{Resolution}&\multicolumn{1}{c}{Symbol}\tabularnewline
+\hline
+\textbf{Small Tree}&&&\tabularnewline
+\hline
+Initial height&ft&tree x interval&h\tabularnewline
+Crown length&ft&tree x interval&cl\tabularnewline
+Crown width&ft&tree x interval&cw\tabularnewline
+Crown ratio&\%&tree x interval&cr\tabularnewline
+Basal diameter&in&tree x interval&bd\tabularnewline
+DBH&in &tree x interval&dbh\tabularnewline
+Trees per acre overall&\#/ac&tree x interval&stpa\tabularnewline
+Trees per acre by height class&\#/ac&STP x interval&stpa1,3,5...\tabularnewline
+Trees per acre  \textgreater  15 ft in ht&\#/ac&STP x interval&stpa15+\tabularnewline
+Trees per acre above subject tree&\#/ac&tree x interval&tpa.grt\tabularnewline
+\hline
+\textbf{Non-tree Vegetation}&&&\tabularnewline
+\hline
+Forb depth in 1m$^2$ q&ft&STP x interval&f.depth\tabularnewline
+Shrub depth in 1m$^2$ q&ft&STP x interval&ls.depth\tabularnewline
+High shrub depth in 1m$^2$ q&ft&STP x interval&hs.depth\tabularnewline
+\% Cover forb&\%&STP x interval&f.cov\tabularnewline
+\% Cover low shrub&\%&STP x interval&ls.cov\tabularnewline
+\% Cover high shrub&\%&STP x interval&hs.cov\tabularnewline
+\% Cover combined veg&\%&STP x interval&polv.cov\tabularnewline
+Transect grass depth&ft&transect x interval&g.tra.depth\tabularnewline
+Transect forb depth&ft&transect x interval&f.tran.depth\tabularnewline
+Transect low shrub depth&ft&transect x interval&ls.tran.depth\tabularnewline
+Transect high shrub depth&ft &transect x interval&hs.tran.depth\tabularnewline
+Grass transect cover&\%&transect x interval&g.tran.cov\tabularnewline
+Tallest veg - subject tree (1m$^2$)&ft&tree x interval&1m.veg.diff\tabularnewline
+Tallest veg - subject tree (transect)&ft&tree x interval&tran.veg.diff\tabularnewline
+\hline
+\textbf{Overstory}&&&\tabularnewline
+\hline
+Trees per acre&\#/ac&plot x interval&tpa\tabularnewline
+Basal area per acre&ft$^2$/ac&plot x interval&bapa\tabularnewline
+Crown area per acre&\%&plot x interval&capa\tabularnewline
+\hline
+\textbf{Site}&&&\tabularnewline
+\hline
+Slope&\%&plot &s\tabularnewline
+Elevation&m&plot&el\tabularnewline
+Aspect&deg. N&plot&asp\tabularnewline
+Site index&ft&installation&SI\tabularnewline
+Slope, aspect, elevation term&?&plot&S\tabularnewline
+\hline
+\end{tabular}\end{center}
+\end{table}
+
+
 
 \newpage
-\newappendix{4. Tables of Parameter Estimates for LQMMs }[t]
+\newappendix{5. Tables of Parameter Estimates for LQMMs }
 \label{appendix:par_est}\\
 
 %Parameter Estimates for the proposed height growth model
 
-\caption{Parameter Estimates for the $\tau$=.1 LQMM}
 
 
+\begin{table}[!htb]
+\caption{Parameter Estimates for the $\tau$=.1 Quantile}
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline\hline
+\multicolumn{1}{l}{qr.SI.1.tab}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{t value}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
+\hline
+(Intercept)&$ 0.2479$&$0.4296$&$ 0.5772$&$0.5639$\tabularnewline
+srHeight.Total&$ 0.2132$&$0.0168$&$12.7057$&$0.0000$\tabularnewline
+cratio&$ 0.5525$&$0.0465$&$11.8891$&$0.0000$\tabularnewline
+TPA.OS&$-0.0015$&$0.0004$&$-3.7103$&$0.0002$\tabularnewline
+slopePercent&$-0.7715$&$0.2638$&$-2.9252$&$0.0035$\tabularnewline
+elevation&$-0.0015$&$0.0009$&$-1.6031$&$0.1091$\tabularnewline
+I(elevation^2)&$ 0.0000$&$0.0000$&$ 1.8903$&$0.0589$\tabularnewline
+slopePercent:cos.rad.asp&$ 2.0377$&$0.3093$&$ 6.5889$&$0.0000$\tabularnewline
+slopePercent:sin.rad.asp&$ 0.6571$&$0.2839$&$ 2.3145$&$0.0207$\tabularnewline
+slopePercent:log(elevation + 1)&$ 0.1224$&$0.0408$&$ 3.0009$&$0.0027$\tabularnewline
+slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$-4.0120$&$0.0001$\tabularnewline
+slopePercent:cos.rad.asp:log(elevation + 1)&$-0.3130$&$0.0476$&$-6.5709$&$0.0000$\tabularnewline
+slopePercent:sin.rad.asp:log(elevation + 1)&$-0.1032$&$0.0437$&$-2.3619$&$0.0183$\tabularnewline
+slopePercent:cos.rad.asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 6.3680$&$0.0000$\tabularnewline
+slopePercent:sin.rad.asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 2.8465$&$0.0045$\tabularnewline
+\hline
+\end{tabular}\end{center}
+\end{table}
+
+\begin{table}[!htb]
+\caption{Parameter Estimates for the $\tau$=.5 Quantile}
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline\hline
+\multicolumn{1}{l}{qr.SI.5.tab}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{t value}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
+\hline
+(Intercept)&$-0.0838$&$0.2588$&$ -0.3237$&$0.7462$\tabularnewline
+srHeight.Total&$ 0.2717$&$0.0107$&$ 25.3344$&$0.0000$\tabularnewline
+cratio&$ 0.6872$&$0.0377$&$ 18.2234$&$0.0000$\tabularnewline
+TPA.OS&$-0.0028$&$0.0002$&$-11.9476$&$0.0000$\tabularnewline
+slopePercent&$-0.9420$&$0.1833$&$ -5.1387$&$0.0000$\tabularnewline
+elevation&$-0.0004$&$0.0006$&$ -0.7802$&$0.4353$\tabularnewline
+I(elevation^2)&$ 0.0000$&$0.0000$&$  1.2701$&$0.2042$\tabularnewline
+slopePercent:cos.rad.asp&$ 2.6583$&$0.3056$&$  8.6995$&$0.0000$\tabularnewline
+slopePercent:sin.rad.asp&$ 1.3175$&$0.1879$&$  7.0124$&$0.0000$\tabularnewline
+slopePercent:log(elevation + 1)&$ 0.1485$&$0.0285$&$  5.2118$&$0.0000$\tabularnewline
+slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$ -6.1556$&$0.0000$\tabularnewline
+slopePercent:cos.rad.asp:log(elevation + 1)&$-0.4099$&$0.0472$&$ -8.6776$&$0.0000$\tabularnewline
+slopePercent:sin.rad.asp:log(elevation + 1)&$-0.2046$&$0.0290$&$ -7.0447$&$0.0000$\tabularnewline
+slopePercent:cos.rad.asp:I(elevation^2)&$ 0.0000$&$0.0000$&$  8.5258$&$0.0000$\tabularnewline
+slopePercent:sin.rad.asp:I(elevation^2)&$ 0.0000$&$0.0000$&$  7.4251$&$0.0000$\tabularnewline
+\hline
+\end{tabular}\end{center}
+\end{table}
 
 
-
+\begin{table}[!htb]
+\caption{Parameter Estimates for the $\tau$=.9 Quantile}
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline\hline
+\multicolumn{1}{l}{qr.SI.9.tab}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{t value}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
+\hline
+(Intercept)&$-1.6905$&$0.4960$&$ -3.4082$&$0.0007$\tabularnewline
+srHeight.Total&$ 0.3657$&$0.0218$&$ 16.7531$&$0.0000$\tabularnewline
+cratio&$ 0.9193$&$0.0819$&$ 11.2234$&$0.0000$\tabularnewline
+TPA.OS&$-0.0052$&$0.0005$&$-11.0204$&$0.0000$\tabularnewline
+slopePercent&$-1.0371$&$0.4713$&$ -2.2002$&$0.0279$\tabularnewline
+elevation&$ 0.0035$&$0.0011$&$  3.2735$&$0.0011$\tabularnewline
+I(elevation^2)&$ 0.0000$&$0.0000$&$ -2.9436$&$0.0033$\tabularnewline
+slopePercent:cos.rad.asp&$ 3.4562$&$0.6610$&$  5.2287$&$0.0000$\tabularnewline
+slopePercent:sin.rad.asp&$ 1.3755$&$0.4661$&$  2.9512$&$0.0032$\tabularnewline
+slopePercent:log(elevation + 1)&$ 0.1591$&$0.0728$&$  2.1854$&$0.0290$\tabularnewline
+slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$ -2.1805$&$0.0293$\tabularnewline
+slopePercent:cos.rad.asp:log(elevation + 1)&$-0.5320$&$0.1022$&$ -5.2031$&$0.0000$\tabularnewline
+slopePercent:sin.rad.asp:log(elevation + 1)&$-0.2141$&$0.0723$&$ -2.9637$&$0.0031$\tabularnewline
+slopePercent:cos.rad.asp:I(elevation^2)&$ 0.0000$&$0.0000$&$  5.0186$&$0.0000$\tabularnewline
+slopePercent:sin.rad.asp:I(elevation^2)&$ 0.0000$&$0.0000$&$  3.1469$&$0.0017$\tabularnewline
+\hline
+\end{tabular}\end{center}
+\end{table}
 
 
 

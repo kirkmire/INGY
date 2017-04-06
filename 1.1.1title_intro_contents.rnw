@@ -59,12 +59,12 @@ for the degree of}
 \end{center}
 
 \newpage
-Kirkmire, Colin, M.SC, May 2017                Forestry
+\noindent Kirkmire, Colin, M.SC, May 2017                Forestry
 
-Effects of tree size, competition, and site on the distribution of sapling height growth
+\noindent Effects of tree size, competition, and site on the distribution of sapling height growth
 
-Dr. David L.R. Affleck, Co-Chair
-Dr. John Goodburn, Co-Chair
+\noindent Dr. David L.R. Affleck, Co-Chair
+\noindent Dr. John Goodburn, Co-Chair
 
 Variable retention harvesting is an increasingly viable option in multiple objective silviculture. As a shade-intolerant, fire-adapted species, ponderosa pine is especially well-suited to the simulated disturbance represented by variable retention harvests. Stand initiation following harvest is a critical stage in stand development yet little is known about how small ponderosa pine trees in the understory respond to competitive factors. To assess these sources of competition, we examined post-harvest understory non-arboreal vegetation, overstory trees, and a subsample of tagged small trees over a period of 16 years on 29 sites throughout the Inland Northwest. 
 
@@ -80,13 +80,11 @@ Modeling difficulties including a skewed response distribution and longitudinal 
 \end{center}
 \normalsize
 
-\noindent I would first like to extend appreciation to the INGY Cooperators, particularly those who participated in the Small Tree Competing Vegetation Study (STCV) for their commitment to this long term study. Their participation required that many stands not be harvested for the duration of the study and a substantial monitary cost over 15 years.
-
-\noindent I also owe a debt of gratitude to the many INGY technicians and researchers who have worked on the STCV before me. The completion of the dataset would not have been possible without your ``boots on the ground'' and careful acquisition of measurements.
+\noindent I would first like to extend appreciation to the INGY Cooperators, particularly those who participated in the Small Tree Competing Vegetation Study (STCV) for their commitment to this long term study. Their participation required that many stands not be harvested for the duration of the study and a substantial monitary cost over 15 years. I also owe a debt of gratitude to the many INGY technicians and researchers who have worked on the STCV before me. The completion of the dataset would not have been possible without your careful acquisition of measurements.
 
 \noindent Thank you to my advisors Dr. David Affleck and Dr. John Goodburn for giving me the opportunity to choose a challenging research topic and for support as I developed the skills to accomplish this research.
 
-\noindent I thank my family for their support and excusing my absense while pursuing this research.  I would also like to thank all of the previous generations of my family that have enjoyed careers in forestry in the Western United States.  Your life-long passion for our forests and the communities they support is something that constantly motivates me.
+\noindent I thank my family for their support and excusing my absense while pursuing this research.  I would also like to thank all of the previous generations of my family that have enjoyed careers in forestry in the Western United States.  Your life-long passion for our forests and the communities they support is constant motivation.
 
 
 \newpage

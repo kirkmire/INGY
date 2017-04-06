@@ -158,14 +158,14 @@ lt60<-as.vector(lt60)
 drp60<-c(drp,lt60)
 
 #For number of measurements per tree
-tree.counts<-xtabs(~annual.gr4$conc)
-tree.counts<-as.data.frame(tree.counts)
-tree.counts$counts<-1
-
-meas.cat<-aggregate(tree.counts$counts, by=list(Category=tree.counts$Freq), FUN=sum)
-
-colnames(meas.cat)<-c("Number of Observations","Number of Trees")
-
-library(Hmisc)
-latex(meas.cat,file="",rowname = NULL)
+# tree.counts<-xtabs(~annual.gr4$conc)
+# tree.counts<-as.data.frame(tree.counts)
+# tree.counts$counts<-1
+# 
+# meas.cat<-aggregate(tree.counts$counts, by=list(Category=tree.counts$Freq), FUN=sum)
+# 
+# colnames(meas.cat)<-c("Number of Observations","Number of Trees")
+# 
+# library(Hmisc)
+# latex(meas.cat,file="",rowname = NULL)
 

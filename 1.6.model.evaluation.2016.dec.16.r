@@ -9,46 +9,39 @@
 # source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
 # source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
 # source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
-# 
+
 
 
 #combines all aic.lists into one dataframe
 
-# colnames(UT.aic)<-c("Variable","n","AIC")
-# 
-# colnames(UV.aic)<-c("Variable","n","AIC")
-# 
-# colnames(OS.aic)<-c("Variable","n","AIC")
-# 
-# colnames(SQ.aic)<-c("Variable","n","AIC")
-# 
 # aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
 # 
 # aic.lists$AIC<-round(aic.lists$AIC,2)
-# 
-# final.aic<-data.frame(matrix("", nrow = 14, ncol = 9),stringsAsFactors=F)
+
+#Gonna need to adjust this...
+# final.aic<-data.frame(matrix("", nrow = 15, ncol = 9),stringsAsFactors=F)
 # final.aic$X1[1:9]<-as.character(aic.lists$Variable[1:9])
 # final.aic$X2[1:9]<-aic.lists$n[1:9]
 # final.aic$X3[1:9]<-aic.lists$AIC[1:9]
-# final.aic$X4[1:13]<-as.character(aic.lists$Variable[10:22])
-# final.aic$X5[1:13]<-aic.lists$n[10:22]
-# final.aic$X6[1:13]<-aic.lists$AIC[10:22]
-# final.aic$X7[1:4]<-as.character(aic.lists$Variable[23:26])
-# final.aic$X8[1:4]<-aic.lists$n[23:26]
-# final.aic$X9[1:4]<-aic.lists$AIC[23:26]
+# final.aic$X4[1:15]<-as.character(aic.lists$Variable[10:24])
+# final.aic$X5[1:15]<-aic.lists$n[10:24]
+# final.aic$X6[1:15]<-aic.lists$AIC[10:24]
+# final.aic$X7[1:4]<-as.character(aic.lists$Variable[25:28])
+# final.aic$X8[1:4]<-aic.lists$n[25:28]
+# final.aic$X9[1:4]<-aic.lists$AIC[25:28]
 # final.aic$X7[5]<-"Site"
 # final.aic$X8[5]<-"n"
 # final.aic$X9[5]<-"AIC"
-# final.aic$X7[6:10]<-as.character(aic.lists$Variable[27:31])
-# final.aic$X8[6:10]<-aic.lists$n[27:31]
-# final.aic$X9[6:10]<-aic.lists$AIC[27:31]
-
-
-
-#The code below will produce output that can then be copied over to the .tex file
-# library(Hmisc)
+# final.aic$X7[6:10]<-as.character(aic.lists$Variable[29:33])
+# final.aic$X8[6:10]<-aic.lists$n[29:33]
+# final.aic$X9[6:10]<-aic.lists$AIC[29:33]
 # 
-# latex(final.aic, file="")            # If you want all the data
+# colnames(final.aic)<-c("Variable","n","AIC","Variable","n","AIC","Variable","n","AIC")
+# 
+# #The code below will produce output that can then be copied over to the .tex file
+# # library(Hmisc)
+# # 
+# latex(final.aic, file="",rowname = "")          
 # 
 # 
 # 
@@ -137,7 +130,12 @@ qr.SI.9 <-rq(ht_annual~srHeight_Total+
              tau=.9 ,  data=annual.gr4)
 
 #below is for the latex summarys of parameter estimates
+
+# pred.tab<-read.csv("Pred.table.csv")
+# 
 # library(Hmisc)
+# latex(pred.tab, file="", rowname = "")
+# 
 # qr.SI.1.sum<-summary(qr.SI.1)
 # qr.SI.1.tab<-round(qr.SI.1.sum$coefficients,4)
 # latex(qr.SI.1.tab, file="")
@@ -196,12 +194,11 @@ annual.gr6$counts<-1
 sorted.totals<-aggregate(annual.gr6$counts,
                          by=list(Category=annual.gr6$response.cat), FUN=sum)
 
+
+# library(RColorBrewer)
+# library(lattice)
+# 
 sorted.totals$x<-sorted.totals$x/sum(sorted.totals$x)
-
-library(RColorBrewer)
-library(lattice)
-
-
 
 barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
@@ -236,11 +233,11 @@ qr.SI.all <-rq(ht_annual~srHeight_Total+
 
 # summary(qr.SI.all)
 
-plot(summary(qr.SI.all),parm="srHeight_Total",main="")
-plot(summary(qr.SI.all),parm="cratio",main="")
-plot(summary(qr.SI.all),parm="TPA.OS",main="")
-
-
+# plot(summary(qr.SI.all),parm="srHeight_Total",main="")
+# plot(summary(qr.SI.all),parm="cratio",main="")
+# plot(summary(qr.SI.all),parm="TPA.OS",main="")
+# 
+# 
 
 
 #Creates column of SEA effect
@@ -279,79 +276,79 @@ for(i in 1:nrow(annual.gr4)){
 #Chi Squared test of homogeneity
 
 
-annual.gr6.lessthan4<-annual.gr6[annual.gr6$Height_Total<4,]
-annual.gr6.4to6<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
-annual.gr6.6plus<-annual.gr6[annual.gr6$Height_Total>6,]
-
-x.table1<-t(aggregate(annual.gr6.lessthan4$counts, by=list(Category=annual.gr6.lessthan4$response.cat), FUN=sum))
-x.table1<-x.table1["x",]
-x.table1<-as.numeric(x.table1)
-
-x.table2<-t(aggregate(annual.gr6.4to6$counts, by=list(Category=annual.gr6.4to6$response.cat), FUN=sum))
-x.table2<-x.table2["x",]
-x.table2<-as.numeric(x.table2)
-
-x.table3<-t(aggregate(annual.gr6.6plus$counts, by=list(Category=annual.gr6.6plus$response.cat), FUN=sum))
-x.table3<-x.table3["x",]
-x.table3<-as.numeric(x.table3)
-
-brkdwn<-rbind(x.table1,x.table2,x.table3)
-rownames(brkdwn)<-c("<4","4-6",">6")
-colnames(brkdwn)<-c(".1-.5",".5-.9","<.1",">.9")
-
-
-xsq1<-chisq.test(x.table1,p=c(.4,.4,.1,.1))
-p=.0001
-xsq2<-chisq.test(x.table2,p=c(.4,.4,.1,.1))
-xsq2
-xsq3<-chisq.test(x.table3,p=c(.4,.4,.1,.1))
-xsq3
-
-exp.tab<-rbind(xsq1$expected,xsq2$expected,xsq3$expected)
-rownames(exp.tab)<-c("<4","4-6",">6")
-colnames(exp.tab)<-c(".1-.5",".5-.9","<.1",">.9")
-
-
-totals<-c(sum(brkdwn[,1]),sum(brkdwn[,2]),sum(brkdwn[,3]),sum(brkdwn[,4]))
-tot.test<-chisq.test(totals,p=c(.4,.4,.1,.1))
-
-summary(tot.test)
-tot.test$expected
-
-chisq<-cbind(xsq1$p.value,xsq2$p.value,xsq3$p.value,tot.test$p.value)
-numb.trees.ht.class<-c(sum(x.table1),sum(x.table2),sum(x.table3),sum(x.table1,x.table2,x.table3))
-
-chisq<-rbind(chisq,numb.trees.ht.class)
-chisq<-round(chisq,3)
-
-
-rownames(chisq)<-c("P-Value","Number of Trees")
-colnames(chisq)<-c("<4","4-6",">6","All")
-
+# annual.gr6.lessthan4<-annual.gr6[annual.gr6$Height_Total<4,]
+# annual.gr6.4to6<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
+# annual.gr6.6plus<-annual.gr6[annual.gr6$Height_Total>6,]
+# #
+# x.table1<-t(aggregate(annual.gr6.lessthan4$counts, by=list(Category=annual.gr6.lessthan4$response.cat), FUN=sum))
+# x.table1<-x.table1["x",]
+# x.table1<-as.numeric(x.table1)
+# 
+# x.table2<-t(aggregate(annual.gr6.4to6$counts, by=list(Category=annual.gr6.4to6$response.cat), FUN=sum))
+# x.table2<-x.table2["x",]
+# x.table2<-as.numeric(x.table2)
+# 
+# x.table3<-t(aggregate(annual.gr6.6plus$counts, by=list(Category=annual.gr6.6plus$response.cat), FUN=sum))
+# x.table3<-x.table3["x",]
+# x.table3<-as.numeric(x.table3)
+# 
+# brkdwn<-rbind(x.table1,x.table2,x.table3)
+# rownames(brkdwn)<-c("<4","4-6",">6")
+# colnames(brkdwn)<-c(".1-.5",".5-.9","<.1",">.9")
 # 
 # 
-# #The code below will produce output that can then be copied over to the .tex file
+# xsq1<-chisq.test(x.table1,p=c(.4,.4,.1,.1))
+# p=.0001
+# xsq2<-chisq.test(x.table2,p=c(.4,.4,.1,.1))
+# xsq2
+# xsq3<-chisq.test(x.table3,p=c(.4,.4,.1,.1))
+# xsq3
+# 
+# exp.tab<-rbind(xsq1$expected,xsq2$expected,xsq3$expected)
+# rownames(exp.tab)<-c("<4","4-6",">6")
+# colnames(exp.tab)<-c(".1-.5",".5-.9","<.1",">.9")
+# 
+# 
+# totals<-c(sum(brkdwn[,1]),sum(brkdwn[,2]),sum(brkdwn[,3]),sum(brkdwn[,4]))
+# tot.test<-chisq.test(totals,p=c(.4,.4,.1,.1))
+# 
+# summary(tot.test)
+# tot.test$expected
+# 
+# chisq<-cbind(xsq1$p.value,xsq2$p.value,xsq3$p.value,tot.test$p.value)
+# numb.trees.ht.class<-c(sum(x.table1),sum(x.table2),sum(x.table3),sum(x.table1,x.table2,x.table3))
+# 
+# chisq<-rbind(chisq,numb.trees.ht.class)
+# chisq<-round(chisq,3)
+# 
+# 
+# rownames(chisq)<-c("P-Value","Number of Trees")
+# colnames(chisq)<-c("<4","4-6",">6","All")
+# 
+# #
+# #
+# # #The code below will produce output that can then be copied over to the .tex file
 # library(Hmisc)
 # #
-# latex(chisq,file="")
+# latex(brkdwn,file="")
+# #
 # 
-
-# 
-# #The code below will produce output that can then be copied over to the .tex file
-# library(Hmisc)
-# 
-# latex(chitable, file="")     
-# 
-# ###
+# #
+# # #The code below will produce output that can then be copied over to the .tex file
+# # library(Hmisc)
+# #
+# latex(chitable, file="")
+# #
+# # ###
 # actual<-rbind(x.table1,x.table2,x.table3)
 # rownames(actual)<-c("<4","4-6",">6")
 # colnames(actual)<-c("<.1",".1to.5",".5tpo.9",">.9")
-# 
-# 
-# #The code below will produce output that can then be copied over to the .tex file
-# library(Hmisc)
-# 
-# latex(actual, file="")     
+# #
+# #
+# # #The code below will produce output that can then be copied over to the .tex file
+# # library(Hmisc)
+# #
+# latex(actual, file="")
 
 
 

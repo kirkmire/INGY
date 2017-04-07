@@ -303,7 +303,7 @@ for(i in 1:nrow(annual.gr4)){
 # xsq2
 # xsq3<-chisq.test(x.table3,p=c(.4,.4,.1,.1))
 # xsq3
-# 
+
 # exp.tab<-rbind(xsq1$expected,xsq2$expected,xsq3$expected)
 # rownames(exp.tab)<-c("<4","4-6",">6")
 # colnames(exp.tab)<-c(".1-.5",".5-.9","<.1",">.9")

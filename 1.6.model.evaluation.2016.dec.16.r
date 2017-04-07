@@ -309,7 +309,7 @@ for(i in 1:nrow(annual.gr4)){
 # colnames(exp.tab)<-c(".1-.5",".5-.9","<.1",">.9")
 # 
 # 
-# totals<-c(sum(brkdwn[,1]),sum(brkdwn[,2]),sum(brkdwn[,3]),sum(brkdwn[,4]))
+#totals<-c(sum(brkdwn[,1]),sum(brkdwn[,2]),sum(brkdwn[,3]),sum(brkdwn[,4]))
 # tot.test<-chisq.test(totals,p=c(.4,.4,.1,.1))
 # 
 # summary(tot.test)
@@ -328,10 +328,12 @@ for(i in 1:nrow(annual.gr4)){
 # #
 # #
 # # #The code below will produce output that can then be copied over to the .tex file
+
+# ptab<-read.csv("P_table.csv")
 # library(Hmisc)
 # #
-# latex(brkdwn,file="")
-# #
+# latex(ptab,file="",rowname = "")
+# # #
 # 
 # #
 # # #The code below will produce output that can then be copied over to the .tex file

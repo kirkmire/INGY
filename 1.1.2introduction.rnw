@@ -85,8 +85,9 @@ More recently, Araujo et al. utilized quantile regression to obtain localized si
 
 With this in mind, the objectives of this research were to
 \begin{enumerate}
-\item{Investigate Quantile Regression as a methodology to predict the full distribution of height growth increments of small ponderosa pine}
-\item{Validate the results of this methodology}
+\item{Investigate quantile regression as a methodology to describe the competitive effects of overstory and understory factors on the height growth increments of small ponderosa pine}
+\item{Assess the effects of these competitive factors across the distribution of height growth responses}
+\item{Relate findings to the standard regional modeling modling methodology for small growth}
 \end{enumerate}
 
 The subsequent chapter describes the STCV study in detail and the modeling techniques developed. This is followed by a presentation of results, which include overarching descriptive results as well as those relating to model specification and validation. The final chapter is a discussion of the results and possible further applications. 

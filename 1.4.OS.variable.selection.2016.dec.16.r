@@ -539,39 +539,56 @@ for(i in 1:nrow(annual.gr4)){
 # plot(gam.TPA,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 # 
 
+#For Stand Density Index
+
+
+clearcut.names<-c("TC","PC","GC")
+
+for(i in 1:nrow(annual.gr4)){
+  if (annual.gr4$Installation[i] %in% clearcut.names) {
+    annual.gr4$qmd[i]<-0
+  } else {annual.gr4$qmd[i] <-sqrt((annual.gr4$bapa.OS[i]/annual.gr4$TPA.OS[i]) / 0.005454154)
+  }
+}
+
+annual.gr4$SDI<-annual.gr4$TPA.OS*((annual.gr4$qmd/10)^1.605)
+
 #CW QR#####################################################
 
 #QR for Nothing
 qr.OS.nothing<-rq(ht_annual~srHeight_Total+cratio
-                  #  treeminus
-                  ,tau=c(.5),data=annual.gr4)
+                      ,tau=c(.5),data=annual.gr4)
 aic.list.OS.CW<-AIC(qr.OS.nothing)[1]
 nlist.OS<-length(qr.OS.nothing$y)
 
-#QR for BAPA CW
-qr.BAPA.CW<-rq(ht_annual~srHeight_Total+cratio+
-                 # treeminus+
+#QR for BAPA 
+qr.BAPA.CW<-rq(ht_annual~srHeight_Tota+cratio+
                  bapa.OS,tau=c(.5),data=annual.gr4)
 aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.BAPA.CW)[1])
 nlist.OS<-c(nlist.OS,length(qr.BAPA.CW$y))
 
-#QR for CCF CW
+#QR for CCF 
 qr.CCF.CW<-rq(ht_annual~srHeight_Total+cratio+
-                # treeminus+
                 CCF.OS,tau=c(.5),data=annual.gr4)
 aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.CCF.CW)[1])
 nlist.OS<-c(nlist.OS,length(qr.CCF.CW$y))
 
 
-#QR for TPA CW
+#QR for TPA 
 qr.TPA.CW<-rq(ht_annual~srHeight_Total+cratio+
-                # treeminus+
-                TPA.OS,tau=c(.5),data=annual.gr4)
+              TPA.OS,tau=c(.5),data=annual.gr4)
 aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.TPA.CW)[1])
 nlist.OS<-c(nlist.OS,length(qr.TPA.CW$y))
 
 
-OS.variable<-c("Nothing","BAPA","CAPA","TPA")
+#QR for SDI
+qr.SDI.CW<-rq(ht_annual~srHeight_Total+cratio+
+                     SDI,tau=c(.5),data=annual.gr4)
+aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.SDI.CW)[1])
+nlist.OS<-c(nlist.OS,length(qr.SDI.CW$y))
+
+
+OS.variable<-c("Nothing","BAPA","CAPA","TPA","SDI")
 
 OS.variable<-as.data.frame(OS.variable)
 

@@ -6,6 +6,7 @@
 \usepackage{amsmath,amssymb}
 \usepackage[english]{babel}
 \usepackage{graphicx} 
+\usepackage{nth}
 \usepackage{indentfirst}
 \usepackage{times}
 \usepackage{array}
@@ -13,7 +14,7 @@
 \usepackage{etoolbox}
 \BeforeBeginEnvironment{equation}{\begin{singlespace}}
 \AfterEndEnvironment{equation}{\end{singlespace}\noindent\ignorespaces}
-
+\usepackage{subfigure}
 \usepackage[style=authoryear, backend=bibtex]{biblatex}
 \usepackage{filecontents}
 \addbibresource{library.bib}

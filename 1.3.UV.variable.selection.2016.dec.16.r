@@ -433,9 +433,10 @@ annual.grUV<-annual.gr4[annual.gr4$Installation %in% sim, ]
 
 
 veg.variable<-c("Nothing","POLV.cov","F.cov","LS.cov","HS.cov",
-                "F.diff","LS.diff","HS.diff",
-                "F.tran","LS.tran","HS.tran","G.tran.diff",
-                "G.tran.cov","mx.vg.diff1m","mx.vg.diff.tr"
+                "F.depth","LS.depth","HS.depth",
+                "F.vol","LS.vol","HS.vol",
+                "F.tran","LS.tran","HS.tran","G.tran.depth",
+                "G.tran.cov","mx.vg.diff.1m","mx.vg.diff.tr"
                )
 ###Quantreg
 library(quantreg)
@@ -488,6 +489,24 @@ nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.LS$y))
 qrCW.1m.HS<- rq(ht_annual~srHeight_Total+diff.HS.1m+cratio,tau=c(.5),data=annual.grUV)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.HS)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.HS$y))
+
+#QR for 1m Forb Volume
+annual.grUV$F.volume<-annual.grUV$diff.F.1m*annual.grUV$Cov.F
+qrCW.1m.F.vol<- rq(ht_annual~srHeight_Total+F.volume+cratio,tau=c(.5),data=annual.grUV)
+aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.F.vol)[1])
+nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.LS.vol$y))
+
+#QR for 1m Low Shrub Volume
+annual.grUV$LS.volume<-annual.grUV$diff.LS.1m*annual.grUV$Cov.LS
+qrCW.1m.LS.vol<- rq(ht_annual~srHeight_Total+LS.volume+cratio,tau=c(.5),data=annual.grUV)
+aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.LS.vol)[1])
+nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.LS.vol$y))
+
+#QR for 1m High Shrub Volume
+annual.grUV$HS.volume<-annual.grUV$diff.HS.1m*annual.grUV$Cov.HS
+qrCW.1m.HS.vol<- rq(ht_annual~srHeight_Total+HS.volume+cratio,tau=c(.5),data=annual.grUV)
+aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.HS.vol)[1])
+nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.HS.vol$y))
 
 #QR for 1m Grass diff
 #qrCW.1m.G<- rq(ht_annual~srHeight_Total+diff.G.1m+cratio,tau=c(.5),data=annual.grUV)

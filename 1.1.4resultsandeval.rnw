@@ -85,7 +85,7 @@ abline(sea.si)
 \caption{Examination of relationship between the slope, elevation and aspect interaction term and site index\label{fig:sivssea}}
 \end{figure}
 
-Figure \ref{fig:sivssea} shows the positive correlation between the SEA value and the site index. The lack of a strong correlation can be attributed to the fact that one site index was obtained for each installation and the SEA value relates productivity to the slope, aspect and elevation at the plot level. Since both of these variables relate to the inherent productivity of the site, it is affirming to see that they positively correlated.
+Figure \ref{fig:sivssea} shows the positive correlation between the SEA value and the site index. Since both of these variables relate to the inherent productivity of the site they should be positively correlated. The lack of a strong correlation can be attributed to a difference in resolution. One site index was obtained for each installation and the SEA value relates productivity to the slope, aspect and elevation at the plot level. 
 
 
 \begin{figure} 
@@ -97,23 +97,8 @@ pipond<-pi[!pi$Installation %in% drp60,]
 pipond<- pipond[order(pipond$Freq),] 
 
 
-
 library(lattice)
 
-print(barchart(pipond$Freq ~ pipond$Installation,
-         origin=0, 
-         #main="Motor insurance claims frequency"
-         xlab="Study Site", ylab="Number of Tagged Small Ponderosa Pine Trees",
-        scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)), 
-         ylim=c(0,270),
-          col=myColours[4],
-         par.settings = my.settings,
-         par.strip.text=list(col="white", font=2),
-         panel=function(x,y,...){
-           panel.grid(h=-1, v=0); 
-           panel.barchart(x,y,...)
-         }
-))
 annual.gr4$count<-1
 inst_count<-as.data.frame(xtabs(annual.gr4$count~annual.gr4$Installation))
 
@@ -177,14 +162,14 @@ print(barchart(inst_count$Freq~ inst_count$annual.gr4.Installation,
 \hline\hline
 \multicolumn{1}{c}{Number of Observations}&\multicolumn{1}{c}{Number of Trees}&\multicolumn{1}{c}{Number of Tree Records}\tabularnewline
 \hline
-$1$&$592$592\tabularnewline
-$2$&$582$1164\tabularnewline
-$3$&$115$345\tabularnewline
+$1$&$592$&$592$\tabularnewline
+$2$&$582$&$1164$\tabularnewline
+$3$&$115$&$345$\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}
 
-Table is related \ref{tab:tree.counts} to Figure \ref{fig:numbRecords} in that it reveals the number of times a unique tree contributed to the model. A nearly equal amount of trees contributed to the model over either one or two measurement intervals. Comparitively few trees appeared three times in the model. Ultimately, the majority of the tree records come from trees that were included over two intervals. Approximately half of that number of trees records were included for only a single measurement interval.
+Table is related \ref{tab:tree.counts} to Figure \ref{fig:numbRecords} in that it reveals the number of times a unique tree contributed to the model. A nearly equal amount of trees contributed to the model over either one or two measurement intervals. Comparatively few trees appeared three times in the model. Ultimately, the majority of the tree records come from trees that were included over two intervals. Approximately half of that number of trees records were included for only a single measurement interval.
 
 
 \begin{figure} 
@@ -450,66 +435,70 @@ print(xyplot(annual.gr4$ht_annual~annual.gr4$Height_Total,
 Annual height growth increment tends to increase with initial height (Figure \ref{fig:delta_ht_init}). However, the variability in height growth also increases with initial height. While taller trees tend to exhibit greater annual height growth, the variability in height growth also increases with initial height (non-homogeneous variance). The point cloud is most dense where values for both annual height growth and initial height are smallest. This reveals that most of the tree records used for this model represent shorter in stature trees that exhibit only modest increases in height growth increment. Despite this concentration of shorter subject trees, there is a wide range of both initial height values and annualized height growth that includes trees greater than 25 ft tall and trees that experience approximately 3 feet of annual growth.
  
 
+
+\begin{figure}[!htb]
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{deltaH_cratio.png}
+  \caption{Annualized height growth increment vs. crown ratio}\label{fig:delta_ht_cratio}
+\endminipage\hfill
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{cratio_ht_total.png}
+  \caption{Crown Ratio vs. Initial height (ft)}\label{fig:init_ht_cratio}
+\endminipage\hfill
+\end{figure}
+
  
-\begin{figure} 
-\begin{center}
-<<label=delta_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
-
-library(lattice)
-
-
-print(xyplot(annual.gr4$ht_annual~annual.gr4$cratio,
-         par.settings = my.settings,
-          pch = 1,
-           col ="grey60",
-          xlab="Crown Ratio (%)",
-         ylab="Annualized Height Growth Increment (ft/yr)",
-       strip = strip.custom(bg="lightgrey"),
-         par.strip.text=list(col="black"),
-         scales=list(
-               )))
-
-
-@
- \end{center}
- \caption{Annualized height growth increment vs. crown ratio.\label{fig:delta_ht_cratio}}
- \end{figure}
+% \begin{figure} 
+% \begin{center}
+% <<label=delta_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
+% 
+% library(lattice)
+% 
+% 
+% print(xyplot(annual.gr4$ht_annual~annual.gr4$cratio,
+%          par.settings = my.settings,
+%           pch = 1,
+%            col ="grey60",
+%           xlab="Crown Ratio (%)",
+%          ylab="Annualized Height Growth Increment (ft/yr)",
+%        strip = strip.custom(bg="lightgrey"),
+%          par.strip.text=list(col="black"),
+%          scales=list(
+%                )))
+% 
+% 
+% @
+%  \end{center}
+%  \caption{Annualized height growth increment vs. crown ratio.\label{fig:delta_ht_cratio}}
+%  \end{figure}
  
 Crown ratio (crown length/total height) appears to act as an upper limit to annual height growth (Figure \ref{fig:delta_ht_cratio}). Small trees with very little crown exhibit height growth responses that are correspondingly small. As crown ratio increases the upper values of the height growth response distribution also increase. However, variance in annual height growth also increases for increasing values of crown ratio. Trees with larger crown ratios exhibit greater variability in height growth. For trees with the fullest crowns (>.8), annual height growth tends to exceed .5 ft. 
  
- \begin{figure} 
-\begin{center}
-<<label=init_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
-
-library(lattice)
-
-
-print(xyplot(annual.gr4$cratio~annual.gr4$Height_Total,
-         par.settings = my.settings,
-          pch = 1,
-           col ="grey60",
-          xlab="Initial Height (ft)",
-         ylab="Crown Ratio (%)",
-       strip = strip.custom(bg="lightgrey"),
-         par.strip.text=list(col="black"),
-         scales=list(
-               )))
-
-
+%  \begin{figure} 
+% \begin{center}
+% <<label=init_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
+% 
+% library(lattice)
+% 
+% 
+% print(xyplot(annual.gr4$cratio~annual.gr4$Height_Total,
+%          par.settings = my.settings,
+%           pch = 1,
+%            col ="grey60",
+%           xlab="Initial Height (ft)",
+%          ylab="Crown Ratio (%)",
+%        strip = strip.custom(bg="lightgrey"),
+%          par.strip.text=list(col="black"),
+%          scales=list(
+%                )))
 @
- \end{center}
- \caption{Initial height (ft) vs. crown ratio.\label{fig:init_ht_cratio}}
- \end{figure}
+%  \end{center}
+%  \caption{Crown Ratio vs. Initial height (ft)\label{fig:init_ht_cratio}}
+%  \end{figure}
  
 As initial height increases, the lower limit of the crown ratio response increases. As subject tree height increases, the variability of the response distribution of crown ratio also decreases. Trees that are exceedingly tall nearly always have high crown ratios. In contrast, the range of variability in the shorter trees corresponds to a wide range of crown ratios. These findings relate physiologically to the relationship between the crown as a driver of growth and tree height; a full crown is necessary to achieve such stature.
 
 
-
-
-
- 
-
- 
 
 \newpage
 \subsection{Variable Selection}
@@ -543,40 +532,52 @@ CrownRatio&321&384.42&F.tran&542&685.36&Aspect&2101&1598.9\tabularnewline
 The primary form of the model included the square root of initial height, since it was found to be have a strong, positive, linear relationship with height growth increment (Figure \ref{fig:seqgam}). The generalized additive model (GAM) in this figure shows the predicted value of height increment as a function of initial height. Generally, the taller the tree at the beginning of the period, the greater the height growth increment. 
 
 %Seqential GAM residual Plots
-\begin{figure} 
-\begin{center}
-<<label=seqgam,fig=TRUE,echo=FALSE>>=
-library(mgcv)
-sr.ht.gam<-gam(ht_annual~s(srHeight_Total),data=annual.gr4)
-plot(sr.ht.gam,residuals=T,se=T,
-         pch = ".",
-         col ="grey60",
-             xlab="Square Root of Total Height",
-             ylab="Annual Height Increment (ft)")
-
-
-@
-\end{center}
-\caption{Generalized additive model of annual height growth increment vs. square-root of initial height.\label{fig:seqgam}}
-\end{figure}
+% \begin{figure} 
+% \begin{center}
+% <<label=seqgam,fig=TRUE,echo=FALSE>>=
+% library(mgcv)
+% sr.ht.gam<-gam(ht_annual~s(srHeight_Total),data=annual.gr4)
+% plot(sr.ht.gam,residuals=T,se=T,
+%          pch = ".",
+%          col ="grey60",
+%              xlab="Square Root of Total Height",
+%              ylab="Annual Height Increment (ft)")
+% 
+% 
+% @
+% \end{center}
+% \caption{Generalized additive model of annual height growth increment vs. square-root of initial height.\label{fig:seqgam}}
+% \end{figure}
 
 Proceeding forward from the primary model to the small tree category of competition, the AIC of the crown ratio variable was found to be much lower than the other candidate variables (see Figure \ref{tab:AIC}) for $\tau$=.5. This variable was therefore selected to represent competition from other small trees. The GAM created to visualize crown ratio includes square root of initial height as a linear term and is smoothed for crown ratio(Figure \ref{fig:seqgamCR}). The relationship for this variable is less linear than that of the primary model yet predicted height growth increment is shown to increase as crown ratio increases. Small trees with larger crown lengths relative to total height are predicted to have greater height growth increments.
 
-\begin{figure} 
-\begin{center}
-<<label=seqgamCR,fig=TRUE,echo=FALSE>>=
-cr.ht.gam<-gam(ht_annual~srHeight_Total+s(cratio),data=annual.gr4)
-plot(cr.ht.gam,residuals=T,se=T,
-      pch = ".",
-      col ="grey60",
-      xlab="Crown Ratio",
-      ylab="Annual Height Increment (ft)")
-
-
-@
-\end{center}
-\caption{Generalized additive model of annual height growth increment vs. crown ratio with square-root of initial height considered as linear predictors.\label{fig:seqgamCR}}
+\begin{figure}
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{init_gam.png}
+  \caption{GAM of annualized height growth increment vs. initial height.}\label{fig:delta_ht_cratio}
+\endminipage\hfill
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{cratio_init.png}
+  \caption{GAM of annualized height growth increment vs. crown ratio.}\label{fig:init_ht_cratio}
+\endminipage\hfill
 \end{figure}
+
+
+% \begin{figure} 
+% \begin{center}
+% <<label=seqgamCR,fig=TRUE,echo=FALSE>>=
+% cr.ht.gam<-gam(ht_annual~srHeight_Total+s(cratio),data=annual.gr4)
+% plot(cr.ht.gam,residuals=T,se=T,
+%       pch = ".",
+%       col ="grey60",
+%       xlab="Crown Ratio",
+%       ylab="Annual Height Increment (ft)")
+% 
+% 
+% @
+% \end{center}
+% \caption{Generalized additive model of annual height growth increment vs. crown ratio with square-root of initial height considered as linear predictors.\label{fig:seqgamCR}}
+% \end{figure}
 
 
 The understory non-arboreal vegetation candidate variables failed to provide an AIC significantly less than that of including only the two previously selected variables. The only variable that offered any improvement over the previous iteration of the model was the 1m$^2$ forb depth variable, which is a measure of the average depth of forb vegetation. However, the inclusion of this variable is hardly justified considering the modest improvement it provides and the impracticality of measuring it in the field. Therefore, no variable was selected from this category of competition.
@@ -632,96 +633,114 @@ $cr$ is the crown ratio, $TPA$ is the overstory trees per acre and $S$ is the sl
 
 \subsection{Fitted Quantile Models}
 
-\begin{figure} 
-\begin{center}
-<<label=qr5resid,fig=TRUE,echo=FALSE>>=
 
-###looking at predicted median vs actual ht growth increments
-
-qqnorm(qr.SI.9$residuals)
-qqline(qr.SI.9$residuals)
-
-
-@
-\end{center}
-\caption{Annual height increment vs predicted LQMM median height increment\label{fig:qr5resid}}
+\begin{figure}[!htb]
+\minipage{0.32\textwidth}
+  \includegraphics[width=\linewidth]{qrsi1resid2.png}
+  \caption{$\tau$=.1 Residuals}\label{fig:qr1resid}
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\linewidth]{qrsi5resid2.png}
+  \caption{$\tau$=.5 Residuals}\label{fig:qr5resid}
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\linewidth]{qrsi9resid2.png}
+  \caption{$\tau$=.9 Residuals}\label{fig:qr9resid}
+\endminipage
 \end{figure}
 
-\begin{figure} 
-\begin{center}
-<<label=predmean,fig=TRUE,echo=FALSE>>=
+% \begin{figure}
+% \begin{center}
+% <<label=qr5resid,fig=TRUE,echo=FALSE>>=
+% 
+% 
+% print(xyplot(qr.SI.5$residuals~qr.SI.5$fitted.values,
+%           par.settings = my.settings,
+%           pch = 1,
+%           abline=0,
+%            col ="grey60",
+%           xlab="Fitted Values (ft)",
+%           ylab="Residuals (ft)",
+%           strip = strip.custom(bg="lightgrey"),
+%           par.strip.text=list(col="black")))
+% 
+% #
+% # qqnorm(qr.SI.9$residuals)
+% # qqline(qr.SI.9$residuals)
+% 
+% 
+% @
+% \end{center}
+% \caption{Residual values vs. fitted values of height growth increment for $\tau$=.5.\label{fig:qr5resid}}
+% \end{figure}
 
-###looking at predicted median vs actual ht growth increments
+The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the variance of the residuals greatly increases as the predicted height growth increases. However, this result is expected as the median ($\tau$=.5) quantile regression is specified to describe the linear trends in the central portion of the response distribution. The model seems to do this well as the residuals appear to be evenly distributed above and below zero. Figure (\ref{fig:qr1resid}) reveals that most residuals are greater than zero for the $\tau$=.1 quantile that describes the lower portion of the response distribution. However, for all positive values of predicted height, there are a number of number of negative residuals. In the $\tau$=.9 quantile, most residuals are found to be negative but there is a modest number of postie residuals across all predicted height increments. Collectively, these residual plots show that the three fitted quantile regression models describe a broad range of the annual height growth response distribution.
 
 
-plot(annual.gr6$ht_annual,annual.gr6$qr.pred.five,
-         pch = 16,
-         col ="grey60",
-         ylab ="Median Predicted Annual Height Growth Increment (feet/year)",
-         xlab="Actual Height Growth Increment (feet/year)")
-
-# abline(fit<-lm(annual.gr6$qr.pred.one~sqrt(annual.gr6$ht_annual)),col="red")
-# abline(fit<-lm(annual.gr6$qr.pred.five~sqrt(annual.gr6$ht_annual)),col="blue")
-# abline(fit<-lm(annual.gr6$qr.pred.nine~sqrt(annual.gr6$ht_annual)),col="green")
-# # points(annual.gr6$ht_annual,annual.gr6$qr.pred.one,col="red")
-# # points(annual.gr6$ht_annual,annual.gr6$qr.pred.nine,col="green")
-# # points(annual.gr6$ht_annual,annual.gr6$lm_ht,col="yellow")
-# abline(fit<-lm(annual.gr6$lm_ht~sqrt(annual.gr6$ht_annual)),col="black")
-
-@
-\end{center}
-\caption{Annual height increment vs predicted LQMM median height increment\label{fig:predmean}}
+\begin{figure}[!htb]
+\minipage{0.32\textwidth}
+  \includegraphics[width=\linewidth]{init_ht_coef.png}
+  \caption{Coefficient Plot of Initial Height}\label{fig:sr_init_coef}
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\linewidth]{cratio_coef.png}
+  \caption{Coefficient Plot of Crown Ratio}\label{fig:cr_coef}
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\linewidth]{tpa_coef.png}
+  \caption{Coefficient Plot of TPA}\label{fig:os_tpa_coef}
+\endminipage
 \end{figure}
 
 
-\begin{figure} 
-\begin{center}
-<<label=sr_init_coef,fig=TRUE,echo=FALSE>>=
-qr.sum<-summary(qr.SI.all)
-plot(qr.sum,parm="srHeight_Total",
-     ylab="Coefficient Value",
-     xlab="Specified Quantile",
-     main="")
+
+% \begin{figure} 
+% \begin{center}
+% <<label=sr_init_coef,fig=TRUE,echo=FALSE>>=
+% qr.sum<-summary(qr.SI.all)
+% plot(qr.sum,parm="srHeight_Total",
+%      ylab="Coefficient Value",
+%      xlab="Specified Quantile",
+%      main="")
+% 
+% 
+% @
+% \end{center}
+% \caption{Coefficient Plots of Initial Height Across All Quantiles\label{fig:sr_init_coef}}
+% \end{figure}
+
+The coefficient plot (Figure \ref{fig:sr_init_coef}) shows that the effect of initial height increases as the specified quantile increases. For the middle range of quantile values ($\tau$=.3-.7), the effect remains within the bounds of the 95\% confidence interval (CI) of the least squares regression estimate (red dotted lines). However, for the two lowest $\tau$ values, the estimate is below the 95\% CI while it is above the CI for the two highest quantiles. This means that the effect of initial height is estimated to be greater for  the trees in the upper portion of the response distribution (i.e. the fastest growing trees). This is in opposition to the least squares estimate which would maintain a moderate, constant effect of initial height for all trees.
+
+% \begin{figure} 
+% \begin{center}
+% <<label=cr_coef,fig=TRUE,echo=FALSE>>=
+% 
+% plot(qr.sum,parm="cratio",main="",
+%         ylab="Coefficient Value",
+%         xlab="Specified Quantile")
+% 
+% 
+% @
+% \end{center}
+% \caption{Coefficient Plot of Crown Ratio Across All Quantiles\label{fig:cr_coef}}
+% \end{figure}
+
+Similarly, the effect of crown ratio increases as the $\tau$ value increases. The estimated effect for the lower half of the response distribution fall below that of the 95\% CI for the mean regression. Given that all other predictors are held constant, the slowest growing trees exhibit an effect of crown ratio that is far less than that of the mean regression. The mean regression estimate of crown ratio does appear to describe the effect of crown ratio well for the faster growing trees as the estimates for the $\tau$=7-9 surfaces fall within the 95\% CI.
 
 
-@
-\end{center}
-\caption{Coefficient Plots of Initial Height Across All Quantiles\label{fig:sr_init_coef}}
-\end{figure}
 
-The coefficient plot (Figure \ref{fig:sr_init_coef}) shows that the effect of inital height increases as the specified quantile increases. For the middle range of quantile values ($\tau$=.3-.7), the effect remains within the bounds of the 95\% confidence interval (CI) of the least squares regression estimate (red dotted lines). However, for the two lowest $\tau$ values, the estimate is below the 95\% CI while it is above the CI for the two highest quantiles. This means that the effect of initial height is estimated to be greater for  the trees in the upper portion of the response distribution (i.e. the fastest growing trees). This is in opposition to the least squares estimate which would maintain a moderate, constant effect of initial height for all trees.
-
-\begin{figure} 
-\begin{center}
-<<label=cr_coef,fig=TRUE,echo=FALSE>>=
-
-plot(qr.sum,parm="cratio",main="",
-        ylab="Coefficient Value",
-        xlab="Specified Quantile")
-
-
-
-@
-\end{center}
-\caption{Coefficient Plot of Crown Ratio Across All Quantiles\label{fig:cr_coef}}
-\end{figure}
-
-Similarly, the effect of crown ratio increases as the $\tau$ value increases. The estimated effect for the lower half of the repsonse distribution fall below that of the 95\% CI for the mean regression. Given that all other predictors are held constant, the slowest growing trees exhibit an effect of crown ratio that is far less than that of the mean regression. The mean regression estimate of crown ratio does appear to describe the effect of crown ratio well for the faster growing trees as the estimates for the $\tau$=7-9 surfaces fall within the 95\% CI.
-
-
-
-\begin{figure} 
-\begin{center}
-<<label=os_tpa_coef,fig=TRUE,echo=FALSE>>=
-
-plot(qr.sum,parm="TPA.OS",main="",
-        ylab="Coefficient Value",
-        xlab="Specified Quantile")
-
-@
-\end{center}
-\caption{Coefficient Plot of Overstory Trees Per Acre Across All Quantiles\label{fig:os_tpa_coef}}
-\end{figure}
+% \begin{figure} 
+% \begin{center}
+% <<label=os_tpa_coef,fig=TRUE,echo=FALSE>>=
+% 
+% plot(qr.sum,parm="TPA.OS",main="",
+%         ylab="Coefficient Value",
+%         xlab="Specified Quantile")
+% 
+% @
+% \end{center}
+% \caption{Coefficient Plot of Overstory Trees Per Acre Across All Quantiles\label{fig:os_tpa_coef}}
+% \end{figure}
 
 As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was negatively correlated to annual height growth(Figure \ref{fig:seqgamOSTPA}). Here we see that estimates for the effect of overstory TPA are negative for all values of $\tau$ and steadily decrease as $\tau$ increases (Figure \ref{fig:os_tpa_coef}). The negative effect of TPA is least pronounced for the trees in the lower portion of the response distribution. In contrast, the fastest growing trees (in the upper portion of the response distribution), exhibit the most negative effects of overstory competition. This result is especially practical since the level of overstory tree retention is one of the primary means of manipulating stand structure.
 
@@ -787,7 +806,7 @@ print(barchart(sorted.totals2$x~sorted.totals2$Category, names = "Quantile Bin",
 \caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres_below4}}
 \end{figure}
 
-In order to provide higher resolution to the validation, we classified the trees within the validation dataset by intitial height (1-4, 4-6, 6+ ft). For the less than 4 ft initial heigh class, the distribution of annual height growth increments match our expected distribution within the central portion of the response distribution (Figure \ref{fig:validres_below4}). However, far fewer height growth increments were below their $\tau$=.1 predicted height increments. In contrast, far more responses exceeded the $\tau$=9 predicted value than expected. For the shorter trees in the data set (< 4ft), many more than expected exhibited growth surpassing their $\tau$=.9 prediction and far fewer than expected exhibited growth below their $\tau$ = .1 prediction.
+In order to provide higher resolution to the validation, we classified the trees within the validation dataset by initial height (1-4, 4-6, 6+ ft). For the less than 4 ft initial height class, the distribution of annual height growth increments match our expected distribution within the central portion of the response distribution (Figure \ref{fig:validres_below4}). However, far fewer height growth increments were below their $\tau$=.1 predicted height increments. In contrast, far more responses exceeded the $\tau$=9 predicted value than expected. For the shorter trees in the data set (< 4ft), many more than expected exhibited growth surpassing their $\tau$=.9 prediction and far fewer than expected exhibited growth below their $\tau$ = .1 prediction.
 
 \begin{figure} 
 \begin{center}
@@ -817,7 +836,7 @@ print(barchart(sorted.totals3$x~sorted.totals3$Category, names = "Quantile Bin",
 \caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres_4_6}}
 \end{figure}
 
-Trees in the intermediate height class (4-6 ft initial ht) appear to disspraportionally frequently exhibit height growth within the $\tau$=.1.-.5 predicted height growth interval (Figure \ref{fig:validres_4_6}). An approximately equally number of trees appear to be absent from the $\tau$=.5.-.9 quantile interval. However, the expected distribution of height growth is apparent in the extremes of the inter-quantile range of predictions.
+Trees in the intermediate height class (4-6 ft initial ht) appear to disproportionately frequently exhibit height growth within the $\tau$=.1.-.5 predicted height growth interval (Figure \ref{fig:validres_4_6}). An approximately equally number of trees appear to be absent from the $\tau$=.5.-.9 quantile interval. However, the expected distribution of height growth is apparent in the extremes of the inter-quantile range of predictions.
 
 \begin{figure} 
 \begin{center}
@@ -847,49 +866,40 @@ print(barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
 
 The trees within the tallest initial height class (6+ ft) appear to have a distribution of height growth increments within inter-quantile bins that conforms very nearly to the expected distribution. 
 
-The results from the chi-squared analysis below (Table \ref{tab:chisqtab}) provide a statistical comparison between the actual (Table \ref{tab:actual}) and expected distribution (Table \ref{tab:expected}) of height growth increments across the inter-quantile intervals. The p-value for the overall chi-squared test (all height classes) was .052 which fails to provide sufficient evidence to reject the null hypothesis (that the distributions are equal) at the \alpha=.05 significance level. However, the p-value is quite low for trees in the less than four feet initial height class (p<.0002), meaning that there is strong evidence that the expected distribution does not equal that predicted by the quantile regression. The chi-squared test for the intermediate initial height class (4-6 ft) produced a p-value=.13 which fails to reject the null hypothesis. The tallest height class (6+ feet) had a p-value=.067 which also fails to reject the null hypothesis at the \alpha=.05 significance level. 
+The results from the chi-squared analysis below (Table \ref{tab:chisqtab}) provide a statistical comparison between the actual and expected distribution of height growth increments across the inter-quantile intervals. The p-value for the overall chi-squared test (all height classes) was .052 which fails to provide sufficient evidence to reject the null hypothesis (that the distributions are equal) at the $\alpha$=.05 significance level. However, the p-value is quite low for trees in the less than four feet initial height class (p<.0002), meaning that there is strong evidence that the expected distribution does not equal that predicted by the quantile regression. The chi-squared test for the intermediate initial height class (4-6 ft) produced a p-value=.13 which fails to reject the null hypothesis. The tallest height class (6+ feet) had a p-value=.067 which also fails to reject the null hypothesis at the $\alpha$=.05 significance level. 
 
-When combined across height class, the actual height growth increments confrom to our expectations provided by the quantile regression predictions. When classified seperately the trees by initial height, the smallest class of tree (1-4 ft) produces a distribution of height growth increments accross inter-quantile bins that does not equal our expectations (\alpha=.05).
+When combined across height class, the actual height growth increments conform to our expectations provided by the quantile regression predictions. When classified separately the trees by initial height, the smallest class of tree (1-4 ft) produces a distribution of height growth increments across inter-quantile bins that does not equal our expectations ($\alpha$=.05).
 
 
-\begin{table}\label{tab:chisqtab}
+\begin{table}[!tbp]
+\caption{Chi-squared analysis expected counts, actual counts and p-values by initial height class.}
 \begin{center}
-\begin{tabular}{lrrrr}
+\begin{tabular}{lllll}
 \hline\hline
-\multicolumn{1}{l}{chisq}&\multicolumn{1}{c}{\textless 4}&\multicolumn{1}{c}{4-6}&\multicolumn{1}{c}{\textgreater 6}&\multicolumn{1}{c}{All}\tabularnewline
+\multicolumn{1}{c}{Initial Height Class}&\multicolumn{1}{c}{Interquantile Interval}&\multicolumn{1}{c}{Expected}&\multicolumn{1}{c}{Actual}&\multicolumn{1}{c}{p-value}\tabularnewline
 \hline
-P-Value&$  0$&$ 0.133$&$  0.067$&$  0.052$\tabularnewline
-Number of Trees&$109$&$85$&$268$&$462$\tabularnewline
+\textless 4 ft&\textless .10&$ 10.9$&$  2$&$0.000$\tabularnewline
+&0.10-.50&$ 43.6$&$ 41$&$$\tabularnewline
+&0.50-.90&$ 43.6$&$ 43$&$$\tabularnewline
+&\textgreater .90&$ 10.9$&$ 23$&$$\tabularnewline
+\hline
+4-6 ft&\textless .10&$  8.5$&$ 11$&$0.133$\tabularnewline
+&0.10-.50&$ 34.0$&$ 42$&$$\tabularnewline
+&0.50-.90&$ 34.0$&$ 24$&$$\tabularnewline
+&\textgreater .90&$  8.5$&$  8$&$$\tabularnewline
+\hline
+\textgreater 6 ft&\textless .10&$ 26.8$&$ 39$&$0.067$\tabularnewline
+&0.10-.50&$107.2$&$105$&$$\tabularnewline
+&0.50-.90&$107.2$&$ 95$&$$\tabularnewline
+&\textgreater .90&$ 26.8$&$ 29$&$$\tabularnewline
+\hline
+All Height Classes&\textless .10&$ 46.2$&$ 52$&$0.052$\tabularnewline
+&0.10-.50&$184.8$&$188$&$$\tabularnewline
+&0.50-.90&$184.8$&$162$&$$\tabularnewline
+&\textgreater .90&$ 46.2$&$ 60$&$$\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}
-
-\begin{table}\label{tab:expected}
-\begin{center}
-\begin{tabular}{lrrrr}
-\hline\hline
-\multicolumn{1}{l}{exp.tab}&\multicolumn{1}{c}{.1-.5}&\multicolumn{1}{c}{.5-.9}&\multicolumn{1}{c}{\textless .1}&\multicolumn{1}{c}{\textgreater .9}\tabularnewline
-\hline
-\textless 4&$ 43.6$&$ 43.6$&$10.9$&$10.9$\tabularnewline
-4-6&$ 34.0$&$ 34.0$&$ 8.5$&$ 8.5$\tabularnewline
-\textgreater 6&$107.2$&$107.2$&$26.8$&$26.8$\tabularnewline
-\hline
-\end{tabular}\end{center}
-\end{table}
-
-\begin{table}\label{tab:actual}
-\begin{center}
-\begin{tabular}{lrrrr}
-\hline\hline
-\multicolumn{1}{l}{brkdwn}&\multicolumn{1}{c}{.1-.5}&\multicolumn{1}{c}{.5-.9}&\multicolumn{1}{c}{\textless .1}&\multicolumn{1}{c}{\textgreater .9}\tabularnewline
-\hline
-\textless 4&$ 41$&$43$&$ 2$&$23$\tabularnewline
-4-6&$ 42$&$24$&$11$&$ 8$\tabularnewline
-\textgreater 6&$105$&$95$&$39$&$29$\tabularnewline
-\hline
-\end{tabular}\end{center}
-\end{table}
-
 
 
 

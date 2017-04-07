@@ -68,7 +68,7 @@ for the degree of}
 
 Variable retention harvesting is an increasingly viable option in multiple objective silviculture. As a shade-intolerant, fire-adapted species, ponderosa pine is especially well-suited to the simulated disturbance represented by variable retention harvests. Stand initiation following harvest is a critical stage in stand development yet little is known about how small ponderosa pine trees in the understory respond to competitive factors. To assess these sources of competition, we examined post-harvest understory non-arboreal vegetation, overstory trees, and a subsample of tagged small trees over a period of 16 years on 29 sites throughout the Inland Northwest. 
 
-Modeling difficulties including a skewed response distribution and longitudinal data led to an examination of Linear Quantile Mixed Models. Initial height, crown ratio, overstory trees per acre and slope/elevation/aspect were found to be significant predictors of height growth accross all predicted quantiles ($\tau$=.1,.5 and .9). However, the effects of these predictors were found to be different between quantiles which suggests that the predictors influence the fastest growing trees in a different way than the slowest and median trees. We found that quantile regression models could be used to provide an empirically based distribution of height growth under a retained overstory.
+Modeling difficulties including a skewed response distribution and longitudinal data led to an examination of quantile regression models. Initial height, crown ratio, overstory trees per acre and slope/elevation/aspect were found to be significant predictors of height growth across all predicted quantiles ($\tau$=.1,.5 and .9). However, the effects of these predictors were found to be different between quantiles which suggests that the predictors influence the fastest growing trees in a different way than the slowest and median trees. We found that quantile regression models could be used to provide an empirically based distribution of height growth under a retained overstory.
 
 
 
@@ -80,11 +80,11 @@ Modeling difficulties including a skewed response distribution and longitudinal 
 \end{center}
 \normalsize
 
-\noindent I would first like to extend appreciation to the INGY Cooperators, particularly those who participated in the Small Tree Competing Vegetation Study (STCV) for their commitment to this long term study. Their participation required that many stands not be harvested for the duration of the study and a substantial monitary cost over 15 years. I also owe a debt of gratitude to the many INGY technicians and researchers who have worked on the STCV before me. The completion of the dataset would not have been possible without your careful acquisition of measurements.
+\noindent I would first like to extend appreciation to the INGY Cooperators, particularly those who participated in the Small Tree Competing Vegetation Study (STCV) for their commitment to this long term study. Their participation required that many stands not be harvested for the duration of the study and a substantial monetary cost over 15 years. I also owe a debt of gratitude to the many INGY technicians and researchers who have worked on the STCV before me. The completion of the dataset would not have been possible without your careful acquisition of measurements.
 
 \noindent Thank you to my advisors Dr. David Affleck and Dr. John Goodburn for giving me the opportunity to choose a challenging research topic and for support as I developed the skills to accomplish this research.
 
-\noindent I thank my family for their support and excusing my absense while pursuing this research.  I would also like to thank all of the previous generations of my family that have enjoyed careers in forestry in the Western United States.  Your life-long passion for our forests and the communities they support is constant motivation.
+\noindent I thank my family for their support and excusing my absence while pursuing this research.  I would also like to thank all of the previous generations of my family that have enjoyed careers in forestry in the Western United States.  Your life-long passion for our forests and the communities they support is constant motivation.
 
 
 \newpage

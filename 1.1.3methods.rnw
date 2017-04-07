@@ -74,7 +74,7 @@ Twenty-six STCV study sites were established on private, public and tribal fores
 \end{figure}
 
 
-The year of initiation varied accross installations with most being established in the late 1990s and early 2000s.  Treatments were randomly assigned to seven plots within each installation (see Figure \ref{fig:instLayout}).  Three plots received multiple applications of regionally effective herbicide (e.g. Pronone).  The remaining four plots were split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.
+The year of initiation varied across installations with most being established in the late 1990s and early 2000s.  Treatments were randomly assigned to seven plots within each installation (see Figure \ref{fig:instLayout}).  Three plots received multiple applications of regionally effective herbicide (e.g. Pronone).  The remaining four plots were split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.
 
 
 
@@ -171,7 +171,7 @@ A sub-sample of the small trees was tagged, mapped and measured repeatedly over 
 There were two sampling methods used to estimate vegetative competition. The first was transect based where point measurements of vegetation were obtained at one foot intervals along a 30 or 40 ft transect (initially, transects ran from plot center to small tree subplot center but were extended an additional 10 ft later in the study). We also took vegetation measurements at the centers of the small tree plots using both 1 m$^{2}$ and 4 m$^{2}$ quadrats. These vegetation measurements quantified separately the amounts of forbs, grasses and shrubs and identified the dominant species for each lifeform.  This is an example of how the resolution of the data goes beyond the scope of this analysis though will undoubtedly be of use in future research efforts.
 
 
-The primary objective of the herbicide treatments was to decouple the harvesting and understory vegetation effects on small tree growth. It has been reported that, like tree growth, levels of understory increase with site productivity (Stage and Boyd 1987, Walstad and Kuch 1987). The herbicide treatments revealed how small trees grow under varying levels of site quality (looking accross installations) without the presence of a corresponding increase non-arboreal vegetation. Because the objective of the herbicide treatments was to simply provide a range of non-arboreal vegetation levels, the herbicide application regimes varied greatly in form, timing and level, and not all installations received treatment. 
+The primary objective of the herbicide treatments was to decouple the harvesting and understory vegetation effects on small tree growth. It has been reported that, like tree growth, levels of understory increase with site productivity (Stage and Boyd 1987, Walstad and Kuch 1987). The herbicide treatments revealed how small trees grow under varying levels of site quality (looking across installations) without the presence of a corresponding increase non-arboreal vegetation. Because the objective of the herbicide treatments was to simply provide a range of non-arboreal vegetation levels, the herbicide application regimes varied greatly in form, timing and level, and not all installations received treatment. 
 
 Figure \ref{fig:timeline} shows the temporal scope of the data collection as well as of the herbicide applications and overstory measurements. An attempt to capture small tree growth at four year intervals was successful for many installations but in some cases the intervals were somewhat irregular (i.e., 3-5 years in length). Ultimately, the height growth increments were standardized to a common periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. 
 
@@ -268,12 +268,12 @@ This characterization of the response distribution also allows for predictor var
 \begin{figure} 
 \begin{center}
     \includegraphics{quant_reg.jpg}
-    \caption{Hypothetical seperation of the distribution of annual height increments according to 3 quantile regression surfaces as a function of trees per acre and initial tree height. The green, yellow and red surfaces represent the $\tau$= .1, .5 and .9 quantiles, respectively.\label{fig:quant_reg}}
+    \caption{Hypothetical separation of the distribution of annual height increments according to 3 quantile regression surfaces as a function of trees per acre and initial tree height. The green, yellow and red surfaces represent the $\tau$= .1, .5 and .9 quantiles, respectively.\label{fig:quant_reg}}
  
 \end{center}
 \end{figure}
 
-Quantile regression allows for the description of the impact of both measured and unmeasured competitive factors that may be explaining much of the variance in small tree height growth. Two subject trees within the same 10 foot radius plot may experience vastly different growth rates despite having the same values of measured factors.  For ponderosa pine small tree growth, unmeasured factors may relate to such things as genetic characteristics, micro-climate, micro-site suitability or other location specific factors such as distance from a retained overstory tree or competing vegetation. Vegetation is known to have a major effect on micro-climate, affecting light, temperature, precipitation and wind (\cite{tappeiner_maguire_harrington_2007}). However, most growth and yield field sampling methods attempt to maintain a degree of simplicity and reproducibility, and therefore avoid sampling at a micro-resolution. This inevitably leads to unexplained variation since there are many unmeasured factors. Quantile regression allows for an explicit (though semiparametric) description of patterns in this unexplained variation.
+Quantile regression allows for the description of the impact of both measured and unmeasured competitive factors that may be explaining much of the variance in small tree height growth. Two subject trees within the same 10 foot radius plot may experience vastly different growth rates despite having the same values of measured factors.  For ponderosa pine small tree growth, unmeasured factors may relate to such things as genetic characteristics, micro-climate, micro-site suitability or other location specific factors such as distance from a retained overstory tree or competing vegetation. Vegetation is known to have a major effect on micro-climate, affecting light, temperature, precipitation and wind (\cite{tappeiner_maguire_harrington_2007}). However, most growth and yield field sampling methods attempt to maintain a degree of simplicity and reproducibility, and therefore avoid sampling at a micro-resolution. This inevitably leads to unexplained variation since there are many unmeasured factors. Quantile regression allows for an explicit (though semi-parametric) description of patterns in this unexplained variation.
 
 
 
@@ -367,9 +367,7 @@ $i$ is the unique tree,~$t$ is year, &~$j$ is the measurement period
 
 
 
-It was also during this stage of preparation that small tree damage codes were screened. Over the years many of the small tagged trees endured some kind of damage including mortality, broken tops, forked tops, sweep or animal damage. Dead trees and those with dead tops were removed from analysis since these trees typically experienced a decrease in height growth from the previous measurement year. See Appendix 3 for the complete list of damage codes recorded. All tree records that exhibited a negative height growth increment were also removed from consideration since this indicated either a measurement error or some misrecorded damage to the top.
-
-
+It was also during this stage of preparation that small tree damage codes were screened. Over the years many of the small tagged trees endured some kind of damage including mortality, broken tops, forked tops, sweep or animal damage. Dead trees and those with dead tops were removed from analysis since these trees typically experienced a decrease in height growth from the previous measurement year. See Appendix 3 for the complete list of damage codes recorded. All tree records that exhibited a negative height growth increment were also removed from consideration since this indicated either a measurement error or some mis-recorded damage to the top.
 
 
 
@@ -382,7 +380,7 @@ Within each category of ecological factor, a subset of relevant predictor variab
 
 Akaike's Information Criterion (AIC) was used for model comparison within each category. The predictor effecting the largest drop in AIC was selected to represent that category in the model going forward. If two predictors had similarly low AIC values, then they were both carried forward into the subsequent categories until a clear advantage could be discerned. If a category was unable to supply a predictor that lowered AIC or if the predictor was deemed impractical for field measurement, no predictor was selected from that category. Refer to appendix B. Variable Selection Steps for a step-by-step guide to model construction.
 
-In the first category (understory tree competition), only plots that recieved multiple applications of herbicide within installations of similar site index and overstory stocking were used. This was done tominimize difference in non-arboreal vegetation levels, overstory competition, and site productivity, and to focus on small-tree competitive effects. Plots of all levels of vegetation treatment (control, one time herbicide treatment and multiple herbicide treatment), were brought into the modeling for the understory vegetation variable selection. Finally, all installations in Figure \ref{fig:SI.vs.BAPA} were considered for the site level variable selection steps of overstory competition and site quality. For a step-by-step outline of the stepwise regression, see Appendix 2.
+In the first category (understory tree competition), only plots that received multiple applications of herbicide within installations of similar site index and overstory stocking were used. This was done to minimize difference in non-arboreal vegetation levels, overstory competition, and site productivity, and to focus on small-tree competitive effects. Plots of all levels of vegetation treatment (control, one time herbicide treatment and multiple herbicide treatment), were brought into the modeling for the understory vegetation variable selection. Finally, all installations in Figure \ref{fig:SI.vs.BAPA} were considered for the site level variable selection steps of overstory competition and site quality. For a step-by-step outline of the stepwise regression, see Appendix 2.
 
 
 
@@ -391,7 +389,7 @@ In the first category (understory tree competition), only plots that recieved mu
 
 To evaluate the performance of the selected model, three quantiles of the height growth response distribution (${\tau}$= .10, .50 and .90) were estimated for each individual tree in the witheld validation data set. The recorded annualized height growth increments were then classified according to where they occurred among the four interquantile intervals (i.e. <.1, .1-.5, .5-.9, >.9). The validation records were also classified into initial height classes of 1-4 feet, 4-6 feet and greater than 6 feet.
 
-Chi-squared tests for homogeneity were then conducted to compare the actual and expected frequencies of annual tree height growth increments accross the four interquantile intervals and height classes. 
+Chi-squared tests for homogeneity were then conducted to compare the actual and expected frequencies of annual tree height growth increments across the four interquantile intervals and height classes. 
 
 
 % H_{0}: \text{Actual distribution matches expected for any height classes}

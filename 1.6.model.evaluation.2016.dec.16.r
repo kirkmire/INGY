@@ -13,30 +13,37 @@
 
 
 #combines all aic.lists into one dataframe
-
+# colnames(UV.aic)<-c("Variable", "n", "AIC")
+# colnames(UT.aic)<-c("Variable", "n", "AIC")
+# colnames(OS.aic)<-c("Variable", "n", "AIC")
+# colnames(SQ.aic)<-c("Variable", "n", "AIC")
 # aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
 # 
+
+# aic.lists$AIC<-round(aic.lists$AIC,1)
 # aic.lists$AIC<-round(aic.lists$AIC,2)
 
 #Gonna need to adjust this...
-# final.aic<-data.frame(matrix("", nrow = 15, ncol = 9),stringsAsFactors=F)
+# final.aic<-data.frame(matrix("", nrow = 18, ncol = 9),stringsAsFactors=F)
 # final.aic$X1[1:9]<-as.character(aic.lists$Variable[1:9])
 # final.aic$X2[1:9]<-aic.lists$n[1:9]
 # final.aic$X3[1:9]<-aic.lists$AIC[1:9]
-# final.aic$X4[1:15]<-as.character(aic.lists$Variable[10:24])
-# final.aic$X5[1:15]<-aic.lists$n[10:24]
-# final.aic$X6[1:15]<-aic.lists$AIC[10:24]
-# final.aic$X7[1:4]<-as.character(aic.lists$Variable[25:28])
-# final.aic$X8[1:4]<-aic.lists$n[25:28]
-# final.aic$X9[1:4]<-aic.lists$AIC[25:28]
+# final.aic$X4[1:18]<-as.character(aic.lists$Variable[10:27])
+# final.aic$X5[1:18]<-aic.lists$n[10:27]
+# final.aic$X6[1:18]<-aic.lists$AIC[10:27]
+# final.aic$X7[1:5]<-as.character(aic.lists$Variable[28:32])
+# final.aic$X8[1:5]<-aic.lists$n[28:32]
+# final.aic$X9[1:5]<-aic.lists$AIC[28:32]
 # final.aic$X7[5]<-"Site"
 # final.aic$X8[5]<-"n"
 # final.aic$X9[5]<-"AIC"
-# final.aic$X7[6:10]<-as.character(aic.lists$Variable[29:33])
-# final.aic$X8[6:10]<-aic.lists$n[29:33]
-# final.aic$X9[6:10]<-aic.lists$AIC[29:33]
+# final.aic$X7[6:10]<-as.character(aic.lists$Variable[33:37])
+# final.aic$X8[6:10]<-aic.lists$n[33:37]
+# final.aic$X9[6:10]<-aic.lists$AIC[33:37]
 # 
 # colnames(final.aic)<-c("Variable","n","AIC","Variable","n","AIC","Variable","n","AIC")
+
+
 # 
 # #The code below will produce output that can then be copied over to the .tex file
 # # library(Hmisc)

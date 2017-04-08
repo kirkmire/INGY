@@ -494,7 +494,7 @@ nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.HS$y))
 annual.grUV$F.volume<-annual.grUV$diff.F.1m*annual.grUV$Cov.F
 qrCW.1m.F.vol<- rq(ht_annual~srHeight_Total+F.volume+cratio,tau=c(.5),data=annual.grUV)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.F.vol)[1])
-nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.LS.vol$y))
+nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.F.vol$y))
 
 #QR for 1m Low Shrub Volume
 annual.grUV$LS.volume<-annual.grUV$diff.LS.1m*annual.grUV$Cov.LS
@@ -517,7 +517,6 @@ nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.HS.vol$y))
 
 #QR for Forb transect cover
 qrCW.forb.tran<- rq(ht_annual~srHeight_Total+diff.F+cratio,tau=c(.5),data=annual.grUV)
-summary(qrCW.forb.tran)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.forb.tran)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.forb.tran$y))
 

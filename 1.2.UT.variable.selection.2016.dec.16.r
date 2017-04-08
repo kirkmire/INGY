@@ -367,6 +367,7 @@ variableUT<-as.data.frame(variable)
 UT.aic<-cbind(variableUT,UT.aic)
 
 
+
 ####LQMM############
 # library(lqmm)
 # 

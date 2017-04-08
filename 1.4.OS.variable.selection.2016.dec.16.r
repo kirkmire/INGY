@@ -562,7 +562,7 @@ aic.list.OS.CW<-AIC(qr.OS.nothing)[1]
 nlist.OS<-length(qr.OS.nothing$y)
 
 #QR for BAPA 
-qr.BAPA.CW<-rq(ht_annual~srHeight_Tota+cratio+
+qr.BAPA.CW<-rq(ht_annual~srHeight_Total+cratio+
                  bapa.OS,tau=c(.5),data=annual.gr4)
 aic.list.OS.CW<-c(aic.list.OS.CW,AIC(qr.BAPA.CW)[1])
 nlist.OS<-c(nlist.OS,length(qr.BAPA.CW$y))

@@ -439,11 +439,11 @@ Annual height growth increment tends to increase with initial height (Figure \re
 \begin{figure}[!htb]
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{deltaH_cratio.png}
-  \caption{Annualized height growth increment vs. crown ratio}\label{fig:delta_ht_cratio}
+  \subcaption{Annualized height growth increment vs. crown ratio}\label{fig:delta_ht_cratio}
 \endminipage\hfill
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{cratio_ht_total.png}
-  \caption{Crown Ratio vs. Initial height (ft)}\label{fig:init_ht_cratio}
+  \subcaption{Crown Ratio vs. Initial height (ft)}\label{fig:init_ht_cratio}
 \endminipage\hfill
 \end{figure}
 
@@ -503,30 +503,33 @@ As initial height increases, the lower limit of the crown ratio response increas
 \newpage
 \subsection{Variable Selection}
 
-\begin{table}
+\begin{table}[!tbp]
+\caption{Akaike Information Criteria for each candidate variable by competition category for the $\tau$=.5 quantile regression}
 \begin{center}
 \begin{tabular}{llllllllll}
 \hline\hline
-\multicolumn{1}{c}{Small Tree}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Vegetation}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Overstory}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}\tabularnewline
+&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}\tabularnewline
 \hline
-Nothing&321&620.4&Nothing&542&683.36&Nothing&2101&1807.31\tabularnewline
-SmallTPA&321&501.26&POLV.cov&542&682.1&BAPA&2101&1755.23\tabularnewline
-Trees15+&321&551.5&F.cov&542&683.99&CAPA&2101&1662.14\tabularnewline
-TGT&321&538.27&LS.cov&542&685.29&TPA&2101&1599.19\tabularnewline
-BD&320&401.29&HS.cov&542&685.13&Site&n&AIC\tabularnewline
-DBH&287&408.76&F.diff&542&657.12&SI&2101&1367.35\tabularnewline
-CrownWidth&321&506.79&LS.diff&542&683.08&Slope&2101&1585.93\tabularnewline
-CrownLength&321&468.53&HS.diff&542&678.77&Elevation&2101&1601.07\tabularnewline
-CrownRatio&321&384.42&F.tran&542&685.36&Aspect&2101&1598.9\tabularnewline
-&&&LS.tran&542&682.66&SEA Int&2101&1295.05\tabularnewline
-&&&HS.tran&542&684.85&&&\tabularnewline
-&&&G.tran.diff&542&684.92&&&\tabularnewline
-&&&G.tran.cov&542&680.96&&&\tabularnewline
-&&&mx.vg.diff1m&542&684.86&&&\tabularnewline
-&&&mx.vg.diff.tr&542&684.99&&&\tabularnewline
+&Nothing&321&620.4&Nothing&542&683.4&Nothing&2101&1807.3\tabularnewline
+&SmallTPA&321&501.3&POLV.cov&542&682.1&BAPA&2101&1755.2\tabularnewline
+&Trees15+&321&551.5&F.cov&542&684&CAPA&2101&1662.1\tabularnewline
+&TGT&321&538.3&LS.cov&542&685.3&TPA&2101&1599.2\tabularnewline
+&BD&320&401.3&HS.cov&542&685.1&Site&n&AIC\tabularnewline
+&DBH&287&408.8&F.depth&542&657.1&SI&2101&1367.3\tabularnewline
+&CrownWidth&321&506.8&LS.depth&542&683.1&Slope&2101&1585.9\tabularnewline
+&CrownLength&321&468.5&HS.depth&542&678.8&Elevation&2101&1601.1\tabularnewline
+&CrownRatio&321&384.4&F.vol&542&674.2&Aspect&2101&1598.9\tabularnewline
+&&&&LS.vol&542&685&SEA Int&2101&1295\tabularnewline
+&&&&HS.vol&542&685.1&&&\tabularnewline
+&&&&F.tran&542&685.4&&&\tabularnewline
+&&&&LS.tran&542&682.7&&&\tabularnewline
+&&&&HS.tran&542&684.9&&&\tabularnewline
+&&&&G.tran.depth&542&684.9&&&\tabularnewline
+&&&&G.tran.cov&542&681&&&\tabularnewline
+&&&&mx.vg.diff.1m&542&684.9&&&\tabularnewline
+&&&&mx.vg.diff.tr&542&685&&&\tabularnewline
 \hline
 \end{tabular}\end{center}
-\label{tab:AIC}
 \end{table}
 
 The primary form of the model included the square root of initial height, since it was found to be have a strong, positive, linear relationship with height growth increment (Figure \ref{fig:seqgam}). The generalized additive model (GAM) in this figure shows the predicted value of height increment as a function of initial height. Generally, the taller the tree at the beginning of the period, the greater the height growth increment. 
@@ -554,11 +557,11 @@ Proceeding forward from the primary model to the small tree category of competit
 \begin{figure}
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{init_gam.png}
-  \caption{GAM of annualized height growth increment vs. initial height.}\label{fig:delta_ht_cratio}
+  \subcaption{GAM of annualized height growth increment vs. initial height.}\label{fig:delta_ht_cratio}
 \endminipage\hfill
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{cratio_init.png}
-  \caption{GAM of annualized height growth increment vs. crown ratio.}\label{fig:init_ht_cratio}
+  \subcaption{GAM of annualized height growth increment vs. crown ratio.}\label{fig:init_ht_cratio}
 \endminipage\hfill
 \end{figure}
 
@@ -584,37 +587,50 @@ The understory non-arboreal vegetation candidate variables failed to provide an 
 
 The overstory candidate variable with the lowest AIC was trees per acre (TPA). The measure of crown area per acre (CAPA) provided a close second and basal area per acre (BAPA) was also much lower than the previous iteration of the model. The GAM of TPA shows that predicted height increment decreases steeply between 0 and 40 TPA but appears to flatten past 40 TPA (Figure \ref{fig:seqgamOSTPA}. As a predictor of height growth increment, TPA is important to distinguish between clearcut (0 TPA) and modest overstory retention levels. However, beyond 40 TPA, it fails to relate to predicted height growth increment.
 
-\begin{figure} 
-\begin{center}
-<<label=seqgamOSTPA,fig=TRUE,echo=FALSE>>=
-tpa.ht.gam<-gam(ht_annual~srHeight_Total+cratio+s(TPA.OS),data=annual.gr4)
-plot(tpa.ht.gam,residuals=T,se=T,
-         pch = ".",
-         col ="grey60",
-       xlab="Residual Trees Per Acre",
-       ylab="Annual Height Increment (ft)")
-@
-\end{center}
-\caption{Generalized additive model of annual height growth increment vs. crown ratio with square-root of initial height and crown ratio considered as linear predictors.\label{fig:seqgamOSTPA}}
+
+\begin{figure}[!htb]
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{TPAgam.png}
+  \subcaption{GAM of annual height growth vs. TPA}\label{seqgamOSTPA}
+\endminipage\hfill
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{SEAgam.png}
+  \subcaption{GAM of annual height growth vs SEA}\label{fig:seqgamSEA}
+\endminipage\hfill
 \end{figure}
+
+
+% \begin{figure} 
+% \begin{center}
+% <<label=seqgamOSTPA,fig=TRUE,echo=FALSE>>=
+% tpa.ht.gam<-gam(ht_annual~srHeight_Total+cratio+s(TPA.OS),data=annual.gr4)
+% plot(tpa.ht.gam,residuals=T,se=T,
+%          pch = ".",
+%          col ="grey60",
+%        xlab="Residual Trees Per Acre",
+%        ylab="Annual Height Increment (ft)")
+% @
+% \end{center}
+% \caption{Generalized additive model of annual height growth increment vs. crown ratio with square-root of initial height and crown ratio considered as linear predictors.\label{fig:}}
+% \end{figure}
 
 Site metrics of slope, aspect and elevation failed to provide an improvement over the null model. However, when considered together in the slope, aspect and elevation (SEA) interaction model (\cite{Stage2007a}, see Equation \eqref{eq:Eq1}), these terms provided the lowest AIC by a wide margin. The AIC of the site index metric was also quite low but failed to surpass that of the SEA term. The values for the SEA interaction were obtained though fitting only the SEA related coefficients of the $\tau$=.5 model to all small tree records. The GAM for this term shows that an increase in the slope, aspect and elevation term is related to general increase in predicted height increment for most SEA values (and most plots). However, the smooth function shows that for the outer values of SEA, this trend is not linear. 
 
 
-\begin{figure} 
-\begin{center}
-<<label=seqgamSEA,fig=TRUE,echo=FALSE>>=
-sea.ht.gam<-gam(ht_annual~srHeight_Total+cratio+TPA.OS+s(SEA.val),data=annual.gr4)
-plot(sea.ht.gam,residuals=T,se=T,
-      pch = ".",
-      col ="grey60",
-      xlab="Slope, Aspect, Elevation (SEA) Term",
-      ylab="Annual Height Increment (ft)")
-
-@
-\end{center}
-\caption{Generalized additive model of annual height growth increment vs. SEA term with square-root of initial height, crown ratio and TPA considered as linear predictors.\label{fig:seqgamSEA}}
-\end{figure}
+% \begin{figure} 
+% \begin{center}
+% <<label=seqgamSEA,fig=TRUE,echo=FALSE>>=
+% sea.ht.gam<-gam(ht_annual~srHeight_Total+cratio+TPA.OS+s(SEA.val),data=annual.gr4)
+% plot(sea.ht.gam,residuals=T,se=T,
+%       pch = ".",
+%       col ="grey60",
+%       xlab="Slope, Aspect, Elevation (SEA) Term",
+%       ylab="Annual Height Increment (ft)")
+% 
+% @
+% \end{center}
+% \caption{Generalized additive model of annual height growth increment vs. SEA term with square-root of initial height, crown ratio and TPA considered as linear predictors.\label{fig:seqgamSEA}}
+% \end{figure}
 
 
 The resultant model is specified as follows:
@@ -637,15 +653,15 @@ $cr$ is the crown ratio, $TPA$ is the overstory trees per acre and $S$ is the sl
 \begin{figure}[!htb]
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{qrsi1resid2.png}
-  \caption{$\tau$=.1 Residuals}\label{fig:qr1resid}
+  \subcaption{$\tau$=.1 Residuals}\label{fig:qr1resid}
 \endminipage\hfill
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{qrsi5resid2.png}
-  \caption{$\tau$=.5 Residuals}\label{fig:qr5resid}
+  \subcaption{$\tau$=.5 Residuals}\label{fig:qr5resid}
 \endminipage\hfill
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{qrsi9resid2.png}
-  \caption{$\tau$=.9 Residuals}\label{fig:qr9resid}
+  \subcaption{$\tau$=.9 Residuals}\label{fig:qr9resid}
 \endminipage
 \end{figure}
 
@@ -680,15 +696,15 @@ The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the varian
 \begin{figure}[!htb]
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{init_ht_coef.png}
-  \caption{Coefficient Plot of Initial Height}\label{fig:sr_init_coef}
+  \subcaption{Coefficient Plot of Initial Height}\label{fig:sr_init_coef}
 \endminipage\hfill
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{cratio_coef.png}
-  \caption{Coefficient Plot of Crown Ratio}\label{fig:cr_coef}
+  \subcaption{Coefficient Plot of Crown Ratio}\label{fig:cr_coef}
 \endminipage\hfill
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{tpa_coef.png}
-  \caption{Coefficient Plot of TPA}\label{fig:os_tpa_coef}
+  \subcaption{Coefficient Plot of TPA}\label{fig:os_tpa_coef}
 \endminipage
 \end{figure}
 
@@ -779,90 +795,106 @@ print(barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
 Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generated for the witheld data (1 randomly selected small tree plot at each plot). The actual height growth increment was then binned according to where it fell among the quantile regression predicted height growth increments (<.10,.1-.5,.5-.9 or >.9). Visually, the actual height growth increment are distributed approximately as expected with .4 falling between the .1-.5 and ,5-.9 $\tau$ predictions and .1 falling below the .1 $\tau$ and above the .9 $\tau$ predicted height (Figure \ref{fig:validres}). 
 
 
-
-\begin{figure} 
-\begin{center}
-<<label=validres_below4,fig=TRUE,echo=FALSE>>=
-
-annual.gr6.lessthan4<-annual.gr6[annual.gr6$Height_Total<4,]
-sorted.totals2<-aggregate(annual.gr6.lessthan4$counts,
-                         by=list(Category=annual.gr6.lessthan4$response.cat), FUN=sum)
-
-sorted.totals2$x<-sorted.totals2$x/sum(sorted.totals2$x)
-
-print(barchart(sorted.totals2$x~sorted.totals2$Category, names = "Quantile Bin",
-        xlab = "Bin", ylab = "Fraction of Total Witheld Trees (<4 ft initial ht)",type=density,
-        ylim=c(0,.60),
-          col=myColours[4],
-        par.settings = my.settings,
-        par.strip.text=list(col="white", font=2),
-        panel=function(x,y,...){
-          panel.grid(h=-1, v=0);
-          panel.barchart(x,y,...)
-        }))
-
-@
-\end{center}
-\caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres_below4}}
+\begin{figure}[!htb]
+\minipage{0.32\textwidth}
+  \includegraphics[width=\linewidth]{lessthan4.png}
+  \subcaption{Witheld tree height growth increments sorted by predicted height growth increment quantiles}\label{fig:validres_below4}
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\linewidth]{between4and6.png}
+  \subcaption{Witheld tree height growth increments sorted by predicted height growth increment quantiles}\label{fig:validres_4_6}
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\linewidth]{greaterthan6.png}
+  \subcaption{Witheld tree height growth increments sorted by predicted height growth increment quantiles}\label{fig:validres_6}
+\endminipage
 \end{figure}
+
+
+% 
+% \begin{figure} 
+% \begin{center}
+% <<label=validres_below4,fig=TRUE,echo=FALSE>>=
+% 
+% annual.gr6.lessthan4<-annual.gr6[annual.gr6$Height_Total<4,]
+% sorted.totals2<-aggregate(annual.gr6.lessthan4$counts,
+%                          by=list(Category=annual.gr6.lessthan4$response.cat), FUN=sum)
+% 
+% sorted.totals2$x<-sorted.totals2$x/sum(sorted.totals2$x)
+% 
+% print(barchart(sorted.totals2$x~sorted.totals2$Category, names = "Quantile Bin",
+%         xlab = "Bin", ylab = "Fraction of Total Witheld Trees (<4 ft initial ht)",type=density,
+%         ylim=c(0,.60),
+%           col=myColours[4],
+%         par.settings = my.settings,
+%         par.strip.text=list(col="white", font=2),
+%         panel=function(x,y,...){
+%           panel.grid(h=-1, v=0);
+%           panel.barchart(x,y,...)
+%         }))
+% 
+% @
+% \end{center}
+% \caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres_below4}}
+% \end{figure}
 
 In order to provide higher resolution to the validation, we classified the trees within the validation dataset by initial height (1-4, 4-6, 6+ ft). For the less than 4 ft initial height class, the distribution of annual height growth increments match our expected distribution within the central portion of the response distribution (Figure \ref{fig:validres_below4}). However, far fewer height growth increments were below their $\tau$=.1 predicted height increments. In contrast, far more responses exceeded the $\tau$=9 predicted value than expected. For the shorter trees in the data set (< 4ft), many more than expected exhibited growth surpassing their $\tau$=.9 prediction and far fewer than expected exhibited growth below their $\tau$ = .1 prediction.
 
-\begin{figure} 
-\begin{center}
-<<label=validres_4_6,fig=TRUE,echo=FALSE>>=
-annual.gr6.4to6<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
-
-
-sorted.totals3<-aggregate(annual.gr6.4to6$counts,
-                         by=list(Category=annual.gr6.4to6$response.cat), FUN=sum)
-
-sorted.totals3$x<-sorted.totals3$x/sum(sorted.totals3$x)
-
-
-print(barchart(sorted.totals3$x~sorted.totals3$Category, names = "Quantile Bin",
-        xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
-        ylim=c(0,.60),
-          col=myColours[4],
-        par.settings = my.settings,
-        par.strip.text=list(col="white", font=2),
-        panel=function(x,y,...){
-          panel.grid(h=-1, v=0);
-          panel.barchart(x,y,...)
-        }))
-
-@
-\end{center}
-\caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres_4_6}}
-\end{figure}
+% \begin{figure} 
+% \begin{center}
+% <<label=validres_4_6,fig=TRUE,echo=FALSE>>=
+% annual.gr6.4to6<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
+% 
+% 
+% sorted.totals3<-aggregate(annual.gr6.4to6$counts,
+%                          by=list(Category=annual.gr6.4to6$response.cat), FUN=sum)
+% 
+% sorted.totals3$x<-sorted.totals3$x/sum(sorted.totals3$x)
+% 
+% 
+% print(barchart(sorted.totals3$x~sorted.totals3$Category, names = "Quantile Bin",
+%         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
+%         ylim=c(0,.60),
+%           col=myColours[4],
+%         par.settings = my.settings,
+%         par.strip.text=list(col="white", font=2),
+%         panel=function(x,y,...){
+%           panel.grid(h=-1, v=0);
+%           panel.barchart(x,y,...)
+%         }))
+% 
+% @
+% \end{center}
+% \caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres_4_6}}
+% \end{figure}
 
 Trees in the intermediate height class (4-6 ft initial ht) appear to disproportionately frequently exhibit height growth within the $\tau$=.1.-.5 predicted height growth interval (Figure \ref{fig:validres_4_6}). An approximately equally number of trees appear to be absent from the $\tau$=.5.-.9 quantile interval. However, the expected distribution of height growth is apparent in the extremes of the inter-quantile range of predictions.
 
-\begin{figure} 
-\begin{center}
-<<label=validres_6,fig=TRUE,echo=FALSE>>=
-annual.gr6.6<-annual.gr6[annual.gr6$Height_Total>6,]
-
-
-sorted.totals<-aggregate(annual.gr6.6$counts,
-                         by=list(Category=annual.gr6.6$response.cat), FUN=sum)
-
-sorted.totals$x<-sorted.totals$x/sum(sorted.totals$x)
-
-print(barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
-        xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
-        col=myColours[4],ylim=c(0,.60),
-        par.settings = my.settings,
-        par.strip.text=list(col="white", font=2),
-        panel=function(x,y,...){
-          panel.grid(h=-1, v=0);
-          panel.barchart(x,y,...)
-        }))
-
-@
-\end{center}
-\caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres_6}}
-\end{figure}
+% \begin{figure} 
+% \begin{center}
+% <<label=validres_6,fig=TRUE,echo=FALSE>>=
+% annual.gr6.6<-annual.gr6[annual.gr6$Height_Total>6,]
+% 
+% 
+% sorted.totals<-aggregate(annual.gr6.6$counts,
+%                          by=list(Category=annual.gr6.6$response.cat), FUN=sum)
+% 
+% sorted.totals$x<-sorted.totals$x/sum(sorted.totals$x)
+% 
+% print(barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
+%         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
+%         col=myColours[4],ylim=c(0,.60),
+%         par.settings = my.settings,
+%         par.strip.text=list(col="white", font=2),
+%         panel=function(x,y,...){
+%           panel.grid(h=-1, v=0);
+%           panel.barchart(x,y,...)
+%         }))
+% 
+% @
+% \end{center}
+% \caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres_6}}
+% \end{figure}
 
 The trees within the tallest initial height class (6+ ft) appear to have a distribution of height growth increments within inter-quantile bins that conforms very nearly to the expected distribution. 
 

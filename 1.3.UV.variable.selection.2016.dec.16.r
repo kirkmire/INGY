@@ -92,14 +92,9 @@ names(agg.1m.data1)[4:7]<-c("diff.F.1m","diff.G.1m","diff.HS.1m","diff.LS.1m")
 names(agg.1m.data1)[9]<-c("diff.POLV.1m")
 
 
-#Merges aggregated 1m data to the "big" df
+#Merges aggregated 1m data to the "big" df, this is where .gr4 is created
 
 annual.gr4<-merge(annual.gr3,agg.1m.data1,by=c("Installation","Plot","Year_Measurement"))
-
-
-
-
-
 
 
 ##Transect Data##
@@ -238,8 +233,6 @@ for(i in 1:nrow(annual.gr4)){
     )
 }
 
-mean(annual.gr4$treeminus)
-
 #Function for height difference between top height of tallest shrub on each 
 #stp vegplot
 #Find diff between init tree height and max shrub height
@@ -308,10 +301,12 @@ annual.gr4$cratio<- annual.gr4$CrownLength/annual.gr4$Height_Total
 #Removes tree records with negative CR
 annual.gr4 <- annual.gr4[!is.na(annual.gr4$cratio) & annual.gr4$cratio>=0,]
 
-#Selects tree record of annual growth from similar installations
+#Selects tree record of annual growth from similar installations,
+#this is where .grUV is created
 annual.grUV<-annual.gr4[annual.gr4$Installation %in% sim, ]
 
-
+#good point to look at not-yet removed damaged trees here with .gr4
+allDamage<-annual.gr4
 
 # 
 # #GAM for 1m polyveg cover
@@ -438,11 +433,18 @@ veg.variable<-c("Nothing","POLV.cov","F.cov","LS.cov","HS.cov",
                 "F.tran","LS.tran","HS.tran","G.tran.depth",
                 "G.tran.cov","mx.vg.diff.1m","mx.vg.diff.tr"
                )
+
+#Removes all Dead tree records (already done in annualization routine)
+# annual.grUV<-annual.grUV[!annual.grUV$Damage %in% damageRemoved]
+# annual.grUV<-annual.grUV[(annual.grUV$Height_Total!=0 & !is.na(annual.grUV$Height_Total)),]
 ###Quantreg
 library(quantreg)
 
 #QR for nothing
 annual.grUV<-annual.grUV[!is.na(annual.grUV$cratio)==T,]
+
+
+
 qrCW.noth<- rq(ht_annual~srHeight_Total+cratio,tau=c(.5),data=annual.grUV)
 aic.list.vegCW<-AIC(qrCW.noth)[1]
 nlqmm.list.UV<-length(qrCW.noth$y)

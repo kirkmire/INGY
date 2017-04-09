@@ -8,7 +8,7 @@
 soverhist$DBH[is.na(soverhist$DBH)] <- 0
 
 #Removes dead OS trees record
-dead.words<-c("DEAD","Dead","DEAD-CUT","DEAD-CUT DOWN")
+dead.words<-c("DEAD","Dead","DEAD-CUT","DEAD-CUT DOWN","CUT")
 
 soverhist<-soverhist[! soverhist$Damage %in% dead.words,]
 
@@ -553,7 +553,15 @@ for(i in 1:nrow(annual.gr4)){
 
 annual.gr4$SDI<-annual.gr4$TPA.OS*((annual.gr4$qmd/10)^1.605)
 
+
+#
+#Removes all Dead/damaged tree records
+# annual.gr4<-annual.gr4[!annual.gr4$Damage %in% damageRemoved,]
+# annual.gr4<-annual.gr4[(annual.gr4$Height_Total!=0 & !is.na(annual.gr4$Height_Total)),]
+
+
 #CW QR#####################################################
+
 
 #QR for Nothing
 qr.OS.nothing<-rq(ht_annual~srHeight_Total+cratio

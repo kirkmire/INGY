@@ -107,7 +107,7 @@ print(barchart(inst_count$Freq~ inst_count$annual.gr4.Installation,
          #main="Motor insurance claims frequency"
          xlab="Study Site", ylab="Number of Tagged Small Ponderosa Pine Trees",
         scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)), 
-         ylim=c(0,300),
+         ylim=c(0,400),
           col=myColours[4],
          par.settings = my.settings,
          par.strip.text=list(col="white", font=2),
@@ -127,91 +127,69 @@ Figure \ref{fig:numbpond} shows that most installations that met the threshold o
 
 This number of tagged ponderosa pine trees at initiation is not ultimately reflective of how many tree records each installation represents. The number of measurement intervals included from each installation as well as an account of tree records excluded due to mortality/damage/missing are necessary considerations to express the relative contribution of each installation to the model. Figure \ref{numbRecords} shows that when these factors are accounted for, many installations contribute over 150 tree records to the model, while installations with only a single measurement interval included Round Mountain (RM) and TJ's Installation (TJ) actually contributed less than 60 tree records. 
 
-\begin{figure} 
-\begin{center}
-<<label=numbRecords, fig=TRUE,width=6,height=4,echo=FALSE>>=
 
-annual.gr4$count<-1
-inst_count<-as.data.frame(xtabs(annual.gr4$count~annual.gr4$Installation))
-
-print(barchart(inst_count$Freq~ inst_count$annual.gr4.Installation,
-         origin=0, 
-         #main="Motor insurance claims frequency"
-         xlab="Study Site", ylab="Number of Tagged Small Ponderosa Pine Trees Records",
-        scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)), 
-         ylim=c(0,300),
-          col=myColours[4],
-         par.settings = my.settings,
-         par.strip.text=list(col="white", font=2),
-         panel=function(x,y,...){
-           panel.grid(h=-1, v=0); 
-           panel.barchart(x,y,...)
-         }
-))
-
-
-@
-\end{center}
-\caption{Number of small tagged ponderosa pine tree records by STCV study site.\label{fig:numbRecords}}
-\end{figure}
 
 \begin{table}\label{tab:tree.counts}
 \caption{Number of Observations Per Individual Small Tagged Tree}
 \begin{center}
-\begin{tabular}{rrr}
+\begin{tabular}{lll}
 \hline\hline
 \multicolumn{1}{c}{Number of Observations}&\multicolumn{1}{c}{Number of Trees}&\multicolumn{1}{c}{Number of Tree Records}\tabularnewline
 \hline
-$1$&$592$&$592$\tabularnewline
-$2$&$582$&$1164$\tabularnewline
-$3$&$115$&$345$\tabularnewline
+$1$&$425$&$425$\tabularnewline
+$2$&$475$&$950$\tabularnewline
+$3$&$411$&$1233$\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}
 
-Table is related \ref{tab:tree.counts} to Figure \ref{fig:numbRecords} in that it reveals the number of times a unique tree contributed to the model. A nearly equal amount of trees contributed to the model over either one or two measurement intervals. Comparatively few trees appeared three times in the model. Ultimately, the majority of the tree records come from trees that were included over two intervals. Approximately half of that number of trees records were included for only a single measurement interval.
+Table is related \ref{tab:tree.counts} to Figure \ref{fig:numbRecords} in that it reveals the number of times a unique tree contributed to the model. A nearly equal amount of trees contributed to the model over either one, two or three measurement intervals. Ultimately, the majority of the tree records come from trees that were included over three intervals.
 
 
 \begin{figure} 
 \begin{center}
-<<label=damageCodes,width=8,height=4,fig=TRUE,echo=FALSE>>=
+<<label=damageCodes,fig=TRUE,echo=FALSE>>=
+dmgStagm<- merge(stagm, stag,by=c("Installation","Plot","STP","Tree"))
+dmgStagm<-dmgStagm[! dmgStagm$Installation %in% drp60,]
+dmgStagm<-dmgStagm[!dmgStagm$Year_Measurement==dmgStagm$Year_Growth,]
+dmgStagm<-dmgStagm[dmgStagm$Species=="PIPO",]
 
+# keep the right growth periods
+keep <- unique(timeline[,c("Installation","Year_Measurement")])
+keep <- keep[!is.na(keep$Year_Measurement),]
+keep<-keep[! keep$Installation %in% drp60,]
+dmgStagm <- merge(dmgStagm,keep)
 
-stagm1<-stagm[stagm$Installation %in% drp60,]
-damageCodes<-as.data.frame(table(droplevels(stagm1$Damage)))
+#To look at unique records
+dmgStagm$conc<-paste(dmgStagm$Installation,dmgStagm$Plot,dmgStagm$STP,
+                                dmgStagm$Tree,sep=",")
 
+#Selects the first unique tree record
+# dmgStagm<-dmgStagm[!duplicated(dmgStagm$conc), ]
 
+dmgStagm<-dmgStagm[dmgStagm$Damage %in% damageRemoved,]
 
+dmgStagm[dmgStagm=="D"]<-"DEAD"
+dmgStagm[dmgStagm=="DT AD"]<-"AD"
 
-names(damageCodes)[1]<-("code")
-names(damageCodes)[2]<-("number")
+dmgStagm<-aggregate(dmgStagm$count,by=list(Installation=dmgStagm$Installation,Year=dmgStagm$Year_Measurement),FUN=sum)
 
-damageCodes<-damageCodes[!damageCodes$number<5&!damageCodes$number>100,]
-
-
-print(barchart(damageCodes$number ~ damageCodes$code,
-         origin=0, 
-         #main="Motor insurance claims frequency"
-         xlab="Damage Code", ylab="Number Small Trees Measurements",
-        scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)), 
-         ylim=c(0,100),
-        col=myColours[4],
-         # auto.key=list(space="right", columns=1, 
-         #               points=FALSE, rectangles=TRUE,
-         #               title="Treatment", cex.title=1),
+print(xyplot(dmgStagm$x~dmgStagm$Year| dmgStagm$Installation, 
+         col=myColours[4],type="o",
          par.settings = my.settings,
-         par.strip.text=list(col="white", font=2),
-         panel=function(x,y,...){
-           panel.grid(h=-1, v=0); 
-           panel.barchart(x,y,...)
-         }
-))
+         strip = strip.custom(bg="lightgrey",
+ par.strip.text=list(col="black", cex=.8)),
+       scales=list(
+         y=list(limits=c(0,140))),
+         xlab="Year Measurement",
+         ylab="Number of Small Tree Records Removed"))
+
 @
 \end{center}
-\caption{Number of Small Tagged Ponderosa Pine Trees by Damage Code\label{fig:damageCodes}}
+\caption{Small tree records removed due to damage or mortality over time.\label{fig:damageCodes}}
 \end{figure}
 
-(see Figure \ref{fig:damageCodes}) 
+The dead, dead top or animal damaged trees were removed from the model whether the damage was recorded at the begining or end of a given interval (see Figure \ref{fig:damageCodes}). Most installations exhibited similarly low levels of mortality or other specified damage. The number of tree records removed generally does not exceed 20 trees. However, some installations such as KC, RM and CR showed high levels of mortality and damage, especially in the later years of the study. Unique trees may appear across mulitple years. Any reductions in the number of tree records removed across measurement years is attributed to an improvement in tree health or an inability to locate and categorize the tree as dead or damaged.
 
 \begin{figure}
 \begin{center}
@@ -369,10 +347,10 @@ print(histogram(~annual.gr4$Height_Total| annual.gr4$Installation,
 
 @
  \end{center}
- \caption{Annualized height growth of small tagged trees by installation.\label{fig:init_ht_by_inst} }
+ \caption{Initial height of small tagged trees by installation.\label{fig:init_ht_by_inst} }
  \end{figure}
  
-The initial height of small ponderosa pine trees at the beginning of measurement intervals ranges between 1 foot (the minimum height to be included in the sample) to just under 30 feet with the majority of tagged trees are between 1 and 15 feet in initial height (Figure \ref{fig:ht_by_inst}). KC and LL have especially narrow distributions of initial height. These installations have very dense, vertically homogeneous ponderosa pine regeneration that are slowly growing. These conditions are not typically found in a natural ponderosa pine stand and these installations may benefit from an understory treatment such as a prescribed burn or non-commercial thinning that promotes differentiation among understory ponderosa pine so they can emerge into the canopy. Although, these stands may not represent optimum management, they are important to include to estimate the effects of small tree competition in extremely dense conditions. 
+The initial height of small ponderosa pine trees at the beginning of measurement intervals ranges between 1 foot (the minimum height to be included in the sample) to just under 30 feet with the majority of tagged trees are between 1 and 15 feet in initial height (Figure \ref{fig:ht_by_inst}). KC and TP have especially narrow distributions of initial height. These installations have very dense, vertically homogeneous ponderosa pine regeneration that are slowly growing. These conditions are not typically found in a natural ponderosa pine stand and these installations may benefit from an understory treatment such as a prescribed burn or non-commercial thinning that promotes differentiation among understory ponderosa pine so they can emerge into the canopy. Although, these stands may not represent optimum management, they are important to include to estimate the effects of small tree competition in extremely dense conditions. 
 
 \begin{figure} 
 \begin{center}
@@ -406,7 +384,7 @@ print(histogram(~annual.gr4$ht_annual| annual.gr4$Installation,
  \end{figure}
 
   
-Ponderosa pine vary in annual height growth according to which installation they are located within (Figure \ref{fig:init_ht_by_inst}). The asymmetric, right skewed distribution reveals that most subject trees experience annual height growth between 0 and 2 ft with very few trees exceeding 2 ft. Note that the distribution itself changes between installations. Some installations such as SG and KC have a vary narrow distribution of annualized height growth which indicates that most trees are experiencing similar levels of growth.  In these stands, this can likely be attributed to their dense understory regeneration in which trees struggle similarly for resources. In contrast, installations such as GC and BC have fairly even distributions of annual height which indicates differentiation in competition and a corresponding wide range of initial heights.
+Ponderosa pine vary in annual height growth according to which installation they are located within (Figure \ref{fig:init_ht_by_inst}). The asymmetric, right skewed distribution reveals that most subject trees experience annual height growth between 0 and 2 ft with very few trees exceeding 2 ft. Note that the distribution itself changes between installations. Some installations such as TP and KC have a vary narrow distribution of annualized height growth which indicates that most trees are experiencing similar levels of growth.  In these stands, this can likely be attributed to their dense understory regeneration in which trees struggle similarly for resources. In contrast, installations such as GC and BC have fairly even distributions of annual height which indicates differentiation in competition and a corresponding wide range of initial heights.
 
 \begin{figure} 
 \begin{center}
@@ -439,45 +417,46 @@ Annual height growth increment tends to increase with initial height (Figure \re
 \begin{figure}[!htb]
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{deltaH_cratio.png}
-  \subcaption{Annualized height growth increment vs. crown ratio}\label{fig:delta_ht_cratio}
+  \subcaption{Annualized height growth increment (ft) vs. crown ratio}\label{fig:delta_ht_cratio}
 \endminipage\hfill
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{cratio_ht_total.png}
   \subcaption{Crown Ratio vs. Initial height (ft)}\label{fig:init_ht_cratio}
 \endminipage\hfill
+\caption{Scatterplots of small tree growth characteristics.}
 \end{figure}
 
  
-% \begin{figure} 
+% \begin{figure}
 % \begin{center}
 % <<label=delta_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
-% 
-% library(lattice)
-% 
-% 
-% print(xyplot(annual.gr4$ht_annual~annual.gr4$cratio,
+%  
+%  library(lattice)
+%  
+%  
+%  print(xyplot(annual.gr4$ht_annual~annual.gr4$cratio,
 %          par.settings = my.settings,
-%           pch = 1,
-%            col ="grey60",
-%           xlab="Crown Ratio (%)",
-%          ylab="Annualized Height Growth Increment (ft/yr)",
-%        strip = strip.custom(bg="lightgrey"),
-%          par.strip.text=list(col="black"),
-%          scales=list(
-%                )))
+%            pch = 1,
+%             col ="grey60",
+%            xlab="Crown Ratio (%)",
+%           ylab="Annualized Height Growth Increment (ft/yr)",
+%         strip = strip.custom(bg="lightgrey"),
+%           par.strip.text=list(col="black"),
+%           scales=list(
+%                 )))
+%  
 % 
-% 
-% @
-%  \end{center}
-%  \caption{Annualized height growth increment vs. crown ratio.\label{fig:delta_ht_cratio}}
-%  \end{figure}
+%  @
+% \end{center}
+% \caption{Annualized height growth increment vs. crown ratio.\label{fig:delta_ht_cratio}}
+% \end{figure}
  
 Crown ratio (crown length/total height) appears to act as an upper limit to annual height growth (Figure \ref{fig:delta_ht_cratio}). Small trees with very little crown exhibit height growth responses that are correspondingly small. As crown ratio increases the upper values of the height growth response distribution also increase. However, variance in annual height growth also increases for increasing values of crown ratio. Trees with larger crown ratios exhibit greater variability in height growth. For trees with the fullest crowns (>.8), annual height growth tends to exceed .5 ft. 
  
-%  \begin{figure} 
+%  \begin{figure}
 % \begin{center}
 % <<label=init_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
-% 
+%
 % library(lattice)
 % 
 % 
@@ -491,7 +470,7 @@ Crown ratio (crown length/total height) appears to act as an upper limit to annu
 %          par.strip.text=list(col="black"),
 %          scales=list(
 %                )))
-@
+% @
 %  \end{center}
 %  \caption{Crown Ratio vs. Initial height (ft)\label{fig:init_ht_cratio}}
 %  \end{figure}
@@ -504,30 +483,30 @@ As initial height increases, the lower limit of the crown ratio response increas
 \subsection{Variable Selection}
 
 \begin{table}[!tbp]
-\caption{Akaike Information Criteria for each candidate variable by competition category for the $\tau$=.5 quantile regression}
+\caption{Akaike Information Criteria for each candidate variable by competition category for the $\tau$=.5 quantile regression\label{tab:AIC}}
 \begin{center}
 \begin{tabular}{llllllllll}
 \hline\hline
 &\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}\tabularnewline
 \hline
-&Nothing&321&620.4&Nothing&542&683.4&Nothing&2101&1807.3\tabularnewline
-&SmallTPA&321&501.3&POLV.cov&542&682.1&BAPA&2101&1755.2\tabularnewline
-&Trees15+&321&551.5&F.cov&542&684&CAPA&2101&1662.1\tabularnewline
-&TGT&321&538.3&LS.cov&542&685.3&TPA&2101&1599.2\tabularnewline
-&BD&320&401.3&HS.cov&542&685.1&Site&n&AIC\tabularnewline
-&DBH&287&408.8&F.depth&542&657.1&SI&2101&1367.3\tabularnewline
-&CrownWidth&321&506.8&LS.depth&542&683.1&Slope&2101&1585.9\tabularnewline
-&CrownLength&321&468.5&HS.depth&542&678.8&Elevation&2101&1601.1\tabularnewline
-&CrownRatio&321&384.4&F.vol&542&674.2&Aspect&2101&1598.9\tabularnewline
-&&&&LS.vol&542&685&SEA Int&2101&1295\tabularnewline
-&&&&HS.vol&542&685.1&&&\tabularnewline
-&&&&F.tran&542&685.4&&&\tabularnewline
-&&&&LS.tran&542&682.7&&&\tabularnewline
-&&&&HS.tran&542&684.9&&&\tabularnewline
-&&&&G.tran.depth&542&684.9&&&\tabularnewline
-&&&&G.tran.cov&542&681&&&\tabularnewline
-&&&&mx.vg.diff.1m&542&684.9&&&\tabularnewline
-&&&&mx.vg.diff.tr&542&685&&&\tabularnewline
+&Nothing&423&839.7&Nothing&721&1011&Nothing&2608&2552.1\tabularnewline
+&SmallTPA&423&708.7&POLV.cov&721&1004&BAPA&2608&2490.5\tabularnewline
+&Trees15+&422&771&F.cov&721&1012.9&CAPA&2608&2417\tabularnewline
+&TGT&423&760.9&LS.cov&721&1012.8&TPA&2608&2346.2\tabularnewline
+&BD&422&610.7&HS.cov&721&1011.9&Site&n&AIC\tabularnewline
+&DBH&389&603.2&F.depth&721&1011.6&SI&2608&2051.7\tabularnewline
+&CrownWidth&423&713.4&LS.depth&721&1012.5&Slope&2608&2340.7\tabularnewline
+&CrownLength&423&674.8&HS.depth&721&1005.1&Elevation&2608&2348.1\tabularnewline
+&CrownRatio&423&585.4&F.vol&721&1012.4&Aspect&2608&2347.5\tabularnewline
+&&&&LS.vol&721&1012.5&SEA Int&2608&1986.5\tabularnewline
+&&&&HS.vol&721&1012.5&&&\tabularnewline
+&&&&F.tran&721&1012.4&&&\tabularnewline
+&&&&LS.tran&721&1010.9&&&\tabularnewline
+&&&&HS.tran&721&1012.9&&&\tabularnewline
+&&&&G.tran.depth&721&1005.8&&&\tabularnewline
+&&&&G.tran.cov&721&1009.1&&&\tabularnewline
+&&&&mx.vg.diff.1m&721&1009.8&&&\tabularnewline
+&&&&mx.vg.diff.tr&721&1012.4&&&\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}
@@ -563,10 +542,11 @@ Proceeding forward from the primary model to the small tree category of competit
   \includegraphics[width=\linewidth]{cratio_init.png}
   \subcaption{GAM of annualized height growth increment vs. crown ratio.}\label{fig:init_ht_cratio}
 \endminipage\hfill
+\caption{Generalized additive models of annualized height growth vs. initial height and crown ratio.}
 \end{figure}
 
-
-% \begin{figure} 
+% 
+% \begin{figure}
 % \begin{center}
 % <<label=seqgamCR,fig=TRUE,echo=FALSE>>=
 % cr.ht.gam<-gam(ht_annual~srHeight_Total+s(cratio),data=annual.gr4)
@@ -597,10 +577,11 @@ The overstory candidate variable with the lowest AIC was trees per acre (TPA). T
   \includegraphics[width=\linewidth]{SEAgam.png}
   \subcaption{GAM of annual height growth vs SEA}\label{fig:seqgamSEA}
 \endminipage\hfill
+\caption{Generalized additive models of annualized height growth vs. TPA and SEA.}
 \end{figure}
 
 
-% \begin{figure} 
+% \begin{figure}
 % \begin{center}
 % <<label=seqgamOSTPA,fig=TRUE,echo=FALSE>>=
 % tpa.ht.gam<-gam(ht_annual~srHeight_Total+cratio+s(TPA.OS),data=annual.gr4)
@@ -617,7 +598,7 @@ The overstory candidate variable with the lowest AIC was trees per acre (TPA). T
 Site metrics of slope, aspect and elevation failed to provide an improvement over the null model. However, when considered together in the slope, aspect and elevation (SEA) interaction model (\cite{Stage2007a}, see Equation \eqref{eq:Eq1}), these terms provided the lowest AIC by a wide margin. The AIC of the site index metric was also quite low but failed to surpass that of the SEA term. The values for the SEA interaction were obtained though fitting only the SEA related coefficients of the $\tau$=.5 model to all small tree records. The GAM for this term shows that an increase in the slope, aspect and elevation term is related to general increase in predicted height increment for most SEA values (and most plots). However, the smooth function shows that for the outer values of SEA, this trend is not linear. 
 
 
-% \begin{figure} 
+% \begin{figure}
 % \begin{center}
 % <<label=seqgamSEA,fig=TRUE,echo=FALSE>>=
 % sea.ht.gam<-gam(ht_annual~srHeight_Total+cratio+TPA.OS+s(SEA.val),data=annual.gr4)
@@ -670,7 +651,7 @@ $cr$ is the crown ratio, $TPA$ is the overstory trees per acre and $S$ is the sl
 % <<label=qr5resid,fig=TRUE,echo=FALSE>>=
 % 
 % 
-% print(xyplot(qr.SI.5$residuals~qr.SI.5$fitted.values,
+% print(xyplot(qr.SI.9$residuals~qr.SI.9$fitted.values,
 %           par.settings = my.settings,
 %           pch = 1,
 %           abline=0,
@@ -710,7 +691,7 @@ The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the varian
 
 
 
-% \begin{figure} 
+% \begin{figure}
 % \begin{center}
 % <<label=sr_init_coef,fig=TRUE,echo=FALSE>>=
 % qr.sum<-summary(qr.SI.all)
@@ -727,7 +708,7 @@ The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the varian
 
 The coefficient plot (Figure \ref{fig:sr_init_coef}) shows that the effect of initial height increases as the specified quantile increases. For the middle range of quantile values ($\tau$=.3-.7), the effect remains within the bounds of the 95\% confidence interval (CI) of the least squares regression estimate (red dotted lines). However, for the two lowest $\tau$ values, the estimate is below the 95\% CI while it is above the CI for the two highest quantiles. This means that the effect of initial height is estimated to be greater for  the trees in the upper portion of the response distribution (i.e. the fastest growing trees). This is in opposition to the least squares estimate which would maintain a moderate, constant effect of initial height for all trees.
 
-% \begin{figure} 
+% \begin{figure}
 % \begin{center}
 % <<label=cr_coef,fig=TRUE,echo=FALSE>>=
 % 
@@ -745,7 +726,7 @@ Similarly, the effect of crown ratio increases as the $\tau$ value increases. Th
 
 
 
-% \begin{figure} 
+% \begin{figure}
 % \begin{center}
 % <<label=os_tpa_coef,fig=TRUE,echo=FALSE>>=
 % 
@@ -811,8 +792,8 @@ Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generat
 \end{figure}
 
 
-% 
-% \begin{figure} 
+
+% \begin{figure}
 % \begin{center}
 % <<label=validres_below4,fig=TRUE,echo=FALSE>>=
 % 
@@ -840,7 +821,7 @@ Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generat
 
 In order to provide higher resolution to the validation, we classified the trees within the validation dataset by initial height (1-4, 4-6, 6+ ft). For the less than 4 ft initial height class, the distribution of annual height growth increments match our expected distribution within the central portion of the response distribution (Figure \ref{fig:validres_below4}). However, far fewer height growth increments were below their $\tau$=.1 predicted height increments. In contrast, far more responses exceeded the $\tau$=9 predicted value than expected. For the shorter trees in the data set (< 4ft), many more than expected exhibited growth surpassing their $\tau$=.9 prediction and far fewer than expected exhibited growth below their $\tau$ = .1 prediction.
 
-% \begin{figure} 
+% \begin{figure}
 % \begin{center}
 % <<label=validres_4_6,fig=TRUE,echo=FALSE>>=
 % annual.gr6.4to6<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
@@ -870,7 +851,7 @@ In order to provide higher resolution to the validation, we classified the trees
 
 Trees in the intermediate height class (4-6 ft initial ht) appear to disproportionately frequently exhibit height growth within the $\tau$=.1.-.5 predicted height growth interval (Figure \ref{fig:validres_4_6}). An approximately equally number of trees appear to be absent from the $\tau$=.5.-.9 quantile interval. However, the expected distribution of height growth is apparent in the extremes of the inter-quantile range of predictions.
 
-% \begin{figure} 
+% \begin{figure}
 % \begin{center}
 % <<label=validres_6,fig=TRUE,echo=FALSE>>=
 % annual.gr6.6<-annual.gr6[annual.gr6$Height_Total>6,]
@@ -906,29 +887,29 @@ When combined across height class, the actual height growth increments conform t
 \begin{table}[!tbp]
 \caption{Chi-squared analysis expected counts, actual counts and p-values by initial height class.}
 \begin{center}
-\begin{tabular}{lllll}
+\begin{tabular}{llllll}
 \hline\hline
-\multicolumn{1}{c}{Initial Height Class}&\multicolumn{1}{c}{Interquantile Interval}&\multicolumn{1}{c}{Expected}&\multicolumn{1}{c}{Actual}&\multicolumn{1}{c}{p-value}\tabularnewline
+&\multicolumn{1}{c}{Initial Height Class}&\multicolumn{1}{c}{Interquantile Interval}&\multicolumn{1}{c}{Expected}&\multicolumn{1}{c}{Observed}&\multicolumn{1}{c}{P.value}\tabularnewline
 \hline
-\textless 4 ft&\textless .10&$ 10.9$&$  2$&$0.000$\tabularnewline
-&0.10-.50&$ 43.6$&$ 41$&$$\tabularnewline
-&0.50-.90&$ 43.6$&$ 43$&$$\tabularnewline
-&\textgreater .90&$ 10.9$&$ 23$&$$\tabularnewline
+&\textless 4 ft&\textless .10&$ 11.4$&$  0$&$0.000$\tabularnewline
+&&0.10-.50&$ 45.6$&$ 42$&$$\tabularnewline
+&&0.50-.90&$ 45.6$&$ 47$&$$\tabularnewline
+&&\textgreater .90&$ 11.4$&$ 25$&$$\tabularnewline
 \hline
-4-6 ft&\textless .10&$  8.5$&$ 11$&$0.133$\tabularnewline
-&0.10-.50&$ 34.0$&$ 42$&$$\tabularnewline
-&0.50-.90&$ 34.0$&$ 24$&$$\tabularnewline
-&\textgreater .90&$  8.5$&$  8$&$$\tabularnewline
+&4-6 ft&\textless .10&$  9.2$&$ 14$&$0.139$\tabularnewline
+&&0.10-.50&$ 36.8$&$ 42$&$$\tabularnewline
+&&0.50-.90&$ 36.8$&$ 28$&$$\tabularnewline
+&&\textgreater .90&$  9.2$&$  8$&$$\tabularnewline
 \hline
-\textgreater 6 ft&\textless .10&$ 26.8$&$ 39$&$0.067$\tabularnewline
-&0.10-.50&$107.2$&$105$&$$\tabularnewline
-&0.50-.90&$107.2$&$ 95$&$$\tabularnewline
-&\textgreater .90&$ 26.8$&$ 29$&$$\tabularnewline
+&\textgreater 6 ft&\textless .10&$ 35.6$&$ 57$&$0.001$\tabularnewline
+&&0.10-.50&$142.4$&$131$&$$\tabularnewline
+&&0.50-.90&$142.4$&$127$&$$\tabularnewline
+&&\textgreater .90&$ 35.6$&$ 41$&$$\tabularnewline
 \hline
-All Height Classes&\textless .10&$ 46.2$&$ 52$&$0.052$\tabularnewline
-&0.10-.50&$184.8$&$188$&$$\tabularnewline
-&0.50-.90&$184.8$&$162$&$$\tabularnewline
-&\textgreater .90&$ 46.2$&$ 60$&$$\tabularnewline
+&All Height Classes&\textless .10&$ 56.2$&$ 96$&$0.052$\tabularnewline
+&&0.10-.50&$224.8$&$215$&$$\tabularnewline
+&&0.50-.90&$224.8$&$202$&$$\tabularnewline
+&&\textgreater .90&$ 56.2$&$ 49$&$$\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}

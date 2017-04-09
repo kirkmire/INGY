@@ -13,11 +13,14 @@ merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Year_Measurement==merged
 #Removes all non-PIPO tree records
 merged_stagm_stag<-merged_stagm_stag[merged_stagm_stag$Species=="PIPO",]
 
-#Removes all Dead tree records
-merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Damage=="DEAD",]
-merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Damage=="D",]
-merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Damage=="DT",]
+#Removes tree record that experienced specified damage
+damageRemoved<-c("DEAD","D","DT","DT AD")
+merged_stagm_stag<-merged_stagm_stag[!merged_stagm_stag$Damage %in% damageRemoved,]
+
 merged_stagm_stag<-merged_stagm_stag[(merged_stagm_stag$Height_Total!=0 & !is.na(merged_stagm_stag$Height_Total)),]
+
+
+
 
 #remove any for height total missing/0
 
@@ -45,7 +48,7 @@ colnames(randstp)[4]<-"STP"
 
 
 merged_stagm_stag<-merge(randstp,merged_stagm_stag,by=c("Installation","Plot","STP"))
-merged_stagm_stag<-merged_stagm_stag[! merged_stagm_stag$Installation %in% drp60,]
+
 
 #now just need to assign this to mergeed_stag_stagmdataframe, pair up by Inst, Plot and STP
 
@@ -115,6 +118,7 @@ for(i in 1:nrow(merged_stagm_stag)){
 merged_stagm_stag$ht_annual[is.na(merged_stagm_stag$ht_annual)]<- -999     
 merged_stagm_stag<-merged_stagm_stag[!(merged_stagm_stag$ht_annual==-999),]
 
+
 # keep the right growth periods
 keep <- unique(timeline[,c("Installation","Year_Measurement")])
 keep <- keep[!is.na(keep$Year_Measurement),]
@@ -141,7 +145,7 @@ annual.gr<-annual.gr[!annual.gr$ht_annual<0,]
 
 
 # Look at damage codes
-# table(droplevels(annual.gr$Damage)) # how many of these codes can you decipher?
+table(droplevels(annual.gr$Damage)) # how many of these codes can you decipher?
 #SW=sweep
 #FT=forked top
 #FUT= damaged (f**ed up) top catchall
@@ -158,10 +162,10 @@ annual.gr<-annual.gr[!annual.gr$ht_annual<0,]
 # 
 # annual.gr[annual.gr$Damage=="D",] # dead? remove
 # #will look up
-# tempdf<-annual.gr[grep("RT",annual.gr$Damage,invert=F),] # dead top?
+tempdf<-annual.gr[grep("RT",annual.gr$Damage,invert=F),] # dead top?
 # 
 # 
-# table(droplevels(tempdf$Damage)) # how many of these codes can you decipher?
+table(droplevels(tempdf$Damage)) # how many of these codes can you decipher?
 # 
 # 
 # hist(annual.gr$ht_annual)

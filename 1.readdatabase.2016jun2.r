@@ -165,7 +165,7 @@ drp60<-c(drp,lt60)
 # meas.cat<-aggregate(tree.counts$counts, by=list(Category=tree.counts$Freq), FUN=sum)
 # 
 # colnames(meas.cat)<-c("Number of Observations","Number of Trees")
-# 
+
 # library(Hmisc)
 # latex(meas.cat,file="",rowname = NULL)
 

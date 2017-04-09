@@ -19,11 +19,11 @@
 # colnames(SQ.aic)<-c("Variable", "n", "AIC")
 # aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
 # 
-
+# 
 # aic.lists$AIC<-round(aic.lists$AIC,1)
 # aic.lists$AIC<-round(aic.lists$AIC,2)
-
-#Gonna need to adjust this...
+# 
+# #Gonna need to adjust this...
 # final.aic<-data.frame(matrix("", nrow = 18, ncol = 9),stringsAsFactors=F)
 # final.aic$X1[1:9]<-as.character(aic.lists$Variable[1:9])
 # final.aic$X2[1:9]<-aic.lists$n[1:9]
@@ -42,14 +42,14 @@
 # final.aic$X9[6:10]<-aic.lists$AIC[33:37]
 # 
 # colnames(final.aic)<-c("Variable","n","AIC","Variable","n","AIC","Variable","n","AIC")
-
-
 # 
-# #The code below will produce output that can then be copied over to the .tex file
-# # library(Hmisc)
+# 
 # # 
-# latex(final.aic, file="",rowname = "")          
-# 
+# # #The code below will produce output that can then be copied over to the .tex file
+#  library(Hmisc)
+# #
+# latex(final.aic, file="",rowname = "")
+
 # 
 # 
 # qr.sum<-data.frame(summary(qr.SI.1))
@@ -290,6 +290,7 @@ for(i in 1:nrow(annual.gr4)){
 # x.table1<-t(aggregate(annual.gr6.lessthan4$counts, by=list(Category=annual.gr6.lessthan4$response.cat), FUN=sum))
 # x.table1<-x.table1["x",]
 # x.table1<-as.numeric(x.table1)
+# x.table1<-c(x.table1,0)
 # 
 # x.table2<-t(aggregate(annual.gr6.4to6$counts, by=list(Category=annual.gr6.4to6$response.cat), FUN=sum))
 # x.table2<-x.table2["x",]
@@ -305,22 +306,22 @@ for(i in 1:nrow(annual.gr4)){
 # 
 # 
 # xsq1<-chisq.test(x.table1,p=c(.4,.4,.1,.1))
-# p=.0001
+# xsq1$observed
 # xsq2<-chisq.test(x.table2,p=c(.4,.4,.1,.1))
-# xsq2
+# xsq2$observed
 # xsq3<-chisq.test(x.table3,p=c(.4,.4,.1,.1))
-# xsq3
-
+# xsq3$observed
+# 
 # exp.tab<-rbind(xsq1$expected,xsq2$expected,xsq3$expected)
 # rownames(exp.tab)<-c("<4","4-6",">6")
 # colnames(exp.tab)<-c(".1-.5",".5-.9","<.1",">.9")
 # 
 # 
-#totals<-c(sum(brkdwn[,1]),sum(brkdwn[,2]),sum(brkdwn[,3]),sum(brkdwn[,4]))
+# totals<-c(sum(brkdwn[,1]),sum(brkdwn[,2]),sum(brkdwn[,3]),sum(brkdwn[,4]))
 # tot.test<-chisq.test(totals,p=c(.4,.4,.1,.1))
 # 
 # summary(tot.test)
-# tot.test$expected
+# tot.test$observed
 # 
 # chisq<-cbind(xsq1$p.value,xsq2$p.value,xsq3$p.value,tot.test$p.value)
 # numb.trees.ht.class<-c(sum(x.table1),sum(x.table2),sum(x.table3),sum(x.table1,x.table2,x.table3))
@@ -335,7 +336,7 @@ for(i in 1:nrow(annual.gr4)){
 # #
 # #
 # # #The code below will produce output that can then be copied over to the .tex file
-
+# 
 # ptab<-read.csv("P_table.csv")
 # library(Hmisc)
 # #

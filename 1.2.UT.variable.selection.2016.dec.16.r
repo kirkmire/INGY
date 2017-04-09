@@ -85,6 +85,14 @@ for(i in 1:nrow(annual.gr)){
 annual.gr$CrownLength<-annual.gr$Height_Total-annual.gr$Height_CrownBase
 
 
+#Creates Crown Ratio Variable
+annual.gr$cratio<- annual.gr$CrownLength/annual.gr$Height_Total
+
+#Removes trees with crown ratio <0
+
+annual.gr <- annual.gr[!is.na(annual.gr$cratio) & annual.gr$cratio>=0,]
+
+
 #Substitute numeric height classes for character 
 #headings for ease of modeling
 colnames(annual.gr)[substring(colnames(annual.gr),1,6)=="Count."]<-c("other","two","four","six","eight","ten","twelve","fourteen")
@@ -92,8 +100,7 @@ colnames(annual.gr)[substring(colnames(annual.gr),1,6)=="Count."]<-c("other","tw
 annual.gr$srHeight_Total<-sqrt(annual.gr$Height_Total)
 
 
-###GAM Take1###
-library(mgcv)
+
 
 #Selects installations of similar overstory basal area and SI
 #see figure
@@ -106,19 +113,13 @@ annual.gr2<-annual.gr[annual.gr$Installation %in% sim, ]
 annual.gr2<-annual.gr2[annual.gr2$Treatment %in% "GE", ]
 
 
-#Removes 6th stp plots from analysis
+#Removes 1/6th of stp plots from analysis
 annual.gr2<-annual.gr2[!annual.gr2$STP_rand==6,]
 
-#Creates Crown Length Variable
-annual.gr2$CrownLength<-annual.gr2$Height_Total-annual.gr2$Height_CrownBase
 
-#Creates Crown Ratio Variable
-annual.gr2$cratio<- annual.gr2$CrownLength/annual.gr2$Height_Total
 
-#Removes trees with crown ratio <0
-
-annual.gr2 <- annual.gr2[!is.na(annual.gr2$cratio) & annual.gr2$cratio>=0,]
-
+###GAMs###
+# library(mgcv)
 # #GAM for Crownwidth ht class
 # gam.stCW<-gam(ht_annual~s(srHeight_Total)+s(CrownWidth),data=annual.gr2, family=gaussian(link="identity"))
 # summary(gam.stCW)
@@ -246,6 +247,9 @@ annual.gr2 <- annual.gr2[!is.na(annual.gr2$cratio) & annual.gr2$cratio>=0,]
 # plot(gam.stcr,residuals=T,se=T,pch=".",ask=F,cex.lab=1.5)
 # 
 
+#Removes all Dead tree records (already done in annualization routine)
+# annual.gr2<-annual.gr2[!annual.gr2$Damage %in% damageRemoved]
+# annual.gr2<-annual.gr2[(annual.gr2$Height_Total!=0 & !is.na(annual.gr2$Height_Total)),]
 
 #####Quantile Regression
 library(quantreg)

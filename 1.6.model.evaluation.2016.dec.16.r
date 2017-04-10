@@ -79,6 +79,8 @@
 # finalcoef$X9[6:10]<-aic.lists$AIC[27:31]
 # 
 
+
+
 library(quantreg)
 
 
@@ -341,7 +343,7 @@ for(i in 1:nrow(annual.gr4)){
 # library(Hmisc)
 # #
 # latex(ptab,file="",rowname = "")
-# # #
+# #
 # 
 # #
 # # #The code below will produce output that can then be copied over to the .tex file

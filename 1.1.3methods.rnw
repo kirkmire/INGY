@@ -300,7 +300,7 @@ $i$ is the unique tree,~$t$ is year, &~$j$ is the measurement period
 
 
 
-% \begin{figure} 
+% \begin{figure}
 % \begin{center}
 % <<label=siteOverstory,fig=TRUE,echo=FALSE>>=
 % 
@@ -331,7 +331,7 @@ $i$ is the unique tree,~$t$ is year, &~$j$ is the measurement period
 %   sinst1$minOSBA[i]<-minOSBA.func(sinst1$Installation[i])
 % }
 % 
-% sim<-c("EM","BC","TJ","RM","CR","TC")
+% sim<-c("*EM","*BC","*TJ","*RM","*CR","*TC")
 % sim<-as.factor(sim)
 % 
 % simInst<-sinst1[sinst1$Installation %in% sim,]

@@ -32,18 +32,18 @@ The polar plot above (Figure \ref{fig:polar_plot}) describes the elevation and d
 \begin{figure} 
 \begin{center}
     \includegraphics{SI_OSBA_inst.jpg}
-    \caption{Site Index and Initial Basal Area per Acre (ft$^2$/ac)\label{fig:SI.vs.BAPA}}
+    \caption{Site index and initial basal area per acre (ft$^2$/ac).\label{fig:SI.vs.BAPA}}
 \end{center}
 \end{figure}
 
-Red
-There appears to be a group of six installations with similarly low overstory retention levels and high site index values (see red colored installations in Figure \ref{fig:SI.vs.BAPA}). These installations were used to develop the understory model since they were so alike in overstory and site productivity. In the following figures, these installations will be identified by a * preceding the name of the installation (ex: *EM).
+The study captured a wide range of productivity and overstory retention levels from low site and low retention to high site and high retention (Figure \ref{fig:SI.vs.BAPA}). However, there is a distinct concentration of installations with similarly low overstory retention levels and high site index values. These six installations (colored red) were selected to develop the understory model since they were so alike in overstory and site characteristics. In the following figures, these installations will be identified by a * preceding the name of the installation (ex: *EM). There is also a noticeable gap where there are no intermediate retained overstory sites (20-60 (ft$^2$/ac)) that have a low site index.
 
 \begin{figure} 
 \begin{center}
 <<label=os_tpa_inst,fig=TRUE,width=8,height=8,echo=FALSE>>=
 
 library(lattice)
+
 
 agg.over.data.TPA<-agg.over.data.TPA[!agg.over.data.TPA$Installation %in% drp60,]
 
@@ -130,7 +130,7 @@ This number of tagged ponderosa pine trees at initiation is not ultimately refle
 
 
 \begin{table}\label{tab:tree.counts}
-\caption{Number of Observations Per Individual Small Tagged Tree}
+\caption{Number of tree records from each unique tree.}
 \begin{center}
 \begin{tabular}{lll}
 \hline\hline
@@ -189,7 +189,7 @@ print(xyplot(dmgStagm$x~dmgStagm$Year| dmgStagm$Installation,
 \caption{Small tree records removed due to damage or mortality over time.\label{fig:damageCodes}}
 \end{figure}
 
-The dead, dead top or animal damaged trees were removed from the model whether the damage was recorded at the begining or end of a given interval (see Figure \ref{fig:damageCodes}). Most installations exhibited similarly low levels of mortality or other specified damage. The number of tree records removed generally does not exceed 20 trees. However, some installations such as KC, RM and CR showed high levels of mortality and damage, especially in the later years of the study. Unique trees may appear across mulitple years. Any reductions in the number of tree records removed across measurement years is attributed to an improvement in tree health or an inability to locate and categorize the tree as dead or damaged.
+The dead, dead top or animal damaged trees were removed from the model whether the damage was recorded at the beginning or end of a given interval (see Figure \ref{fig:damageCodes}). Most installations exhibited similarly low levels of mortality or other specified damage. The number of tree records removed generally does not exceed 20 trees. However, some installations such as KC, RM and CR showed high levels of mortality and damage, especially in the later years of the study. Unique trees may appear across multiple years. Any reductions in the number of tree records removed across measurement years is attributed to an improvement in tree health or an inability to locate and categorize the tree as dead or damaged.
 
 \begin{figure}
 \begin{center}
@@ -417,11 +417,11 @@ Annual height growth increment tends to increase with initial height (Figure \re
 \begin{figure}[!htb]
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{deltaH_cratio.png}
-  \subcaption{Annualized height growth increment (ft) vs. crown ratio}\label{fig:delta_ht_cratio}
+  \subcaption{Annualized height growth increment (ft) vs. crown ratio.}\label{fig:delta_ht_cratio}
 \endminipage\hfill
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{cratio_ht_total.png}
-  \subcaption{Crown Ratio vs. Initial height (ft)}\label{fig:init_ht_cratio}
+  \subcaption{Crown ratio vs. initial height (ft).}\label{fig:init_ht_cratio}
 \endminipage\hfill
 \caption{Scatterplots of small tree growth characteristics.}
 \end{figure}
@@ -483,7 +483,7 @@ As initial height increases, the lower limit of the crown ratio response increas
 \subsection{Variable Selection}
 
 \begin{table}[!tbp]
-\caption{Akaike Information Criteria for each candidate variable by competition category for the $\tau$=.5 quantile regression\label{tab:AIC}}
+\caption{Akaike Information Criteria for each candidate variable by competition category for the $\tau$=.5 quantile regression.\label{tab:AIC}}
 \begin{center}
 \begin{tabular}{llllllllll}
 \hline\hline
@@ -571,11 +571,11 @@ The overstory candidate variable with the lowest AIC was trees per acre (TPA). T
 \begin{figure}[!htb]
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{TPAgam.png}
-  \subcaption{GAM of annual height growth vs. TPA}\label{seqgamOSTPA}
+  \subcaption{GAM of annual height growth vs. TPA.}\label{seqgamOSTPA}
 \endminipage\hfill
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{SEAgam.png}
-  \subcaption{GAM of annual height growth vs SEA}\label{fig:seqgamSEA}
+  \subcaption{GAM of annual height growth vs SEA.}\label{fig:seqgamSEA}
 \endminipage\hfill
 \caption{Generalized additive models of annualized height growth vs. TPA and SEA.}
 \end{figure}
@@ -616,12 +616,10 @@ Site metrics of slope, aspect and elevation failed to provide an improvement ove
 
 The resultant model is specified as follows:
 
-
 \begin{align}\label{eq:Eq3.1}
 
 h_{\tau} =& b_{0,\tau}\sqrt{i}+b_{cr,\tau}cr 
 +b_{TPA,\tau}TPA+b_{S,\tau}S \qquad,
-
 \end{align}
 \noindent where $h$ is the predicted growth response, $i$ is the initial height in feet, 
 $cr$ is the crown ratio, $TPA$ is the overstory trees per acre and $S$ is the slope, aspect and elevation term
@@ -634,16 +632,17 @@ $cr$ is the crown ratio, $TPA$ is the overstory trees per acre and $S$ is the sl
 \begin{figure}[!htb]
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{qrsi1resid2.png}
-  \subcaption{$\tau$=.1 Residuals}\label{fig:qr1resid}
+  \subcaption{$\tau$=.1 residuals.}\label{fig:qr1resid}
 \endminipage\hfill
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{qrsi5resid2.png}
-  \subcaption{$\tau$=.5 Residuals}\label{fig:qr5resid}
+  \subcaption{$\tau$=.5 residuals.}\label{fig:qr5resid}
 \endminipage\hfill
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{qrsi9resid2.png}
-  \subcaption{$\tau$=.9 Residuals}\label{fig:qr9resid}
+  \subcaption{$\tau$=.9 residuals.}\label{fig:qr9resid}
 \endminipage
+\caption{Residual plots of predicted height growth increment (ft) from $\tau$=1,5 and 9 regression surfaces.}
 \end{figure}
 
 % \begin{figure}
@@ -677,16 +676,17 @@ The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the varian
 \begin{figure}[!htb]
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{init_ht_coef.png}
-  \subcaption{Coefficient Plot of Initial Height}\label{fig:sr_init_coef}
+  \subcaption{Coefficient plot of initial height.}\label{fig:sr_init_coef}
 \endminipage\hfill
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{cratio_coef.png}
-  \subcaption{Coefficient Plot of Crown Ratio}\label{fig:cr_coef}
+  \subcaption{Coefficient plot of crown ratio.}\label{fig:cr_coef}
 \endminipage\hfill
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{tpa_coef.png}
-  \subcaption{Coefficient Plot of TPA}\label{fig:os_tpa_coef}
+  \subcaption{Coefficient plot of TPA.}\label{fig:os_tpa_coef}
 \endminipage
+\caption{Quantile regression coefficient estimates and 95\% confidence intervals accross $\tau$=1-9.}
 \end{figure}
 
 
@@ -773,22 +773,23 @@ print(barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
 \caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres}}
 \end{figure}
 
-Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generated for the witheld data (1 randomly selected small tree plot at each plot). The actual height growth increment was then binned according to where it fell among the quantile regression predicted height growth increments (<.10,.1-.5,.5-.9 or >.9). Visually, the actual height growth increment are distributed approximately as expected with .4 falling between the .1-.5 and ,5-.9 $\tau$ predictions and .1 falling below the .1 $\tau$ and above the .9 $\tau$ predicted height (Figure \ref{fig:validres}). 
+Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generated for the witheld data (1 randomly selected small tree plot at each plot). The actual height growth increment was then binned according to where it fell among the quantile regression predicted height growth increments (<.10, .1-.5, .5-.9 or >.9). Visually, the actual height growth increment are distributed approximately as expected with .4 falling between the .1-.5 and, 5-.9 $\tau$ predictions and .1 falling below the .1 $\tau$ and above the .9 $\tau$ predicted height (Figure \ref{fig:validres}). 
 
 
 \begin{figure}[!htb]
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{lessthan4.png}
-  \subcaption{Witheld tree height growth increments sorted by predicted height growth increment quantiles}\label{fig:validres_below4}
+  \subcaption{Initial Height less than 4 ft.}\label{fig:validres_below4}
 \endminipage\hfill
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{between4and6.png}
-  \subcaption{Witheld tree height growth increments sorted by predicted height growth increment quantiles}\label{fig:validres_4_6}
+  \subcaption{Initial Height between 4 and 6 ft.}\label{fig:validres_4_6}
 \endminipage\hfill
 \minipage{0.32\textwidth}
   \includegraphics[width=\linewidth]{greaterthan6.png}
-  \subcaption{Witheld tree height growth increments sorted by predicted height growth increment quantiles}\label{fig:validres_6}
+  \subcaption{Initial Height > 6 ft.}\label{fig:validres_6}
 \endminipage
+\caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles intervals and initial height classes.}
 \end{figure}
 
 
@@ -819,7 +820,7 @@ Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generat
 % \caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres_below4}}
 % \end{figure}
 
-In order to provide higher resolution to the validation, we classified the trees within the validation dataset by initial height (1-4, 4-6, 6+ ft). For the less than 4 ft initial height class, the distribution of annual height growth increments match our expected distribution within the central portion of the response distribution (Figure \ref{fig:validres_below4}). However, far fewer height growth increments were below their $\tau$=.1 predicted height increments. In contrast, far more responses exceeded the $\tau$=9 predicted value than expected. For the shorter trees in the data set (< 4ft), many more than expected exhibited growth surpassing their $\tau$=.9 prediction and far fewer than expected exhibited growth below their $\tau$ = .1 prediction.
+In order to provide higher resolution to the validation, we classified the trees within the validation dataset by initial height (1-4, 4-6, 6+ ft). For the less than 4 ft initial height class, the distribution of annual height growth increments match our expected distribution within the central portion of the response distribution (Figure \ref{fig:validres_below4}). However, no height growth increments were below their $\tau$=.1 predicted height increments. In contrast, far more responses exceeded the $\tau$=9 predicted value than expected. For the shorter trees in the data set (< 4ft), many more than expected exhibited growth surpassing their $\tau$=.9 prediction and none exhibited growth below their $\tau$ = .1 prediction.
 
 % \begin{figure}
 % \begin{center}
@@ -849,7 +850,7 @@ In order to provide higher resolution to the validation, we classified the trees
 % \caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres_4_6}}
 % \end{figure}
 
-Trees in the intermediate height class (4-6 ft initial ht) appear to disproportionately frequently exhibit height growth within the $\tau$=.1.-.5 predicted height growth interval (Figure \ref{fig:validres_4_6}). An approximately equally number of trees appear to be absent from the $\tau$=.5.-.9 quantile interval. However, the expected distribution of height growth is apparent in the extremes of the inter-quantile range of predictions.
+Trees in the intermediate height class (4-6 ft initial ht) appear to disproportionately frequently exhibit height growth within the $\tau$=.1.-.5 predicted height growth interval (Figure \ref{fig:validres_4_6}). An approximately equally number of trees appear to be absent from the $\tau$=.5.-.9 quantile interval. A similar pattern is observed between the extremes of the predicted height growth intervals; more trees grew below their .10 prediction and fewer grew above their .90 prediction. In the 4-6 ft height class, trees generally grew less than their median prediction of height growth. 
 
 % \begin{figure}
 % \begin{center}
@@ -877,11 +878,11 @@ Trees in the intermediate height class (4-6 ft initial ht) appear to disproporti
 % \caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres_6}}
 % \end{figure}
 
-The trees within the tallest initial height class (6+ ft) appear to have a distribution of height growth increments within inter-quantile bins that conforms very nearly to the expected distribution. 
+The trees within the tallest initial height class (6+ ft) appear to have a distribution of height growth increments within inter-quantile bins that conforms very nearly to the expected distribution. Slightly more trees appear in the extremes of the height growth quantile intervals than in the center of the distribution. 
 
-The results from the chi-squared analysis below (Table \ref{tab:chisqtab}) provide a statistical comparison between the actual and expected distribution of height growth increments across the inter-quantile intervals. The p-value for the overall chi-squared test (all height classes) was .052 which fails to provide sufficient evidence to reject the null hypothesis (that the distributions are equal) at the $\alpha$=.05 significance level. However, the p-value is quite low for trees in the less than four feet initial height class (p<.0002), meaning that there is strong evidence that the expected distribution does not equal that predicted by the quantile regression. The chi-squared test for the intermediate initial height class (4-6 ft) produced a p-value=.13 which fails to reject the null hypothesis. The tallest height class (6+ feet) had a p-value=.067 which also fails to reject the null hypothesis at the $\alpha$=.05 significance level. 
+The results from the chi-squared analysis below (Table \ref{tab:chisqtab}) provide a statistical comparison between the actual and expected distribution of height growth increments across the inter-quantile intervals. The p-value for the overall chi-squared test (all height classes) was .000 which provides sufficient evidence to reject the null hypothesis (that the distributions are equal) at the $\alpha$=.05 significance level. However, the p-value is quite low for trees in the less than four feet initial height class (p<.0002), meaning that there is strong evidence that the expected distribution does not equal that predicted by the quantile regression. The chi-squared test for the intermediate initial height class (4-6 ft) produced a p-value=.139 which fails to reject the null hypothesis. The tallest height class (6+ feet) had a p-value=.001 which rejects the null hypothesis at the $\alpha$=.05 significance level. 
 
-When combined across height class, the actual height growth increments conform to our expectations provided by the quantile regression predictions. When classified separately the trees by initial height, the smallest class of tree (1-4 ft) produces a distribution of height growth increments across inter-quantile bins that does not equal our expectations ($\alpha$=.05).
+When classified separately by initial height, only the intermediate class of tree (4-6 ft) produces a distribution of height growth increments across inter-quantile bins that meets our expectations (p=.139). When combined across height class, the actual height growth increments visually conform to our expectations provided by the quantile regression predictions but fail to provide a distribution that is statistically equal to our expectations. 
 
 
 \begin{table}[!tbp]
@@ -906,7 +907,7 @@ When combined across height class, the actual height growth increments conform t
 &&0.50-.90&$142.4$&$127$&$$\tabularnewline
 &&\textgreater .90&$ 35.6$&$ 41$&$$\tabularnewline
 \hline
-&All Height Classes&\textless .10&$ 56.2$&$ 96$&$0.052$\tabularnewline
+&All Height Classes&\textless .10&$ 56.2$&$ 96$&$0.000$\tabularnewline
 &&0.10-.50&$224.8$&$215$&$$\tabularnewline
 &&0.50-.90&$224.8$&$202$&$$\tabularnewline
 &&\textgreater .90&$ 56.2$&$ 49$&$$\tabularnewline

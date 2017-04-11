@@ -614,12 +614,12 @@ Site metrics of slope, aspect and elevation failed to provide an improvement ove
 
 
 The resultant model is specified as follows:
-
+%
 \begin{align}\label{eq:Eq3.1}
-
 h_{\tau} =& b_{0,\tau}\sqrt{i}+b_{cr,\tau}cr 
 +b_{TPA,\tau}TPA+b_{S,\tau}S \qquad,
 \end{align}
+%
 \noindent where $h$ is the predicted growth response, $i$ is the initial height in feet, 
 $cr$ is the crown ratio, $TPA$ is the overstory trees per acre and $S$ is the slope, aspect and elevation term
 

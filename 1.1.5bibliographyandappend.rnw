@@ -146,7 +146,8 @@ All analyses were performed using the R statistical software \Sexpr{R.Version()$
 \label{appendix:pred_var}\\
 
 
-\begin{table}[!htb]
+
+\begin{table}[!tbp]
 \begin{center}
 \begin{tabular}{lllll}
 \hline\hline
@@ -158,35 +159,38 @@ Initial height&ft&tree x interval&h\tabularnewline
 Crown length&ft&tree x interval&cl\tabularnewline
 Crown width&ft&tree x interval&cw\tabularnewline
 Crown ratio&\%&tree x interval&cr\tabularnewline
-Basal diameter&in&tree x interval&bd\tabularnewline
-DBH&in &tree x interval&dbh\tabularnewline
-Trees per acre overall&\#/ac&tree x interval&stpa\tabularnewline
-Trees per acre by height class&\#/ac&STP x interval&stpa1,3,5...\tabularnewline
-Trees per acre  \textgreater  15 ft in ht&\#/ac&STP x interval&stpa15+\tabularnewline
-Trees per acre above subject tree&\#/ac&tree x interval&tpa.grt\tabularnewline
+Basal diameter&in&tree x interval&BD\tabularnewline
+DBH&in &tree x interval&DBH\tabularnewline
+Trees per acre overall&#/ac&tree x interval&SmallTPA\tabularnewline
+Trees per acre  \textgreater  15 ft in ht&#/ac&STP x interval&Trees15+\tabularnewline
+Trees per acre above subject tree&#/ac&tree x interval&TGT\tabularnewline
 \hline
 \textbf{Non-tree Vegetation}&&&\tabularnewline
 \hline
-Forb depth in 1m$^2$ q&ft&STP x interval&f.depth\tabularnewline
-Shrub depth in 1m$^2$ q&ft&STP x interval&ls.depth\tabularnewline
-High shrub depth in 1m$^2$ q&ft&STP x interval&hs.depth\tabularnewline
-\% Cover forb&\%&STP x interval&f.cov\tabularnewline
-\% Cover low shrub&\%&STP x interval&ls.cov\tabularnewline
-\% Cover high shrub&\%&STP x interval&hs.cov\tabularnewline
-\% Cover combined veg&\%&STP x interval&polv.cov\tabularnewline
-Transect grass depth&ft&transect x interval&g.tra.depth\tabularnewline
-Transect forb depth&ft&transect x interval&f.tran.depth\tabularnewline
-Transect low shrub depth&ft&transect x interval&ls.tran.depth\tabularnewline
-Transect high shrub depth&ft &transect x interval&hs.tran.depth\tabularnewline
-Grass transect cover&\%&transect x interval&g.tran.cov\tabularnewline
-Tallest veg - subject tree (1m$^2$)&ft&tree x interval&1m.veg.diff\tabularnewline
-Tallest veg - subject tree (transect)&ft&tree x interval&tran.veg.diff\tabularnewline
+Forb depth in 1m$^2$ q&ft&STP x interval&F.depth\tabularnewline
+Low shrub depth in 1m$^2$ q&ft&STP x interval&LS.depth\tabularnewline
+High shrub depth in 1m$^2$ q&ft&STP x interval&HS.depth\tabularnewline
+Forb volume in 1m2 q&m$^2$*ft&STP x interval&F.vol\tabularnewline
+Low shrub volume in 1m$^2$ q&m2*ft&STP x interval&LS.vol\tabularnewline
+High shrub volume in 1m$^2$ q &m2*ft&STP x interval&HS.vol\tabularnewline
+\% Cover forb&\%&STP x interval&F.cov\tabularnewline
+\% Cover low shrub&\%&STP x interval&LS.cov\tabularnewline
+\% Cover high shrub&\%&STP x interval&HS.cov\tabularnewline
+\% Cover combined veg&\%&STP x interval&POLV.cov\tabularnewline
+Transect grass depth&ft&transect x interval&G.tran.depth\tabularnewline
+Transect forb depth&ft&transect x interval&F.tran.depth\tabularnewline
+Transect low shrub depth&ft&transect x interval&LS.tran.depth\tabularnewline
+Transect high shrub depth&ft &transect x interval&HS.tran.depth\tabularnewline
+Grass transect cover&\%&transect x interval&G.tran.cov\tabularnewline
+Tallest veg - subject tree (1m2)&ft&tree x interval&max.vg.diff.1m\tabularnewline
+Tallest veg - subject tree (transect)&ft&tree x interval&max.vg.diff.tr\tabularnewline
 \hline
 \textbf{Overstory}&&&\tabularnewline
 \hline
-Trees per acre&\#/ac&plot x interval&tpa\tabularnewline
+Trees per acre&#/ac&plot x interval&tpa\tabularnewline
 Basal area per acre&ft$^2$/ac&plot x interval&bapa\tabularnewline
 Crown area per acre&\%&plot x interval&capa\tabularnewline
+Stand Density Index&&plot x interval&SDI\tabularnewline
 \hline
 \textbf{Site}&&&\tabularnewline
 \hline
@@ -194,11 +198,10 @@ Slope&\%&plot &s\tabularnewline
 Elevation&m&plot&el\tabularnewline
 Aspect&deg. N&plot&asp\tabularnewline
 Site index&ft&installation&SI\tabularnewline
-Slope, aspect, elevation term&?&plot&S\tabularnewline
+Slope, aspect, elevation term&?&plot&SEA, S\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}
-
 
 
 \newpage

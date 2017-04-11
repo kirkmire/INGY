@@ -166,8 +166,9 @@ drp60<-c(drp,lt60)
 # 
 # colnames(meas.cat)<-c("Number of Observations","Number of Trees")
 
+# pred<-read.csv("pred.table.csv")
 # library(Hmisc)
-# latex(meas.cat,file="",rowname = NULL)
+# latex(pred,file="",rowname = NULL)
 
 
 

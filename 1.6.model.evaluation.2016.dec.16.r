@@ -12,14 +12,14 @@
 
 
 
-#combines all aic.lists into one dataframe
+# #combines all aic.lists into one dataframe
 # colnames(UV.aic)<-c("Variable", "n", "AIC")
 # colnames(UT.aic)<-c("Variable", "n", "AIC")
 # colnames(OS.aic)<-c("Variable", "n", "AIC")
 # colnames(SQ.aic)<-c("Variable", "n", "AIC")
 # aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
-# 
-# 
+# #
+# #
 # aic.lists$AIC<-round(aic.lists$AIC,1)
 # aic.lists$AIC<-round(aic.lists$AIC,2)
 # 
@@ -34,28 +34,28 @@
 # final.aic$X7[1:5]<-as.character(aic.lists$Variable[28:32])
 # final.aic$X8[1:5]<-aic.lists$n[28:32]
 # final.aic$X9[1:5]<-aic.lists$AIC[28:32]
-# final.aic$X7[5]<-"Site"
-# final.aic$X8[5]<-"n"
-# final.aic$X9[5]<-"AIC"
-# final.aic$X7[6:10]<-as.character(aic.lists$Variable[33:37])
-# final.aic$X8[6:10]<-aic.lists$n[33:37]
-# final.aic$X9[6:10]<-aic.lists$AIC[33:37]
-# 
-# colnames(final.aic)<-c("Variable","n","AIC","Variable","n","AIC","Variable","n","AIC")
-# 
-# 
-# # 
-# # #The code below will produce output that can then be copied over to the .tex file
-#  library(Hmisc)
+# final.aic$X7[6]<-"Site"
+# final.aic$X8[6]<-"n"
+# final.aic$X9[6]<-"AIC"
+# final.aic$X7[7:11]<-as.character(aic.lists$Variable[33:37])
+# final.aic$X8[7:11]<-aic.lists$n[33:37]
+# final.aic$X9[7:11]<-aic.lists$AIC[33:37]
 # #
+# colnames(final.aic)<-c("Variable","n","AIC","Variable","n","AIC","Variable","n","AIC")
+# #
+# #
+# # #
+# # # #The code below will produce output that can then be copied over to the .tex file
+#  library(Hmisc)
+# # #
 # latex(final.aic, file="",rowname = "")
 
-# 
-# 
+#
+#
 # qr.sum<-data.frame(summary(qr.SI.1))
-# 
+#
 # latex(coef9,file="")
-# 
+#
 # coef1<-data.frame(coef(qr.SI.1))
 # coef5<-data.frame(coef(qr.SI.5))
 # coef9<-data.frame(coef(qr.SI.9))

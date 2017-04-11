@@ -282,7 +282,7 @@ print(barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, g
 
 @
 \end{center}
-\caption{Plot vegetation volumes by herbicide treatment (GE = multiple applications, 1X = one time application, CTRL = no herbicide)\label{fig:vegVol}}
+\caption{Plot vegetation volumes by herbicide treatment at the start of the measurement period (GE = multiple applications, 1X = one time application, CTRL = no herbicide).\label{fig:vegVol}}
 \end{figure}
 
 
@@ -414,17 +414,17 @@ Annual height growth increment tends to increase with initial height (Figure \re
  
 
 
-\begin{figure}[!htb]
-\minipage{0.48\textwidth}
-  \includegraphics[width=\linewidth]{deltaH_cratio.png}
-  \subcaption{Annualized height growth increment (ft) vs. crown ratio.}\label{fig:delta_ht_cratio}
-\endminipage\hfill
-\minipage{0.48\textwidth}
-  \includegraphics[width=\linewidth]{cratio_ht_total.png}
-  \subcaption{Crown ratio vs. initial height (ft).}\label{fig:init_ht_cratio}
-\endminipage\hfill
-\caption{Scatterplots of small tree growth characteristics.}
-\end{figure}
+% \begin{figure}[!htb]
+% \minipage{0.48\textwidth}
+%   \includegraphics[width=\linewidth]{deltaH_cratio.png}
+%   \subcaption{Annualized height growth increment (ft) vs. crown ratio.}\label{fig:delta_ht_cratio}
+% \endminipage\hfill
+% \minipage{0.48\textwidth}
+%   \includegraphics[width=\linewidth]{cratio_ht_total.png}
+%   \subcaption{Crown ratio vs. initial height (ft).}\label{fig:init_ht_cratio}
+% \endminipage\hfill
+% \caption{Scatterplots of small tree growth characteristics.}
+% \end{figure}
 
  
 % \begin{figure}
@@ -453,27 +453,27 @@ Annual height growth increment tends to increase with initial height (Figure \re
  
 Crown ratio (crown length/total height) appears to act as an upper limit to annual height growth (Figure \ref{fig:delta_ht_cratio}). Small trees with very little crown exhibit height growth responses that are correspondingly small. As crown ratio increases the upper values of the height growth response distribution also increase. However, variance in annual height growth also increases for increasing values of crown ratio. Trees with larger crown ratios exhibit greater variability in height growth. For trees with the fullest crowns (>.8), annual height growth tends to exceed .5 ft. 
  
-%  \begin{figure}
-% \begin{center}
-% <<label=init_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
-%
-% library(lattice)
-% 
-% 
-% print(xyplot(annual.gr4$cratio~annual.gr4$Height_Total,
-%          par.settings = my.settings,
-%           pch = 1,
-%            col ="grey60",
-%           xlab="Initial Height (ft)",
-%          ylab="Crown Ratio (%)",
-%        strip = strip.custom(bg="lightgrey"),
-%          par.strip.text=list(col="black"),
-%          scales=list(
-%                )))
-% @
-%  \end{center}
-%  \caption{Crown Ratio vs. Initial height (ft)\label{fig:init_ht_cratio}}
-%  \end{figure}
+ \begin{figure}
+\begin{center}
+<<label=init_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
+
+library(lattice)
+
+
+print(xyplot(annual.gr4$Height_Total~annual.gr4$cratio,
+         par.settings = my.settings,
+          pch = 1,
+           col ="grey60",
+          xlab="Initial Height (ft)",
+         ylab="Crown Ratio (%)",
+       strip = strip.custom(bg="lightgrey"),
+         par.strip.text=list(col="black"),
+         scales=list(
+               )))
+@
+ \end{center}
+ \caption{Crown Ratio vs. Initial height (ft)\label{fig:init_ht_cratio}}
+ \end{figure}
  
 As initial height increases, the lower limit of the crown ratio response increases. As subject tree height increases, the variability of the response distribution of crown ratio also decreases. Trees that are exceedingly tall nearly always have high crown ratios. In contrast, the range of variability in the shorter trees corresponds to a wide range of crown ratios. These findings relate physiologically to the relationship between the crown as a driver of growth and tree height; a full crown is necessary to achieve such stature.
 
@@ -483,7 +483,6 @@ As initial height increases, the lower limit of the crown ratio response increas
 \subsection{Variable Selection}
 
 \begin{table}[!tbp]
-\caption{Akaike Information Criteria for each candidate variable by competition category for the $\tau$=.5 quantile regression.\label{tab:AIC}}
 \begin{center}
 \begin{tabular}{llllllllll}
 \hline\hline
@@ -493,13 +492,13 @@ As initial height increases, the lower limit of the crown ratio response increas
 &SmallTPA&423&708.7&POLV.cov&721&1004&BAPA&2608&2490.5\tabularnewline
 &Trees15+&422&771&F.cov&721&1012.9&CAPA&2608&2417\tabularnewline
 &TGT&423&760.9&LS.cov&721&1012.8&TPA&2608&2346.2\tabularnewline
-&BD&422&610.7&HS.cov&721&1011.9&Site&n&AIC\tabularnewline
-&DBH&389&603.2&F.depth&721&1011.6&SI&2608&2051.7\tabularnewline
-&CrownWidth&423&713.4&LS.depth&721&1012.5&Slope&2608&2340.7\tabularnewline
-&CrownLength&423&674.8&HS.depth&721&1005.1&Elevation&2608&2348.1\tabularnewline
-&CrownRatio&423&585.4&F.vol&721&1012.4&Aspect&2608&2347.5\tabularnewline
-&&&&LS.vol&721&1012.5&SEA Int&2608&1986.5\tabularnewline
-&&&&HS.vol&721&1012.5&&&\tabularnewline
+&BD&422&610.7&HS.cov&721&1011.9&SDI&2608&2454\tabularnewline
+&DBH&389&603.2&F.depth&721&1011.6&Site&n&AIC\tabularnewline
+&CrownWidth&423&713.4&LS.depth&721&1012.5&SI&2608&2051.7\tabularnewline
+&CrownLength&423&674.8&HS.depth&721&1005.1&Slope&2608&2340.7\tabularnewline
+&CrownRatio&423&585.4&F.vol&721&1012.4&Elevation&2608&2348.1\tabularnewline
+&&&&LS.vol&721&1012.5&Aspect&2608&2347.5\tabularnewline
+&&&&HS.vol&721&1012.5&SEA Int&2608&1986.5\tabularnewline
 &&&&F.tran&721&1012.4&&&\tabularnewline
 &&&&LS.tran&721&1010.9&&&\tabularnewline
 &&&&HS.tran&721&1012.9&&&\tabularnewline
@@ -670,7 +669,7 @@ $cr$ is the crown ratio, $TPA$ is the overstory trees per acre and $S$ is the sl
 % \caption{Residual values vs. fitted values of height growth increment for $\tau$=.5.\label{fig:qr5resid}}
 % \end{figure}
 
-The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the variance of the residuals greatly increases as the predicted height growth increases. However, this result is expected as the median ($\tau$=.5) quantile regression is specified to describe the linear trends in the central portion of the response distribution. The model seems to do this well as the residuals appear to be evenly distributed above and below zero. Figure (\ref{fig:qr1resid}) reveals that most residuals are greater than zero for the $\tau$=.1 quantile that describes the lower portion of the response distribution. However, for all positive values of predicted height, there are a number of number of negative residuals. In the $\tau$=.9 quantile, most residuals are found to be negative but there is a modest number of postie residuals across all predicted height increments. Collectively, these residual plots show that the three fitted quantile regression models describe a broad range of the annual height growth response distribution.
+The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the variance of the residuals is split roughy proportionally above and below zero. This result is expected as the median ($\tau$=.5) quantile regression is specified to describe the linear trends in the central portion of the response distribution. The model seems to do this well as the residuals appear to be evenly distributed above and below zero. Figure (\ref{fig:qr1resid}) reveals that most residuals are greater than zero for the $\tau$=.1 quantile that describes the lower portion of the response distribution. However, for all positive values of predicted height, there are a number of number of negative residuals. In the $\tau$=.9 quantile, most residuals are found to be negative but there is a modest number of postie residuals across all predicted height increments. Collectively, these residual plots show that the three fitted quantile regression models describe a broad range of the annual height growth response distribution.
 
 
 \begin{figure}[!htb]

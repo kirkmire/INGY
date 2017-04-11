@@ -14,7 +14,7 @@
 \usepackage{etoolbox}
 \BeforeBeginEnvironment{equation}{\begin{singlespace}}
 \AfterEndEnvironment{equation}{\end{singlespace}\noindent\ignorespaces}
-\usepackage{subfigure}
+\usepackage{subcaption}
 \usepackage[style=authoryear, backend=bibtex]{biblatex}
 \usepackage{filecontents}
 \addbibresource{library.bib}

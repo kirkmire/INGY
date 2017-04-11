@@ -1,5 +1,4 @@
 
-
 int1<-read.csv("C:/Users/Colin/Desktop/R-Projects/INGY/GEE_project/1STCV_plot_ndvi_med.csv")
 int2<-read.csv("C:/Users/Colin/Desktop/R-Projects/INGY/GEE_project/2STCV_plot_ndvi_med.csv")
 int3<-read.csv("C:/Users/Colin/Desktop/R-Projects/INGY/GEE_project/3STCV_plot_ndvi_med.csv")
@@ -69,9 +68,9 @@ abline(one)
 ge<-lm(ndvi_merged$p95[ndvi_merged$Treatment.x=="GE"]
        ~ndvi_merged$TPA.OS[ndvi_merged$Treatment.x=="GE"])
 ctrl<-lm(ndvi_merged$p95[ndvi_merged$Treatment.x=="CTRL"]
-       ~ndvi_merged$TPA.OS[ndvi_merged$Treatment.x=="CTRL"])
+         ~ndvi_merged$TPA.OS[ndvi_merged$Treatment.x=="CTRL"])
 one<-lm(ndvi_merged$p95[ndvi_merged$Treatment.x=="1X"]
-         ~ndvi_merged$TPA.OS[ndvi_merged$Treatment.x=="1X"])
+        ~ndvi_merged$TPA.OS[ndvi_merged$Treatment.x=="1X"])
 
 
 plot(ndvi_merged$p95~ndvi_merged$Year_Measurement,col=ndvi_merged$Treatment.x)
@@ -90,7 +89,7 @@ one<-lm(ndvi_merged$p95[ndvi_merged$Treatment.x=="1X"]
 xyplot(ndvi_merged$p95~ndvi_merged$bapa.OS,group=ndvi_merged$Treatment.x,auto.key = T)
 
 lm.os.trt<-lm(ndvi_merged$p95~ndvi_merged$TPA.OS+ndvi_merged$Treatment.x+ndvi_merged$Installation)
-  
+
 summary(lm.os.trt)
 
 #below shows all plots, not just those with tagged trees
@@ -103,5 +102,3 @@ xyplot(ndvi_merged_all$p95~ndvi_merged_all$int|ndvi_merged_all$Installation
        strip = strip.custom(bg="lightgrey"),
        # col=myColours[4],
        par.settings = my.settings)
-
-

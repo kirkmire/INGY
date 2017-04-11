@@ -6,23 +6,42 @@
 \begin{document}
 \SweaveOpts{concordance=TRUE}
 
-
-\begin{equation}\label{eq:Eq3.1}
-\begin{aligned}
-
-h_{\tau} &= b_{0,\tau}\sqrt{i}+b_{cr,\tau}cr 
-+b_{TPA,\tau}TPA+b_{S,\tau}S 
-
-& 
-\text{where $h$ is the predicted growth response, $i$ is the initial height in feet}, 
-\text{$cr$ is the crown ratio}, \\
-&
-\text{$TPA$ is the trees per acre}  and \text{$S$ is the slope, aspect and elevation term}
-\end{aligned}
-\end{equation}
+\begin{align}  \label{eq:Eq0} 
+SDI = & \sqrt{(BAPA/TPA)/.005454154} \qquad, 
+\end{align}
+where $SDI$ is the Stand density index, $BAPA$ is the basal area per acre, and $TPA$ is trees per acre
 
 
 
+
+
+\begin{table}[!tbp]
+\begin{center}
+\begin{tabular}{llllllllll}
+\hline\hline
+&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}\tabularnewline
+\hline
+&Nothing&321&620.4&Nothing&542&683.4&Nothing&2101&1807.3\tabularnewline
+&SmallTPA&321&501.3&POLV.cov&542&682.1&BAPA&2101&1755.2\tabularnewline
+&Trees15+&321&551.5&F.cov&542&684&CAPA&2101&1662.1\tabularnewline
+&TGT&321&538.3&LS.cov&542&685.3&TPA&2101&1599.2\tabularnewline
+&BD&320&401.3&HS.cov&542&685.1&Site&n&AIC\tabularnewline
+&DBH&287&408.8&F.depth&542&657.1&SI&2101&1367.3\tabularnewline
+&CrownWidth&321&506.8&LS.depth&542&683.1&Slope&2101&1585.9\tabularnewline
+&CrownLength&321&468.5&HS.depth&542&678.8&Elevation&2101&1601.1\tabularnewline
+&CrownRatio&321&384.4&F.vol&542&674.2&Aspect&2101&1598.9\tabularnewline
+&&&&LS.vol&542&685&SEA Int&2101&1295\tabularnewline
+&&&&HS.vol&542&685.1&&&\tabularnewline
+&&&&F.tran&542&685.4&&&\tabularnewline
+&&&&LS.tran&542&682.7&&&\tabularnewline
+&&&&HS.tran&542&684.9&&&\tabularnewline
+&&&&G.tran.depth&542&684.9&&&\tabularnewline
+&&&&G.tran.cov&542&681&&&\tabularnewline
+&&&&mx.vg.diff.1m&542&684.9&&&\tabularnewline
+&&&&mx.vg.diff.tr&542&685&&&\tabularnewline
+\hline
+\end{tabular}\end{center}
+\end{table}
 % \begin{equation} 
 % \begin{aligned}
 % % \label{small_eqtest}

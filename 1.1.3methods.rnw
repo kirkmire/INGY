@@ -239,8 +239,9 @@ Basal area was calculated for each live overstory tree and aggregated over each 
 \begin{align}  \label{eq:Eq0} 
 SDI = & \sqrt{(BAPA/TPA)/.005454154} \qquad, 
 \end{align}
-where $SDI$ is the Stand density index, $BAPA$ is the basal area per acre, and $TPA$ is trees per acre
-%
+where $SDI$ is the Stand density index, $BAPA$ is the basal area per acre, and $TPA$ is trees per acre.
+
+
 All retained overstory variables were linearly interpolated between overstory measurement years to provide estimates for intervening years of small tree and understory measurement. The initial and final years of overstory measurement provided limits of the interpolation meaning that a measurement year preceding the first overstory measurement (or following the last) would be assigned the overstory variable value calculated for the initial (or final) overstory measurement year. 
 
 
@@ -291,11 +292,11 @@ The objective was to obtain a parsimonious system of quantile regression models 
 Only the installations with greater than 60 ponderosa pine tagged small trees at initiation were used for model development. This minimum number of trees ensured that installations included in model building would have a sufficient number of tagged small trees to contribute to model development. The installations that sustained a post-initiation harvest were also excluded from analysis. At these installations annual height increment was calculated by finding the appropriate measurement intervals according to the timeline in Figure \ref{fig:timeline}, then subtracting earlier height measurements from the later oner and dividing by the difference between measurement years. 
 %
 \begin{align}\label{eq:Eq2}
-y_{i,j}=& \frac{(h_{i,j+1}-h_{i,j})}{(t_{i,j+1}-t_{i,j})} \qquad, 
+y_{i,j}=&(h_{i,j+1}-h_{i,j})/(t_{i,j+1}-t_{i,j}) \qquad, 
 \end{align}
 where~$y$ is the annualized growth response in feet, $h$ is the height in feet, 
-$i$ is the unique tree,~$t$ is year, &~$j$ is the measurement period
-%
+$i$ is the unique tree,~$t$ is year, &~$j$ is the measurement period.
+
 % \begin{figure}
 % \begin{center}
 % <<label=siteOverstory,fig=TRUE,echo=FALSE>>=
@@ -357,6 +358,7 @@ $i$ is the unique tree,~$t$ is year, &~$j$ is the measurement period
 % \end{center}
 % \caption{Site Index and Overstory Basal Area at Initiation\label{fig:siteOverstory}}
 % \end{figure}
+
 It was also during this stage of preparation that small tree damage codes were screened. Over the years many of the small tagged trees endured some kind of damage including mortality, broken tops, forked tops, sweep or animal damage. Dead trees and those with dead tops were removed from analysis since these trees typically experienced a decrease in height growth from the previous measurement year. See Appendix 3 for the complete list of damage codes recorded. All tree records that exhibited a negative height growth increment were also removed from consideration since this indicated either a measurement error or some mis-recorded damage to the top.
 
 

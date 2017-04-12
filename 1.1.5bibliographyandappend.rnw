@@ -143,11 +143,11 @@ All analyses were performed using the R statistical software \Sexpr{R.Version()$
 
 \newpage
 \newappendix{4. Tables of Predictor Variables}
-\label{appendix:pred_var}\\
+\label{appendix:pred_var}
 
 
 
-\begin{table}[!tbp]
+\begin{table}
 \begin{center}
 \begin{tabular}{lllll}
 \hline\hline
@@ -206,90 +206,87 @@ Slope, aspect, elevation term&?&plot&SEA, S\tabularnewline
 
 \newpage
 \newappendix{5. Tables of Parameter Estimates for LQMMs }
-\label{appendix:par_est}\\
+\label{appendix:par_est}
 
 %Parameter Estimates for the proposed height growth model
 
 
-
-\begin{table}[!htb]
+\begin{table}
 \caption{Parameter Estimates for the $\tau$=.1 Quantile}
 \begin{center}
 \begin{tabular}{lrrrr}
 \hline\hline
-\multicolumn{1}{l}{qr.SI.1.tab}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{t value}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
+\multicolumn{1}{l}{Parameter}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{t value}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
 \hline
-(Intercept)&$ 0.2479$&$0.4296$&$ 0.5772$&$0.5639$\tabularnewline
-srHeight.Total&$ 0.2132$&$0.0168$&$12.7057$&$0.0000$\tabularnewline
-cratio&$ 0.5525$&$0.0465$&$11.8891$&$0.0000$\tabularnewline
-TPA.OS&$-0.0015$&$0.0004$&$-3.7103$&$0.0002$\tabularnewline
-slopePercent&$-0.7715$&$0.2638$&$-2.9252$&$0.0035$\tabularnewline
-elevation&$-0.0015$&$0.0009$&$-1.6031$&$0.1091$\tabularnewline
-I(elevation^2)&$ 0.0000$&$0.0000$&$ 1.8903$&$0.0589$\tabularnewline
-slopePercent:cos.rad.asp&$ 2.0377$&$0.3093$&$ 6.5889$&$0.0000$\tabularnewline
-slopePercent:sin.rad.asp&$ 0.6571$&$0.2839$&$ 2.3145$&$0.0207$\tabularnewline
-slopePercent:log(elevation + 1)&$ 0.1224$&$0.0408$&$ 3.0009$&$0.0027$\tabularnewline
-slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$-4.0120$&$0.0001$\tabularnewline
-slopePercent:cos.rad.asp:log(elevation + 1)&$-0.3130$&$0.0476$&$-6.5709$&$0.0000$\tabularnewline
-slopePercent:sin.rad.asp:log(elevation + 1)&$-0.1032$&$0.0437$&$-2.3619$&$0.0183$\tabularnewline
-slopePercent:cos.rad.asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 6.3680$&$0.0000$\tabularnewline
-slopePercent:sin.rad.asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 2.8465$&$0.0045$\tabularnewline
+(Intercept)&$ 0.2914$&$0.2629$&$ 1.1082$&$0.2679$\tabularnewline
+srHeight_Total&$ 0.1689$&$0.0128$&$13.2145$&$0.0000$\tabularnewline
+cratio&$ 0.6236$&$0.0480$&$13.0048$&$0.0000$\tabularnewline
+TPA.OS&$-0.0014$&$0.0003$&$-4.6834$&$0.0000$\tabularnewline
+slopePercent&$-0.7155$&$0.2286$&$-3.1300$&$0.0018$\tabularnewline
+elevation&$-0.0016$&$0.0006$&$-2.7801$&$0.0055$\tabularnewline
+I(elevation^2)&$ 0.0000$&$0.0000$&$ 3.1749$&$0.0015$\tabularnewline
+slopePercent:cos_rad_asp&$ 2.0823$&$0.3669$&$ 5.6760$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp&$ 0.9356$&$0.2532$&$ 3.6946$&$0.0002$\tabularnewline
+slopePercent:log(elevation + 1)&$ 0.1156$&$0.0355$&$ 3.2559$&$0.0011$\tabularnewline
+slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$-4.6515$&$0.0000$\tabularnewline
+slopePercent:cos_rad_asp:log(elevation + 1)&$-0.3213$&$0.0569$&$-5.6465$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp:log(elevation + 1)&$-0.1452$&$0.0394$&$-3.6900$&$0.0002$\tabularnewline
+slopePercent:cos_rad_asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 5.3698$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 3.6603$&$0.0003$\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}
 
-\begin{table}[!htb]
+\begin{table}
 \caption{Parameter Estimates for the $\tau$=.5 Quantile}
 \begin{center}
 \begin{tabular}{lrrrr}
 \hline\hline
-\multicolumn{1}{l}{qr.SI.5.tab}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{t value}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
+\multicolumn{1}{l}{Parameter}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{t value}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
 \hline
-(Intercept)&$-0.0838$&$0.2588$&$ -0.3237$&$0.7462$\tabularnewline
-srHeight.Total&$ 0.2717$&$0.0107$&$ 25.3344$&$0.0000$\tabularnewline
-cratio&$ 0.6872$&$0.0377$&$ 18.2234$&$0.0000$\tabularnewline
-TPA.OS&$-0.0028$&$0.0002$&$-11.9476$&$0.0000$\tabularnewline
-slopePercent&$-0.9420$&$0.1833$&$ -5.1387$&$0.0000$\tabularnewline
-elevation&$-0.0004$&$0.0006$&$ -0.7802$&$0.4353$\tabularnewline
-I(elevation^2)&$ 0.0000$&$0.0000$&$  1.2701$&$0.2042$\tabularnewline
-slopePercent:cos.rad.asp&$ 2.6583$&$0.3056$&$  8.6995$&$0.0000$\tabularnewline
-slopePercent:sin.rad.asp&$ 1.3175$&$0.1879$&$  7.0124$&$0.0000$\tabularnewline
-slopePercent:log(elevation + 1)&$ 0.1485$&$0.0285$&$  5.2118$&$0.0000$\tabularnewline
-slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$ -6.1556$&$0.0000$\tabularnewline
-slopePercent:cos.rad.asp:log(elevation + 1)&$-0.4099$&$0.0472$&$ -8.6776$&$0.0000$\tabularnewline
-slopePercent:sin.rad.asp:log(elevation + 1)&$-0.2046$&$0.0290$&$ -7.0447$&$0.0000$\tabularnewline
-slopePercent:cos.rad.asp:I(elevation^2)&$ 0.0000$&$0.0000$&$  8.5258$&$0.0000$\tabularnewline
-slopePercent:sin.rad.asp:I(elevation^2)&$ 0.0000$&$0.0000$&$  7.4251$&$0.0000$\tabularnewline
+(Intercept)&$-0.0074$&$0.3233$&$-0.0228$&$0.9818$\tabularnewline
+srHeight_Total&$ 0.2727$&$0.0114$&$23.8798$&$0.0000$\tabularnewline
+cratio&$ 0.6619$&$0.0434$&$15.2358$&$0.0000$\tabularnewline
+TPA.OS&$-0.0024$&$0.0003$&$-9.2075$&$0.0000$\tabularnewline
+slopePercent&$-0.9636$&$0.2235$&$-4.3106$&$0.0000$\tabularnewline
+elevation&$-0.0007$&$0.0007$&$-1.0415$&$0.2977$\tabularnewline
+I(elevation^2)&$ 0.0000$&$0.0000$&$ 1.4207$&$0.1555$\tabularnewline
+slopePercent:cos_rad_asp&$ 3.3287$&$0.3382$&$ 9.8434$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp&$ 1.3592$&$0.2249$&$ 6.0434$&$0.0000$\tabularnewline
+slopePercent:log(elevation + 1)&$ 0.1527$&$0.0347$&$ 4.4046$&$0.0000$\tabularnewline
+slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$-5.4548$&$0.0000$\tabularnewline
+slopePercent:cos_rad_asp:log(elevation + 1)&$-0.5139$&$0.0524$&$-9.8107$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp:log(elevation + 1)&$-0.2107$&$0.0348$&$-6.0598$&$0.0000$\tabularnewline
+slopePercent:cos_rad_asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 9.5375$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 6.3018$&$0.0000$\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}
-
 
 \begin{table}[!htb]
 \caption{Parameter Estimates for the $\tau$=.9 Quantile}
 \begin{center}
 \begin{tabular}{lrrrr}
 \hline\hline
-\multicolumn{1}{l}{qr.SI.9.tab}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{t value}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
+\multicolumn{1}{l}{Parameter}&\multicolumn{1}{c}{Value}&\multicolumn{1}{c}{Std. Error}&\multicolumn{1}{c}{t value}&\multicolumn{1}{c}{Pr(\textgreater |t|)}\tabularnewline
 \hline
-(Intercept)&$-1.6905$&$0.4960$&$ -3.4082$&$0.0007$\tabularnewline
-srHeight.Total&$ 0.3657$&$0.0218$&$ 16.7531$&$0.0000$\tabularnewline
-cratio&$ 0.9193$&$0.0819$&$ 11.2234$&$0.0000$\tabularnewline
-TPA.OS&$-0.0052$&$0.0005$&$-11.0204$&$0.0000$\tabularnewline
-slopePercent&$-1.0371$&$0.4713$&$ -2.2002$&$0.0279$\tabularnewline
-elevation&$ 0.0035$&$0.0011$&$  3.2735$&$0.0011$\tabularnewline
-I(elevation^2)&$ 0.0000$&$0.0000$&$ -2.9436$&$0.0033$\tabularnewline
-slopePercent:cos.rad.asp&$ 3.4562$&$0.6610$&$  5.2287$&$0.0000$\tabularnewline
-slopePercent:sin.rad.asp&$ 1.3755$&$0.4661$&$  2.9512$&$0.0032$\tabularnewline
-slopePercent:log(elevation + 1)&$ 0.1591$&$0.0728$&$  2.1854$&$0.0290$\tabularnewline
-slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$ -2.1805$&$0.0293$\tabularnewline
-slopePercent:cos.rad.asp:log(elevation + 1)&$-0.5320$&$0.1022$&$ -5.2031$&$0.0000$\tabularnewline
-slopePercent:sin.rad.asp:log(elevation + 1)&$-0.2141$&$0.0723$&$ -2.9637$&$0.0031$\tabularnewline
-slopePercent:cos.rad.asp:I(elevation^2)&$ 0.0000$&$0.0000$&$  5.0186$&$0.0000$\tabularnewline
-slopePercent:sin.rad.asp:I(elevation^2)&$ 0.0000$&$0.0000$&$  3.1469$&$0.0017$\tabularnewline
+(Intercept)&$-2.1068$&$0.5073$&$-4.1534$&$0.0000$\tabularnewline
+srHeight_Total&$ 0.3799$&$0.0237$&$16.0241$&$0.0000$\tabularnewline
+cratio&$ 0.8531$&$0.0932$&$ 9.1575$&$0.0000$\tabularnewline
+TPA.OS&$-0.0050$&$0.0006$&$-8.9289$&$0.0000$\tabularnewline
+slopePercent&$-1.0788$&$0.4615$&$-2.3375$&$0.0195$\tabularnewline
+elevation&$ 0.0043$&$0.0011$&$ 3.9237$&$0.0001$\tabularnewline
+I(elevation^2)&$ 0.0000$&$0.0000$&$-3.5608$&$0.0004$\tabularnewline
+slopePercent:cos_rad_asp&$ 3.6589$&$0.6648$&$ 5.5037$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp&$ 1.2349$&$0.4931$&$ 2.5043$&$0.0123$\tabularnewline
+slopePercent:log(elevation + 1)&$ 0.1658$&$0.0712$&$ 2.3274$&$0.0200$\tabularnewline
+slopePercent:I(elevation^2)&$ 0.0000$&$0.0000$&$-2.3025$&$0.0214$\tabularnewline
+slopePercent:cos_rad_asp:log(elevation + 1)&$-0.5636$&$0.1028$&$-5.4815$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp:log(elevation + 1)&$-0.1915$&$0.0764$&$-2.5079$&$0.0122$\tabularnewline
+slopePercent:cos_rad_asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 5.2575$&$0.0000$\tabularnewline
+slopePercent:sin_rad_asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 2.5608$&$0.0105$\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}
-
 
 

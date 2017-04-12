@@ -13,9 +13,9 @@
 \vspace*{1\baselineskip}
 \begin{center}
 
-\text{PREDICTING THE GROWTH RESPONSE OF SMALL PONDEROSA PINE TREES UNDER} 
-\text{VARYING LEVELS OF OVERSTORY RETENTION, VEGETATIVE COMPETITION AND}
-\text{SITE QUALITY} 
+\text{ESTIMATING THE EFFECTS OF OVERSTORY RETENTION, VEGETATIVE COMPETITION}
+\text{AND SITE QUALITY ON THE GROWTH RESPONSE OF SMALL PONDEROSA PINE TREES}
+\text{USING REGRESSION QUANTILES}
 
 \text{By}
 
@@ -61,14 +61,16 @@ for the degree of}
 \newpage
 \noindent Kirkmire, Colin, M.SC, May 2017                Forestry
 
-\noindent Effects of tree size, competition, and site on the distribution of sapling height growth
+\noindent Estimating the Effects OF Overstory Retention, Vegetative Competitions
+and Site Quality on the Growth Response of Small Ponderosa Pine Trees
+using Regression Quantiles
 
 \noindent Dr. David L.R. Affleck, Co-Chair
 \noindent Dr. John Goodburn, Co-Chair
 
 Variable retention harvesting is an increasingly viable option in multiple objective silviculture. As a shade-intolerant, fire-adapted species, ponderosa pine is especially well-suited to the simulated disturbance represented by variable retention harvests. Stand initiation following harvest is a critical stage in stand development yet little is known about how small ponderosa pine trees in the understory respond to competitive factors. To assess these sources of competition, we examined post-harvest understory non-arboreal vegetation, overstory trees, and a subsample of tagged small trees over a period of 16 years on 29 sites throughout the Inland Northwest. 
 
-Modeling difficulties including a skewed response distribution and longitudinal data led to an examination of quantile regression models. Initial height, crown ratio, overstory trees per acre and slope/elevation/aspect were found to be significant predictors of height growth across all predicted quantiles ($\tau$=.1,.5 and .9). However, the effects of these predictors were found to be different between quantiles which suggests that the predictors influence the fastest growing trees in a different way than the slowest and median trees. We found that quantile regression models could be used to provide an empirically based distribution of height growth under a retained overstory.
+Modeling difficulties including a skewed response distribution and longitudinal data led to an examination of quantile regression models. Initial height, crown ratio, overstory trees per acre and slope/elevation/aspect were found to be significant predictors of height growth across all predicted quantiles ($\tau$= .1, .5 and .9). However, the effects of these predictors were found to be different between quantiles which suggests that the predictors influence the fastest growing trees in a different way than the slowest and median trees. We found that quantile regression models could be used to provide an empirically based distribution of height growth under a retained overstory.
 
 
 

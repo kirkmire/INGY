@@ -45,9 +45,16 @@ The study captured a wide range of productivity and overstory retention levels f
 library(lattice)
 
 
+agg.over.data.TPA$Installation[agg.over.data.TPA$Installation=="TC"]<-"*TC"
+agg.over.data.TPA$Installation[agg.over.data.TPA$Installation=="RM"]<-"*RM"
+agg.over.data.TPA$Installation[agg.over.data.TPA$Installation=="EM"]<-"*EM"
+agg.over.data.TPA$Installation[agg.over.data.TPA$Installation=="BC"]<-"*BC"
+agg.over.data.TPA$Installation[agg.over.data.TPA$Installation=="TJ"]<-"*TJ"
+agg.over.data.TPA$Installation[agg.over.data.TPA$Installation=="CR"]<-"*CR"
+
 agg.over.data.TPA<-agg.over.data.TPA[!agg.over.data.TPA$Installation %in% drp60,]
 
-print(xyplot(agg.over.data.TPA$TPA~ agg.over.data.TPA$Year_MeasurementOS | factor(agg.over.data.TPA$Installation),
+print(xyplot(agg.over.data.TPA$TPA~ agg.over.data.TPA$Year_MeasurementOS | agg.over.data.TPA$Installation,
        type = "o",  
         par.settings = my.settings,
          pch = 16,
@@ -66,7 +73,7 @@ print(xyplot(agg.over.data.TPA$TPA~ agg.over.data.TPA$Year_MeasurementOS | facto
  \caption{Interpolated overstory TPA by study site, plot and year.\label{fig:os_tpa_inst}}
  \end{figure}
  
-Figure \ref{fig:os_tpa_inst} shows the plot-level interpolations of overstory trees per acre. Most plots stayed constant in the number of overstory trees. However, due to mortality or recruitment, there may be slight differences. Within installations, there is noticeable variation in overstory trees per acre between plots. This is usually advantageous in model-building as it provides a range of overstory conditions within each installation. However, due to the understory treatments, a homogeneous overstory condition is favorable to isolate the understory effects. Fortunately, for most installations the plot levels are similar (LF seems to be the exception).
+Figure \ref{fig:os_tpa_inst} shows the plot-level interpolations of overstory trees per acre. Most plots stayed constant in the number of overstory trees. However, due to mortality, there may be slight differences. Within installations, there is noticeable variation in overstory trees per acre between plots. This is usually advantageous in model-building as it provides a range of overstory conditions within each installation. However, due to the understory treatments, a homogeneous overstory condition is favorable to isolate the understory effects. Fortunately, for most installations the plot levels are similar (LF seems to be the exception).
 
 \begin{figure} 
 \begin{center}
@@ -85,7 +92,7 @@ abline(sea.si)
 \caption{Examination of relationship between the slope, elevation and aspect interaction term and site index\label{fig:sivssea}}
 \end{figure}
 
-Figure \ref{fig:sivssea} shows the positive correlation between the SEA value and the site index. Since both of these variables relate to the inherent productivity of the site they should be positively correlated. The lack of a strong correlation can be attributed to a difference in resolution. One site index was obtained for each installation and the SEA value relates productivity to the slope, aspect and elevation at the plot level. 
+Figure \ref{fig:sivssea} shows the positive correlation between the SEA value and the site index. Since both of these variables relate to the inherent productivity of the site they should be positively correlated. The lack of a strong correlation can be attributed in part to a difference in resolution. One site index was obtained for each installation and the SEA value relates productivity to the slope, aspect and elevation at the plot level. 
 
 
 \begin{figure} 
@@ -101,6 +108,14 @@ library(lattice)
 
 annual.gr4$count<-1
 inst_count<-as.data.frame(xtabs(annual.gr4$count~annual.gr4$Installation))
+
+inst_count$annual.gr4.Installation<-as.character(inst_count$annual.gr4.Installation)
+inst_count$annual.gr4.Installation[inst_count$annual.gr4.Installation=="TC"]<-"*TC"
+inst_count$annual.gr4.Installation[inst_count$annual.gr4.Installation=="RM"]<-"*RM"
+inst_count$annual.gr4.Installation[inst_count$annual.gr4.Installation=="EM"]<-"*EM"
+inst_count$annual.gr4.Installation[inst_count$annual.gr4.Installation=="BC"]<-"*BC"
+inst_count$annual.gr4.Installation[inst_count$annual.gr4.Installation=="TJ"]<-"*TJ"
+inst_count$annual.gr4.Installation[inst_count$annual.gr4.Installation=="CR"]<-"*CR"
 
 print(barchart(inst_count$Freq~ inst_count$annual.gr4.Installation,
          origin=0, 
@@ -120,12 +135,11 @@ print(barchart(inst_count$Freq~ inst_count$annual.gr4.Installation,
 
 @
 \end{center}
-\caption{Number of small tagged ponderosa pine trees by STCV study site.\label{fig:numbPond}}
+\caption{Number of small tagged ponderosa pine tree records by STCV study site.\label{fig:numbPond}}
 \end{figure}
 
-Figure \ref{fig:numbpond} shows that most installations that met the threshold of 60 tagged ponderosa pine trees have around 100-150 tagged trees at the initiation of the project. There are three installations that have tagged ponderosa pine trees in excess of 200 Emphey Mountain (EM), Loon Lake (LL) and Thinning Project (TP). 
 
-This number of tagged ponderosa pine trees at initiation is not ultimately reflective of how many tree records each installation represents. The number of measurement intervals included from each installation as well as an account of tree records excluded due to mortality/damage/missing are necessary considerations to express the relative contribution of each installation to the model. Figure \ref{numbRecords} shows that when these factors are accounted for, many installations contribute over 150 tree records to the model, while installations with only a single measurement interval included Round Mountain (RM) and TJ's Installation (TJ) actually contributed less than 60 tree records. 
+The number of tagged ponderosa pine trees at initiation is not ultimately reflective of how many tree records each installation represents. The number of measurement intervals included from each installation as well as an account of tree records excluded due to mortality/damage/missing are necessary considerations to express the relative contribution of each installation to the model. Figure \ref{fig:numbPond} shows that when these factors are accounted for, many installations contribute over 150 tree records to the model, while installations with only a single measurement interval included Round Mountain (RM) and TJ's Installation (TJ) actually contributed less than 60 tree records. There were five installations that had tagged ponderosa pine tree records in excess of 200 and two that had over 300: Emphey Mountain (EM) and Lubrecht Forest (LF). 
 
 
 
@@ -143,7 +157,7 @@ $3$&$411$&$1233$\tabularnewline
 \end{tabular}\end{center}
 \end{table}
 
-Table is related \ref{tab:tree.counts} to Figure \ref{fig:numbRecords} in that it reveals the number of times a unique tree contributed to the model. A nearly equal amount of trees contributed to the model over either one, two or three measurement intervals. Ultimately, the majority of the tree records come from trees that were included over three intervals.
+Table 1 is related  to Figure \ref{fig:numbPond} in that it reveals the number of times a unique tree contributed to the model. A nearly equal amount of trees contributed to the model over either one, two or three measurement intervals. Ultimately, the majority of the tree records come from trees that were included over three intervals.
 
 
 \begin{figure} 
@@ -173,6 +187,14 @@ dmgStagm[dmgStagm=="D"]<-"DEAD"
 dmgStagm[dmgStagm=="DT AD"]<-"AD"
 
 dmgStagm<-aggregate(dmgStagm$count,by=list(Installation=dmgStagm$Installation,Year=dmgStagm$Year_Measurement),FUN=sum)
+
+dmgStagm$Installation<-as.character(dmgStagm$Installation)
+dmgStagm$Installation[dmgStagm$Installation=="TC"]<-"*TC"
+dmgStagm$Installation[dmgStagm$Installation=="RM"]<-"*RM"
+dmgStagm$Installation[dmgStagm$Installation=="EM"]<-"*EM"
+dmgStagm$Installation[dmgStagm$Installation=="BC"]<-"*BC"
+dmgStagm$Installation[dmgStagm$Installation=="TJ"]<-"*TJ"
+dmgStagm$Installation[dmgStagm$Installation=="CR"]<-"*CR"
 
 print(xyplot(dmgStagm$x~dmgStagm$Year| dmgStagm$Installation, 
          col=myColours[4],type="o",
@@ -224,13 +246,19 @@ for(i in 1:nrow(tallied)) {
 
 
 tallied.mins<-tallied[tallied$Year_Measurement== tallied$inst.min,]
-tallied.mins<-aggregate(tallied.mins$Count, by=list(tallied.mins$Installation,tallied.mins$Species),FUN=sum)
+tallied.mins<-aggregate(tallied.mins$Count, by=list(Installation=tallied.mins$Installation,Species=tallied.mins$Species),FUN=sum)
 
 # spec.freq.table<-spec.freq.table[! spec.freq.table$Installation %in% drp60,]
 # spec.freq.table1<-spec.freq.table[! spec.freq.table$Freq==0 ,]
+tallied.mins$Installation<-as.character(tallied.mins$Installation)
+tallied.mins$Installation[tallied.mins$Installation=="TC"]<-"*TC"
+tallied.mins$Installation[tallied.mins$Installation=="RM"]<-"*RM"
+tallied.mins$Installation[tallied.mins$Installation=="EM"]<-"*EM"
+tallied.mins$Installation[tallied.mins$Installation=="BC"]<-"*BC"
+tallied.mins$Installation[tallied.mins$Installation=="TJ"]<-"*TJ"
+tallied.mins$Installation[tallied.mins$Installation=="CR"]<-"*CR"
 
-
-print(barchart(x~ Group.2| Group.1, data=tallied.mins, 
+print(barchart(Species~ x| Installation, data=tallied.mins, 
        strip = strip.custom(bg="lightgrey"),
          col=myColours[4],
          par.settings = my.settings,
@@ -244,10 +272,10 @@ print(barchart(x~ Group.2| Group.1, data=tallied.mins,
 
 @
  \end{center}
- \caption{Species composition of small tagged trees in installations with more than 60 ponderosa pine at initiation.\label{fig:speccomp}}
+ \caption{Species composition of small tree plots in installations with more than 60 tagged ponderosa pine at initiation. PSME= \emph{Psuedotsuga menziesii}, PIPO= \emph{Pinus ponderosa}, ABGR= \emph{Abies grandis}, THPL= \emph{Thuja plicata}, PIMO= \emph{Pinus monticola}, PICO= \emph{Pinus contorta}, LAOC= \emph{Larix occidentalis}.\label{fig:speccomp}}
  \end{figure}
  
-The threshold number of tagged ponderosa pine limits the analysis to installations with a significant ponderosa pine understory component. However, to obtain a clear description of the inter-species understory tree competition between installations, it is necessary to look beyond the tagged subject trees to the tallied trees at initiation (Figure \ref{fig:speccomp}). Based on the frequencies of small trees by species and installation in, the selected installations are not dominated by Douglas-fir (Pseudotsuga men.) regeneration although there are number of installations that are very closely split between the two species.
+The threshold number of tagged ponderosa pine limits the analysis to installations with a significant ponderosa pine understory component. However, to obtain a clear description of the inter-species understory tree competition between installations, it is necessary to look beyond the tagged subject trees to the tallied trees at initiation (Figure \ref{fig:speccomp}). Based on the frequencies of small trees by species and installation in, the selected installations are not dominated by Douglas-fir regeneration although there are number of installations that are very closely split between the two species.
  
  %To discussion?
  % Including installations that are dominated by the relatively shade-tolerant Douglas-fir may 
@@ -269,6 +297,15 @@ library(lattice)
 CTRLandGE.volume.index$Group.2<-factor(CTRLandGE.volume.index$Group.2)
 
 myColors<-c("white","darkgray","gray22")
+
+CTRLandGE.volume.index$Group.1<-as.character(CTRLandGE.volume.index$Group.1)
+CTRLandGE.volume.index$Group.1[CTRLandGE.volume.index$Group.1=="TC"]<-"*TC"
+CTRLandGE.volume.index$Group.1[CTRLandGE.volume.index$Group.1=="RM"]<-"*RM"
+CTRLandGE.volume.index$Group.1[CTRLandGE.volume.index$Group.1=="EM"]<-"*EM"
+CTRLandGE.volume.index$Group.1[CTRLandGE.volume.index$Group.1=="BC"]<-"*BC"
+CTRLandGE.volume.index$Group.1[CTRLandGE.volume.index$Group.1=="TJ"]<-"*TJ"
+CTRLandGE.volume.index$Group.1[CTRLandGE.volume.index$Group.1=="CR"]<-"*CR"
+
 
 print(barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, groups=CTRLandGE.volume.index$Group.2,
          origin=0,
@@ -388,7 +425,7 @@ Ponderosa pine vary in annual height growth according to which installation they
 
 \begin{figure} 
 \begin{center}
-<<label=delta_ht_init,fig=TRUE,width=8,height=8,echo=FALSE>>=
+<<label=delta_ht_init,fig=TRUE,width=5,height=5,echo=FALSE>>=
 
 library(lattice)
 
@@ -414,26 +451,26 @@ Annual height growth increment tends to increase with initial height (Figure \re
  
 
 
-% \begin{figure}[!htb]
-% \minipage{0.48\textwidth}
-%   \includegraphics[width=\linewidth]{deltaH_cratio.png}
-%   \subcaption{Annualized height growth increment (ft) vs. crown ratio.}\label{fig:delta_ht_cratio}
-% \endminipage\hfill
-% \minipage{0.48\textwidth}
-%   \includegraphics[width=\linewidth]{cratio_ht_total.png}
-%   \subcaption{Crown ratio vs. initial height (ft).}\label{fig:init_ht_cratio}
-% \endminipage\hfill
-% \caption{Scatterplots of small tree growth characteristics.}
-% \end{figure}
+\begin{figure}[!htb]
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{deltaH_cratio.png}
+  \subcaption{Annualized height growth increment (ft/yr) vs. crown ratio.}\label{fig:delta_ht_cratio}
+\endminipage\hfill
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{cratio_ht_total.png}
+  \subcaption{Crown ratio vs. initial height (ft).}\label{fig:init_ht_cratio}
+\endminipage\hfill
+\caption{Scatterplots of small tree growth characteristics.}
+\end{figure}
 
  
 % \begin{figure}
 % \begin{center}
 % <<label=delta_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
-%  
+% 
 %  library(lattice)
-%  
-%  
+% 
+% 
 %  print(xyplot(annual.gr4$ht_annual~annual.gr4$cratio,
 %          par.settings = my.settings,
 %            pch = 1,
@@ -444,7 +481,7 @@ Annual height growth increment tends to increase with initial height (Figure \re
 %           par.strip.text=list(col="black"),
 %           scales=list(
 %                 )))
-%  
+% 
 % 
 %  @
 % \end{center}
@@ -453,28 +490,28 @@ Annual height growth increment tends to increase with initial height (Figure \re
  
 Crown ratio (crown length/total height) appears to act as an upper limit to annual height growth (Figure \ref{fig:delta_ht_cratio}). Small trees with very little crown exhibit height growth responses that are correspondingly small. As crown ratio increases the upper values of the height growth response distribution also increase. However, variance in annual height growth also increases for increasing values of crown ratio. Trees with larger crown ratios exhibit greater variability in height growth. For trees with the fullest crowns (>.8), annual height growth tends to exceed .5 ft. 
  
- \begin{figure}
-\begin{center}
-<<label=init_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
+%  \begin{figure}
+% \begin{center}
+% <<label=init_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
+% 
+% library(lattice)
+% 
+% 
+% print(xyplot(annual.gr4$Height_Total~annual.gr4$cratio,
+%          par.settings = my.settings,
+%           pch = 1,
+%            col ="grey60",
+%           ylab="Initial Height (ft)",
+%          xlab="Crown Ratio (%)",
+%        strip = strip.custom(bg="lightgrey"),
+%          par.strip.text=list(col="black"),
+%          scales=list(
+%                )))
+% @
+%  \end{center}
+%  \caption{Crown Ratio vs. Initial height (ft)\label{fig:init_ht_cratio}}
+%  \end{figure}
 
-library(lattice)
-
-
-print(xyplot(annual.gr4$Height_Total~annual.gr4$cratio,
-         par.settings = my.settings,
-          pch = 1,
-           col ="grey60",
-          xlab="Initial Height (ft)",
-         ylab="Crown Ratio (%)",
-       strip = strip.custom(bg="lightgrey"),
-         par.strip.text=list(col="black"),
-         scales=list(
-               )))
-@
- \end{center}
- \caption{Crown Ratio vs. Initial height (ft)\label{fig:init_ht_cratio}}
- \end{figure}
- 
 As initial height increases, the lower limit of the crown ratio response increases. As subject tree height increases, the variability of the response distribution of crown ratio also decreases. Trees that are exceedingly tall nearly always have high crown ratios. In contrast, the range of variability in the shorter trees corresponds to a wide range of crown ratios. These findings relate physiologically to the relationship between the crown as a driver of growth and tree height; a full crown is necessary to achieve such stature.
 
 
@@ -483,6 +520,7 @@ As initial height increases, the lower limit of the crown ratio response increas
 \subsection{Variable Selection}
 
 \begin{table}[!tbp]
+\caption{Candidate variables and associated sample size (n) and AIC.}
 \begin{center}
 \begin{tabular}{llllllllll}
 \hline\hline
@@ -530,16 +568,16 @@ The primary form of the model included the square root of initial height, since 
 % \caption{Generalized additive model of annual height growth increment vs. square-root of initial height.\label{fig:seqgam}}
 % \end{figure}
 
-Proceeding forward from the primary model to the small tree category of competition, the AIC of the crown ratio variable was found to be much lower than the other candidate variables (see Figure \ref{tab:AIC}) for $\tau$=.5. This variable was therefore selected to represent competition from other small trees. The GAM created to visualize crown ratio includes square root of initial height as a linear term and is smoothed for crown ratio(Figure \ref{fig:seqgamCR}). The relationship for this variable is less linear than that of the primary model yet predicted height growth increment is shown to increase as crown ratio increases. Small trees with larger crown lengths relative to total height are predicted to have greater height growth increments.
+Proceeding forward from the primary model to the small tree category of competition, the AIC of the crown ratio variable was found to be much lower than the other candidate variables (see Table 2) for $\tau$=.5. This variable was therefore selected to represent competition from other small trees. The GAM created to visualize crown ratio includes square root of initial height as a linear term and is smoothed for crown ratio (Figure \ref{fig:seqgamCR}). The relationship for this variable is less linear than that of the primary model yet predicted height growth increment is shown to increase as crown ratio increases. Small trees with larger crown lengths relative to total height are predicted to have greater height growth increments.
 
 \begin{figure}
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{init_gam.png}
-  \subcaption{GAM of annualized height growth increment vs. initial height.}\label{fig:delta_ht_cratio}
+  \subcaption{GAM of annualized height growth increment vs. initial height.}\label{fig:seqgam}
 \endminipage\hfill
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{cratio_init.png}
-  \subcaption{GAM of annualized height growth increment vs. crown ratio.}\label{fig:init_ht_cratio}
+  \subcaption{GAM of annualized height growth increment vs. crown ratio.}\label{fig:seqgamCR}
 \endminipage\hfill
 \caption{Generalized additive models of annualized height growth vs. initial height and crown ratio.}
 \end{figure}
@@ -562,15 +600,15 @@ Proceeding forward from the primary model to the small tree category of competit
 % \end{figure}
 
 
-The understory non-arboreal vegetation candidate variables failed to provide an AIC significantly less than that of including only the two previously selected variables. The only variable that offered any improvement over the previous iteration of the model was the 1m$^2$ forb depth variable, which is a measure of the average depth of forb vegetation. However, the inclusion of this variable is hardly justified considering the modest improvement it provides and the impracticality of measuring it in the field. Therefore, no variable was selected from this category of competition.
+The understory non-arboreal vegetation candidate variables failed to provide an AIC significantly less than that of including only the two previously selected variables. The only variables that offered even marginal improvement over the previous iteration of the model were the 1m&^2$ \% cover of all non-arboreal vegetation (POLV.cov) and transect measured grass depth (G.tran.depth). However, the inclusion of these variables is hardly justified considering the modest improvement they provide and the impracticality of measuring either in the field. Therefore, no candidate variable was selected from this category of competition.
 
-The overstory candidate variable with the lowest AIC was trees per acre (TPA). The measure of crown area per acre (CAPA) provided a close second and basal area per acre (BAPA) was also much lower than the previous iteration of the model. The GAM of TPA shows that predicted height increment decreases steeply between 0 and 40 TPA but appears to flatten past 40 TPA (Figure \ref{fig:seqgamOSTPA}. As a predictor of height growth increment, TPA is important to distinguish between clearcut (0 TPA) and modest overstory retention levels. However, beyond 40 TPA, it fails to relate to predicted height growth increment.
+The overstory candidate variable with the lowest AIC was trees per acre (TPA). The measure of crown area per acre (CAPA) provided a close second and basal area per acre (BAPA) was also much lower than the previous iteration of the model. The GAM of TPA shows that predicted height increment decreases steeply between 0 and 40 TPA but appears to flatten past 40 TPA (Figure \ref{fig:seqgamOSTPA}). As a predictor of height growth increment, TPA is important to distinguish between clearcut (0 TPA) and modest overstory retention levels. However, beyond 40 TPA, it fails to relate to predicted height growth increment.
 
 
 \begin{figure}[!htb]
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{TPAgam.png}
-  \subcaption{GAM of annual height growth vs. TPA.}\label{seqgamOSTPA}
+  \subcaption{GAM of annual height growth vs. TPA.}\label{fig:seqgamOSTPA}
 \endminipage\hfill
 \minipage{0.48\textwidth}
   \includegraphics[width=\linewidth]{SEAgam.png}
@@ -738,7 +776,7 @@ Similarly, the effect of crown ratio increases as the $\tau$ value increases. Th
 % \caption{Coefficient Plot of Overstory Trees Per Acre Across All Quantiles\label{fig:os_tpa_coef}}
 % \end{figure}
 
-As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was negatively correlated to annual height growth(Figure \ref{fig:seqgamOSTPA}). Here we see that estimates for the effect of overstory TPA are negative for all values of $\tau$ and steadily decrease as $\tau$ increases (Figure \ref{fig:os_tpa_coef}). The negative effect of TPA is least pronounced for the trees in the lower portion of the response distribution. In contrast, the fastest growing trees (in the upper portion of the response distribution), exhibit the most negative effects of overstory competition. This result is especially practical since the level of overstory tree retention is one of the primary means of manipulating stand structure.
+As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was negatively correlated to annual height growth (Figure \ref{fig:seqgamOSTPA}). Here we see that estimates for the effect of overstory TPA are negative for all values of $\tau$ and steadily decrease as $\tau$ increases (Figure \ref{fig:os_tpa_coef}). The negative effect of TPA is least pronounced for the trees in the lower portion of the response distribution. In contrast, the fastest growing trees (in the upper portion of the response distribution), exhibit the most negative effects of overstory competition. This result is especially practical since the level of overstory tree retention is one of the primary means of manipulating stand structure.
 
 
 
@@ -879,7 +917,7 @@ Trees in the intermediate height class (4-6 ft initial ht) appear to disproporti
 
 The trees within the tallest initial height class (6+ ft) appear to have a distribution of height growth increments within inter-quantile bins that conforms very nearly to the expected distribution. Slightly more trees appear in the extremes of the height growth quantile intervals than in the center of the distribution. 
 
-The results from the chi-squared analysis below (Table \ref{tab:chisqtab}) provide a statistical comparison between the actual and expected distribution of height growth increments across the inter-quantile intervals. The p-value for the overall chi-squared test (all height classes) was .000 which provides sufficient evidence to reject the null hypothesis (that the distributions are equal) at the $\alpha$=.05 significance level. However, the p-value is quite low for trees in the less than four feet initial height class (p<.0002), meaning that there is strong evidence that the expected distribution does not equal that predicted by the quantile regression. The chi-squared test for the intermediate initial height class (4-6 ft) produced a p-value=.139 which fails to reject the null hypothesis. The tallest height class (6+ feet) had a p-value=.001 which rejects the null hypothesis at the $\alpha$=.05 significance level. 
+The results from the chi-squared analysis below (Table 3) provide a statistical comparison between the actual and expected distribution of height growth increments across the inter-quantile intervals. The p-value for the overall chi-squared test (all height classes) was .000 which provides sufficient evidence to reject the null hypothesis (that the distributions are equal) at the $\alpha$=.05 significance level. However, the p-value is quite low for trees in the less than four feet initial height class (p<.0002), meaning that there is strong evidence that the expected distribution does not equal that predicted by the quantile regression. The chi-squared test for the intermediate initial height class (4-6 ft) produced a p-value=.139 which fails to reject the null hypothesis. The tallest height class (6+ feet) had a p-value=.001 which rejects the null hypothesis at the $\alpha$=.05 significance level. 
 
 When classified separately by initial height, only the intermediate class of tree (4-6 ft) produces a distribution of height growth increments across inter-quantile bins that meets our expectations (p=.139). When combined across height class, the actual height growth increments visually conform to our expectations provided by the quantile regression predictions but fail to provide a distribution that is statistically equal to our expectations. 
 

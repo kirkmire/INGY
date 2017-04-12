@@ -51,7 +51,9 @@ The other unanticipated result of the variable selection process was that the ov
 In terms of magnitude, the crown ratio and initial height effect provided the greatest marginal contribution to predicted annual height growth. High levels of TPA can have a large negative effect on the height growth. The SEA term effect is much more difficult to interpret because of the interaction terms. 
 
 
-The effects of the selected variables fell in line with expectations; however, when the effects were mapped across $\tau$ values, the effects produced some unexpected patterns. The effect of initial height is positive and increases across quantiles, meaning that the effect is estimated to become larger in the upper quantiles. Crown ratio effect is also positive and increases across quantiles. TPA has a negative effect on annual height growth and becomes more negative in the upper quantiles. It was unanticipated that the effect of TPA would change so much across quantiles, as all trees within a plot are subjected to the same level of overstory retention. Apparently, the negative effect of TPA is much more pronounced for trees in the upper quantiles (the fastest growing trees, all other variables held constant). This could be an important consideration in management as overstory retention is one of the primary ways to influence the understory development.
+The effects of the selected variables fell in line with expectations. Increases in intitial height and crown ratio contribute to increases in predicted height increment. Overstory TPA is associated with a decrease in the height growth rate that is intuitive considering the response of understory trees to the enhancement in light level provided by the canopy openings. Although it is difficult to interpret the interaction terms, increases in slope and elevation detracted from predicted tree height.
+
+When the effects were mapped across $\tau$ values, the effects produced some unexpected patterns. The effect of initial height is positive and increases across quantiles, meaning that the effect is estimated to become larger in the upper quantiles. Crown ratio effect is also positive and increases across quantiles. TPA has a negative effect on annual height growth and becomes more negative in the upper quantiles. It was unanticipated that the effect of TPA would change so much across quantiles, as all trees within a plot are subjected to the same level of overstory retention. Apparently, the negative effect of TPA is much more pronounced for trees in the upper quantiles (the fastest growing trees, all other variables held constant). This could be an important consideration in management as overstory retention is one of the primary ways to influence the understory development.
 
 
 %Model validation
@@ -67,7 +69,7 @@ Visually the results of the other initial height categories matched the expected
 
 Although there have been no other studies that predict height growth of small ponderosa pine trees with quantile regression, we can qualitatively compare our results to that of other empirical models. We can also compare the effects of our selected predictors to studies that examine specific competitive effects on small ponderosa pine growth.
 
-A study of ponderosa pine regeneration on the Nez Perce and Spokane Tribal lands found that height growth increased with increasing initial tree size and larger crown ratios (\cite{Ferguson2011}). However, this study focused on growth response of the regeneration following pre-commercial thinning. The authors also found that trees with small crown ratios; slower 5-yr pre-thinning height growth and higher height to diameter ratios had a higher probability of mortality. These characteristics of low crown ratio and little height growth were also found in trees that had were predicted to have very low (or even negative) $\tau$=.1 height growth increments. Our model does not account for mortality, but it is expected that many of the trees with very low $\tau$=.1 predicted height growth increments are succumbing to competition induced mortality.
+A study of ponderosa pine regeneration on the Nez Perce and Spokane Tribal lands found that height growth increased with increasing initial tree size and larger crown ratios (\cite{Ferguson2011}). However, this study focused on growth response of the regeneration following pre-commercial thinning. The authors also found that trees with small crown ratios; slower 5-yr pre-thinning height growth and higher height to diameter ratios had a higher probability of mortality. These characteristics of low crown ratio and little height growth were also found in trees that had were predicted to have very low (or even negative) $\tau$=.1 height growth increments. Our model does not account for mortality, but it is likely that many of the trees with very low $\tau$=.1 predicted height growth increments are succumbing to competition induced mortality.
 
 
 Salas and Stage used STCV data to develop the small tree component of their individual-tree height growth model for Inland Northwest douglas-fir height growth (\cite{Salasa}). The authors also used ``attained height'' (initial height) as a predictor variable that avoids the problems associated with tree age. They represented overstory and understory competition with basal area in larger trees and ocularly estimated understory cover, respectively. 
@@ -77,50 +79,55 @@ It was surprising that no predictors relating to crown or small tree competition
 
 Similar to the model presented in this thesis, site productivity is represented by factors other than site index (slope, elevation, aspect and ecological habitat type). As an endnote to their paper, the authors stated that they tested the inclusion of the number of small trees but found no improvement and speculate that even though the correlation between site productivity and greater understory was reduced, it was still a problem for small conifers because they were not thinned. 
 
-Although there have been no other studies that predict height growth of small ponderosa pine trees with quantile regression, we can compare our results to that of other empirical models in a qualitative sense. We can also compare the effects of our selected predictors to studies that examine specific competitive effects on small ponderosa pine growth.
 
 
-\subsection{Qualitative Comparison to the FVS Small-Tree Height Increment Model}
+The following section will compare the proposed model to that of the current standard in forest growth modeling; the Forest Vegetation Simulator (FVS, (\cite{Dixon2013a}). FVS is a distance independent growth model used to project stand level characteristics and has regional variants that cover most of the United States. The Inland Empire Variant covers most of the study sites used in this analysis (eastern Washington, north-central Idaho and Western Montana) and was originally the Prognosis model developed under the direction of Stage (\cite{Stage1973}).
+
+\subsection{Qualitative Comparison to the Inland Empire Variant FVS Small-Tree Height Increment Model}
 
 % Modeling of small trees is typically focused on height growth as it is a driving force in a tree's development as it competes for light and vertical growing space. 
 
-In the Inland Northwest, FVS is a distance independent growth model used to project stand level characteristics. The small-tree routine in FVS estimates individual height growth first. Factors used to estimate height growth include National Forest location code, habitat type, species dependent intercept, stand crown competition factor (CCF), basal area in trees larger than the subject tree, aspect, slope and initial height. The estimate e represents the mean growth of a population of trees exposed to those factors , it does not of course indicate if a particular tree will achieve that mean or not. It does not provide any information about the likelihood of a tree achieving that mean or of achieving a height growth of .5 times the mean or 1.5 times the mean. That is, no information on the probability distribution of potential growth rates for the tree. Although, there is a random error component included in the estimate.
+The small-tree routine in the Inland Empire Variant of FVS provides a 5-year estimate of individual height growth first and then estimates diameter growth from height growth (\cite{keyser2008}). The FVS small tree growth routine for the Inland Empire Variant utilizes the following equation to predict the height growth of small trees (less than 3 in DBH):
+%
+\begin{align} \label{eq:fvs_eq}
+\emph{HTG} &= exp(\emph{X}) \nonumber \\
+\emph{X}  &= [\emph{LOC}+\emph{HAB}+\emph{SPP}+_{C_1}ln\emph{HT}+_{C_2}*\emph{CCF}+ \nonumber \\
+&_{C_3}*\emph{BAL}/100+.22157*\emph{SL}*cos(\emph{ASP}) -0.12432*\emph{SL} \nonumber  \\
+&*sin(\emph{ASP}-.10987*\emph{SL})] \qquad, \nonumber \\
+\text{where}~\emph{HTG} &= \text{the estimated height growth for the cycle}, \nonumber \\
+\emph{LOC} &= \text{is a location-specific coefficient}, \nonumber \\
+\emph{HAB} &= \text{habitat type dependent intercept},\nonumber \\
+\emph{SPP} &= \text{species dependent intercept}, \nonumber \\
+\emph{CCF} &= \text{crown competition factor}, \nonumber \\
+\emph{BAL} &= \text{total basal area in trees larger than the subject tree},\nonumber \\
+\emph{ASP} &= \text{stand aspect}, \nonumber \\
+\emph{SL} &= \text{the stand slope}, \nonumber \\
+\emph{HT} &= \text{initial tree height}, \nonumber \\
+_{C_1}-_{C_3}  &= \text{species specific coefficients.}\nonumber \\
+\end{align}
+Height growth estimates from the small-tree model are weighted with the height growth estimates from the large tree model over a range of diameters in order to smooth the transition between the two models.
 
 
-The FVS small tree growth routine utilizes two equations to predict the height growth of small trees (less than 3 in DBH). Height growth estimates from the small-tree model are weighted with the height growth estimates from the large tree model over a range of diameters in order to smooth the transition between the two models (Dixon, 2013).
-\begin{singlespace}
-\begin{equation} \label{eq:fvs_eq}
-\begin{aligned}
-% \label{small_eqtest}
-\emph{HTG} &= exp(\emph{X}) \\
-\emph{X}  &= [\emph{LOC}+\emph{HAB}+\emph{SPP}+_{C_1}ln\emph{HT}+_{C_2}*\emph{CCF}+ 
-_{C_3}*\emph{BAL}/100+.22157*\emph{SL}* \\
-&cos(\emph{ASP}) -0.12432*\emph{SL} 
-*sin(\emph{ASP}-.10987*\emph{SL})], \\ \text{where}~\emph{HTG} &= \text{the estimated height growth for the cycle}, \\  
-\emph{LOC} &= \text{is a location-specific coefficient}, \\
-\emph{HAB} &= \text{habitat type dependent intercept}, \\
-\emph{SPP} &= \text{species dependent intercept}, \\
-\emph{CCF} &= \text{crown competition factor}, \\
-\emph{BAL} &= \text{total basal area in trees larger than the subject tree},\\
-\emph{ASP} &= \text{stand aspect}, \\
-\emph{SL} &= \text{the stand slope}, \\
-\emph{HT} &= \text{initial tree height}, \\
-_{C_1}-_{C_3}  &= \text{species specific coefficients}
-\end{aligned}
-\end{equation}
-\myequations{Equation number \ref{eq:fvs_eq}}
-\end{singlespace}
+The FVS small growth equation is quite similar to the model proposed in this thesis. The height growth in the FVS small tree growth equation is estimated from initial height, site quality (in terms of location, habitat type, slope and aspect), CCF and BAL. Although the FVS equation utilizes crown competition factor instead of crown ratio, both terms relate to the crown competition. However, CCF relates strictly to competition from arboreal competition whereas crown ratio may be a reflection of all competition including non-tree vegetation. Similarly, the FVS model uses basal area in trees larger to quantify competition from the larger trees whereas our model uses trees per acre.
 
-The FVS small growth equation (Eq. \ref{eq:fvs_eq}) is quite similar to the model proposed in this thesis. The height growth in the FVS small tree growth equation is estimated from initial height, site quality (in terms of location, habitat type, slope and aspect), CCF and BAL. Although the FVS equation utilizes crown competition factor instead of crown ratio, both terms relate to the crown competition. However, CCF relates strictly to competition from arboreal competition whereas crown ratio relates to all forms of aboveground vegetative competition. Similarly, the FVS model uses basal area in trees larger to quantify competition from the larger trees whereas our model uses trees per acre.
+The FVS height growth estimate represents the mean growth of a sample of small trees that have similar characteristics and growing conditions to the modeled subject tree. Alternatively, the proposed model considers the enitre range of height growth increments a given tree may be capable of. As we saw earlier, modeling the mean height growth is not approporiate because the effects of the predictors changes accross quantiles of the response distribution. 
 
-When there are many small trees, a small random error is then added to the height growth estimate. When relatively few samples represent the stand, two additional tree records are created that duplicate the characteristics of the tree except the predicted height growth and the number of trees per acre represented by the source tree (Dixon, 2013). The two new records are given 15 and 25 percent of the original value. Each of the records correspond to a portion of the error distribution of deviations about the predicted height. 
+However, FVS does accomodate multiple trajectories of the same tree record to provide some degree of variation from the mean estimate. When there are many small trees, a small random error is then added to the height growth estimate. When relatively few samples represent the stand, two additional tree records are created that duplicate the characteristics of the tree except the predicted height growth and the number of trees per acre represented by the source tree. The two new records are given 15 and 25 percent of the original value. Each of the records correspond to a portion of the error distribution of deviations about the predicted height. 
 
 %maybe include Figure 6-2 from essential FVS, norm. dev. from pred.
 
-It is within this ``tripling'' framework that our quantile regression model may find its greatest utility. Instead of drawing random increments from within the normal distribution, the three tree records could be assigned predicted quantile values for \emph{Tau}=.25, .50 and .75 and weighted similarly.  These quantile derivations of height provide a more empirically based distribution of possible height values for a given set of predictors.
+It is within this ``tripling'' framework that our quantile regression model may find its greatest utility. Instead of drawing random increments from within the normal distribution, the three tree records could be assigned predicted quantile values for \emph{Tau}= .25, .50 and .75.  These quantile derivations of height provide a more empirically based distribution of possible height values for a given set of predictors.
 
-The individual tree height growth increment model proposed in this thesis provides an idea of what the maximum growth of a given small ponderosa pine tree could be.  However, it will not be able to predict with any certainty whether a particular tree will achieve its maximum growth. If enough information was available to predict this, it would negate the need for quantile regression.  The utility of the model is in providing managers an idea of the growth rate of the fastest growing trees.
+The individual tree height growth increment model proposed in this thesis provides an idea of what the entire range of possible growth of a given small ponderosa pine tree could be.  However, it will not be able to predict with any certainty whether a particular tree will achieve its maximum growth. If enough information was available to predict this, it would negate the need for quantile regression.  The primary utility of the model is in providing managers an idea of the growth rate of the fastest growing trees and how post-harvest stand conditions such as retained overstory can be expected to effect these specific trees.
 
-Having a better idea of the growth rate of the fastest trees has a number of potential applications.  Forests managed under the Sustainable Forest Initiative (SFI) or Forest Stewardship Counsel (FSC) are required to achieve ``green-up'' whereby trees in clearcut areas are at least 3 years old or 5 meters high at a desired stocking level before adjacent units can be harvested. This could lead to better predicting when stands will reach green up.  
+Having a better idea of the growth rate of the fastest trees has a number of potential applications.  Forests managed under the Sustainable Forest Initiative (SFI) or Forest Stewardship Counsel (FSC) are required to achieve ``green-up'' whereby trees in clearcut areas are at least 3 years old or 5 meters high at a desired stocking level before adjacent units can be harvested. This could lead to better prediction of when stands will reach green up.  Another example of a possible application is an improved of when to initiate an understory thinning thinning
+
+Accurate modeling of the development of recruited and juvenile trees is crucial for simulation models to achieve a consistent simulation output (\cite{Golser1997}). When combined with a large-tree growth model such as in FVS, the proposed model could contribute to an improvement in modeling long-term stand development and enable managers to make informed decisions regarding overstory retention and understory vegetation.
+
+
+
+
+
+
 
 

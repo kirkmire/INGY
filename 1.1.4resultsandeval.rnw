@@ -208,10 +208,10 @@ print(xyplot(dmgStagm$x~dmgStagm$Year| dmgStagm$Installation,
 
 @
 \end{center}
-\caption{Small tree records removed due to damage or mortality over time.\label{fig:damageCodes}}
+\caption{Small tree records removed due to top damage or mortality over time.\label{fig:damageCodes}}
 \end{figure}
 
-The dead, dead top or animal damaged trees were removed from the model whether the damage was recorded at the beginning or end of a given interval (see Figure \ref{fig:damageCodes}). Most installations exhibited similarly low levels of mortality or other specified damage. The number of tree records removed generally does not exceed 20 trees. However, some installations such as KC, RM and CR showed high levels of mortality and damage, especially in the later years of the study. Unique trees may appear across multiple years. Any reductions in the number of tree records removed across measurement years is attributed to an improvement in tree health or an inability to locate and categorize the tree as dead or damaged.
+The dead, dead top or animal damaged trees were removed from the model whether the damage was recorded at the beginning or end of a given interval (see Figure \ref{fig:damageCodes}). Other damage codes were recorded for subject trees (see Appendix 3) but only trees with the specified damage relating directly to top damage or mortality were removed.  Most installations exhibited similarly low levels of mortality or other specified damage. The number of tree records removed generally does not exceed 20 trees. However, some installations such as KC, RM and CR showed high levels of mortality and damage, especially in the later years of the study. Unique trees may appear across multiple years. Any reductions in the number of tree records removed across measurement years is attributed to an improvement in tree health or an inability to locate and categorize the tree as dead or damaged. 
 
 \begin{figure}
 \begin{center}
@@ -377,7 +377,7 @@ print(histogram(~annual.gr4$Height_Total| annual.gr4$Installation,
  par.strip.text=list(col="black", cex=.8)),
        scales=list(
          y=list(limits=c(0,100))),
-         xlab="Total Height",
+         xlab="Total Height (ft)",
          ylab="Percent of Total"))
 
 
@@ -410,7 +410,7 @@ print(histogram(~annual.gr4$ht_annual| annual.gr4$Installation,
  par.strip.text=list(col="black", cex=.8)),
        scales=list(
          y=list(limits=c(0,100))),
-         xlab="Annualized Height Growth",
+         xlab="Annualized Height Growth (ft/yr)",
          ylab="Percent of Total"))
 
 

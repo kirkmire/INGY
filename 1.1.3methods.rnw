@@ -234,7 +234,7 @@ Average height depths for low shrubs, high shrubs, forbs were calculated for the
 
 \noindent\textbf{Retained Overstory Tree Competition:}
 
-Basal area was calculated for each live overstory tree and aggregated over each plot to provide an estimate of stand basal area (ft$^2$/ac). Crown area was obtained for each overstory tree from the average of the two perpendicular measurements of width. Total crown area was then computed in terms of percent of an acre (after summing the combined areas of trees greater than 10.5in and between 3.6in and 10.5in). Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots. Stand density index (SDI) was calculated in the following equation:
+Basal area was calculated for each live overstory tree and aggregated over each plot to provide an estimate of stand basal area (ft$^2$/ac). Crown area was obtained for each overstory tree from the average of the two perpendicular measurements of width. Total crown area was then computed in terms of percent of an acre. Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots. Stand density index (SDI) was calculated in the following equation:
 %
 \begin{align}  \label{eq:Eq0} 
 SDI = & \sqrt{(BAPA/TPA)/.005454154} \qquad, 
@@ -261,7 +261,7 @@ $el$ is elevation in feet, $\alpha$ is aspect and the $b$ are coefficients estim
 % Now check out \eqref{eq:Eq1}!
 
 
-Site index from STCV records of each installation's initiation. One or more open grown, undamaged, dominant ponderosa pine site tree was identified at the initiation of the site and site index calculated from standard site index curves for the Inland Northwest (\cite{Milner1992}) with a base age of 50 years at breast height. However, there was a single installation (Grouse Creek) that utilized douglas-fir as the site tree.
+Site trees were identified at the initiation of the study as one or more open grown, undamaged, dominant ponderosa pine. However, there was a single installation (Grouse Creek) that utilized Douglas-fir as the site tree. Site index was calculated from standard site index curves for the Inland Northwest (\cite{Milner1992}) with a base age of 50 years at breast height. 
 
 \newpage
 \subsection{Quantile Regression Modelling Framework}

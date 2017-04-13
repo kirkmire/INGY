@@ -74,7 +74,7 @@ All analyses were performed using the R statistical software \Sexpr{R.Version()$
 
 \newpage
 \newappendix{3. Damage Codes}
-\label{appendix:Damage_Codes}
+\label{appendix:Damage_Codes}\\\\\\
 
 % %<<echo=FALSE>>=
 % data.dir <- "C:/Users/Colin/Desktop/R-Projects/INGY"  # note the backward slashes, check to see if it matches Rprojects folder
@@ -107,36 +107,27 @@ All analyses were performed using the R statistical software \Sexpr{R.Version()$
 \multicolumn{1}{l}{}&\multicolumn{1}{c}{Code}&\multicolumn{1}{c}{Explanations}\tabularnewline
 \hline
 1&AD&Animal Damage\tabularnewline
-2&Bad Lean&NULL\tabularnewline
-3&Bent&NULL\tabularnewline
-4&BR&Blister rust\tabularnewline
-5&BT&Broken top\tabularnewline
-6&Canker&NULL\tabularnewline
-7&CK&Check\tabularnewline
-8&CO&Commandra Rust\tabularnewline
-9&CR&Crook\tabularnewline
-10&Dead&NULL\tabularnewline
-11&DT&Dead Top\tabularnewline
-12&Dying&NULL\tabularnewline
-13&FK&Fork\tabularnewline
-14&FT&Forked top\tabularnewline
-15&FUT&Multiple damages, too many to list\tabularnewline
-16&Gall&NULL\tabularnewline
-17&ID&Insect damage\tabularnewline
-18&Laydown&NULL\tabularnewline
-19&Lean&NULL\tabularnewline
-20&MD&NULL\tabularnewline
-21&MIA&Unable to locate tree, no evidence of death\tabularnewline
-22&Mistle&Mistletoe\tabularnewline
-23&MT&Mistletoe\tabularnewline
-24&Nearly Dead&NULL\tabularnewline
-25&PD&Pronone (herbicide) damage\tabularnewline
-26&RT&Reestablished Top\tabularnewline
-27&SC&NULL\tabularnewline
-28&Small Broom&NULL\tabularnewline
-29&SP&NULL\tabularnewline
-30&SW&Sweep\tabularnewline
-31&TK&NULL\tabularnewline
+2&BR&Blister rust\tabularnewline
+3&BT&Broken top\tabularnewline
+4&CK&Check\tabularnewline
+5&CO&Commandra Rust\tabularnewline
+6&CR&Crook\tabularnewline
+7&Dead&NULL\tabularnewline
+8&DT&Dead Top\tabularnewline
+9&FK&Fork\tabularnewline
+10&FT&Forked top\tabularnewline
+11&FUT&Multiple damages, too many to list\tabularnewline
+12&Gall&NULL\tabularnewline
+13&ID&Insect damage\tabularnewline
+14&Lean&NULL\tabularnewline
+15&MIA&Unable to locate tree, no evidence of death\tabularnewline
+16&Mistle&Mistletoe\tabularnewline
+17&MT&Mistletoe\tabularnewline
+18&PD&Pronone (herbicide) damage\tabularnewline
+19&RT&Reestablished Top\tabularnewline
+20&Small Broom&NULL\tabularnewline
+21&SW&Sweep\tabularnewline
+
 \hline
 \end{tabular}\end{center}
 \end{table}

@@ -379,7 +379,7 @@ In the first category (understory tree competition), only plots that received mu
 \subsection{Model Validation}
 
 
-To evaluate the performance of the selected model, three quantiles of the height growth response distribution (${\tau}$= .10, .50 and .90) were estimated for each individual tree in the witheld validation data set. The recorded annualized height growth increments were then classified according to where they occurred among the four interquantile intervals (i.e. <.1, .1-.5, .5-.9, >.9). The validation records were also classified into initial height classes of 1-4 feet, 4-6 feet and greater than 6 feet.
+To evaluate the performance of the selected model, three quantiles of the height growth response distribution (${\tau}$= .10, .50 and .90) were estimated for each individual tree in the witheld validation data set. The recorded annualized height growth increments were then classified according to where they occurred among the four interquantile intervals (i.e. <.1, .1-.5, .5-.9, >.9). The validation records were also classified into initial height classes of 1-5 feet, 5-10 feet and greater than 10 feet.
 
 Chi-squared tests for homogeneity were then conducted to compare the actual and expected frequencies of annual tree height growth increments across the four interquantile intervals and height classes. 
 

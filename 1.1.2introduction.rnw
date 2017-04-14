@@ -33,7 +33,7 @@ Powers et al.(\citeyear{Powers2011a}) found that variable retention harvesting c
 \begin{figure}[ht]
 \begin{center}
     \includegraphics[width=160mm]{comp_flowchart.jpg}
-    \caption{Biological framework of small tree growth. Small trees are defined as those that have a DBH less than 3.5 in}
+    \caption{Biological framework of small tree growth. Small trees are defined as those that have a DBH less than 3.5 inches.}
     \label{fig:chart}
 \end{center}
 \end{figure}
@@ -60,21 +60,21 @@ Preliminary findings from the STCV study revealed an extremely skewed distributi
 
 \subsection{Applications of Quantile Regression}
 
-The description of growth in terms of centiles has been used since the 19th century as a graphical method to monitor height-for-age and weight-for-age trajectory of infants and children (\cite{Wei2004},Koenker). Although most of these charts were created through parametric methods (\cite{SIM:SIM4780111005}), recognizing what may be considered out of the ordinary or what the maximum expected growth could be has undoubtedly provided medical practitioners with a useful tool in caring for patients. It has more recently been proven useful in evaluating and predicting other rates of change of biological growth functions near the upper boundary(\cite{Cade2003a}). 
+The description of growth in terms of centiles has been used since the 19th century as a graphical method to monitor height-for-age and weight-for-age trajectory of infants and children (\cite{Wei2004},Koenker). Although most of these charts were created through parametric methods (\cite{SIM:SIM4780111005}), recognizing what may be considered out of the ordinary or what the maximum expected growth could be has undoubtedly provided medical practitioners with a useful tool in caring for patients. It has more recently been proven useful in evaluating and predicting other rates of change of biological growth functions near the upper boundary (\cite{Cade2003a}). 
 
 Applications of quantile regression in ecology are increasingly realized. Examples include pronghorn density by forage availability where least squares fails to recognize that pronghorn densities changed at different rates as a function of shrub cover in the higher and lower quantiles. Quantile regression has also been used to reveal the effects of density dependent self-thinning processes of annual plants in the Southwestern US. This process was most evident in the upper quantiles, where competition for resources was greatest and other effects minimal (\cite{Cade2000}). Just as growth charts have assisted doctors, ecologists are benefiting from an enhanced window into the entire distribution of the response variable.
 
 
-There are few examples of quantile regression in applied forest growth modeling. However, Bohora and Cao have compared quantile regression models to mixed effect models in predicting the diameter growth of \emph{Pinus taeda}. The authors concluded that the quantile regression predictions of diameter growth increment were adequate but that the mixed model had lower bias. Coomes and Allen (\cite{Coomes2007}) used quantile regression to fit an upper boundary curve to a size-growth distribution to test similarity to the Enquist model of uninhibited growth (stem-diameter growth scales as the one-third power of stem diameter).
+There are few examples of quantile regression in applied forest growth modeling. However, Bohora and Cao (\citeyear{Bohora2014}) have compared quantile regression models to mixed effect models in predicting the diameter growth of \emph{Pinus taeda}. The authors concluded that the quantile regression predictions of diameter growth increment were adequate but that the mixed model had lower bias. Coomes and Allen (\citeyear{Coomes2007}) used quantile regression to fit an upper boundary curve to a size-growth distribution to test similarity to the Enquist model of uninhibited growth (stem-diameter growth scales as the one-third power of stem diameter).
 
-More recently, Araujo et al. utilized quantile regression to obtain localized site index curves in Eucalyptus plantation stands. The authors found that estimates made with quantile regression generate a more accurate family of height growth curves between the observed data than by the guide curve method, obtained using standard regression. These examples of successful use of quantile regression in forestry are encouraging and lend support to this effort to use it to describe the growth of ponderosa pine.
+More recently, Araujo et al. (\citeyear{Araujo2016}) utilized quantile regression to obtain localized site index curves in Eucalyptus plantation stands. The authors found that estimates made with quantile regression generate a more accurate family of height growth curves between the observed data than by the guide curve method, obtained using standard regression. These examples of successful use of quantile regression in forestry are encouraging and lend support to this effort to use it to describe the growth of ponderosa pine.
 
 
 With this in mind, the objectives of this research were to
 \begin{enumerate}
 \item{Investigate quantile regression as a methodology to describe the competitive effects of overstory and understory factors on the height growth increments of small ponderosa pine}
 \item{Assess the effects of these competitive factors across the distribution of height growth responses}
-\item{Relate findings to the standard regional modeling modling methodology for small growth}
+\item{Relate findings to the standard regional modeling methodology for small tree growth}
 \end{enumerate}
 
 The subsequent chapter describes the STCV study in detail and the modeling techniques developed. This is followed by a presentation of results, which include overarching descriptive results as well as those relating to model specification and validation. The final chapter is a discussion of the results and possible further applications. 

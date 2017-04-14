@@ -213,7 +213,7 @@ xyplot(Installation ~ Year_Measurement,
 \end{figure}
 
 
-A point of concern is that some measurements were taken at times that may not have allowed herbicide applications to take full effect. That is, several measurement years were concurrent with or followed soon after the first herbicide application. For example, TJ which was measured in 2001, concurrent with the first measurement year. This necessitated careful selection of the appropriate measurement years on an installation-by-installation basis. The ``first interval years'' were selected such that one to three years had elapsed since the initial herbicide application to allow for the herbicide to take effect. 
+A point of concern is that some measurements were taken at times that may not have allowed herbicide applications to take full effect. That is, several measurement years were concurrent with or followed soon after the first herbicide application. For example, the TJ installation was measured in 2001, concurrent with the first measurement year. This necessitated careful selection of the appropriate measurement years on an installation-by-installation basis. The ``first interval years'' were selected such that one to three years had elapsed since the initial herbicide application to allow for the herbicide to take effect. 
 
 
 \newpage
@@ -222,7 +222,7 @@ A point of concern is that some measurements were taken at times that may not ha
 \noindent\textbf{Understory Tree Competition:}
 
 
-The small trees in each small tree subplot (STP) were tallied by height class and then multiplied by 138.73 to obtain per acre estimates.  The number of trees taller than the subject tree was also found by summing all small tree tallies with height class midpoints greater than the height of the subject tree. Crown length was found by subtracting the crown base from the total height (crown base is considered the height of the lowest contiguous branch). Crown width was found as an average of the two perpendicular measurements of crown width obtained in the field. Crown ratio was obtained by dividing the crown length by the total tree height. Basal diameter and diameter at breast height were measured at 1 in above root collar and at 4.5 ft, respectively.
+The small trees in each small tree subplot (STP) were tallied by height class and then multiplied by 138.73 to obtain per acre estimates.  The number of trees taller than the subject tree was also found by summing all small tree tallies with height class midpoints greater than the height of the subject tree. Crown length was found by subtracting the crown base from the total height (crown base is considered the height of the lowest contiguous branch). Crown width was found as an average of the two perpendicular measurements of crown width obtained in the field. Crown ratio was obtained by dividing the crown length by the total tree height. Basal diameter and diameter at breast height (dbh) were measured at 1 in above root collar and at 4.5 ft, respectively.
 
 \noindent\textbf{Understory Vegetation Competition:}
 
@@ -234,7 +234,7 @@ Average height depths for low shrubs, high shrubs, forbs were calculated for the
 
 \noindent\textbf{Retained Overstory Tree Competition:}
 
-Basal area was calculated for each live overstory tree and aggregated over each plot to provide an estimate of stand basal area (ft$^2$/ac). Crown area was obtained for each overstory tree from the average of the two perpendicular measurements of width. Total crown area was then computed in terms of percent of an acre. Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots. Stand density index (SDI) was calculated in the following equation:
+Basal area was calculated for each live overstory tree and aggregated over each plot to provide an estimate of stand basal area (ft$^2$/ac, BAPA). Crown area was obtained for each overstory tree from the average of the two perpendicular measurements of width. Total crown area was then computed in terms of percent of an acre (CAPA). Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots. Stand density index (SDI) was calculated in the following equation:
 %
 \begin{align}  \label{eq:Eq0} 
 SDI = & \sqrt{(BAPA/TPA)/.005454154} \qquad, 
@@ -269,7 +269,7 @@ Site trees were identified at the initiation of the study as one or more open gr
 The desire to focus on the full distribution of growth rates naturally led to an investigation of quantile regression (\cite{Koenker_2009}). This technique allows for the characterization of multiple quantiles of the height growth responses of small trees. Quantile regression utilizes the simplex algorithm (as opposed to least-squares) to calibrate linear regression functions to describe a specified or set of specified quantiles (${\tau}$) of the response distribution. Specifying the .90 quantile (${\tau}$=.90), for example, allows for the examination of the ``maximum'' or upper \nth{10} percentile of the height growth response distribution and its relationship with stand and site factors. By contrast, ${\tau}$=.50 would describe the median height growth response.
 
 
-This characterization of the response distribution also allows for predictor variables to have different effects across quantiles. The quantile regression visualization shown in Figure \ref{fig:quant_reg} compares three quantiles of the annual height growth response against overstory basal area and site index. In this example, the ${\tau}$=.10 quantile plane shows very little response for both overstory basal area and site index. However, the height growth in the ${\tau}$=.90 and ${\tau}$=.50 quantile planes change readily as site index and retained basal area respectively increase and decrease. Although not the case in this example, the factors that affect the growth of the slowest growing trees may not influence the growth of the fastest growing trees or vice versa. In an extreme case, the factors may even have opposing signs across quantile planes.
+This characterization of the response distribution also allows for predictor variables to have different effects across quantiles. The quantile regression visualization shown in Figure \ref{fig:quant_reg} compares three quantiles of the annual height growth response against overstory basal area and site index. In this example, the ${\tau}$=.10 quantile plane shows very little response for both overstory basal area and site index. However, the height growth in the ${\tau}$=.90 and ${\tau}$=.50 quantile planes change readily as site index and retained basal area respectively increase and decrease. The factors that affect the growth of the trees in the lower portion of height growth responses may not influence the growth observed in the upper portion of the response distribution or vice versa. In an extreme case, the factors may even have opposing signs between quantile planes.
 
 \begin{figure} 
 \begin{center}
@@ -359,7 +359,7 @@ $i$ is the unique tree,~$t$ is year, &~$j$ is the measurement period.
 % \caption{Site Index and Overstory Basal Area at Initiation\label{fig:siteOverstory}}
 % \end{figure}
 
-It was also during this stage of preparation that small tree damage codes were screened. Over the years many of the small tagged trees endured some kind of damage including mortality, broken tops, forked tops, sweep or animal damage. Dead trees and those with dead tops were removed from analysis since these trees typically experienced a decrease in height growth from the previous measurement year. See Appendix 3 for the complete list of damage codes recorded. All tree records that exhibited a negative height growth increment were also removed from consideration since this indicated either a measurement error or some mis-recorded damage to the top.
+It was also during this stage of preparation that small tree damage codes were screened. Over the years, many of the small tagged trees endured some kind of damage, including, but not limited to, mortality, broken tops, forked tops, sweep or animal damage. See Appendix 3 for the complete list of damage codes recorded. Dead trees and those with dead tops were removed from analysis since these trees typically exhibited a decrease in height growth from the previous measurement year. All tree records that exhibited a negative height growth increment were also removed from consideration since this indicated either a measurement error or some mis-recorded damage to the top.
 
 
 

@@ -73,7 +73,7 @@ print(xyplot(agg.over.data.TPA$TPA~ agg.over.data.TPA$Year_MeasurementOS | agg.o
  \caption{Interpolated overstory TPA by study site, plot and year.\label{fig:os_tpa_inst}}
  \end{figure}
  
-Figure \ref{fig:os_tpa_inst} shows the plot-level interpolations of overstory trees per acre. Most plots stayed constant in the number of overstory trees. However, due to mortality, there may be slight differences. Within installations, there is noticeable variation in overstory trees per acre between plots. This is usually advantageous in model-building as it provides a range of overstory conditions within each installation. However, due to the understory treatments, a homogeneous overstory condition is favorable to isolate the understory effects. Fortunately, for most installations the plot levels are similar (LF seems to be the exception).
+Figure \ref{fig:os_tpa_inst} shows the plot-level interpolations of overstory trees per acre. Most plots stayed constant in the number of overstory trees per acre. However, due to mortality, there may be slight differences. For most installations the overstory retention levels are similar. Within several installations, there is noticeable variation in overstory trees per acre between plots.  Installations LF (Lubrecht Forest) and EM (Empey Mountain) show considerible differences in overtory TPA between plots.
 
 \begin{figure} 
 \begin{center}
@@ -157,7 +157,7 @@ $3$&$411$&$1233$\tabularnewline
 \end{tabular}\end{center}
 \end{table}
 
-Table 1 is related  to Figure \ref{fig:numbPond} in that it reveals the number of times a unique tree contributed to the model. A nearly equal amount of trees contributed to the model over either one, two or three measurement intervals. Ultimately, the majority of the tree records come from trees that were included over three intervals.
+Table 1 is related  to Figure \ref{fig:numbPond} in that it reveals the number of times a unique tree contributed to the model. A nearly equal amount of trees contributed to the model over either one, two or three measurement intervals. Ultimately, the majority of the tree records were from trees that were included over three intervals.
 
 
 \begin{figure} 
@@ -421,7 +421,7 @@ print(histogram(~annual.gr4$ht_annual| annual.gr4$Installation,
  \end{figure}
 
   
-Ponderosa pine vary in annual height growth according to which installation they are located within (Figure \ref{fig:init_ht_by_inst}). The asymmetric, right skewed distribution reveals that most subject trees experience annual height growth between 0 and 2 ft with very few trees exceeding 2 ft. Note that the distribution itself changes between installations. Some installations such as TP and KC have a vary narrow distribution of annualized height growth which indicates that most trees are experiencing similar levels of growth.  In these stands, this can likely be attributed to their dense understory regeneration in which trees struggle similarly for resources. In contrast, installations such as GC and BC have fairly even distributions of annual height which indicates differentiation in competition and a corresponding wide range of initial heights.
+Ponderosa pine vary in annual height growth according to which installation they are located within (Figure \ref{fig:init_ht_by_inst}). The asymmetric, right skewed distributions reveal that most subject trees experience annual height growth between 0 and 2 ft with very few trees exceeding 2 ft. Note that the distribution itself changes between installations. Some installations such as TP and KC have a vary narrow distribution of annualized height growth which indicates that most trees are experiencing similar levels of growth.  In these stands, this can likely be attributed to their dense understory regeneration in which trees struggle similarly for resources. In contrast, installations such as GC and BC have fairly even distributions of annual height which indicates differentiation in competition and a corresponding wide range of initial heights.
 
 \begin{figure} 
 \begin{center}
@@ -447,7 +447,9 @@ print(xyplot(annual.gr4$ht_annual~annual.gr4$Height_Total,
  \caption{Annualized height growth increment vs. initial height.\label{fig:delta_ht_init}}
  \end{figure}
  
-Annual height growth increment tends to increase with initial height (Figure \ref{fig:delta_ht_init}). However, the variability in height growth also increases with initial height. While taller trees tend to exhibit greater annual height growth, the variability in height growth also increases with initial height (non-homogeneous variance). The point cloud is most dense where values for both annual height growth and initial height are smallest. This reveals that most of the tree records used for this model represent shorter in stature trees that exhibit only modest increases in height growth increment. Despite this concentration of shorter subject trees, there is a wide range of both initial height values and annualized height growth that includes trees greater than 25 ft tall and trees that experience approximately 3 feet of annual growth.
+Annual height growth increment tends to increase with initial height (Figure \ref{fig:delta_ht_init}). This relationship was positive although weak and increasing in variance with points fanning out from the origin in decreasing density. This reveals that most of the tree records used for this model represent shorter in stature trees that exhibit only modest increases in height growth increment. Despite this concentration of shorter subject trees, there is a wide range of both initial height values and annualized height growth that includes trees greater than 25 ft tall and trees that experience approximately 3 feet of annual growth. While taller trees tend to exhibit greater annual height growth, the variability in height growth also increases with initial height (non-homogeneous variance). 
+
+
  
 
 
@@ -512,12 +514,11 @@ Crown ratio (crown length/total height) appears to act as an upper limit to annu
 %  \caption{Crown Ratio vs. Initial height (ft)\label{fig:init_ht_cratio}}
 %  \end{figure}
 
-As initial height increases, the lower limit of the crown ratio response increases. As subject tree height increases, the variability of the response distribution of crown ratio also decreases. Trees that are exceedingly tall nearly always have high crown ratios. In contrast, the range of variability in the shorter trees corresponds to a wide range of crown ratios. These findings relate physiologically to the relationship between the crown as a driver of growth and tree height; a full crown is necessary to achieve such stature.
+As initial height increases, the lower extent of crown ratio response increases. As subject tree height increases, the variability of the response distribution of crown ratio also decreases. Trees that are exceedingly tall nearly always have high crown ratios. In contrast, the range of variability in the shorter trees corresponds to a wide range of crown ratios. These findings relate physiologically to the relationship between the crown as a driver of growth and tree height; a full crown is necessary to achieve such stature.
 
 
 
-\newpage
-\subsection{Variable Selection}
+
 
 \begin{table}[!tbp]
 \caption{Candidate variables and associated sample size (n) and AIC.}
@@ -547,6 +548,9 @@ As initial height increases, the lower limit of the crown ratio response increas
 \hline
 \end{tabular}\end{center}
 \end{table}
+
+\newpage
+\subsection{Variable Selection}
 
 The primary form of the model included the square root of initial height, since it was found to be have a strong, positive, linear relationship with height growth increment (Figure \ref{fig:seqgam}). The generalized additive model (GAM) in this figure shows the predicted value of height increment as a function of initial height. Generally, the taller the tree at the beginning of the period, the greater the height growth increment. 
 
@@ -707,7 +711,7 @@ $cr$ is the crown ratio, $TPA$ is the overstory trees per acre and $S$ is the sl
 % \caption{Residual values vs. fitted values of height growth increment for $\tau$=.5.\label{fig:qr5resid}}
 % \end{figure}
 
-The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the variance of the residuals is split roughy proportionally above and below zero. This result is expected as the median ($\tau$=.5) quantile regression is specified to describe the linear trends in the central portion of the response distribution. The model seems to do this well as the residuals appear to be evenly distributed above and below zero. Figure (\ref{fig:qr1resid}) reveals that most residuals are greater than zero for the $\tau$=.1 quantile that describes the lower portion of the response distribution. However, for all positive values of predicted height, there are a number of number of negative residuals. In the $\tau$=.9 quantile, most residuals are found to be negative but there is a modest number of postie residuals across all predicted height increments. Collectively, these residual plots show that the three fitted quantile regression models describe a broad range of the annual height growth response distribution.
+The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the variance of the residuals is split roughy proportionally above and below zero. This result is expected as the median ($\tau$=.5) quantile regression is specified to describe the linear trends in the central portion of the response distribution. The model seems to do this well as the residuals appear to be evenly distributed above and below zero. Figure (\ref{fig:qr1resid}) reveals that most residuals are greater than zero for the $\tau$=.1 quantile that describes the lower portion of the response distribution. However, for all positive values of predicted height, there are a number of number of negative residuals. In the $\tau$=.9 quantile, most residuals are found to be negative but there is a modest number of positive residuals across all predicted height increments. Collectively, these residual plots show that the three fitted quantile regression models describe a broad range of the annual height growth response distribution.
 
 
 \begin{figure}[!htb]
@@ -723,7 +727,7 @@ The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the varian
   \includegraphics[width=\linewidth]{tpa_coef.png}
   \subcaption{Coefficient plot of TPA.}\label{fig:os_tpa_coef}
 \endminipage
-\caption{Quantile regression coefficient estimates and 95\% confidence intervals accross $\tau$=1-9.}
+\caption{Quantile regression coefficient estimates and 95\% confidence intervals accross $\tau$=1-9.}\label{fig:coefplot}
 \end{figure}
 
 

@@ -74,7 +74,7 @@ All analyses were performed using the R statistical software \Sexpr{R.Version()$
 
 \newpage
 \newappendix{3. Damage Codes}
-\label{appendix:Damage_Codes}\\\\\\
+\label{appendix:Damage_Codes}
 
 % %<<echo=FALSE>>=
 % data.dir <- "C:/Users/Colin/Desktop/R-Projects/INGY"  # note the backward slashes, check to see if it matches Rprojects folder
@@ -135,10 +135,7 @@ All analyses were performed using the R statistical software \Sexpr{R.Version()$
 \newpage
 \newappendix{4. Tables of Predictor Variables}
 \label{appendix:pred_var}
-
-
-
-\begin{table}
+\begin{table}[!htb]
 \begin{center}
 \begin{tabular}{lllll}
 \hline\hline
@@ -176,21 +173,21 @@ Grass transect cover&\%&transect x interval&G.tran.cov\tabularnewline
 Tallest veg - subject tree (1m2)&ft&tree x interval&max.vg.diff.1m\tabularnewline
 Tallest veg - subject tree (transect)&ft&tree x interval&max.vg.diff.tr\tabularnewline
 \hline
-\textbf{Overstory}&&&\tabularnewline
+\textbf{Overstory Tree}&&&\tabularnewline
 \hline
 Trees per acre&#/ac&plot x interval&tpa\tabularnewline
 Basal area per acre&ft$^2$/ac&plot x interval&bapa\tabularnewline
 Crown area per acre&\%&plot x interval&capa\tabularnewline
 Stand Density Index&&plot x interval&SDI\tabularnewline
 \hline
-\textbf{Site}&&&\tabularnewline
+\textbf{Site Quaility}&&&\tabularnewline
 \hline
 Slope&\%&plot &s\tabularnewline
 Elevation&m&plot&el\tabularnewline
 Aspect&deg. N&plot&asp\tabularnewline
 Site index&ft&installation&SI\tabularnewline
 Slope, aspect, elevation term&?&plot&SEA, S\tabularnewline
-\hline
+
 \end{tabular}\end{center}
 \end{table}
 
@@ -198,11 +195,7 @@ Slope, aspect, elevation term&?&plot&SEA, S\tabularnewline
 \newpage
 \newappendix{5. Tables of Parameter Estimates for LQMMs }
 \label{appendix:par_est}
-
-%Parameter Estimates for the proposed height growth model
-
-
-\begin{table}
+\begin{table}[!htb]
 \caption{Parameter Estimates for the $\tau$=.1 Quantile}
 \begin{center}
 \begin{tabular}{lrrrr}
@@ -227,7 +220,7 @@ slopePercent:sin_rad_asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 3.6603$&$0.0003$\ta
 \hline
 \end{tabular}\end{center}
 \end{table}
-
+%
 \begin{table}
 \caption{Parameter Estimates for the $\tau$=.5 Quantile}
 \begin{center}
@@ -253,8 +246,8 @@ slopePercent:sin_rad_asp:I(elevation^2)&$ 0.0000$&$0.0000$&$ 6.3018$&$0.0000$\ta
 \hline
 \end{tabular}\end{center}
 \end{table}
-
-\begin{table}[!htb]
+%
+\begin{table}
 \caption{Parameter Estimates for the $\tau$=.9 Quantile}
 \begin{center}
 \begin{tabular}{lrrrr}

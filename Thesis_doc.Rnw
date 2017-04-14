@@ -5,17 +5,19 @@
 %%%%%%%%  Packages   %%%%%%%%%%%%%%%%
 \usepackage{amsmath,amssymb}
 \usepackage[english]{babel}
+\usepackage{csquotes}
 \usepackage{graphicx} 
 \usepackage{nth}
 \usepackage{indentfirst}
 \usepackage{times}
+\usepackage{gensymb}
 \usepackage{array}
 \usepackage{setspace}
 \usepackage{etoolbox}
 \BeforeBeginEnvironment{equation}{\begin{singlespace}}
 \AfterEndEnvironment{equation}{\end{singlespace}\noindent\ignorespaces}
 \usepackage{subcaption}
-\usepackage[style=authoryear, backend=bibtex]{biblatex}
+\usepackage[style=authoryear,doi=false,url=false, backend=bibtex]{biblatex}
 \usepackage{filecontents}
 \addbibresource{library.bib}
 \addbibresource{other.bib}

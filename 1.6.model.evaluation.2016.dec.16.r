@@ -145,15 +145,15 @@ qr.SI.9 <-rq(ht_annual~srHeight_Total+
 # library(Hmisc)
 # latex(pred.tab, file="", rowname = "")
 # 
-# qr.SI.1.sum<-summary(qr.SI.1)
+# qr.SI.1.sum<-signif(summary(qr.SI.1)$coefficient,digits=3)
 # qr.SI.1.tab<-round(qr.SI.1.sum$coefficients,4)
 # latex(qr.SI.1.tab, file="")
 # 
-# qr.SI.5.sum<-summary(qr.SI.5)
+# qr.SI.5.sum<-signif(summary(qr.SI.5)$coefficient,digits=3)
 # qr.SI.5.tab<-round(qr.SI.5.sum$coefficients,4)
 # latex(qr.SI.5.tab, file="")
 # 
-# qr.SI.9.sum<-summary(qr.SI.9)
+# qr.SI.9.sum<-signif(summary(qr.SI.9)$coefficient,digits=3)
 # qr.SI.9.tab<-round(qr.SI.9.sum$coefficients,4)
 # latex(qr.SI.9.tab, file="")
 
@@ -285,25 +285,24 @@ for(i in 1:nrow(annual.gr4)){
 #Chi Squared test of homogeneity
 
 
-# annual.gr6.lessthan4<-annual.gr6[annual.gr6$Height_Total<4,]
-# annual.gr6.4to6<-annual.gr6[4<annual.gr6$Height_Total&annual.gr6$Height_Total<6,]
-# annual.gr6.6plus<-annual.gr6[annual.gr6$Height_Total>6,]
+# annual.gr6.lessthan5<-annual.gr6[annual.gr6$Height_Total<5,]
+# annual.gr6.5to10<-annual.gr6[5<annual.gr6$Height_Total&annual.gr6$Height_Total<10,]
+# annual.gr6.10plus<-annual.gr6[annual.gr6$Height_Total>10,]
 # #
-# x.table1<-t(aggregate(annual.gr6.lessthan4$counts, by=list(Category=annual.gr6.lessthan4$response.cat), FUN=sum))
+# x.table1<-t(aggregate(annual.gr6.lessthan5$counts, by=list(Category=annual.gr6.lessthan5$response.cat), FUN=sum))
 # x.table1<-x.table1["x",]
 # x.table1<-as.numeric(x.table1)
-# x.table1<-c(x.table1,0)
 # 
-# x.table2<-t(aggregate(annual.gr6.4to6$counts, by=list(Category=annual.gr6.4to6$response.cat), FUN=sum))
+# x.table2<-t(aggregate(annual.gr6.5to10$counts, by=list(Category=annual.gr6.5to10$response.cat), FUN=sum))
 # x.table2<-x.table2["x",]
 # x.table2<-as.numeric(x.table2)
 # 
-# x.table3<-t(aggregate(annual.gr6.6plus$counts, by=list(Category=annual.gr6.6plus$response.cat), FUN=sum))
+# x.table3<-t(aggregate(annual.gr6.10plus$counts, by=list(Category=annual.gr6.10plus$response.cat), FUN=sum))
 # x.table3<-x.table3["x",]
 # x.table3<-as.numeric(x.table3)
 # 
 # brkdwn<-rbind(x.table1,x.table2,x.table3)
-# rownames(brkdwn)<-c("<4","4-6",">6")
+# rownames(brkdwn)<-c("<5","5-10",">10")
 # colnames(brkdwn)<-c(".1-.5",".5-.9","<.1",">.9")
 # 
 # 
@@ -315,13 +314,13 @@ for(i in 1:nrow(annual.gr4)){
 # xsq3$observed
 # 
 # exp.tab<-rbind(xsq1$expected,xsq2$expected,xsq3$expected)
-# rownames(exp.tab)<-c("<4","4-6",">6")
+# rownames(exp.tab)<-c("<5","5-10",">10")
 # colnames(exp.tab)<-c(".1-.5",".5-.9","<.1",">.9")
 # 
 # 
 # totals<-c(sum(brkdwn[,1]),sum(brkdwn[,2]),sum(brkdwn[,3]),sum(brkdwn[,4]))
 # tot.test<-chisq.test(totals,p=c(.4,.4,.1,.1))
-# 
+# tot.test$expected
 # summary(tot.test)
 # tot.test$observed
 # 
@@ -333,12 +332,12 @@ for(i in 1:nrow(annual.gr4)){
 # 
 # 
 # rownames(chisq)<-c("P-Value","Number of Trees")
-# colnames(chisq)<-c("<4","4-6",">6","All")
+# colnames(chisq)<-c("<5","5-10",">10","All")
 # 
-# #
-# #
-# # #The code below will produce output that can then be copied over to the .tex file
-# 
+# # #
+# # #
+# # # #The code below will produce output that can then be copied over to the .tex file
+# # 
 # ptab<-read.csv("P_table.csv")
 # library(Hmisc)
 # #

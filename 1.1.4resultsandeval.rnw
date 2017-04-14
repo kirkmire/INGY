@@ -650,7 +650,7 @@ Figure \ref{fig:Sea_heat} illustrates the relative effects of the slope and elev
   \includegraphics[width=\linewidth]{slope_elevation_NW.png}
   \subcaption{North-west aspect (315\degree)}\label{fig:se_nw}
 \endminipage\hfill
-\caption{Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (m). Lighter shades indicate a greater predicted height growth increment. Initial height= 1ft, crown ratio=.5, overstory TPA=40.}\label{fig:SEA_heat}
+\caption{Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (m). Lighter shades indicate a greater predicted height growth increment. Initial height= 1ft, crown ratio=.5, overstory TPA=40.}\label{fig:Sea_heat}
 \end{figure}
 
 
@@ -842,7 +842,7 @@ As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was
 \begin{center}
 <<label=validres,fig=TRUE,echo=FALSE>>=
 
-print(barchart(sorted.totals2$x~sorted.totals2$Category, names = "Quantile Bin",
+print(barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
         ylim=c(0,.60),
         col=myColours[4],

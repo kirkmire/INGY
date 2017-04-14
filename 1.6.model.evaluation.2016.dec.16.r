@@ -160,7 +160,7 @@ annual.gr6$qr.pred.one <- predict.rq(qr.SI.1, annual.gr6)
 annual.gr6$qr.pred.five <- predict.rq(qr.SI.5, annual.gr6)
 annual.gr6$qr.pred.nine <- predict.rq(qr.SI.9, annual.gr6)
 
-curiosity<-annual.gr6[annual.gr6$qr.pred.one<0,]
+# curiosity<-annual.gr6[annual.gr6$qr.pred.one<0,]
 
 valid.func<-function(annualht,qr.pred.one,qr.pred.five,qr.pred.nine){
   # annualht<-1.2
@@ -204,17 +204,18 @@ sorted.totals<-aggregate(annual.gr6$counts,
 # library(RColorBrewer)
 # library(lattice)
 # 
-sorted.totals2$x<-sorted.totals$x/sum(sorted.totals$x)
+sorted.totals$x<-sorted.totals$x/sum(sorted.totals$x)
 
 
-sorted.totals2$Category= factor(sorted.totals2$Category,
+
+sorted.totals$Category= factor(sorted.totals$Category,
                                 levels = c("< .1",
                                            ".1 - .5",
                                            ".5 - .9",
                                            "> .9"),
                                 ordered=TRUE)
 
-barchart(sorted.totals2$x~sorted.totals2$Category, names = "Quantile Bin",
+barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
         main = "Witheld Data Height Growth Response
         sorted by Quantile Category",ylim=c(0,.60),

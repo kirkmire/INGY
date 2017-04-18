@@ -166,8 +166,9 @@ Table 1 is related  to Figure \ref{fig:numbPond} in that it reveals the number o
 dmgStagm<- merge(stagm, stag,by=c("Installation","Plot","STP","Tree"))
 dmgStagm<-dmgStagm[! dmgStagm$Installation %in% drp60,]
 dmgStagm<-dmgStagm[!dmgStagm$Year_Measurement==dmgStagm$Year_Growth,]
+dmgStagm<-dmgStagm[dmgStagm$Damage %in% damageRemoved,]
 dmgStagm<-dmgStagm[dmgStagm$Species=="PIPO",]
-
+unique(dmgStagm$Installation)
 # keep the right growth periods
 keep <- unique(timeline[,c("Installation","Year_Measurement")])
 keep <- keep[!is.na(keep$Year_Measurement),]
@@ -181,7 +182,7 @@ dmgStagm$conc<-paste(dmgStagm$Installation,dmgStagm$Plot,dmgStagm$STP,
 #Selects the first unique tree record
 # dmgStagm<-dmgStagm[!duplicated(dmgStagm$conc), ]
 
-dmgStagm<-dmgStagm[dmgStagm$Damage %in% damageRemoved,]
+
 
 dmgStagm[dmgStagm=="D"]<-"DEAD"
 dmgStagm[dmgStagm=="DT AD"]<-"AD"
@@ -208,7 +209,7 @@ print(xyplot(dmgStagm$x~dmgStagm$Year| dmgStagm$Installation,
 
 @
 \end{center}
-\caption{Small tree records removed due to top damage or mortality over time.\label{fig:damageCodes}}
+\caption{Small tree records removed due to top damage or mortality over time.\label{fig:damageCodes}. Installation PC (Pine Creek) had no removed records over the measurement periods.}
 \end{figure}
 
 The dead, dead top or animal damaged trees were removed from the model whether the damage was recorded at the beginning or end of a given interval (see Figure \ref{fig:damageCodes}). Other damage codes were recorded for subject trees (see Appendix 3) but only trees with the specified damage relating directly to top damage or mortality were removed.  Most installations exhibited similarly low levels of mortality or other specified damage. The number of tree records removed generally does not exceed 20 trees. However, some installations such as KC, RM and CR showed high levels of mortality and damage, especially in the later years of the study. Unique trees may appear across multiple years. Any reductions in the number of tree records removed across measurement years is attributed to an improvement in tree health or an inability to locate and categorize the tree as dead or damaged. 

@@ -20,18 +20,21 @@ source(paste(getwd(),'/1.6.model.evaluation.2016.dec.16.r',sep=""), echo=FALSE)
 \subsection{Installation Characteristics}
 \doublespacing
 
-\begin{figure} 
+
+
+Figure \ref{fig:polar_plot} describes the elevation and directional distributions of plots by installation. All plots range in elevation between 600 and 1200 m. Plots within the same installation have generally similar values of elevation and aspect. The Loon Lake (LL) and Cemetery Ridge (CR) installation are notable exceptions where the topography was fairly flat and thus aspect varied within the installation's plots. There is a broad range of aspects and elevations as plots are well-distributed among the regions of the polar plot.
+
+\begin{figure}[!h]
 \begin{center}
     \includegraphics{polar_plot.jpg}
     \caption{Aspect and elevation by plot and installation.\label{fig:polar_plot}}
 \end{center}
 \end{figure}
 
-The polar plot above (Figure \ref{fig:polar_plot}) describes the elevation and directional distributions of plots by installation. All plots range in elevation between 600 and 1200 m. Plots within the same installation have generally similar values of elevation and aspect. The Loon Lake (LL) and Cemetery Ridge (CR) installation are notable exceptions where the topography was fairly flat and thus aspect varied within the installation's plots. There is a broad range of aspects and elevations as plots are well-distributed among the regions of the polar plot.
 
 \begin{figure} 
 \begin{center}
-    \includegraphics{SI_OSBA_inst.jpg}
+    \includegraphics{SI_OSBA_inst.JPG}
     \caption{Site index and initial basal area per acre (ft$^2$/ac).\label{fig:SI.vs.BAPA}}
 \end{center}
 \end{figure}
@@ -604,7 +607,7 @@ Proceeding forward from the primary model to the small tree category of competit
 % \end{figure}
 
 
-The understory non-arboreal vegetation candidate variables failed to provide an AIC significantly less than that of including only the two previously selected variables. The only variables that offered even marginal improvement over the previous iteration of the model were the 1m&^2$ \% cover of all non-arboreal vegetation (POLV.cov) and transect measured grass depth (G.tran.depth). However, the inclusion of these variables is hardly justified considering the modest improvement they provide and the impracticality of measuring either in the field. Therefore, no candidate variable was selected from this category of competition.
+The understory non-arboreal vegetation candidate variables failed to provide an AIC significantly less than that of including only the two previously selected variables. The only variables that offered even marginal improvement over the previous iteration of the model were the 1m$^2$ \% cover of all non-arboreal vegetation (POLV.cov) and transect measured grass depth (G.tran.depth). However, the inclusion of these variables is hardly justified considering the modest improvement they provide and the impracticality of measuring either in the field. Therefore, no candidate variable was selected from this category of competition.
 
 The overstory candidate variable with the lowest AIC was trees per acre (TPA). The measure of crown area per acre (CAPA) provided a close second and basal area per acre (BAPA) was also much lower than the previous iteration of the model. The GAM of TPA shows that predicted height increment decreases steeply between 0 and 40 TPA but appears to flatten past 40 TPA (Figure \ref{fig:seqgamOSTPA}). As a predictor of height growth increment, TPA is important to distinguish between clearcut (0 TPA) and modest overstory retention levels. However, beyond 40 TPA, it fails to relate to predicted height growth increment.
 

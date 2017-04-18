@@ -58,8 +58,16 @@
 
 \SweaveInput{1.1.4discussion.rnw}
 
-\SweaveInput{1.1.5bibliographyandappend.rnw}
 
- 
+\newpage
+\begin{center}
+\section{Literature Cited}
+\end{center}
+\normalsize
+%\doublespacing
+
+\printbibliography
+
+\SweaveInput{1.1.5bibliographyandappend.rnw}
 
 \end{document}

@@ -65,7 +65,7 @@ Twenty-nine STCV study sites were established on private, public and tribal fore
 % # @
 % # 
 
-\begin{figure} 
+\begin{figure}[!h]
 \begin{center}
     \includegraphics{map_w_dots2.jpg}
     \caption{Map of STCV Installations, those included in this study labeled with a black circle.
@@ -90,7 +90,12 @@ The year of initiation varied across installations with most being established i
 \begin{figure} 
 \begin{center}
 <<label=samplePlot,fig=TRUE,echo=FALSE>>=
-source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=FALSE)
+if (Sys.info()['sysname']=="Linux"){
+  source(file.path(getwd(),'dlra_code','1.readdata.R'), echo=FALSE)
+} else {
+  source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=FALSE)
+}
+
 source(paste(getwd(),'/other_code/18.database.error.corrections.2016jun16.r',sep=""), echo=FALSE)
 source(paste(getwd(),'/1.1annualizedht.2016.dec.16.r',sep = ""), echo=FALSE)
 
@@ -295,7 +300,7 @@ Only the installations with greater than 60 ponderosa pine tagged small trees at
 y_{i,j}=&(h_{i,j+1}-h_{i,j})/(t_{i,j+1}-t_{i,j}) \qquad, 
 \end{align}
 where~$y$ is the annualized growth response in feet, $h$ is the height in feet, 
-$i$ is the unique tree,~$t$ is year, &~$j$ is the measurement period.
+$i$ is the unique tree, $t$ is year, $j$ is the measurement period.
 
 % \begin{figure}
 % \begin{center}

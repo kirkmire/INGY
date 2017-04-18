@@ -144,23 +144,37 @@ print(barchart(inst_count$Freq~ inst_count$annual.gr4.Installation,
 
 The number of tagged ponderosa pine trees at initiation is not ultimately reflective of how many tree records each installation represents. The number of measurement intervals included from each installation as well as an account of tree records excluded due to mortality/damage/missing are necessary considerations to express the relative contribution of each installation to the model. Figure \ref{fig:numbPond} shows that when these factors are accounted for, many installations contribute over 150 tree records to the model, while installations with only a single measurement interval included Round Mountain (RM) and TJ's Installation (TJ) actually contributed less than 60 tree records. There were five installations that had tagged ponderosa pine tree records in excess of 200 and two that had over 300: Emphey Mountain (EM) and Lubrecht Forest (LF). 
 
+<<label=distinctrecords,echo=FALSE,results=tex>>=
+library(xtable)
+remeas.struct <- data.frame(obs=c(2,3,4),
+           trees=as.numeric(table(table(annual.gr4$conc))))
+remeas.struct$rec <- (remeas.struct[,1]-1)*remeas.struct[,2]
+colnames( remeas.struct ) <- c( "Number of measurements", 
+                                "Number of trees", 
+                                "Number of growth records" ) 
+print(xtable(remeas.struct,
+       caption="Number of tree records from each unique tree.",
+       label="tab:tree.counts",
+       digits=0),
+      include.rownames=F)
+@
 
 
-\begin{table}\label{tab:tree.counts}
-\caption{Number of tree records from each unique tree.}
-\begin{center}
-\begin{tabular}{lll}
-\hline\hline
-\multicolumn{1}{c}{Number of Observations}&\multicolumn{1}{c}{Number of Trees}&\multicolumn{1}{c}{Number of Tree Records}\tabularnewline
-\hline
-$1$&$425$&$425$\tabularnewline
-$2$&$475$&$950$\tabularnewline
-$3$&$411$&$1233$\tabularnewline
-\hline
-\end{tabular}\end{center}
-\end{table}
+% \begin{table}\label{tab:tree.counts}
+% \caption{Number of tree records from each unique tree.}
+% \begin{center}
+% \begin{tabular}{lll}
+% \hline\hline
+% \multicolumn{1}{c}{Number of Observations}&\multicolumn{1}{c}{Number of Trees}&\multicolumn{1}{c}{Number of Tree Records}\tabularnewline
+% \hline
+% $1$&$425$&$425$\tabularnewline
+% $2$&$475$&$950$\tabularnewline
+% $3$&$411$&$1233$\tabularnewline
+% \hline
+% \end{tabular}\end{center}
+% \end{table}
 
-Table 1 is related  to Figure \ref{fig:numbPond} in that it reveals the number of times a unique tree contributed to the model. A nearly equal amount of trees contributed to the model over either one, two or three measurement intervals. Ultimately, the majority of the tree records were from trees that were included over three intervals.
+Table \ref{tab:tree.counts} is related  to Figure \ref{fig:numbPond} in that it reveals the number of times a unique tree contributed to the model. A nearly equal amount of trees contributed to the model over either one, two or three measurement intervals. Ultimately, the majority of the tree records were from trees that were included over three intervals.
 
 
 \begin{figure} 
@@ -184,12 +198,18 @@ dmgStagm$conc<-paste(dmgStagm$Installation,dmgStagm$Plot,dmgStagm$STP,
 #Selects the first unique tree record
 # dmgStagm<-dmgStagm[!duplicated(dmgStagm$conc), ]
 
-dmgStagm<-dmgStagm[dmgStagm$Damage %in% damageRemoved,]
+# dmgStagm<-dmgStagm[dmgStagm$Damage %in% damageRemoved,]
+# 
+# dmgStagm[dmgStagm=="D"]<-"DEAD"
+# dmgStagm[dmgStagm=="DT AD"]<-"AD"
 
-dmgStagm[dmgStagm=="D"]<-"DEAD"
-dmgStagm[dmgStagm=="DT AD"]<-"AD"
-
-dmgStagm<-aggregate(dmgStagm$count,by=list(Installation=dmgStagm$Installation,Year=dmgStagm$Year_Measurement),FUN=sum)
+dmgStagm<-aggregate(dmgStagm$Damage,
+                    by=list(Installation=dmgStagm$Installation,
+                            Year=dmgStagm$Year_Measurement),
+                    FUN=function(x){
+                      countit <- 0 + 1*(x %in% damageRemoved)
+                      sum(countit)
+                    })
 
 dmgStagm$Installation<-as.character(dmgStagm$Installation)
 dmgStagm$Installation[dmgStagm$Installation=="TC"]<-"*TC"
@@ -205,7 +225,7 @@ print(xyplot(dmgStagm$x~dmgStagm$Year| dmgStagm$Installation,
          strip = strip.custom(bg="lightgrey",
  par.strip.text=list(col="black", cex=.8)),
        scales=list(
-         y=list(limits=c(0,140))),
+         y=list(limits=c(-5,140))),
          xlab="Year Measurement",
          ylab="Number of Small Tree Records Removed"))
 

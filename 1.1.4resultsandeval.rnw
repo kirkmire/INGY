@@ -22,12 +22,12 @@ source(paste(getwd(),'/1.6.model.evaluation.2016.dec.16.r',sep=""), echo=FALSE)
 
 
 
-Figure \ref{fig:polar_plot} describes the elevation and directional distributions of plots by installation. All plots range in elevation between 600 and 1200 m. Plots within the same installation have generally similar values of elevation and aspect. The Loon Lake (LL) and Cemetery Ridge (CR) installation are notable exceptions where the topography was fairly flat and thus aspect varied within the installation's plots. There is a broad range of aspects and elevations as plots are well-distributed among the regions of the polar plot.
+Figure \ref{fig:polar_plot} describes the elevation and directional distributions of plots by installation. All plots range in elevation between 2000 and 4500 ft. Plots within the same installation have generally similar values of elevation and aspect. The Loon Lake (LL) and Cemetery Ridge (CR) installation are notable exceptions where the topography was fairly flat and thus aspect varied within the installation's plots. There is a broad range of aspects and elevations as plots are well-distributed among the regions of the polar plot.
 
 \begin{figure}[!h]
 \begin{center}
-    \includegraphics{polar_plot.jpg}
-    \caption{Aspect and elevation by plot and installation.\label{fig:polar_plot}}
+    \includegraphics{polar_plot.png}
+    \caption[Aspect and elevation by plot and installation.]{Aspect (N\degree) and elevation (ft) by plot and installation.\label{fig:polar_plot}}
 \end{center}
 \end{figure}
 
@@ -171,7 +171,7 @@ dmgStagm<-dmgStagm[! dmgStagm$Installation %in% drp60,]
 dmgStagm<-dmgStagm[!dmgStagm$Year_Measurement==dmgStagm$Year_Growth,]
 dmgStagm<-dmgStagm[dmgStagm$Damage %in% damageRemoved,]
 dmgStagm<-dmgStagm[dmgStagm$Species=="PIPO",]
-unique(dmgStagm$Installation)
+
 # keep the right growth periods
 keep <- unique(timeline[,c("Installation","Year_Measurement")])
 keep <- keep[!is.na(keep$Year_Measurement),]
@@ -276,7 +276,7 @@ print(barchart(Species~ x| Installation, data=tallied.mins,
 
 @
  \end{center}
- \caption[Species composition of small tree plots in installations with more than 60 tagged ponderosa pine at initiation.]{Species composition of small tree plots in installations with more than 60 tagged ponderosa pine at initiation. PSME= \emph{Psuedotsuga menziesii}, PIPO= \emph{Pinus ponderosa}, ABGR= \emph{Abies grandis}, THPL= \emph{Thuja plicata}, PIMO= \emph{Pinus monticola}, PICO= \emph{Pinus contorta}, LAOC= \emph{Larix occidentalis}.\label{fig:speccomp}}
+ \caption[Species composition of small tree plots.]{Species composition of small tree plots in installations with more than 60 tagged ponderosa pine at initiation. PSME= \emph{Psuedotsuga menziesii}, PIPO= \emph{Pinus ponderosa}, ABGR= \emph{Abies grandis}, THPL= \emph{Thuja plicata}, PIMO= \emph{Pinus monticola}, PICO= \emph{Pinus contorta}, LAOC= \emph{Larix occidentalis}.\label{fig:speccomp}}
  \end{figure}
  
 The threshold number of tagged ponderosa pine limits the analysis to installations with a significant ponderosa pine understory component. However, to obtain a clear description of the inter-species understory tree competition between installations, it is necessary to look beyond the tagged subject trees to the tallied trees at initiation (Figure \ref{fig:speccomp}). Based on the frequencies of small trees by species and installation in, the selected installations are not dominated by Douglas-fir regeneration although there are number of installations that are very closely split between the two species.
@@ -360,7 +360,8 @@ When comparing the vegetation depths between the control and the herbicide plots
 % \end{center}
 % \caption{Polar Plot...speccomp\label{fig:polar_plot}}
 % \end{figure}
-\newpage
+% \newpage
+
 \subsection{Subject Tree Characteristics}
  
 \begin{figure} 
@@ -778,7 +779,7 @@ The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the varian
   \includegraphics[width=\linewidth]{tpa_coef.png}
   \subcaption{Coefficient plot of TPA.}\label{fig:os_tpa_coef}
 \endminipage
-\caption{Quantile regression coefficient estimates and 95\% confidence intervals accross $\tau$=1-9.}\label{fig:coefplot}
+\caption[Quantile regression coefficient plots.]{Quantile regression coefficient estimates and 95\% confidence intervals accross $\tau$=1-9.}\label{fig:coefplot}
 \end{figure}
 
 
@@ -862,7 +863,7 @@ print(barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
 
 @
 \end{center}
-\caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres}}
+\caption[Validation results.]{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres}}
 \end{figure}
 
 Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generated for the witheld data (1 randomly selected small tree plot at each plot). The actual height growth increment was then binned according to where it fell among the quantile regression predicted height growth increments (<.10, .1-.5, .5-.9 or >.9). Visually, the actual height growth increment are distributed approximately as expected with .4 falling between the .1-.5 and, 5-.9 $\tau$ predictions and .1 falling below the .1 $\tau$ and above the .9 $\tau$ predicted height (Figure \ref{fig:validres}). 
@@ -881,7 +882,7 @@ Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generat
   \includegraphics[width=\linewidth]{greaterthan10.png}
   \subcaption{Initial Height > 10 ft.}\label{fig:validres_10}
 \endminipage
-\caption{Witheld tree height growth increments sorted by predicted height growth increment quantiles intervals and initial height classes.}
+\caption[Validation results by initial height class.]{Witheld tree height growth increments sorted by predicted height growth increment quantiles intervals and initial height classes.}
 \end{figure}
 
 

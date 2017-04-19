@@ -8,9 +8,19 @@ names(sstp1)[7:8]<-c("Cov","Bas")
 #Reshaped 1 meter small tree plot veg measurements so that each stp record year has its
 #own associated Forb, Grass, Low Shrub, High Shrub and Polyveg measurements
 
-stp<-reshape(sstp1, direction="wide",idvar=
-                     c("Installation","Plot","STP","Year_Measurement"),
-                   timevar="Lifeform",v.names=c("Cov","Bas","Top"))
+#stp<-reshape(sstp1, direction="wide",idvar=
+#                     c("Installation","Plot","STP","Year_Measurement"),
+#                   timevar="Lifeform",v.names=c("Cov","Bas","Top"))
+
+sstp1$Lifeform[sstp1$Installation=="GS" & sstp1$Plot==5 & sstp1$STP==4 & 
+        sstp1$Year_Measurement==2015 & sstp1$Species_Primary=="POPR" & 
+        !is.na(sstp1$Species_Primary)] <- "G"
+stp<-reshape(sstp1[!is.na(sstp1$Lifeform),], direction="wide",
+            idvar=c("Installation","Plot","STP","Year_Measurement"),
+            timevar="Lifeform",
+            drop=c("Species_Primary","Species_Secondary","ID"),
+            v.names=c("Cov","Bas","Top"))
+
 
 #Note: no base and top height measurements for polyveg lifeform in 1m and 4m
 
@@ -26,7 +36,9 @@ veg_record<- merge(splot, stp,by=c("Installation","Plot"))
 
 
 #Merges annual small tree growth records with 1m veg records for each year
-annual.gr3<- merge(annual.gr, veg_record,by=c("Installation","Plot","STP","Year_Measurement"))
+annual.gr3<- merge(annual.gr[,!(names(annual.gr) %in% c("ID.y"))], 
+                   veg_record,
+                   by=c("Installation","Plot","STP","Year_Measurement"))
 
 
 #4m data not collected until 2007, ok to compare to 1m data 
@@ -94,7 +106,8 @@ names(agg.1m.data1)[9]<-c("diff.POLV.1m")
 
 #Merges aggregated 1m data to the "big" df, this is where .gr4 is created
 
-annual.gr4<-merge(annual.gr3,agg.1m.data1,by=c("Installation","Plot","Year_Measurement"))
+annual.gr4<-merge(annual.gr3[,!(names(annual.gr3) %in% c("ID.y"))],
+                  agg.1m.data1,by=c("Installation","Plot","Year_Measurement"))
 
 
 ##Transect Data##
@@ -138,7 +151,8 @@ for(i in tran.names) {
 
 #Merges aggregated transect data to the "big" df
 
-annual.gr4<-merge(annual.gr4,agg.tran.data1,by=c("Installation","Plot","STP","Year_Measurement"))
+annual.gr4<-merge(annual.gr4,
+                  agg.tran.data1,by=c("Installation","Plot","STP","Year_Measurement"))
                
    
 ##Transect Grass Cover Data##

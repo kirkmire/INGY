@@ -247,7 +247,7 @@ Two relative measures of competition were created by subtracting the tallest und
 Basal area was calculated for each live overstory tree and aggregated over each plot to provide an estimate of stand basal area (ft$^2$/ac, BAPA). Crown area was obtained for each overstory tree from the average of the two perpendicular measurements of width. Total crown area was then computed in terms of percent of an acre (CAPA). Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots. Stand density index (SDI) was calculated using the following equation:
 %
 \begin{align}  \label{eq:Eq0} 
-QMD = & \sqrt{(BAPA/TPA)/(\pi/4/144)} \qquad, \newline
+QMD = & \sqrt{(BAPA/TPA)/(\pi/4/144)} \qquad, \\
 SDI = & TPA*\frac{QMD}{10}^{1.605} \qquad, 
 \end{align}
 where $QMD$ is the Quadratic Mean Diameter, $BAPA$ is the basal area per acre, $TPA$ is trees per acre, and $SDI$ is the Stand Density Index.
@@ -289,7 +289,7 @@ This characterization of the response distribution also allows for predictor var
 \begin{figure} 
 \begin{center}
     \includegraphics{quant_reg.jpg}
-    \caption[Hypothetical quantile regression surfaces of annual height increments]{Hypothetical separation of the distribution of annual height increments according to 3 quantile regression surfaces as a function of trees per acre and initial tree height. The red, yellow and green surfaces represent the $\tau$= .1, .5 and .9 quantiles, respectively.\label{fig:quant_reg}}
+    \caption[Hypothetical quantile regression surfaces of annual height increments.]{Hypothetical separation of the distribution of annual height increments according to 3 quantile regression surfaces as a function of trees per acre and initial tree height. The red, yellow and green surfaces represent the $\tau$= .1, .5 and .9 quantiles, respectively.\label{fig:quant_reg}}
  \end{center}
 \end{figure}
 

@@ -493,19 +493,19 @@ aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.HS)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.HS$y))
 
 #QR for 1m Forb Volume
-annual.grUV$F.volume<-annual.grUV$diff.F.1m*annual.grUV$Cov.F
+annual.grUV$F.volume<-(annual.grUV$diff.F.1m*annual.grUV$Cov.F)/100
 qrCW.1m.F.vol<- rq(ht_annual~srHeight_Total+F.volume+cratio,tau=c(.5),data=annual.grUV)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.F.vol)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.F.vol$y))
 
 #QR for 1m Low Shrub Volume
-annual.grUV$LS.volume<-annual.grUV$diff.LS.1m*annual.grUV$Cov.LS
+annual.grUV$LS.volume<-(annual.grUV$diff.LS.1m*annual.grUV$Cov.LS)/100
 qrCW.1m.LS.vol<- rq(ht_annual~srHeight_Total+LS.volume+cratio,tau=c(.5),data=annual.grUV)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.LS.vol)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.LS.vol$y))
 
 #QR for 1m High Shrub Volume
-annual.grUV$HS.volume<-annual.grUV$diff.HS.1m*annual.grUV$Cov.HS
+annual.grUV$HS.volume<-(annual.grUV$diff.HS.1m*annual.grUV$Cov.HS)/100
 qrCW.1m.HS.vol<- rq(ht_annual~srHeight_Total+HS.volume+cratio,tau=c(.5),data=annual.grUV)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.HS.vol)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV, length(qrCW.1m.HS.vol$y))

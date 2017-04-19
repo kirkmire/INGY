@@ -92,7 +92,7 @@ abline(sea.si)
 
 @
 \end{center}
-\caption{Examination of relationship between the slope, elevation and aspect interaction term and site index\label{fig:sivssea}}
+\caption[Comparison of slope, elevation and aspect term to site index]{Examination of relationship between the slope, elevation and aspect interaction term and site index\label{fig:sivssea}}
 \end{figure}
 
 Figure \ref{fig:sivssea} shows the positive correlation between the SEA value and the site index. Since both of these variables relate to the inherent productivity of the site they should be positively correlated. The lack of a strong correlation can be attributed in part to a difference in resolution. One site index was obtained for each installation and the SEA value relates productivity to the slope, aspect and elevation at the plot level. 
@@ -212,7 +212,7 @@ print(xyplot(dmgStagm$x~dmgStagm$Year| dmgStagm$Installation,
 
 @
 \end{center}
-\caption{Small tree records removed due to top damage or mortality over time.\label{fig:damageCodes}. Installation PC (Pine Creek) had no removed records over the measurement periods.}
+\caption[Small tree records removed due to top damage or mortality over time.]{Small tree records removed due to top damage or mortality over time.\label{fig:damageCodes}. Installation PC (Pine Creek) had no removed records over the measurement periods.}
 \end{figure}
 
 The dead, dead top or animal damaged trees were removed from the model whether the damage was recorded at the beginning or end of a given interval (see Figure \ref{fig:damageCodes}). Other damage codes were recorded for subject trees (see Appendix 3) but only trees with the specified damage relating directly to top damage or mortality were removed.  Most installations exhibited similarly low levels of mortality or other specified damage. The number of tree records removed generally does not exceed 20 trees. However, some installations such as KC, RM and CR showed high levels of mortality and damage, especially in the later years of the study. Unique trees may appear across multiple years. Any reductions in the number of tree records removed across measurement years is attributed to an improvement in tree health or an inability to locate and categorize the tree as dead or damaged. 
@@ -276,7 +276,7 @@ print(barchart(Species~ x| Installation, data=tallied.mins,
 
 @
  \end{center}
- \caption{Species composition of small tree plots in installations with more than 60 tagged ponderosa pine at initiation. PSME= \emph{Psuedotsuga menziesii}, PIPO= \emph{Pinus ponderosa}, ABGR= \emph{Abies grandis}, THPL= \emph{Thuja plicata}, PIMO= \emph{Pinus monticola}, PICO= \emph{Pinus contorta}, LAOC= \emph{Larix occidentalis}.\label{fig:speccomp}}
+ \caption[Species composition of small tree plots in installations with more than 60 tagged ponderosa pine at initiation.]{Species composition of small tree plots in installations with more than 60 tagged ponderosa pine at initiation. PSME= \emph{Psuedotsuga menziesii}, PIPO= \emph{Pinus ponderosa}, ABGR= \emph{Abies grandis}, THPL= \emph{Thuja plicata}, PIMO= \emph{Pinus monticola}, PICO= \emph{Pinus contorta}, LAOC= \emph{Larix occidentalis}.\label{fig:speccomp}}
  \end{figure}
  
 The threshold number of tagged ponderosa pine limits the analysis to installations with a significant ponderosa pine understory component. However, to obtain a clear description of the inter-species understory tree competition between installations, it is necessary to look beyond the tagged subject trees to the tallied trees at initiation (Figure \ref{fig:speccomp}). Based on the frequencies of small trees by species and installation in, the selected installations are not dominated by Douglas-fir regeneration although there are number of installations that are very closely split between the two species.
@@ -323,7 +323,7 @@ print(barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, g
 
 @
 \end{center}
-\caption{Plot vegetation volumes by herbicide treatment at the start of the measurement period (GE = multiple applications, 1X = one time application, CTRL = no herbicide).\label{fig:vegVol}}
+\caption[Plot vegetation volumes by herbicide treatment at the start of the measurement period.]{Plot vegetation volumes by herbicide treatment at the start of the measurement period (GE = multiple applications, 1X = one time application, CTRL = no herbicide).\label{fig:vegVol}}
 \end{figure}
 
 
@@ -654,7 +654,7 @@ Figure \ref{fig:Sea_heat} illustrates the relative effects of the slope and elev
   \includegraphics[width=\linewidth]{slope_elevation_NW.png}
   \subcaption{North-west aspect (315\degree)}\label{fig:se_nw}
 \endminipage\hfill
-\caption{Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (m). Lighter shades indicate a greater predicted height growth increment. Initial height= 1ft, crown ratio=.5, overstory TPA=40.}\label{fig:Sea_heat}
+\caption[Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (ft).]{Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (ft). Lighter shades indicate a greater predicted height growth increment. Initial height= 1ft, crown ratio=.5, overstory TPA=40.}\label{fig:Sea_heat}
 \end{figure}
 
 
@@ -666,7 +666,7 @@ Figure \ref{fig:Sea_heat} illustrates the relative effects of the slope and elev
 % #aspect_deg <- 0
 % fake.data <- data.frame(srHeight_Total=1,cratio=.5,TPA.OS=40,
 %                         slopePercent=rep(seq(0,36,length=50),50),
-%                         elevation=rep(seq(600,1350,length=50),each=50))
+%                         elevation=rep(seq(1950,4500,length=50),each=50))
 % fake.data$cos_rad_asp <- cos(3.1415*aspect_deg/180)
 % fake.data$sin_rad_asp <- sin(3.1415*aspect_deg/180)
 % fake.data$growth <- predict(qr.SI.5,newdata=fake.data)
@@ -676,7 +676,7 @@ Figure \ref{fig:Sea_heat} illustrates the relative effects of the slope and elev
 %                         dimnames=list(round(unique(fake.data$elevation)),
 %                                       round(unique(fake.data$slopePercent))))
 % print(levelplot(growth.matrix,colorkey=FALSE,
-%                 xlab="Elevation (m)",
+%                 xlab="Elevation (ft)",
 %                 ylab="Slope (%)",
 %                 scales=list(y=list(at=seq(1,50,by=10)),
 %                             x=list(at=seq(1,50,by=10))),
@@ -684,6 +684,7 @@ Figure \ref{fig:Sea_heat} illustrates the relative effects of the slope and elev
 % }
 % plot_this_sq_effect(135)
 % plot_this_sq_effect(315)
+% 
 % @
 % \end{center}
 % \end{figure}
@@ -698,7 +699,7 @@ Figure \ref{fig:Sea_heat} illustrates the relative effects of the slope and elev
 %       col ="grey60",
 %       xlab="Slope, Aspect, Elevation (SEA) Term",
 %       ylab="Annual Height Increment (ft)")
-% 
+%
 % @
 % \end{center}
 % \caption{Generalized additive model of annual height growth increment vs. SEA term with square-root of initial height, crown ratio and TPA considered as linear predictors.\label{fig:seqgamSEA}}
@@ -987,7 +988,7 @@ Whether viewed by height class or combined, the actual height growth increments 
 
 
 \begin{table}[!tbp]
-\caption{Chi-squared analysis expected counts, actual counts and p-values by initial height class.}
+\caption[Chi-squared analysis table.]{Chi-squared analysis expected counts, actual counts and p-values by initial height class.}
 \begin{center}
 \begin{tabular}{llllll}
 \hline\hline

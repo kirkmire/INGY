@@ -159,9 +159,9 @@ Trees per acre above subject tree&trees/ac&tree x interval&TGT\tabularnewline
 Forb depth in 1m$^2$ q&ft&STP x interval&F.depth\tabularnewline
 Low shrub depth in 1m$^2$ q&ft&STP x interval&LS.depth\tabularnewline
 High shrub depth in 1m$^2$ q&ft&STP x interval&HS.depth\tabularnewline
-Forb volume in 1m2 q&m$^2$*ft&STP x interval&F.vol\tabularnewline
-Low shrub volume in 1m$^2$ q&m2*ft&STP x interval&LS.vol\tabularnewline
-High shrub volume in 1m$^2$ q &m2*ft&STP x interval&HS.vol\tabularnewline
+Forb volume in 1m2 q&ft$^3$/ft$^2$&STP x interval&F.vol\tabularnewline
+Low shrub volume in 1m$^2$ q&ft$^3$/ft$^2$&STP x interval&LS.vol\tabularnewline
+High shrub volume in 1m$^2$ q &ft$^3$/ft$^2$&STP x interval&HS.vol\tabularnewline
 \% Cover forb&\%&STP x interval&F.cov\tabularnewline
 \% Cover low shrub&\%&STP x interval&LS.cov\tabularnewline
 \% Cover high shrub&\%&STP x interval&HS.cov\tabularnewline
@@ -184,10 +184,10 @@ Stand Density Index&&plot x interval&SDI\tabularnewline
 \textbf{Site Quaility}&&&\tabularnewline
 \hline
 Slope&\%&plot &s\tabularnewline
-Elevation&m&plot&el\tabularnewline
+Elevation&ft&plot&el\tabularnewline
 Aspect&N\degree&plot&asp\tabularnewline
 Site index&ft&installation&SI\tabularnewline
-Slope, aspect, elevation term&X&plot&SEA, S\tabularnewline
+Slope, aspect, elevation term&&plot&SEA, S\tabularnewline
 
 \end{tabular}\end{center}
 \end{table}

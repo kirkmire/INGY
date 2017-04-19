@@ -68,7 +68,7 @@ Twenty-nine STCV study sites were established on private, public and tribal fore
 \begin{figure}[!h]
 \begin{center}
     \includegraphics{map_w_dots2.jpg}
-    \caption{Map of STCV Installations, those included in this study labeled with a black circle.
+    \caption[Map of STCV installations.]{Map of STCV installations. Installations included in this study labeled with a black circle.
     \label{fig:map}}
 \end{center}
 \end{figure}
@@ -164,19 +164,19 @@ rect(80-(1*3.28084),47,80,47,col=NA,border="black", lwd=1)
 
 @
 \end{center}
-\caption{Design of STCV Sampling Plot. Note that vegetation quadrants exist for all six small tree plots although only illustrated on two.\label{fig:samplePlot}}
+\caption[Design of STCV Sampling Plot.]{Note that vegetation quadrants exist for all six small tree plots although only illustrated on two.\label{fig:samplePlot}}
 \end{figure}
 
 Each plot contained a series of nested subplots that decrease in area with physiologically smaller vegetation units (see Figure \ref{fig:samplePlot}). Starting with the full extent of the plot, overstory trees with greater than 10.5 in diameter at breast height (DBH, 4.5 ft), were measured over approximately half an acre. Overstory trees with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested subplot of roughly a quarter acre. 
 
 The small trees, whose growth responses are the subject of this research, were defined as those that have a DBH less than 3.5 in yet a height greater than .5 ft for shade tolerant species, or 1 ft for shade intolerant species at the time of initial measurements. Small trees were measured on the six .007 ac subplots 60 degrees apart from plot center at a distance of approximately 30 ft. All small trees on the .007 ac subplot were tallied by 2 ft height class and species.
 
-A sub-sample of the small trees was tagged, mapped and measured repeatedly over the course of the study. Height classes for each subplot were determined by dividing the range in heights by four. Two trees per height class and species were then selected when possible. Ultimately, the number of tagged trees should be between 4 and 8 trees per species per small tree subplot. 
+A sub-sample of the small trees was tagged, mapped and measured repeatedly over the course of the study. Height classes for each subplot were determined by dividing the range in observed heights by four. Two trees per height class and species were then selected when possible. Ultimately, the number of tagged trees fell between 4 and 8 trees per species per small tree subplot. 
 
-There were two sampling methods used to estimate vegetative competition. The first was transect based where point measurements of vegetation were obtained at one foot intervals along a 30 or 40 ft transect (initially, transects ran from plot center to small tree subplot center but were extended an additional 10 ft later in the study). We also took vegetation measurements at the centers of the small tree plots using both 1 m$^{2}$ and 4 m$^{2}$ quadrats. These vegetation measurements quantified separately the amounts of forbs, grasses and shrubs and identified the dominant species for each lifeform.  This is an example of how the resolution of the data goes beyond the scope of this analysis though will undoubtedly be of use in future research efforts.
+There were two sampling methods used to estimate vegetative competition. The first was transect based where point measurements of vegetation were obtained at one foot intervals along a 30 or 40 ft transect (initially, transects ran from plot center to small tree subplot center but were extended an additional 10 ft later in the study). We also took vegetation measurements at the centers of the small tree plots using both 1 m$^{2}$ and 4 m$^{2}$ quadrats. These vegetation measurements quantified separately the amounts of forbs, grasses and shrubs, and identified the dominant species for each lifeform.  This is an example of how the resolution of the data goes beyond the scope of this analysis though will undoubtedly be of use in future research efforts.
 
 
-The primary objective of the herbicide treatments was to decouple the harvesting and understory vegetation effects on small tree growth. It has been reported that, like tree growth, levels of understory increase with site productivity (\cite{walstad1}). The herbicide treatments revealed how small trees grow under varying levels of site quality (looking across installations) without the presence of a corresponding increase non-arboreal vegetation. Because the objective of the herbicide treatments was to simply provide a range of non-arboreal vegetation levels, the herbicide application regimes varied greatly in form, timing and level, and not all installations received treatment. 
+The primary objective of the herbicide treatments was to decouple the harvesting and understory vegetation effects on small tree growth. It has been reported that, like tree growth, levels of understory increase with site productivity (\cite{walstad1}). The herbicide treatments revealed how small trees grow under varying levels of site quality (looking across installations) without the presence of a corresponding increase non-arboreal vegetation (cf. Figure \ref{fig:chart}). Because the objective of the herbicide treatments was to simply provide a range of non-arboreal vegetation levels, the herbicide application regimes varied greatly in form, timing and level, and not all installations received treatment. 
 
 Figure \ref{fig:timeline} shows the temporal scope of the data collection as well as of the herbicide applications and overstory measurements. An attempt to capture small tree growth at four year intervals was successful for many installations but in some cases the intervals were somewhat irregular (i.e., 3-5 years in length). Ultimately, the height growth increments were standardized to a common periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. 
 
@@ -214,7 +214,7 @@ xyplot(Installation ~ Year_Measurement,
 
 @
 \end{center}
-\caption{Timeline of Installation Measurements and Treatments.Green and red triangles represent years of overstory measurements and herbicide treatment, respectively. The black squares represent the years of the selected growth intervals. \label{fig:timeline}}
+\caption[Timeline of Installation Measurements and Treatments.]{Green and red triangles represent years of overstory measurements and herbicide treatment, respectively. The black squares represent the years of the selected growth intervals. \label{fig:timeline}}
 \end{figure}
 
 
@@ -227,46 +227,56 @@ A point of concern is that some measurements were taken at times that may not ha
 \noindent\textbf{Understory Tree Competition:}
 
 
-The small trees in each small tree subplot (STP) were tallied by height class and then multiplied by 138.73 to obtain per acre estimates.  The number of trees taller than the subject tree was also found by summing all small tree tallies with height class midpoints greater than the height of the subject tree. Crown length was found by subtracting the crown base from the total height (crown base is considered the height of the lowest contiguous branch). Crown width was found as an average of the two perpendicular measurements of crown width obtained in the field. Crown ratio was obtained by dividing the crown length by the total tree height. Basal diameter and diameter at breast height (dbh) were measured at 1 in above root collar and at 4.5 ft, respectively.
+The small trees in each small tree subplot (STP) were tallied by height class and then multiplied by 138.73 to obtain per acre estimates.  The number of trees taller than the subject tree was also found by summing all small tree tallies with height class midpoints greater than the height of the subject tree. Crown length was found by subtracting the crown base from the total height (crown base is considered the height of the lowest contiguous branch). Crown ratio was obtained by dividing the crown length by the total tree height. Crown width was found as an average of the two perpendicular measurements of crown diameter obtained in the field. Basal diameter and diameter at breast height (dbh) were measured at 1 in above root collar and at 4.5 ft, respectively. The resolutions and symbols for these variables are summarized in Appendix C. 
 
 \noindent\textbf{Understory Vegetation Competition:}
 
 Although measurements of understory vegetation and height were recorded in 4 m$^2$ quadrats in the later years of the study, only the 1 m$^2$ quadrats were utilized in this analysis since they were used for the entire duration of the study.  
 
-Average differences (depth) at the quadrat level between base and top height measurements were found separately for forbs, low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were obtained for forbs, low shrubs, high shrubs and grasses. The ocular estimates of percentage cover also included an overall estimate of vegetation cover combined in the quadrat. A volume measurement combined the two measures of vegetation by multiplying the percentage cover by the average depth of the associated cover.
+Average differences (depth) at the quadrat level between base and top height measurements were found separately for forbs, low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were obtained for forbs, low shrubs, high shrubs and grasses. The ocular estimates of percentage cover also included an overall estimate of vegetation cover in the quadrat. A volume measurement combined the two measures of vegetation by multiplying the percentage cover by the average depth of the associated cover.
 
-Average height depths for low shrubs, high shrubs, forbs were calculated for the 30 or 40 transect points corresponding to each small tree plot. The original sampling design called for a 30 foot transect that would extend from plot center to the center of each STP (30 transect points), however, in subsequent years 10 ft were added to the length of the transect to extend it through the STP (40 transect points). Percentage cover of grass obtained ocularly through a 6 in by 6 in grid and through measurement of the top height of grasses averaged over the length of the transect. Two relative measures of competition were created by subtracting the tallest understory vegetation height from that of the subject tree for both 1 m$^2$ and transect vegetation.
+
+
+
+Average height depths for low shrubs, high shrubs, forbs were calculated for the 30 or 40 transect points corresponding to each small tree plot. The original sampling design called for a 30 foot transect that would extend from plot center to the center of each STP (15 transect points). However, in subsequent years 10 ft were added to the length of the transect to extend it through the STP (20 transect points). Percentage cover of grass was obtained ocularly through a 6 in by 6 in grid and through measurement of the top height of grasses averaged over the length of the transect. 
+
+Two relative measures of competition were created by subtracting the tallest understory vegetation height from that of the subject tree for both 1 m$^2$ and transect vegetation. A negative value reflects a subject tree that is potentially overtopped by proximal vegetation. A positive value describes how much taller the subject tree is than the tallest vegetation.
 
 \noindent\textbf{Retained Overstory Tree Competition:}
 
-Basal area was calculated for each live overstory tree and aggregated over each plot to provide an estimate of stand basal area (ft$^2$/ac, BAPA). Crown area was obtained for each overstory tree from the average of the two perpendicular measurements of width. Total crown area was then computed in terms of percent of an acre (CAPA). Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots. Stand density index (SDI) was calculated in the following equation:
+Basal area was calculated for each live overstory tree and aggregated over each plot to provide an estimate of stand basal area (ft$^2$/ac, BAPA). Crown area was obtained for each overstory tree from the average of the two perpendicular measurements of width. Total crown area was then computed in terms of percent of an acre (CAPA). Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots. Stand density index (SDI) was calculated using the following equation:
 %
 \begin{align}  \label{eq:Eq0} 
-SDI = & \sqrt{(BAPA/TPA)/.005454154} \qquad, 
+QMD = & \sqrt{(BAPA/TPA)/(\pi/4/144)} \qquad, \newline
+SDI = & TPA*\frac{QMD}{10}^{1.605} \qquad, 
 \end{align}
-where $SDI$ is the Stand density index, $BAPA$ is the basal area per acre, and $TPA$ is trees per acre.
+where $QMD$ is the Quadratic Mean Diameter, $BAPA$ is the basal area per acre, $TPA$ is trees per acre, and $SDI$ is the Stand Density Index.
 
 
-All retained overstory variables were linearly interpolated between overstory measurement years to provide estimates for intervening years of small tree and understory measurement. The initial and final years of overstory measurement provided limits of the interpolation meaning that a measurement year preceding the first overstory measurement (or following the last) would be assigned the overstory variable value calculated for the initial (or final) overstory measurement year. 
+
+
+
+All retained overstory variables were linearly interpolated between overstory measurement years to provide estimates for intervening small tree and understory measurements. The initial and final years of overstory measurement provided limits of the interpolation, meaning that a measurement year preceding the first overstory measurement (or following the last) would be assigned the overstory variable value calculated for the initial (or final) overstory measurement year. 
 
 
 
 
 \noindent\textbf{Site Quality:}
-Slope (\%), elevation (m) and aspect (degrees from North) were calculated using Google Earth Engine (\cite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed by taking $\cos$((aspect*$\pi$)/180) and $\sin$((aspect*$\pi$)/180). Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (\citeyear{Stage2007a}):
+
+Slope (\%), elevation (m) and aspect (degrees from North) were calculated using Google Earth Engine (\cite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed into two variables expressing northerly and easterly exposure by applying the cosine and sine functions. Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (\citeyear{Stage2007a}):
 %
 \begin{align}  \label{eq:Eq1} 
-y = & b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)] + 
+SQ = & b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)] + 
            s\ln(el+1)[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)]  \nonumber \\
 & + (el^2)s[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2 \qquad, 
 \end{align}
-where $y$ is the growth response, $s$ is the slope in percent,
+where $SQ$ is the relative site quality, $s$ is the slope in percent,
 $el$ is elevation in feet, $\alpha$ is aspect and the $b$ are coefficients estimated from the data.
 %
 % Now check out \eqref{eq:Eq1}!
 
 
-Site trees were identified at the initiation of the study as one or more open grown, undamaged, dominant ponderosa pine. However, there was a single installation (Grouse Creek) that utilized Douglas-fir as the site tree. Site index was calculated from standard site index curves for the Inland Northwest (\cite{Milner1992}) with a base age of 50 years at breast height. 
+Site trees were identified at the initiation of the study as one or more open-grown, undamaged, dominant ponderosa pine. However, there was a single installation (Grouse Creek) that utilized Douglas-fir as the site tree. Site index was calculated from standard site index curves for the Inland Northwest (\cite{Milner1992}) with a base age of 50 years at breast height. 
 
 \newpage
 \subsection{Quantile Regression Modelling Framework}
@@ -274,17 +284,16 @@ Site trees were identified at the initiation of the study as one or more open gr
 The desire to focus on the full distribution of growth rates naturally led to an investigation of quantile regression (\cite{Koenker_2009}). This technique allows for the characterization of multiple quantiles of the height growth responses of small trees. Quantile regression utilizes the simplex algorithm (as opposed to least-squares) to calibrate linear regression functions to describe a specified or set of specified quantiles (${\tau}$) of the response distribution. Specifying the .90 quantile (${\tau}$=.90), for example, allows for the examination of the ``maximum'' or upper \nth{10} percentile of the height growth response distribution and its relationship with stand and site factors. By contrast, ${\tau}$=.50 would describe the median height growth response.
 
 
-This characterization of the response distribution also allows for predictor variables to have different effects across quantiles. The quantile regression visualization shown in Figure \ref{fig:quant_reg} compares three quantiles of the annual height growth response against overstory basal area and site index. In this example, the ${\tau}$=.10 quantile plane shows very little response for both overstory basal area and site index. However, the height growth in the ${\tau}$=.90 and ${\tau}$=.50 quantile planes change readily as site index and retained basal area respectively increase and decrease. The factors that affect the growth of the trees in the lower portion of height growth responses may not influence the growth observed in the upper portion of the response distribution or vice versa. In an extreme case, the factors may even have opposing signs between quantile planes.
+This characterization of the response distribution also allows for predictor variables to have different effects across quantiles. The quantile regression visualization shown in Figure \ref{fig:quant_reg} compares three quantiles of the annual height growth response against overstory basal area and site index. In this example, the ${\tau}$=.10 quantile plane shows very little change as a function of both overstory basal area and site index. However, the height growth in the ${\tau}$=.90 and ${\tau}$=.50 quantile planes changes readily as site index and retained basal area respectively increase and decrease. Thus, the factors that affect the growth of the trees in the lower portion of height growth responses may not influence the growth observed in the upper portion of the response distribution or vice versa. In an extreme case, the factors may even have opposing signs between quantile planes.
 
 \begin{figure} 
 \begin{center}
     \includegraphics{quant_reg.jpg}
-    \caption{Hypothetical separation of the distribution of annual height increments according to 3 quantile regression surfaces as a function of trees per acre and initial tree height. The red, yellow and green surfaces represent the $\tau$= .1, .5 and .9 quantiles, respectively.\label{fig:quant_reg}}
- 
-\end{center}
+    \caption[Hypothetical quantile regression surfaces of annual height increments]{Hypothetical separation of the distribution of annual height increments according to 3 quantile regression surfaces as a function of trees per acre and initial tree height. The red, yellow and green surfaces represent the $\tau$= .1, .5 and .9 quantiles, respectively.\label{fig:quant_reg}}
+ \end{center}
 \end{figure}
 
-Quantile regression allows for the description of the impact of both measured and unmeasured competitive factors that may be explaining much of the variance in small tree height growth. Two subject trees within the same 10 foot radius plot may experience vastly different growth rates despite having the same values of measured factors.  For ponderosa pine small tree growth, unmeasured factors may relate to such things as genetic characteristics, micro-climate, micro-site suitability or other location specific factors such as distance from a retained overstory tree or competing vegetation. Vegetation is known to have a major effect on micro-climate, affecting light, temperature, precipitation and wind (Tappeiner, \citeyear{tappeiner_maguire_harrington_2007}). However, most growth and yield field sampling methods attempt to maintain a degree of simplicity and reproducibility, and therefore avoid sampling at a micro-resolution. This inevitably leads to unexplained variation since there are many unmeasured factors. Quantile regression allows for an explicit (though semi-parametric) description of patterns in this unexplained variation.
+Quantile regression allows for the description of the impact of both measured and unmeasured competitive factors that may be explaining the variance in small tree height growth. Two subject trees within the same 10 foot radius plot may experience vastly different growth rates despite having the same values of measured factors.  For ponderosa pine small tree growth, unmeasured factors may relate to such things as genetic characteristics, micro-climate, micro-site suitability or other location specific factors such as distance from a retained overstory tree or competing vegetation. Vegetation is known to have a major effect on micro-climate, affecting light, temperature, precipitation and wind (Tappeiner, \citeyear{tappeiner_maguire_harrington_2007}). However, most growth and yield field sampling methods attempt to maintain a degree of simplicity and reproducibility, and therefore avoid sampling at a micro-resolution. This inevitably leads to unexplained variation since there are many unmeasured factors. Quantile regression allows for an explicit (though semi-parametric) description of patterns in this unexplained variation as illustrated in the diverging planes in Figure \ref{fig:quant_reg}.
 
 
 
@@ -292,9 +301,9 @@ Quantile regression allows for the description of the impact of both measured an
 \newpage
 \subsection{Model Specification}
 
-The objective was to obtain a parsimonious system of quantile regression models informed by our understanding of the factors surrounding small tree growth (see Figure \ref{fig:chart}). These quantile regression models were constructed in a forward stepwise process that proceeded from one of the four categories of ecological factors that affect tree growth (see Appendix 4). 
+The objective was to obtain a parsimonious system of quantile regression models informed by our understanding of the factors surrounding small tree growth (see Figure \ref{fig:chart}). These quantile regression models were constructed in a forward stepwise process that proceeded through the four categories of ecological factors that affect tree growth (see Appendix 4). 
 
-Only the installations with greater than 60 ponderosa pine tagged small trees at initiation were used for model development. This minimum number of trees ensured that installations included in model building would have a sufficient number of tagged small trees to contribute to model development. The installations that sustained a post-initiation harvest were also excluded from analysis. At these installations annual height increment was calculated by finding the appropriate measurement intervals according to the timeline in Figure \ref{fig:timeline}, then subtracting earlier height measurements from the later oner and dividing by the difference between measurement years. 
+Only the installations with greater than 60 ponderosa pine tagged small trees at initiation were used for model development. This minimum number of trees ensured that installations included in model building would have a sufficient number of tagged small trees to contribute to model development. The installations that sustained a post-initiation harvest were also excluded from analysis. At the retained installations annual height increment was calculated by finding the appropriate measurement intervals according to the timeline in Figure \ref{fig:timeline}, then subtracting earlier height measurements from the later oner and dividing by the difference between measurement years. 
 %
 \begin{align}\label{eq:Eq2}
 y_{i,j}=&(h_{i,j+1}-h_{i,j})/(t_{i,j+1}-t_{i,j}) \qquad, 

@@ -219,7 +219,7 @@ barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
         main = "Witheld Data Height Growth Response
         sorted by Quantile Category",ylim=c(0,.60),
-        par.settings = my.settings,
+        # par.settings = my.settings,
         par.strip.text=list(col="white", font=2),
         panel=function(x,y,...){
           panel.grid(h=-1, v=0);

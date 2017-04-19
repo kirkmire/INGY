@@ -70,3 +70,6 @@ for(i in 1:nrow(annual.gr6)){
     annual.gr6$Year_Measurement[i])
 }
 
+#Elevation to feet
+annual.gr6$elevation<-annual.gr6$elevation*3.28084
+

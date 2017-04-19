@@ -77,6 +77,8 @@ aic.list.SQ<-c(aic.list.SQ,AIC(qr.slope)[1])
 nlist.SQ<-c(nlist.SQ,length(qr.slope$y))
 
 #Elev Quantreg (Carrying forward CW and shrub transect, TPA)
+#convert elevation to feet
+annual.gr4$elevation<-annual.gr4$elevation*3.28084
 
 qr.elev<-rq(ht_annual~srHeight_Total+cratio+
               # treeminus+

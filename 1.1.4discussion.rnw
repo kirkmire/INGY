@@ -68,7 +68,7 @@ By selection, none of the trees used to develop the model had a height growth in
 
 Visually the results of the other initial height categories matched the expected distribution. The 10+ ft height class and the ``all trees'' validation appeared particularly ideal and it was surprising that the distributions were statistically different than the expected distribution. Although the model failed to fully statistically demonstrate that it is capable of producing distributions of height growth increment that were observed in the validation data, the model still produces a range of height increments that describes the height growth distribution for the intermediate height class. A lower limit for predicted height would likely improve the outcome of validation.
 
-\subsection{Comparison of results to related studies}
+\subsection{Comparison of Results to Related Studies}
 
 Although there have been no other studies that predict height growth of small ponderosa pine trees with quantile regression, we can qualitatively compare our results to that of other empirical models. We can also compare the effects of our selected predictors to studies that examine specific competitive effects on small ponderosa pine growth.
 

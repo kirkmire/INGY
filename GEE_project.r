@@ -55,10 +55,10 @@ ndvi_merged<-merge(rbind_meds,ndvi_merge,by=c("InstPlot","int"))
 
 library(lattice)
 
-xyplot(ndvi_merged$p95~ndvi_merged$Treatment|ndvi_merged$Installation,group=ndvi_merged$int,auto.key = T)
+xyplot(ndvi_merged$mean~ndvi_merged$Treatment|ndvi_merged$Installation,group=ndvi_merged$int,auto.key = T)
 
 ndvi_merged$Treatment.x<-factor(ndvi_merged$Treatment)
-xyplot(ndvi_merged$p95~ndvi_merged$Year_Measurement|ndvi_merged$Installation,
+xyplot(ndvi_merged$mean~ndvi_merged$Year_Measurement|ndvi_merged$Installation,
        group=ndvi_merged$Treatment,auto.key = T,pch=16)
 
 plot(ndvi_merged$p95~ndvi_merged$TPA.OS,col=ndvi_merged$Treatment.x)

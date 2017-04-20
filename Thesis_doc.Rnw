@@ -66,6 +66,7 @@
 \normalsize
 %\doublespacing
 
+\nocite{Rlang}
 \printbibliography
 
 \SweaveInput{1.1.5bibliographyandappend.rnw}

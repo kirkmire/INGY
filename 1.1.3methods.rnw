@@ -233,7 +233,12 @@ The small trees in each small tree subplot (STP) were tallied by height class an
 
 Although measurements of understory vegetation and height were recorded in 4 m$^2$ quadrats in the later years of the study, only the 1 m$^2$ quadrats were utilized in this analysis since they were used for the entire duration of the study.  
 
-Average differences (depth) at the quadrat level between base and top height measurements were found separately for forbs, low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were obtained for forbs, low shrubs, high shrubs and grasses. The ocular estimates of percentage cover also included an overall estimate of vegetation cover in the quadrat. A volume measurement combined the two measures of vegetation by multiplying the percentage cover by the average depth of the associated cover.
+Average differences (depth) at the quadrat level between base and top height measurements were found separately for forbs, low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were obtained for forbs, low shrubs, high shrubs and grasses. The ocular estimates of percentage cover also included an overall estimate of vegetation cover in the quadrat. A volume per area measurement combined the two measures of vegetation by multiplying the percentage cover by the depth of the associated cover:
+
+\begin{align}  \label{eq:Eq0} 
+volume(\frac{ft^{3}}{ft^{2}}) =  [\frac{ft^{2}veg}{ft^{2}land}]*[top-base]
+\end{align}
+where $volume$ is the per area volume estimate, $veg$ is the ocularly estimated precentage cover of vegetation, $land$ is one square meter vegetation sample plot, $top$ is the vegetation top height in feet and $base$ is the vegetation base height in feet.
 
 
 
@@ -246,8 +251,8 @@ Two relative measures of competition were created by subtracting the tallest und
 
 Basal area was calculated for each live overstory tree and aggregated over each plot to provide an estimate of stand basal area (ft$^2$/ac, BAPA). Crown area was obtained for each overstory tree from the average of the two perpendicular measurements of width. Total crown area was then computed in terms of percent of an acre (CAPA). Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots. Stand density index (SDI) was calculated using the following equation:
 %
-\begin{align}  \label{eq:Eq0} 
-QMD = & \sqrt{(BAPA/TPA)/(\pi/4/144)} \qquad, \\
+\begin{align}  \label{eq:Eq0.1} 
+QMD = & \sqrt{(BAPA/TPA)/(\pi/4/144)} \qquad, \nonumber \\
 SDI = & TPA*\frac{QMD}{10}^{1.605} \qquad, 
 \end{align}
 where $QMD$ is the Quadratic Mean Diameter, $BAPA$ is the basal area per acre, $TPA$ is trees per acre, and $SDI$ is the Stand Density Index.
@@ -263,7 +268,7 @@ All retained overstory variables were linearly interpolated between overstory me
 
 \noindent\textbf{Site Quality:}
 
-Slope (\%), elevation (m) and aspect (degrees from North) were calculated using Google Earth Engine (\cite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed into two variables expressing northerly and easterly exposure by applying the cosine and sine functions. Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (\citeyear{Stage2007a}):
+Slope (\%), elevation (m) and aspect (North \degree) were calculated using Google Earth Engine (\cite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed into two variables expressing northerly and easterly exposure by applying the cosine and sine functions. Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (\citeyear{Stage2007a}):
 %
 \begin{align}  \label{eq:Eq1} 
 SQ = & b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)] + 

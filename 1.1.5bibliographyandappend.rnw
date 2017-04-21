@@ -37,7 +37,7 @@
   
 \begin{align}  
 \Delta{h} = & \sqrt{h} + \text{candidate small tree variable} \qquad, \nonumber \\
-\end{align}
+\end{align}\nonumber
 where $h$ is the tree height in feet.
 
 
@@ -51,7 +51,7 @@ where $h$ is the tree height in feet.
   
 \begin{align} 
 \emph{Q}_{.50}\Delta{h} = & \sqrt{h} + \text{candidate small tree variable} \qquad, \nonumber \\
-\end{align}
+\end{align}\nonumber
 where $h$ is the tree height in feet and $Q$ is the specified quantile.
 
 
@@ -68,7 +68,7 @@ where $h$ is the tree height in feet and $Q$ is the specified quantile.
   \begin{align} 
 \emph{Q}_{\tau}\Delta{h} = & \textrm{b}_{0,\tau}\sqrt{\textrm{h}}+\textrm{b}_{UT,\tau}\textrm{UT}  \nonumber
  + \textrm{b}_{UV,\tau}\textrm{UV}+\textrm{b}_{OT,\tau}\textrm{OT}+\textrm{b}_{SP,\tau}\textrm{SP} \qquad, \nonumber \\
-\end{align}
+\end{align}\nonumber
 where $h$ is the tree height in feet, $Q$ is the specified quantile, and $b$ are the fitted coefficients.
 }
 \end{small}

@@ -68,6 +68,8 @@ Quantile regression (\cite{Koenker1978}) provides a statistical technique for es
 
 There are few examples of quantile regression in applied forest growth modeling. However, Bohora and Cao (\citeyear{Bohora2014}) have compared quantile regression models to mixed effect models in predicting the diameter growth of \emph{Pinus taeda}. The authors concluded that the quantile regression predictions of diameter growth increment were adequate but that the mixed model had lower bias in terms of mean difference. Coomes and Allen (\citeyear{Coomes2007}) used quantile regression to fit an upper boundary curve to a size-growth distribution to test similarity to the Enquist model of uninhibited growth (stem-diameter growth scales as the one-third power of stem diameter). More recently, Araujo et al. (\citeyear{Araujo2016}) utilized quantile regression to obtain localized site index curves in Eucalyptus plantation stands. The authors found that estimates made with quantile regression generate a more accurate family of height growth curves between the observed data than by the guide curve method, obtained using standard regression. These examples of successful use of quantile regression in forestry are encouraging and lend support to this effort to use it to describe the growth of ponderosa pine.
 
+Today's standard model of small tree growth, the Forest Vegetation Simulator, introduces variability in height growth increment through assigning average growth from three different intervals within an assumed normal distribution about a mean height increment prediction. This parametric technique to introduce variability in estimates 
+
 \subsection{Objectives}
 
 With this in mind, the objectives of this research were to

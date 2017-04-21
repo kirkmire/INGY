@@ -110,11 +110,37 @@ However, FVS does accommodate multiple trajectories of the same tree record to p
 
 \begin{figure}[ht]
 \begin{center}
-    \includegraphics[width=160mm]{triplingFramework.png}
+    \includegraphics[width=160mm]{customFVSdist.png}
     \caption[FVS tripling framework.]{FVS error distribution about predicted height growth. ``A'', ``B'', and ``C'' are average values from their respective portions of the normal distribution that correspond to each of the three weighted tree records.}
     \label{fig:tripling}
 \end{center}
 \end{figure}
+
+% \begin{figure} 
+% \begin{center}
+% <<label=capaTpa,fig=TRUE,width=7,height=5,echo=FALSE>>=
+% 
+% library(lattice)
+% x.1   <- seq(-3.4,3.4,length=1000)
+% y.1   <- dnorm(x.1,mean=0, sd=1)
+% 
+% 
+% print(xyplot(y.1~ x.1, type="l",lwd=2,col="black",
+%         xlab="Normalized Deviations from Predictions", 
+%         ylab="Relative Frequency",
+%         ylim=c(0,.5),
+%           # panel=mypanel,
+%           panel = function(...) {
+%         panel.abline(v=c(-1.1,.65),lwd=1.5, lty = "dotted", col = "black")
+%         panel.xyplot(...)
+%       }))
+% 
+% 
+% @
+% \end{center}
+% \caption[Crown area per acre vs. trees per acre by plot.]{Crown area per acre vs. trees per acre by plot. The measurements within each plot are represented by a common line and color. Any middle values are interpolated from overstory measurements taken at the begining and end of the measurement interval.\label{fig:capaTpa}}
+% \end{figure}
+
 
 It is within this ``tripling'' framework that our quantile regression model may find its greatest utility. Instead of selecting normalized deviations from a mean prediction and then assigning random error from within the normal distribution, the three tree records could be assigned predicted quantile values for $\tau$= .25, .50 and .75.  These quantile derivations of height provide a more empirically based distribution of possible height values for a given set of predictors.
 

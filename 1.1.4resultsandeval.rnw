@@ -317,7 +317,7 @@ When comparing the vegetation depths between the control and the herbicide plots
 
 \begin{figure} 
 \begin{center}
-<<label=capaTpa,fig=TRUE,width=7,height=4,echo=FALSE>>=
+<<label=capaTpa,fig=TRUE,width=7,height=5,echo=FALSE>>=
 
 library(lattice)
 
@@ -671,7 +671,7 @@ Figure \ref{fig:Sea_heat} illustrates the relative effects of the slope and elev
 % \begin{center}
 % <<label=slope_elev,fig=TRUE,echo=FALSE>>=
 % plot_this_sq_effect <- function(aspect_deg){
-% #aspect_deg <- 0
+% # aspect_deg <- 315
 % fake.data <- data.frame(srHeight_Total=1,cratio=.5,TPA.OS=40,
 %                         slopePercent=rep(seq(0,36,length=50),50),
 %                         elevation=rep(seq(1950,4500,length=50),each=50))

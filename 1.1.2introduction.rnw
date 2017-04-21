@@ -33,15 +33,15 @@ Powers et al.(\citeyear{Powers2011a}) found that variable retention harvesting c
 \begin{figure}[ht]
 \begin{center}
     \includegraphics[width=160mm]{comp_flowchart.jpg}
-    \caption[Biological framework of small tree growth.]{Biological framework of small tree growth. Small trees are defined as those that have a DBH less than 3.5 inches.}
-    \label{fig:chart}
+    \caption[Biological framework of small tree growth.]{Biological framework of small tree growth. Small trees are defined as those that have a DBH less than 3.5 inches.\label{fig:chart}}
+    
 \end{center}
 \end{figure}
 
 %Understory competition effects on sapling vigor
 Following germination, the importance of competing vegetation as an impediment to early survival and development of young seedlings is well-established. In central Idaho, soil moisture remained above the wilting point at depths below 15 cm (6 in) on areas free of competing vegetation throughout the growing season but dropped to or below that critical point on the majority of vegetated plots (\cite{curtis_lynch}). Shrub competition also reduced the height and diameter growth of ponderosa pine planted in northern California (\cite{oliver_1979}); similar growth reductions have been reported for stands in Oregon (\cite{barrett_1979}). 
 
-Busse et al.(\citeyear{Busse1996}) also found that the presence of understory vegetation adversely affected the growth of ponderosa pine for an estimated 20 years. In a central Oregon study, trees completely surrounded by understory shrubs grew in height only 9 cm (3.5 in) per decade. Those trees with no competitive ground cover averaged 12 cm (4.7 in) of growth per decade. The severity of understory effects on growth also varies by site: in California on a droughty soil, severe shrub competition reduced diameter growth to less than half that of competition-free trees (\cite{oliver_1984}). The direct competition for light, water and nutrients is not the only way that ponderosa pine is affected by understory vegetation. Insect damage has also been found to be greater on trees competing with shrubs, accounting for some of the growth depression (\cite{oliver_1984}). 
+Busse et al.(\citeyear{Busse1996}) also found that the presence of understory vegetation adversely affected the growth of ponderosa pine for an estimated 20 years. In a central Oregon study, trees completely surrounded by understory shrubs grew in height only 9 cm (3.5 in) per decade. Those trees with no competitive ground cover averaged 12 cm (4.7 in) of growth per decade. The severity of understory effects on growth also varies by site: in California on a droughty soil, severe shrub competition reduced diameter growth to less than half that of competition-free trees (\cite{Oliver1984}). The direct competition for light, water and nutrients is not the only way that ponderosa pine is affected by understory vegetation. Insect damage has also been found to be greater on trees competing with shrubs, accounting for some of the growth depression (\cite{Oliver1984}). 
 
 Despite the numerous examples of adversely affected growth attributed to competing vegetation, the presence of vegetation is not without some benefit to the stand. There is a long term carbon and nitrogen benefit to the upper soil horizon from maintaining understory vegetation (\cite{Busse1996}). Understory vegetation also provides forage and habitat for a wide range of species, stabilizes soil, and captures nutrients after disturbance. Fireweed (\emph{Chamerion angustifolium} (L.) Holub), for example, regenerates after fire and captures and recycles soil nitrogen (\cite{daubenmire_daubenmire_1968}). 
 

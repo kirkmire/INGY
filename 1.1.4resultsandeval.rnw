@@ -315,9 +315,23 @@ print(barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, g
 
 When comparing the vegetation depths between the control and the herbicide plots in the first year of the selected measurement intervals, it is apparent that there is a large drop in vegetation levels within installations with large amounts of understory vegetation in the control plots (see Figure \ref{fig:vegVol}). This indicates some success in establishing a wide range of non-arboreal vegetative conditions on installations. However, the herbicide applications failed to contribute to a marked difference in depth in installations of little vegetative volume in control plots. 
 
+\begin{figure} 
+\begin{center}
+<<label=capaTpa,fig=TRUE,width=7,height=4,echo=FALSE>>=
+
+library(lattice)
+
+print(xyplot(CCF.OS ~ TPA.OS, data=annual.gr4, groups=InstPlot, type="o",
+        xlab="Trees per Acre", 
+        ylab=expression("Crown Area Per Acre" ~ (ft^{2}/"acre"))))
 
 
+@
+\end{center}
+\caption[Crown area per acre vs. trees per acre by plot.]{Crown area per acre vs. trees per acre by plot. The measurements within each plot are represented by a common line and color. Any middle values are interpolated from overstory measurements taken at the begining and end of the measurement interval.\label{fig:capaTpa}}
+\end{figure}
 
+Figure \ref{fig:capaTpa} shows that crown area per acre (CAPA) and trees per acre (TPA) variables are closely correlated (R=.92). Variation in trees per acre within plots is attributed solely to mortality therefore any change in trees per acre accross measurement years is negative. Crown area per acre may increase or decrease depending on the growth of crowns in overstory trees and the loss of crown due to mortality. Many plots in the intermediate TPA range (40-70 TPA) show a lack of overstory mortality and an increase in crown area per acre. However, plots with higher residual overstory TPA tend to exhibit higher levels of mortality and a corresponding decrease in crown area per acre.
 
  
 % \begin{figure}

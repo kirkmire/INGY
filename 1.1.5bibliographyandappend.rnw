@@ -15,13 +15,15 @@
 \label{appendix:var_select}
 \begin{enumerate}
 \begin{small}
-  \item{Select intallations with >60 \emph{P. Ponderosa} small tagged trees at initiation}
+  \item{Select installations with >60 \emph{P. Ponderosa} small tagged trees at initiation}
+  
+  \item{Retain one randomly selected STP of the six STPs within each plot for validation}
   
   \item{Select installations of similar overstory basal area and site productivity}
   
-  \item{Retain the sixth small tree plot of each installation for validation}
+
   
-\item{Create a list of the practical predictor variables within each category:
+\item{Create a list of the predictor variables within each category:
   \begin{itemize}
          \item {Understory Tree (UT)}
          \item {Understory Non-tree (UV)}
@@ -30,43 +32,44 @@
  \end{itemize}
 }
   
-  \item{For each candidate variable in UT generate a generalized additive model (GAM) using the base model and only the control plots (no herbicide):
-  \begin{center}
-\begin{equation}\label{eq:initMod}
-  \Delta \textrm{ height annual}=\sqrt{\textrm{ initial height }}+\textrm{ candidate small tree variable}
-\end{equation}
-  \end{center}
-  }
+  \item{For each candidate variable in UT generate a generalized additive model (GAM) using the base model and only the GE plots (multiple applications of herbicide):
+
   
-  \item{Visually examine the results and the partial residual plots of the models produced in 5}
+\begin{align}  
+\Delta{h} = & \sqrt{h} + \text{candidate small tree variable} \qquad, \nonumber \\
+\end{align}
+where $h$ is the tree height in feet.
+
+
+  
+  \item{Visually examine the results and the partial residual plots of the models produced}
   
   \item{Include quadratic terms of variables in the list of candidate variables if warranted}
   
   \item{Fit a quantile regression model with each candidate variable for$\textrm{ $\tau$}=.5$ using the quantreg package
-    \begin{center}
-\begin{equation}\label{eq:varMod}
-  \emph{Q}_{.50}\Delta \textrm{ height annual}=\sqrt{\textrm{ initial height }}+\textrm{ candidate small tree variable}
-\end{equation}
-  \end{center}
-  }
+
   
-  
+\begin{align} 
+\emph{Q}_{.50}\Delta{h} = & \sqrt{h} + \text{candidate small tree variable} \qquad, \nonumber \\
+\end{align}
+where $h$ is the tree height in feet and $Q$ is the specified quantile.
+
+
   \item{Calculate the AIC for each model within the UT category}
   
   \item{Select the variable from the model with the lowest AIC to be carried forward into UV category}
   
-  \item{Repeat steps 5-10 for the UV variables}
+  \item{Repeat steps 5-10 for the UV variables but with the addition of control and 1 time herbicide treated plots}
   \item{Select variables from the overstory and site productivity categories using the process outlined in steps 5-11 using all installations selected in step 1 (and all plots)}
-  \item{Using the variables selected for the $\tau$=.5, fit quantile regressions for $\tau$=.1, .9. This will estimate different $b_{\tau}$ for each specified quantile.\\
+  \item{Using the variables selected for the $\tau$=.5, fit quantile regressions for $\tau$=.1, .9.\\
   
-  \textbf{Final Models:}\\
+  \textbf{Final Models:}
 
-\begin{center}
-\begin{equation}\label{eq:finMod}
- \Delta_{\tau} =\textrm{b}_{0,\tau}\sqrt{\textrm{h}}+\textrm{b}_{UT,\tau}\textrm{UT} 
- + \textrm{b}_{UV,\tau}\textrm{UV}+\textrm{b}_{OT,\tau}\textrm{OT}+\textrm{b}_{SP,\tau}\textrm{SP}
-  \end{equation}
-  \end{center}
+  \begin{align} 
+\emph{Q}_{\tau}\Delta{h} = & \textrm{b}_{0,\tau}\sqrt{\textrm{h}}+\textrm{b}_{UT,\tau}\textrm{UT}  \nonumber
+ + \textrm{b}_{UV,\tau}\textrm{UV}+\textrm{b}_{OT,\tau}\textrm{OT}+\textrm{b}_{SP,\tau}\textrm{SP} \qquad, \nonumber \\
+\end{align}
+where $h$ is the tree height in feet, $Q$ is the specified quantile, and $b$ are the fitted coefficients.
 }
 \end{small}
 \end{enumerate}
@@ -149,10 +152,10 @@ Crown length&ft&tree x interval&cl\tabularnewline
 Crown width&ft&tree x interval&cw\tabularnewline
 Crown ratio&\%&tree x interval&cr\tabularnewline
 Basal diameter&in&tree x interval&BD\tabularnewline
-DBH&in &tree x interval&DBH\tabularnewline
-Trees per acre overall&trees/ac&tree x interval&SmallTPA\tabularnewline
-Trees per acre  \textgreater  15 ft in ht&trees/ac&STP x interval&Trees15+\tabularnewline
-Trees per acre above subject tree&trees/ac&tree x interval&TGT\tabularnewline
+Diameter at breast height&in &tree x interval&dbh\tabularnewline
+Trees per acre overall&ac$^-1$&tree x interval&SmallTPA\tabularnewline
+Trees per acre  \textgreater  15 ft in ht&ac$^-1$&STP x interval&Trees15+\tabularnewline
+Trees per acre above subject tree&ac$^-1$&tree x interval&TGT\tabularnewline
 \hline
 \textbf{Non-tree Vegetation}&&&\tabularnewline
 \hline
@@ -179,13 +182,13 @@ Tallest veg - subject tree (transect)&ft&tree x interval&max.vg.diff.tr\tabularn
 Trees per acre&trees/ac&plot x interval&tpa\tabularnewline
 Basal area per acre&ft$^2$/ac&plot x interval&bapa\tabularnewline
 Crown area per acre&\%&plot x interval&capa\tabularnewline
-Stand Density Index&&plot x interval&SDI\tabularnewline
+Stand Density Index&ac$^-1$&plot x interval&SDI\tabularnewline
 \hline
-\textbf{Site Quaility}&&&\tabularnewline
+\textbf{Site Quality}&&&\tabularnewline
 \hline
 Slope&\%&plot &s\tabularnewline
 Elevation&ft&plot&el\tabularnewline
-Aspect&N\degree&plot&asp\tabularnewline
+Aspect&N\degree&plot&\lambda\tabularnewline
 Site index&ft&installation&SI\tabularnewline
 Slope, aspect, elevation term&&plot&SEA, S\tabularnewline
 

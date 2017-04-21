@@ -541,24 +541,24 @@ As initial height increases, crown ratio increases and the variability of crown 
 \hline\hline
 \multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}\tabularnewline
 \hline
-$\sqrt{h}$ only&423&839.7&$\sqrt{h}$ and cr only&721&1011.0&Nothing&2608&2552.1&SI&2608&2051.7\tabularnewline
-SmallTPA&423&708.7&POLV.cov&721&1004.0&BAPA&2608&2490.5&Slope&2608&2340.7\tabularnewline
-Trees15+&422&771.0&F.cov&721&1012.9&CAPA&2608&2417.0&Elevation&2608&2348.1\tabularnewline
-TGT&423&760.9&LS.cov&721&1012.8&TPA&2608&2346.2&Aspect&2608&2347.5\tabularnewline
-BD&422&610.7&HS.cov&721&1011.9&SDI&2608&2454.0&SEA Int&2608&1986.5\tabularnewline
-DBH&389&603.2&F.depth&721&1011.6&&&&&&\tabularnewline
-CrownWidth&423&713.4&LS.depth&721&1012.5&&&&&&\tabularnewline
-CrownLength&423&674.8&HS.depth&721&1005.1&&&&&&\tabularnewline
-CrownRatio&423&585.4&F.vol&721&1012.4&&&&&&\tabularnewline
-&&&LS.vol&721&1012.5&&&&&&\tabularnewline
-&&&HS.vol&721&1012.5&&&&&&\tabularnewline
-&&&F.tran&721&1012.4&&&&&&\tabularnewline
-&&&LS.tran&721&1010.9&&&&&&\tabularnewline
-&&&HS.tran&721&1012.9&&&&&&\tabularnewline
-&&&G.tran.depth&721&1005.8&&&&&&\tabularnewline
-&&&G.tran.cov&721&1009.1&&&&&&\tabularnewline
-&&&mx.vg.diff.1m&721&1009.8&&&&&&\tabularnewline
-&&&mx.vg.diff.tr&721&1012.4&&&&&&\tabularnewline
+$\sqrt{h}$ only&423&840&$\sqrt{h}$ and cr only&721&1011&Nothing&2608&2552&SI&2608&2052\tabularnewline
+SmallTPA&423&709&POLV.cov&721&1004&BAPA&2608&2491&Slope&2608&2341\tabularnewline
+Trees15+&422&771&F.cov&721&1013&CAPA&2608&2417&Elevation&2608&2348\tabularnewline
+TGT&423&761&LS.cov&721&1013&TPA&2608&2346&Aspect&2608&2348\tabularnewline
+BD&422&611&HS.cov&721&1012&SDI&2608&2454&SEA Int&2608&1987\tabularnewline
+DBH&389&603&F.depth&721&1012&&&&&&\tabularnewline
+CrownWidth&423&713&LS.depth&721&1013&&&&&&\tabularnewline
+CrownLength&423&675&HS.depth&721&1005&&&&&&\tabularnewline
+CrownRatio&423&585&F.vol&721&1012&&&&&&\tabularnewline
+&&&LS.vol&721&1013&&&&&&\tabularnewline
+&&&HS.vol&721&1013&&&&&&\tabularnewline
+&&&F.tran&721&1012&&&&&&\tabularnewline
+&&&LS.tran&721&1011&&&&&&\tabularnewline
+&&&HS.tran&721&1013&&&&&&\tabularnewline
+&&&G.tran.depth&721&1006&&&&&&\tabularnewline
+&&&G.tran.cov&721&1009&&&&&&\tabularnewline
+&&&mx.vg.diff.1m&721&1010&&&&&&\tabularnewline
+&&&mx.vg.diff.tr&721&1012&&&&&&\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}
@@ -588,7 +588,7 @@ The primary form of the model included the square root of initial height, since 
 % \caption{Generalized additive model of annual height growth increment vs. square-root of initial height.\label{fig:seqgam}}
 % \end{figure}
 
-Proceeding forward from the base model to the small tree category of competition, the AIC for the \tau=.5 QR model with the crown ratio variable was found to be much lower than the other candidate variables (see Table 2). This variable was therefore selected to represent competition from other small trees. The GAM created to visualize the crown ratio effect includes square root of initial height as a linear term and is smoothed for crown ratio (Figure \ref{fig:seqgamCR}). The relationship for this variable is non-linear yet predicted height growth increment is shown to increase as crown ratio increases. Quadratic terms were evaluated to imrpove this relationship to no avail. Small trees with larger crown lengths relative to total height are predicted to have greater height growth increments.
+Proceeding forward from the base model to the small tree category of competition, the AIC for the $\tau$=.5 QR model with the crown ratio variable was found to be much lower than the other candidate variables (see Table 2). This variable was therefore selected to represent competition from other small trees. The GAM created to visualize the crown ratio effect includes square root of initial height as a linear term and is smoothed for crown ratio (Figure \ref{fig:seqgamCR}). The relationship for this variable is non-linear yet predicted height growth increment is shown to increase as crown ratio increases. Quadratic terms were evaluated to imrpove this relationship to no avail. Small trees with larger crown lengths relative to total height are predicted to have greater height growth increments.
 
 \begin{figure}
 \minipage{0.48\textwidth}
@@ -725,7 +725,7 @@ The resultant model is specified as follows:
 +b_{TPA,\tau}TPA+S(\emph{b}) \qquad,
 \end{align}
 %
-\noindent where \delta $h$ is the predicted growth response, $h$ is the initial height in feet, $\tau$ is the specified portion of the response distribution, $cr$ is the crown ratio, $TPA$ is the overstory trees per acre and $S$ is the complex of slope, aspect and elevation terms and estimated coefficients (Equation \ref{eq:Eq1}). Coefficients given in Tables \ref{tab:tau1}-\ref{tab:tau9}.
+\noindent where \Delta{h} is the predicted growth response, $h$ is the initial height in feet, $\tau$ is the specified portion of the response distribution, $cr$ is the crown ratio, $TPA$ is the overstory trees per acre and $S$ is the complex of slope, aspect and elevation terms and estimated coefficients (Equation \ref{eq:Eq1}). Coefficients given in Tables \ref{tab:tau1}-\ref{tab:tau9}.
 
 
 
@@ -851,7 +851,7 @@ slopePercent:sin.rad.asp:I(elevation$^2$)&$ 8.50e-08$&$3.32e-08$&$ 2.56$&$1.05e-
 % \caption{Residual values vs. fitted values of height growth increment for $\tau$=.5.\label{fig:qr5resid}}
 % \end{figure}
 
-The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the residuals for the $\tau$=.5 model are split roughy proportionally above and below zero. This result is expected as the median ($\tau$=.5) quantile regression is specified to describe the linear trends in the central portion of the response distribution. Figure (\ref{fig:qr1resid}) reveals that most residuals are greater than zero for the $\tau$=.1 quantile model that describes the lower portion of the response distribution. In the $\tau$=.9 quantile, most residuals are found to be negative but there is a modest number of positive residuals across all predicted height increments. All of the models fail at the low predictions because negative height growth increments were removed from the dataset, yet the linear models predict negative height increments. Thus the residuals of the lowest fitted values are exclusively positive. Collectively, these residual plots suggest that models are working for \widehat{\delta h} > 0, but are not constrained to be positive. 
+The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the residuals for the $\tau$=.5 model are split roughy proportionally above and below zero. This result is expected as the median ($\tau$=.5) quantile regression is specified to describe the linear trends in the central portion of the response distribution. Figure (\ref{fig:qr1resid}) reveals that most residuals are greater than zero for the $\tau$=.1 quantile model that describes the lower portion of the response distribution. In the $\tau$=.9 quantile, most residuals are found to be negative but there is a modest number of positive residuals across all predicted height increments. All of the models fail at the low predictions because negative height growth increments were removed from the dataset, yet the linear models predict negative height increments. Thus the residuals of the lowest fitted values are exclusively positive. Collectively, these residual plots suggest that models are working for \widehat{\Delta{h}} > 0, but are not constrained to be positive. 
 
 
 \begin{figure}[!htb]
@@ -887,7 +887,7 @@ The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the residu
 % \caption{Coefficient Plots of Initial Height Across All Quantiles\label{fig:sr_init_coef}}
 % \end{figure}
 
-The coefficient plot (Figure \ref{fig:sr_init_coef}) shows that the effect of initial height increases as the specified quantile increases. For the middle range of quantile values ($\tau$=.3-.7), the effect remains within the bounds of the 95\% confidence interval (CI) of the least squares regression estimate (red dotted lines). However, for the $\tau$<.2 values, the estimate is below the 95\% CI while it is above the CI for the $\tau$ \geq .8. This means that the maximum or upper-quantiles of the growth distribution increase more rapidly with initial height than does the median and much more rapidly than do the lower quantiles. The effect of initial height on median growth is about the same as would be estimated by standard linear regression.
+The coefficient plot (Figure \ref{fig:sr_init_coef}) shows that the effect of initial height increases as the specified quantile increases. For the middle range of quantile values ($\tau$=.3-.7), the effect remains within the bounds of the 95\% confidence interval (CI) of the least squares regression estimate (red dotted lines). However, for the $\tau$<.2 values, the estimate is below the 95\% CI while it is above the CI for the $\tau$ \geq{.8}. This means that the maximum or upper-quantiles of the growth distribution increase more rapidly with initial height than does the median and much more rapidly than do the lower quantiles. The effect of initial height on median growth is about the same as would be estimated by standard linear regression.
 
 % \begin{figure}
 % \begin{center}

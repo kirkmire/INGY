@@ -461,7 +461,7 @@ print(xyplot(annual.gr4$ht_annual~annual.gr4$Height_Total,
  \caption{Annualized height growth increment vs. initial height.\label{fig:delta_ht_init}}
  \end{figure}
  
-Annual height growth increment tends to increase with initial height (Figure \ref{fig:delta_ht_init}). This relationship was positive although weak (r\approx.65) and increasing in variance with points fanning out from the origin in decreasing density. This reveals that most of the tree records represent shorter-in-stature trees that exhibit only modest increases in height growth increment. Despite this concentration of shorter subject trees, there is a wide range of both initial height values and annualized height growth that includes trees greater than 25 ft tall and trees that experience approximately 3 feet of annual growth. While taller trees tend to exhibit greater annual height growth, the variability in height growth also increases with initial height (non-homogeneous variance). 
+Annual height growth increment tends to increase with initial height (Figure \ref{fig:delta_ht_init}). This relationship was positive although weak (r$\approx$.65) and increasing in variance with points fanning out from the origin in decreasing density. This reveals that most of the tree records represent shorter-in-stature trees that exhibit only modest increases in height growth increment. Despite this concentration of shorter subject trees, there is a wide range of both initial height values and annualized height growth that includes trees greater than 25 ft tall and trees that experience approximately 3 feet of annual growth. While taller trees tend to exhibit greater annual height growth, the variability in height growth also increases with initial height (non-homogeneous variance). 
 
 
  
@@ -539,7 +539,7 @@ As initial height increases, crown ratio increases and the variability of crown 
 \begin{center}
 \begin{tabular}{llllllllllll}
 \hline\hline
-\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}\tabularnewline
+\multicolumn{1}{c}{UT Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{UV Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{OS Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{SP Variable}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}\tabularnewline
 \hline
 $\sqrt{h}$ only&423&840&$\sqrt{h}$ and cr only&721&1011&Nothing&2608&2552&SI&2608&2052\tabularnewline
 SmallTPA&423&709&POLV.cov&721&1004&BAPA&2608&2491&Slope&2608&2341\tabularnewline
@@ -725,7 +725,7 @@ The resultant model is specified as follows:
 +b_{TPA,\tau}TPA+S(\emph{b}) \qquad,
 \end{align}
 %
-\noindent where \Delta{h} is the predicted growth response, $h$ is the initial height in feet, $\tau$ is the specified portion of the response distribution, $cr$ is the crown ratio, $TPA$ is the overstory trees per acre and $S$ is the complex of slope, aspect and elevation terms and estimated coefficients (Equation \ref{eq:Eq1}). Coefficients given in Tables \ref{tab:tau1}-\ref{tab:tau9}.
+\noindent where $\Delta{h}$ is the predicted growth response, $h$ is the initial height in feet, $\tau$ is the specified portion of the response distribution, $cr$ is the crown ratio, $TPA$ is the overstory trees per acre and $S$ is the complex of slope, aspect and elevation terms and estimated coefficients (Equation \ref{eq:Eq1}). Coefficients given in Tables \ref{tab:tau1}-\ref{tab:tau9}.
 
 
 
@@ -887,7 +887,7 @@ The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the residu
 % \caption{Coefficient Plots of Initial Height Across All Quantiles\label{fig:sr_init_coef}}
 % \end{figure}
 
-The coefficient plot (Figure \ref{fig:sr_init_coef}) shows that the effect of initial height increases as the specified quantile increases. For the middle range of quantile values ($\tau$=.3-.7), the effect remains within the bounds of the 95\% confidence interval (CI) of the least squares regression estimate (red dotted lines). However, for the $\tau$<.2 values, the estimate is below the 95\% CI while it is above the CI for the $\tau$ \geq{.8}. This means that the maximum or upper-quantiles of the growth distribution increase more rapidly with initial height than does the median and much more rapidly than do the lower quantiles. The effect of initial height on median growth is about the same as would be estimated by standard linear regression.
+The coefficient plot (Figure \ref{fig:sr_init_coef}) shows that the effect of initial height increases as the specified quantile increases. For the middle range of quantile values ($\tau$=.3-.7), the effect remains within the bounds of the 95\% confidence interval (CI) of the least squares regression estimate (red dotted lines). However, for the $\tau$<.2 values, the estimate is below the 95\% CI while it is above the CI for the $\tau$ $\geq$ .8. This means that the maximum or upper-quantiles of the growth distribution increase more rapidly with initial height than does the median and much more rapidly than do the lower quantiles. The effect of initial height on median growth is about the same as would be estimated by standard linear regression.
 
 % \begin{figure}
 % \begin{center}

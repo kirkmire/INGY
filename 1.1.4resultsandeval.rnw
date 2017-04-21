@@ -887,7 +887,7 @@ The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the residu
 % \caption{Coefficient Plots of Initial Height Across All Quantiles\label{fig:sr_init_coef}}
 % \end{figure}
 
-The coefficient plot (Figure \ref{fig:sr_init_coef}) shows that the effect of initial height increases as the specified quantile increases. For the middle range of quantile values ($\tau$=.3-.7), the effect remains within the bounds of the 95\% confidence interval (CI) of the least squares regression estimate (red dotted lines). However, for the $\tau$<.2 values, the estimate is below the 95\% CI while it is above the CI for the $\tau$ \geq{.8}. This means that the maximum or upper-quantiles of the growth distribution increase more rapidly with initial height than does the median and much more rapidly than do the lower quantiles. The effect of initial height on median growth is about the same as would be estimated by standard linear regression.
+The coefficient plot (Figure \ref{fig:sr_init_coef}) shows that the effect of initial height increases as the specified quantile increases. For the middle range of quantile values ($\tau$=.3-.7), the effect remains within the bounds of the 95\% confidence interval (CI) of the least squares regression estimate (red dotted lines). However, for the $\tau$<.2 values, the estimate is below the 95\% CI while it is above the CI for the $\tau$ $\geq$ .8. This means that the maximum or upper-quantiles of the growth distribution increase more rapidly with initial height than does the median and much more rapidly than do the lower quantiles. The effect of initial height on median growth is about the same as would be estimated by standard linear regression.
 
 % \begin{figure}
 % \begin{center}

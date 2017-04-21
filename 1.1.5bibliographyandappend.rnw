@@ -188,7 +188,7 @@ Stand Density Index&ac$^-1$&plot x interval&SDI\tabularnewline
 \hline
 Slope&\%&plot &s\tabularnewline
 Elevation&ft&plot&el\tabularnewline
-Aspect&N\degree&plot&\lambda\tabularnewline
+Aspect&N\degree&plot&\alpha\tabularnewline
 Site index&ft&installation&SI\tabularnewline
 Slope, aspect, elevation term&&plot&SEA, S\tabularnewline
 

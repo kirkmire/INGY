@@ -46,7 +46,10 @@ There were several counterintuitive results from the variable selection process.
 
 The alternative measure of vegetation, the 1m$^2$ plots, may have also failed to adequately capture the vegetative competition despite being within the STPs. This issue was recognized a few years into the study, leading to the introduction of the 4m$^2$ vegetation plots. Only the smaller size plots were maintained throughout all measurement intervals in the model, so it was used instead of the larger ones. The 1m$^2$ plots cover such a small proportion of the STPs (3.4\%) that they may be unable to adequately characterize the vegetation. Although the location of the 1m$^2$ in the center of the STP means that it is spatially tied to the STP, this may also be a source of bias. The tagged tree mapping is referenced to STP center and unless carefully delineated, these plots may have become an area of high impact from researchers. However, protocol stipulated that the vegetation measurements occur before STP measurements.
 
-The other unanticipated result of the variable selection process was that the overstory trees per acre variable (TPA) provided a superior model fit than all other overstory candidate variables. Crown area per acre (CAPA) had the second lowest AIC, but basal area per acre (BAPA) and stand density index (SDI) were expected to best describe the overstory retention since they provide information about the density of the retained overstory trees. However, there is a disadvantage to BAPA metric; the basal area contributed by many trees of a small diameter is considered to be equivalent to the basal area of few large diameter trees. The TPA metric may be better at capturing the competitive effects of smaller diameter overstory trees since it can differentiate between many and few overstory trees. 
+The other unanticipated result of the variable selection process was that the overstory trees per acre variable (TPA) provided a superior model fit than all other overstory candidate variables. Crown area per acre (CAPA) had the second lowest AIC but was expected to best describe competition from the overstory because it directly relates to ability of the overstory trees to shade the small trees in the understory. Basal area per acre (BAPA) and stand density index (SDI) were expected to provide a superior  model fit than TPA since they provide information about the density of the retained overstory. However, the study design resulted in a TPA measure that provides much more information than a traditional measure of TPA.
+
+The lower dbh limit imposed by the study ensured that only overstory trees greater than 3.5 in were included in the TPA metric, whereas a more traditional TPA would consider trees of all size classes. This likely resulted in an improved correlation between TPA and CAPA ((R=.92), see Figure, \ref{fig:capaTpa}). It is not entirely clear why TPA provides a better model fit than CAPA, but it is possible that changes in CAPA across measurement years somehow fail to relate to small tree height growth increment as well as decreases in TPA. TPA certainly provides a more practically obtained measure of overstory competition.
+
 
 
 %Effects
@@ -142,21 +145,30 @@ However, FVS does accommodate multiple trajectories of the same tree record to p
 % \end{figure}
 
 
-It is within this ``tripling'' framework that our quantile regression model may find its greatest utility. Instead of selecting normalized deviations from a mean prediction and then assigning random error from within the normal distribution, the three tree records could be assigned predicted quantile values for $\tau$= .25, .50 and .75.  These quantile derivations of height provide a more empirically based distribution of possible height values for a given set of predictors.
-
-The individual tree height growth increment model proposed in this thesis provides an estimate of what the entire range of possible growth of a given small ponderosa pine tree could be.  However, it will not predict whether a particular tree will achieve its maximum growth. If enough information were available to predict this, it would negate the need for quantile regression.  The primary utility of the model is in providing managers an idea of the growth rates of the fastest growing trees and how post-harvest stand conditions such as retained overstory can be expected to affect these rates.
-
-\subsection{Conclusions}
+It is within this ``tripling'' framework that our quantile regression model may find its greatest utility. Instead of selecting normalized deviations from a mean prediction and then assigning random error from within the normal distribution, the three tree records could be assigned predicted quantile values for $\tau$= .25, .50 and .75, for example.  These quantile derivations of height provide a more empirically based distribution of possible height values for a given set of predictors.
 
 
 
+\section{Conclusions}
+
+The individual tree height growth increment model proposed in this thesis provides an estimate of what the entire range of possible growth of a given small ponderosa pine tree could be.  It will not predict whether a particular tree will achieve its maximum growth. If enough information were available to predict this, it would negate the need for quantile regression. Rather, this model has the potential to introduce empiracally supported variation in height growth estimates. The empirical evidence for the model was obtained through the most comprehensive and long-standing study of small tree growth in the Inland Northwest to date.
+
+Statistical validation failed to demonstrate that the model produced an expected distribution of height growth increments consistant with the height growth observed in the witheld data. However, this is primarily due to $\tau$=.1 predicted negative height increments for some tree's height growth. Imposing a lower limit on predicted height growth or using non-linear quantile regression would likely resolve the issue of negative predictions of height growth. 
 
 
-Having a better idea of the growth rate of the fastest trees has a number of potential applications.  Forests managed under the Sustainable Forest Initiative (SFI) or Forest Stewardship Counsel (FSC) are required to achieve ``green-up'' whereby trees in clearcut areas are at least 3 years old or 5 meters high at a desired stocking level before adjacent units can be harvested. This could lead to better prediction of when stands will reach green-up.  
+The primary utility of the model is in providing managers an idea of the growth rates of the fastest growing understory trees and how post-harvest stand conditions such as retained overstory can be expected to affect these rates. Having a better idea of the growth rate of the fastest trees has a number of potential applications. Forests managed under the Sustainable Forest Initiative (SFI) or Forest Stewardship Counsel (FSC) are required to achieve ``green-up'' whereby trees in clearcut areas are at least 3 years old or 5 meters high at a desired stocking level before adjacent units can be harvested. This could lead to better prediction of when stands will reach green-up. 
+
+Another application of improved prediction of the maximum growth of small trees relates to growth into the retained canopy and how quickly this will occur. Since the small trees that emerge into the canopy first may eventually compose the (co-)dominant crown class, it is especially important know how factors such as retained overstory and understory vegetation affect growth in these trees. The small trees that emerge first into the canopy may also eventually be of greater commercial or volumetric interest.
+
+
+As alluded to in the previous paragraph, improving the predictions of small tree growth has implications beyond simply improving our knowledge of understory tree growth and related competitive factors. Improvements in small tree height growth predictions can be carried forward to improvementts in the later stages of modeled stand development. Accurate modeling of the development of recruited and juvenile trees following removal of overstory is crucial for simulation models to achieve a consistent simulation output (\cite{Golser1997}). When combined with a large-tree growth model such as in FVS, the proposed model could contribute to an improvement in modeling long-term stand development and enable managers to make better informed decisions regarding overstory retention and understory vegetation following variable retention harvest.
+
+
+
 
 Another example of a possible application is an improved idea of which ponderosa pine stands may benefit from an understory thinning or herbicide application. Within similar site conditions and initial tree heights, the stand with lower predicted height growth increments is presumably experiencing more competition from understory vegetation or other small trees. However, one disadvantage of failing to disintangle the sources of understory competition is that it becomes difficult to know which understory component to manipulate as a forest manager. This is where adequate knowledge of the stand understory is necesary to guide management.
 
-Accurate modeling of the development of recruited and juvenile trees following removal of overstory is crucial for simulation models to achieve a consistent simulation output (\cite{Golser1997}). When combined with a large-tree growth model such as in FVS, the proposed model could contribute to an improvement in modeling long-term stand development and enable managers to make better informed decisions regarding overstory retention and understory vegetation following variable retention harvest.
+
 
 
 

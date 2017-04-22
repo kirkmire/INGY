@@ -323,7 +323,7 @@ library(lattice)
 
 print(xyplot(CCF.OS ~ TPA.OS, data=annual.gr4, groups=InstPlot, type="o",
         xlab="Trees per Acre", 
-        ylab=expression("Crown Area Per Acre" ~ (ft^{2}/"acre"))))
+        ylab="Crown Area Per Acre (% of an acre)"))
 
 
 @
@@ -993,17 +993,19 @@ Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generat
 % \begin{center}
 % <<label=validres_below4,fig=TRUE,echo=FALSE>>=
 % 
-% annual.gr6.lessthan5<-annual.gr6[5<annual.gr6$Height_Total,]
+% annual.gr6.lessthan5<-annual.gr6[5<annual.gr6$Height_Total&annual.gr6$Height_Total<10,]
 % sorted.totals2<-aggregate(annual.gr6.lessthan5$counts,
 %                          by=list(Category=annual.gr6.lessthan5$response.cat), FUN=sum)
 % 
 % sorted.totals2$x<-sorted.totals2$x/sum(sorted.totals2$x)
 % sorted.totals2$Category= factor(sorted.totals2$Category,
-%              levels = c("< .1",
-%                           ".1 - .5",
-%                           ".5 - .9",
-%                           "> .9"),
-%              ordered=TRUE)
+%               levels = c("< .1",
+%                            ".1 - .5",
+%                            ".5 - .9",
+%                            "> .9"),
+%               ordered=TRUE)
+% 
+% 
 % 
 % print(barchart(sorted.totals2$x~sorted.totals2$Category, names = "Quantile Bin",
 %         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,

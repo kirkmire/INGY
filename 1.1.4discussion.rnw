@@ -48,7 +48,12 @@ The alternative measure of vegetation, the 1m$^2$ plots, may have also failed to
 
 The other unanticipated result of the variable selection process was that the overstory trees per acre variable (TPA) provided a superior model fit than all other overstory candidate variables. Crown area per acre (CAPA) had the second lowest AIC but was expected to best describe competition from the overstory because it directly relates to ability of the overstory trees to shade the small trees in the understory. Basal area per acre (BAPA) and stand density index (SDI) were expected to provide a superior  model fit than TPA since they provide information about the density of the retained overstory. However, the study design resulted in a TPA measure that provides much more information than a traditional measure of TPA.
 
-The lower dbh limit imposed by the study ensured that only overstory trees greater than 3.5 in were included in the TPA metric, whereas a more traditional TPA would consider trees of all size classes. This likely resulted in an improved correlation between TPA and CAPA ((R=.92), see Figure, \ref{fig:capaTpa}). It is not entirely clear why TPA provides a better model fit than CAPA, but it is possible that changes in CAPA across measurement years somehow fail to relate to small tree height growth increment as well as decreases in TPA. TPA certainly provides a more practically obtained measure of overstory competition.
+The lower dbh limit imposed by the study ensured that only overstory trees greater than 3.5 in were included in the TPA metric, whereas a more traditional TPA may consider trees of all size classes. This likely resulted in an improved correlation between TPA and CAPA ((R=.92), see Figure, \ref{fig:capaTpa}). It is not entirely clear why TPA provides a better model fit than CAPA, but it is possible that changes in CAPA across measurement years somehow fail to relate to available understory light as well as decreases in TPA. TPA certainly provides a more practically obtained measure of overstory competition.
+
+The selection of the slope, aspect and elevation interaction term was expected given that these site attributes are known to be useful surrogates for the spatial distribution of factors that influence productivity such as radiation, precipitation and temperature (\cite{Stage2007a}). The interaction term also provides plot-level information rather than installation-level. The values of slope, aspect and elelvation are quite easily derived from location coordinates and a spatial analysis program. 
+
+
+As another candidate variable for site productivity, site index may have been influenced by the mixed species nature of the stands as well as the uneven age and lack of ideal open-grown dominate speciman trees. Site index curves are based on an open-grown, dominate tree growing within a  single-species, even aged stand. Despite the lack of ideal conditions for site index, it provided a greatly improved model fit over the previous iteration of the model (without a descriptor of site productivity). 
 
 
 
@@ -113,7 +118,7 @@ However, FVS does accommodate multiple trajectories of the same tree record to p
 
 \begin{figure}[ht]
 \begin{center}
-    \includegraphics[width=160mm]{customFVSdist.png}
+    \includegraphics[width=140mm]{customFVSdist.png}
     \caption[FVS tripling framework.]{FVS error distribution about predicted height growth. ``A'', ``B'', and ``C'' are average values from their respective portions of the normal distribution that correspond to each of the three weighted tree records.}
     \label{fig:tripling}
 \end{center}

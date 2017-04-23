@@ -899,8 +899,7 @@ The coefficient plot (Figure \ref{fig:sr_init_coef}) shows that the effect of in
 % \caption{Coefficient Plot of Crown Ratio Across All Quantiles\label{fig:cr_coef}}
 % \end{figure}
 
-Similarly, the effect of crown ratio increases as the $\tau$ value increases. The estimated effect for the lower half of the response distribution fall below that of the 95\% CI for the mean regression. Given that all other predictors are held constant, the slowest growing trees exhibit an effect of crown ratio that is far less than that of the mean regression. The mean regression estimate of crown ratio does appear to describe the effect of crown ratio well for the faster growing trees as the estimates for the $\tau$=7-9 surfaces fall within the 95\% CI.
-
+Similarly, the effect of crown ratio generally increases as the $\tau$ value increases (Figure \ref{fig:cr_coef}. There are some inconsistancies with this trend at the the extreme $\tau$ values (.1 and .9) where a there are also considerably wider confidence intervals around the estimates. Given that all other predictors are held constant, the slowest growing trees reveal an effect of crown ratio that is far less than that of trees that exhibit higher annual growth. 
 
 
 % \begin{figure}
@@ -916,7 +915,7 @@ Similarly, the effect of crown ratio increases as the $\tau$ value increases. Th
 % \caption{Coefficient Plot of Overstory Trees Per Acre Across All Quantiles\label{fig:os_tpa_coef}}
 % \end{figure}
 
-As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was negatively correlated to annual height growth (Figure \ref{fig:seqgamOSTPA}). Here we see that estimates for the effect of overstory TPA are negative for all values of $\tau$ and steadily decrease as $\tau$ increases (Figure \ref{fig:os_tpa_coef}). The negative effect of TPA is least pronounced for the trees in the lower portion of the response distribution. In contrast, the fastest growing trees (in the upper portion of the response distribution), exhibit the most negative effects of overstory competition. This result is especially practical since the level of overstory tree retention is one of the primary means of manipulating stand structure.
+As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was negatively correlated to annual height growth (Figure \ref{fig:seqgamOSTPA}). Here we see that estimates for the effect of overstory TPA are negative for all values of $\tau$ and steadily decrease as $\tau$ increases (Figure \ref{fig:os_tpa_coef}). The negative effect of TPA is least pronounced for the trees in the lower quantiles of the growth distribution. In contrast, the fastest growing trees (in the upper quantiles of the growth distribution), exhibit the most negative effects of overstory competition, although with a slightly larger confidence interval around the estimate. 
 
 
 \begin{figure} 
@@ -926,14 +925,14 @@ As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was
 sea.si<-lm(SEA.val~SiteIndex_Value,data=annual.gr4)
 plot(annual.gr4$SEA.val~annual.gr4$SiteIndex_Value,
      xlab="Site Index Value",
-     ylab="Slope, Aspect, Elevation Term",
+     ylab="SEA Contribution to Height Prediction (ft)",
      pch = 16,
      col ="grey60")
 abline(sea.si)
 
 @
 \end{center}
-\caption[Comparison of slope, elevation and aspect term to site index]{Examination of relationship between the slope, elevation and aspect interaction term and site index (ft at base age of 50 yrs)\label{fig:sivssea}}
+\caption[Comparison of slope, elevation and aspect term to site index]{Examination of relationship between the slope, elevation and aspect interaction (SEA) contribution to the $\tau$=.5 predicted annual height growth and site index (ft at base age of 50 yrs)\label{fig:sivssea}}
 \end{figure}
 
 Figure \ref{fig:sivssea} shows the positive association between the SEA value and the site index. Since both of these variables relate to the inherent productivity of the site they should be positively correlated. The lack of a strong correlation can be attributed in part to a difference in resolution. One site index was obtained for each installation whereas the SEA value relates productivity to the slope, aspect and elevation at the plot level.

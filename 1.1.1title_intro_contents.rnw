@@ -61,7 +61,7 @@ for the degree of}
 \newpage
 \noindent Kirkmire, Colin, M.SC, May 2017                Forestry
 
-\noindent Estimating the Effects of Overstory Retention, Vegetative Competitions,
+\noindent Estimating the Effects of Overstory Retention, Vegetative Competition,
 and Site Quality on the Growth Response of Small Ponderosa Pine Trees
 using Regression Quantiles
 

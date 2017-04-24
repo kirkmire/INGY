@@ -469,7 +469,7 @@ Annual height growth increment tends to increase with initial height (Figure \re
   \subcaption{Annualized height growth increment (ft/yr) vs. crown ratio.}\label{fig:delta_ht_cratio}
 \endminipage\hfill
 \minipage{0.48\textwidth}
-  \includegraphics[width=\linewidth]{cratio_ht_total.png}
+  \includegraphics[width=\linewidth]{cratioInit.png}
   \subcaption{Initial height (ft) vs. crown ratio.}\label{fig:init_ht_cratio}
 \endminipage\hfill
 \caption{Scatterplots of small tree growth characteristics.}

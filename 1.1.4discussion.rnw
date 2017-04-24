@@ -100,7 +100,7 @@ The following section will compare the proposed model to that of the current sta
 The small-tree routine in the Inland Empire Variant of FVS provides a 5-year estimate of individual height growth first and then estimates diameter growth from height growth (\cite{keyser2008}). The FVS small tree growth routine for the Inland Empire Variant utilizes the following equation to predict the height growth of small trees (less than 3 in DBH):
 %
 \begin{align} \label{eq:fvs_eq}
-\Delta{h} &=\propto h^{B_{1}}e^{B_{2}CCF}e^{\propto_{3}BAL}f(HAB,LOC,sl,asp\alpha)\qquad, 
+\Delta{h} &=\propto h^{B_{1}}e^{B_{2}CCF}e^{B_{3}BAL}f(HAB,LOC,sl,\alpha)\qquad, 
 \end{align}
 where $h$ is tree height, $CCF$ is crown competition factor, $BAL$ is total basal area in tree larger than the subject tree, $HAB$ is a habitat type dependent intercept, $LOC$ is a location specific intercept, $\alpha$ is the stand aspect, and $sl$ is the stand slope with $B_1$-$B_3$ and $f$() being species-specific.
 

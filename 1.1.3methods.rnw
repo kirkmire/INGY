@@ -236,9 +236,9 @@ Although measurements of understory vegetation and height were recorded in 4 m$^
 Average differences (depth) at the quadrat level between base and top height measurements were found separately for forbs, low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were obtained for forbs, low shrubs, high shrubs and grasses. The ocular estimates of percentage cover also included an overall estimate of vegetation cover in the quadrat. A volume per area measurement combined the two measures of vegetation by multiplying the percentage cover by the depth of the associated cover:
 
 \begin{align}  \label{eq:Eq0} 
-volume(\frac{ft^{3}}{ft^{2}}) =  [\frac{ft^{2}veg}{ft^{2}land}]*[top-base]
+volume(\frac{ft^{3}}{ft^{2}}) =  [\frac{ft^{2}veg/100}{ft^{2}land}]*[top-base]
 \end{align}
-where $volume$ is the per area volume estimate, $veg$ is the ocularly estimated precentage cover of vegetation, $land$ is one square meter vegetation sample plot, $top$ is the vegetation top height in feet and $base$ is the vegetation base height in feet.
+where $volume$ is the per area volume estimate, $veg$ is the ocularly estimated percentage cover of vegetation, $land$ is one square meter vegetation sample plot, $top$ is the vegetation top height in feet and $base$ is the vegetation base height in feet.
 
 
 
@@ -306,7 +306,7 @@ Quantile regression allows for the description of the impact of both measured an
 \newpage
 \subsection{Model Specification}
 
-The objective was to obtain a parsimonious system of quantile regression models informed by our understanding of the factors surrounding small tree growth (see Figure \ref{fig:chart}). These quantile regression models were constructed in a forward stepwise process that proceeded through the four categories of ecological factors that affect tree growth (see Appendix 4). 
+The objective was to obtain a parsimonious system of quantile regression models informed by our understanding of the factors surrounding small tree growth (see Figure \ref{fig:chart}). These quantile regression models were constructed in a forward stepwise process that proceeded through the four categories of ecological factors that affect tree growth (Figure \ref{fig:chart}). 
 
 Only the installations with greater than 60 ponderosa pine tagged small trees at initiation were used for model development. This minimum number of trees ensured that installations included in model building would have a sufficient number of tagged small trees to contribute to model development. The installations that sustained a post-initiation harvest were also excluded from analysis. At the retained installations annual height increment was calculated by finding the appropriate measurement intervals according to the timeline in Figure \ref{fig:timeline}, then subtracting earlier height measurements from the later oner and dividing by the difference between measurement years. 
 %

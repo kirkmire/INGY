@@ -2,3 +2,17 @@
 .Rhistory
 .RData
 11.Quant_reg_LL.rmd
+Thesis_doc-*.pdf
+*.tex
+*.bbl
+*.log
+*.loc
+*.xml
+*.gz
+*.bib
+*.log
+*.lot
+*.apc
+*.lof
+*.toc
+*.Rproj

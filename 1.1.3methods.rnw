@@ -10,7 +10,7 @@
 \subsection{Study Design}
 \doublespacing
 
-Twenty-nine STCV study sites were established on private, public and tribal forestlands ranging from the eastern slopes of the Cascade Mountains to western Montana (see Figure \ref{fig:map}).  Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), but with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or harvested according to a shelterwood, seed tree or heavy thinning variable retention harvest.
+Twenty-nine STCV study sites were established on private, public and tribal forestlands ranging from the eastern slopes of the Cascade Mountains to western Montana (see Figure \ref{fig:map}).  Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), but with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or harvested according to a shelterwood, seed tree or heavy thinning partial retention harvest.
 
 
 % # <<fig=FALSE,include=FALSE, echo=FALSE>>=
@@ -164,7 +164,7 @@ rect(80-(1*3.28084),47,80,47,col=NA,border="black", lwd=1)
 
 @
 \end{center}
-\caption[Design of STCV Sampling Plot.]{Note that vegetation quadrants exist for all six small tree plots although only illustrated on two.\label{fig:samplePlot}}
+\caption[Design of STCV Sampling Plot.]{Design of STCV Sampling Plot. Note that vegetation quadrants exist for all six small tree plots although only illustrated on two.\label{fig:samplePlot}}
 \end{figure}
 
 Each plot contained a series of nested subplots that decrease in area with physiologically smaller vegetation units (see Figure \ref{fig:samplePlot}). Starting with the full extent of the plot, overstory trees with greater than 10.5 in diameter at breast height (DBH, 4.5 ft), were measured over approximately half an acre. Overstory trees with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested subplot of roughly a quarter acre. 
@@ -176,7 +176,7 @@ A sub-sample of the small trees was tagged, mapped and measured repeatedly over 
 There were two sampling methods used to estimate vegetative competition. The first was transect based where point measurements of vegetation were obtained at one foot intervals along a 30 or 40 ft transect (initially, transects ran from plot center to small tree subplot center but were extended an additional 10 ft later in the study). We also took vegetation measurements at the centers of the small tree plots using both 1 m$^{2}$ and 4 m$^{2}$ quadrats. These vegetation measurements quantified separately the amounts of forbs, grasses and shrubs, and identified the dominant species for each lifeform.  This is an example of how the resolution of the data goes beyond the scope of this analysis though will undoubtedly be of use in future research efforts.
 
 
-The primary objective of the herbicide treatments was to decouple the harvesting and understory vegetation effects on small tree growth. It has been reported that, like tree growth, levels of understory increase with site productivity (\cite{walstad1}). The herbicide treatments revealed how small trees grow under varying levels of site quality (looking across installations) without the presence of a corresponding increase non-arboreal vegetation (cf. Figure \ref{fig:chart}). Because the objective of the herbicide treatments was to simply provide a range of non-arboreal vegetation levels, the herbicide application regimes varied greatly in form, timing and level, and not all installations received treatment. 
+The objective of the herbicide treatments was to decouple the harvesting and site productivity related understory vegetation effects on small tree growth. It has been reported that, like tree growth, levels of understory increase with site productivity (\cite{walstad1}) and with decreases in overstory trees (\cite{Ffolliott1982}, \cite{Moore1992}). The herbicide treatments revealed how small trees grow under varying levels of site quality and overstory retention (looking across installations) without the presence of a corresponding increase non-arboreal vegetation (cf. Figure \ref{fig:chart}). Because the objective of the herbicide treatments was to simply provide a range of non-arboreal vegetation levels, the herbicide application regimes varied greatly in form, timing and level, and not all installations received treatment. 
 
 Figure \ref{fig:timeline} shows the temporal scope of the data collection as well as of the herbicide applications and overstory measurements. An attempt to capture small tree growth at four year intervals was successful for many installations but in some cases the intervals were somewhat irregular (i.e., 3-5 years in length). Ultimately, the height growth increments were standardized to a common periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. 
 
@@ -236,9 +236,9 @@ Although measurements of understory vegetation and height were recorded in 4 m$^
 Average differences (depth) at the quadrat level between base and top height measurements were found separately for forbs, low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were obtained for forbs, low shrubs, high shrubs and grasses. The ocular estimates of percentage cover also included an overall estimate of vegetation cover in the quadrat. A volume per area measurement combined the two measures of vegetation by multiplying the percentage cover by the depth of the associated cover:
 
 \begin{align}  \label{eq:Eq0} 
-volume(\frac{ft^{3}}{ft^{2}}) =  [\frac{ft^{2}veg/100}{ft^{2}land}]*[top-base]
+volume(\frac{ft^{3}}{ft^{2}}) =  [\frac{ft^{2}veg/100}{ft^{2}land}]*[ft.top-ft.base]
 \end{align}
-where $volume$ is the per area volume estimate, $veg$ is the ocularly estimated percentage cover of vegetation, $land$ is one square meter vegetation sample plot, $top$ is the vegetation top height in feet and $base$ is the vegetation base height in feet.
+where $volume$ is the per area volume estimate, $veg$ is the ocularly estimated percentage cover of vegetation, $land$ is one square meter vegetation sample plot, $ft.top$ is the vegetation top height in feet and $ft.base$ is the vegetation base height in feet.
 
 
 
@@ -253,9 +253,9 @@ Basal area was calculated for each live overstory tree and aggregated over each 
 %
 \begin{align}  \label{eq:Eq0.1} 
 QMD = & \sqrt{(BAPA/TPA)/(\pi/4/144)} \qquad, \nonumber \\
-SDI = & TPA*\frac{QMD}{10}^{1.605} \qquad, 
+SDI = & TPA*(\frac{QMD}{10})^{1.605} \qquad, 
 \end{align}
-where $QMD$ is the Quadratic Mean Diameter, $BAPA$ is the basal area per acre, $TPA$ is trees per acre, and $SDI$ is the Stand Density Index.
+where $QMD$ is the Quadratic Mean Diameter, $BAPA$ is the basal area per acre, $TPA$ is trees per acre, and $SDI$ is the Stand Density Index(the equivalent number of 10 in dbh trees per acre).
 
 
 
@@ -271,25 +271,25 @@ All retained overstory variables were linearly interpolated between overstory me
 Slope (\%), elevation (m) and aspect (North \degree) were calculated using Google Earth Engine (\cite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed into two variables expressing northerly and easterly exposure by applying the cosine and sine functions. Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (\citeyear{Stage2007a}):
 %
 \begin{align}  \label{eq:Eq1} 
-SQ = & b_{0}+s[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)] + 
-           s\ln(el+1)[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)]  \nonumber \\
-& + (el^2)s[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2 \qquad, 
+S = & b_{0}+sl[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)] + 
+           sl\ln(el+1)[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)]  \nonumber \\
+& + (el^2)sl[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2 \qquad, 
 \end{align}
-where $SQ$ is the relative site quality, $s$ is the slope in percent,
+where $S$ is the relative site quality, $sl$ is the slope in percent,
 $el$ is elevation in feet, $\alpha$ is aspect and the $b$ are coefficients estimated from the data.
 %
 % Now check out \eqref{eq:Eq1}!
 
 
-Site trees were identified at the initiation of the study as one or more open-grown, undamaged, dominant ponderosa pine. However, there was a single installation (Grouse Creek) that utilized Douglas-fir as the site tree. Site index was calculated from standard site index curves for the Inland Northwest (\cite{Milner1992}) with a base age of 50 years at breast height. 
+Site trees were identified at the initiation of the study as the nearest approximation to one (or more) open-grown, undamaged, dominant ponderosa pine. However, there was a single installation (Grouse Creek) that utilized Douglas-fir as the site tree. Site index was calculated from standard site index curves for the Inland Northwest (\cite{Milner1992}) with a base age of 50 years at breast height. 
 
-\newpage
+
 \subsection{Quantile Regression Modelling Framework}
 
 The desire to focus on the full distribution of growth rates naturally led to an investigation of quantile regression (\cite{Koenker_2009}). This technique allows for the characterization of multiple quantiles of the height growth responses of small trees. Quantile regression utilizes the simplex algorithm (as opposed to least-squares) to calibrate linear regression functions to describe a specified or set of specified quantiles (${\tau}$) of the response distribution. Specifying the .90 quantile (${\tau}$=.90), for example, allows for the examination of the ``maximum'' or upper \nth{10} percentile of the height growth response distribution and its relationship with stand and site factors. By contrast, ${\tau}$=.50 would describe the median height growth response.
 
 
-This characterization of the response distribution also allows for predictor variables to have different effects across quantiles. The quantile regression visualization shown in Figure \ref{fig:quant_reg} compares three quantiles of the annual height growth response against overstory basal area and site index. In this example, the ${\tau}$=.10 quantile plane shows very little change as a function of both overstory basal area and site index. However, the height growth in the ${\tau}$=.90 and ${\tau}$=.50 quantile planes changes readily as site index and retained basal area respectively increase and decrease. Thus, the factors that affect the growth of the trees in the lower portion of height growth responses may not influence the growth observed in the upper portion of the response distribution or vice versa. In an extreme case, the factors may even have opposing signs between quantile planes.
+This characterization of the response distribution also allows for predictor variables to have different effects across quantiles. The quantile regression visualization shown in Figure \ref{fig:quant_reg} compares three quantiles of the annual height growth response against retained overstory basal area and initial height. In this example, the ${\tau}$=.10 quantile plane shows very little change as a function of both overstory basal area and initial. However, the height growth in the ${\tau}$=.90 and ${\tau}$=.50 quantile planes changes readily as initial height and retained basal area respectively increase and decrease. Thus, the factors that affect the growth of the trees in the lower portion of height growth responses may not influence the growth observed in the upper portion of the response distribution or vice versa. In an extreme case, the factors may even have opposing signs between quantile planes.
 
 \begin{figure} 
 \begin{center}
@@ -378,7 +378,7 @@ $i$ is the unique tree, $t$ is year, $j$ is the measurement period.
 % \caption{Site Index and Overstory Basal Area at Initiation\label{fig:siteOverstory}}
 % \end{figure}
 
-It was also during this stage of preparation that small tree damage codes were screened. Over the years, many of the small tagged trees endured some kind of damage, including, but not limited to, mortality, broken tops, forked tops, sweep or animal damage. See Appendix 3 for the complete list of damage codes recorded. Dead trees and those with dead tops were removed from analysis since these trees typically exhibited a decrease in height growth from the previous measurement year. All tree records that exhibited a negative height growth increment were also removed from consideration since this indicated either a measurement error or some damage to the top.
+It was also during this stage of preparation that small tree damage codes were screened. Over the years, many of the small tagged trees endured some kind of damage, including, but not limited to, mortality, broken tops, forked tops, sweep or animal damage. See Appendix B for the complete list of damage codes recorded. Dead trees and those with dead tops were removed from analysis since these trees typically exhibited a decrease in height growth from the previous measurement year. All tree records that exhibited a negative height growth increment were also removed from consideration since this indicated either a measurement error or some damage to the top.
 
 
 

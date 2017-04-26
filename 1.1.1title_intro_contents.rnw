@@ -72,7 +72,7 @@ Partial retention harvesting is an increasingly common harvesting option in mult
 
 Stand initiation following harvest is a critical stage in stand development yet little is known about how small ponderosa pine trees in the understory respond to competitive factors. To assess these sources of competition, we examined post-harvest understory non-arboreal vegetation, overstory trees, and a subsample of tagged small trees over a period of 17 years on 29 sites throughout the Inland Northwest. Given modeling challenges including a skewed response distribution, a novel approach was taken in describing the distribution through quantile regression. This technique allows for the characterization of multiple quantiles of the height growth response for a given set of covariates. 
 
-Initial height, crown ratio, overstory trees per acre and an interaction of slope, elevation, aspect were found to be significant predictors of height growth across all modeled quantiles ($\tau$= .1, .5 and .9). However, the effects of these predictors were found to be different among quantiles which suggests that the predictors influence the fastest growing trees in a different way than the slowest and median trees. We found that quantile regression models could be used to provide an empirically based estimate of the distribution of height growth under a retained overstory.
+Initial height, crown ratio, overstory trees per acre, and an interaction of slope, elevation, and aspect were found to be significant predictors of height growth across all modeled quantiles ($\tau$= .1, .5 and .9). However, the effects of these predictors were found to be different among quantiles which suggests that the predictors influence the fastest growing trees in a different way than the slowest and median trees. We found that quantile regression models could be used to provide an empirically based estimate of the distribution of height growth under a retained overstory.
 
 
 
@@ -94,8 +94,9 @@ Initial height, crown ratio, overstory trees per acre and an interaction of slop
 \newpage
 \normalsize
 \tableofcontents
-\large 
-\textbf{LIST OF APPENDICES}\\[1pt]
+\begin{flushleft}
+\textbf{List of Appendices}\\[1pt]
+\end{flushleft}
 \listofappendices
 
 \newpage

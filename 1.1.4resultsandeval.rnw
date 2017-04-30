@@ -842,6 +842,10 @@ slopePercent:sin.rad.asp:I(elevation$^2$)&$ 8.50e-08$&$3.32e-08$&$ 2.56$&$1.05e-
 
 
 
+
+
+
+
 % \begin{figure}
 % \begin{center}
 % <<label=sr_init_coef,fig=TRUE,echo=FALSE>>=
@@ -892,6 +896,75 @@ Similarly, the effect of crown ratio generally increases as the $\tau$ value inc
 As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was negatively correlated to annual height growth (Figure \ref{fig:seqgamOSTPA}). Here we see that estimates for the effect of overstory TPA are negative for all values of $\tau$ and steadily decrease as $\tau$ increases (Figure \ref{fig:os_tpa_coef}). The negative effect of TPA is least pronounced for the trees in the lower quantiles of the growth distribution. In contrast, the fastest growing trees (in the upper quantiles of the growth distribution), exhibit the most negative effects of overstory competition, although with a slightly larger confidence interval around the estimate. 
 
 
+% \begin{figure}
+% \begin{center}
+% plot_this_elev_effect <- function(aspect_deg){
+%    #aspect_deg <- 225
+%    fake.data <- data.frame(srHeight_Total=1,cratio=.5,TPA.OS=40,
+%                             slopePercent=10,
+%                             elevation=seq(1950,4500,length=50))
+%    fake.data$cos_rad_asp <- cos(3.1415*aspect_deg/180)
+%    fake.data$sin_rad_asp <- sin(3.1415*aspect_deg/180)
+%    fake.data$growth1 <- predict(qr.SI.1,newdata=fake.data)
+%    fake.data$growth5 <- predict(qr.SI.5,newdata=fake.data)
+%    fake.data$growth9 <- predict(qr.SI.9,newdata=fake.data)
+%    fake.data
+% }
+% dat <- plot_this_elev_effect(200)
+% 
+% with(dat, plot(elevation,growth9,type="l",col="green",
+% xlab="Elevation (ft)",ylab= "Annual Height Growth (ft)"))
+% with(dat, lines(elevation,growth5,type="l",col="orange"))
+% with(dat, lines(elevation,growth1,type="l",col="red"))
+% with(annual.gr4,rug(elevation))
+% 
+% 
+% 
+% plot_this_asp_effect <- function(elev){
+%   #aspect_deg <- 225
+%   fake.data <- data.frame(srHeight_Total=1,cratio=.5,TPA.OS=40,
+%                           slopePercent=10,
+%                           aspect_degr=seq(0,360,length=100),
+%                           elevation=elev)
+%   fake.data$cos_rad_asp <- cos(3.1415*fake.data$aspect_degr/180)
+%   fake.data$sin_rad_asp <- sin(3.1415*fake.data$aspect_degr/180)
+%   fake.data$growth1 <- predict(qr.SI.1,newdata=fake.data)
+%   fake.data$growth5 <- predict(qr.SI.5,newdata=fake.data)
+%   fake.data$growth9 <- predict(qr.SI.9,newdata=fake.data)
+%   fake.data
+% }
+% 
+% dat <- plot_this_asp_effect(3500)
+% 
+% with(dat, plot(aspect_degr,growth9,type="l",ylim=c(0,1.0),col="green",
+% xlab="Aspect (Degrees N)",ylab= "Annual Height Growth (ft)"))
+% with(dat, lines(aspect_degr,growth5,type="l",col="orange"))
+% with(dat, lines(aspect_degr,growth1,type="l",col="red"))
+% with(annual.gr4,rug(aspect))
+% 
+% @
+% \end{center}
+% \caption{Coefficient Plots of Initial Height Across All Quantiles\label{fig:sr_init_coef}}
+% \end{figure}
+
+\begin{figure}[!htb]
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{annualgr_aspect.png}
+  \subcaption{Annual height growth by aspect, elevation set to 3500 ft}\label{fig:gr_asp}
+\endminipage\hfill
+\minipage{0.48\textwidth}
+  \includegraphics[width=\linewidth]{annualgr_elevation.png}
+  \subcaption{Annual height growth by elevation, aspect set to 180\degree}\label{fig:gr_elev}
+\endminipage\hfill
+\caption[Predicted annual height growth by aspect and elevation.]{Predicted annual height growth by aspect and elevation. Green, yellow and red lines represent the .9, .5 and .1 $\tau$ regression quantiles, respectively. Initial height set to 1 foot, crown ratio set to .5, TPA is 40 and slope is 10\%.}\label{fig:sea_gr}
+\end{figure}
+
+Figures \ref{fig:gr_asp} and \ref{fig:gr_elev} show the effects of slope and elevation among quantile etimates of annual height growth when all other variables are held constant. In Figure \ref{fig:gr_asp}, the effect of aspect increases as the $\tau$ value increases. However, the differences in height growth estimates among quantiles by apect may change at different elevations or slopes due the interaction between these terms. Aspect is shown to increase annual height growth at an optimum of approximately 200$\degree$ when the slope is 10\% and the elevation is 3,500 ft. 
+
+                      
+                          
+Figure \ref{fig:gr_elev} shows that elevation is estimated to have a positive effect on annual height growth for most elevations, although, for lower elevations where there is sparse data, elevation is estimated to have a negative contribution to annual growth. The magnitude of the elevation effect increases across quantile $\tau$ values for commonly observed elevation conditions. This means that the effect of elevation is greater for the fastest growing trees for the given parameters. However, as in Figure \ref{fig:gr_asp}, the effect of elevation may change for different slope and aspect values due to the interaction between these predictors.  The optimum elevation appears to be around 3500 ft for all $\tau$ values when the aspect is 200$\degree$ and the slope is 10\%.                    
+                          
 
 
 %Summary tables of parameter estimates for Tau= .1, .5, .9
@@ -937,7 +1010,7 @@ As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was
 % \caption{Residual values vs. fitted values of height growth increment for $\tau$=.5.\label{fig:qr5resid}}
 % \end{figure}
 
-The middle residual plot above (Figure \ref{fig:qr5resid}) shows that the residuals for the $\tau$=.5 model are split roughly proportionally above and below zero. This result is expected as the median ($\tau$=.5) quantile regression is specified to describe the linear trends in the central portion of the response distribution. Figure (\ref{fig:qr1resid}) reveals that most residuals are greater than zero for the $\tau$=.1 quantile model that describes the lower portion of the response distribution. In the $\tau$=.9 quantile, most residuals are found to be negative but there is a modest number of positive residuals across all predicted height increments. All of the models fail at the low predictions because negative height growth increments were removed from the dataset, yet the linear models predict negative height increments. Thus the residuals of the lowest fitted values are exclusively positive. Collectively, these residual plots suggest that models are working for $\widehat{\Delta{h}}$ > 0, but are not constrained to be positive. 
+The middle residual plot (Figure \ref{fig:qr5resid}) shows that the residuals for the $\tau$=.5 model are split roughly proportionally above and below zero. This result is expected as the median ($\tau$=.5) quantile regression is specified to describe the linear trends in the central portion of the response distribution. Figure (\ref{fig:qr1resid}) reveals that most residuals are greater than zero for the $\tau$=.1 quantile model that describes the lower portion of the response distribution. In the $\tau$=.9 quantile, most residuals are found to be negative but there is a modest number of positive residuals across all predicted height increments. All of the models fail at the low predictions because negative height growth increments were removed from the dataset, yet the linear models predict negative height increments. Thus the residuals of the lowest fitted values are exclusively positive. Collectively, these residual plots suggest that models are working for $\widehat{\Delta{h}}$ > 0, but are not constrained to be positive. 
 
 
 

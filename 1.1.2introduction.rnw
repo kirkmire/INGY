@@ -12,7 +12,7 @@
 
 Managing forests as multi-aged structures with more than a single canopy layer has become increasingly common, particularly in ponderosa pine (\emph{Pinus ponderosa} C. Lawson) forests at lower elevations where forest and grassland where ownerships often have multiple objectives. Partial retention harvesting allows for the removal of merchantable trees while retaining elements of the previous stand's overstory structure whether to meet objectives of improved aesthetic, enhanced wildlife habitat or the provision of seed or shelter for new trees (\cite{Franklin1997}). Partial retention harvest is commonly used in ponderosa pine stands to facilitate a complex multi-aged stand structure, in part because such structures were historically created through a natural disturbance regime of relatively frequent but low severity surface fires often intiated by Native Americans(\cite{Arno1995}). 
 
-Understory vegetation and overstory tree density both provide conflicting facilitating and competitive effects on ponderosa pine regeneration growth and survival in the understory (\cite{Keyes2005}). The shading provided by the retained overstory trees helps prevent dessication in the summer months and the understory vegetation provides similar reductions in moisture stress, although within the microenvironment. However, excessive shade and accelerated soil moisture depletion may reduce small tree growth. Partial retention harvests may provide a balance of the conflicting effects of overstory retention and understory vegetation, as ponderosa pine regeneration responds positively to openings in the canopy, particularly on moisture limited sites (\cite{Harrod2009}, \cite{Aubry2009}).
+Following patrial retention harvest, understory vegetation and overstory tree density both provide conflicting facilitating and competitive effects on ponderosa pine regeneration growth and survival in the understory (\cite{Keyes2005}). The shading provided by the retained overstory trees helps prevent dessication in the summer months and the understory vegetation provides similar reductions in moisture stress, although within the microenvironment. However, excessive shade and accelerated soil moisture depletion may reduce small tree growth, particularly as trees grow out of the seedling class. Partial retention harvests may provide a balance of the conflicting effects of overstory retention and understory vegetation, as ponderosa pine regeneration responds positively to openings in the canopy, particularly on moisture limited sites (\cite{Harrod2009}, \cite{Aubry2009}).
 
 Predictive modeling of small ponderosa pine growth dynamics following such partial retention harvest treatments can be very challenging however, particularly relative to even-aged stands, as it requires consideration of complex competitive effects from both the retained overstory and the understory vegetation.
 
@@ -37,8 +37,8 @@ Powers et al.(\citeyear{Powers2011a}) found that partial retention harvesting ca
 
 \begin{figure}[ht]
 \begin{center}
-    \includegraphics[width=160mm]{comp_flowchart.jpg}
-    \caption[Biological framework of small tree growth.]{Biological framework of small tree growth.\label{fig:chart}}
+    \includegraphics[width=160mm]{chart.png}
+    \caption[Biological framework of small tree growth.]{Biological framework of small tree growth. Red arrows indicate hypothesized growth limiting, competitive relationships and green arrows indicate hypothesized growth facilitating relationships.\label{fig:chart}}
     
 \end{center}
 \end{figure}

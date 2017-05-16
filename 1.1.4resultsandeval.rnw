@@ -251,8 +251,8 @@ print(barchart(Species~ x| Installation, data=tallied.mins,
        strip = strip.custom(bg="lightgrey"),
          col=myColours[4],
          par.settings = my.settings,
-         xlab="Species",
-         ylab="Count",
+         ylab="Species",
+         xlab="Count",
  par.strip.text=list(col="black", cex=.8)),
        scales=list(
          x=list(limits=c(0,260)))
@@ -296,10 +296,10 @@ CTRLandGE.volume.index$Group.1[CTRLandGE.volume.index$Group.1=="TJ"]<-"*TJ"
 CTRLandGE.volume.index$Group.1[CTRLandGE.volume.index$Group.1=="CR"]<-"*CR"
 
 
-print(barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, groups=CTRLandGE.volume.index$Group.2,
+print(barchart(CTRLandGE.volume.index$Cov ~ CTRLandGE.volume.index$Group.1, groups=CTRLandGE.volume.index$Group.2,
          origin=0,
          #main="Motor insurance claims frequency"
-        xlab="Installation", ylab="Vegetation Depth (ft)",
+        xlab="Installation", ylab="Mean Vegetation Cover (%)",
         scales=list(tck=c(1,0), x=list(cex=.7), y=list(cex=1.2)),
         par.settings=list(superpose.polygon=list(col=myColors[2:5])),
         auto.key=list(space="right", columns=1, 
@@ -308,12 +308,12 @@ print(barchart(CTRLandGE.volume.index$volume ~ CTRLandGE.volume.index$Group.1, g
 
 @
 \end{center}
-\caption[Plot vegetation volumes by herbicide treatment at the start of the measurement period.]{Plot vegetation volumes by herbicide treatment at the start of the measurement period (GE = multiple applications, 1X = one time application, CTRL = no herbicide).\label{fig:vegVol}}
+\caption[Average percentage cover by herbicide treatment at the start of the measurement period.]{Average percentage cover by herbicide treatment at the start of the measurement period (GE = multiple applications, 1X = one time application, CTRL = no herbicide).\label{fig:vegVol}}
 \end{figure}
 
 
 
-When comparing the vegetation depths between the control and the herbicide plots in the first year of the selected measurement intervals, it is apparent that there is a large drop in vegetation levels within installations with large amounts of understory vegetation in the control plots (see Figure \ref{fig:vegVol}). This indicates some success in establishing a wide range of non-arboreal vegetative conditions on installations. However, the herbicide applications failed to contribute to a marked difference in depth in installations of little vegetative volume in control plots. 
+When comparing the vegetation cover between the control and the herbicide plots in the first year of the selected measurement intervals, it is apparent that there is a large drop in vegetation levels within installations with large amounts of understory vegetation in the control plots (see Figure \ref{fig:vegVol}). This indicates some success in establishing a wide range of non-arboreal vegetative conditions on installations. However, the herbicide applications failed to contribute to a marked difference in depth in installations of little vegetative volume in control plots. 
 
 \begin{figure} 
 \begin{center}
@@ -476,29 +476,29 @@ Annual height growth increment tends to increase with initial height (Figure \re
 \end{figure}
 
  
-% \begin{figure}
-% \begin{center}
-% <<label=delta_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
-% 
-%  library(lattice)
-% 
-% 
-%  print(xyplot(annual.gr4$ht_annual~annual.gr4$cratio,
-%          par.settings = my.settings,
-%            pch = 1,
-%             col ="grey60",
-%            xlab="Crown Ratio (%)",
-%           ylab="Annualized Height Growth Increment (ft/yr)",
-%         strip = strip.custom(bg="lightgrey"),
-%           par.strip.text=list(col="black"),
-%           scales=list(
-%                 )))
-% 
-% 
-%  @
-% \end{center}
-% \caption{Annualized height growth increment vs. crown ratio.\label{fig:delta_ht_cratio}}
-% \end{figure}
+\begin{figure}
+\begin{center}
+<<label=delta_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
+
+ library(lattice)
+
+
+ print(xyplot(annual.gr4$ht_annual~annual.gr4$TPA.OS,
+         par.settings = my.settings,
+           pch = 1,
+            col ="black",
+           xlab="Crown Ratio (%)",
+          ylab="Annualized Height Growth Increment (ft/yr)",
+        strip = strip.custom(bg="lightgrey"),
+          par.strip.text=list(col="black"),
+          scales=list(
+                )))
+
+
+ @
+\end{center}
+\caption{Annualized height growth increment vs. crown ratio.\label{fig:delta_ht_cratio}}
+\end{figure}
  
 Crown ratio (crown length/total height) appears to put an upper limit on annual height growth (Figure \ref{fig:delta_ht_cratio}). Trees with very little live crown exhibit height growth responses that are correspondingly small. As crown ratio increases the upper values of the height growth response distribution also increase. However, variance in annual height growth also increases for increasing values of crown ratio. For trees with the fullest crowns (>.8), annual height growth tends to exceed .5 ft but limited to under 3 ft. 
  
@@ -912,10 +912,10 @@ As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was
 % }
 % dat <- plot_this_elev_effect(200)
 % 
-% with(dat, plot(elevation,growth9,type="l",col="green",
+% with(dat, plot(elevation,growth9,type="l",col="green",lwd=2,
 % xlab="Elevation (ft)",ylab= "Annual Height Growth (ft)"))
-% with(dat, lines(elevation,growth5,type="l",col="orange"))
-% with(dat, lines(elevation,growth1,type="l",col="red"))
+% with(dat, lines(elevation,growth5,type="l",col="orange",lwd=2))
+% with(dat, lines(elevation,growth1,type="l",col="red",lwd=2))
 % with(annual.gr4,rug(elevation))
 % 
 % 
@@ -936,10 +936,10 @@ As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was
 % 
 % dat <- plot_this_asp_effect(3500)
 % 
-% with(dat, plot(aspect_degr,growth9,type="l",ylim=c(0,1.0),col="green",
+% with(dat, plot(aspect_degr,growth9,type="l",ylim=c(0,1.0),col="green",lwd=2,
 % xlab="Aspect (Degrees N)",ylab= "Annual Height Growth (ft)"))
-% with(dat, lines(aspect_degr,growth5,type="l",col="orange"))
-% with(dat, lines(aspect_degr,growth1,type="l",col="red"))
+% with(dat, lines(aspect_degr,growth5,type="l",col="orange",lwd=2))
+% with(dat, lines(aspect_degr,growth1,type="l",col="red",lwd=2))
 % with(annual.gr4,rug(aspect))
 % 
 % @
@@ -1163,7 +1163,7 @@ The trees within the tallest initial height class (10+ ft) appear to have a dist
 The results from the chi-squared analysis (Table \ref{tab:chisq}) provide a statistical comparison between the actual and expected distribution of height growth increments across the inter-quantile intervals. The p-value for the overall chi-squared test (all height classes) was .039 which provides sufficient evidence to reject the null hypothesis (that the distributions are equal) at the $\alpha$=.05 significance level. The large difference between the expected number of height growth increments (56) below their $\tau$=.1 predictions and the observed (96) contributed greatly to the statistical difference between the distributions. 
 
 
-The p-values were also below $\alpha$=.05 for the chi-squared tests by initial height classification. In the less than five feet initial height class, the p-value was .003. The chi-squared test for the intermediate initial height class (5-10 ft) produced a p-value of <.001 which fails to reject the null hypothesis. The tallest height class (10+ feet) had a p-value= .442 which rejects the null hypothesis at the $\alpha$=.05 significance level but is the closest to having an actual distribution across interquantile intervals that matches the expected distribution. 
+The p-values were also below $\alpha$=.05 for the chi-squared tests by initial height classification. In the less than five feet initial height class, the p-value was .003. The chi-squared test for the intermediate initial height class (5-10 ft) produced a p-value of <.001 which fails to reject the null hypothesis. The tallest height class (10+ feet) had a p-value= .442 which fails to rejects the null hypothesis at the $\alpha$=.05 significance level and suggests that the observed distribution is the same as the expected.
 
 Whether viewed by height class or combined, the actual height growth increments visually conform approximately to our expectations provided by the quantile regression predictions but fail to provide a distribution that is statistically equal to our expectations. 
 

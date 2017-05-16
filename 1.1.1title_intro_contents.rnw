@@ -14,12 +14,12 @@
 \begin{center}
 
 \text{ESTIMATING THE EFFECTS OF OVERSTORY RETENTION, VEGETATIVE COMPETITION,}
-\text{AND SITE QUALITY ON THE GROWTH RESPONSE OF SMALL PONDEROSA PINE TREES}
+\text{AND SITE QUALITY ON THE HEIGHT GROWTH OF SMALL PONDEROSA PINE TREES}
 \text{USING REGRESSION QUANTILES}
 
 \text{By}
 
-\text{Colin Patrick Kirkmire} 
+\text{COLIN PATRICK KIRKMIRE} 
 
 \text{B.Sc. Forest Management, University of Washington, Seattle, Washington, 2015} 
 
@@ -59,20 +59,22 @@ for the degree of}
 \end{center}
 
 \newpage
-\noindent Kirkmire, Colin, M.SC, May 2017                Forestry
+\noindent Kirkmire, Colin, M.Sc, May 2017                Forestry
 
 \noindent Estimating the Effects of Overstory Retention, Vegetative Competition,
-and Site Quality on the Growth Response of Small Ponderosa Pine Trees
+and Site Quality on the Height Growth of Small Ponderosa Pine Trees
 using Regression Quantiles
 
 \noindent Dr. David L.R. Affleck, Co-Chair \\
 \noindent Dr. John Goodburn, Co-Chair
 
-Managing forests as multi-aged structures with more than a single canopy layer has become increasingly common, particularly in ponderosa pine (\emph{Pinus ponderosa} C. Lawson) forests at lower elevations where forest and grassland where ownerships often have multiple objectives. Partial retention harvesting allows for the removal of merchantable trees while retaining elements of the previous stand's overstory structure whether to meet objectives of improved aesthetic, enhanced wildlife habitat or the provision of seed or shelter for new trees (\cite{Franklin1997}). Partial retention harvest is commonly used in ponderosa pine stands to facilitate a complex multi-aged stand structure, in part because such structures were historically created through a natural disturbance regime of relatively frequent but low severity surface fires often intiated by Native Americans(\cite{Arno1995}). 
+Managing forests as multi-aged structures with more than a single canopy layer has become increasingly common, particularly in ponderosa pine (\emph{Pinus ponderosa} C. Lawson) forests at lower elevations where forest and grassland where ownerships often have multiple objectives. Partial retention harvesting allows for the removal of merchantable trees while retaining elements of the previous stand's overstory structure whether to meet objectives of improved aesthetic, enhanced wildlife habitat or the provision of seed or shelter for new trees (\cite{Franklin1997}). Partial retention harvest is commonly used in ponderosa pine stands to facilitate a complex multi-aged stand structure, in part because such structures were historically created through a natural disturbance regime of relatively frequent but low severity surface fires often intiated by Native Americans (\cite{Arno1995}). 
 
-Stand initiation following partial retention harvest is a critical stage in stand development yet little is known about how small ponderosa pine trees in the understory respond to competitive factors. To assess these sources of competition, we examined post-harvest understory non-arboreal vegetation, overstory trees, and a subsample of tagged small trees over a period of 17 years on 29 sites throughout the Inland Northwest. Given modeling challenges including a skewed response distribution, a novel approach was taken in describing the distribution through quantile regression. This technique allows for the characterization of multiple quantiles of the height growth response for a given set of covariates. 
+Stand initiation following partial retention harvest is a critical stage in stand development yet little is known about how ponderosa pine trees in the understory respond to competitive factors. To assess the impacts of these sources of competition, we examined post-harvest understory non-arboreal vegetation, overstory trees, and a subsample of tagged small trees over a period of 17 years on 15 sites throughout the Inland Northwest. A novel approach was taken in describing the distribution of height growth responses through quantile regression. This technique allows for the characterization of multiple quantiles of the height growth response for a given set of covariates. 
 
-Initial height, crown ratio, overstory trees per acre, and an interaction of slope, elevation, and aspect were found to be significant predictors of height growth across all modeled quantiles ($\tau$= .1, .5 and .9). However, the effects of these predictors were found to be different among quantiles which suggests that the predictors influence the fastest growing trees in a different way than the slowest and median trees. We found that quantile regression models could be used to provide an empirically based estimate of the distribution of height growth under a retained overstory.
+Initial height, crown ratio, overstory trees per acre, and an interaction of slope, elevation, and aspect were found to be significant predictors of height growth across all modeled quantiles (.1, .5 and .9). The effects of initial height and crown ratio were positive and the effect of trees per acre was negative. However, the effects of these predictors were found to be different among quantiles which suggests that the predictors influence the upper limits to growth in a different way than the lower limits and median growth rates. 
+
+No effect of understory non-arboreal vegetation was incorporated because there  was no appreciable improvement to the model, possibly because crown ratio and intitial height were included in the model. We found that quantile regression models could be used to provide an empirically based estimate of the distribution of height growth under a retained overstory.
 
 
 
@@ -84,7 +86,7 @@ Initial height, crown ratio, overstory trees per acre, and an interaction of slo
 \end{center}
 \normalsize
 
-\noindent I would first like to extend appreciation to the INGY Cooperators, particularly those who participated in the Small Tree Competing Vegetation Study (STCV) for their commitment to this long term study. Their participation required that many stands not be harvested for the duration of the study and a substantial monetary cost over 15 years. I also owe a debt of gratitude to the many INGY technicians and researchers who have worked on the STCV before me. The completion of the dataset would not have been possible without your careful acquisition of measurements.
+\noindent I would first like to extend appreciation to the Inland NW Growth & Yield Cooperators, particularly those who participated in the Small Tree Competing Vegetation Study (STCV) for their commitment to this long term study. Their participation required that many stands not be harvested for the duration of the study and a substantial monetary cost over 17 years. I also owe a debt of gratitude to the many INGY technicians and researchers who have worked on the STCV before me. The completion of the dataset would not have been possible without your careful acquisition of measurements.
 
 \noindent Thank you to my advisors Dr. David Affleck and Dr. John Goodburn for granting me the opportunity to work on the STCV and for your guidance as I developed the skills to accomplish this research.
 

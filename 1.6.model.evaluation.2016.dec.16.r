@@ -80,8 +80,10 @@
 
 library(quantreg)
 
+annual.gr4<-annual.gr4[!annual.gr4$ht_annual==0,]
 
-qr.SI.1 <-rq(ht_annual~srHeight_Total+
+
+qr.SI.1 <-rq(log(ht_annual)~srHeight_Total+
                cratio+
                TPA.OS+
                slopePercent +
@@ -336,21 +338,21 @@ for(i in 1:nrow(annual.gr4)){
 # 
 # rownames(chisq)<-c("P-Value","Number of Trees")
 # colnames(chisq)<-c("<5","5-10",">10","All")
-# 
-# # #
-# # #
-# # # #The code below will produce output that can then be copied over to the .tex file
-# # 
+
+# #
+# #
+# # #The code below will produce output that can then be copied over to the .tex file
+#
 # ptab<-read.csv("P_table.csv")
 # library(Hmisc)
 # #
 # latex(ptab,file="",rowname = "")
-# #
-# 
-# #
-# # #The code below will produce output that can then be copied over to the .tex file
-# # library(Hmisc)
-# #
+#
+
+#
+# #The code below will produce output that can then be copied over to the .tex file
+# library(Hmisc)
+#
 # latex(chitable, file="")
 # #
 # # ###

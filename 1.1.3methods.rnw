@@ -10,7 +10,7 @@
 \subsection{Study Design}
 \doublespacing
 
-Twenty-nine STCV study sites were established on private, public and tribal forestlands ranging from the eastern slopes of the Cascade Mountains to western Montana (see Figure \ref{fig:map}).  Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), but with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or harvested according to a shelterwood, seed tree or heavy thinning partial retention harvest.
+Twenty-nine STCV study sites were established on private, public and tribal forestlands ranging from the eastern slopes of the Cascade Mountains to western Montana (see Figure \ref{fig:map}).  Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), but with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or treated according to a shelterwood, seed tree or heavy thinning partial retention harvest.
 
 
 % # <<fig=FALSE,include=FALSE, echo=FALSE>>=
@@ -68,13 +68,13 @@ Twenty-nine STCV study sites were established on private, public and tribal fore
 \begin{figure}[!h]
 \begin{center}
     \includegraphics{map_w_dots2.jpg}
-    \caption[Map of STCV installations.]{Map of STCV installations. Installations included in this study labeled with a black circle.
+    \caption[Map of STCV installations.]{Map of STCV installations. Installations included in this study denoted with a black circle.
     \label{fig:map}}
 \end{center}
 \end{figure}
 
 
-The year of initiation varied across installations with most being established in the late 1990s and early 2000s.  Treatments were randomly assigned to seven plots within each installation (see Figure \ref{fig:instLayout}).  Three plots received multiple applications of regionally effective herbicide (e.g. Pronone).  The remaining four plots were split between the one-time treatment group (just one application of herbicide) and control plots which received no herbicide treatment.
+The year of initiation varied across installations with most being established in the late 1990s and early 2000s.  Treatments were randomly assigned to seven plots within each installation (see Figure \ref{fig:instLayout}).  Three plots received multiple applications of regionally effective herbicide (e.g. Pronone).  The remaining four plots were split between the one-time treatment group (just one application of herbicide) and the control group which received no herbicide treatment.
 
 
 
@@ -167,18 +167,18 @@ rect(80-(1*3.28084),47,80,47,col=NA,border="black", lwd=1)
 \caption[Design of STCV Sampling Plot.]{Design of STCV Sampling Plot. Note that vegetation quadrants exist for all six small tree plots although only illustrated on two.\label{fig:samplePlot}}
 \end{figure}
 
-Each plot contained a series of nested subplots that decrease in area with physiologically smaller vegetation units (see Figure \ref{fig:samplePlot}). Starting with the full extent of the plot, overstory trees with greater than 10.5 in diameter at breast height (DBH, 4.5 ft), were measured over approximately half an acre. Overstory trees with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested subplot of roughly a quarter acre. 
+Each plot contained a series of nested subplots that decrease in area with physiologically smaller vegetation units (see Figure \ref{fig:samplePlot}). Starting with the full extent of the plot, overstory trees with greater than 10.5 in diameter at breast height (DBH, 4.5 ft), were measured over approximately half an acre (radius 80 ft). Overstory trees with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested subplot of roughly a quarter acre (radius 60 ft). 
 
-The small trees, whose growth responses are the subject of this research, were defined as those that have a DBH less than 3.5 in yet a height greater than .5 ft for shade tolerant species, or 1 ft for shade intolerant species at the time of initial measurements. Small trees were measured on the six .007 ac subplots 60 degrees apart from plot center at a distance of approximately 30 ft. All small trees on the .007 ac subplot were tallied by 2 ft height class and species.
+The small trees, whose growth responses are the subject of this research, were defined as those that had a DBH less than 3.5 in yet a height greater than 1 ft for shade intolerant species or .5 ft for shade tolerant species at the time of initial measurements. Small trees were measured on six .007 ac small tree plots (abbrv. STP, radius 10 ft) 60 degrees apart from plot center at a distance of approximately 30 ft. All small trees on the .007 ac subplot were tallied by 2 ft height class and species.
 
 A sub-sample of the small trees was tagged, mapped and measured repeatedly over the course of the study. Height classes for each subplot were determined by dividing the range in observed heights by four. Two trees per height class and species were then selected when possible. Ultimately, the number of tagged trees fell between 4 and 8 trees per species per small tree subplot. 
 
-There were two sampling methods used to estimate vegetative competition. The first was transect based where point measurements of vegetation were obtained at one foot intervals along a 30 or 40 ft transect (initially, transects ran from plot center to small tree subplot center but were extended an additional 10 ft later in the study). We also took vegetation measurements at the centers of the small tree plots using both 1 m$^{2}$ and 4 m$^{2}$ quadrats. These vegetation measurements quantified separately the amounts of forbs, grasses and shrubs, and identified the dominant species for each lifeform.  This is an example of how the resolution of the data goes beyond the scope of this analysis though will undoubtedly be of use in future research efforts.
+There were two sampling methods used to estimate vegetative competition. The first was transect based where point measurements of vegetation were obtained at two foot intervals along a 30 or 40 ft transect (initially, transects ran from plot center to small tree subplot center but were extended an additional 10 ft later in the study). We also took vegetation measurements at the centers of the small tree plots using both 1 m$^{2}$ (10.76 ft$^{2}$) and 4 m$^{2}$ (43.06 ft$^{2}$) quadrats. These vegetation measurements quantified separately the amounts of forbs, grasses and shrubs, and identified the dominant species for each lifeform.  This is an example of how the resolution of the data goes beyond the scope of this analysis.
 
 
-The objective of the herbicide treatments was to decouple the harvesting and site productivity related understory vegetation effects on small tree growth. It has been reported that, like tree growth, levels of understory increase with site productivity (\cite{walstad1}) and with decreases in overstory trees (\cite{Ffolliott1982}, \cite{Moore1992}). The herbicide treatments revealed how small trees grow under varying levels of site quality and overstory retention (looking across installations) without the presence of a corresponding increase non-arboreal vegetation (cf. Figure \ref{fig:chart}). Because the objective of the herbicide treatments was to simply provide a range of non-arboreal vegetation levels, the herbicide application regimes varied greatly in form, timing and level, and not all installations received treatment. 
+The objective of the herbicide treatments was to decouple the harvesting and site productivity related impacts on the understory vegetation effects on small tree growth. It has been reported that, like tree growth, levels of understory increase with site productivity (\cite{walstad1}) and with decreases in overstory trees (\cite{Ffolliott1982}, \cite{Moore1992}). The herbicide treatments revealed how small trees grow under varying levels of site quality and overstory retention (looking across installations) without the presence of a corresponding increase non-arboreal vegetation (cf. Figure \ref{fig:chart}). Because the objective of the herbicide treatments was to simply provide a range of non-arboreal vegetation levels, the herbicide application regimes varied greatly in form, timing and level, and not all installations received treatment. 
 
-Figure \ref{fig:timeline} shows the temporal scope of the data collection as well as of the herbicide applications and overstory measurements. An attempt to capture small tree growth at four year intervals was successful for many installations but in some cases the intervals were somewhat irregular (i.e., 3-5 years in length). Ultimately, the height growth increments were standardized to a common periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. 
+Figure \ref{fig:timeline} shows the temporal scope of the data collection as well as of the herbicide applications and overstory measurements for a subset of the installations. An attempt to capture small tree growth at four year intervals was successful for many installations but in some cases the intervals were somewhat irregular (i.e., 3-5 years in length). Ultimately, the height growth increments were standardized to a common periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. 
 
 
 \begin{figure} 
@@ -214,48 +214,50 @@ xyplot(Installation ~ Year_Measurement,
 
 @
 \end{center}
-\caption[Timeline of Installation Measurements and Treatments.]{Green and red triangles represent years of overstory measurements and herbicide treatment, respectively. The black squares represent the years of the selected growth intervals. \label{fig:timeline}}
+\caption[Timeline of Installation Measurements and Treatments.]{Green and red triangles represent years of overstory measurements and herbicide treatment, respectively. The black squares represent the years bounding the selected growth intervals. \label{fig:timeline}}
 \end{figure}
 
 
-A point of concern is that some measurements were taken at times that may not have allowed herbicide applications to take full effect. That is, several measurement years were concurrent with or followed soon after the first herbicide application. For example, the TJ installation was measured in 2001, concurrent with the first measurement year. This necessitated careful selection of the appropriate measurement years on an installation-by-installation basis. The ``first interval years'' were selected such that one to three years had elapsed since the initial herbicide application to allow for the herbicide to take effect. 
+A point of concern is that some measurements were taken at times that may not have allowed herbicide applications to take full effect. That is, several measurement years were concurrent with or followed soon after the first herbicide application. For example, the TJ installation was measured in 2001, concurrent with the first application of herbicide. Thus the vegetation measurements taken in 2001 would not well represent the vegetation levels experienced by the small trees from 2001 to 2004. This necessitated careful selection of the appropriate measurement years on an installation-by-installation basis. The ``first interval years'' were selected such that one to three years had elapsed since the initial herbicide application to allow for the herbicide to take effect. 
 
 
 \newpage
 \subsection{Variable Acquisition}
 
+The variables can be divided into four categories; understory tree competition, understory vegetation competition, retained overstory competition, and site quality. The resolutions and symbols for these variables are summarized in Appendix C. 
+
 \noindent\textbf{Understory Tree Competition:}
 
 
-The small trees in each small tree subplot (STP) were tallied by height class and then multiplied by 138.73 to obtain per acre estimates.  The number of trees taller than the subject tree was also found by summing all small tree tallies with height class midpoints greater than the height of the subject tree. Crown length was found by subtracting the crown base from the total height (crown base is considered the height of the lowest contiguous branch). Crown ratio was obtained by dividing the crown length by the total tree height. Crown width was found as an average of the two perpendicular measurements of crown diameter obtained in the field. Basal diameter and diameter at breast height (dbh) were measured at 1 in above root collar and at 4.5 ft, respectively. The resolutions and symbols for these variables are summarized in Appendix C. 
+The small trees in each small tree subplot (STP) were tallied by height class and then divided by .007 ac to obtain per acre estimates.  The number of trees taller than the subject tree was also found by summing all small tree tallies with height class midpoints greater than the height of the subject tree. Crown length was found by subtracting the crown base from the total height (crown base is considered the height of the lowest live branch on a whorl contiguous with the main crown). Crown ratio was obtained by dividing the crown length by the total tree height. Crown width was found as an average of the two perpendicular measurements of crown diameter obtained in the field. Basal diameter and diameter at breast height (dbh) were measured at 1 in above root collar and at 4.5 ft, respectively. 
 
 \noindent\textbf{Understory Vegetation Competition:}
 
 Although measurements of understory vegetation and height were recorded in 4 m$^2$ quadrats in the later years of the study, only the 1 m$^2$ quadrats were utilized in this analysis since they were used for the entire duration of the study.  
 
-Average differences (depth) at the quadrat level between base and top height measurements were found separately for forbs, low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were obtained for forbs, low shrubs, high shrubs and grasses. The ocular estimates of percentage cover also included an overall estimate of vegetation cover in the quadrat. A volume per area measurement combined the two measures of vegetation by multiplying the percentage cover by the depth of the associated cover:
+Average differences (depths) at the quadrat level between base and top height measurements were found separately for forbs, low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were obtained for forbs, low shrubs, high shrubs and grasses. The ocular estimates of percentage cover also included an overall estimate of vegetation cover in the quadrat. A volume per area measurement combined the two measures of vegetation by multiplying the percentage cover by the depth of the associated cover:
 
 \begin{align}  \label{eq:Eq0} 
-volume(\frac{ft^{3}}{ft^{2}}) =  [\frac{ft^{2}veg/100}{ft^{2}land}]*[ft.top-ft.base]
+v =  \frac{cover}{100}*(top-base)
 \end{align}
-where $volume$ is the per area volume estimate, $veg$ is the ocularly estimated percentage cover of vegetation, $land$ is one square meter vegetation sample plot, $ft.top$ is the vegetation top height in feet and $ft.base$ is the vegetation base height in feet.
+where $v$ is the volume of vegetation per unit area, $cover$ is the ocularly estimated percentage cover of vegetation, $top$ is the vegetation top height in feet and $base$ is the vegetation base height in feet.
 
 
 
 
-Average height depths for low shrubs, high shrubs, forbs were calculated for the 30 or 40 transect points corresponding to each small tree plot. The original sampling design called for a 30 foot transect that would extend from plot center to the center of each STP (15 transect points). However, in subsequent years 10 ft were added to the length of the transect to extend it through the STP (20 transect points). Percentage cover of grass was obtained ocularly through a 6 in by 6 in grid and through measurement of the top height of grasses averaged over the length of the transect. 
+Average depths for low shrubs, high shrubs, and forbs were also calculated for the 30 or 40 transect points reaching out from plot center to each STP. The original sampling design called for a 30 foot transect that would extend from plot center to the center of each STP (15 transect points). However, in subsequent years 10 ft were added to the length of the transect to extend it through the STP (20 transect points). At each point a 6 in x 6 in quadrat was used to measure grass height and percentage cover. 
 
-Two relative measures of competition were created by subtracting the tallest understory vegetation height from that of the subject tree for both 1 m$^2$ and transect vegetation. A negative value reflects a subject tree that is potentially overtopped by proximal vegetation. A positive value describes how much taller the subject tree is than the tallest vegetation.
+Relative measures of competition were created by subtracting the tallest understory vegetation height from that of the subject tree. A negative value reflects a subject tree that is potentially overtopped by proximal vegetation. A positive value describes how much taller the subject tree is than the tallest recorded vegetation.
 
 \noindent\textbf{Retained Overstory Tree Competition:}
 
-Basal area was calculated for each live overstory tree and aggregated over each plot to provide an estimate of stand basal area (ft$^2$/ac, BAPA). Crown area was obtained for each overstory tree from the average of the two perpendicular measurements of width. Total crown area was then computed in terms of percent of an acre (CAPA). Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots. Stand density index (SDI) was calculated using the following equation:
+Basal area was calculated for each live overstory tree and aggregated over each plot to provide an estimate of stand basal area (BAPA, ft$^2$/ac). Crown area was obtained for each overstory tree from the average of the two perpendicular measurements of crown width. Total crown area was then computed in terms of percent of an acre (CAPA). Trees per acre (TPA) is calculated from the plot level aggregation of the two overstory tree plots. Stand density index (SDI) was calculated using the following equations:
 %
 \begin{align}  \label{eq:Eq0.1} 
 QMD = & \sqrt{(BAPA/TPA)/(\pi/4/144)} \qquad, \nonumber \\
 SDI = & TPA*(\frac{QMD}{10})^{1.605} \qquad, 
 \end{align}
-where $QMD$ is the Quadratic Mean Diameter, $BAPA$ is the basal area per acre, $TPA$ is trees per acre, and $SDI$ is the Stand Density Index(the equivalent number of 10 in dbh trees per acre).
+where $QMD$ is the Quadratic Mean Diameter, $BAPA$ is the basal area per acre, $TPA$ is trees per acre. Stand Density Index represents the equivalent number of 10 in dbh trees per acre.
 
 
 
@@ -268,7 +270,7 @@ All retained overstory variables were linearly interpolated between overstory me
 
 \noindent\textbf{Site Quality:}
 
-Slope (\%), elevation (m) and aspect (North \degree) were calculated using Google Earth Engine (\cite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed into two variables expressing northerly and easterly exposure by applying the cosine and sine functions. Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (\citeyear{Stage2007a}):
+Slope, elevation, and aspect were calculated using Google Earth Engine (\nocite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed into two variables expressing northerly and easterly exposure by applying the cosine and sine functions. Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (\citeyear{Stage2007a}):
 %
 \begin{align}  \label{eq:Eq1} 
 S = & b_{0}+sl[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)] + 
@@ -281,7 +283,7 @@ $el$ is elevation in feet, $\alpha$ is aspect and the $b$ are coefficients estim
 % Now check out \eqref{eq:Eq1}!
 
 
-Site trees were identified at the initiation of the study as the nearest approximation to one (or more) open-grown, undamaged, dominant ponderosa pine. However, there was a single installation (Grouse Creek) that utilized Douglas-fir as the site tree. Site index was calculated from standard site index curves for the Inland Northwest (\cite{Milner1992}) with a base age of 50 years at breast height. 
+One or more open-grown, undamaged, dominant ponderosa pine were identified at the initiation of the study. However, there was one installation (Grouse Creek) that recorded only Douglas-fir as the site tree. Site index was calculated from these trees' heights and ages using standard site index curves for the Inland Northwest (\cite{Milner1992}) with a base age of 50 years at breast height. 
 
 
 \subsection{Quantile Regression Modelling Framework}

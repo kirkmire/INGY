@@ -22,7 +22,7 @@ source(paste(getwd(),'/1.6.model.evaluation.2016.dec.16.r',sep=""), echo=FALSE)
 
 
 
-Figure \ref{fig:polar_plot} describes the elevation and orientation of plots by installation. All plots range in elevation between 2000 and 4500 ft. There is a broad range of aspects and elevations as plots are well-distributed among the regions of the polar plot. Plots within the same installation have generally similar values of elevation and aspect. The Loon Lake (LL) and Cemetery Ridge (CR) installation are notable exceptions where the topography was fairly flat and thus aspect varied within the installation's plots. 
+Figure \ref{fig:polar_plot} describes the elevation and orientation of plots by installation. All plots range in elevation between 2000 and 4500 ft. There is a broad range of aspects and elevations as plots are well-distributed among the regions of the polar plot. Plots within the same installation have generally similar values of elevation and aspect. The Loon Lake (LL) and Cemetery Ridge (CR) installation are notable exceptions where the topography was fairly flat and thus aspect varied widely among the installation's plots. 
 
 \begin{figure}[!h]
 \begin{center}
@@ -39,7 +39,7 @@ Figure \ref{fig:polar_plot} describes the elevation and orientation of plots by 
 \end{center}
 \end{figure}
 
-The study captured a wide range of productivity and overstory retention levels from low site and low retention to high site and high retention (Figure \ref{fig:SI.vs.BAPA}). However, there is a concentration of installations with similarly low overstory retention levels and high site index values. These six installations (colored red) were selected to develop the understory model since they were relatively homogeneous in overstory and site characteristics. In the following figures, these installations will be identified by an asterisk preceding the name of the installation (ex: *EM). There is also a noticeable gap where there are no intermediate retained overstory sites (20-60 ft$^2$/ac) that have a low site index.
+The study captured a wide range of productivity and overstory retention levels from low site and low retention to high site and high retention (Figure \ref{fig:SI.vs.BAPA}). However, there is a concentration of installations with similarly low overstory retention levels and high site index values. These six installations (colored red in Figure \ref{fig:SI.vs.BAPA}) were selected to develop the understory model since they were relatively homogeneous in overstory and site characteristics. In the following figures, these installations will be identified by an asterisk preceding the name of the installation (ex: *EM). There is also a noticeable gap where there are no intermediate retained overstory sites (20-60 ft$^2$/ac) that have a low site index.
 
 \begin{figure} 
 \begin{center}
@@ -60,6 +60,7 @@ agg.over.data.TPA<-agg.over.data.TPA[!agg.over.data.TPA$Installation %in% drp60,
 print(xyplot(agg.over.data.TPA$TPA~ agg.over.data.TPA$Year_MeasurementOS | agg.over.data.TPA$Installation,
        type = "o",  
         par.settings = my.settings,
+       ylim=c(0,150),
          pch = 16,
          col ="grey60",
        groups = agg.over.data.TPA$Plot, 
@@ -76,7 +77,7 @@ print(xyplot(agg.over.data.TPA$TPA~ agg.over.data.TPA$Year_MeasurementOS | agg.o
  \caption{Overstory TPA by study site, plot and year.\label{fig:os_tpa_inst}}
  \end{figure}
  
-Figure \ref{fig:os_tpa_inst} shows the plot-level interpolations of overstory trees per acre. Most plots stayed constant in the number of overstory trees per acre. However, due to mortality, there may be slight differences. For most installations the overstory retention levels are similar across plots. Within several installations, there is noticeable variation in overstory trees per acre between plots.  Installations LF (Lubrecht Forest) and EM (Empey Mountain) show considerable differences in overtory TPA between plots.
+Figure \ref{fig:os_tpa_inst} shows the plot-level interpolations of overstory trees per acre. Most plots stayed constant in the number of overstory trees per acre. However, due to mortality, there may be slight differences. For most installations the overstory retention levels are similar across plots, though there is noticeable variation in LF (Lubrecht Forest) and EM (Empey Mountain).
 
 %%%%%%%%%%%%%%%%%%
 
@@ -126,12 +127,12 @@ print(barchart(inst_count$Freq~ inst_count$annual.gr4.Installation,
 \end{figure}
 
 
-The total number of small tagged ponderosa pine trees provided by each installation varied substantially (Figure \ref{fig:numbPond}). When multiple growth intervals and the number of tree records excluded due to mortality or damage are accounted for, many installations contribute over 150 tree records to the model, while installations with only a single measurement interval (RM and TJ) actually contributed fewer than 60 tree records. There were five installations that had tagged ponderosa pine tree records in excess of 200 and two that had over 300 (EM and LF). 
+The total number of small tagged ponderosa pine trees provided by each installation varied substantially (Figure \ref{fig:numbPond}). When multiple growth intervals and the number of tree records excluded due to mortality or damage are accounted for, 9 installations contribute over 150 tree records to the model, while installations with only a single measurement interval (RM and TJ) contribute fewer than 60 records. There were five installations that had tagged ponderosa pine tree records in excess of 200 and two that had over 300 (EM and LF). 
 
 
 
 \begin{table}
-\caption{Number of tree records from each unique tree.}\label{tab:treeCounts}
+\caption{Distribution of the number of height growth records from each unique tree.}\label{tab:treeCounts}
 \begin{center}
 \begin{tabular}{lll}
 \hline\hline
@@ -144,7 +145,7 @@ $4$&$411$&$1233$\tabularnewline
 \end{tabular}\end{center}
 \end{table}
 
-Table \ref{tab:treeCounts} is related  to Figure \ref{fig:numbPond} in that it reveals the number of times a unique tree contributed to the model. A nearly equal number of trees contributed to the model over either one, two or three measurement intervals. Ultimately, the most common class of the tree records were from trees that were included over three intervals (4 observations).
+Table \ref{tab:treeCounts} is related  to Figure \ref{fig:numbPond} in that it reveals the number of times a unique tree can contribute to the models. A nearly equal number of unique trees contributed to the model over either one, two or three measurement intervals. Yet ultimately, the most common class of tree records were those from trees that were included over three intervals (4 observations).
 
 
 \begin{figure} 
@@ -200,7 +201,7 @@ print(xyplot(dmgStagm$x~dmgStagm$Year| dmgStagm$Installation,
 \caption[Small tree records removed due to top damage or mortality over time.]{Small tree records removed due to top damage or mortality over time.\label{fig:damageCodes}. Installation PC (Pine Creek) had no removed records over the measurement periods.}
 \end{figure}
 
-The dead, dead top or animal damaged trees were removed from the model whether the damage was recorded at the beginning or end of a given interval. For example, if damage occurred at the beginning or end of a measurement interval, the tree would be removed and there would be no record of growth over the interval for that tree (although other growth intervals for the tree without associated damage may be included). Other damage codes were recorded for subject trees (see Appendix B) but only trees with the specified damage relating directly to top damage or mortality were removed.  Most installations exhibited similarly low levels of mortality or other specified damage (see Figure \ref{fig:damageCodes}). The number of tree records removed generally does not exceed 20 trees per installation and per interval. However, some installations such as KC, RM and CR showed high levels of mortality and damage, especially in the later years of the study. Any reductions in the number of tree records removed across measurement years is attributed to an improvement in tree health or an inability to locate and categorize the tree as dead or damaged. 
+The dead, dead top or animal damaged trees were removed from the model whether the damage was recorded at the beginning or end of a given interval. For example, if damage occurred at the beginning or end of a measurement interval, the tree would be removed and there would be no record of growth over the interval for that tree (although other growth intervals for the tree without associated damage may be included). Other damage codes were recorded for subject trees (see Appendix B) but only trees with the specified damage relating directly to top damage or mortality were removed.  Most installations exhibited similarly low levels of mortality or other specified damage (see Figure \ref{fig:damageCodes}). The number of tree records removed generally does not exceed 20 per installation and per interval. However, some installations such as KC, RM and CR showed high levels of mortality and damage, especially in the later years of the study. Any reductions in the number of tree records removed across measurement years is attributed to an improvement in tree health or an inability to locate the tree. 
 
 \begin{figure}
 \begin{center}
@@ -264,7 +265,7 @@ print(barchart(Species~ x| Installation, data=tallied.mins,
  \caption[Species composition of small tree plots.]{Species composition of small tree plots in installations with more than 60 tagged ponderosa pine at initiation. PSME= \emph{Pseudotsuga menziesii}, PIPO= \emph{Pinus ponderosa}, ABGR= \emph{Abies grandis}, THPL= \emph{Thuja plicata}, PIMO= \emph{Pinus monticola}, PICO= \emph{Pinus contorta}, LAOC= \emph{Larix occidentalis}.\label{fig:speccomp}}
  \end{figure}
  
-The threshold number of tagged ponderosa pine limits the analysis to installations with a significant ponderosa pine understory component. However, to obtain a clear description of the inter-species understory tree competition among installations, it is necessary to look beyond the tagged subject trees to the tallied trees at initiation (Figure \ref{fig:speccomp}). Based on the frequencies of small trees by species and installation in, the selected installations are not dominated by Douglas-fir (\emph{Pseudotsuga menziesii}) regeneration although there are a number of installations that are very closely split between the two species.
+The threshold number of tagged ponderosa pine limits the analysis to installations with a significant ponderosa pine understory component. However, to obtain a clear description of the inter-species understory tree competition among installations, it is necessary to look beyond the tagged subject trees to the full set of tallied trees at initiation (Figure \ref{fig:speccomp}). Based on the frequencies of small trees by species and installation, the selected installations are not dominated by Douglas-fir (\emph{Pseudotsuga menziesii}) or grand fir (\emph{Abies grandis}) regeneration although there are a number of installations that are very closely split between the three species.
  
  %To discussion?
  % Including installations that are dominated by the relatively shade-tolerant Douglas-fir may 
@@ -313,7 +314,7 @@ print(barchart(CTRLandGE.volume.index$Cov ~ CTRLandGE.volume.index$Group.1, grou
 
 
 
-When comparing the vegetation cover between the control and the herbicide plots in the first year of the selected measurement intervals, it is apparent that there is a large drop in vegetation levels within installations with large amounts of understory vegetation in the control plots (see Figure \ref{fig:vegVol}). This indicates some success in establishing a wide range of non-arboreal vegetative conditions on installations. However, the herbicide applications failed to contribute to a marked difference in depth in installations of little vegetative volume in control plots. 
+When comparing the vegetation cover between the control and the herbicide plots in the first year of the selected measurement intervals, it is apparent that there is a large drop in vegetation levels within installations with large amounts of understory vegetation in the control plots (see Figure \ref{fig:vegVol}). This indicates some success in establishing a wide range of non-arboreal vegetative conditions on these installations. However, the herbicide applications failed to contribute to a marked difference in depth in installations with little vegetative volume in control plots. 
 
 \begin{figure} 
 \begin{center}
@@ -331,34 +332,34 @@ print(xyplot(CCF.OS ~ TPA.OS, data=annual.gr4, groups=InstPlot, type="o",
 \caption[Crown area per acre vs. trees per acre by plot.]{Crown area per acre vs. trees per acre by plot. The measurements within each plot across years are represented by a common line and color. Any middle values are interpolated from overstory measurements taken at the beginning and end of the measurement interval.\label{fig:capaTpa}}
 \end{figure}
 
-Figure \ref{fig:capaTpa} shows that crown area per acre (CAPA) and trees per acre (TPA) variables are closely correlated (r=.92). Variation in trees per acre within plots is attributed solely to mortality therefore any change in trees per acre across measurement years is negative. Crown area per acre may increase or decrease depending on the growth of crowns in overstory trees and the loss of crown due to mortality. Many plots in the intermediate TPA range (40-70 TPA) show a lack of overstory mortality and an increase in crown area per acre. However, plots with higher residual overstory TPA tend to exhibit higher levels of mortality and a corresponding decrease in crown area per acre.
+Figure \ref{fig:capaTpa} shows that the crown area per acre (CAPA) and trees per acre (TPA) variables are closely correlated (r=.92). Variation in trees per acre within plots is attributed solely to mortality therefore any change in trees per acre across measurement years is negative. Crown area per acre may increase or decrease depending on the growth of crowns in overstory trees and the loss of crown due to mortality. Many plots in the intermediate TPA range (40-70 TPA) show a lack of overstory mortality and an increase in crown area per acre. However, plots with higher residual overstory TPA tend to exhibit higher levels of mortality and a corresponding decrease in crown area per acre.
 
  
-% \begin{figure}
-% \begin{center}
-% <<label=polar_plot,fig=FALSE,width=9,height=9,echo=FALSE>>=
-%  library(plotly)
-% # packageVersion('plotly')
-% 
-% colourCount = 15
-% getPalette = colorRampPalette(brewer.pal(9, "Set1"))
-% 
-% 
-%  p <- plot_ly(
-%    plotly::mic, r = ~annual.gr4$elevation, t = ~annual.gr4$aspect,
-%    color = ~annual.gr4$Installation,
-%    # alpha = 0.7,
-%    type = "scatter")
-%    # ,
-%    # mode="markers",
-%    # marker=list(color=getPalette(colourCount)))
-% 
-% layout(p, title = "",radialaxis=list(range=c(min(annual.gr4$elevation),max(annual.gr4$elevation))) ,orientation = -90,margin=list(b=90,r=90))
-% 
-% @
-% \end{center}
-% \caption{Polar Plot...speccomp\label{fig:polar_plot}}
-% \end{figure}
+%' \begin{figure}
+%' \begin{center}
+%' <<label=polar_plot,fig=FALSE,width=9,height=9,echo=FALSE>>=
+%'  library(plotly)
+%' # packageVersion('plotly')
+%' 
+%' colourCount = 15
+%' getPalette = colorRampPalette(brewer.pal(9, "Set1"))
+%' 
+%' 
+%'  p <- plot_ly(
+%'    plotly::mic, r = ~annual.gr4$elevation, t = ~annual.gr4$aspect,
+%'    color = ~annual.gr4$Installation,
+%'    # alpha = 0.7,
+%'    type = "scatter")
+%'    # ,
+%'    # mode="markers",
+%'    # marker=list(color=getPalette(colourCount)))
+%' 
+%' layout(p, title = "",radialaxis=list(range=c(5000,2000)) ,orientation = -90,margin=list(b=90,r=90))
+%' 
+%' @
+%' \end{center}
+%' \caption{Polar Plot...speccomp\label{fig:polar_plot}}
+%' \end{figure}
 
 \newpage
 \subsection{Tagged Tree Characteristics}

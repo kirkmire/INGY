@@ -258,20 +258,20 @@ library(quantreg)
 annual.gr2<-annual.gr2[!annual.gr2$ht_annual==0,]
 
 #QR for small.tpa
-qr.nothing<-rq(log(annual.gr2$ht_annual)~srHeight_Total,tau=c(.5),data=annual.gr2)
+qr.nothing<-rq( (annual.gr2$ht_annual)~srHeight_Total,tau=c(.5),data=annual.gr2)
 summary(qr.nothing)
 aic.list<-AIC(qr.nothing)[1]
 nlist<-length(qr.nothing$y)
 
 #QR for small.tpa
-qr.stpa<-rq(log(ht_annual) ~ srHeight_Total+small.tpa,tau=c(.5),data=annual.gr2)
+qr.stpa<-rq( (ht_annual) ~ srHeight_Total+small.tpa,tau=c(.5),data=annual.gr2)
 summary(qr.stpa)
 aic.list<-c(aic.list,AIC(qr.stpa)[1])
 
 nlist<-c(nlist,length(qr.stpa$y))
 
 #QR for height class 2
-qr.stp2<-rq(log(ht_annual)~srHeight_Total+two,tau=c(.5),data=annual.gr2)
+qr.stp2<-rq( (ht_annual)~srHeight_Total+two,tau=c(.5),data=annual.gr2)
 summary(qr.stp2)
 #aic.list<-c(aic.list,AIC(qr.stp2)[1])
 
@@ -315,32 +315,32 @@ summary(qr.stp2)
 # #nlist<-c(nlist,length(qr.stp14$y))
 #
 #QR for height class 15
-qr.stp15<-rq(log(ht_annual)~srHeight_Total+other,tau=c(.5),data=annual.gr2)
+qr.stp15<-rq( (ht_annual)~srHeight_Total+other,tau=c(.5),data=annual.gr2)
 summary(qr.stp15)
 aic.list<-c(aic.list,AIC(qr.stp15)[1])
 nlist<-c(nlist,length(qr.stp15$y))
 #
 #
 #QR for trees greater than
-qr.sttgt<-rq(log(ht_annual)~srHeight_Total+tpa.gt,tau=c(.5),data=annual.gr2)
+qr.sttgt<-rq( (ht_annual)~srHeight_Total+tpa.gt,tau=c(.5),data=annual.gr2)
 summary(qr.sttgt)
 aic.list<-c(aic.list,AIC(qr.sttgt)[1])
 nlist<-c(nlist,length(qr.sttgt$y))
 
 #QR for basal diameter
-qr.stbd<-rq(log(ht_annual)~srHeight_Total+BasalDiameter,tau=c(.5),data=annual.gr2)
+qr.stbd<-rq( (ht_annual)~srHeight_Total+BasalDiameter,tau=c(.5),data=annual.gr2)
 summary(qr.stbd)
 aic.list<-c(aic.list,AIC(qr.stbd)[1])
 nlist<-c(nlist,length(qr.stbd$y))
 
 #QR for DBH
-qr.stdbh<-rq(log(ht_annual)~srHeight_Total+DBH,tau=c(.5),data=annual.gr2)
+qr.stdbh<-rq( (ht_annual)~srHeight_Total+DBH,tau=c(.5),data=annual.gr2)
 summary(qr.stdbh)
 aic.list<-c(aic.list,AIC(qr.stdbh)[1])
 nlist<-c(nlist,length(qr.stdbh$y))
 
 #QR for Crown Width
-qr.stcw<-rq(log(ht_annual)~srHeight_Total+CrownWidth,tau=c(.5),data=annual.gr2)
+qr.stcw<-rq( (ht_annual)~srHeight_Total+CrownWidth,tau=c(.5),data=annual.gr2)
 summary(qr.stcw)
 aic.list<-c(aic.list,AIC(qr.stcw)[1])
 nlist<-c(nlist,length(qr.stcw$y))
@@ -353,12 +353,12 @@ aic.list<-c(aic.list,AIC(qr.stcl)[1])
 nlist<-c(nlist,length(qr.stcl$y))
 
 #QR for Crown Ratio
-qr.stcr<-rq(log(ht_annual)~srHeight_Total+cratio,tau=c(.5),data=annual.gr2)
+qr.stcr<-rq( (ht_annual)~srHeight_Total+cratio,tau=c(.5),data=annual.gr2)
 summary(qr.stcl)
 aic.list<-c(aic.list,AIC(qr.stcr)[1])
 nlist<-c(nlist,length(qr.stcr$y))
 
-# plot(log(annual.gr4$ht_annual)~annual.gr4$Height_Total)
+# plot( (annual.gr4$ht_annual)~annual.gr4$Height_Total)
 
 
 UT.aic<-as.data.frame(cbind(nlist,aic.list))

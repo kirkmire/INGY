@@ -1,27 +1,36 @@
 
 #Reads in previous scripts required (takes ~10min)
-# source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=TRUE)
-# source(paste(getwd(),'/other_code/18.database.error.corrections.2016jun16.r',sep=""), echo=TRUE)
-# source(paste(getwd(),'/1.1annualizedht.2016.dec.16.r',sep = ""), echo=TRUE)
-# source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-# source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-# source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-# source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-# source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
-# source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
+source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/other_code/18.database.error.corrections.2016jun16.r',sep=""), echo=TRUE)
+source(paste(getwd(),'/1.1annualizedht.2016.dec.16.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
+source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
 
 
 
-# #combines all aic.lists into one dataframe
-# colnames(UV.aic)<-c("Variable", "n", "AIC")
-# colnames(UT.aic)<-c("Variable", "n", "AIC")
-# colnames(OS.aic)<-c("Variable", "n", "AIC")
-# colnames(SQ.aic)<-c("Variable", "n", "AIC")
+#combines all aic.lists into one dataframe
+colnames(UV.aic)<-c("Variable", "n", "AIC")
+colnames(UT.aic)<-c("Variable", "n", "AIC")
+colnames(OS.aic)<-c("Variable", "n", "AIC")
+colnames(SQ.aic)<-c("Variable", "n", "AIC")
+
+#
+# #Sort by AIC
+# UV.aic<-UV.aic[order(UV.aic$AIC),]
+# UT.aic<-UT.aic[order(UT.aic$AIC),]
+# OS.aic<-OS.aic[order(OS.aic$AIC),]
+# SQ.aic<-SQ.aic[order(SQ.aic$AIC),]
+# 
+# #
 # aic.lists<-rbind(UT.aic,UV.aic,OS.aic,SQ.aic)
-# #
-# #
+# 
 # aic.lists$AIC<-round(aic.lists$AIC,0)
-
+# 
+# 
 # 
 # #Gonna need to adjust this...
 # final.aic<-data.frame(matrix("", nrow = 18, ncol = 12),stringsAsFactors=F)
@@ -37,7 +46,7 @@
 # final.aic$X10[1:5]<-as.character(aic.lists$Variable[33:37])
 # final.aic$X11[1:5]<-aic.lists$n[33:37]
 # final.aic$X12[1:5]<-aic.lists$AIC[33:37]
-#
+# 
 # colnames(final.aic)<-c("Variable","n","AIC","Variable","n","AIC","Variable","n","AIC","Variable","n","AIC")
 # #
 # #

@@ -198,7 +198,7 @@ print(xyplot(dmgStagm$x~dmgStagm$Year| dmgStagm$Installation,
 
 @
 \end{center}
-\caption[Small tree records removed due to top damage or mortality over time.]{Small tree records removed due to top damage or mortality over time.\label{fig:damageCodes}. Installation PC (Pine Creek) had no removed records over the measurement periods.}
+\caption[Small tree records removed due to top damage or mortality over time.]{Small tree records removed due to top damage or mortality over time.\label{fig:damageCodes}. Installation PC (Pine Creek) had no records removed over the measurement periods.}
 \end{figure}
 
 The dead, dead top or animal damaged trees were removed from the model whether the damage was recorded at the beginning or end of a given interval. For example, if damage occurred at the beginning or end of a measurement interval, the tree would be removed and there would be no record of growth over the interval for that tree (although other growth intervals for the tree without associated damage may be included). Other damage codes were recorded for subject trees (see Appendix B) but only trees with the specified damage relating directly to top damage or mortality were removed.  Most installations exhibited similarly low levels of mortality or other specified damage (see Figure \ref{fig:damageCodes}). The number of tree records removed generally does not exceed 20 per installation and per interval. However, some installations such as KC, RM and CR showed high levels of mortality and damage, especially in the later years of the study. Any reductions in the number of tree records removed across measurement years is attributed to an improvement in tree health or an inability to locate the tree. 
@@ -262,7 +262,7 @@ print(barchart(Species~ x| Installation, data=tallied.mins,
 
 @
  \end{center}
- \caption[Species composition of small tree plots.]{Species composition of small tree plots in installations with more than 60 tagged ponderosa pine at initiation. PSME= \emph{Pseudotsuga menziesii}, PIPO= \emph{Pinus ponderosa}, ABGR= \emph{Abies grandis}, THPL= \emph{Thuja plicata}, PIMO= \emph{Pinus monticola}, PICO= \emph{Pinus contorta}, LAOC= \emph{Larix occidentalis}.\label{fig:speccomp}}
+ \caption[Species composition of small tree plots.]{Species composition of small tree plots in installations with more than 60 tagged ponderosa pine at initiation. Species represented are \emph{Pseudotsuga menziesii} (PSME), \emph{Pinus ponderosa} (PIPO), \emph{Abies grandis} ABGR, \emph{Thuja plicata} (THPL), \emph{Pinus monticola} (PIMO), \emph{Pinus contorta}(PICO), and \emph{Larix occidentalis} (LAOC).\label{fig:speccomp}}
  \end{figure}
  
 The threshold number of tagged ponderosa pine limits the analysis to installations with a significant ponderosa pine understory component. However, to obtain a clear description of the inter-species understory tree competition among installations, it is necessary to look beyond the tagged subject trees to the full set of tallied trees at initiation (Figure \ref{fig:speccomp}). Based on the frequencies of small trees by species and installation, the selected installations are not dominated by Douglas-fir (\emph{Pseudotsuga menziesii}) or grand fir (\emph{Abies grandis}) regeneration although there are a number of installations that are very closely split between the three species.
@@ -324,15 +324,15 @@ library(lattice)
 
 print(xyplot(CCF.OS ~ TPA.OS, data=annual.gr4, groups=InstPlot, type="o",
         xlab="Trees per Acre", 
-        ylab="Crown Area Per Acre (% of an acre)"))
+        ylab="Crown Area Per Acre (ac/ac)"))
 
 
 @
 \end{center}
-\caption[Crown area per acre vs. trees per acre by plot.]{Crown area per acre vs. trees per acre by plot. The measurements within each plot across years are represented by a common line and color. Any middle values are interpolated from overstory measurements taken at the beginning and end of the measurement interval.\label{fig:capaTpa}}
+\caption[Crown area per acre vs. trees per acre by plot.]{Crown area per acre vs. trees per acre by plot. The values for each plot across overstory measurement years are connected by line and drawn in the same color.\label{fig:capaTpa}}
 \end{figure}
 
-Figure \ref{fig:capaTpa} shows that the crown area per acre (CAPA) and trees per acre (TPA) variables are closely correlated (r=.92). Variation in trees per acre within plots is attributed solely to mortality therefore any change in trees per acre across measurement years is negative. Crown area per acre may increase or decrease depending on the growth of crowns in overstory trees and the loss of crown due to mortality. Many plots in the intermediate TPA range (40-70 TPA) show a lack of overstory mortality and an increase in crown area per acre. However, plots with higher residual overstory TPA tend to exhibit higher levels of mortality and a corresponding decrease in crown area per acre.
+Figure \ref{fig:capaTpa} shows that the crown area per acre (CAPA) and trees per acre (TPA) variables are closely correlated (r=.92). Variation in trees per acre within plots is attributed solely to mortality therefore any change in trees per acre across measurement years is negative. Crown area per acre may increase or decrease depending on the growth of crowns in overstory trees and the loss of crown area due to tree mortality. Many plots in the intermediate TPA range (40-70 TPA) show a lack of overstory mortality and an increase in crown area per acre. However, plots with higher residual overstory TPA tend to exhibit higher levels of mortality and a corresponding decrease in crown area per acre.
 
  
 %' \begin{figure}
@@ -389,10 +389,10 @@ print(histogram(~annual.gr4$Height_Total| annual.gr4$Installation,
 
 @
  \end{center}
- \caption{Initial height of small tagged trees by installation.\label{fig:init_ht_by_inst} }
+ \caption{Distribution of initial heights of small tagged trees by installation.\label{fig:init_ht_by_inst} }
  \end{figure}
  
-The height of tagged ponderosa pine trees at the beginning of the selected measurement intervals ranges between 1 foot (the minimum height to be included in the sample) to just under 30 feet, with the majority of tagged trees between 1 and 15 feet (Figure \ref{fig:init_ht_by_inst}). KC and TP have especially narrow distributions of initial height despite having 3 measurement periods each. These installations have very dense, vertically homogeneous ponderosa pine regeneration that is slowly growing. 
+The heights of tagged ponderosa pine trees at the beginning of the selected measurement intervals ranges between 1 foot (the minimum height to be included in the sample) to just under 30 feet, with the majority of tagged trees between 1 and 15 feet (Figure \ref{fig:init_ht_by_inst}). KC and TP have especially narrow distributions of initial height despite having 3 measurement periods each. These installations have very dense, vertically homogeneous ponderosa pine regeneration. 
 
 % Discussion?
 % These conditions are not typically found in a natural ponderosa pine stand and these installations may benefit from an understory treatment such as a prescribed burn or non-commercial thinning that promotes differentiation among understory ponderosa pine so they can emerge into the canopy. Although, these stands may not represent optimum management, they are important to include to estimate the effects of small tree competition in extremely dense conditions. 
@@ -425,11 +425,11 @@ print(histogram(~annual.gr4$ht_annual| annual.gr4$Installation,
 
 @
  \end{center}
- \caption{Annualized height growth of small tagged trees by installation.\label{fig:ht_by_inst} }
+ \caption{Distribution of annualized height growth of small tagged trees by installation.\label{fig:ht_by_inst} }
  \end{figure}
 
   
-The distribution of ponderosa annual height growth varied by installation (Figure \ref{fig:ht_by_inst}). The asymmetric, commonly right-skewed distributions reveal that most subject trees experience annual height growth between 0 and 2 ft with very few trees exceeding 2 ft. Some installations such as TP and KC have a vary narrow distribution of annualized height growth which indicates that most trees are experiencing similar levels of growth. In contrast, installations such as GC and BC have fairly even distributions of annual height which indicates differentiation in competition and a corresponding wide range of initial heights.
+The distribution of ponderosa annual height growth varied by installation (Figure \ref{fig:ht_by_inst}). The asymmetric, commonly right-skewed distributions reveal that most subject trees experience annual height growth between 0 and 2 ft with very few trees exceeding 2 ft. Some installations such as TP and KC have a vary narrow distribution of annualized height growth. In contrast, installations such as GC and BC have fairly broad distributions of annual height which suggests differentiation in competition and a corresponding wide range of initial heights.
 
 %Discusion?
 % In these stands, this can likely be attributed to their dense understory regeneration in which trees struggle similarly for resources. 
@@ -458,7 +458,7 @@ print(xyplot(annual.gr4$ht_annual~annual.gr4$Height_Total,
  \caption{Annualized height growth increment vs. initial height.\label{fig:delta_ht_init}}
  \end{figure}
  
-Annual height growth increment tends to increase with initial height (Figure \ref{fig:delta_ht_init}). This relationship was positive although weak (r$\approx$.65) and increasing in variance with points fanning out from the origin in decreasing density. This reveals that most of the tree records represent shorter-in-stature trees that exhibit only modest increases in height growth increment. Despite this concentration of shorter subject trees, there is a wide range of both initial height values and annualized height growth that includes trees greater than 25 ft tall and trees that experience approximately 3 feet of annual growth. While taller trees tend to exhibit greater annual height growth, the variability in height growth also increases with initial height (non-homogeneous variance). 
+Annual height growth increment tends to increase with initial height (Figure \ref{fig:delta_ht_init}). This relationship was positive although weak (r$\approx$.65) and increasing in variance with points fanning out from the origin in decreasing density. This reveals that most of the tree records represent shorter-in-stature trees that exhibit only modest increases in height growth increment. Despite this concentration of shorter subject trees, there is a wide range of both initial height values and annualized height growth that includes trees greater than 25 ft tall and trees that experience approximately 3 feet of annual growth. 
 
 
  
@@ -484,12 +484,12 @@ Annual height growth increment tends to increase with initial height (Figure \re
  library(lattice)
 
 
- print(xyplot(annual.gr4$ht_annual~annual.gr4$TPA.OS,
+ print(xyplot(annual.gr4$cratio~annual.gr4$ht_annual,
          par.settings = my.settings,
            pch = 1,
-            col ="black",
-           xlab="Crown Ratio (%)",
-          ylab="Annualized Height Growth Increment (ft/yr)",
+          col ="grey60",
+           ylab="Crown Ratio",
+          xlab="Annualized Height Growth Increment (ft/yr)",
         strip = strip.custom(bg="lightgrey"),
           par.strip.text=list(col="black"),
           scales=list(
@@ -501,29 +501,29 @@ Annual height growth increment tends to increase with initial height (Figure \re
 \caption{Annualized height growth increment vs. crown ratio.\label{fig:delta_ht_cratio}}
 \end{figure}
  
-Crown ratio (crown length/total height) appears to put an upper limit on annual height growth (Figure \ref{fig:delta_ht_cratio}). Trees with very little live crown exhibit height growth responses that are correspondingly small. As crown ratio increases the upper values of the height growth response distribution also increase. However, variance in annual height growth also increases for increasing values of crown ratio. For trees with the fullest crowns (>.8), annual height growth tends to exceed .5 ft but limited to under 3 ft. 
+Crown ratio appears to impose an upper limit on annual height growth (Figure \ref{fig:delta_ht_cratio}). Trees with very little live crown exhibit height growth responses that are correspondingly small. As crown ratio increases the upper values of the height growth response distribution also increase. However, variance in annual height growth also increases for increasing values of crown ratio. For trees with the fullest crowns (>.8), annual height growth tends to exceed .5 ft but be limited to under 3 ft. 
  
-%  \begin{figure}
-% \begin{center}
-% <<label=init_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
-% 
-% library(lattice)
-% 
-% 
-% print(xyplot(annual.gr4$cratio~annual.gr4$Height_Total,
-%          par.settings = my.settings,
-%           pch = 1,
-%            col ="grey60",
-%           xlab="Initial Height (ft)",
-%          ylab="Crown Ratio (%)",
-%        strip = strip.custom(bg="lightgrey"),
-%          par.strip.text=list(col="black"),
-%          scales=list(
-%                )))
-% @
-%  \end{center}
-%  \caption{Crown Ratio vs. Initial height (ft)\label{fig:init_ht_cratio}}
-%  \end{figure}
+ \begin{figure}
+\begin{center}
+<<label=init_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
+
+library(lattice)
+
+
+print(xyplot(annual.gr4$cratio~annual.gr4$Height_Total,
+         par.settings = my.settings,
+          pch = 1,
+           col ="grey60",
+          xlab="Initial Height (ft)",
+         ylab="Crown Ratio",
+       strip = strip.custom(bg="lightgrey"),
+         par.strip.text=list(col="black"),
+         scales=list(
+               )))
+@
+ \end{center}
+ \caption{Crown Ratio vs. Initial height (ft)\label{fig:init_ht_cratio}}
+ \end{figure}
 
 As initial height increases, crown ratio increases and the variability of crown ratio decreases (Figure \ref{fig:init_ht_cratio}). These findings relate physiologically to the relationship between the crown as a driver of growth and tree height; a full crown is necessary to achieve such stature.
 
@@ -563,7 +563,7 @@ CrownRatio&423&585&F.vol&721&1012&&&&&&\tabularnewline
 \newpage
 \subsection{Variable Selection}
 
-The primary form of the model included the square root of initial height, since it was found to be have a strong, positive, linear relationship with height growth increment (Figure \ref{fig:seqgam}). The partial residual plot shows the predicted value of height increment as a function of initial height. Generally, the taller the tree at the beginning of the period, the greater the height growth increment. 
+The primary form of the model included the square root of initial height, since it was found to have a strong, positive, linear relationship with height growth increment (Figure \ref{fig:seqgam}). The partial residual plot of the primary model shows the partial effect of the square root of initial height and error across the square root of initial height. 
 
 % Seqential GAM residual Plots
 % \begin{figure}
@@ -585,7 +585,7 @@ The primary form of the model included the square root of initial height, since 
 % \caption{Generalized additive model of annual height growth increment vs. square-root of initial height.\label{fig:seqgam}}
 % \end{figure}
 
-Proceeding forward from the base model to the small tree category of competition, the AIC for the $\tau$=.5 QR model with the crown ratio variable was found to be much lower than the other candidate variables (see Table 2). This variable was therefore selected to represent competition from other small trees. The partial residual plot created to visualize the crown ratio effect includes square root of initial height as a linear term and is smoothed for crown ratio (Figure \ref{fig:seqgamCR}). The relationship for this variable is non-linear yet predicted height growth increment is shown to increase as crown ratio increases. Quadratic terms were evaluated to improve this relationship to no avail. Small trees with larger crown lengths relative to total height are predicted to have greater height growth increments.
+Proceeding forward from the primary model to the small tree category of competition, the AIC value for the $\tau$=.5 QR model with the crown ratio variable was found to be much lower than those for the models incorporating other candidate variables (see Table 2). This variable was therefore selected to represent competition from other small trees. The partial residual plot created to visualize the crown ratio effect includes square root of initial height as a linear term and is smoothed for crown ratio (Figure \ref{fig:seqgamCR}). The relationship for this variable is non-linear yet predicted height growth increment is shown to increase as crown ratio increases. Quadratic terms were evaluated to improve this relationship to no avail. Small trees with larger crown ratios are predicted to have greater height growth increments.
 
 \begin{figure}
 \minipage{0.48\textwidth}
@@ -617,9 +617,9 @@ Proceeding forward from the base model to the small tree category of competition
 % \end{figure}
 
 
-The understory non-arboreal vegetation candidate variables failed to provide a model with an AIC appreciably less than that of including only the two previously selected variables. The only variables that offered even marginal improvement over the previous iteration of the model were the 1m$^2$ percent cover of all non-arboreal vegetation (POLV.cov) and transect measured grass depth (G.tran.depth). However, the inclusion of these variables is hardly justified considering the modest improvement they provide and the expense of measuring either in the field. Therefore, no candidate variable was selected from this category of competition.
+The understory non-arboreal vegetation candidate variables failed to provide a model with an AIC appreciably less than that of the model with \sqrt{h} and crown ratio. The only variable that offered even marginal improvement over the previous iteration of the model was transect measured grass depth (G.tran.depth). However, the inclusion of this variable is hardly justified considering the modest improvement they provide and the expense of measuring either in the field. Therefore, no candidate variable was selected from this category of competition.
 
-The overstory candidate variable that lowered model AIC the most was trees per acre (TPA). The measure of crown area per acre (CAPA) provided a close second and basal area per acre (BAPA) was also much lower than the previous iteration of the model. The partial residual plot of TPA shows that predicted height increment decreases steeply between 0 and 40 TPA but appears to flatten past 40 TPA (Figure \ref{fig:seqgamOSTPA}). As a predictor of height growth increment, TPA is important to distinguish between clearcut (0 TPA) and modest overstory retention levels. However, beyond 40 TPA, it fails to relate to height growth increment.
+The overstory candidate variable that lowered model AIC the most was trees per acre (TPA). The measure of crown area per acre (CAPA) provided a close second and the model adding basal area per acre (BAPA) also resulted in an AIC much lower than the previous iteration of the model. The partial residual plot of TPA shows that predicted height increment decreases steeply between 0 and 40 TPA but appears to flatten past 40 TPA (Figure \ref{fig:seqgamOSTPA}). As a predictor of height growth increment, TPA is important to distinguish between clearcut (0 TPA) and modest overstory retention levels. However, beyond 40 TPA, it may not relate to height growth increment.
 
 
 \begin{figure}[!htb]
@@ -649,7 +649,7 @@ The overstory candidate variable that lowered model AIC the most was trees per a
 % \caption{Generalized additive model of annual height growth increment vs. crown ratio with square-root of initial height and crown ratio considered as linear predictors.\label{fig:}}
 % \end{figure}
 
-Site metrics of slope, aspect and elevation failed to provide an improvement over the null model. However, when considered together in the slope, aspect and elevation (SEA) interaction model (\cite{Stage2007a}, see Equation \eqref{eq:Eq1}), these terms provided the lowest AIC by a wide margin. The AIC of the site index metric was also quite low but failed to surpass that of the SEA term. The values for the SEA interaction were obtained though fitting the SEA related coefficients of the $\tau$=.5 model to all small tree records. The partial residual for this term shows that an increase in the slope, aspect and elevation term is related to general increase in predicted height increment for most SEA values (and most plots). 
+Individually, the plot metrics of slope, aspect and elevation failed to provide an improvement over the model with \sqrt{h}, crown ratio, and TPA. However, when considered together in the slope, aspect and elevation (SEA) interaction model (\cite{Stage2007a}, see Equation 3), these terms lowered AIC by a wide margin. The AIC of the model with site index was also quite low but failed to surpass that using the SEA term. The partial residual for this term shows that an increase in the slope, aspect and elevation term is related to general increase in predicted height increment for most SEA values (and most plots). 
 
 \begin{figure} 
 \begin{center}
@@ -657,8 +657,8 @@ Site metrics of slope, aspect and elevation failed to provide an improvement ove
 
 sea.si<-lm(SEA.val~SiteIndex_Value,data=annual.gr4)
 plot(annual.gr4$SEA.val~annual.gr4$SiteIndex_Value,
-     xlab="Site Index Value",
-     ylab="SEA Contribution to Height Prediction (ft)",
+     xlab="Site Index (ft)",
+     ylab="Partial Contribution of SEA to the .5 quantile",
      pch = 16,
      col ="grey60")
 abline(sea.si)
@@ -668,9 +668,9 @@ abline(sea.si)
 \caption[Comparison of slope, elevation and aspect term to site index]{Examination of relationship between the slope, elevation and aspect interaction (SEA) contribution to the $\tau$=.5 predicted annual height growth and site index (ft at base age of 50 yrs)\label{fig:sivssea}}
 \end{figure}
 
-Figure \ref{fig:sivssea} shows the positive association between the SEA value and the site index. Since both of these variables relate to the inherent productivity of the site they should be positively correlated. The lack of a strong correlation can be attributed in part to a difference in resolution. One site index was obtained for each installation whereas the SEA value relates productivity to the slope, aspect and elevation at the plot level.
+Figure \ref{fig:sivssea} shows the positive association between the partial contribution of the SEA terms and site index. Since both of these variables relate to the inherent productivity of the site they should be positively correlated. The lack of a strong correlation can be attributed in part to a difference in resolution. One value of site index was obtained for each installation whereas the SEA value relates productivity to the slope, aspect and elevation at the plot level.
 
-Figure \ref{fig:Sea_heat} illustrates the relative effects of the slope and elevation on estimated height growth for two different aspects. For the south-east aspect, a negative effect of increasing slope is apparent at the lowest elevations. Growth of small trees on steep south-facing slopes is reduced at low elevations. The opposite is observed on north-west facing slopes where small trees are estimated to grow the most on steeper slopes at low elevations. Both aspects show that there is a moderate reduction in height growth at high elevations and steep slopes.
+Figure \ref{fig:Sea_heat} illustrates the relative effects of slope and elevation on estimated height growth for two different aspects. For the south-east aspect, a negative effect of increasing slope is apparent at the lowest elevations. Growth of small trees on steep south-facing slopes is reduced at low elevations. The opposite is observed on north-west facing slopes where small trees are estimated to grow the most on steeper slopes at low elevations. Both aspects show that there is a reduction in height growth at the highest elevations and steepest slopes, although the south-east aspect shows higher growth at high elevations.
 
 
 \begin{figure}[!htb]
@@ -682,7 +682,7 @@ Figure \ref{fig:Sea_heat} illustrates the relative effects of the slope and elev
   \includegraphics[width=\linewidth]{slope_elevation_NW.png}
   \subcaption{North-west aspect (315\degree)}\label{fig:se_nw}
 \endminipage\hfill
-\caption[Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (ft).]{Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (ft). Lighter shades indicate a greater predicted height growth increment. Initial height= 1ft, crown ratio=.5, overstory TPA=40.}\label{fig:Sea_heat}
+\caption[Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (ft).]{Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (ft). Lighter shades indicate a greater predicted height growth increment.}\label{fig:Sea_heat}
 \end{figure}
 
 
@@ -734,14 +734,14 @@ Figure \ref{fig:Sea_heat} illustrates the relative effects of the slope and elev
 % \end{figure}
 
 
-The resultant model is specified as follows:
+After the 4 variable selection steps, the resultant model is specified as follows:
 %
 \begin{align}\label{eq:Eq3.1}
 \Delta h_{\tau} =& b_{0,\tau}\sqrt{h}+b_{cr,\tau}cr 
-+b_{TPA,\tau}TPA+S(\textbf{b}) \qquad,
++b_{TPA,\tau}TPA+SEA(b) \qquad,
 \end{align}
 %
-\noindent where $\Delta{h}$ is the predicted growth response, $h$ is the initial height in feet, $\tau$ is the specified portion of the response distribution, $cr$ is the crown ratio, $TPA$ is the overstory trees per acre and $S$ is the complex of slope, aspect and elevation terms and estimated coefficients (Equation \ref{eq:Eq1}). Coefficients given in Tables \ref{tab:tau1}-\ref{tab:tau9}.
+\noindent where $\Delta{h}$ is the predicted growth response, $h$ is the initial height in feet, $\tau$ is the specified portion of the response distribution, $cr$ is crown ratio, $TPA$ is the overstory trees per acre and $SEA$ is the complex of slope, aspect and elevation terms and estimated coefficients ($b$, Equation \ref{eq:Eq1}). Coefficients and their bootstrap-estimated standard errors are given in Tables \ref{tab:tau1}-\ref{tab:tau9}.
 
 
 
@@ -862,7 +862,7 @@ slopePercent:sin.rad.asp:I(elevation$^2$)&$ 8.50e-08$&$3.32e-08$&$ 2.56$&$1.05e-
 % \caption{Coefficient Plots of Initial Height Across All Quantiles\label{fig:sr_init_coef}}
 % \end{figure}
 
-The coefficient plot (Figure \ref{fig:sr_init_coef}) shows that the effect of initial height increases as the specified quantile increases. For the middle range of quantile values ($\tau$=.3-.7), the effect remains within the bounds of the 95\% confidence interval (CI) of the least squares regression estimate (red dotted lines). However, for the $\tau$<.2 values, the estimate is below the 95\% CI while it is above the CI for the $\tau$ $\geq$ .8. This means that the maximum or upper-quantiles of the growth distribution increase more rapidly with initial height than does the median and much more rapidly than do the lower quantiles. The effect of initial height on median growth is about the same as would be estimated by standard linear regression.
+The quantile regression coefficient plot (Figure \ref{fig:sr_init_coef}) shows that the estimated effect of initial height increases as the specified quantile increases. For the middle range of quantile values ($\tau$=.3-.7), the effect remains within the bounds of the 95\% confidence interval (CI) of the least squares regression estimate (red dotted lines). However, for the $\tau$ $\leq$ .2 values, the estimate is below that CI while it is above the CI for the $\tau$ $\geq$ .8 quantiles. This means that the maximum or upper-quantiles of the growth distribution increase more rapidly with initial height than does the median and much more rapidly than do the lower quantiles. The effect of initial height on median growth is about the same as would be estimated by standard linear regression.
 
 % \begin{figure}
 % \begin{center}
@@ -878,7 +878,7 @@ The coefficient plot (Figure \ref{fig:sr_init_coef}) shows that the effect of in
 % \caption{Coefficient Plot of Crown Ratio Across All Quantiles\label{fig:cr_coef}}
 % \end{figure}
 
-Similarly, the effect of crown ratio generally increases as the $\tau$ value increases (Figure \ref{fig:cr_coef}. There are some inconsistencies with this trend at the the extreme $\tau$ values (.1 and .9) where there are also considerably wider confidence intervals around the estimates. Given that all other predictors are held constant, the slowest growing trees reveal an effect of crown ratio that is far less than that of trees that exhibit higher annual growth. 
+Similarly, the effect of crown ratio generally increases as the $\tau$ value increases (Figure \ref{fig:cr_coef}). There are some inconsistencies with this trend at the the extreme $\tau$ values (.1 and .9) where there are also considerably wider confidence intervals around the estimates. Given that all other predictors are held constant, the slowest growing trees reveal an effect of crown ratio that is far less than that of trees that exhibit higher annual growth. 
 
 
 % \begin{figure}
@@ -894,7 +894,7 @@ Similarly, the effect of crown ratio generally increases as the $\tau$ value inc
 % \caption{Coefficient Plot of Overstory Trees Per Acre Across All Quantiles\label{fig:os_tpa_coef}}
 % \end{figure}
 
-As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was negatively correlated to annual height growth (Figure \ref{fig:seqgamOSTPA}). Here we see that estimates for the effect of overstory TPA are negative for all values of $\tau$ and steadily decrease as $\tau$ increases (Figure \ref{fig:os_tpa_coef}). The negative effect of TPA is least pronounced for the trees in the lower quantiles of the growth distribution. In contrast, the fastest growing trees (in the upper quantiles of the growth distribution), exhibit the most negative effects of overstory competition, although with a slightly larger confidence interval around the estimate. 
+As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was negatively correlated to annual height growth (Figure \ref{fig:seqgamOSTPA}). In terms of quantile regression we see that estimates for the effect of overstory TPA are negative for all values of $\tau$ and steadily decrease as $\tau$ increases (Figure \ref{fig:os_tpa_coef}). The negative effect of TPA is least pronounced for the trees in the lower quantiles of the growth distribution. In contrast, the fastest growing trees (in the upper quantiles of the growth distribution), experience the most negative effects of overstory competition, although with a slightly larger confidence interval around the estimate. 
 
 
 % \begin{figure}
@@ -960,7 +960,7 @@ As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was
 \caption[Predicted annual height growth by aspect and elevation.]{Predicted annual height growth by aspect and elevation. Green, yellow and red lines represent the .9, .5 and .1 $\tau$ regression quantiles, respectively. Initial height set to 1 foot, crown ratio set to .5, TPA is 40 and slope is 10\%.}\label{fig:sea_gr}
 \end{figure}
 
-Figures \ref{fig:gr_asp} and \ref{fig:gr_elev} show the effects of slope and elevation among quantile etimates of annual height growth when all other variables are held constant. In Figure \ref{fig:gr_asp}, the effect of aspect increases as the $\tau$ value increases. However, the differences in height growth estimates among quantiles by apect may change at different elevations or slopes due the interaction between these terms. Aspect is shown to increase annual height growth at an optimum of approximately 200$\degree$ when the slope is 10\% and the elevation is 3,500 ft. 
+Figures \ref{fig:gr_asp} and \ref{fig:gr_elev} show the effects of slope and elevation among quantile etimates of annual height growth when all other variables are held constant. In Figure \ref{fig:gr_asp}, the effect of aspect increases as the $\tau$ value increases. However, the differences in height growth estimates among quantiles by aspect may change at different elevations or slopes due the interaction between these terms. Aspect is shown to increase annual height growth at an optimum of approximately 200$\degree$ when the slope is 10\% and the elevation is 3,500 ft. 
 
                       
                           

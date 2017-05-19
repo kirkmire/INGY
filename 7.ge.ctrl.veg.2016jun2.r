@@ -3,6 +3,8 @@ CTRLandGE.plots <- splot
 
 #Merge Control&GE plots with 1m^2 plot data#
 CTRLandGE.plot.veg <- merge(CTRLandGE.plots,sstp1,by=c("Installation","Plot"))
+#Remove polv meas
+CTRLandGE.plot.veg<-CTRLandGE.plot.veg[!CTRLandGE.plot.veg$Lifeform=="POLV",]
 
 #Find minimum year of measurement in timeline#
 library(plyr)

@@ -441,7 +441,7 @@ allDamage<-annual.gr4
 
 
 
-veg.variable<-c("Nothing","POLV.cov","F.cov","LS.cov","HS.cov",
+veg.variable<-c("Nothing","Comb.cov","F.cov","LS.cov","HS.cov",
                 "F.depth","LS.depth","HS.depth",
                 "F.vol","LS.vol","HS.vol",
                 "F.tran","LS.tran","HS.tran","G.tran.depth",
@@ -464,8 +464,11 @@ aic.list.vegCW<-AIC(qrCW.noth)[1]
 nlqmm.list.UV<-length(qrCW.noth$y)
 
 
-#QR for 1m polyveg cover
-qrCW.1m.polv<- rq(ht_annual~srHeight_Total+Cov.POLV+cratio,tau=c(.5),data=annual.grUV)
+#QR for 1m combined cover
+
+annual.grUV$cov.comb<-annual.grUV$Cov.F+annual.grUV$Cov.LS+annual.grUV$Cov.HS
+
+qrCW.1m.polv<- rq(ht_annual~srHeight_Total+cov.comb+cratio,tau=c(.5),data=annual.grUV)
 aic.list.vegCW<-c(aic.list.vegCW,AIC(qrCW.1m.polv)[1])
 nlqmm.list.UV<-c(nlqmm.list.UV,length(qrCW.1m.polv$y))
 

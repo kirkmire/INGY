@@ -1,24 +1,24 @@
 
-#Reads in previous scripts required (takes ~10min)
-source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/other_code/18.database.error.corrections.2016jun16.r',sep=""), echo=TRUE)
-source(paste(getwd(),'/1.1annualizedht.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
-source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
-source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
-
-
-
-#combines all aic.lists into one dataframe
-colnames(UV.aic)<-c("Variable", "n", "AIC")
-colnames(UT.aic)<-c("Variable", "n", "AIC")
-colnames(OS.aic)<-c("Variable", "n", "AIC")
-colnames(SQ.aic)<-c("Variable", "n", "AIC")
-
-#
+# #Reads in previous scripts required (takes ~10min)
+# source(paste(getwd(),'/1.readdatabase.2016jun2.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/other_code/18.database.error.corrections.2016jun16.r',sep=""), echo=TRUE)
+# source(paste(getwd(),'/1.1annualizedht.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.2.UT.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.3.UV.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.4.OS.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.5.SQ.variable.selection.2016.dec.16.r',sep = ""), echo=TRUE)
+# source(paste(getwd(),'/1.6.1.annual.gr.6.withelddata.2016.dec.2016.r',sep=""), echo=TRUE)
+# source(paste(getwd(),'/7.ge.ctrl.veg.2016jun2.r',sep=""), echo=TRUE)
+# 
+# 
+# 
+# #combines all aic.lists into one dataframe
+# colnames(UV.aic)<-c("Variable", "n", "AIC")
+# colnames(UT.aic)<-c("Variable", "n", "AIC")
+# colnames(OS.aic)<-c("Variable", "n", "AIC")
+# colnames(SQ.aic)<-c("Variable", "n", "AIC")
+# 
+# #
 # #Sort by AIC
 # UV.aic<-UV.aic[order(UV.aic$AIC),]
 # UT.aic<-UT.aic[order(UT.aic$AIC),]
@@ -56,12 +56,13 @@ colnames(SQ.aic)<-c("Variable", "n", "AIC")
 # # #
 # latex(final.aic, file="",rowname = "")
 
-#
-#
+
+# coef.tbl<-read.csv("C:/Users/Colin/Desktop/R-Projects/INGY/coef.tbl.csv")
+# 
 # qr.sum<-data.frame(summary(qr.SI.1))
-#
-# latex(coef9,file="")
-#
+# 
+# latex(coef.tbl,file="")
+# 
 # coef1<-data.frame(coef(qr.SI.1))
 # coef5<-data.frame(coef(qr.SI.5))
 # coef9<-data.frame(coef(qr.SI.9))

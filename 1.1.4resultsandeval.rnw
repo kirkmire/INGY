@@ -477,29 +477,29 @@ Annual height growth increment tends to increase with initial height (Figure \re
 \end{figure}
 
  
-\begin{figure}
-\begin{center}
-<<label=delta_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
-
- library(lattice)
-
-
- print(xyplot(annual.gr4$cratio~annual.gr4$ht_annual,
-         par.settings = my.settings,
-           pch = 1,
-          col ="grey60",
-           ylab="Crown Ratio",
-          xlab="Annualized Height Growth Increment (ft/yr)",
-        strip = strip.custom(bg="lightgrey"),
-          par.strip.text=list(col="black"),
-          scales=list(
-                )))
-
-
- @
-\end{center}
-\caption{Annualized height growth increment vs. crown ratio.\label{fig:delta_ht_cratio}}
-\end{figure}
+%' \begin{figure}
+%' \begin{center}
+%' <<label=delta_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
+%' 
+%'  library(lattice)
+%' 
+%' 
+%'  print(xyplot(annual.gr4$cratio~annual.gr4$ht_annual,
+%'          par.settings = my.settings,
+%'            pch = 1,
+%'           col ="grey60",
+%'            ylab="Crown Ratio",
+%'           xlab="Annualized Height Growth Increment (ft/yr)",
+%'         strip = strip.custom(bg="lightgrey"),
+%'           par.strip.text=list(col="black"),
+%'           scales=list(
+%'                 )))
+%' 
+%' 
+%'  @
+%' \end{center}
+%' \caption{Annualized height growth increment vs. crown ratio.\label{fig:delta_ht_cratio}}
+%' \end{figure}
  
 Crown ratio appears to impose an upper limit on annual height growth (Figure \ref{fig:delta_ht_cratio}). Trees with very little live crown exhibit height growth responses that are correspondingly small. As crown ratio increases the upper values of the height growth response distribution also increase. However, variance in annual height growth also increases for increasing values of crown ratio. For trees with the fullest crowns (>.8), annual height growth tends to exceed .5 ft but be limited to under 3 ft. 
  

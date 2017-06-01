@@ -72,9 +72,14 @@ One unanticipated result of using quantile regression to examine all parts of th
 Visually the results of the other initial height categories matched the expected distribution, particularly the 10+ ft height class. Although the model failed to fully statistically demonstrate that it is capable of producing distributions of height growth increment that were observed in the validation data, the model still produces a range of height increments that approximately describe the height growth distribution for certain ranges of the predictor variables. 
 
 \subsection{Comparison of Results to Related Studies}
-%Need to discuss literature from intro in this subsection
 
 Although there have been no other studies that predict height growth of small ponderosa pine trees with quantile regression, we can qualitatively compare our results to those of other empirical models. We can also compare the effects of our selected predictors to studies that examine specific competitive effects on small ponderosa pine growth.
+
+%Need to discuss literature from intro in this subsection
+%Curtis_lynch
+Although several authors mentioned in the introduction found that vegetative competition reduced the height and diameter growth of ponderosa pine (Curtis, Busse, Oliver), we found no suitable measure of vegetative competition that relates to height growth. However, the competitive effect of overstory trees described by (\cite{Oliver1984}, (\cite{Ffolliott1982} and \cite{Moore1992})) was observed in all overstory measures and most pronounced in the measure of trees per acre.
+
+
 
 % A study of ponderosa pine regeneration on the Nez Perce and Spokane Tribal lands found that height growth increased with increasing initial tree size and larger crown ratios (\cite{Ferguson2011}). However, this study focused on growth response of the regeneration following pre-commercial thinning. The authors also found that trees with small crown ratios; slower 5-yr pre-thinning height growth and higher height to diameter ratios had a higher probability of mortality. These characteristics of low crown ratio and little height growth were also found in trees that had were predicted to have very low (or even negative) $\tau$=.1 height growth increments. Our model does not account for mortality, but it is possible that many of the trees with very low $\tau$=.1 predicted height growth increments are succumbing to competition induced mortality.
 

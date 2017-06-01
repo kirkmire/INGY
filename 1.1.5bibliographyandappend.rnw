@@ -27,8 +27,8 @@ Crown ratio&\%&tree x interval&cr\tabularnewline
 Basal diameter&in&tree x interval&dgl\tabularnewline
 Diameter at breast height&in &tree x interval&dbh\tabularnewline
 Trees per acre >3.5"&ac$^{-1}$&tree x interval&STPA\tabularnewline
-Trees per acre  \textgreater  15 ft in ht&ac$^{-1}$&STP x interval&STPA_15\tabularnewline
-Trees per acre above subject tree&ac$^{-1}$&tree x interval&STPA_+\tabularnewline
+Trees per acre  \textgreater  15 ft in ht&ac$^{-1}$&STP x interval&STPA_{15}\tabularnewline
+Trees per acre above subject tree&ac$^{-1}$&tree x interval&STPA_{+}\tabularnewline
 \hline
 \textbf{Non-tree Vegetation}&&&\tabularnewline
 \hline
@@ -159,7 +159,7 @@ SW&Sweep\tabularnewline
 \begin{align}  
 E[\Delta{h}] = & B_{0} + B_{1}\sqrt{h} +B_{2}(\textrm{candidate}) \qquad, \nonumber \\
 \end{align}\nonumber
-where $h$ is the tree height in feet and \Delta{h} is annual ht growth.
+where $h$ is the tree height in feet and $\Delta{h}$ is annual ht growth.
 
 
   
@@ -171,7 +171,7 @@ where $h$ is the tree height in feet and \Delta{h} is annual ht growth.
 
   
 \begin{align} 
-\emph{Q}_{.5}[\Delta{h}] = & B_{0} + B_{1}\sqrt{h} + B_{2}\text{candidate} \qquad, \nonumber \\
+\emph{Q}_{.5}[\Delta{h}] = & B_{0} + B_{1}\sqrt{h} + B_{2}(\textrm{candidate}) \qquad, \nonumber \\
 \end{align}\nonumber
 where $h$ is the tree height in feet and $Q$ is the quantile function (for $\tau$=.5).
 

@@ -30,9 +30,9 @@ The tagged trees in the study ranged from 1-30 ft in initial height (Figure \ref
 
 The relationship between initial height and annual height was not surprising; taller trees generally had greater annual height growth. What was surprising was how great the variance in height growth was. Trees above 15 ft exhibited a standard deviation of approximately 41\% of mean growth. It is commonly said that ``the rich get richer'' in regard to small tree growth and competition. However, considering this high degree of variance, some of ``the rich'' do not. Incorporating this increasing variability into the model is important and a quantile regression technique that describes the impact of height on the full distribution of growth is one way to do so. 
 
-Initial height and annual height growth related to crown ratio in similar ways. Crown ratio imposed a biological upper limit to annual height growth and . The small trees that exhibited growth greater than 1 ft annually had crown ratios greater than 50\%. This emphasizes the importance of the crown ratio to annual height growth. Small trees without sufficient crown are simply unable to produce enough photosynthate to accrue a substantial annual height growth. Nearly all small trees that were greater than 15 ft had crown ratios greater than 50\% (Figure \ref{fig:init_ht_cratio}). 
+Initial height and annual height growth related to crown ratio in similar ways. Crown ratio imposed a biological upper limit to annual height growth and . The small trees that exhibited growth greater than 1 ft annually had crown ratios greater than 50\%. This emphasizes the importance of the crown ratio to annual height growth. Small trees without sufficient crown are simply unable to produce enough photosynthate to accrue a substantial annual height growth. Nearly all small trees that were taller than 15 ft had crown ratios greater than 50\% (Figure \ref{fig:init_ht_cratio}). 
 
-Having a full crown does not necessarily mean that a given tree will gain more than a foot of height growth a year or be at least 15 ft in height; rather, trees that are greater than 15 ft tall or gain more than a foot of height annually will more likely possess a high crown ratio (>50\%). Once again, quantile regression provides a technique to describe the maximum growth for a given crown ratio and height (by specifying $\tau$=.9). The central and lower regions of this distribution are also described by the quantile regression ($\tau$=.5 and .1, respectively).
+Having a full crown does not necessarily mean that a given tree will gain more than a foot of height growth a year or be at least 15 ft in height; rather, trees that are taller than 15 ft or gain more than a foot of height annually will more likely possess a high crown ratio (>50\%). Once again, quantile regression provides a technique to describe the maximum growth for a given crown ratio and height (by specifying $\tau$=.9). The central and lower regions of this distribution are also described by the quantile regression ($\tau$=.5 and .1, respectively).
 
 
 
@@ -77,14 +77,14 @@ Although there have been no other studies that predict height growth of small po
 
 %Need to discuss literature from intro in this subsection
 %Curtis_lynch
-Although several authors mentioned in the introduction found that vegetative competition reduced the height and diameter growth of ponderosa pine (Curtis, Busse, Oliver), we found no suitable measure of vegetative competition that relates to height growth. However, the competitive effect of overstory trees described by (\cite{Oliver1984}, (\cite{Ffolliott1982} and \cite{Moore1992})) was observed in all overstory measures and most pronounced in the measure of trees per acre.
+Although several authors mentioned in the introduction found that vegetative competition reduced the height and diameter growth of ponderosa pine (\cite{barrett_1979}, \cite{curtis_lynch}, \citeyear{Busse1996}, \cite{oliver_1979}), we found no suitable measure of vegetative competition that relates to height growth. However, the competitive effect of overstory trees described by (\cite{Oliver1984}, (\cite{Ffolliott1982} and \cite{Moore1992})) was observed in all overstory measures and most pronounced in the measure of trees per acre.
 
 
 
 % A study of ponderosa pine regeneration on the Nez Perce and Spokane Tribal lands found that height growth increased with increasing initial tree size and larger crown ratios (\cite{Ferguson2011}). However, this study focused on growth response of the regeneration following pre-commercial thinning. The authors also found that trees with small crown ratios; slower 5-yr pre-thinning height growth and higher height to diameter ratios had a higher probability of mortality. These characteristics of low crown ratio and little height growth were also found in trees that had were predicted to have very low (or even negative) $\tau$=.1 height growth increments. Our model does not account for mortality, but it is possible that many of the trees with very low $\tau$=.1 predicted height growth increments are succumbing to competition induced mortality.
 
 
-Salas and Stage (\citeyear{Salasa1}) used a subset of the STCV data to develop an individual-tree height growth model for Inland Northwest Douglas-fir height growth. The authors also used ``attained height'' (initial height) as a predictor variable that avoids the problems associated with tree age. They represented overstory and understory competition with basal area in larger trees and ocularly estimated understory cover, respectively. It was surprising that no predictors relating to crown or small tree competition were included in their model and that vegetation cover was. These differences in model form may relate to species differences between ponderosa pine and Douglas fir since ponderosa pine is considered to be a more shade intolerant species and thus crown ratio may better relate to height growth. As ponderosa pine grows in drier conditions that are less conducive to dense vegetation, the overwhelming vegetation competition sometimes observed on Douglas-fir habitat types may be more important to early height growth.
+Salas and Stage (\citeyear{Salasa1}) used a subset of the STCV data to develop an individual-tree height growth model for Inland Northwest Douglas-fir height growth. The authors also used ``attained height'' (initial height) as a predictor variable that avoids the problems associated with tree age. They represented overstory and understory competition with basal area in larger trees and ocularly estimated understory cover, respectively. It was surprising that no predictors relating to crown or small tree competition were included in their model and that vegetation cover was. These differences in model form may relate to species differences between ponderosa pine and Douglas fir since ponderosa pine is considered to be a more deep rooted, shade intolerant species and thus crown ratio may better relate to height growth. As ponderosa pine grows in drier conditions that are less conducive to dense vegetation, the overwhelming vegetation competition sometimes observed on Douglas-fir habitat types may be more important to early height growth.
 
 
 Similar to the model presented in this thesis, Salas and Stage represented site productivity with factors other than site index (slope, elevation, aspect and ecological habitat type). As an endnote to their paper, the authors stated that they tested the inclusion of the number of small trees as a predictor of height growth. They found no improvement and speculate that even though the correlation between site productivity and greater understory vegetation cover was reduced due to the herbicide treatments, the correlation between small tree density and site productivity was still a problem for small conifers because they were not thinned. Referencing Figure \ref{fig:chart}, this implies that the effects of site productivity on subject tree growth may be confounded by corresponding increases in competition from other small trees.
@@ -112,17 +112,21 @@ The FVS small tree height growth equation is quite similar to the model proposed
 
 
 
-The FVS height growth estimate represents the mean growth of small trees facing the given conditions. The proposed models estimate the entire distribution of height growth increments these trees may achieve. As seen in Figure \ref{fig:coefplot}, modeling the mean height growth is not adequate because the effects of the predictors changes across quantiles of the response distribution. 
+The FVS height growth estimate represents the mean growth of small trees facing the given conditions. The proposed models estimate the entire distribution of height growth increments these trees may achieve. As seen in Figure \ref{fig:coefplot}, modeling the mean height growth is not adequate because the effects of the predictors changes across quantiles of the response distribution. The small tree height growth model incorporates a normally distributed random error bounded by -1.5 and 1.0 standard deviations
 
-FVS does accommodate multiple trajectories of tree records to provide some degree of variation from the mean. When there are many small trees, a small random error is added to the height growth estimate. When relatively few samples represent the stand, two additional tree records are created that triplicate the characteristics of the tree except the predicted height growth and the number of trees per acre represented by the source tree. The two new records are given weights of 15 and 25 percent (Figure \ref{fig:tripling}). Each of the records then correspond to a portion of the distribution of height growth. A random error is also drawn from a normal distribution and added to each estimate.
 
-\begin{figure}[ht]
-\begin{center}
-    \includegraphics[width=140mm]{customFVSdist.png}
-    \caption[Forest Vegetation Simulator tripling framework.]{FVS error distribution about predicted height growth. ``A'', ``B'', and ``C'' are average values from their respective portions of the normal distribution that correspond to each of the three weighted tree records.}
-    \label{fig:tripling}
-\end{center}
-\end{figure}
+
+% FVS does accommodate multiple trajectories of tree records to provide some degree of variation from the mean. When there are many small trees, a small random error is added to the height growth estimate. When relatively few samples represent the stand, two additional tree records are created that triplicate the characteristics of the tree except the predicted height growth and the number of trees per acre represented by the source tree. The two new records are given weights of 15 and 25 percent (Figure \ref{fig:tripling}). Each of the records then correspond to a portion of the distribution of height growth. A random error is also drawn from a normal distribution and added to each estimate.
+
+
+%removed tripling randomization figure from EFVS section 6.4.2
+% \begin{figure}[ht]
+% \begin{center}
+%     \includegraphics[width=140mm]{customFVSdist.png}
+%     \caption[Forest Vegetation Simulator tripling framework.]{FVS error distribution about predicted height growth. ``A'', ``B'', and ``C'' are average values from their respective portions of the normal distribution that correspond to each of the three weighted tree records.}
+%     \label{fig:tripling}
+% \end{center}
+% \end{figure}
 
 % \begin{figure} 
 % \begin{center}

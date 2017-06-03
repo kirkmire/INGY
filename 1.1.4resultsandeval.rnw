@@ -539,11 +539,11 @@ CrownRatio&420&580&HS.depth&721&1005&TPA&2608&2346&SEA Int&2608&1987\tabularnewl
 DBH&386&593&G.tran.depth&721&1006&CAPA&2608&2417&SI&2608&2052\tabularnewline
 BD&419&600&G.tran.cov&721&1009&SDI&2608&2454&Slope&2608&2341\tabularnewline
 CrownLength&420&667&mx.vg.diff.1m&721&1010&BAPA&2608&2491&Aspect&2608&2348\tabularnewline
-SmallTPA&420&700&LS.tran&721&1011&$\sqrt{h}$ and cr only&2608&2552&Elevation&2608&2348\tabularnewline
-CrownWidth&420&702&$\sqrt{h}$ and cr only&721&1011&&&&&&\tabularnewline
+SmallTPA&420&700&LS.tran&721&1011&\textbf{$\sqrt{h}$ and cr only}&2608&2552&Elevation&2608&2348\tabularnewline
+CrownWidth&420&702&\textbf{$\sqrt{h}$ and cr only}&721&1011&&&&&&\tabularnewline
 TGT&420&757&F.depth&721&1012&&&&&&\tabularnewline
 Trees15+&419&759&HS.cov&721&1012&&&&&&\tabularnewline
-$\sqrt{h}$ only&420&828&F.vol&721&1012&&&&&&\tabularnewline
+\textbf{$\sqrt{h}$} only&420&828&F.vol&721&1012&&&&&&\tabularnewline
 &&&F.tran&721&1012&&&&&&\tabularnewline
 &&&mx.vg.diff.tr&721&1012&&&&&&\tabularnewline
 &&&LS.depth&721&1013&&&&&&\tabularnewline

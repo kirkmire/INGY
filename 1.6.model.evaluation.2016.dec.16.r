@@ -210,8 +210,8 @@ sorted.totals<-aggregate(annual.gr6$counts,
                          by=list(Category=annual.gr6$response.cat), FUN=sum)
 
 
-# library(RColorBrewer)
-# library(lattice)
+library(RColorBrewer)
+library(lattice)
 # 
 sorted.totals$x<-sorted.totals$x/sum(sorted.totals$x)
 
@@ -224,16 +224,18 @@ sorted.totals$Category= factor(sorted.totals$Category,
                                            "> .9"),
                                 ordered=TRUE)
 
-barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
-        xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
-        main = "Witheld Data Height Growth Response
-        sorted by Quantile Category",ylim=c(0,.60),
-        # par.settings = my.settings,
-        par.strip.text=list(col="white", font=2),
-        panel=function(x,y,...){
-          panel.grid(h=-1, v=0);
-          panel.barchart(x,y,...)
-        })
+
+
+# barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
+#         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
+#         main = "Witheld Data Height Growth Response
+#         sorted by Quantile Category",ylim=c(0,.60),
+#         # par.settings = my.settings,
+#         par.strip.text=list(col="white", font=2),
+#         panel=function(x,y,...){
+#           panel.grid(h=-1, v=0);
+#           panel.barchart(x,y,...)
+#         })
 
 #Creates Coefficient Plots Across Quantiles
 

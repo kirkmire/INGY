@@ -503,27 +503,27 @@ Annual height growth increment tends to increase with initial height (Figure \re
  
 Crown ratio appears to impose an upper limit on annual height growth (Figure \ref{fig:delta_ht_cratio}). Trees with very little live crown exhibit height growth responses that are correspondingly small. As crown ratio increases the upper values of the height growth response distribution also increase. However, variance in annual height growth also increases for increasing values of crown ratio. For trees with the fullest crowns (>.8), annual height growth tends to exceed .5 ft but be limited to under 3 ft. 
  
- \begin{figure}
-\begin{center}
-<<label=init_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
-
-library(lattice)
-
-
-print(xyplot(annual.gr4$cratio~annual.gr4$Height_Total,
-         par.settings = my.settings,
-          pch = 1,
-           col ="grey60",
-          xlab="Initial Height (ft)",
-         ylab="Crown Ratio",
-       strip = strip.custom(bg="lightgrey"),
-         par.strip.text=list(col="black"),
-         scales=list(
-               )))
-@
- \end{center}
- \caption{Crown Ratio vs. Initial height (ft)\label{fig:init_ht_cratio}}
- \end{figure}
+%  \begin{figure}
+% \begin{center}
+% <<label=init_ht_cratio,fig=TRUE,width=8,height=8,echo=FALSE>>=
+% 
+% library(lattice)
+% 
+% 
+% print(xyplot(annual.gr4$cratio~annual.gr4$Height_Total,
+%          par.settings = my.settings,
+%           pch = 1,
+%            col ="grey60",
+%           xlab="Initial Height (ft)",
+%          ylab="Crown Ratio",
+%        strip = strip.custom(bg="lightgrey"),
+%          par.strip.text=list(col="black"),
+%          scales=list(
+%                )))
+% @
+%  \end{center}
+%  \caption{Crown Ratio vs. Initial height (ft)\label{fig:init_ht_cratio}}
+%  \end{figure}
 
 As initial height increases, crown ratio increases and the variability of crown ratio decreases (Figure \ref{fig:init_ht_cratio}). These findings relate physiologically to the relationship between the crown as a driver of growth and tree height; a full crown is necessary to achieve such stature.
 
@@ -648,7 +648,7 @@ The overstory candidate variable that lowered model AIC the most was trees per a
 % \caption{Generalized additive model of annual height growth increment vs. crown ratio with square-root of initial height and crown ratio considered as linear predictors.\label{fig:}}
 % \end{figure}
 
-Individually, the plot metrics of slope, aspect and elevation failed to provide an improvement over the model with \sqrt{h}, crown ratio, and TPA. However, when considered together in the slope, aspect and elevation (SEA) interaction model (\cite{Stage2007a}, see Equation 3), these terms lowered AIC by a wide margin. The AIC of the model with site index was also quite low but failed to surpass that using the SEA term. The partial residual for this term shows that an increase in the slope, aspect and elevation term is related to general increase in predicted height increment for most SEA values (and most plots). 
+Individually, the plot metrics of slope, aspect and elevation failed to provide an improvement over the model with $\sqrt{h}$, crown ratio, and TPA. However, when considered together in the slope, aspect and elevation (SEA) interaction model (\cite{Stage2007a}, see Equation 3), these terms lowered AIC by a wide margin. The AIC of the model with site index was also quite low but failed to surpass that using the SEA term. The partial residual for this term shows that an increase in the slope, aspect and elevation term is related to general increase in predicted height increment for most SEA values (and most plots). 
 
 \begin{figure} 
 \begin{center}
@@ -740,7 +740,7 @@ After the 4 variable selection steps, the resultant model is specified as follow
 +b_{TPA,\tau}TPA+SEA(b) \qquad,
 \end{align}
 %
-\noindent where $\Delta{h}$ is the predicted growth response, $h$ is the initial height in feet, $\tau$ is the specified portion of the response distribution, $cr$ is crown ratio, $TPA$ is the overstory trees per acre and $SEA$ is the complex of slope, aspect and elevation terms and estimated coefficients ($b$, Equation \ref{eq:Eq1}). Coefficients and their bootstrap-estimated standard errors are given in Tables \ref{tab:tau1}-\ref{tab:tau9}.
+\noindent where $\Delta{h}$ is the predicted growth response, $h$ is the initial height in feet, $\tau$ is the specified portion of the response distribution, $cr$ is crown ratio, $TPA$ is the overstory trees per acre and $SEA$ is the complex of slope, aspect and elevation terms and estimated coefficients ($b$, Equation \ref{eq:Eq1}). Coefficients and their bootstrap-estimated standard errors are given in Table \ref{tab:tau1}.
 
 
 

@@ -112,7 +112,14 @@ The FVS small tree height growth equation is quite similar to the model proposed
 
 
 
-The FVS height growth estimate represents the mean growth of small trees facing the given conditions. The proposed models estimate the entire distribution of height growth increments these trees may achieve. As seen in Figure \ref{fig:coefplot}, modeling the mean height growth is not adequate because the effects of the predictors changes across quantiles of the response distribution. The small tree height growth model incorporates a normally distributed random error bounded by -1.5 and 1.0 standard deviations
+The FVS height growth estimate represents the mean growth of small trees facing the given conditions. The proposed models estimate the entire distribution of height growth increments these trees may achieve. As seen in Figure \ref{fig:coefplot}, modeling the mean height growth is not adequate because the effects of the predictors changes across quantiles of the response distribution. 
+
+
+
+
+
+
+FVS does accommodate multiple trajectories of tree records to provide some degree of variation from the mean. When relatively few samples represent the stand, two additional tree records are created that triplicate the characteristics of the tree except the number of trees per acre represented. The two new records represent 15 and 25 percent of the trees per acre and the original record represents 60 percent. A normally distributed random error bounded by -1.5 and 1.0 standard deviations is then added to each of the triplicated tree records. 
 
 
 
@@ -154,7 +161,7 @@ The FVS height growth estimate represents the mean growth of small trees facing 
 % \end{figure}
 
 
-It is within this ``tripling'' framework that our quantile regression model may find its greatest utility. Instead of selecting normalized deviations from a mean prediction and then assigning random error from within the normal distribution, the three tree records could be assigned predicted quantile values for $\tau$= .25, .50 and .75, for example.  These quantile derivations of height provide a more empirically based distribution of possible height values for a given set of predictors.
+It is within this ``tripling'' framework that our quantile regression model may find its greatest utility. Instead of assigning random error from within a normal distribution, the three tree records could be assigned predicted quantile values for $\tau$= .25, .50 and .75, for example.  These quantile derivations of height provide a more empirically based distribution of possible height values for a given set of predictors.
 
 
 \newpage

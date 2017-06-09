@@ -21,6 +21,12 @@ CTRLandGE.volume.index<-aggregate(CTRLandGE.plot.veg[, 17:19], list(CTRLandGE.pl
 CTRLandGE.volume.index$volume<-(CTRLandGE.volume.index$Cov/100)*CTRLandGE.volume.index$Top
 
 
+#Finding  % of mean growth
+
+# annual.gr15<-annual.gr4[annual.gr4$Height_Total>15,]
+# 
+# sd(annual.gr15$ht_annual)/mean(annual.gr15$ht_annual)
+
 # library(RColorBrewer)
 # myColours <- brewer.pal(6,"Blues")
 # 

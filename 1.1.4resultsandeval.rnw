@@ -616,7 +616,7 @@ Proceeding forward from the primary model to the small tree category of competit
 % \end{figure}
 
 
-The understory non-arboreal vegetation candidate variables failed to provide a model with an AIC appreciably less than that of the model with \sqrt{h} and crown ratio. The only variable that offered even marginal improvement over the previous iteration of the model was transect measured grass depth (G.tran.depth). However, the inclusion of this variable is hardly justified considering the modest improvement they provide and the expense of measuring either in the field. Therefore, no candidate variable was selected from this category of competition.
+The understory non-arboreal vegetation candidate variables failed to provide a model with an AIC appreciably less than that of the model with $\sqrt{h}$ and crown ratio. The only variable that offered even marginal improvement over the previous iteration of the model was transect measured grass depth (G.tran.depth). However, the inclusion of this variable is hardly justified considering the modest improvement they provide and the expense of measuring either in the field. Therefore, no candidate variable was selected from this category of competition.
 
 The overstory candidate variable that lowered model AIC the most was trees per acre (TPA). The measure of crown area per acre (CAPA) provided a close second and the model adding basal area per acre (BAPA) also resulted in an AIC much lower than the previous iteration of the model. The partial residual plot of TPA shows that predicted height increment decreases steeply between 0 and 40 TPA but appears to flatten past 40 TPA (Figure \ref{fig:seqgamOSTPA}). As a predictor of height growth increment, TPA is important to distinguish between clearcut (0 TPA) and modest overstory retention levels. However, beyond 40 TPA, it may not relate to height growth increment.
 
@@ -1038,27 +1038,36 @@ The middle residual plot (Figure \ref{fig:qr5resid}) shows that the residuals fo
 %validation bargraph
 %Chi-squared test
 %
-\begin{figure} 
+
+\begin{figure}[ht]
 \begin{center}
-<<label=validres,fig=TRUE,echo=FALSE>>=
-
-print(barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
-        xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
-        ylim=c(0,.60),
-        col=myColours[4],
-        par.settings = my.settings,
-        par.strip.text=list(col="white", font=2),
-        panel=function(x,y,...){
-          panel.grid(h=-1, v=0);
-          panel.barchart(x,y,...)
-        }))
-
-
-
-@
+    \includegraphics[width=140mm]{overall_valid.png}
+    \caption[Validation results.]{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres}}
+    
 \end{center}
-\caption[Validation results.]{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres}}
 \end{figure}
+
+% \begin{figure} 
+% \begin{center}
+% <<label=validres,fig=TRUE,echo=FALSE>>=
+% 
+% print(barchart(sorted.totals$x~sorted.totals$Category, names = "Quantile Bin",
+%         xlab = "Bin", ylab = "Fraction of Total Witheld Trees",type=density,
+%         ylim=c(0,.60),
+%         col=myColours[4],
+%         par.settings = my.settings,
+%         par.strip.text=list(col="white", font=2),
+%         panel=function(x,y,...){
+%           panel.grid(h=-1, v=0);
+%           panel.barchart(x,y,...)
+%         }))
+% 
+% 
+% 
+% @
+% \end{center}
+% \caption[Validation results.]{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres}}
+% \end{figure}
 
 Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generated for the witheld data (1 randomly selected STP at each plot). The actual height growth increment was then binned according to where it fell among the estimated height growth quantiles (<.10, .1-.5, .5-.9 or >.9). Visually, the actual height growth increments are distributed approximately as expected with 40\% falling between the .1-.5 and 5-.9 $\tau$ quantiles and 10\% falling below the .1 quantile and above the .9 quantile (Figure \ref{fig:validres}). 
 

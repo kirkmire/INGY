@@ -1042,7 +1042,7 @@ The middle residual plot (Figure \ref{fig:qr5resid}) shows that the residuals fo
 \begin{figure}[ht]
 \begin{center}
     \includegraphics[width=140mm]{overall_valid.png}
-    \caption[Validation results.]{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres}}
+    \caption[Validation results.]{Withheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres}}
     
 \end{center}
 \end{figure}
@@ -1069,7 +1069,7 @@ The middle residual plot (Figure \ref{fig:qr5resid}) shows that the residuals fo
 % \caption[Validation results.]{Witheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres}}
 % \end{figure}
 
-Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generated for the witheld data (1 randomly selected STP at each plot). The actual height growth increment was then binned according to where it fell among the estimated height growth quantiles (<.10, .1-.5, .5-.9 or >.9). Visually, the actual height growth increments are distributed approximately as expected with 40\% falling between the .1-.5 and 5-.9 $\tau$ quantiles and 10\% falling below the .1 quantile and above the .9 quantile (Figure \ref{fig:validres}). 
+Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generated for the withheld data (1 randomly selected STP at each plot). The actual height growth increment was then binned according to where it fell among the estimated height growth quantiles (<.10, .1-.5, .5-.9 or >.9). Visually, the actual height growth increments are distributed approximately as expected with 40\% falling between the .1-.5 and 5-.9 $\tau$ quantiles and 10\% falling below the .1 quantile and above the .9 quantile (Figure \ref{fig:validres}). 
 
 
 \begin{figure}[!htb]
@@ -1085,7 +1085,7 @@ Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generat
   \includegraphics[width=\linewidth]{greaterthan10.png}
   \subcaption{Initial Height > 10 ft.}\label{fig:validres_10}
 \endminipage
-\caption[Validation results by initial height class.]{Witheld tree height growth increments sorted by predicted height growth increment quantiles intervals and initial height classes.}
+\caption[Validation results by initial height class.]{Withheld tree height growth increments sorted by predicted height growth increment quantiles intervals and initial height classes.}
 \end{figure}
 
 

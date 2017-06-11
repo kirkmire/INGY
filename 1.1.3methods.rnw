@@ -167,7 +167,7 @@ rect(80-(1*3.28084),47,80,47,col=NA,border="black", lwd=1)
 \caption[Design of STCV Sampling Plot.]{Design of STCV Sampling Plot. Note that vegetation quadrants exist for all six small tree plots although only illustrated on two.\label{fig:samplePlot}}
 \end{figure}
 
-Each plot contained a series of nested subplots that decrease in area with physiologically smaller vegetation units (see Figure \ref{fig:samplePlot}). Starting with the full extent of the plot, overstory trees with greater than 10.5 in diameter at breast height (DBH, 4.5 ft), were measured over approximately half an acre (radius 80 ft). Overstory trees with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested subplot of aproximately a quarter acre (radius 60 ft). 
+Each plot contained a series of nested subplots that decrease in area with physiologically smaller vegetation units (see Figure \ref{fig:samplePlot}). Starting with the full extent of the plot, overstory trees with greater than 10.5 in diameter at breast height (DBH, 4.5 ft), were measured over approximately half an acre (radius 80 ft). Overstory trees with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested subplot of approximately a quarter acre (radius 60 ft). 
 
 The small trees, whose growth responses are the subject of this research, were defined as those that had a DBH less than 3.5 in yet a height greater than 1 ft for shade intolerant species or .5 ft for shade tolerant species at the time of initial measurements. Small trees were measured on six .007 ac small tree plots (abbrv. STP, radius 10 ft) 60 degrees apart from plot center at a distance of approximately 30 ft. All small trees on the .007 ac subplot were tallied by 2 ft height class and species.
 

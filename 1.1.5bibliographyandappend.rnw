@@ -37,7 +37,7 @@ Low shrub depth in 1m$^2$ q&ft&STP x interval&d_{ls}\tabularnewline
 High shrub depth in 1m$^2$ q&ft&STP x interval&d_{hs}\tabularnewline
 Forb volume in 1m2 q&ft$^3$/ft$^2$&STP x interval&v_{f}\tabularnewline
 Low shrub volume in 1m$^2$ q&ft$^3$/ft$^2$&STP x interval&v_{ls}\tabularnewline
-High shrub volume in 1m$^2$ q &ft$^3$/ft$^2$&STP x interval&V_{hs}\tabularnewline
+High shrub volume in 1m$^2$ q &ft$^3$/ft$^2$&STP x interval&v_{hs}\tabularnewline
 \% Cover forb&\%&STP x interval&c_{f}\tabularnewline
 \% Cover low shrub&\%&STP x interval&c_{ls}\tabularnewline
 \% Cover high shrub&\%&STP x interval&c_{hs}\tabularnewline

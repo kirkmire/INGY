@@ -27,7 +27,7 @@ Figure \ref{fig:polar_plot} describes the elevation and orientation of plots by 
 \begin{figure}[!h]
 \begin{center}
     \includegraphics{polar_plot.png}
-    \caption[Aspect and elevation of STCV plots by installation.]{Aspect (N\degree) and elevation (ft) of STCV plot by installation. Only installations with >60 ponderosa pine are shown.\label{fig:polar_plot}}
+    \caption[Aspect and elevation of STCV plots by installation.]{Aspect (\degree) and elevation (ft) of STCV plot by installation. Only installations with >60 ponderosa pine are shown.\label{fig:polar_plot}}
 \end{center}
 \end{figure}
 
@@ -74,7 +74,7 @@ print(xyplot(agg.over.data.TPA$TPA~ agg.over.data.TPA$Year_MeasurementOS | agg.o
 
 @
  \end{center}
- \caption{Overstory TPA by study site, plot and year.\label{fig:os_tpa_inst}}
+ \caption{Overstory trees per acre by study site, plot and year.\label{fig:os_tpa_inst}}
  \end{figure}
  
 Figure \ref{fig:os_tpa_inst} shows the plot-level interpolations of overstory trees per acre. Most plots stayed constant in the number of overstory trees per acre. However, due to mortality, there may be slight differences. For most installations the overstory retention levels are similar across plots, though there is noticeable variation in LF (Lubrecht Forest) and EM (Empey Mountain).
@@ -535,24 +535,25 @@ As initial height increases, crown ratio increases and the variability of crown 
 \hline\hline
 \multicolumn{1}{c}{UT Var.}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{UV Var.}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{OS Var.}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{SQ Var.}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}\tabularnewline
 \hline
-CrownRatio&420&580&HS.depth&721&1005&TPA&2608&2346&SEA Int&2608&1987\tabularnewline
-DBH&386&593&G.tran.depth&721&1006&CAPA&2608&2417&SI&2608&2052\tabularnewline
-BD&419&600&G.tran.cov&721&1009&SDI&2608&2454&Slope&2608&2341\tabularnewline
-CrownLength&420&667&mx.vg.diff.1m&721&1010&BAPA&2608&2491&Aspect&2608&2348\tabularnewline
-SmallTPA&420&700&LS.tran&721&1011&\textbf{$\sqrt{h}$ and cr only}&2608&2552&Elevation&2608&2348\tabularnewline
-CrownWidth&420&702&\textbf{$\sqrt{h}$ and cr only}&721&1011&&&&&&\tabularnewline
-TGT&420&757&F.depth&721&1012&&&&&&\tabularnewline
-Trees15+&419&759&HS.cov&721&1012&&&&&&\tabularnewline
-\textbf{$\sqrt{h}$} only&420&828&F.vol&721&1012&&&&&&\tabularnewline
-&&&F.tran&721&1012&&&&&&\tabularnewline
+\textbf{cr}&420&580&d_{hs}&721&1005&\textbf{TPA}&2608&2346&\textbf{SEA}&2608&1987\tabularnewline
+dbh&386&593&\tilde{v}_{g}&721&1006&CAPA&2608&2417&SI&2608&2052\tabularnewline
+dgl&419&600&c_{g}&721&1009&SDI&2608&2454&sl&2608&2341\tabularnewline
+cl&420&667&mx.vg.diff.1m&721&1010&BAPA&2608&2491&\alpha&2608&2348\tabularnewline
+STPA&420&700&\tilde{v}_{ls}&721&1011&$\sqrt{h}$ and cr&2608&2552&el&2608&2348\tabularnewline
+cw&420&702&\textbf{$\sqrt{h}$ and cr only}&721&1011&&&&&&\tabularnewline
+STPA_{+}&420&757&d_{f}&721&1012&&&&&&\tabularnewline
+STPA_{15}&419&759&c_{hs}&721&1012&&&&&&\tabularnewline
+$\sqrt{h}$ only&420&828&F.vol&721&1012&&&&&&\tabularnewline
+&&&v_{f}&721&1012&&&&&&\tabularnewline
 &&&mx.vg.diff.tr&721&1012&&&&&&\tabularnewline
-&&&LS.depth&721&1013&&&&&&\tabularnewline
-&&&HS.vol&721&1013&&&&&&\tabularnewline
-&&&LS.vol&721&1013&&&&&&\tabularnewline
-&&&LS.cov&721&1013&&&&&&\tabularnewline
-&&&HS.tran&721&1013&&&&&&\tabularnewline
-&&&Comb.cov&721&1013&&&&&&\tabularnewline
-&&&F.cov&721&1013&&&&&&\tabularnewline
+&&&d_{ls}&721&1013&&&&&&\tabularnewline
+&&&v_{hs}&721&1013&&&&&&\tabularnewline
+&&&v_{ls}&721&1013&&&&&&\tabularnewline
+&&&c_{ls}&721&1013&&&&&&\tabularnewline
+&&&\tilde{v}_{hs}&721&1013&&&&&&\tabularnewline
+
+&&&comb&721&1013&&&&&&\tabularnewline
+&&&c_{f}&721&1013&&&&&&\tabularnewline
 \hline
 \end{tabular}\end{center}
 \end{table}
@@ -616,7 +617,7 @@ Proceeding forward from the primary model to the small tree category of competit
 % \end{figure}
 
 
-The understory non-arboreal vegetation candidate variables failed to provide a model with an AIC appreciably less than that of the model with $\sqrt{h}$ and crown ratio. The only variable that offered even marginal improvement over the previous iteration of the model was transect measured grass depth (G.tran.depth). However, the inclusion of this variable is hardly justified considering the modest improvement they provide and the expense of measuring either in the field. Therefore, no candidate variable was selected from this category of competition.
+The understory non-arboreal vegetation candidate variables failed to provide a model with an AIC appreciably less than that of the model with $\sqrt{h}$ and crown ratio. The variables that offered marginal improvement over the previous iteration of the model were high shrub depth (d_{hs}), transect measured grass depth (\tilde{v}_{g}) and cover (c_{g}). However, the inclusion of these variables is hardly justified considering the modest improvement they provide and the expense of measuring either in the field. Therefore, no candidate variable was selected from this category of competition.
 
 The overstory candidate variable that lowered model AIC the most was trees per acre (TPA). The measure of crown area per acre (CAPA) provided a close second and the model adding basal area per acre (BAPA) also resulted in an AIC much lower than the previous iteration of the model. The partial residual plot of TPA shows that predicted height increment decreases steeply between 0 and 40 TPA but appears to flatten past 40 TPA (Figure \ref{fig:seqgamOSTPA}). As a predictor of height growth increment, TPA is important to distinguish between clearcut (0 TPA) and modest overstory retention levels. However, beyond 40 TPA, it may not relate to height growth increment.
 
@@ -630,7 +631,7 @@ The overstory candidate variable that lowered model AIC the most was trees per a
   \includegraphics[width=\linewidth]{SEAgam.png}
   \subcaption{Partial residuals of annual height growth vs SEA.}\label{fig:seqgamSEA}
 \endminipage\hfill
-\caption{Partial residual plots of annualized height growth vs. TPA and SEA.}
+\caption{Partial residual plots of annualized height growth vs. trees per acre and SEA.}
 \end{figure}
 
 

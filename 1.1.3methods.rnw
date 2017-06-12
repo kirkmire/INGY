@@ -164,7 +164,7 @@ rect(80-(1*3.28084),47,80,47,col=NA,border="black", lwd=1)
 
 @
 \end{center}
-\caption[Design of STCV Sampling Plot.]{Design of STCV Sampling Plot. Note that vegetation quadrants exist for all six small tree plots although only illustrated on two.\label{fig:samplePlot}}
+\caption[Design of STCV sampling plot.]{Design of STCV sampling plot. Note that vegetation quadrants exist for all six small tree plots although only illustrated on two.\label{fig:samplePlot}}
 \end{figure}
 
 Each plot contained a series of nested subplots that decrease in area with physiologically smaller vegetation units (see Figure \ref{fig:samplePlot}). Starting with the full extent of the plot, overstory trees with greater than 10.5 in diameter at breast height (DBH, 4.5 ft), were measured over approximately half an acre (radius 80 ft). Overstory trees with DBH greater than 3.5 in but less than 10.5 in were measured on a smaller nested subplot of approximately a quarter acre (radius 60 ft). 
@@ -176,7 +176,7 @@ A sub-sample of the small trees was tagged, mapped and measured repeatedly over 
 There were two sampling methods used to estimate vegetative competition. The first was transect based where point measurements of vegetation were obtained at two foot intervals along a 30 or 40 ft transect (initially, transects ran from plot center to small tree subplot center but were extended an additional 10 ft later in the study). We also took vegetation measurements at the centers of the small tree plots using both 1 m$^{2}$ (10.76 ft$^{2}$) and 4 m$^{2}$ (43.06 ft$^{2}$) quadrats. These vegetation measurements quantified separately the cover of forbs, grasses and shrubs, and identified the dominant species for each lifeform.  This is an example of how the resolution of the data goes beyond the scope of this analysis.
 
 
-The objective of the herbicide treatments was to decouple the harvesting and site productivity related impacts on the understory vegetation effects on small tree growth. It has been reported that, like tree growth, levels of understory increase with site productivity (\cite{walstad1}) and with decreases in overstory trees (\cite{Ffolliott1982}, \cite{Moore1992}). The herbicide treatments revealed how small trees grow under varying levels of site quality and overstory retention (looking across installations) without the presence of a corresponding increase non-arboreal vegetation (cf. Figure \ref{fig:chart}). Because the objective of the herbicide treatments was to simply provide a range of non-arboreal vegetation levels, the herbicide application regimes varied greatly in form, timing and level, and not all installations received treatment. 
+The objective of the herbicide treatments was to decouple the harvesting and site productivity related impacts on the understory vegetation from the latter's effects on small tree growth. It has been reported that, like tree growth, levels of understory increase with site productivity (\cite{walstad1}) and with decreases in overstory trees (\cite{Ffolliott1982}, \cite{Moore1992}). The herbicide treatments revealed how small trees grow under varying levels of site quality and overstory retention (looking across installations) without the presence of a corresponding increase non-arboreal vegetation (cf. Figure \ref{fig:chart}). Because the objective of the herbicide treatments was to simply provide a range of non-arboreal vegetation levels, the herbicide application regimes varied greatly in form, timing and level, and not all installations received treatment. 
 
 Figure \ref{fig:timeline} shows the temporal scope of the data collection as well as of the herbicide applications and overstory measurements for a subset of the installations. An attempt to capture small tree growth at four year intervals was successful for many installations but in some cases the intervals were somewhat irregular (i.e., 3-5 years in length). Ultimately, the height growth increments were standardized to a common periodic annual increment regardless of whether they were collected on a 3, 4 or 5-year interval. 
 
@@ -214,7 +214,7 @@ xyplot(Installation ~ Year_Measurement,
 
 @
 \end{center}
-\caption[Timeline of Installation Measurements and Treatments.]{Green and red triangles represent years of overstory measurements and herbicide treatment, respectively. The black squares represent the years bounding the selected growth intervals. \label{fig:timeline}}
+\caption[Timeline of installation measurements and treatments.]{Green and red triangles represent years of overstory measurements and herbicide treatment, respectively. The black squares represent the years bounding the selected growth intervals. \label{fig:timeline}}
 \end{figure}
 
 

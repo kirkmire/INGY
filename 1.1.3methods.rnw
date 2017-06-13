@@ -218,7 +218,7 @@ xyplot(Installation ~ Year_Measurement,
 \end{figure}
 
 
-A point of concern is that some measurements were taken at times that may not have allowed herbicide applications to take full effect. That is, several measurement years were concurrent with or followed soon after the first herbicide application. For example, the TJ installation was measured in 2001, concurrent with the first application of herbicide. Thus the vegetation measurements taken in 2001 would not well represent the vegetation levels experienced by the small trees from 2001 to 2004. This necessitated careful selection of the appropriate measurement years on an installation-by-installation basis. The ``first interval years'' were selected such that one to three years had elapsed since the initial herbicide application to allow for the herbicide to take effect. 
+A point of concern is that some measurements were taken at times that may not have allowed herbicide applications to take full effect. That is, several measurement years were concurrent with or followed soon after the first herbicide application. For example, the TJ installation was measured in 2001, concurrent with the first herbicide application. Thus the measurements taken in 2001 would not well represent the vegetation levels experienced by the small trees from 2001 to 2004. This necessitated careful selection of measurement interval years on an installation-by-installation basis. The ``first interval years'' were selected such that one to three years had elapsed since the initial herbicide application. 
 
 
 \newpage

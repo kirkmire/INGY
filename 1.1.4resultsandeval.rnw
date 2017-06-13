@@ -536,22 +536,21 @@ As initial height increases, crown ratio increases and the variability of crown 
 \multicolumn{1}{c}{UT Var.}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{UV Var.}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{OS Var.}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}&\multicolumn{1}{c}{SQ Var.}&\multicolumn{1}{c}{n}&\multicolumn{1}{c}{AIC}\tabularnewline
 \hline
 \textbf{cr}&420&580&d_{hs}&721&1005&\textbf{TPA}&2608&2346&\textbf{SEA}&2608&1987\tabularnewline
-dbh&386&593&\tilde{v}_{g}&721&1006&CAPA&2608&2417&SI&2608&2052\tabularnewline
+dbh&386&593&$\tilde{v}_{g}$&721&1006&CAPA&2608&2417&SI&2608&2052\tabularnewline
 dgl&419&600&c_{g}&721&1009&SDI&2608&2454&sl&2608&2341\tabularnewline
 cl&420&667&mx.vg.diff.1m&721&1010&BAPA&2608&2491&\alpha&2608&2348\tabularnewline
-STPA&420&700&\tilde{v}_{ls}&721&1011&$\sqrt{h}$ and cr&2608&2552&el&2608&2348\tabularnewline
+STPA&420&700&$\tilde{v}_{ls}$&721&1011&$\sqrt{h}$ and cr&2608&2552&el&2608&2348\tabularnewline
 cw&420&702&\textbf{$\sqrt{h}$ and cr only}&721&1011&&&&&&\tabularnewline
+$\sqrt{h}$ only&420&828&\tilde{v}_{f}&721&1012&&&&&&\tabularnewline
 STPA_{+}&420&757&d_{f}&721&1012&&&&&&\tabularnewline
 STPA_{15}&419&759&c_{hs}&721&1012&&&&&&\tabularnewline
-$\sqrt{h}$ only&420&828&F.vol&721&1012&&&&&&\tabularnewline
 &&&v_{f}&721&1012&&&&&&\tabularnewline
 &&&mx.vg.diff.tr&721&1012&&&&&&\tabularnewline
 &&&d_{ls}&721&1013&&&&&&\tabularnewline
 &&&v_{hs}&721&1013&&&&&&\tabularnewline
 &&&v_{ls}&721&1013&&&&&&\tabularnewline
 &&&c_{ls}&721&1013&&&&&&\tabularnewline
-&&&\tilde{v}_{hs}&721&1013&&&&&&\tabularnewline
-
+&&&$\tilde{v}_{hs}$&721&1013&&&&&&\tabularnewline
 &&&comb&721&1013&&&&&&\tabularnewline
 &&&c_{f}&721&1013&&&&&&\tabularnewline
 \hline
@@ -665,7 +664,7 @@ abline(sea.si)
 
 @
 \end{center}
-\caption[Comparison of slope, elevation and aspect term to site index]{Examination of relationship between the slope, elevation and aspect interaction (SEA) contribution to the $\tau$=.5 predicted annual height growth and site index (ft at base age of 50 yrs)\label{fig:sivssea}}
+\caption[Comparison of slope, elevation and aspect term to site index]{Partial contribution of slope, elevation and aspect interaction (SEA) to the $\tau$=.5 predicted annual height growth and site index (ft at base age of 50 yrs)\label{fig:sivssea}}
 \end{figure}
 
 Figure \ref{fig:sivssea} shows the positive association between the partial contribution of the SEA terms and site index. Since both of these variables relate to the inherent productivity of the site they should be positively correlated. The lack of a strong correlation can be attributed in part to a difference in resolution. One value of site index was obtained for each installation whereas the SEA value relates productivity to the slope, aspect and elevation at the plot level.
@@ -682,7 +681,7 @@ Figure \ref{fig:Sea_heat} illustrates the relative effects of slope and elevatio
   \includegraphics[width=\linewidth]{slope_elevation_NW.png}
   \subcaption{North-west aspect (315\degree)}\label{fig:se_nw}
 \endminipage\hfill
-\caption[Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (ft).]{Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (ft). Lighter shades indicate a greater predicted height growth increment.}\label{fig:Sea_heat}
+\caption[Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (ft).]{Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (ft). The minimum growth was subtracted from the projected growth and divided by the range of growth, thus standardizing the growth increments between 0 and 1. Lighter shades indicate a greater predicted height growth increment.}\label{fig:Sea_heat}
 \end{figure}
 
 
@@ -752,7 +751,7 @@ After the 4 variable selection steps, the resultant model is specified as follow
 \begin{center}
 \begin{tabular}{lllllll}
 \hline\hline
-&\multicolumn{1}{c}{Q.1 \Delta{h}}&&\multicolumn{1}{c}{Q.5 \Delta{h}}&&\multicolumn{1}{c}{Q.9 \Delta{h}}\tabularnewline
+&\multicolumn{1}{c}{Q.1 (\Delta{h})}&&\multicolumn{1}{c}{Q.5 (\Delta{h})}&&\multicolumn{1}{c}{Q.9 (\Delta{h})}\tabularnewline
 \hline
 &b&SE(b)&b&SE(b)&b&SE(b)\tabularnewline
 (Intercept)&2.91E-01&2.63E-01&-7.36E-03&3.23E-01&-2.11E+00&5.07E-01\tabularnewline

@@ -51,7 +51,7 @@ for the degree of}
 \vspace{10 mm}
 
 \text{Dr. David Patterson}\\ 
-\text{Department of Mathematical Statistics} 
+\text{Department of Mathematical Sciences} 
 \vspace{10 mm}
 
 \text{Dr. Peter Kolb}\\ 
@@ -73,10 +73,10 @@ Ponderosa pine (\emph{Pinus ponderosa} C. Lawson) forests in the Inland Northwes
 To assess the impacts of these sources of competition, we examined post-harvest understory non-arboreal vegetation, overstory trees, and a subsample of tagged small trees over a period of 17 years on 15 sites throughout the Inland Northwest. A novel approach was taken in describing the distribution of height growth responses through quantile regression (\cite{Koenker1978}). This technique allows for the characterization of multiple quantiles of the height growth response for a given set of covariates. 
 
 
-Initial height, crown ratio, overstory trees per acre, and an interaction of slope, elevation, and aspect were found to be significant predictors of height growth across all modeled quantiles (.1, .5 and .9). The effects of initial height and crown ratio were positive and the effect of trees per acre was negative. However, the effects of these predictors were found to be different among quantiles which suggests that the predictors influence the upper limits to growth in a different way than the lower limits and median growth rates. Examining the effects of the selected variables showed that the positive effects of initial height and cratio increase as the quantiles increased from .1 to .9. The effect of retained overstory trees per acre became more negative in the upper quantiles. 
+Initial height, crown ratio, number of overstory trees per acre, slope, elevation, and aspect were found to be significant predictors of height growth across all modeled quantiles (.1, .5 and .9). The effects of initial height and crown ratio were positive and the effect of overstory trees per acre was negative. However, the effects of these predictors were found to be different among quantiles which suggests that the predictors influence the upper limits to growth in a different way than the lower limits and median growth rates. Examining the effects of the selected variables showed that the positive effects of initial height and crown ratio increase as the quantiles increased from .1 to .9. The negative effect of retained overstory trees per acre on small tree height growth became more pronounced in the upper quantiles. No effect of understory non-arboreal vegetation was incorporated into the models because there was no appreciable improvement, possibly because the effects of crown ratio and initial height were included.
 
 
-No effect of understory non-arboreal vegetation was incorporated because there  was no appreciable improvement to the model, possibly because crown ratio and initial height were included in the model. We found that quantile regression models could be used to provide an empirically-based estimate of the distribution of height growth under a retained overstory. Quantile predicted height growth increments introduce variability in small tree height growth increment that could improve long term projections of multi-aged stand growth.
+We found that quantile regression models could be used to provide an empirically-based estimate of the distribution of height growth under a retained overstory. Quantile regression estimated height growth increments introduce variability in small tree height growth increment that could improve long-term projections of multi-aged stand growth.
 
 
 

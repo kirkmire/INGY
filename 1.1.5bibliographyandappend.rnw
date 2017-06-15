@@ -157,7 +157,7 @@ SW&Sweep\tabularnewline
 
   
 \begin{align}  
-E[\Delta{h}] = & B_{0} + B_{1}\sqrt{h} +B_{2}(\textrm{candidate}) \qquad, \nonumber \\
+E[\Delta{h}] = & b_{0} + b_{1}\sqrt{h} +b_{2}(\textrm{candidate}) \qquad, \nonumber \\
 \end{align}\nonumber
 where $h$ is the tree height in feet and $\Delta{h}$ is annual ht growth.
 
@@ -171,7 +171,7 @@ where $h$ is the tree height in feet and $\Delta{h}$ is annual ht growth.
 
   
 \begin{align} 
-\emph{Q}_{.5}[\Delta{h}] = & B_{0} + B_{1}\sqrt{h} + B_{2}(\textrm{candidate}) \qquad, \nonumber \\
+\emph{Q}_{.5}[\Delta{h}] = & b_{0} + b_{1}\sqrt{h} + b_{2}(\textrm{candidate}) \qquad, \nonumber \\
 \end{align}\nonumber
 where $h$ is the tree height in feet and $Q$ is the quantile function (for $\tau$=.5).
 
@@ -187,8 +187,8 @@ where $h$ is the tree height in feet and $Q$ is the quantile function (for $\tau
   \textbf{Final Models:}
 
   \begin{align} 
-\emph{Q}_{\tau}[\Delta{h}] = & B_{0} + B_{1,\tau}\sqrt{h} + B_{2,\tau}\textrm{UT}  \nonumber
- + B_{3,\tau}\textrm{UV}+ B_{4,\tau}\textrm{OT}+B_{5,\tau}\textrm{SP} \qquad, \nonumber \\
+\emph{Q}_{\tau}[\Delta{h}] = & b_{0} + b_{1,\tau}\sqrt{h} + b_{2,\tau}\textrm{UT}  \nonumber
+ + b_{3,\tau}\textrm{UV}+ b_{4,\tau}\textrm{OT}+b_{5,\tau}\textrm{SP} \qquad, \nonumber \\
 \end{align}\nonumber
 where $h$ is the tree height in feet, $Q$ is the specified quantile, and $b$ are the fitted coefficients.
 }

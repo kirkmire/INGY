@@ -10,7 +10,7 @@
 \subsection{Study Design}
 \doublespacing
 
-Twenty-nine STCV study sites were established on private, public and tribal forestlands ranging from the eastern slopes of the Cascade Mountains to western Montana (see Figure \ref{fig:map}).  Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), but with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or treated according to a shelterwood, seed tree or heavy thinning partial retention harvest.
+Twenty-nine STCV installations were established on private, public and tribal forestlands ranging from the eastern slopes of the Cascade Mountains to western Montana (see Figure \ref{fig:map}).  Installations were established in stands with various forest cover (e.g., mixed ponderosa pine, Douglas-fir, and grand fir types), but with each stand exhibiting relatively homogeneous levels of site quality, overstory tree density, and understory competition.  Installations were located in recently harvested stands that were either clearcut or treated according to a shelterwood, seed tree or heavy thinning partial retention harvest.
 
 
 % # <<fig=FALSE,include=FALSE, echo=FALSE>>=
@@ -214,7 +214,7 @@ xyplot(Installation ~ Year_Measurement,
 
 @
 \end{center}
-\caption[Timeline of installation measurements and treatments.]{Green and red triangles represent years of overstory measurements and herbicide treatment, respectively. The black squares represent the years bounding the selected growth intervals. \label{fig:timeline}}
+\caption[Timeline of installation measurements and treatments.]{STCV installation treatment and measurement schedule. Green and red triangles represent years of overstory measurements and herbicide treatment, respectively. The black squares represent the years bounding the selected growth intervals. \label{fig:timeline}}
 \end{figure}
 
 
@@ -224,7 +224,7 @@ A point of concern is that some measurements were taken at times that may not ha
 \newpage
 \subsection{Variable Acquisition}
 
-The variables can be divided into four categories; understory tree competition, understory vegetation competition, retained overstory competition, and site quality. The resolutions and symbols for these variables are summarized in Appendix C. 
+The variables can be divided into four categories; understory tree competition, understory vegetation competition, retained overstory competition, and site quality. The resolutions and symbols for these variables are summarized in Appendix A. 
 
 \noindent\textbf{Understory Tree Competition:}
 
@@ -238,7 +238,7 @@ Although measurements of understory vegetation and height were recorded in 4 m$^
 Average differences (depths) at the quadrat level between base and top height measurements were found separately for forbs, low shrubs, high shrubs and grasses.  Ocular estimates of percentage cover were obtained for forbs, low shrubs, high shrubs and grasses. The ocular estimates of percentage cover also included an overall estimate of vegetation cover in the quadrat. A volume per area measurement combined the two measures of vegetation by multiplying the percentage cover by the depth of the associated cover:
 
 \begin{align}  \label{eq:Eq0} 
-v =  \frac{cover}{100}*(top-base)
+v =  \frac{cover}{100}\times(top-base)
 \end{align}
 where $v$ is the volume of vegetation per unit area, $cover$ is the ocularly estimated percentage cover of vegetation, $top$ is the vegetation top height in feet and $base$ is the vegetation base height in feet.
 
@@ -255,25 +255,25 @@ Basal area was calculated for each live overstory tree and aggregated over each 
 %
 \begin{align}  \label{eq:Eq0.1} 
 QMD = & \sqrt{(BAPA/TPA)/(\pi/4/144)} \qquad, \nonumber \\
-SDI = & TPA*(\frac{QMD}{10})^{1.605} \qquad, 
+SDI = & TPA\times\left(\frac{QMD}{10}\right)^{1.605} \qquad, 
 \end{align}
-where $QMD$ is the Quadratic Mean Diameter, $BAPA$ is the basal area per acre, $TPA$ is trees per acre. Stand Density Index represents the equivalent number of 10 in dbh trees per acre.
+where $QMD$ is the Quadratic Mean Diameter (in.), $BAPA$ is the basal area per acre, and $TPA$ is trees per acre. Stand Density Index represents the equivalent number of trees per acre in a stand with a QMD of 10 in (\cite{Reineke1933}).
 
 
 
 
 
-All retained overstory variables were linearly interpolated between overstory measurement years to provide estimates for intervening small tree and understory measurements. The initial and final years of overstory measurement provided limits of the interpolation, meaning that a measurement year preceding the first overstory measurement (or following the last) would be assigned the overstory variable value calculated for the initial (or final) overstory measurement year. 
+All retained overstory variables were linearly interpolated between overstory measurement years to provide estimates for intervening small tree and understory measurements. The initial and final years of overstory measurement provided limits of the interpolation, meaning that a measurement year preceding the first overstory measurement (or following the last) would be assigned the overstory variable value calculated for the initial (or final) overstory measurement year. \\[6pt]
 
 
 
 
 \noindent\textbf{Site Quality:}
 
-Slope, elevation, and aspect were calculated using Google Earth Engine (\nocite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed into two variables expressing northerly and easterly exposure by applying the cosine and sine functions. Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (\citeyear{Stage2007a}):
+Slope, elevation, and aspect were calculated using Google Earth Engine (\cite{googleearthengine}) based on each plot's GPS coordinates. Aspect was transformed into two variables expressing northerly and easterly exposure by applying the cosine and sine functions. Interacting effects of elevation, slope and aspect were considered according to the model proposed by Salas and Stage (\citeyear{Stage2007a}):
 %
 \begin{align}  \label{eq:Eq1} 
-S = & b_{0}+sl[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)] + 
+S = & sl[b_{1}+b_{2}\text{cos}(\alpha)+b_3\text{sin}(\alpha)] + 
            sl\ln(el+1)[b_{4}+b_{5}\text{cos}+b_{6}\text{sin}(\alpha)]  \nonumber \\
 & + (el^2)sl[b_{7}+b_{8}\text{cos}(\alpha)+b_{9}\text{sin}(\alpha)]+b_{10}el+b_{11}el^2 \qquad, 
 \end{align}
@@ -402,7 +402,7 @@ In the first category (understory tree competition), only plots that received mu
 
 To evaluate the performance of the selected model, three quantiles of the height growth response distribution (${\tau}$= .10, .50 and .90) were estimated for each individual tree in the withheld validation data set. The recorded annualized height growth increments were then classified according to where they occurred among the four interquantile intervals (i.e. <.1, .1-.5, .5-.9, >.9). The validation records were also separated into initial height classes of 1-5 feet, 5-10 feet and greater than 10 feet.
 
-Chi-squared tests for homogeneity were then conducted to compare the actual and expected frequencies of annual tree height growth increments across the four interquantile intervals and height classes. 
+$\chi^2$ tests for homogeneity were then conducted to compare the actual and expected frequencies of annual tree height growth increments across the four interquantile intervals and height classes. 
 
 
 % H_{0}: \text{Actual distribution matches expected for any height classes}

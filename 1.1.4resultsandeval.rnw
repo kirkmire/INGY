@@ -584,7 +584,7 @@ The primary form of the model included the square root of initial height, since 
 % \caption{Generalized additive model of annual height growth increment vs. square-root of initial height.\label{fig:seqgam}}
 % \end{figure}
 
-Proceeding forward from the base model to the small tree category of competition, the AIC value for the $\tau$=.5 QR model with the crown ratio variable was found to be much lower than those for the models incorporating other candidate variables (see Table 2). This variable was therefore selected to represent competition from other small trees. The partial residual plot created to visualize the crown ratio effect includes square root of initial height as a linear term and is smoothed for crown ratio (Figure \ref{fig:seqgamCR}). The relationship for this variable is non-linear yet predicted height growth increment is shown to increase as crown ratio increases. Quadratic terms were evaluated to improve this relationship to no avail. Small trees with larger crown ratios are predicted to have greater height growth increments.
+Proceeding forward from the base model to the small tree category of competition, the AIC value for the $\tau$=.5 QR model with the crown ratio variable was found to be much lower than those for the models incorporating other candidate variables (see Table 2). This variable was therefore selected to represent competition from other small trees. The partial residual plot created to visualize the crown ratio effect includes square root of initial height as a linear term and is smoothed for crown ratio (Figure \ref{fig:seqgamCR}). The relationship for this variable is non-linear yet estimated height growth increment is shown to increase as crown ratio increases. Quadratic terms were evaluated to improve this relationship to no avail. Small trees with larger crown ratios are estimated to have greater height growth increments.
 
 \begin{figure}
 \minipage{0.48\textwidth}
@@ -618,7 +618,7 @@ Proceeding forward from the base model to the small tree category of competition
 
 The understory non-arboreal vegetation candidate variables failed to provide a model with an AIC appreciably less than that of the model with $\sqrt{h}$ and crown ratio. The variables that offered marginal improvement over the previous iteration of the model were high shrub depth ($d_{hs}$), transect measured grass depth ($\tilde{v}_{g}$) and grass cover ($c_{g}$). However, the inclusion of these variables is hardly justified considering the modest improvement they provide and the expense of measuring either in the field. Therefore, no candidate variable was selected from this category of competition.
 
-The overstory candidate variable that lowered model AIC the most was trees per acre (TPA). The measure of crown area per acre (CAPA) provided a close second and the model adding basal area per acre (BAPA) also resulted in an AIC much lower than the previous iteration of the model. The partial residual plot of TPA shows that predicted height increment decreases steeply between 0 and 40 TPA but appears to flatten past 40 TPA (Figure \ref{fig:seqgamOSTPA}). As a predictor of height growth increment, TPA is important to distinguish between clearcut (0 TPA) and modest overstory retention levels. However, beyond 40 TPA, it may not relate to height growth increment.
+The overstory candidate variable that lowered model AIC the most was trees per acre (TPA). The measure of crown area per acre (CAPA) provided a close second and the model adding basal area per acre (BAPA) also resulted in an AIC much lower than the previous iteration of the model. The partial residual plot of TPA shows that height increment decreases steeply between 0 and 40 TPA but appears to flatten past 40 TPA (Figure \ref{fig:seqgamOSTPA}). As a predictor of height growth increment, TPA is important to distinguish between clearcut (0 TPA) and modest overstory retention levels. However, beyond 40 TPA, it may not relate to height growth increment.
 
 
 \begin{figure}[!htb]
@@ -648,7 +648,7 @@ The overstory candidate variable that lowered model AIC the most was trees per a
 % \caption{Generalized additive model of annual height growth increment vs. crown ratio with square-root of initial height and crown ratio considered as linear predictors.\label{fig:}}
 % \end{figure}
 
-Individually, the plot metrics of slope, aspect and elevation failed to provide an improvement over the model with $\sqrt{h}$, crown ratio, and TPA. However, when considered together in the slope, aspect and elevation (S) interaction model (\cite{Stage2007a}, see Equation 3), these terms lowered AIC by a wide margin. The AIC of the model with site index was also quite low but failed to surpass that using the S term. The partial residual for this term shows that an increase in the slope, aspect and elevation term is related to general increase in predicted height increment for most S values (and most plots). 
+Individually, the plot metrics of slope, aspect and elevation failed to provide an improvement over the model with $\sqrt{h}$, crown ratio, and TPA. However, when considered together in the slope, aspect and elevation (S) interaction model (\cite{Stage2007a}, see Equation 3), these terms lowered AIC by a wide margin. The AIC of the model with site index was also quite low but failed to surpass that using the S term. The partial residual for this term shows that an increase in the slope, aspect and elevation term is related to a general increase in height increment for most S values (and most plots). 
 
 \begin{figure} 
 \begin{center}
@@ -681,7 +681,7 @@ Figure \ref{fig:Sea_heat} illustrates the relative effects of slope and elevatio
   \includegraphics[width=\linewidth]{slope_elevation_NW.png}
   \subcaption{North-west aspect (315\degree)}\label{fig:se_nw}
 \endminipage\hfill
-\caption[Standardized median growth increment by slope (\%) and elevation (ft).]{Standardized $\tau$=.5 predicted growth increment by slope (\%) and elevation (ft). The minimum growth was subtracted from the projected growth and divided by the range of growth, thus standardizing the growth increments between 0 and 1. Lighter shades indicate a greater predicted height growth increment.}\label{fig:Sea_heat}
+\caption[Standardized median growth increment by slope (\%) and elevation (ft).]{Standardized median growth increment by slope (\%) and elevation (ft). The minimum growth was subtracted from the projected growth and divided by the range of growth, thus standardizing the growth increments between 0 and 1. Lighter shades indicate a greater estimated height growth increment.}\label{fig:Sea_heat}
 \end{figure}
 
 
@@ -973,7 +973,7 @@ As we saw earlier, overstory trees per acre (TPA) in the range of (0-40 TPA) was
   \includegraphics[width=\linewidth]{annualgr_elevation.png}
   \subcaption{Annual height growth by elevation, aspect set to 180\degree}\label{fig:gr_elev}
 \endminipage\hfill
-\caption[Estimated annual height growth by aspect and elevation.]{Predicted annual height growth by aspect and elevation. Red, yellow and green lines represent the .9, .5 and .1 regression quantiles, respectively. Slope = 10\%.}\label{fig:sea_gr}
+\caption[Estimated annual height growth by aspect and elevation.]{Estimated annual height growth by aspect and elevation. Red, yellow and green lines represent the .9, .5 and .1 regression quantiles, respectively. Slope = 10\%.}\label{fig:sea_gr}
 \end{figure}
 
 Figures \ref{fig:gr_asp} and \ref{fig:gr_elev} show the effects of slope and elevation among quantile estimates of annual height growth when all other variables are held constant. In Figure \ref{fig:gr_asp}, the effect of aspect increases as the $\tau$ value increases. However, the differences in height growth estimates among quantiles by aspect may change at different elevations or slopes due the interaction between these terms. Aspect is shown to increase annual height growth at an optimum of approximately 200$\degree$ when the slope is 10\% and the elevation is 3,500 ft. 
@@ -1027,7 +1027,7 @@ Figure \ref{fig:gr_elev} shows that elevation is estimated to have a positive ef
 % \caption{Residual values vs. fitted values of height growth increment for $\tau$=.5.\label{fig:qr5resid}}
 % \end{figure}
 
-The middle residual plot (Figure \ref{fig:qr5resid}) shows that the residuals for the $\tau$=.5 model are split roughly proportionally above and below zero. This result is expected as the median ($\tau$=.5) quantile regression is specified to describe the linear trends in the central portion of the response distribution. Figure (\ref{fig:qr1resid}) reveals that most residuals are greater than zero for the $\tau$=.1 quantile model that describes the lower portion of the response distribution. In the $\tau$=.9 quantile, most residuals are found to be negative but there is a modest number of positive residuals across all predicted height increments. The .1 and .5 models appear to understate growth at the low predictions because the models predict negative height increments. Thus the residuals of the lowest fitted values are exclusively positive. Collectively, these residual plots suggest that models are working well for $\widehat{\Delta{h}}$ > 0, but are not constrained to be positive. 
+The middle residual plot (Figure \ref{fig:qr5resid}) shows that the residuals for the $\tau$=.5 model are split roughly proportionally above and below zero. This result is expected as the median ($\tau$=.5) quantile regression is specified to describe the linear trends in the central portion of the response distribution. Figure (\ref{fig:qr1resid}) reveals that most residuals are greater than zero for the $\tau$=.1 quantile model that describes the lower portion of the response distribution. In the $\tau$=.9 quantile, most residuals are found to be negative but there is a modest number of positive residuals across all estimated height increments. The .1 and .5 models appear to understate growth at low estimates because the models  negative height increments. Thus the residuals of the lowest fitted values are exclusively positive. Collectively, these residual plots suggest that models are working well for where estimtes of height increment are positive, but are not constrained to be positive. 
 
 
 
@@ -1062,14 +1062,14 @@ The middle residual plot (Figure \ref{fig:qr5resid}) shows that the residuals fo
 %Chi-squared test
 %
 
-Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generated for the withheld data (1 randomly selected STP at each plot). The actual height growth increment was then binned according to where it fell among the estimated height growth quantiles (<.10, .1-.5, .5-.9 or >.9). Visually, the actual height growth increments are distributed approximately as expected with 40\% falling between the .1-.5 and 5-.9 $\tau$ quantiles and 10\% falling below the .1 quantile and above the .9 quantile (Figure \ref{fig:validres}). 
+Estimated annual height growth increments for $\tau$= .1, .5 and .9 were generated for the withheld data (1 randomly selected STP at each plot). The actual height growth increment was then binned according to where it fell among the estimated height growth quantiles (<.10, .1-.5, .5-.9 or >.9). Visually, the actual height growth increments are distributed approximately as expected with 40\% falling between the .1-.5 and 5-.9 $\tau$ quantiles and 10\% falling below the .1 quantile and above the .9 quantile (Figure \ref{fig:validres}). 
 
 
 
 \begin{figure}[ht]
 \begin{center}
     \includegraphics[width=140mm]{overall_valid.png}
-    \caption[Validation results.]{Withheld tree height growth increments sorted by predicted height growth increment quantiles.\label{fig:validres}}
+    \caption[Validation results.]{Withheld tree height growth increments sorted by estimated height growth increment quantiles.\label{fig:validres}}
     
 \end{center}
 \end{figure}
@@ -1088,7 +1088,7 @@ Predicted annual height growth increments for $\tau$= .1, .5 and .9 were generat
   \includegraphics[width=\linewidth]{greaterthan10.png}
   \subcaption{Initial Height > 10 ft.}\label{fig:validres_10}
 \endminipage
-\caption[Validation results by initial height class.]{Withheld tree height growth increments sorted by predicted height growth increment quantiles intervals and initial height classes.}
+\caption[Validation results by initial height class.]{Withheld tree height growth increments sorted by estimated height growth increment quantiles intervals and initial height classes.}
 \end{figure}
 
 

@@ -117,7 +117,7 @@ The FVS small tree height growth equation is quite similar to the model proposed
 The FVS height growth estimate represents the mean growth of small trees facing the given conditions. The proposed models estimate the entire distribution of height growth increments these trees may achieve. As seen in Figure \ref{fig:coefplot}, modeling the mean height growth is not adequate because the effects of the predictors changes across quantiles of the response distribution. 
 
 
-FVS does accommodate multiple trajectories of tree records to provide some degree of variation from the mean. When relatively few samples represent the stand, two additional tree records are created that triplicate the characteristics of the tree except the number of trees per acre represented. The two new records represent 15 and 25 percent of the trees per acre and the original record represents 60 percent of trees per acre. A normally distributed random error (bounded between -1.5 and 1.0 standard deviations) is then added to each of the triplicated tree records. 
+FVS does accommodate multiple trajectories of tree records to provide some degree of variation from the mean. When relatively few samples represent the stand, two additional tree records are created that triplicate the characteristics of the tree except the number of trees per acre represented. The two new records represent 15 and 25 percent of the trees per acre and the original record represents 60 percent of trees per acre. A normally distributed random error (bounded between -1.5 and 1.0 size-dependent standard deviations) is then added to each of the triplicated tree records. 
 
 
 

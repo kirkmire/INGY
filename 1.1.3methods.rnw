@@ -295,12 +295,12 @@ This characterization of the response distribution allows for predictor variable
 
 \begin{figure} 
 \begin{center}
-    \includegraphics{quant_reg.jpg}
+    \includegraphics[width=.6\textwidth]{quant_reg.jpg}
     \caption[Hypothetical quantile regression surfaces of annual height increments.]{Hypothetical separation of the distribution of annual height increments according to 3 quantile regression surfaces as a function of trees per acre and initial tree height. The red, yellow and green surfaces represent the $\tau$= .1, .5 and .9 quantiles, respectively.\label{fig:quant_reg}}
  \end{center}
 \end{figure}
 
-Quantile regression allows for the description of the impact of both measured and unmeasured factors that may be responsible for variance in small tree height growth. Two subject trees within the same 10 ft radius plot may experience vastly different growth rates despite having the same values of measured factors.  For ponderosa pine small tree growth, unmeasured factors may relate to genetic characteristics, micro-climate, micro-site suitability or other location specific factors such as distance from a retained overstory tree or competing vegetation. Vegetation is known to have a major effect on micro-climate, affecting light, temperature, precipitation and wind (Tappeiner, \citeyear{tappeiner_maguire_harrington_2007}). However, most growth and yield field sampling methods attempt to maintain a degree of simplicity and reproducibility, and therefore avoid sampling at a micro-resolution. This inevitably leads to unexplained variation. Quantile regression allows for an explicit (though semi-parametric) description of patterns in this unexplained variation as illustrated in the diverging planes in Figure \ref{fig:quant_reg}.
+Quantile regression allows for the description of the impact of both measured and unmeasured factors that may be responsible for variance in small tree height growth. Two subject trees within the same 10 ft radius plot may experience vastly different growth rates despite having the same values of measured factors. For small ponderosa pine tree growth, measured factors may relate to genetic characteristics, micro-climate, micro-site suitability or other location specific factors such as distance from a retained overstory tree. Vegetation is known to have a major effect on micro-climate, affecting light, temperature, precipitation and wind (Tappeiner, \citeyear{tappeiner_maguire_harrington_2007}). However, most growth and yield field sampling methods attempt to maintain a degree of simplicity and reproducibility, and therefore avoid sampling at a micro-resolution. This inevitably leads to unexplained variation. Quantile regression allows for an explicit (though semi-parametric) description of patterns in this unexplained variation as illustrated by the diverging planes in Figure \ref{fig:quant_reg}.
 
 
 

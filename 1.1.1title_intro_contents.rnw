@@ -63,7 +63,7 @@ for the degree of}
 
 \noindent Estimating the Effects of Overstory Retention, Vegetative Competition,
 and Site Quality on the Height Growth of Small Ponderosa Pine Trees
-using Regression Quantiles
+Using Regression Quantiles
 
 \noindent Dr. David L.R. Affleck, Co-Chair \\
 \noindent Dr. John Goodburn, Co-Chair

@@ -101,7 +101,7 @@ Similar to the model presented in this thesis, Salas and Stage (\citeyear{Salasa
 
 The Forest Vegetation Simulator (FVS, \cite{Dixon2013a}) is a distance independent growth model used to project stand level characteristics and has regional variants that cover most of the United States. The Inland Empire Variant covers most of the installations used in this analysis (eastern Washington, north-central Idaho and Western Montana) and was originally the Prognosis model developed by Stage (\citeyear{Stage1973}).
 
-The small-tree routine in the Inland Empire Variant of FVS provides a 5-year estimate of individual height growth (\cite{keyser2008}). It utilizes the following equation to predict the height growth of small trees (less than 3 in DBH):
+The small-tree routine in the Inland Empire Variant of FVS provides a 5-year estimate of individual height growth (\cite{keyser2008}). It utilizes the following equation to estimate the height growth of small trees (less than 3 in DBH):
 %
 \begin{align} \label{eq:fvs_eq}
 \Delta{h} &\propto h^{B_{1}}e^{B_{2}CCF}e^{B_{3}BAL}f(HAB,LOC,sl,\alpha)\qquad, 
@@ -159,7 +159,7 @@ FVS does accommodate multiple trajectories of tree records to provide some degre
 % \end{figure}
 
 
-It is within this ``tripling'' framework that our quantile regression model may find its greatest utility. Instead of assigning random error from within a normal distribution, the three tree records could be assigned predicted quantile values for $\tau$= .25, .50 and .75, for example.  These quantile derivations of height provide a more empirically based distribution of possible height values for a given set of predictors.
+It is within this ``tripling'' framework that our quantile regression model may find its greatest utility. Instead of assigning random error from within a normal distribution, the three tree records could be assigned estimated height values for $\tau$= .25, .50 and .75, for example.  These quantile derivations of height provide a more empirically based distribution of possible height values for a given set of predictors.
 
 
 \newpage

@@ -33,7 +33,7 @@ soverhist <- sqlFetch(path,"Plots_Overstory_Measures")
 
 #transect dta
 strani <- sqlFetch(path,"Transects")
-stran <- sqlFetch(path,"Transects_PointVeg")
+stran <- sqlFetch(path,"Transects_PointVeg_ckedits")
 stranco <- sqlFetch(path,"Transects_Cover")
 strangr <- sqlFetch(path,"Transects_GrassHeight")
 
@@ -46,7 +46,7 @@ sstpt <- sqlFetch(path,"STPs_SaplingTallies")
 
 # tagged small tree growth data
 stag <- sqlFetch(path,"STPs_TaggedTrees")
-stagm <- sqlFetch(path,"STPs_TaggedTrees_Measures")
+stagm <- sqlFetch(path,"STPs_TaggedTrees_Measures_ckedits")
 
 # lookup data
 spptr <- sqlFetch(path,"Lookup_Species_Tree")
@@ -57,65 +57,75 @@ timeline <- sqlFetch(path,"Timeline")
 
 timelineJan<-timeline
 
-#Forb/Shrub reference data
-forbshrub <- sqlFetch(path,"Lookup_Vegetation_Form_ckedits")
-
-#Function for assigning "lifeform" to transect point data
-#Results posted to updated accdb
-
-length((forbshrub$Species))
-
-lookup<-function(species){
-   row<-forbshrub[forbshrub$Species==species,]
-  ifelse(length(row$Lifeform)==1,
-         "good",
-         ###issue: some species (SYAL, AMAL) listed as F and S
-         ifelse(row$Lifeform=="F",
-                "bad",
-                "good"))
-  
-}
-
-forbshrub$Lifeform2<-0
-
-for(i in 1:nrow(forbshrub)){
-  forbshrub$Lifeform2[i]<-lookup(
-    forbshrub$Species[i])
-}
-
-unsure<-forbshrub[forbshrub$Lifeform2=="bad",]
-#library(xlsx)
-#write.xlsx(unsure, "unsure.xlsx")
-
-#print(unsure)
-
-##Code for assigning new lifeform to stran data#
-
-stran$Lifeform1<-0
-forbshrub$Lifeform<-as.character(forbshrub$Lifeform)
-stran$Species_Primary<-as.character(stran$Species_Primary)
-stran<-stran[!is.na(stran$Top)==T,]
-
-
-lf.lookup<-function(species,top){
- # species<-"FRVE"
- # top<-.3
-  row<-forbshrub[forbshrub$Species==species,]
-  if(length(row$Lifeform)==1){row$Lifeform
-  } else {
-    if(top>3){"HS"
-    } else {
-      "LS"
-    }}
-  
-  }
-
-
-for(i in 1:nrow(stran)){
-  stran$Lifeform1[i]<-lf.lookup(
-    stran$Species_Primary[i],
-    stran$Top[i])
-}
+# #Forb/Shrub reference data
+# forbshrub <- sqlFetch(path,"Lookup_Vegetation_Form_ckedits")
+# 
+# #Function for assigning "lifeform" to transect point data
+# #Results posted to updated accdb
+# 
+# #look at unique vegetative species
+# length(unique(stran$Species_Primary))
+# 
+# #look at veg species not in ck_edits
+# unique(forbshrub$Species) %in% unique(stran$Species_Primary)
+# 
+# 
+# length(unique(forbshrub$Species))
+# 
+# length((forbshrub$Species))
+# 
+# lookup<-function(species){
+#    row<-forbshrub[forbshrub$Species==species,]
+#   ifelse(length(row$Lifeform)==1,
+#          "good",
+#          ###issue: some species (SYAL, AMAL) listed as F and S
+#          ifelse(row$Lifeform=="F",
+#                 "bad",
+#                 "good"))
+#   
+# }
+# 
+# forbshrub$Lifeform2<-0
+# 
+# for(i in 1:nrow(forbshrub)){
+#   forbshrub$Lifeform2[i]<-lookup(
+#     forbshrub$Species[i])
+# }
+# 
+# unsure<-forbshrub[forbshrub$Lifeform2=="bad",]
+# library(xlsx)
+# write.csv(stran, "Transects_PointVeg_ckedits.csv")
+# 
+# #print(unsure)
+# 
+# ##Code for assigning new lifeform to stran data#
+# 
+# stran$Lifeform1<-0
+# forbshrub$Lifeform<-as.character(forbshrub$Lifeform)
+# stran$Species_Primary<-as.character(stran$Species_Primary)
+# stran<-stran[!is.na(stran$Top)==T,]
+# 
+# #Function that classifies shrubs and forbs as "low"or "high"
+# 
+# lf.lookup<-function(species,top){
+#  # species<-"FRVE"
+#  # top<-.3
+#   row<-forbshrub[forbshrub$Species==species,]
+#   if(length(row$Lifeform)==1){row$Lifeform
+#   } else {
+#     if(top>3){"HS"
+#     } else {
+#       "LS"
+#     }}
+#   
+#   }
+# 
+# 
+# for(i in 1:nrow(stran)){
+#   stran$Lifeform1[i]<-lf.lookup(
+#     stran$Species_Primary[i],
+#     stran$Top[i])
+# }
 
 
 ###For Site Quality#

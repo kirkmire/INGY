@@ -5,7 +5,7 @@
 
 #! 1. set directory and filename of current database
 data.dir <- "C:/Users/Colin/Desktop/R-Projects/INGY"  # note the backward slashes, check to see if it matches Rprojects folder
-filenm <- "stcv_database_Aug2016.accdb"
+filenm <- "stcv_database_2017july24.accdb"
 
 
 #! 2. access libraries
@@ -22,6 +22,17 @@ sqlTables(path)[,3]
 splot <- sqlFetch(path,"Plots")
 splothist <- sqlFetch(path,"Plots_History")
 
+#! The "Plots_History" table is
+#missing many of the slope, aspect and
+#elevation measurements
+#could retrieve these based on lat long coords
+
+# #For extracting plot lat long data
+# Plots.lat.long <- sqlFetch(path,"Plots")
+# Plots.lat.long1 <- Plots.lat.long[!Plots.lat.long$Installation %in% c("BCCheck","LRCheck"),
+#                                   c("Installation","Plot","Latitude","Longitude")]
+# Plots.lat.long1 <- Plots.lat.long1[!is.na(Plots.lat.long1$Latitude)==T,]
+
 # installation data
 sinst <- sqlFetch(path,"Installations")
 sinsthist <- sqlFetch(path,"Installations_History")
@@ -30,6 +41,13 @@ sinstloc <- sqlFetch(path,"Installations_Locations_GIS")
 #!the "Installations_Location_GIS" table provides 
 #plot coordinates for the installation reference tree (plot 0)
 #as well as all plots in a variety of formats
+
+
+#timeline data for 2017 research
+#contains the associated overstory meas 
+#and understory treatments for
+#a subset of installations
+timeline <- sqlFetch(path,"Timeline")
 
 
 # installations to drop
@@ -43,7 +61,7 @@ drp <- c(drp, "DC","CT")
 sover <- sqlFetch(path,"Plots_Overstory_Trees")
 soverhist <- sqlFetch(path,"Plots_Overstory_Measures")
 
-#!Note that the clearcut installations will not have
+#!Note that the clearcut installations do not have
 #any overstory measurement record
 
 #transect dta
@@ -112,19 +130,7 @@ sppnontr <- sqlFetch(path,"Lookup_Species_NonTree")
 
 
 
-#timeline data
-timeline <- sqlFetch(path,"Timeline")
 
-
-# For plot lat long
-Plots.lat.long <- sqlFetch(path,"Plots")
-
-
-Plots.lat.long1 <- Plots.lat.long[!Plots.lat.long$Installation %in% c("BCCheck","LRCheck"),
-                                  c("Installation","Plot","Latitude","Longitude")]
-
-
-Plots.lat.long1 <- Plots.lat.long1[!is.na(Plots.lat.long1$Latitude)==T,]
 
 
 odbcCloseAll()
